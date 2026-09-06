@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>প্রোফাইল - KOTOBA</title>
+    
+    <!-- Monetag Ad Script -->
+    <script>(function(s){s.dataset.zone='11740671',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -355,11 +359,9 @@
                 emailEl.innerText = user.email;
                 nameEl.innerText = displayName;
 
-                // নামের প্রথম অক্ষর সেট করা (বাংলা বা ইংরেজি উভয় অক্ষর সাপোর্ট করবে)
                 const firstChar = displayName.trim().charAt(0).toUpperCase();
                 avatarInitialEl.innerText = firstChar;
 
-                // সংরক্ষিত হাইলাইটের সংখ্যা লোড
                 try {
                     const docRef = doc(db, "user_highlights", user.email);
                     const docSnap = await getDoc(docRef);
@@ -378,7 +380,6 @@
             }
         });
 
-        // লগআউট হ্যান্ডলার
         logoutBtn.addEventListener("click", async () => {
             if (confirm("আপনি কি প্রোফাইল থেকে বের হতে চান?")) {
                 await signOut(auth);

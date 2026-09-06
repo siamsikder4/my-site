@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রোফাইল - Kotoba</title>
-    <!-- আইকন ও ফন্ট -->
+    <title>প্রোফাইল - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -23,9 +23,95 @@
             padding-bottom: 80px;
         }
 
+        /* লোডার ওভারলে */
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .book-loader {
+            position: relative;
+            width: 64px;
+            height: 46px;
+            perspective: 200px;
+            margin-bottom: 18px;
+        }
+
+        .book-loader .cover-left {
+            position: absolute;
+            left: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            background: #ffffff;
+        }
+
+        .book-loader .cover-right {
+            position: absolute;
+            right: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+        }
+
+        .book-loader .spine {
+            position: absolute;
+            left: 31px; top: 0;
+            width: 2px; height: 46px;
+            background: #047857;
+        }
+
+        .book-loader .page {
+            position: absolute;
+            width: 29px; height: 42px;
+            top: 2px; right: 3px;
+            border: 2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+            transform-origin: left center;
+            animation: flipBook 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .book-loader .page:nth-child(1) { animation-delay: 0.15s; }
+        .book-loader .page:nth-child(2) { animation-delay: 0.35s; }
+        .book-loader .page:nth-child(3) { animation-delay: 0.55s; }
+
+        @keyframes flipBook {
+            0% { transform: rotateY(0deg); }
+            50%, 100% { transform: rotateY(-180deg); }
+        }
+
+        .loading-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: 0.8px;
+        }
+
         /* টপ বার */
         .top-nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 14px 18px;
             background: #ffffff;
@@ -35,17 +121,11 @@
             z-index: 100;
         }
 
-        .back-btn {
-            text-decoration: none;
-            color: #0f3e2e;
-            font-size: 16px;
-            margin-right: 14px;
-        }
-
         .logo {
             font-weight: 800;
             font-size: 17px;
             color: #0f3e2e;
+            text-decoration: none;
         }
 
         .container {
@@ -54,180 +134,140 @@
             margin: 0 auto;
         }
 
-        /* ইউজার কার্ড */
+        /* প্রোফাইল কার্ড */
         .profile-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 18px;
             padding: 24px 18px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .avatar-wrap {
-            position: relative;
-            width: 84px;
-            height: 84px;
-            margin: 0 auto 12px;
-        }
-
-        .user-avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #047857;
-        }
-
-        .user-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f3e2e;
-            margin-bottom: 2px;
-        }
-
-        .user-email {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 14px;
-        }
-
-        .badge-target {
-            display: inline-block;
+        .avatar-circle {
+            width: 70px;
+            height: 70px;
             background: #e6f4ea;
             color: #047857;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 11.5px;
-            font-weight: 700;
-        }
-
-        /* স্ট্যাটিস্টিকস গ্রিড */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-
-        .stat-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 12px 6px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f3e2e;
-        }
-
-        .stat-label {
-            font-size: 10.5px;
-            color: #64748b;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        /* মেনু অপশন কার্ড */
-        .menu-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 18px;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            text-decoration: none;
-            color: #1e293b;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 13.5px;
-            font-weight: 600;
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .menu-item-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .menu-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            font-size: 28px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            margin: 0 auto 12px;
+            font-weight: 800;
         }
 
-        .green-icon { background: #e6f4ea; color: #047857; }
-        .blue-icon { background: #e0f2fe; color: #0284c7; }
-        .red-icon { background: #fee2e2; color: #dc2626; }
-
-        /* লগআউট বাটন */
-        .logout-btn {
-            width: 100%;
-            background: #fff;
-            color: #dc2626;
-            border: 1px solid #fecdd3;
-            padding: 12px;
-            border-radius: 12px;
+        .user-email-text {
             font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 18px;
+            word-break: break-all;
+        }
+
+        .logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: background 0.2s;
         }
 
-        /* লগইন না থাকলে দেখানোর স্টেট */
-        .guest-box {
-            display: none;
+        .logout-btn:active {
+            background: #fecaca;
+        }
+
+        /* সেকশন কার্ড (পাসওয়ার্ড ও ইমেইল পরিবর্তন) */
+        .section-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 18px;
-            padding: 35px 20px;
+            padding: 20px 18px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #047857;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 11px;
+            background: #0f3e2e;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: background 0.2s;
+        }
+
+        .action-btn.secondary {
+            background: #047857;
+        }
+
+        .action-btn:active {
+            opacity: 0.9;
+        }
+
+        .msg-box {
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 9px;
+            border-radius: 8px;
+            display: none;
             text-align: center;
         }
 
-        .guest-icon {
-            font-size: 45px;
-            color: #94a3b8;
-            margin-bottom: 14px;
-        }
-
-        .guest-btn {
-            display: inline-block;
-            background: #0f3e2e;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px 24px;
-            border-radius: 20px;
-            font-size: 13.5px;
-            font-weight: 700;
-            margin-top: 14px;
-        }
+        .error-msg { background: #fee2e2; color: #dc2626; }
+        .success-msg { background: #e6f4ea; color: #047857; }
 
         /* বটম বার */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 62px;
             background: #ffffff;
             border-top: 1px solid #eef2f5;
@@ -259,82 +299,54 @@
 </head>
 <body>
 
+    <!-- লোডার ওভারলে -->
+    <div id="pageLoader" class="loader-overlay">
+        <div class="book-loader">
+            <div class="cover-left"></div>
+            <div class="cover-right"></div>
+            <div class="spine"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+        </div>
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="logo">আমার প্রোফাইল</div>
+        <a href="index.html" class="logo">KOTOBA</a>
+        <div style="font-size: 12.5px; font-weight: 700; color: #047857;">প্রোফাইল সেটিংস</div>
     </header>
 
     <main class="container">
-
-        <!-- লগইন করা অবস্থা -->
-        <div id="userProfile" style="display: none;">
-            
-            <div class="profile-card">
-                <div class="avatar-wrap">
-                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" id="avatarImg" class="user-avatar" alt="Avatar">
-                </div>
-                <h3 class="user-name" id="profileName">শিক্ষার্থী</h3>
-                <p class="user-email" id="profileEmail">user@example.com</p>
-                <span class="badge-target"><i class="fa-solid fa-bullseye"></i> লক্ষ্য: JLPT N5 / N4</span>
-            </div>
-
-            <!-- স্টাডি স্ট্যাটাস -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">৪৬</div>
-                    <div class="stat-label">বর্ণমালা পাঠ</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">১২০</div>
-                    <div class="stat-label">কাঞ্জি টার্গেট</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">২১টি</div>
-                    <div class="stat-label">N4 ব্যাকরণ</div>
-                </div>
-            </div>
-
-            <!-- কুইক মেনু -->
-            <div class="menu-card">
-                <a href="alphabet.html" class="menu-item">
-                    <div class="menu-item-left">
-                        <div class="menu-icon green-icon"><i class="fa-solid fa-font"></i></div>
-                        <span>বর্ণমালা প্র্যাকটিস</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
-                </a>
-                <a href="kanji.html" class="menu-item">
-                    <div class="menu-item-left">
-                        <div class="menu-icon blue-icon"><i class="fa-solid fa-pen-nib"></i></div>
-                        <span>N5 কাঞ্জি চার্ট</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
-                </a>
-                <a href="n4-grammar.html" class="menu-item">
-                    <div class="menu-item-left">
-                        <div class="menu-icon green-icon"><i class="fa-solid fa-book-open"></i></div>
-                        <span>N4 ব্যাকরণ সমগ্র</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
-                </a>
-            </div>
-
-            <button class="logout-btn" id="signOutBtn">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i> অ্যাকাউন্ট সাইন আউট
-            </button>
+        <!-- প্রোফাইল ইনফো -->
+        <div class="profile-card">
+            <div class="avatar-circle" id="userAvatar">U</div>
+            <div class="user-email-text" id="userEmailDisplay">লোড হচ্ছে...</div>
+            <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> লগআউট করুন</button>
         </div>
 
-        <!-- গেস্ট / লগইন ছাড়া অবস্থা -->
-        <div id="guestBox" class="guest-box">
-            <i class="fa-regular fa-circle-user guest-icon"></i>
-            <h3 style="font-size: 17px; color: #0f3e2e; margin-bottom: 6px;">লগইন করা নেই</h3>
-            <p style="font-size: 12px; color: #64748b;">পড়াশোনার অগ্রগতি সংরক্ষণ করতে আপনার অ্যাকাউন্টে সাইন ইন করুন।</p>
-            <a href="login.html" class="guest-btn">লগইন / সাইন আপ করুন</a>
+        <!-- ইমেইল পরিবর্তন সেকশন (Edit Email) -->
+        <div class="section-card">
+            <h3 class="section-title"><i class="fa-solid fa-envelope"></i> ইমেইল ঠিকানা পরিবর্তন</h3>
+            <div class="form-group">
+                <label>নতুন ইমেইল ঠিকানা</label>
+                <input type="email" id="newEmailInput" placeholder="newemail@example.com">
+            </div>
+            <button class="action-btn secondary" id="updateEmailBtn">ইমেইল আপডেট করুন</button>
+            <div class="msg-box" id="emailMsgBox"></div>
         </div>
 
+        <!-- পাসওয়ার্ড রিসেট সেকশন (Forgot/Reset Password) -->
+        <div class="section-card">
+            <h3 class="section-title"><i class="fa-solid fa-key"></i> পাসওয়ার্ড রিসেট</h3>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 12px;">আপনার বর্তমান ইমেইলে পাসওয়ার্ড পরিবর্তনের লিংক পাঠাতে নিচের বাটনে ক্লিক করুন।</p>
+            <button class="action-btn" id="resetPassBtn">পাসওয়ার্ড পরিবর্তনের লিংক পাঠান</button>
+            <div class="msg-box" id="passMsgBox"></div>
+        </div>
     </main>
 
-    <!-- বটম নেভিগেশন বার -->
+    <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -350,10 +362,17 @@
         </a>
     </nav>
 
-    <!-- Firebase স্ক্রিপ্ট -->
+    <!-- ট্রানজিশন স্ক্রিপ্ট ও ফায়ারবেস লজিক -->
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pageLoader");
+            if (loader) loader.classList.add("hidden");
+        });
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail, verifyBeforeUpdateEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -368,33 +387,78 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        const userProfile = document.getElementById("userProfile");
-        const guestBox = document.getElementById("guestBox");
-        const profileName = document.getElementById("profileName");
-        const profileEmail = document.getElementById("profileEmail");
-        const avatarImg = document.getElementById("avatarImg");
-        const signOutBtn = document.getElementById("signOutBtn");
+        const userEmailDisplay = document.getElementById("userEmailDisplay");
+        const userAvatar = document.getElementById("userAvatar");
+        const logoutBtn = document.getElementById("logoutBtn");
+        
+        const resetPassBtn = document.getElementById("resetPassBtn");
+        const passMsgBox = document.getElementById("passMsgBox");
+
+        const newEmailInput = document.getElementById("newEmailInput");
+        const updateEmailBtn = document.getElementById("updateEmailBtn");
+        const emailMsgBox = document.getElementById("emailMsgBox");
+
+        let activeUser = null;
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                guestBox.style.display = "none";
-                userProfile.style.display = "block";
-                profileName.innerText = user.displayName || "জাপানিজ শিক্ষার্থী";
-                profileEmail.innerText = user.email;
-                if (user.photoURL) {
-                    avatarImg.src = user.photoURL;
-                }
+                activeUser = user;
+                userEmailDisplay.innerText = user.email;
+                userAvatar.innerText = user.email.charAt(0).toUpperCase();
             } else {
-                userProfile.style.display = "none";
-                guestBox.style.display = "block";
+                window.location.href = "login.html";
             }
         });
 
-        signOutBtn.addEventListener("click", () => {
-            signOut(auth).then(() => {
-                window.location.href = "login.html";
-            });
+        // লগআউট
+        logoutBtn.addEventListener("click", async () => {
+            await signOut(auth);
+            window.location.href = "login.html";
         });
+
+        // পাসওয়ার্ড রিসেট লিংক পাঠানো
+        resetPassBtn.addEventListener("click", async () => {
+            if (!activeUser) return;
+            passMsgBox.style.display = "none";
+            try {
+                await sendPasswordResetEmail(auth, activeUser.email);
+                showMsg(passMsgBox, "পাসওয়ার্ড পরিবর্তনের লিংক আপনার ইমেইলে পাঠানো হয়েছে।", "success");
+            } catch (err) {
+                showMsg(passMsgBox, "সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।", "error");
+            }
+        });
+
+        // ইমেইল পরিবর্তন (Edit Email)
+        updateEmailBtn.addEventListener("click", async () => {
+            const newEmail = newEmailInput.value.trim();
+            emailMsgBox.style.display = "none";
+
+            if (!newEmail) {
+                showMsg(emailMsgBox, "নতুন ইমেইল ঠিকানা লিখুন।", "error");
+                return;
+            }
+
+            try {
+                // ফায়ারবেসের সিকিউর মেথড যার মাধ্যমে নতুন ইমেইলে ভেরিফিকেশন যাবে
+                await verifyBeforeUpdateEmail(activeUser, newEmail);
+                showMsg(emailMsgBox, "নতুন ইমেইলে একটি ভেরিফিকেশন লিংক পাঠানো হয়েছে। লিংকটি কনফার্ম করুন।", "success");
+                newEmailInput.value = "";
+            } catch (err) {
+                let errorText = "ইমেইল আপডেট করা যায়নি। আবার চেষ্টা করুন।";
+                if (err.code === "auth/requires-recent-login") {
+                    errorText = "নিরাপত্তার জন্য পুনরায় লগইন করে আবার চেষ্টা করুন।";
+                } else if (err.code === "auth/email-already-in-use") {
+                    errorText = "এই ইমেইলটি ইতিমধ্যে অন্য অ্যাকাউন্টে ব্যবহৃত হচ্ছে।";
+                }
+                showMsg(emailMsgBox, errorText, "error");
+            }
+        });
+
+        function showMsg(box, text, type) {
+            box.innerText = text;
+            box.style.display = "block";
+            box.className = `msg-box ${type === 'error' ? 'error-msg' : 'success-msg'}`;
+        }
     </script>
 </body>
 </html>

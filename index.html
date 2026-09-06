@@ -1,14 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-    <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জাপানি ভাষা শিখুন বাংলায়</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a>
-    </nav>
-    <h1>Welcome to My Home Page</h1>
-    <p>মোবাইল দিয়ে তৈরি করা আমার প্রথম ওয়েবসাইট!</p>
+
+    <!-- হেডার ও মেনুবার -->
+    <header>
+        <div class="logo">BD-Japanese</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="n5.html">N5</a>
+            <a href="kanji.html">Kanji</a>
+        </nav>
+    </header>
+
+    <!-- হিরো সেকশন -->
+    <section class="hero">
+        <h1>সহজে বাংলায় জাপানি ভাষা শিখুন</h1>
+        <p>JLPT ও NAT-TEST প্রস্তুতির জন্য সম্পূর্ণ ফ্রি রিসোর্স এবং গাইডলাইন।</p>
+        <a href="#courses" class="btn">পড়া শুরু করুন</a>
+    </section>
+
+    <!-- কোর্স ও ক্যাটাগরি কার্ড -->
+    <main class="container" id="courses">
+        <h2 class="section-title">পড়াশোনার ক্যাটাগরি</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <h3>Minna no Nihongo (N5)</h3>
+                <p>লেসন ১ থেকে ২৫ পর্যন্ত ব্যাকরণ, শব্দভাণ্ডার এবং সহজ বাংলা ব্যাখ্যা।</p>
+                <a href="n5.html">লেসনগুলো দেখুন &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>কাঞ্জি শিক্ষা (Kanji)</h3>
+                <p>N5 লেভেলের জরুরি ১০০+ কাঞ্জি, অর্থ ও স্ট্রোক অর্ডারসহ বিস্তারিত।</p>
+                <a href="kanji.html">কাঞ্জি প্র্যাকটিস &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>ভোকাবুলারি ব্যাংক</h3>
+                <p>প্রতিদিনের প্রয়োজনীয় জাপানি শব্দ এবং অডিও উচ্চারণ গাইড।</p>
+                <a href="#">শব্দতালিকা দেখুন &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>প্রশ্ন ও মডেল টেস্ট</h3>
+                <p>বিগত বছরের পরীক্ষার প্রশ্ন সমাধান এবং অনলাইন কুইজ টেস্ট।</p>
+                <a href="#">টেস্ট দিন &rarr;</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ফুটার -->
+    <footer>
+        <p>&copy; 2026 BD-Japanese. সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
 </body>
 </html>

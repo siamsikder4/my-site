@@ -163,7 +163,7 @@
             margin: 0 auto;
             overflow: hidden;
             background: #f8fafc;
-            padding-bottom: 62px; /* বটম বারের জায়গা */
+            padding-bottom: 62px;
         }
 
         .chat-messages {
@@ -369,7 +369,7 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        model: "llama-3.3-70b-versatile",
+                        model: "llama-3.1-8b-instant",
                         messages: messageHistory,
                         temperature: 0.7
                     })

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রোফাইল - KOTOBA</title>
+    <title>প্রোফাইল সেটিংস - KOTOBA</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -141,16 +141,54 @@
             border-radius: 18px;
             padding: 24px 18px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-            text-align: center;
             margin-bottom: 16px;
+            position: relative;
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .card-title-sm {
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f3e2e;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* এডিট পেনসিল বাটন */
+        .edit-pencil-btn {
+            background: #e6f4ea;
+            color: #047857;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .edit-pencil-btn:active {
+            transform: scale(0.9);
+            background: #047857;
+            color: #ffffff;
         }
 
         .avatar-circle {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: #e6f4ea;
             color: #047857;
-            font-size: 28px;
+            font-size: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -159,19 +197,72 @@
             font-weight: 800;
         }
 
-        .user-email-text {
+        .user-field-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .user-field-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .user-field-value {
             font-size: 14px;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 18px;
-            word-break: break-all;
+            padding: 9px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .user-field-value.locked {
+            background: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .user-field-input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid #047857;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            outline: none;
+            background: #ffffff;
+            display: none;
+        }
+
+        .save-profile-btn {
+            display: none;
+            width: 100%;
+            padding: 11px;
+            background: #047857;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 14px;
+        }
+
+        .logout-container {
+            text-align: center;
+            margin-top: 16px;
         }
 
         .logout-btn {
             background: #fee2e2;
             color: #dc2626;
             border: none;
-            padding: 8px 20px;
+            padding: 9px 20px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 700;
@@ -179,11 +270,7 @@
             transition: background 0.2s;
         }
 
-        .logout-btn:active {
-            background: #fecaca;
-        }
-
-        /* সেকশন কার্ড (পাসওয়ার্ড ও ইমেইল পরিবর্তন) */
+        /* সেকশন কার্ড (পাসওয়ার্ড রিসেট) */
         .section-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -197,37 +284,10 @@
             font-size: 15px;
             font-weight: 800;
             color: #0f3e2e;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 11.5px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 13px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus {
-            border-color: #047857;
         }
 
         .action-btn {
@@ -240,12 +300,8 @@
             font-size: 13.5px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 6px;
             transition: background 0.2s;
-        }
-
-        .action-btn.secondary {
-            background: #047857;
         }
 
         .action-btn:active {
@@ -315,29 +371,50 @@
     <!-- টপ বার -->
     <header class="top-nav">
         <a href="index.html" class="logo">KOTOBA</a>
-        <div style="font-size: 12.5px; font-weight: 700; color: #047857;">প্রোফাইল সেটিংস</div>
+        <div style="font-size: 12.5px; font-weight: 700; color: #047857;">প্রোফাইল</div>
     </header>
 
     <main class="container">
-        <!-- প্রোফাইল ইনফো -->
+        
+        <!-- প্রোফাইল কার্ড (নাম, ফোন, ইমেইল ও এডিট পেনসিল) -->
         <div class="profile-card">
-            <div class="avatar-circle" id="userAvatar">U</div>
-            <div class="user-email-text" id="userEmailDisplay">লোড হচ্ছে...</div>
-            <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> লগআউট করুন</button>
-        </div>
-
-        <!-- ইমেইল পরিবর্তন সেকশন (Edit Email) -->
-        <div class="section-card">
-            <h3 class="section-title"><i class="fa-solid fa-envelope"></i> ইমেইল ঠিকানা পরিবর্তন</h3>
-            <div class="form-group">
-                <label>নতুন ইমেইল ঠিকানা</label>
-                <input type="email" id="newEmailInput" placeholder="newemail@example.com">
+            <div class="card-header-flex">
+                <div class="card-title-sm"><i class="fa-solid fa-user-pen"></i> ব্যক্তিগত তথ্য</div>
+                <button class="edit-pencil-btn" id="toggleEditBtn" title="এডিট করুন"><i class="fa-solid fa-pen"></i></button>
             </div>
-            <button class="action-btn secondary" id="updateEmailBtn">ইমেইল আপডেট করুন</button>
-            <div class="msg-box" id="emailMsgBox"></div>
+
+            <div class="avatar-circle" id="userAvatar">U</div>
+
+            <!-- নাম (এডিটযোগ্য) -->
+            <div class="user-field-group">
+                <label>আপনার নাম</label>
+                <div class="user-field-value" id="displayNameText">লোড হচ্ছে...</div>
+                <input type="text" class="user-field-input" id="displayNameInput" placeholder="আপনার নাম লিখুন">
+            </div>
+
+            <!-- ফোন নম্বর (এডিটযোগ্য) -->
+            <div class="user-field-group">
+                <label>মোবাইল নম্বর</label>
+                <div class="user-field-value" id="displayPhoneText">যোগ করা হয়নি</div>
+                <input type="tel" class="user-field-input" id="displayPhoneInput" placeholder="01XXXXXXXXX">
+            </div>
+
+            <!-- ইমেইল (অপরিবর্তনযোগ্য/Locked) -->
+            <div class="user-field-group">
+                <label>ইমেইল ঠিকানা (পরিবর্তন করা যাবে না)</label>
+                <div class="user-field-value locked" id="userEmailDisplay">লোড হচ্ছে...</div>
+            </div>
+
+            <!-- সেভ বাটন -->
+            <button class="save-profile-btn" id="saveProfileBtn">পরিবর্তনসমূহ সংরক্ষণ করুন</button>
+            <div class="msg-box" id="profileMsgBox"></div>
+
+            <div class="logout-container">
+                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> লগআউট করুন</button>
+            </div>
         </div>
 
-        <!-- পাসওয়ার্ড রিসেট সেকশন (Forgot/Reset Password) -->
+        <!-- পাসওয়ার্ড রিসেট সেকশন -->
         <div class="section-card">
             <h3 class="section-title"><i class="fa-solid fa-key"></i> পাসওয়ার্ড রিসেট</h3>
             <p style="font-size: 12px; color: #64748b; margin-bottom: 12px;">আপনার বর্তমান ইমেইলে পাসওয়ার্ড পরিবর্তনের লিংক পাঠাতে নিচের বাটনে ক্লিক করুন।</p>
@@ -372,7 +449,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail, verifyBeforeUpdateEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -386,27 +464,113 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         const userEmailDisplay = document.getElementById("userEmailDisplay");
         const userAvatar = document.getElementById("userAvatar");
         const logoutBtn = document.getElementById("logoutBtn");
         
+        const toggleEditBtn = document.getElementById("toggleEditBtn");
+        const displayNameText = document.getElementById("displayNameText");
+        const displayNameInput = document.getElementById("displayNameInput");
+        const displayPhoneText = document.getElementById("displayPhoneText");
+        const displayPhoneInput = document.getElementById("displayPhoneInput");
+        const saveProfileBtn = document.getElementById("saveProfileBtn");
+        const profileMsgBox = document.getElementById("profileMsgBox");
+
         const resetPassBtn = document.getElementById("resetPassBtn");
         const passMsgBox = document.getElementById("passMsgBox");
 
-        const newEmailInput = document.getElementById("newEmailInput");
-        const updateEmailBtn = document.getElementById("updateEmailBtn");
-        const emailMsgBox = document.getElementById("emailMsgBox");
-
         let activeUser = null;
+        let isEditing = false;
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 activeUser = user;
                 userEmailDisplay.innerText = user.email;
                 userAvatar.innerText = user.email.charAt(0).toUpperCase();
+
+                // Firestore থেকে নাম ও ফোন নম্বর লোড করা
+                try {
+                    const docRef = doc(db, "user_profiles", user.email);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        displayNameText.innerText = data.name || "নাম সেট করা হয়নি";
+                        displayNameInput.value = data.name || "";
+                        displayPhoneText.innerText = data.phone || "যোগ করা হয়নি";
+                        displayPhoneInput.value = data.phone || "";
+                    } else {
+                        displayNameText.innerText = user.displayName || "ব্যবহারকারী";
+                        displayNameInput.value = user.displayName || "";
+                    }
+                } catch (e) {
+                    console.error("Profile load error:", e);
+                }
             } else {
                 window.location.href = "login.html";
+            }
+        });
+
+        // এডিট মোড টগল (পেনসিল বাটনে ক্লিক করলে ইনপুট বক্স আসবে)
+        toggleEditBtn.addEventListener("click", () => {
+            isEditing = !isEditing;
+            if (isEditing) {
+                toggleEditBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                toggleEditBtn.style.background = "#fee2e2";
+                toggleEditBtn.style.color = "#dc2626";
+
+                displayNameText.style.display = "none";
+                displayNameInput.style.display = "block";
+
+                displayPhoneText.style.display = "none";
+                displayPhoneInput.style.display = "block";
+
+                saveProfileBtn.style.display = "block";
+            } else {
+                exitEditMode();
+            }
+        });
+
+        function exitEditMode() {
+            isEditing = false;
+            toggleEditBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+            toggleEditBtn.style.background = "#e6f4ea";
+            toggleEditBtn.style.color = "#047857";
+
+            displayNameText.style.display = "block";
+            displayNameInput.style.display = "none";
+
+            displayPhoneText.style.display = "block";
+            displayPhoneInput.style.display = "none";
+
+            saveProfileBtn.style.display = "none";
+        }
+
+        // নাম ও ফোন নম্বর ফায়ারস্টোরে সেভ করা
+        saveProfileBtn.addEventListener("click", async () => {
+            if (!activeUser) return;
+            profileMsgBox.style.display = "none";
+
+            const newName = displayNameInput.value.trim();
+            const newPhone = displayPhoneInput.value.trim();
+
+            try {
+                const docRef = doc(db, "user_profiles", activeUser.email);
+                await setDoc(docRef, {
+                    email: activeUser.email,
+                    name: newName,
+                    phone: newPhone,
+                    updatedAt: new Date().toISOString()
+                }, { merge: true });
+
+                displayNameText.innerText = newName || "নাম সেট করা হয়নি";
+                displayPhoneText.innerText = newPhone || "যোগ করা হয়নি";
+
+                showMsg(profileMsgBox, "প্রোফাইল সফলভাবে আপডেট করা হয়েছে!", "success");
+                setTimeout(exitEditMode, 1200);
+            } catch (err) {
+                showMsg(profileMsgBox, "সংরক্ষণ করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।", "error");
             }
         });
 
@@ -425,32 +589,6 @@
                 showMsg(passMsgBox, "পাসওয়ার্ড পরিবর্তনের লিংক আপনার ইমেইলে পাঠানো হয়েছে।", "success");
             } catch (err) {
                 showMsg(passMsgBox, "সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।", "error");
-            }
-        });
-
-        // ইমেইল পরিবর্তন (Edit Email)
-        updateEmailBtn.addEventListener("click", async () => {
-            const newEmail = newEmailInput.value.trim();
-            emailMsgBox.style.display = "none";
-
-            if (!newEmail) {
-                showMsg(emailMsgBox, "নতুন ইমেইল ঠিকানা লিখুন।", "error");
-                return;
-            }
-
-            try {
-                // ফায়ারবেসের সিকিউর মেথড যার মাধ্যমে নতুন ইমেইলে ভেরিফিকেশন যাবে
-                await verifyBeforeUpdateEmail(activeUser, newEmail);
-                showMsg(emailMsgBox, "নতুন ইমেইলে একটি ভেরিফিকেশন লিংক পাঠানো হয়েছে। লিংকটি কনফার্ম করুন।", "success");
-                newEmailInput.value = "";
-            } catch (err) {
-                let errorText = "ইমেইল আপডেট করা যায়নি। আবার চেষ্টা করুন।";
-                if (err.code === "auth/requires-recent-login") {
-                    errorText = "নিরাপত্তার জন্য পুনরায় লগইন করে আবার চেষ্টা করুন।";
-                } else if (err.code === "auth/email-already-in-use") {
-                    errorText = "এই ইমেইলটি ইতিমধ্যে অন্য অ্যাকাউন্টে ব্যবহৃত হচ্ছে।";
-                }
-                showMsg(emailMsgBox, errorText, "error");
             }
         });
 

@@ -2,130 +2,188 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
 }
 
 body {
-    background-color: #f8fafc;
-    color: #333;
+    background-color: #f7faf9;
+    color: #1a202c;
+    padding-bottom: 50px;
 }
 
-/* Header */
-header {
-    background: #ffffff;
-    padding: 15px 20px;
+/* টপ বার */
+.top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 14px 18px;
+    background: #ffffff;
+    border-bottom: 1px solid #eef2f5;
     position: sticky;
     top: 0;
+    z-index: 100;
 }
 
 .logo {
-    font-size: 20px;
-    font-weight: bold;
-    color: #dc2626; /* জাপান ফ্ল্যাগ রেড */
+    font-weight: 800;
+    font-size: 17px;
+    color: #0f3e2e;
+    letter-spacing: 0.5px;
 }
 
-nav a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #4b5563;
+.menu-btn, .login-btn {
+    font-size: 14px;
     font-weight: 500;
+    color: #4a5568;
+    cursor: pointer;
 }
 
-nav a:hover {
-    color: #dc2626;
+/* কন্টেইনার */
+.page-content {
+    padding: 20px 16px;
+    max-width: 480px;
+    margin: 0 auto;
 }
 
-/* Hero Section */
-.hero {
+/* হিরো টেক্সট */
+.hero-text {
     text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(135deg, #fee2e2 0%, #ffffff 100%);
+    margin: 15px 0 25px;
 }
 
-.hero h1 {
-    font-size: 28px;
-    color: #1f2937;
-    margin-bottom: 12px;
-}
-
-.hero p {
-    color: #4b5563;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.hero .btn {
-    display: inline-block;
-    background: #dc2626;
-    color: #fff;
-    padding: 10px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Course Cards Section */
-.container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 25px;
-    color: #111827;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
-    border: 1px solid #e5e7eb;
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-.card h3 {
-    color: #dc2626;
+.hero-text h2 {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0e3b2c;
     margin-bottom: 8px;
 }
 
-.card p {
-    font-size: 14px;
-    color: #6b7280;
-    line-height: 1.5;
-    margin-bottom: 15px;
+.hero-text p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #4a5568;
 }
 
-.card a {
-    text-decoration: none;
-    color: #1d4ed8;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-/* Footer */
-footer {
+/* সেনসেই এআই ব্যানার */
+.tutor-banner {
+    background: #0f3e2e;
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 26px 16px;
     text-align: center;
-    padding: 25px;
-    background: #111827;
-    color: #9ca3af;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
+}
+
+.tutor-banner h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.tutor-banner p {
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-bottom: 18px;
+}
+
+.banner-btn {
+    display: inline-block;
+    background: #c51636;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 9px 24px;
+    border-radius: 25px;
     font-size: 14px;
-    margin-top: 40px;
+    font-weight: 600;
+}
+
+/* লেভেল ব্যাজ ও হেডিং */
+.level-section {
+    margin-bottom: 35px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.red-badge { background: #b91c1c; }
+.green-badge { background: #047857; }
+.dark-badge { background: #1e3a34; }
+
+.section-heading {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0e3b2c;
+    margin-bottom: 14px;
+}
+
+/* কার্ড গ্রিড (মোবাইলে পাশাপাশি ২টি করে) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.item-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px 8px;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.red-top { border-top: 3px solid #b91c1c; }
+.green-top { border-top: 3px solid #059669; }
+
+/* আইকন সার্কেল */
+.icon-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.green-bg { background: #e6f4ea; color: #047857; }
+.red-bg { background: #fce8e6; color: #b91c1c; }
+.yellow-bg { background: #fef3c7; color: #d97706; }
+
+/* কার্ড টেক্সট */
+.item-card h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.item-card p {
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.3;
+}
+
+/* ছোট কামিং সুন ট্যাগ */
+.mini-tag {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #fef08a;
+    color: #854d0e;
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
 }

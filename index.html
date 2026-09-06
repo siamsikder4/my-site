@@ -47,17 +47,20 @@
         .top-nav-right {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .top-nav-link {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 600;
             color: #0f3e2e;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 5px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: #f1f5f9;
         }
 
         .page-content {
@@ -366,8 +369,14 @@
     <header class="top-nav">
         <a href="index.html" class="logo">KOTOBA</a>
         <div class="top-nav-right">
-            <a href="login.html" class="top-nav-link"><i class="fa-solid fa-arrow-right-to-bracket"></i> লগইন</a>
-            <a href="profile.html" class="top-nav-link"><i class="fa-regular fa-user"></i> প্রোফাইল</a>
+            <!-- লগইন থাকলে এই বাটনটি লুকিয়ে যাবে -->
+            <a href="login.html" id="topLoginBtn" class="top-nav-link">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> লগইন
+            </a>
+            <!-- লগইন থাকলে এই বাটনটি দৃশ্যমান হবে -->
+            <a href="profile.html" id="topProfileBtn" class="top-nav-link" style="display: none;">
+                <i class="fa-regular fa-user"></i> প্রোফাইল
+            </a>
         </div>
     </header>
 
@@ -495,10 +504,12 @@
             <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
             <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
             <div class="card-grid">
-                <a href="#" class="item-card green-top">
+                
+                <!-- N4 শব্দকোষ লিংক -->
+                <a href="n4-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
-                    <p>N4 ভোকাবুলারি এবং মূলশব্দ</p>
+                    <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
                 </a>
 
                 <!-- N4 ব্যাকরণ লিংক -->
@@ -551,14 +562,62 @@
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
         </button>
-        <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
+        <!-- লগইন থাকলে এটি 'প্রোফাইল' হবে, লগআউট থাকলে 'লগইন' হবে -->
+        <a href="login.html" class="nav-item" id="bottomAuthBtn">
+            <i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i>
+            <span id="bottomAuthText">লগইন</span>
         </a>
     </nav>
 
-    <!-- স্ক্রিপ্ট -->
-    <script>
+    <!-- Firebase ও স্ক্রিপ্ট কোড -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // আপনার Firebase কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const topLoginBtn = document.getElementById("topLoginBtn");
+        const topProfileBtn = document.getElementById("topProfileBtn");
+        const bottomAuthBtn = document.getElementById("bottomAuthBtn");
+        const bottomAuthIcon = document.getElementById("bottomAuthIcon");
+        const bottomAuthText = document.getElementById("bottomAuthText");
+
+        // ইউজারের লগইন স্ট্যাটাস পরীক্ষা করা
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // ইউজার লগইন করা থাকলে:
+                // ১. ওপরের লগইন বাটন লুকাবে এবং প্রোফাইল বাটন দৃশ্যমান হবে
+                topLoginBtn.style.display = "none";
+                topProfileBtn.style.display = "flex";
+
+                // ২. নিচের বারে লগইন পরিবর্তিত হয়ে সরাসরি প্রোফাইল লিংক হয়ে যাবে
+                bottomAuthBtn.href = "profile.html";
+                bottomAuthIcon.className = "fa-solid fa-circle-user";
+                bottomAuthText.innerText = "প্রোফাইল";
+            } else {
+                // ইউজার লগআউট থাকলে:
+                topLoginBtn.style.display = "flex";
+                topProfileBtn.style.display = "none";
+
+                bottomAuthBtn.href = "login.html";
+                bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
+                bottomAuthText.innerText = "লগইন";
+            }
+        });
+
+        // ================= সেনসেই AI চ্যাটবক্স ফাংশন =================
         const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
 
         const openBtn = document.getElementById("openChatBtn");
@@ -577,7 +636,7 @@
         bottomSenseiBtn.addEventListener("click", openModal);
         closeBtn.addEventListener("click", () => overlay.style.display = "none");
 
-        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।';";
+        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
 
         async function sendMessage() {
             const text = userInput.value.trim();
@@ -589,7 +648,7 @@
             const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
 
             if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার API Key বসান।";
+                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার আসল API Key বসান।";
                 return;
             }
 

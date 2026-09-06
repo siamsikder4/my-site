@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন - BD Japanese</title>
+    <title>লগইন - Kotoba</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -74,7 +74,6 @@
             margin-bottom: 20px;
         }
 
-        /* গুগল লগইন বাটন */
         .google-btn {
             width: 100%;
             padding: 11px;
@@ -120,7 +119,6 @@
             padding: 0 10px;
         }
 
-        /* ইনপুট ফিল্ড */
         .form-group {
             margin-bottom: 14px;
         }
@@ -185,7 +183,6 @@
             display: none;
         }
 
-        /* প্রোফাইল স্টেট (লগইন থাকা অবস্থায়) */
         .profile-card {
             display: none;
             text-align: center;
@@ -223,7 +220,6 @@
             cursor: pointer;
         }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -262,12 +258,11 @@
 
     <header class="top-nav">
         <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="logo">BD JAPANESE</div>
+        <div class="logo">KOTOBA</div>
     </header>
 
     <main class="container">
         
-        <!-- লগইন/রেজিস্ট্রেশন বক্স -->
         <div class="auth-card" id="authBox">
             <h2 class="auth-title" id="formTitle">লগইন করুন</h2>
             <p class="auth-sub" id="formSubtitle">আপনার অ্যাকাউন্টে প্রবেশ করে প্রস্তুতি শুরু করুন</p>
@@ -298,7 +293,6 @@
             </div>
         </div>
 
-        <!-- লগইন সফল হলে প্রোফাইল বক্স -->
         <div class="auth-card profile-card" id="profileBox">
             <img src="" id="userPhoto" class="user-avatar" alt="Profile">
             <h3 class="user-name" id="userName">User</h3>
@@ -308,7 +302,6 @@
 
     </main>
 
-    <!-- বটম নেভিগেশন -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -324,7 +317,6 @@
         </a>
     </nav>
 
-    <!-- Firebase মডিউলার স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { 
@@ -337,14 +329,14 @@
             onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // আপনার Firebase Console থেকে পাওয়া কনফিগ এখানে বসান
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -365,7 +357,6 @@
         const emailInput = document.getElementById("emailInput");
         const passInput = document.getElementById("passInput");
 
-        // Auth স্টেট মনিটরিং
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 authBox.style.display = "none";
@@ -379,7 +370,6 @@
             }
         });
 
-        // লগইন / রেজিস্ট্রেশন মোড টগল
         toggleMode.addEventListener("click", () => {
             isSignUp = !isSignUp;
             errorMsg.style.display = "none";
@@ -398,7 +388,6 @@
             }
         });
 
-        // ইমেইল/পাসওয়ার্ড অ্যাকশন
         submitBtn.addEventListener("click", async () => {
             const email = emailInput.value.trim();
             const pass = passInput.value.trim();
@@ -420,7 +409,6 @@
             }
         });
 
-        // গুগল সাইন ইন
         document.getElementById("googleLoginBtn").addEventListener("click", async () => {
             try {
                 await signInWithPopup(auth, googleProvider);
@@ -429,7 +417,6 @@
             }
         });
 
-        // সাইন আউট
         document.getElementById("logoutBtn").addEventListener("click", () => {
             signOut(auth);
         });

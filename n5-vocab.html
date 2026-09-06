@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N5 Vocabulary - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
     
@@ -19,7 +20,7 @@
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 90px;
+            padding-bottom: 75px;
         }
 
         /* লোডার ওভারলে */
@@ -107,12 +108,12 @@
             letter-spacing: 0.8px;
         }
 
-        /* টপ বার */
+        /* টপ নেভিগেশন */
         .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 14px 18px;
             background: #ffffff;
             border-bottom: 1px solid #eef2f5;
             position: sticky;
@@ -123,207 +124,464 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 16px;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 700;
             color: #0f3e2e;
-            text-decoration: none;
+            cursor: pointer;
         }
 
-        .user-pill {
-            font-size: 11px;
+        .nav-title {
+            font-weight: 800;
+            font-size: 16.5px;
+            color: #0f3e2e;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right {
+            font-size: 11.5px;
             font-weight: 700;
             color: #047857;
             background: #e6f4ea;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            text-decoration: none;
+            gap: 5px;
         }
 
-        .container {
+        .main-container {
             padding: 16px;
-            max-width: 600px;
+            max-width: 480px;
             margin: 0 auto;
         }
 
-        .page-header {
+        /* লেসন সিলেকশন গ্রিড */
+        .grid-header-wrap {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
-        .page-title {
+        .main-category-title {
             font-size: 20px;
             font-weight: 800;
-            color: #0f3e2e;
+            color: #0e3b2c;
             margin-bottom: 4px;
         }
 
-        .page-sub {
-            font-size: 11.5px;
+        .sub-category-desc {
+            font-size: 12px;
             color: #64748b;
             font-weight: 600;
         }
 
-        /* ২ কলাম গ্রিড লেআউট */
-        .vocab-grid {
+        .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
-        .lesson-box {
+        .lesson-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-left: 4px solid #047857;
+            border-left: 4px solid #144336;
             border-radius: 14px;
-            padding: 14px;
+            padding: 16px 12px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s ease;
         }
 
-        .lesson-box:active {
-            transform: scale(0.97);
+        .lesson-card:active {
+            transform: scale(0.98);
         }
 
-        .box-top {
+        .card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .badge-l {
-            font-size: 9.5px;
-            font-weight: 800;
+        .l-badge {
             background: #f1f5f9;
             color: #475569;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .badge-jp {
-            font-size: 9.5px;
+            font-size: 10px;
             font-weight: 700;
-            color: #64748b;
-            font-family: 'Noto Sans JP', sans-serif;
+            padding: 2px 7px;
+            border-radius: 6px;
         }
 
-        .lesson-name {
-            font-size: 14px;
-            font-weight: 800;
-            color: #0f3e2e;
+        .kanji-lesson-tag {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .card-lesson-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #144336;
             margin-bottom: 3px;
         }
 
-        .lesson-desc {
+        .card-lesson-desc {
             font-size: 11px;
             color: #64748b;
-            font-weight: 600;
-            margin-bottom: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            line-height: 1.3;
         }
 
-        .box-bottom {
+        .card-arrow {
             display: flex;
             justify-content: flex-end;
-            color: #047857;
+            margin-top: 10px;
+            color: #cbd5e1;
             font-size: 12px;
         }
 
-        /* শব্দ তালিকা দেখার মডাল ভিউ */
-        .vocab-modal {
+        /* ফ্ল্যাশকার্ড ভিউ */
+        .detail-view {
             display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #f7faf9;
-            z-index: 1000;
-            flex-direction: column;
         }
 
-        .modal-header {
-            background: #ffffff;
-            padding: 14px 16px;
+        .fc-top-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #eef2f5;
+            gap: 8px;
+            margin-bottom: 14px;
+            position: relative;
         }
 
-        .modal-title {
-            font-size: 16px;
+        .fc-title {
+            font-size: 20px;
             font-weight: 800;
             color: #0f3e2e;
         }
 
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #475569;
-            cursor: pointer;
-        }
-
-        .vocab-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px 16px;
-        }
-
-        .vocab-item-row {
-            background: #ffffff;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 12px 10px;
+        .fc-tools {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 14px;
+            padding: 0 4px;
         }
 
-        .vocab-item-row.bookmarked {
-            background: #fef2f2;
+        .fc-tool-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.15s;
+        }
+
+        .fc-tool-btn:active {
+            transform: scale(0.92);
+        }
+
+        .flashcard-container {
+            perspective: 1200px;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.34, 1.35, 0.64, 1);
+            transform-style: preserve-3d;
+            border-radius: 20px;
+        }
+
+        .flashcard-container.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .flashcard-front {
+            border-top: 4px solid #144336;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background: #fbfdfc;
+            border-top: 4px solid #b91c1c;
+        }
+
+        .flashcard-container.is-highlighted .flashcard-face {
+            border-color: #ef4444 !important;
+            border-top-color: #dc2626 !important;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.16) !important;
+            background: #fffafa !important;
+        }
+
+        .fc-jp-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: #144336;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .fc-meaning-text {
+            font-size: 20px;
+            font-weight: 800;
+            color: #b91c1c;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .fc-ro-text {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .fc-tap-hint {
+            position: absolute;
+            bottom: 16px;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .fc-highlight-btn {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .fc-highlight-btn.active {
+            color: #ffffff;
+            background: #ef4444;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+        }
+
+        .fc-speaker-icon {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            color: #047857;
+            background: #f1f5f9;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .fc-speaker-icon:active {
+            transform: scale(0.9);
+            background: #047857;
+            color: #ffffff;
+        }
+
+        .fc-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 18px 0 24px;
+            gap: 12px;
+        }
+
+        .fc-arrow-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.15s;
+        }
+
+        .fc-progress-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fc-counter-text {
+            font-size: 12px;
+            font-weight: 800;
+            color: #475569;
+            letter-spacing: 0.5px;
+        }
+
+        .fc-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .fc-progress-fill {
+            height: 100%;
+            background: #144336;
+            width: 5%;
+            transition: width 0.25s ease;
+        }
+
+        .vocab-accordion-header {
+            background: #144336;
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13.5px;
+            box-shadow: 0 3px 6px rgba(20, 67, 54, 0.15);
+        }
+
+        .vocab-accordion-header .acc-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .vocab-accordion-header .acc-icon {
+            font-size: 13px;
+            transition: transform 0.25s ease;
+        }
+
+        .vocab-table-card {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .vocab-table th {
+            background: #f8fafc;
+            color: #144336;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 12px 6px;
+            border-bottom: 1px solid #e2e8f0;
+            line-height: 1.3;
+        }
+
+        .vocab-table td {
+            padding: 12px 6px;
+            font-size: 12.5px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .vocab-table tr:nth-child(even) {
+            background: #fafcfb;
+        }
+
+        .vocab-table tr.highlighted-row {
+            background-color: #fff1f2 !important;
             border-left: 4px solid #ef4444;
         }
 
-        .vocab-jp {
-            font-size: 15px;
+        .col-kana {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 14px;
             font-weight: 700;
             color: #0f3e2e;
-            font-family: 'Noto Sans JP', sans-serif;
-            margin-bottom: 2px;
         }
 
-        .vocab-roma {
-            font-size: 11px;
+        .col-ro {
+            font-size: 12px;
             color: #64748b;
+            font-weight: 500;
         }
 
-        .vocab-bn {
-            font-size: 13.5px;
-            font-weight: 600;
+        .col-bn {
+            font-size: 12px;
+            font-weight: 700;
             color: #1e293b;
-            text-align: right;
         }
 
-        .bookmark-btn {
+        .table-hl-btn {
             background: none;
             border: none;
+            font-size: 16px;
             color: #cbd5e1;
-            font-size: 18px;
             cursor: pointer;
-            padding-left: 12px;
+            transition: transform 0.15s, color 0.15s;
         }
 
-        .vocab-item-row.bookmarked .bookmark-btn {
+        .table-hl-btn.active {
             color: #ef4444;
         }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -345,10 +603,13 @@
             align-items: center;
             gap: 4px;
             font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         .nav-item.active {
-            color: #0f3e2e;
+            color: #144336;
         }
 
         .nav-item i {
@@ -373,34 +634,106 @@
 
     <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="nav-left">
-            <i class="fa-solid fa-arrow-left"></i> KOTOBA
-        </a>
-        <a href="profile.html" class="user-pill">
-            <i class="fa-solid fa-envelope"></i> <span id="userEmailText">qr.siamsikder@gmail.com</span>
-        </a>
+        <div class="nav-left" id="btnBackToGrid">
+            <i class="fa-solid fa-bars" id="menuIcon"></i>
+            <span class="nav-title">KOTOBA</span>
+        </div>
+        <div class="nav-right" id="userEmailDisplay">
+            <i class="fa-solid fa-cloud"></i> <span id="syncText">লোড হচ্ছে...</span>
+        </div>
     </header>
 
-    <main class="container">
-        <div class="page-header">
-            <h1 class="page-title">N5 Vocabulary</h1>
-            <p class="page-sub">মোট ২৫টি লেসন • সম্পূর্ণ শব্দভাণ্ডার</p>
+    <main class="main-container">
+
+        <!-- ভিউ ১: লেসন তালিকা -->
+        <div id="lessonGridView">
+            <div class="grid-header-wrap">
+                <h2 class="main-category-title">N5 Vocabulary</h2>
+                <p class="sub-category-desc">মোট ২৫টি লেসন • সম্পূর্ণ শব্দভাণ্ডার</p>
+            </div>
+
+            <div class="lesson-grid" id="gridContainer"></div>
         </div>
 
-        <!-- লেসন গ্রিড (লেসন ১ থেকে ২৫) -->
-        <div class="vocab-grid" id="lessonGrid"></div>
+        <!-- ভিউ ২: ৩ডি ফ্ল্যাশকার্ড ও টেবিল ভিউ -->
+        <div id="lessonDetailView" class="detail-view">
+            
+            <div class="fc-top-header">
+                <h3 class="fc-title">শব্দার্থ ফ্ল্যাশকার্ড</h3>
+            </div>
+
+            <div class="fc-tools">
+                <button class="fc-tool-btn" id="btnShuffle"><i class="fa-solid fa-shuffle"></i></button>
+                <button class="fc-tool-btn" id="btnSpeakMain"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+
+            <!-- ৩ডি অ্যানিমেটেড ফ্ল্যাশকার্ড -->
+            <div class="flashcard-container" id="flashcardContainer">
+                <div class="flashcard-inner">
+                    <div class="flashcard-face flashcard-front">
+                        <button class="fc-highlight-btn" id="fcFrontHlBtn">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn"><i class="fa-solid fa-volume-high"></i></button>
+                        <div class="fc-jp-text" id="fcKana">わたし</div>
+                        <div class="fc-tap-hint">
+                            <i class="fa-solid fa-hand-pointer"></i>
+                            <span>ফ্লিপ করুন</span>
+                        </div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <button class="fc-highlight-btn" id="fcBackHlBtn">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn"><i class="fa-solid fa-volume-high"></i></button>
+                        <div class="fc-meaning-text" id="fcMeaning">আমি</div>
+                        <div class="fc-ro-text" id="fcRomaji">watashi</div>
+                        <div class="fc-tap-hint">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>পুনরায় ফ্লিপ করুন</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc-nav-bar">
+                <button class="fc-arrow-btn" id="btnPrevCard"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="fc-progress-wrap">
+                    <div class="fc-counter-text" id="cardCounter">CARD 1 / 10</div>
+                    <div class="fc-progress-bar">
+                        <div class="fc-progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <button class="fc-arrow-btn" id="btnNextCard"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="vocab-accordion-header" id="btnToggleTable">
+                <div class="acc-title">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                    <span id="accButtonText">লেসন ১ এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন</span>
+                </div>
+                <i class="fa-solid fa-chevron-right acc-icon" id="accChevron"></i>
+            </div>
+
+            <div class="vocab-table-card" id="tableCard">
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 34%;">জাপানিজ<br>(কানা)</th>
+                            <th style="width: 28%;">রোমাজি /<br>উচ্চারণ</th>
+                            <th style="width: 28%;">বাংলা অর্থ</th>
+                            <th style="width: 10%;">মার্ক</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+        </div>
+
     </main>
 
-    <!-- শব্দ তালিকা দেখার পপআপ মডাল -->
-    <div class="vocab-modal" id="vocabModal">
-        <div class="modal-header">
-            <div class="modal-title" id="modalTitle">লেসন ১ শব্দকোষ</div>
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-        </div>
-        <div class="vocab-list" id="vocabListContainer"></div>
-    </div>
-
-    <!-- বটম বার -->
+    <!-- ফিক্সড বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -416,357 +749,683 @@
         </a>
     </nav>
 
-    <script>
-        // N5 লেসন ১ থেকে ২৫ এর সম্পূর্ণ শব্দ ডেটা (পিডিএফ থেকে সংগৃহীত)
-        const n5VocabData = {
-            1: [
-                { jp: "あたし", roma: "watashi", bn: "আমি" },
-                { jp: "あなた", roma: "anata", bn: "তুমি" },
-                { jp: "あのひと (あのかた)", roma: "anohito (anokata)", bn: "ঐব্যক্তি (সম্মান সূচক)" },
-                { jp: "~さん", roma: "~san", bn: "জনাব, বেগম" },
-                { jp: "~ちゃん", roma: "~chan", bn: "ছোট শিশুর নামের ব্যবহার" },
-                { jp: "~じん", roma: "~jin", bn: "নাগরিকত্ব বোঝাতে" },
-                { jp: "せんせい", roma: "sensei", bn: "শিক্ষক" },
-                { jp: "きょうし", roma: "kyōshi", bn: "প্রশিক্ষক, শিক্ষক" },
-                { jp: "がくせい", roma: "gakusei", bn: "ছাত্র, ছাত্রী" },
-                { jp: "かいしゃいん", roma: "kaishain", bn: "কোম্পানীতে চাকুরীরত ব্যক্তি" },
-                { jp: "ぎんこういん", roma: "ginkōin", bn: "ব্যাংকার" },
-                { jp: "いしゃ", roma: "isha", bn: "ডাক্তার" },
-                { jp: "けんきゅうしゃ", roma: "kenkyūsha", bn: "গবেষক" },
-                { jp: "だいがく", roma: "daigaku", bn: "বিশ্ববিদ্যালয়" },
-                { jp: "びょういん", roma: "byōin", bn: "হাসপাতাল" },
-                { jp: "だれ (どなた)", roma: "dare (donata)", bn: "কে (সম্মান সূচক)" }
-            ],
-            2: [
-                { jp: "これ", roma: "kore", bn: "এটা (বস্তু)" },
-                { jp: "それ", roma: "sore", bn: "ওটা (বস্তু)" },
-                { jp: "あれ", roma: "are", bn: "ঐটা (একটু দূরের বস্তু)" },
-                { jp: "この~", roma: "kono~", bn: "এই (বস্তু বা প্রাণী)" },
-                { jp: "その~", roma: "sono~", bn: "ওই" },
-                { jp: "あの~", roma: "ano~", bn: "ঐ~" },
-                { jp: "ほん", roma: "hon", bn: "বই" },
-                { jp: "じしょ", roma: "jisho", bn: "অভিধান / ডিকশনারী" },
-                { jp: "ざっし", roma: "zasshi", bn: "ম্যাগাজিন" },
-                { jp: "しんぶん", roma: "shinbun", bn: "খবরের কাগজ" },
-                { jp: "ノート", roma: "nōto", bn: "নোট বুক" },
-                { jp: "えんぴつ", roma: "enpitsu", bn: "পেন্সিল" },
-                { jp: "ボールペン", roma: "bōrupen", bn: "বলপেন" },
-                { jp: "かぎ", roma: "kagi", bn: "চাবি" },
-                { jp: "とけい", roma: "tokei", bn: "ঘড়ি" },
-                { jp: "かさ", roma: "kasa", bn: "ছাতা" },
-                { jp: "かばん", roma: "kaban", bn: "ব্যাগ" }
-            ],
-            3: [
-                { jp: "ここ", roma: "koko", bn: "এখানে (আমার কাছের স্থান)" },
-                { jp: "そこ", roma: "soko", bn: "ওখানে (আপনার কাছের স্থান)" },
-                { jp: "あそこ", roma: "asoko", bn: "ঐখানে (একটু দূরের স্থান)" },
-                { jp: "どこ", roma: "doko", bn: "কোথায় / কোন স্থানে?" },
-                { jp: "こちら", roma: "kochira", bn: "এই দিকে" },
-                { jp: "きょうしつ", roma: "kyōshitsu", bn: "ক্লাসরুম" },
-                { jp: "しょくどう", roma: "shokudō", bn: "খাবার হলরুম / ক্যান্টিন" },
-                { jp: "じむしょ", roma: "jimusho", bn: "অফিস" },
-                { jp: "かいぎしつ", roma: "kaigisitsu", bn: "মিটিং রুম" },
-                { jp: "うけつけ", roma: "uketsuke", bn: "রিসেপশন ডেস্ক" },
-                { jp: "へや", roma: "heya", bn: "রুম" },
-                { jp: "トイレ", roma: "toire", bn: "টয়লেট" },
-                { jp: "でんわ", roma: "denwa", bn: "টেলিফোন" }
-            ],
-            4: [
-                { jp: "おきます", roma: "okimasu", bn: "ঘুম থেকে উঠা" },
-                { jp: "ねます", roma: "nemasu", bn: "ঘুমানো" },
-                { jp: "はたらきます", roma: "hatarakimasu", bn: "কাজ করা" },
-                { jp: "やすみます", roma: "yasumimasu", bn: "বিশ্রাম করা / ছুটি নেওয়া" },
-                { jp: "べんきょうします", roma: "benkyōshimasu", bn: "লেখাপড়া করা" },
-                { jp: "おわります", roma: "owarimasu", bn: "শেষ করা" },
-                { jp: "デパート", roma: "depāto", bn: "ডিপার্টমেন্টাল স্টোর" },
-                { jp: "ぎんこう", roma: "ginkō", bn: "ব্যাংক" },
-                { jp: "ゆうびんきょく", roma: "yūbinkyoku", bn: "পোষ্ট অফিস" },
-                { jp: "としょかん", roma: "toshokan", bn: "লাইব্রেরী" },
-                { jp: "いま", roma: "ima", bn: "এখন" }
-            ],
-            5: [
-                { jp: "いきます", roma: "ikimasu", bn: "যাওয়া" },
-                { jp: "きます", roma: "kimasu", bn: "আসা" },
-                { jp: "かえります", roma: "kaerimasu", bn: "ফিরে যাওয়া / ফিরে আসা" },
-                { jp: "がっこう", roma: "gakkō", bn: "স্কুল / বিদ্যালয়" },
-                { jp: "えき", roma: "eki", bn: "স্টেশন" },
-                { jp: "ひこうき", roma: "hikōki", bn: "উড়োজাহাজ" },
-                { jp: "ふね", roma: "fune", bn: "জাহাজ" },
-                { jp: "でんしゃ", roma: "densha", bn: "বৈদ্যুতিক ট্রেন" },
-                { jp: "ちかてつ", roma: "chikatetsu", bn: "সাবওয়ে" },
-                { jp: "バス", roma: "basu", bn: "বাস" },
-                { jp: "タクシー", roma: "takushi", bn: "ট্যাক্সি" },
-                { jp: "あるいて", roma: "aruite", bn: "পায়ের হেঁটে" },
-                { jp: "ともだち", roma: "tomodachi", bn: "বন্ধু" }
-            ],
-            6: [
-                { jp: "たべます", roma: "tabemasu", bn: "খাওয়া" },
-                { jp: "のみます", roma: "nomimasu", bn: "পান করা" },
-                { jp: "すいます", roma: "suimasu", bn: "ধূমপান করা" },
-                { jp: "みます", roma: "mimasu", bn: "দেখা" },
-                { jp: "ききます", roma: "kikimasu", bn: "শোনা" },
-                { jp: "よみます", roma: "yomimasu", bn: "পড়া" },
-                { jp: "かきます", roma: "kakimasu", bn: "লেখা / আঁকা" },
-                { jp: "かいます", roma: "kaimasu", bn: "ক্রয় করা" },
-                { jp: "ごはん", roma: "gohan", bn: "ভাত / খাবার" },
-                { jp: "パン", roma: "pan", bn: "রুটি" },
-                { jp: "にく", roma: "niku", bn: "মাংস" },
-                { jp: "さかな", roma: "sakana", bn: "মাছ" },
-                { jp: "みず", roma: "mizu", bn: "পানি" }
-            ],
-            7: [
-                { jp: "きります", roma: "kirimasu", bn: "কাটা" },
-                { jp: "おくります", roma: "okurimasu", bn: "পাঠানো" },
-                { jp: "あげます", roma: "agemasu", bn: "দেওয়া" },
-                { jp: "もらいます", roma: "moraimasu", bn: "পাওয়া" },
-                { jp: "かします", roma: "kashimasu", bn: "ধার দেওয়া" },
-                { jp: "かります", roma: "karimasu", bn: "ধার করা" },
-                { jp: "おしえます", roma: "oshiemasu", bn: "শেখানো" },
-                { jp: "はし", roma: "hasi", bn: "চপস্টিক" },
-                { jp: "スプーン", roma: "supūn", bn: "চামচ" },
-                { jp: "ナイフ", roma: "naifu", bn: "চাকু" }
-            ],
-            8: [
-                { jp: "ハンサム [な]", roma: "hansamu", bn: "সুদর্শন" },
-                { jp: "きれい [な]", roma: "kirei", bn: "সুন্দর, পরিষ্কার" },
-                { jp: "しずか [な]", roma: "shizuka", bn: "নীরব, শান্ত" },
-                { jp: "ゆうめい [な]", roma: "yūmei", bn: "বিখ্যাত" },
-                { jp: "しんせつ [な]", roma: "shinsetsu", bn: "দয়ালু" },
-                { jp: "げんき [な]", roma: "genki", bn: "সুস্থ, সজীব" },
-                { jp: "おおきい", roma: "ōkī", bn: "বড়" },
-                { jp: "ちいさい", roma: "chīsai", bn: "ছোট" },
-                { jp: "あたらしい", roma: "atarashī", bn: "নতুন" },
-                { jp: "ふるい", roma: "furui", bn: "পুরানো" }
-            ],
-            9: [
-                { jp: "わかります", roma: "wakarimasu", bn: "বুঝা" },
-                { jp: "あります", roma: "arimasu", bn: "আছে" },
-                { jp: "すき [な]", roma: "suki", bn: "পছন্দ" },
-                { jp: "きらい [な]", roma: "kirai", bn: "অপছন্দ" },
-                { jp: "じょうず [な]", roma: "jōzu", bn: "দক্ষ / ভালো পারা" },
-                { jp: "へた [な]", roma: "heta", bn: "অদক্ষ" },
-                { jp: "りょうり", roma: "ryōri", bn: "রান্না / খাবার" },
-                { jp: "スポーツ", roma: "supōtsu", bn: "খেলাধুলা" },
-                { jp: "おんがく", roma: "ongaku", bn: "সঙ্গীত" }
-            ],
-            10: [
-                { jp: "あります", roma: "arimasu", bn: "আছে (নিষ্প্রাণ)" },
-                { jp: "います", roma: "imasu", bn: "আছে (জীবিত)" },
-                { jp: "いろいろ [な]", roma: "iroiro", bn: "বিভিন্ন" },
-                { jp: "おとこのひと", roma: "otoko no hito", bn: "পুরুষ" },
-                { jp: "おんなのひと", roma: "onna no hito", bn: "মহিলা" },
-                { jp: "いぬ", roma: "inu", bn: "কুকুর" },
-                { jp: "ねこ", roma: "neko", bn: "বিড়াল" },
-                { jp: "うえ", roma: "ue", bn: "উপরে" },
-                { jp: "した", roma: "shita", bn: "নিচে" }
-            ],
-            11: [
-                { jp: "ひとつ", roma: "hitotsu", bn: "একটি" },
-                { jp: "ふたつ", roma: "futatsu", bn: "দুইটি" },
-                { jp: "ひとり", roma: "hitori", bn: "একজন" },
-                { jp: "ふたり", roma: "futari", bn: "দুইজন" },
-                { jp: "りんご", roma: "ringo", bn: "আপেল" },
-                { jp: "みかん", roma: "mikan", bn: "কমলা" },
-                { jp: "りょうしん", roma: "ryōshin", bn: "পিতা-মাতা" },
-                { jp: "きょうだい", roma: "kyōdai", bn: "ভাইবোন" }
-            ],
-            12: [
-                { jp: "かんたん [な]", roma: "kantan", bn: "সহজ" },
-                { jp: "ちかい", roma: "chikai", bn: "কাছে" },
-                { jp: "とおい", roma: "tōi", bn: "দূরে" },
-                { jp: "はやい", roma: "hayai", bn: "তাড়াতাড়ি / দ্রুত" },
-                { jp: "おそい", roma: "osoi", bn: "দেরি" },
-                { jp: "きせつ", roma: "kisetsu", bn: "ঋতু" },
-                { jp: "はる", roma: "haru", bn: "বসন্তকাল" },
-                { jp: "なつ", roma: "natsu", bn: "গ্রীষ্মকাল" }
-            ],
-            13: [
-                { jp: "あそびます", roma: "asobimasu", bn: "খেলা করা" },
-                { jp: "およぎます", roma: "oyogimasu", bn: "সাঁতার কাটা" },
-                { jp: "むかえます", roma: "mukaemasu", bn: "বরণ করা" },
-                { jp: "つかれます", roma: "tsukaremasu", bn: "ক্লান্ত হওয়া" },
-                { jp: "ほしい", roma: "hoshii", bn: "চাই" },
-                { jp: "ひろい", roma: "hiroi", bn: "প্রশস্ত" },
-                { jp: "せまい", roma: "semai", bn: "সংীর্ণ" }
-            ],
-            14: [
-                { jp: "つけます", roma: "tsukemasu", bn: "জ্বালানো" },
-                { jp: "けします", roma: "keshimasu", bn: "নিবানো" },
-                { jp: "あけます", roma: "akemasu", bn: "খোলা" },
-                { jp: "しめます", roma: "shimemasu", bn: "বন্ধ করা" },
-                { jp: "まちます", roma: "machimasu", bn: "অপেক্ষা করা" },
-                { jp: "もちます", roma: "mochimasu", bn: "ধরে রাখা" },
-                { jp: "ちず", roma: "chizu", bn: "ম্যাপ" }
-            ],
-            15: [
-                { jp: "おきます", roma: "okimasu", bn: "রাখা" },
-                { jp: "つくります", roma: "tsukurimasu", bn: "তৈরি করা" },
-                { jp: "うります", roma: "urimasu", bn: "বিক্রি করা" },
-                { jp: "しります", roma: "shirimasu", bn: "জানা" },
-                { jp: "すみます", roma: "sumimasu", bn: "বসবাস করা" },
-                { jp: "どくしん", roma: "dokushin", bn: "অবিবাহিত" }
-            ],
-            16: [
-                { jp: "のります", roma: "norimasu", bn: "চড়া" },
-                { jp: "おります", roma: "orimasu", bn: "নামা" },
-                { jp: "のりかえます", roma: "norikaemasu", bn: "বদলি করা" },
-                { jp: "あびます", roma: "abimasu", bn: "গোসল করা" },
-                { jp: "からだ", roma: "karada", bn: "শরীর" },
-                { jp: "あたま", roma: "atama", bn: "মাথা" }
-            ],
-            17: [
-                { jp: "おぼえます", roma: "oboemasu", bn: "মনে রাখা" },
-                { jp: "わすれます", roma: "wasuremasu", bn: "ভুলে যাওয়া" },
-                { jp: "なくします", roma: "nakushimasu", bn: "হারিয়ে ফেলা" },
-                { jp: "たいせつ [な]", roma: "taisetsu", bn: "গুরুত্বপূর্ণ" },
-                { jp: "びょうき", roma: "byōki", bn: "অসুস্থতা" },
-                { jp: "くすり", roma: "kusuri", bn: "ওষুধ" }
-            ],
-            18: [
-                { jp: "できます", roma: "dekimasu", bn: "পারা" },
-                { jp: "あらいます", roma: "araimasu", bn: "ধৌত করা" },
-                { jp: "ひきます", roma: "hikimasu", bn: "বাজানো" },
-                { jp: "うたいます", roma: "utaimasu", bn: "গান গাওয়া" },
-                { jp: "しゅみ", roma: "shumi", bn: "শখ" },
-                { jp: "にっき", roma: "nikki", bn: "ডায়রি" }
-            ],
-            19: [
-                { jp: "のぼります", roma: "noborimasu", bn: "ওঠা" },
-                { jp: "とまります", roma: "tomarimasu", bn: "থাকা" },
-                { jp: "そうじします", roma: "sōji shimasu", bn: "পরিষ্কার করা" },
-                { jp: "ねむい", roma: "nemui", bn: "ঘুম ঘুম ভাব" },
-                { jp: "つよい", roma: "tsuyoi", bn: "শক্তিশালী" }
-            ],
-            20: [
-                { jp: "いります", roma: "irimasu", bn: "প্রয়োজন" },
-                { jp: "しらべます", roma: "shirabemasu", bn: "অনুসন্ধান" },
-                { jp: "ぼく", roma: "boku", bn: "আমি (ইনফরমাল)" },
-                { jp: "きみ", roma: "kimi", bn: "তুমি" },
-                { jp: "ことば", roma: "kotoba", bn: "শব্দ / ভাষা" }
-            ],
-            21: [
-                { jp: "おもいます", roma: "omoimasu", bn: "মনে করা" },
-                { jp: "いいます", roma: "imasu", bn: "বলা" },
-                { jp: "かちます", roma: "kachimasu", bn: "জয় করা" },
-                { jp: "まけます", roma: "makemasu", bn: "হারা" },
-                { jp: "いけん", roma: "iken", bn: "মতামত" }
-            ],
-            22: [
-                { jp: "きます", roma: "kimasu", bn: "পরিধান করা" },
-                { jp: "はきます", roma: "hakimasu", bn: "পরা (জুতা/প্যান্ট)" },
-                { jp: "かぶります", roma: "kaburimasu", bn: "পরা (টুপি)" },
-                { jp: "うまれます", roma: "umaremasu", bn: "জন্ম" },
-                { jp: "コート", roma: "kōto", bn: "কোট" }
-            ],
-            23: [
-                { jp: "ききます", roma: "kikimasu", bn: "জিজ্ঞাসা করা" },
-                { jp: "まわします", roma: "mawashimasu", bn: "ঘুরানো" },
-                { jp: "まがります", roma: "magarimasu", bn: "মোড় নেওয়া" },
-                { jp: "みち", roma: "michi", bn: "রাস্তা" }
-            ],
-            24: [
-                { jp: "くれます", roma: "kuremasu", bn: "দেওয়া (আমাকে)" },
-                { jp: "なおします", roma: "naoshimasu", bn: "ঠিক করা" },
-                { jp: "つれていきます", roma: "tsurete ikimasu", bn: "নিয়ে যাওয়া" },
-                { jp: "しょうかいします", roma: "shōkai shimasu", bn: "পরিচয়" }
-            ],
-            25: [
-                { jp: "かんがえます", roma: "kangaemasu", bn: "চিন্তা করা" },
-                { jp: "つきます", roma: "tsukimasu", bn: "পৌঁছানো" },
-                { jp: "たります", roma: "tarimasu", bn: "যথেষ্ট" },
-                { jp: "いなか", roma: "inaka", bn: "গ্রামাঞ্চল" }
-            ]
+    <!-- Firebase ও স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
         };
 
-        const lessonTitles = {
-            1: "প্রারম্ভিক শব্দার্থ ও পেশা",
-            2: "বস্তু ও পরিচিত জিনিসপত্র",
-            3: "স্থান ও দিকবাচক শব্দ",
-            4: "সময়, দিন ও দৈনন্দিন কাজ",
-            5: "যাতায়াত ও ভ্রমণ",
-            6: "খাওয়া-দাওয়া ও কার্যকলাপ",
-            7: "যন্ত্রপাতি ও লেনদেন",
-            8: "গুণবাচক শব্দ (Adjectives)",
-            9: "পছন্দ, দক্ষতা ও কারণ",
-            10: "অবস্থান ও প্রাণী",
-            11: "সংখ্যা ও কাউন্টার",
-            12: "ঋতু, আবহাওয়া ও তুলনা",
-            13: "শখ, বিনোদন ও ইচ্ছা",
-            14: "গৃহস্থালি কাজ ও ভার্ব",
-            15: "অবস্থান ও পেশাগত শব্দ",
-            16: "যাতায়াত বদলি ও শারীরিক গঠন",
-            17: "বাধ্যবাধকতা ও স্বাস্থ্য",
-            18: "পারদর্শিতা ও শখ",
-            19: "অভিজ্ঞতা ও পরিবর্তন",
-            20: "ইনফরমাল ও কথ্য ভাষা",
-            21: "অনুমান, মতামত ও উক্তি",
-            22: "পোশাক পরিচ্ছদ ও জন্ম",
-            23: "দিকনির্দেশ ও রাস্তাঘাট",
-            24: "উপহার ও সাহায্য প্রদান",
-            25: "শর্ত, সম্ভাবনা ও পরিকল্পনা"
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUserEmail = null;
+        let highlightedWords = [];
+
+        // N5 লেসন ১ থেকে ২৫ এর সম্পূর্ণ শব্দভাণ্ডার
+        const lessons = {
+            1: {
+                title: "প্রারম্ভিক শব্দার্থ ও পেশা",
+                kanji: "第1課",
+                words: [
+                    { kana: "わたし", ro: "watashi", bn: "আমি" },
+                    { kana: "あなた", ro: "anata", bn: "তুমি" },
+                    { kana: "あのひと (あのかた)", ro: "anohito (anokata)", bn: "ঐব্যক্তি (সম্মান সূচক)" },
+                    { kana: "~さん", ro: "~san", bn: "জনাব, বেগম" },
+                    { kana: "~ちゃん", ro: "~chan", bn: "ছোট শিশুর নামের ব্যবহার" },
+                    { kana: "~じん", ro: "~jin", bn: "নাগরিকত্ব বোঝাবার জন্য" },
+                    { kana: "せんせい", ro: "sensei", bn: "শিক্ষক" },
+                    { kana: "きょうし", ro: "kyōshi", bn: "প্রশিক্ষক, শিক্ষক" },
+                    { kana: "がくせい", ro: "gakusei", bn: "ছাত্র, ছাত্রী" },
+                    { kana: "かいしゃいん", ro: "kaishain", bn: "কোম্পানীতে চাকুরীরত ব্যক্তি" },
+                    { kana: "ぎんこういん", ro: "ginkōin", bn: "ব্যাংকার" },
+                    { kana: "いしゃ", ro: "isha", bn: "ডাক্তার" },
+                    { kana: "けんきゅうしゃ", ro: "kenkyūsha", bn: "গবেষক" },
+                    { kana: "だいがく", ro: "daigaku", bn: "বিশ্ববিদ্যালয়" },
+                    { kana: "びょういん", ro: "byōin", bn: "হাসপাতাল" },
+                    { kana: "だれ (どなた)", ro: "dare (donata)", bn: "কে (সম্মান সূচক)" }
+                ]
+            },
+            2: {
+                title: "বস্তু ও পরিচিত জিনিসপত্র",
+                kanji: "第2課",
+                words: [
+                    { kana: "これ", ro: "kore", bn: "এটা (বস্তু)" },
+                    { kana: "それ", ro: "sore", bn: "ওটা (বস্তু)" },
+                    { kana: "あれ", ro: "are", bn: "ঐটা (একটু দূরের বস্তু)" },
+                    { kana: "この~", ro: "kono~", bn: "এই" },
+                    { kana: "その~", ro: "sono~", bn: "ওই" },
+                    { kana: "あの~", ro: "ano~", bn: "ঐ~" },
+                    { kana: "ほん", ro: "hon", bn: "বই" },
+                    { kana: "じしょ", ro: "jisho", bn: "অভিধান / ডিকশনারী" },
+                    { kana: "ざっし", ro: "zasshi", bn: "ম্যাগাজিন" },
+                    { kana: "しんぶん", ro: "shinbun", bn: "খবরের কাগজ" },
+                    { kana: "ノート", ro: "nōto", bn: "নোট বুক" },
+                    { kana: "えんぴつ", ro: "enpitsu", bn: "পেন্সিল" },
+                    { kana: "ボールペン", ro: "bōrupen", bn: "বলপেন" },
+                    { kana: "かぎ", ro: "kagi", bn: "চাবি" },
+                    { kana: "とけい", ro: "tokei", bn: "ঘড়ি" },
+                    { kana: "かさ", ro: "kasa", bn: "ছাতা" },
+                    { kana: "かばん", ro: "kaban", bn: "ব্যাগ" }
+                ]
+            },
+            3: {
+                title: "স্থান ও দিকবাচক শব্দ",
+                kanji: "第3課",
+                words: [
+                    { kana: "ここ", ro: "koko", bn: "এখানে" },
+                    { kana: "そこ", ro: "soko", bn: "ওখানে" },
+                    { kana: "あそこ", ro: "asoko", bn: "ঐখানে" },
+                    { kana: "どこ", ro: "doko", bn: "কোথায়" },
+                    { kana: "こちら", ro: "kochira", bn: "এই দিকে" },
+                    { kana: "きょうしつ", ro: "kyōshitsu", bn: "ক্লাসরুম" },
+                    { kana: "しょくどう", ro: "shokudō", bn: "খাবার হলরুম" },
+                    { kana: "じむしょ", ro: "jimusho", bn: "অফিস" },
+                    { kana: "かいぎしつ", ro: "kaigisitsu", bn: "মিটিং রুম" },
+                    { kana: "うけつけ", ro: "uketsuke", bn: "রিসেপশন ডেস্ক" },
+                    { kana: "へや", ro: "heya", bn: "রুম" },
+                    { kana: "トイレ", ro: "toire", bn: "টয়লেট" },
+                    { kana: "でんわ", ro: "denwa", bn: "টেলিফোন" }
+                ]
+            },
+            4: {
+                title: "সময়, দিন ও দৈনন্দিন কাজ",
+                kanji: "第4課",
+                words: [
+                    { kana: "おきます", ro: "okimasu", bn: "ঘুম থেকে উঠা" },
+                    { kana: "ねます", ro: "nemasu", bn: "ঘুমানো" },
+                    { kana: "はたらきます", ro: "hatarakimasu", bn: "কাজ করা" },
+                    { kana: "やすみます", ro: "yasumimasu", bn: "ছুটি নেওয়া" },
+                    { kana: "べんきょうします", ro: "benkyōshimasu", bn: "লেখাপড়া করা" },
+                    { kana: "おわります", ro: "owarimasu", bn: "শেষ করা" },
+                    { kana: "デパート", ro: "depāto", bn: "ডিপার্টমেন্টাল স্টোর" },
+                    { kana: "ぎんこう", ro: "ginkō", bn: "ব্যাংক" },
+                    { kana: "ゆうびんきょく", ro: "yūbinkyoku", bn: "পোস্ট অফিস" },
+                    { kana: "としょかん", ro: "toshokan", bn: "লাইব্রেরী" },
+                    { kana: "いま", ro: "ima", bn: "এখন" }
+                ]
+            },
+            5: {
+                title: "যাতায়াত ও ভ্রমণ",
+                kanji: "第5課",
+                words: [
+                    { kana: "いきます", ro: "ikimasu", bn: "যাওয়া" },
+                    { kana: "きます", ro: "kimasu", bn: "আসা" },
+                    { kana: "かえります", ro: "kaerimasu", bn: "ফিরে যাওয়া" },
+                    { kana: "がっこう", ro: "gakkō", bn: "স্কুল / বিদ্যালয়" },
+                    { kana: "えき", ro: "eki", bn: "স্টেশন" },
+                    { kana: "ひこうき", ro: "hikōki", bn: "উড়োজাহাজ" },
+                    { kana: "ふね", ro: "fune", bn: "জাহাজ" },
+                    { kana: "でんしゃ", ro: "densha", bn: "বৈদ্যুতিক ট্রেন" },
+                    { kana: "ちかてつ", ro: "chikatetsu", bn: "সাবওয়ে" },
+                    { kana: "バス", ro: "basu", bn: "বাস" },
+                    { kana: "タクシー", ro: "takushi", bn: "ট্যাক্সি" },
+                    { kana: "あるいて", ro: "aruite", bn: "পায়ে হেঁটে" },
+                    { kana: "ともだち", ro: "tomodachi", bn: "বন্ধু" }
+                ]
+            },
+            6: {
+                title: "খাওয়া-দাওয়া ও কার্যকলাপ",
+                kanji: "第6課",
+                words: [
+                    { kana: "たべます", ro: "tabemasu", bn: "খাওয়া" },
+                    { kana: "のみます", ro: "nomimasu", bn: "পান করা" },
+                    { kana: "すいます", ro: "suimasu", bn: "ধূমপান করা" },
+                    { kana: "みます", ro: "mimasu", bn: "দেখা" },
+                    { kana: "ききます", ro: "kikimasu", bn: "শোনা" },
+                    { kana: "よみます", ro: "yomimasu", bn: "পড়া" },
+                    { kana: "かきます", ro: "kakimasu", bn: "লেখা / আঁকা" },
+                    { kana: "かいます", ro: "kaimasu", bn: "ক্রয় করা" },
+                    { kana: "ごはん", ro: "gohan", bn: "ভাত / খাবার" },
+                    { kana: "パン", ro: "pan", bn: "রুটি" },
+                    { kana: "にく", ro: "niku", bn: "মাংস" },
+                    { kana: "さかな", ro: "sakana", bn: "মাছ" },
+                    { kana: "みず", ro: "mizu", bn: "পানি" }
+                ]
+            },
+            7: {
+                title: "যন্ত্রপাতি ও লেনদেন",
+                kanji: "第7課",
+                words: [
+                    { kana: "きります", ro: "kirimasu", bn: "কাটা" },
+                    { kana: "おくります", ro: "okurimasu", bn: "পাঠানো" },
+                    { kana: "あげます", ro: "agemasu", bn: "দেওয়া" },
+                    { kana: "もらいます", ro: "moraimasu", bn: "পাওয়া" },
+                    { kana: "かします", ro: "kashimasu", bn: "ধার দেওয়া" },
+                    { kana: "かります", ro: "karimasu", bn: "ধার করা" },
+                    { kana: "おしえます", ro: "oshiemasu", bn: "শেখানো" },
+                    { kana: "はし", ro: "hasi", bn: "চপস্টিক" },
+                    { kana: "スプーン", ro: "supūn", bn: "চামচ" },
+                    { kana: "ナイフ", ro: "naifu", bn: "চাকু" }
+                ]
+            },
+            8: {
+                title: "গুণবাচক শব্দ (Adjectives)",
+                kanji: "第8課",
+                words: [
+                    { kana: "ハンサム [な]", ro: "hansamu", bn: "সুদর্শন" },
+                    { kana: "きれい [な]", ro: "kirei", bn: "সুন্দর, পরিষ্কার" },
+                    { kana: "しずか [な]", ro: "shizuka", bn: "নীরব, শান্ত" },
+                    { kana: "ゆうめい [な]", ro: "yūmei", bn: "বিখ্যাত" },
+                    { kana: "しんせつ [な]", ro: "shinsetsu", bn: "দয়ালু" },
+                    { kana: "げんき [な]", ro: "genki", bn: "সুস্থ, সজীব" },
+                    { kana: "おおきい", ro: "ōkī", bn: "বড়" },
+                    { kana: "ちいさい", ro: "chīsai", bn: "ছোট" },
+                    { kana: "あたらしい", ro: "atarashī", bn: "নতুন" },
+                    { kana: "ふるい", ro: "furui", bn: "পুরানো" }
+                ]
+            },
+            9: {
+                title: "পছন্দ, দক্ষতা ও কারণ",
+                kanji: "第9課",
+                words: [
+                    { kana: "わかります", ro: "wakarimasu", bn: "বুঝা" },
+                    { kana: "あります", ro: "arimasu", bn: "আছে" },
+                    { kana: "すき [な]", ro: "suki", bn: "পছন্দ" },
+                    { kana: "きらい [な]", ro: "kirai", bn: "অপছন্দ" },
+                    { kana: "じょうず [な]", ro: "jōzu", bn: "দক্ষ / ভালো পারা" },
+                    { kana: "へた [な]", ro: "heta", bn: "অদক্ষ" },
+                    { kana: "りょうり", ro: "ryōri", bn: "রান্না" },
+                    { kana: "スポーツ", ro: "supōtsu", bn: "খেলাধুলা" },
+                    { kana: "おんがく", ro: "ongaku", bn: "সঙ্গীত" }
+                ]
+            },
+            10: {
+                title: "অবস্থান ও প্রাণী",
+                kanji: "第10課",
+                words: [
+                    { kana: "あります", ro: "arimasu", bn: "আছে (নিষ্প্রাণ)" },
+                    { kana: "います", ro: "imasu", bn: "আছে (জীবিত)" },
+                    { kana: "いろいろ [な]", ro: "iroiro", bn: "বিভিন্ন" },
+                    { kana: "おとこのひと", ro: "otoko no hito", bn: "পুরুষ" },
+                    { kana: "おんなのひと", ro: "onna no hito", bn: "মহিলা" },
+                    { kana: "いぬ", ro: "inu", bn: "কুকুর" },
+                    { kana: "ねこ", ro: "neko", bn: "বিড়াল" },
+                    { kana: "うえ", ro: "ue", bn: "উপরে" },
+                    { kana: "した", ro: "shita", bn: "নিচে" }
+                ]
+            },
+            11: {
+                title: "সংখ্যা ও কাউন্টার",
+                kanji: "第11課",
+                words: [
+                    { kana: "ひとつ", ro: "hitotsu", bn: "একটি" },
+                    { kana: "ふたつ", ro: "futatsu", bn: "দুইটি" },
+                    { kana: "ひとり", ro: "hitori", bn: "একজন" },
+                    { kana: "ふたり", ro: "futari", bn: "দুইজন" },
+                    { kana: "りんご", ro: "ringo", bn: "আপেল" },
+                    { kana: "みかん", ro: "mikan", bn: "কমলা" },
+                    { kana: "りょうしん", ro: "ryōshin", bn: "পিতা-মাতা" },
+                    { kana: "きょうだい", ro: "kyōdai", bn: "ভাইবোন" }
+                ]
+            },
+            12: {
+                title: "ঋতু, আবহাওয়া ও তুলনা",
+                kanji: "第12課",
+                words: [
+                    { kana: "かんたん [な]", ro: "kantan", bn: "সহজ" },
+                    { kana: "ちかい", ro: "chikai", bn: "কাছে" },
+                    { kana: "とおい", ro: "tōi", bn: "দূরে" },
+                    { kana: "はやい", ro: "hayai", bn: "তাড়াতাড়ি" },
+                    { kana: "おそい", ro: "osoi", bn: "দেরি" },
+                    { kana: "きせつ", ro: "kisetsu", bn: "ঋতু" },
+                    { kana: "はる", ro: "haru", bn: "বসন্তকাল" },
+                    { kana: "なつ", ro: "natsu", bn: "গ্রীষ্মকাল" }
+                ]
+            },
+            13: {
+                title: "শখ, বিনোদন ও ইচ্ছা",
+                kanji: "第13課",
+                words: [
+                    { kana: "あそびます", ro: "asobimasu", bn: "খেলা করা" },
+                    { kana: "およぎます", ro: "oyogimasu", bn: "সাঁতার কাটা" },
+                    { kana: "むかえます", ro: "mukaemasu", bn: "বরণ করা" },
+                    { kana: "つかれます", ro: "tsukaremasu", bn: "ক্লান্ত হওয়া" },
+                    { kana: "ほしい", ro: "hoshii", bn: "চাই" },
+                    { kana: "ひろい", ro: "hiroi", bn: "প্রশস্ত" },
+                    { kana: "せまい", ro: "semai", bn: "সংীর্ণ" }
+                ]
+            },
+            14: {
+                title: "গৃহস্থালি কাজ ও ভার্ব",
+                kanji: "第14課",
+                words: [
+                    { kana: "つけます", ro: "tsukemasu", bn: "জ্বালানো" },
+                    { kana: "けします", ro: "keshimasu", bn: "নিবানো" },
+                    { kana: "あけます", ro: "akemasu", bn: "খোলা" },
+                    { kana: "しめます", ro: "shimemasu", bn: "বন্ধ করা" },
+                    { kana: "まちます", ro: "machimasu", bn: "অপেক্ষা করা" },
+                    { kana: "もちます", ro: "mochimasu", bn: "ধরে রাখা" },
+                    { kana: "ちず", ro: "chizu", bn: "ম্যাপ" }
+                ]
+            },
+            15: {
+                title: "অবস্থান ও পেশাগত শব্দ",
+                kanji: "第15課",
+                words: [
+                    { kana: "おきます", ro: "okimasu", bn: "রাখা" },
+                    { kana: "つくります", ro: "tsukurimasu", bn: "তৈরি করা" },
+                    { kana: "うります", ro: "urimasu", bn: "বিক্রি করা" },
+                    { kana: "しります", ro: "shirimasu", bn: "জানা" },
+                    { kana: "すみます", ro: "sumimasu", bn: "বসবাস করা" },
+                    { kana: "どくしん", ro: "dokushin", bn: "অবিবাহিত" }
+                ]
+            },
+            16: {
+                title: "যাতায়াত বদলি ও শারীরিক গঠন",
+                kanji: "第16課",
+                words: [
+                    { kana: "のります", ro: "norimasu", bn: "চড়া" },
+                    { kana: "おります", ro: "orimasu", bn: "নামা" },
+                    { kana: "のりかえます", ro: "norikaemasu", bn: "বদলি করা" },
+                    { kana: "あびます", ro: "abimasu", bn: "গোসল করা" },
+                    { kana: "からだ", ro: "karada", bn: "শরীর" },
+                    { kana: "あたま", ro: "atama", bn: "মাথা" }
+                ]
+            },
+            17: {
+                title: "বাধ্যবাধকতা ও স্বাস্থ্য",
+                kanji: "第17課",
+                words: [
+                    { kana: "おぼえます", ro: "oboemasu", bn: "মনে রাখা" },
+                    { kana: "わすれます", ro: "wasuremasu", bn: "ভুলে যাওয়া" },
+                    { kana: "なくします", ro: "nakushimasu", bn: "হারিয়ে ফেলা" },
+                    { kana: "たいせつ [な]", ro: "taisetsu", bn: "গুরুত্বপূর্ণ" },
+                    { kana: "びょうき", ro: "byōki", bn: "অসুস্থতা" },
+                    { kana: "くすり", ro: "kusuri", bn: "ওষুধ" }
+                ]
+            },
+            18: {
+                title: "পারদর্শিতা ও শখ",
+                kanji: "第18課",
+                words: [
+                    { kana: "できます", ro: "dekimasu", bn: "পারা" },
+                    { kana: "あらいます", ro: "araimasu", bn: "ধৌত করা" },
+                    { kana: "ひきます", ro: "hikimasu", bn: "বাজানো" },
+                    { kana: "うたいます", ro: "utaimasu", bn: "গান গাওয়া" },
+                    { kana: "しゅみ", ro: "shumi", bn: "শখ" },
+                    { kana: "にっき", ro: "nikki", bn: "ডায়রি" }
+                ]
+            },
+            19: {
+                title: "অভিজ্ঞতা ও পরিবর্তন",
+                kanji: "第19課",
+                words: [
+                    { kana: "のぼります", ro: "noborimasu", bn: "ওঠা" },
+                    { kana: "とまります", ro: "tomarimasu", bn: "থাকা" },
+                    { kana: "そうじします", ro: "sōji shimasu", bn: "পরিষ্কার করা" },
+                    { kana: "ねむい", ro: "nemui", bn: "ঘুম ঘুম ভাব" },
+                    { kana: "つよい", ro: "tsuyoi", bn: "শক্তিশালী" }
+                ]
+            },
+            20: {
+                title: "ইনফরমাল ও কথ্য ভাষা",
+                kanji: "第20課",
+                words: [
+                    { kana: "いります", ro: "irimasu", bn: "প্রয়োজন" },
+                    { kana: "しらべます", ro: "shirabemasu", bn: "অনুসন্ধান" },
+                    { kana: "ぼく", ro: "boku", bn: "আমি (ইনফরমাল)" },
+                    { kana: "きみ", ro: "kimi", bn: "তুমি" },
+                    { kana: "ことば", ro: "kotoba", bn: "শব্দ / ভাষা" }
+                ]
+            },
+            21: {
+                title: "অনুমান, মতামত ও উক্তি",
+                kanji: "第21課",
+                words: [
+                    { kana: "おもいます", ro: "omoimasu", bn: "মনে করা" },
+                    { kana: "います", ro: "imasu", bn: "বলা" },
+                    { kana: "かちます", ro: "kachimasu", bn: "জয় করা" },
+                    { kana: "まけます", ro: "makemasu", bn: "হারা" },
+                    { kana: "いけん", ro: "iken", bn: "মতামত" }
+                ]
+            },
+            22: {
+                title: "পোশাক পরিচ্ছদ ও জন্ম",
+                kanji: "第22課",
+                words: [
+                    { kana: "きます", ro: "kimasu", bn: "পরিধান করা" },
+                    { kana: "はきます", ro: "hakimasu", bn: "পরা (জুতা/প্যান্ট)" },
+                    { kana: "かぶります", ro: "kaburimasu", bn: "পরা (টুপি)" },
+                    { kana: "うまれます", ro: "umaremasu", bn: "জন্ম" },
+                    { kana: "コート", ro: "kōto", bn: "কোট" }
+                ]
+            },
+            23: {
+                title: "দিকনির্দেশ ও রাস্তাঘাট",
+                kanji: "第23課",
+                words: [
+                    { kana: "ききます", ro: "kikimasu", bn: "জিজ্ঞাসা করা" },
+                    { kana: "まわします", ro: "mawashimasu", bn: "ঘুরানো" },
+                    { kana: "まがります", ro: "magarimasu", bn: "মোড় নেওয়া" },
+                    { kana: "みち", ro: "michi", bn: "রাস্তা" }
+                ]
+            },
+            24: {
+                title: "উপহার ও সাহায্য প্রদান",
+                kanji: "第24課",
+                words: [
+                    { kana: "くれます", ro: "kuremasu", bn: "দেওয়া (আমাকে)" },
+                    { kana: "なおします", ro: "naoshimasu", bn: "ঠিক করা" },
+                    { kana: "つれていきます", ro: "tsurete ikimasu", bn: "নিয়ে যাওয়া" },
+                    { kana: "しょうかいします", ro: "shōkai shimasu", bn: "পরিচয়" }
+                ]
+            },
+            25: {
+                title: "শর্ত, সম্ভাবনা ও পরিকল্পনা",
+                kanji: "第25課",
+                words: [
+                    { kana: "かんがえます", ro: "kangaemasu", bn: "চিন্তা করা" },
+                    { kana: "つきます", ro: "tsukimasu", bn: "পৌঁছানো" },
+                    { kana: "たります", ro: "tarimasu", bn: "যথেষ্ট" },
+                    { kana: "いなか", ro: "inaka", bn: "গ্রামাঞ্চল" }
+                ]
+            }
         };
 
-        // গ্রিডে লেসন কার্ড রেন্ডার করা
-        const grid = document.getElementById("lessonGrid");
-        for (let i = 1; i <= 25; i++) {
-            const desc = lessonTitles[i] || "শব্দভাণ্ডার ও অনুশীলন";
-            const div = document.createElement("div");
-            div.className = "lesson-box";
-            div.onclick = () => openLesson(i);
-            div.innerHTML = `
-                <div class="box-top">
-                    <span class="badge-l">L-${i}</span>
-                    <span class="badge-jp">第${i}課</span>
-                </div>
-                <div class="lesson-name">লেসন ${i}</div>
-                <div class="lesson-desc">${desc}</div>
-                <div class="box-bottom"><i class="fa-solid fa-arrow-right"></i></div>
-            `;
-            grid.appendChild(div);
-        }
+        let currentLesson = 1;
+        let currentWords = [];
+        let currentIndex = 0;
+        let isTableOpen = false;
 
-        function openLesson(lessonNum) {
-            document.getElementById("modalTitle").innerText = `লেসন ${lessonNum} শব্দকোষ`;
-            const container = document.getElementById("vocabListContainer");
-            container.innerHTML = "";
-
-            const words = n5VocabData[lessonNum] || [];
-
-            words.forEach((item) => {
-                const row = document.createElement("div");
-                row.className = "vocab-item-row";
-                row.innerHTML = `
-                    <div>
-                        <div class="vocab-jp">${item.jp}</div>
-                        <div class="vocab-roma">${item.roma}</div>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <div class="vocab-bn">${item.bn}</div>
-                        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">
-                            <i class="fa-solid fa-bookmark"></i>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(row);
-            });
-
-            document.getElementById("vocabModal").style.display = "flex";
-        }
-
-        function closeModal() {
-            document.getElementById("vocabModal").style.display = "none";
-        }
-
-        function toggleBookmark(btn, event) {
-            event.stopPropagation();
-            const row = btn.closest(".vocab-item-row");
-            row.classList.toggle("bookmarked");
-        }
-
+        // লোডার রিমুভ (অত্যন্ত নিরাপদ ও নন-ব্লকিং)
         window.addEventListener("load", () => {
             const loader = document.getElementById("pageLoader");
-            if (loader) loader.classList.add("hidden");
+            if (loader) {
+                loader.classList.add("hidden");
+            }
         });
+
+        // ফায়ারস্টোর বা লোকালস্টোরেজ হাইলাইট সিঙ্ক
+        onAuthStateChanged(auth, async (user) => {
+            const syncText = document.getElementById("syncText");
+
+            if (user && user.email) {
+                currentUserEmail = user.email;
+                syncText.innerText = user.email;
+                try {
+                    const docRef = doc(db, "user_highlights", user.email);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists() && docSnap.data().words) {
+                        highlightedWords = docSnap.data().words;
+                    } else {
+                        highlightedWords = JSON.parse(localStorage.getItem("kotoba_n5_vocab_highlights")) || [];
+                        await setDoc(docRef, { email: user.email, words: highlightedWords });
+                    }
+                } catch (e) {
+                    highlightedWords = JSON.parse(localStorage.getItem("kotoba_n5_vocab_highlights")) || [];
+                }
+            } else {
+                currentUserEmail = null;
+                syncText.innerText = "গেস্ট মোড";
+                highlightedWords = JSON.parse(localStorage.getItem("kotoba_n5_vocab_highlights")) || [];
+            }
+            updateCardHighlightState();
+            renderTable();
+        });
+
+        async function saveUserHighlights() {
+            localStorage.setItem("kotoba_n5_vocab_highlights", JSON.stringify(highlightedWords));
+            if (currentUserEmail) {
+                try {
+                    const docRef = doc(db, "user_highlights", currentUserEmail);
+                    await setDoc(docRef, { email: currentUserEmail, words: highlightedWords }, { merge: true });
+                } catch (e) {
+                    console.error("Cloud save error:", e);
+                }
+            }
+        }
+
+        function getWordKey(lessonNo, kana) {
+            return `N5_L${lessonNo}_${kana}`;
+        }
+
+        function isWordHighlighted(lessonNo, kana) {
+            return highlightedWords.includes(getWordKey(lessonNo, kana));
+        }
+
+        async function toggleWordHighlight(lessonNo, kana, e) {
+            if (e) e.stopPropagation();
+            const key = getWordKey(lessonNo, kana);
+
+            if (highlightedWords.includes(key)) {
+                highlightedWords = highlightedWords.filter(k => k !== key);
+            } else {
+                highlightedWords.push(key);
+            }
+
+            await saveUserHighlights();
+            updateCardHighlightState();
+            renderTable();
+        }
+
+        function toggleCurrentHighlight(e) {
+            if (e) e.stopPropagation();
+            if (currentWords.length === 0) return;
+            const currentItem = currentWords[currentIndex];
+            toggleWordHighlight(currentLesson, currentItem.kana, e);
+        }
+
+        function updateCardHighlightState() {
+            if (currentWords.length === 0) return;
+            const item = currentWords[currentIndex];
+            const highlighted = isWordHighlighted(currentLesson, item.kana);
+
+            const cardContainer = document.getElementById("flashcardContainer");
+            const frontBtn = document.getElementById("fcFrontHlBtn");
+            const backBtn = document.getElementById("fcBackHlBtn");
+
+            if (highlighted) {
+                cardContainer.classList.add("is-highlighted");
+                frontBtn.classList.add("active");
+                backBtn.classList.add("active");
+            } else {
+                cardContainer.classList.remove("is-highlighted");
+                frontBtn.classList.remove("active");
+                backBtn.classList.remove("active");
+            }
+        }
+
+        // UI রেন্ডার ও নেভিগেশন
+        function renderLessonGrid() {
+            const container = document.getElementById("gridContainer");
+            container.innerHTML = "";
+
+            for (let i = 1; i <= 25; i++) {
+                const lesson = lessons[i] || { title: "শিঘ্রই আসছে", kanji: `第${i}課` };
+
+                const card = document.createElement("div");
+                card.className = "lesson-card";
+                card.onclick = () => openLesson(i);
+                card.innerHTML = `
+                    <div class="card-top">
+                        <span class="l-badge">L-${i}</span>
+                        <span class="kanji-lesson-tag">${lesson.kanji}</span>
+                    </div>
+                    <div class="card-lesson-title">লেসন ${convertBengaliNumber(i)}</div>
+                    <div class="card-lesson-desc">${lesson.title}</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                `;
+                container.appendChild(card);
+            }
+        }
+
+        function openLesson(num) {
+            if (!lessons[num]) {
+                alert("এই লেসনের ডেটা খুব শীঘ্রই যুক্ত করা হবে!");
+                return;
+            }
+            currentLesson = num;
+            currentWords = [...lessons[num].words];
+            currentIndex = 0;
+            isTableOpen = false;
+
+            document.getElementById("lessonGridView").style.display = "none";
+            document.getElementById("lessonDetailView").style.display = "block";
+            document.getElementById("accButtonText").innerText = `লেসন ${convertBengaliNumber(num)} এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন`;
+            
+            document.getElementById("tableCard").style.display = "none";
+            document.getElementById("accChevron").style.transform = "rotate(0deg)";
+
+            document.getElementById("flashcardContainer").classList.remove("flipped");
+            fillCardData();
+            renderTable();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function backToGrid() {
+            if (document.getElementById("lessonDetailView").style.display === "block") {
+                document.getElementById("lessonDetailView").style.display = "none";
+                document.getElementById("lessonGridView").style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        function fillCardData() {
+            if (currentWords.length === 0) return;
+            const item = currentWords[currentIndex];
+
+            document.getElementById("fcKana").innerText = item.kana;
+            document.getElementById("fcMeaning").innerText = item.bn;
+            document.getElementById("fcRomaji").innerText = item.ro;
+
+            document.getElementById("cardCounter").innerText = `CARD ${currentIndex + 1} / ${currentWords.length}`;
+            const pct = ((currentIndex + 1) / currentWords.length) * 100;
+            document.getElementById("progressFill").style.width = `${pct}%`;
+
+            updateCardHighlightState();
+        }
+
+        function flipCard() {
+            document.getElementById("flashcardContainer").classList.toggle("flipped");
+        }
+
+        function nextCard() {
+            if (currentIndex < currentWords.length - 1) {
+                currentIndex++;
+                updateCardWithAnimation();
+            }
+        }
+
+        function prevCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCardWithAnimation();
+            }
+        }
+
+        function updateCardWithAnimation() {
+            const container = document.getElementById("flashcardContainer");
+            if (container.classList.contains("flipped")) {
+                container.classList.remove("flipped");
+                setTimeout(fillCardData, 200);
+            } else {
+                fillCardData();
+            }
+        }
+
+        function shuffleCards() {
+            currentWords.sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            updateCardWithAnimation();
+        }
+
+        function toggleTable() {
+            isTableOpen = !isTableOpen;
+            const tableCard = document.getElementById("tableCard");
+            const chevron = document.getElementById("accChevron");
+
+            if (isTableOpen) {
+                tableCard.style.display = "block";
+                chevron.style.transform = "rotate(90deg)";
+            } else {
+                tableCard.style.display = "none";
+                chevron.style.transform = "rotate(0deg)";
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+            currentWords.forEach(item => {
+                const highlighted = isWordHighlighted(currentLesson, item.kana);
+                const tr = document.createElement("tr");
+                if (highlighted) tr.className = "highlighted-row";
+
+                tr.innerHTML = `
+                    <td>
+                        <span class="col-kana">${item.kana}</span>
+                    </td>
+                    <td>
+                        <span class="col-ro">${item.ro}</span>
+                    </td>
+                    <td>
+                        <span class="col-bn">${item.bn}</span>
+                    </td>
+                    <td>
+                        <button class="table-hl-btn ${highlighted ? 'active' : ''}">
+                            <i class="fa-${highlighted ? 'solid' : 'regular'} fa-bookmark"></i>
+                        </button>
+                    </td>
+                `;
+
+                tr.querySelector(".table-hl-btn").addEventListener("click", (e) => {
+                    toggleWordHighlight(currentLesson, item.kana, e);
+                });
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function speakCurrent() {
+            if (currentWords.length === 0) return;
+            const text = currentWords[currentIndex].kana.split(' ')[0];
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'ja-JP';
+                u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function convertBengaliNumber(n) {
+            const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return n.toString().split('').map(d => bnDigits[d] || d).join('');
+        }
+
+        // ইভেন্ট বাইন্ডিং
+        document.getElementById("btnBackToGrid").addEventListener("click", backToGrid);
+        document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
+        document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);
+        document.getElementById("flashcardContainer").addEventListener("click", flipCard);
+        document.getElementById("fcFrontHlBtn").addEventListener("click", toggleCurrentHighlight);
+        document.getElementById("fcBackHlBtn").addEventListener("click", toggleCurrentHighlight);
+        document.getElementById("btnPrevCard").onclick = prevCard;
+        document.getElementById("btnNextCard").onclick = nextCard;
+        document.getElementById("btnToggleTable").onclick = toggleTable;
+
+        document.querySelectorAll(".fc-speak-voice-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                speakCurrent();
+            });
+        });
+
+        renderLessonGrid();
     </script>
 </body>
 </html>

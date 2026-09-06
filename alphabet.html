@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>জাপানিজ বর্ণমালা - BD Japanese</title>
+    <!-- আইকন ও ফন্ট -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 50px;
+            padding-bottom: 80px;
         }
 
-        /* টপ বার */
+        /* টপ হেডার */
         .top-nav {
             display: flex;
             align-items: center;
@@ -35,8 +38,7 @@
             text-decoration: none;
             color: #0f3e2e;
             font-size: 16px;
-            font-weight: bold;
-            margin-right: 15px;
+            margin-right: 14px;
         }
 
         .logo {
@@ -46,29 +48,21 @@
         }
 
         .content {
-            padding: 20px 16px;
+            padding: 16px;
             max-width: 480px;
             margin: 0 auto;
         }
 
-        .page-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #0e3b2c;
-            margin-bottom: 15px;
-        }
-
-        /* ট্যাব বাটন */
-        .tab-buttons {
+        /* মূল সুইচ বাটন (হিরাগানা / কাতাকানা) */
+        .main-switcher {
             display: flex;
             background: #e2e8f0;
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
-        .tab-btn {
+        .switch-btn {
             flex: 1;
             padding: 10px;
             border: none;
@@ -78,15 +72,58 @@
             color: #4a5568;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .tab-btn.active {
-            background: #047857;
+        .switch-btn.active {
+            background: #0f3e2e;
             color: #ffffff;
+            box-shadow: 0 2px 6px rgba(15, 62, 46, 0.2);
         }
 
-        /* ক্যারেক্টার গ্রিড */
+        /* সাব ক্যাটাগরি পিলস */
+        .sub-categories {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
+        }
+
+        .sub-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sub-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .sub-pill.active {
+            background: #e6f4ea;
+            border-color: #059669;
+            color: #059669;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #64748b;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        /* বর্ণমালা কার্ড গ্রিড */
         .char-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -96,17 +133,28 @@
         .char-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 10px 4px;
+            border-radius: 12px;
+            padding: 10px 4px 8px;
             text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.1s, border-color 0.1s;
+        }
+
+        .char-card:active {
+            transform: scale(0.94);
+            border-color: #059669;
+            background: #f0fdf4;
         }
 
         .char-jp {
-            font-size: 22px;
-            font-weight: bold;
-            color: #0e3b2c;
-            line-height: 1.2;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 25px;
+            font-weight: 700;
+            color: #0f3e2e;
+            line-height: 1.1;
+            margin-bottom: 2px;
         }
 
         .char-ro {
@@ -117,16 +165,56 @@
 
         .char-bn {
             font-size: 11px;
-            color: #047857;
-            font-weight: bold;
+            color: #059669;
+            font-weight: 700;
         }
 
-        .tab-content {
-            display: none;
+        .audio-icon {
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            font-size: 8px;
+            color: #cbd5e1;
         }
 
-        .tab-content.active {
-            display: block;
+        .empty-slot {
+            visibility: hidden;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            background: none;
+            border: none;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
         }
     </style>
 </head>
@@ -138,153 +226,216 @@
     </header>
 
     <main class="content">
-        <h2 class="page-title">মৌলিক বর্ণমালা চার্ট (৪৬টি)</h2>
 
-        <!-- সুইচ ট্যাব -->
-        <div class="tab-buttons">
-            <button class="tab-btn active" onclick="switchTab('hiragana', this)">হিরাগানা (Hiragana)</button>
-            <button class="tab-btn" onclick="switchTab('katakana', this)">কাতাকানা (Katakana)</button>
+        <!-- হিরাগানা / কাতাকানা সুইচ -->
+        <div class="main-switcher">
+            <button class="switch-btn active" onclick="switchScript('hira', this)">হিরাগানা (Hiragana)</button>
+            <button class="switch-btn" onclick="switchScript('kata', this)">কাতাকানা (Katakana)</button>
         </div>
 
-        <!-- হিরাগানা চার্ট -->
-        <div id="hiragana" class="tab-content active">
-            <div class="char-grid">
-                <div class="char-card"><div class="char-jp">あ</div><div class="char-ro">a</div><div class="char-bn">আ</div></div>
-                <div class="char-card"><div class="char-jp">い</div><div class="char-ro">i</div><div class="char-bn">ই</div></div>
-                <div class="char-card"><div class="char-jp">う</div><div class="char-ro">u</div><div class="char-bn">উ</div></div>
-                <div class="char-card"><div class="char-jp">え</div><div class="char-ro">e</div><div class="char-bn">এ</div></div>
-                <div class="char-card"><div class="char-jp">お</div><div class="char-ro">o</div><div class="char-bn">ও</div></div>
-
-                <div class="char-card"><div class="char-jp">か</div><div class="char-ro">ka</div><div class="char-bn">কা</div></div>
-                <div class="char-card"><div class="char-jp">き</div><div class="char-ro">ki</div><div class="char-bn">কি</div></div>
-                <div class="char-card"><div class="char-jp">く</div><div class="char-ro">ku</div><div class="char-bn">কু</div></div>
-                <div class="char-card"><div class="char-jp">け</div><div class="char-ro">ke</div><div class="char-bn">কে</div></div>
-                <div class="char-card"><div class="char-jp">こ</div><div class="char-ro">ko</div><div class="char-bn">কো</div></div>
-
-                <div class="char-card"><div class="char-jp">さ</div><div class="char-ro">sa</div><div class="char-bn">সা</div></div>
-                <div class="char-card"><div class="char-jp">し</div><div class="char-ro">shi</div><div class="char-bn">শি</div></div>
-                <div class="char-card"><div class="char-jp">す</div><div class="char-ro">su</div><div class="char-bn">সু</div></div>
-                <div class="char-card"><div class="char-jp">せ</div><div class="char-ro">se</div><div class="char-bn">সে</div></div>
-                <div class="char-card"><div class="char-jp">そ</div><div class="char-ro">so</div><div class="char-bn">সো</div></div>
-
-                <div class="char-card"><div class="char-jp">た</div><div class="char-ro">ta</div><div class="char-bn">তা</div></div>
-                <div class="char-card"><div class="char-jp">ち</div><div class="char-ro">chi</div><div class="char-bn">চি</div></div>
-                <div class="char-card"><div class="char-jp">つ</div><div class="char-ro">tsu</div><div class="char-bn">ৎসু</div></div>
-                <div class="char-card"><div class="char-jp">て</div><div class="char-ro">te</div><div class="char-bn">তে</div></div>
-                <div class="char-card"><div class="char-jp">と</div><div class="char-ro">to</div><div class="char-bn">তো</div></div>
-
-                <div class="char-card"><div class="char-jp">な</div><div class="char-ro">na</div><div class="char-bn">না</div></div>
-                <div class="char-card"><div class="char-jp">に</div><div class="char-ro">ni</div><div class="char-bn">নি</div></div>
-                <div class="char-card"><div class="char-jp">ぬ</div><div class="char-ro">nu</div><div class="char-bn">নু</div></div>
-                <div class="char-card"><div class="char-jp">ね</div><div class="char-ro">ne</div><div class="char-bn">নে</div></div>
-                <div class="char-card"><div class="char-jp">の</div><div class="char-ro">no</div><div class="char-bn">নো</div></div>
-
-                <div class="char-card"><div class="char-jp">は</div><div class="char-ro">ha</div><div class="char-bn">হা</div></div>
-                <div class="char-card"><div class="char-jp">ひ</div><div class="char-ro">hi</div><div class="char-bn">হি</div></div>
-                <div class="char-card"><div class="char-jp">ふ</div><div class="char-ro">fu</div><div class="char-bn">ফু</div></div>
-                <div class="char-card"><div class="char-jp">へ</div><div class="char-ro">he</div><div class="char-bn">হে</div></div>
-                <div class="char-card"><div class="char-jp">ほ</div><div class="char-ro">ho</div><div class="char-bn">হো</div></div>
-
-                <div class="char-card"><div class="char-jp">ま</div><div class="char-ro">ma</div><div class="char-bn">মা</div></div>
-                <div class="char-card"><div class="char-jp">み</div><div class="char-ro">mi</div><div class="char-bn">মি</div></div>
-                <div class="char-card"><div class="char-jp">む</div><div class="char-ro">mu</div><div class="char-bn">মু</div></div>
-                <div class="char-card"><div class="char-jp">め</div><div class="char-ro">me</div><div class="char-bn">মে</div></div>
-                <div class="char-card"><div class="char-jp">も</div><div class="char-ro">mo</div><div class="char-bn">মো</div></div>
-
-                <div class="char-card"><div class="char-jp">や</div><div class="char-ro">ya</div><div class="char-bn">ইয়া</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ゆ</div><div class="char-ro">yu</div><div class="char-bn">ইউ</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">よ</div><div class="char-ro">yo</div><div class="char-bn">ইয়ো</div></div>
-
-                <div class="char-card"><div class="char-jp">ら</div><div class="char-ro">ra</div><div class="char-bn">রা</div></div>
-                <div class="char-card"><div class="char-jp">り</div><div class="char-ro">ri</div><div class="char-bn">রি</div></div>
-                <div class="char-card"><div class="char-jp">る</div><div class="char-ro">ru</div><div class="char-bn">রু</div></div>
-                <div class="char-card"><div class="char-jp">れ</div><div class="char-ro">re</div><div class="char-bn">রে</div></div>
-                <div class="char-card"><div class="char-jp">ろ</div><div class="char-ro">ro</div><div class="char-bn">রো</div></div>
-
-                <div class="char-card"><div class="char-jp">わ</div><div class="char-ro">wa</div><div class="char-bn">ওয়া</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ん</div><div class="char-ro">n</div><div class="char-bn">ং/ন</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">を</div><div class="char-ro">wo</div><div class="char-bn">ও</div></div>
-            </div>
+        <!-- সাব ক্যাটাগরি -->
+        <div class="sub-categories">
+            <button class="sub-pill active" onclick="switchType('basic', this)">মৌলিক (৪৬টি)</button>
+            <button class="sub-pill" onclick="switchType('dakuon', this)">দাকুঅন (২৫টি)</button>
+            <button class="sub-pill" onclick="switchType('yoon', this)">যুক্তাক্ষর (৩৬টি)</button>
         </div>
 
-        <!-- কাতাকানা চার্ট -->
-        <div id="katakana" class="tab-content">
-            <div class="char-grid">
-                <div class="char-card"><div class="char-jp">ア</div><div class="char-ro">a</div><div class="char-bn">আ</div></div>
-                <div class="char-card"><div class="char-jp">イ</div><div class="char-ro">i</div><div class="char-bn">ই</div></div>
-                <div class="char-card"><div class="char-jp">ウ</div><div class="char-ro">u</div><div class="char-bn">উ</div></div>
-                <div class="char-card"><div class="char-jp">エ</div><div class="char-ro">e</div><div class="char-bn">এ</div></div>
-                <div class="char-card"><div class="char-jp">オ</div><div class="char-ro">o</div><div class="char-bn">ও</div></div>
-
-                <div class="char-card"><div class="char-jp">カ</div><div class="char-ro">ka</div><div class="char-bn">কা</div></div>
-                <div class="char-card"><div class="char-jp">キ</div><div class="char-ro">ki</div><div class="char-bn">কি</div></div>
-                <div class="char-card"><div class="char-jp">ク</div><div class="char-ro">ku</div><div class="char-bn">কু</div></div>
-                <div class="char-card"><div class="char-jp">ケ</div><div class="char-ro">ke</div><div class="char-bn">কে</div></div>
-                <div class="char-card"><div class="char-jp">コ</div><div class="char-ro">ko</div><div class="char-bn">কো</div></div>
-
-                <div class="char-card"><div class="char-jp">サ</div><div class="char-ro">sa</div><div class="char-bn">সা</div></div>
-                <div class="char-card"><div class="char-jp">シ</div><div class="char-ro">shi</div><div class="char-bn">শি</div></div>
-                <div class="char-card"><div class="char-jp">ス</div><div class="char-ro">su</div><div class="char-bn">সু</div></div>
-                <div class="char-card"><div class="char-jp">セ</div><div class="char-ro">se</div><div class="char-bn">সে</div></div>
-                <div class="char-card"><div class="char-jp">ソ</div><div class="char-ro">so</div><div class="char-bn">সো</div></div>
-
-                <div class="char-card"><div class="char-jp">タ</div><div class="char-ro">ta</div><div class="char-bn">তা</div></div>
-                <div class="char-card"><div class="char-jp">チ</div><div class="char-ro">chi</div><div class="char-bn">চি</div></div>
-                <div class="char-card"><div class="char-jp">ツ</div><div class="char-ro">tsu</div><div class="char-bn">ৎসু</div></div>
-                <div class="char-card"><div class="char-jp">テ</div><div class="char-ro">te</div><div class="char-bn">তে</div></div>
-                <div class="char-card"><div class="char-jp">ト</div><div class="char-ro">to</div><div class="char-bn">তো</div></div>
-
-                <div class="char-card"><div class="char-jp">ナ</div><div class="char-ro">na</div><div class="char-bn">না</div></div>
-                <div class="char-card"><div class="char-jp">ニ</div><div class="char-ro">ni</div><div class="char-bn">নি</div></div>
-                <div class="char-card"><div class="char-jp">ヌ</div><div class="char-ro">nu</div><div class="char-bn">নু</div></div>
-                <div class="char-card"><div class="char-jp">ネ</div><div class="char-ro">ne</div><div class="char-bn">নে</div></div>
-                <div class="char-card"><div class="char-jp">ノ</div><div class="char-ro">no</div><div class="char-bn">নো</div></div>
-
-                <div class="char-card"><div class="char-jp">ハ</div><div class="char-ro">ha</div><div class="char-bn">হা</div></div>
-                <div class="char-card"><div class="char-jp">ヒ</div><div class="char-ro">hi</div><div class="char-bn">হি</div></div>
-                <div class="char-card"><div class="char-jp">フ</div><div class="char-ro">fu</div><div class="char-bn">ফু</div></div>
-                <div class="char-card"><div class="char-jp">ヘ</div><div class="char-ro">he</div><div class="char-bn">হে</div></div>
-                <div class="char-card"><div class="char-jp">ホ</div><div class="char-ro">ho</div><div class="char-bn">হো</div></div>
-
-                <div class="char-card"><div class="char-jp">マ</div><div class="char-ro">ma</div><div class="char-bn">মা</div></div>
-                <div class="char-card"><div class="char-jp">ミ</div><div class="char-ro">mi</div><div class="char-bn">মি</div></div>
-                <div class="char-card"><div class="char-jp">ム</div><div class="char-ro">mu</div><div class="char-bn">মু</div></div>
-                <div class="char-card"><div class="char-jp">メ</div><div class="char-ro">me</div><div class="char-bn">মে</div></div>
-                <div class="char-card"><div class="char-jp">モ</div><div class="char-ro">mo</div><div class="char-bn">মো</div></div>
-
-                <div class="char-card"><div class="char-jp">ヤ</div><div class="char-ro">ya</div><div class="char-bn">ইয়া</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ユ</div><div class="char-ro">yu</div><div class="char-bn">ইউ</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ヨ</div><div class="char-ro">yo</div><div class="char-bn">ইয়ো</div></div>
-
-                <div class="char-card"><div class="char-jp">ラ</div><div class="char-ro">ra</div><div class="char-bn">রা</div></div>
-                <div class="char-card"><div class="char-jp">リ</div><div class="char-ro">ri</div><div class="char-bn">রি</div></div>
-                <div class="char-card"><div class="char-jp">ル</div><div class="char-ro">ru</div><div class="char-bn">রু</div></div>
-                <div class="char-card"><div class="char-jp">レ</div><div class="char-ro">re</div><div class="char-bn">রে</div></div>
-                <div class="char-card"><div class="char-jp">ロ</div><div class="char-ro">ro</div><div class="char-bn">রো</div></div>
-
-                <div class="char-card"><div class="char-jp">ワ</div><div class="char-ro">wa</div><div class="char-bn">ওয়া</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ン</div><div class="char-ro">n</div><div class="char-bn">ং/ন</div></div>
-                <div class="char-card" style="opacity:0.3;">-</div>
-                <div class="char-card"><div class="char-jp">ヲ</div><div class="char-ro">wo</div><div class="char-bn">ও</div></div>
-            </div>
+        <div class="info-bar">
+            <span>অক্ষরে ট্যাপ করলে জাপানি উচ্চারণ শোনা যাবে</span>
+            <i class="fa-solid fa-volume-high"></i>
         </div>
+
+        <!-- ক্যারেক্টার গ্রিড কনটেইনার -->
+        <div class="char-grid" id="charGrid"></div>
+
     </main>
 
+    <!-- বটম নেভিগেশন -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>লগইন</span>
+        </a>
+    </nav>
+
     <script>
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            element.classList.add('active');
+        let currentScript = 'hira'; // 'hira' or 'kata'
+        let currentType = 'basic';  // 'basic', 'dakuon', 'yoon'
+
+        const characters = {
+            basic: [
+                { h: 'あ', k: 'ア', r: 'a', b: 'আ' },
+                { h: 'い', k: 'イ', r: 'i', b: 'ই' },
+                { h: 'う', k: 'ウ', r: 'u', b: 'উ' },
+                { h: 'え', k: 'エ', r: 'e', b: 'এ' },
+                { h: 'お', k: 'オ', r: 'o', b: 'ও' },
+
+                { h: 'か', k: 'カ', r: 'ka', b: 'কা' },
+                { h: 'き', k: 'キ', r: 'ki', b: 'কি' },
+                { h: 'く', k: 'ク', r: 'ku', b: 'কু' },
+                { h: 'け', k: 'ケ', r: 'ke', b: 'কে' },
+                { h: 'こ', k: 'コ', r: 'ko', b: 'কো' },
+
+                { h: 'さ', k: 'サ', r: 'sa', b: 'সা' },
+                { h: 'し', k: 'シ', r: 'shi', b: 'শি' },
+                { h: 'す', k: 'ス', r: 'su', b: 'সু' },
+                { h: 'せ', k: 'セ', r: 'se', b: 'সে' },
+                { h: 'そ', k: 'ソ', r: 'so', b: 'সো' },
+
+                { h: 'た', k: 'タ', r: 'ta', b: 'তা' },
+                { h: 'ち', k: 'チ', r: 'chi', b: 'চি' },
+                { h: 'つ', k: 'ツ', r: 'tsu', b: 'ৎসু' },
+                { h: 'て', k: 'テ', r: 'te', b: 'তে' },
+                { h: 'と', k: 'ト', r: 'to', b: 'তো' },
+
+                { h: 'な', k: 'ナ', r: 'na', b: 'না' },
+                { h: 'に', k: 'ニ', r: 'ni', b: 'নি' },
+                { h: 'ぬ', k: 'ヌ', r: 'nu', b: 'নু' },
+                { h: 'ね', k: 'ネ', r: 'ne', b: 'নে' },
+                { h: 'の', k: 'ノ', r: 'no', b: 'নো' },
+
+                { h: 'は', k: 'ハ', r: 'ha', b: 'হা' },
+                { h: 'ひ', k: 'ヒ', r: 'hi', b: 'হি' },
+                { h: 'ふ', k: 'フ', r: 'fu', b: 'ফু' },
+                { h: 'へ', k: 'ヘ', r: 'he', b: 'হে' },
+                { h: 'ほ', k: 'ホ', r: 'ho', b: 'হো' },
+
+                { h: 'ま', k: 'マ', r: 'ma', b: 'মা' },
+                { h: 'み', k: 'ミ', r: 'mi', b: 'মি' },
+                { h: 'む', k: 'ム', r: 'mu', b: 'মু' },
+                { h: 'め', k: 'メ', r: 'me', b: 'মে' },
+                { h: 'も', k: 'モ', r: 'mo', b: 'মো' },
+
+                { h: 'や', k: 'ヤ', r: 'ya', b: 'ইয়া' },
+                { empty: true },
+                { h: 'ゆ', k: 'ユ', r: 'yu', b: 'ইউ' },
+                { empty: true },
+                { h: 'よ', k: 'ヨ', r: 'yo', b: 'ইয়ো' },
+
+                { h: 'ら', k: 'ラ', r: 'ra', b: 'রা' },
+                { h: 'り', k: 'リ', r: 'ri', b: 'রি' },
+                { h: 'る', k: 'ル', r: 'ru', b: 'রু' },
+                { h: 'れ', k: 'レ', r: 're', b: 'রে' },
+                { h: 'ろ', k: 'ロ', r: 'ro', b: 'রো' },
+
+                { h: 'わ', k: 'ワ', r: 'wa', b: 'ওয়া' },
+                { empty: true },
+                { h: 'ん', k: 'ン', r: 'n', b: 'ং/ন' },
+                { empty: true },
+                { h: 'を', k: 'ヲ', r: 'wo', b: 'ও' }
+            ],
+            dakuon: [
+                { h: 'が', k: 'ガ', r: 'ga', b: 'গা' },
+                { h: 'ぎ', k: 'ギ', r: 'gi', b: 'গি' },
+                { h: 'ぐ', k: 'グ', r: 'gu', b: 'গু' },
+                { h: 'げ', k: 'ゲ', r: 'ge', b: 'গে' },
+                { h: 'ご', k: 'ゴ', r: 'go', b: 'গো' },
+
+                { h: 'ざ', k: 'ザ', r: 'za', b: 'জা' },
+                { h: 'じ', k: 'ジ', r: 'ji', b: 'জি' },
+                { h: 'ず', k: 'ズ', r: 'zu', b: 'জু' },
+                { h: 'ぜ', k: 'ゼ', r: 'ze', b: 'জে' },
+                { h: 'ぞ', k: 'ゾ', r: 'zo', b: 'জো' },
+
+                { h: 'だ', k: 'ダ', r: 'da', b: 'দা' },
+                { h: 'ぢ', k: 'ヂ', r: 'ji', b: 'জি' },
+                { h: 'づ', k: 'ヅ', r: 'zu', b: 'জু' },
+                { h: 'で', k: 'デ', r: 'de', b: 'দে' },
+                { h: 'ど', k: 'ド', r: 'do', b: 'দো' },
+
+                { h: 'ば', k: 'バ', r: 'ba', b: 'বা' },
+                { h: 'び', k: 'ビ', r: 'bi', b: 'বি' },
+                { h: 'ぶ', k: 'ブ', r: 'bu', b: 'বু' },
+                { h: 'べ', k: 'ベ', r: 'be', b: 'বে' },
+                { h: 'ぼ', k: 'ボ', r: 'bo', b: 'বো' },
+
+                { h: 'ぱ', k: 'パ', r: 'pa', b: 'পা' },
+                { h: 'ぴ', k: 'ピ', r: 'pi', b: 'পি' },
+                { h: 'ぷ', k: 'プ', r: 'pu', b: 'পু' },
+                { h: 'ぺ', k: 'ペ', r: 'pe', b: 'পে' },
+                { h: 'ぽ', k: 'ポ', r: 'po', b: 'পো' }
+            ],
+            yoon: [
+                { h: 'きゃ', k: 'キャ', r: 'kya', b: 'ক্যা' },
+                { h: 'きゅ', k: 'キュ', r: 'kyu', b: 'কিউ' },
+                { h: 'きょ', k: 'キョ', r: 'kyo', b: 'কিয়ো' },
+                { empty: true }, { empty: true },
+
+                { h: 'しゃ', k: 'シャ', r: 'sha', b: 'শা' },
+                { h: 'しゅ', k: 'シュ', r: 'shu', b: 'শু' },
+                { h: 'しょ', k: 'ショ', r: 'sho', b: 'শো' },
+                { empty: true }, { empty: true },
+
+                { h: 'ちゃ', k: 'チャ', r: 'cha', b: 'চা' },
+                { h: 'ちゅ', k: 'チュ', r: 'chu', b: 'চু' },
+                { h: 'ちょ', k: 'チョ', r: 'cho', b: 'চো' },
+                { empty: true }, { empty: true },
+
+                { h: 'にゃ', k: 'ニャ', r: 'nya', b: 'ন্যা' },
+                { h: 'にゅ', k: 'ニュ', r: 'nyu', b: 'নিউ' },
+                { h: 'にょ', k: 'ニョ', r: 'nyo', b: 'নিয়ো' },
+                { empty: true }, { empty: true }
+            ]
+        };
+
+        function renderGrid() {
+            const grid = document.getElementById('charGrid');
+            grid.innerHTML = '';
+
+            const list = characters[currentType];
+            list.forEach(item => {
+                if (item.empty) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'empty-slot';
+                    grid.appendChild(emptyDiv);
+                } else {
+                    const char = currentScript === 'hira' ? item.h : item.k;
+                    const card = document.createElement('div');
+                    card.className = 'char-card';
+                    card.onclick = () => playSound(char);
+                    card.innerHTML = `
+                        <i class="fa-solid fa-volume-low audio-icon"></i>
+                        <div class="char-jp">${char}</div>
+                        <div class="char-ro">${item.r}</div>
+                        <div class="char-bn">${item.b}</div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
         }
+
+        function switchScript(script, el) {
+            currentScript = script;
+            document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderGrid();
+        }
+
+        function switchType(type, el) {
+            currentType = type;
+            document.querySelectorAll('.sub-pill').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderGrid();
+        }
+
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        renderGrid();
     </script>
 </body>
 </html>

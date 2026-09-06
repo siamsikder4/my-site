@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N5 Vocabulary - KOTOBA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 90px;
+        }
+
+        /* লোডার ওভারলে */
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .book-loader {
+            position: relative;
+            width: 64px;
+            height: 46px;
+            perspective: 200px;
+            margin-bottom: 18px;
+        }
+
+        .book-loader .cover-left {
+            position: absolute;
+            left: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            background: #ffffff;
+        }
+
+        .book-loader .cover-right {
+            position: absolute;
+            right: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+        }
+
+        .book-loader .spine {
+            position: absolute;
+            left: 31px; top: 0;
+            width: 2px; height: 46px;
+            background: #047857;
+        }
+
+        .book-loader .page {
+            position: absolute;
+            width: 29px; height: 42px;
+            top: 2px; right: 3px;
+            border: 2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+            transform-origin: left center;
+            animation: flipBook 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .book-loader .page:nth-child(1) { animation-delay: 0.15s; }
+        .book-loader .page:nth-child(2) { animation-delay: 0.35s; }
+        .book-loader .page:nth-child(3) { animation-delay: 0.55s; }
+
+        @keyframes flipBook {
+            0% { transform: rotateY(0deg); }
+            50%, 100% { transform: rotateY(-180deg); }
+        }
+
+        .loading-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: 0.8px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 16px;
+            color: #0f3e2e;
+            text-decoration: none;
+        }
+
+        .user-pill {
+            font-size: 11px;
+            font-weight: 700;
+            color: #047857;
+            background: #e6f4ea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 4px;
+        }
+
+        .page-sub {
+            font-size: 11.5px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* ২ কলাম গ্রিড লেআউট (স্ক্রিনশটের আদলে) */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .lesson-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #047857;
+            border-radius: 14px;
+            padding: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            position: relative;
+        }
+
+        .lesson-box:active {
+            transform: scale(0.97);
+        }
+
+        .box-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .badge-l {
+            font-size: 9.5px;
+            font-weight: 800;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .badge-jp {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #64748b;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .lesson-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 3px;
+        }
+
+        .lesson-desc {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .box-bottom {
+            display: flex;
+            justify-content: flex-end;
+            color: #047857;
+            font-size: 12px;
+        }
+
+        /* শব্দ তালিকা দেখার মডাল বা ভিউ (স্ক্রিনশট ২ এর আদলে) */
+        .vocab-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #f7faf9;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: #ffffff;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eef2f5;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f3e2e;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .vocab-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 16px;
+        }
+
+        .vocab-item-row {
+            background: #ffffff;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 12px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .vocab-item-row.bookmarked {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .vocab-jp {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f3e2e;
+            font-family: 'Noto Sans JP', sans-serif;
+            margin-bottom: 2px;
+        }
+
+        .vocab-roma {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .vocab-bn {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1e293b;
+            text-align: right;
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            font-size: 18px;
+            cursor: pointer;
+            padding-left: 12px;
+        }
+
+        .vocab-item-row.bookmarked .bookmark-btn {
+            color: #ef4444;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- লোডার ওভারলে -->
+    <div id="pageLoader" class="loader-overlay">
+        <div class="book-loader">
+            <div class="cover-left"></div>
+            <div class="cover-right"></div>
+            <div class="spine"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+        </div>
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <!-- টপ বার -->
+    <header class="top-nav">
+        <a href="index.html" class="nav-left">
+            <i class="fa-solid fa-arrow-left"></i> KOTOBA
+        </a>
+        <a href="profile.html" class="user-pill">
+            <i class="fa-solid fa-envelope"></i> <span id="userEmailText">qr.siamsikder@gmail.com</span>
+        </a>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">N5 Vocabulary</h1>
+            <p class="page-sub">মোট ২৫টি লেসন • সম্পূর্ণ শব্দভাণ্ডার</p>
+        </div>
+
+        <!-- লেসন গ্রিড (লেসন ১ থেকে ২৫) -->
+        <div class="vocab-grid" id="lessonGrid">
+            <!-- জাভাস্ক্রিপ্ট দিয়ে ডাইনামিকালি লেসন কার্ডগুলো জেনারেট হবে -->
+        </div>
+    </main>
+
+    <!-- শব্দ তালিকা দেখার পপআপ মডাল -->
+    <div class="vocab-modal" id="vocabModal">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">লেসন ১ শব্দকোষ</div>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="vocab-list" id="vocabListContainer">
+            <!-- শব্দের তালিকা এখানে লোড হবে -->
+        </div>
+    </div>
+
+    <!-- বটম বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <script>
+        // N5 লেসনগুলোর নমুনা ডেটা (লেসন ১ থেকে ২৫)
+        const n5VocabData = {
+            1: [
+                { jp: "わたし", roma: "watashi", bn: "আমি" },
+                { jp: "あなた", roma: "anata", bn: "তুমি" },
+                { jp: "あのひと", roma: "anohito", bn: "ঐব্যক্তি (সম্মানসূচক)" },
+                { jp: "せんせい", roma: "sensei", bn: "শিক্ষক" },
+                { jp: "がくせい", roma: "gakusei", bn: "ছাত্র / ছাত্রী" },
+                { jp: "かいしゃいん", roma: "kaishain", bn: "কোম্পানির চাকুরীরত ব্যক্তি" },
+                { jp: "いしゃ", roma: "isha", bn: "ডাক্তার" },
+                { jp: "だいがく", roma: "daigaku", bn: "বিশ্ববিদ্যালয়" }
+            ],
+            2: [
+                { jp: "これ", roma: "kore", bn: "এটা (বস্তু)" },
+                { jp: "それ", roma: "sore", bn: "ওটা (বস্তু)" },
+                { jp: "あれ", roma: "are", bn: "ঐটা (একটু দূরের বস্তু)" },
+                { jp: "ほん", roma: "hon", bn: "বই" },
+                { jp: "じしょ", roma: "jisho", bn: "অভিধান / ডিকশনারী" },
+                { jp: "ざっし", roma: "zasshi", bn: "ম্যাগাজিন" },
+                { jp: "えんぴつ", roma: "enpitsu", bn: "পেন্সিল" },
+                { jp: "かぎ", roma: "kagi", bn: "চাবি" }
+            ],
+            3: [
+                { jp: "ここ", roma: "koko", bn: "এখানে" },
+                { jp: "そこ", roma: "soko", bn: "ওখানে" },
+                { jp: "あそこ", roma: "asoko", bn: "ঐখানে" },
+                { jp: "どこ", roma: "doko", bn: "কোথায়" },
+                { jp: "きょうしつ", roma: "kyōshitsu", bn: "ক্লাসরুম" },
+                { jp: "しょくどう", roma: "shokudō", bn: "ক্যান্টিন / খাবার রুম" }
+            ],
+            4: [
+                { jp: "おきます", roma: "okimasu", bn: "ঘুম থেকে ওঠা" },
+                { jp: "ねます", roma: "nemasu", bn: "ঘুমানো" },
+                { jp: "はたらきます", roma: "hatarakimasu", bn: "কাজ করা" },
+                { jp: "やすみます", roma: "yasumimasu", bn: "বিশ্রাম নেওয়া / ছুটি" },
+                { jp: "いま", roma: "ima", bn: "এখন" }
+            ]
+            // লেসন ৫ থেকে ২৫ পর্যন্ত একইভাবে স্ট্রাকচার করা যাবে
+        };
+
+        const lessonTitles = {
+            1: "প্রারম্ভিক শব্দার্থ ও পেশা",
+            2: "বস্তু ও পরিচিত জিনিসপত্র",
+            3: "স্থান ও দিকবাচক শব্দ",
+            4: "সময়, দিন ও দৈনন্দিন কাজ",
+            5: "যাতায়াত ও ভ্রমণ",
+            6: "খawa-दाwa ও কার্যকলাপ",
+            7: "যন্ত্রপাতি ও লেনদেন",
+            8: "গুণবাচক শব্দ (Adjectives)",
+            9: "পছন্দ, দক্ষতা ও কারণ",
+            10: "অবস্থান ও প্রাণী",
+            11: "সংখ্যা ও কাউন্টার",
+            12: "ঋতু, আবহাওয়া ও তুলনা",
+            13: "শখ, বিনোদন ও ইচ্ছা",
+            14: "গৃহস্থালি কাজ ও ভার্ব",
+            15: "অবস্থান ও পেশাগত শব্দ",
+            16: "যাতায়াত বদলি ও শারীরিক গঠন",
+            17: "বাধ্যবাধকতা ও স্বাস্থ্য",
+            18: "পারদর্শিতা ও শখ",
+            19: "অভিজ্ঞতা ও পরিবর্তন",
+            20: "ইনফরমাল ও কথ্য ভাষা",
+            21: "অনুমান, মতামত ও উক্তি",
+            22: "পোশাক পরিচ্ছদ ও জন্ম",
+            23: "দিকনির্দেশ ও রাস্তাঘাট",
+            24: "উপহার ও সাহায্য প্রদান",
+            25: "শর্ত, সম্ভাবনা ও পরিকল্পনা"
+        };
+
+        // গ্রিডে লেসন কার্ড রেন্ডার করা
+        const grid = document.getElementById("lessonGrid");
+        for (let i = 1; i <= 25; i++) {
+            const desc = lessonTitles[i] || "শব্দভাণ্ডার ও অনুশীলন";
+            const div = document.createElement("div");
+            div.className = "lesson-box";
+            div.onclick = () => openLesson(i);
+            div.innerHTML = `
+                <div class="box-top">
+                    <span class="badge-l">L-${i}</span>
+                    <span class="badge-jp">第${i}課</span>
+                </div>
+                <div class="lesson-name">লেসন ${i}</div>
+                <div class="lesson-desc">${desc}</div>
+                <div class="box-bottom"><i class="fa-solid fa-arrow-right"></i></div>
+            `;
+            grid.appendChild(div);
+        }
+
+        function openLesson(lessonNum) {
+            document.getElementById("modalTitle").innerText = `লেসন ${lessonNum} শব্দকোষ`;
+            const container = document.getElementById("vocabListContainer");
+            container.innerHTML = "";
+
+            const words = n5VocabData[lessonNum] || [
+                { jp: "けいかく", roma: "keikaku", bn: "পরিকল্পনা" },
+                { jp: "れんしゅう", roma: "renshū", bn: "অনুশীলন" },
+                { jp: "もんだい", roma: "mondai", bn: "সমস্যা" }
+            ];
+
+            words.forEach((item, index) => {
+                const row = document.createElement("div");
+                row.className = "vocab-item-row";
+                row.innerHTML = `
+                    <div>
+                        <div class="vocab-jp">${item.jp}</div>
+                        <div class="vocab-roma">${item.roma}</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <div class="vocab-bn">${item.bn}</div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(this, event)">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            document.getElementById("vocabModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("vocabModal").style.display = "none";
+        }
+
+        function toggleBookmark(btn, event) {
+            event.stopPropagation();
+            const row = btn.closest(".vocab-item-row");
+            row.classList.toggle("bookmarked");
+        }
+
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pageLoader");
+            if (loader) loader.classList.add("hidden");
+        });
+    </script>
+</body>
+</html>

@@ -20,7 +20,7 @@
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 75px;
+            padding-bottom: 80px;
         }
 
         /* টপ বার */
@@ -41,13 +41,19 @@
             font-size: 17px;
             color: #0f3e2e;
             letter-spacing: 0.5px;
+            text-decoration: none;
         }
 
-        .menu-btn, .login-btn {
+        .menu-btn, .login-nav-btn {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: #4a5568;
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .login-nav-btn {
+            color: #0f3e2e;
         }
 
         .page-content {
@@ -312,13 +318,13 @@
             justify-content: center;
         }
 
-        /* বটম বার */
+        /* বটম নেভিগেশন */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 60px;
+            height: 62px;
             background: #ffffff;
             border-top: 1px solid #eef2f5;
             display: flex;
@@ -329,7 +335,7 @@
 
         .nav-item {
             text-decoration: none;
-            color: #94a3b8;
+            color: #8392a5;
             font-size: 11px;
             display: flex;
             flex-direction: column;
@@ -346,7 +352,7 @@
         }
 
         .nav-item i {
-            font-size: 17px;
+            font-size: 19px;
         }
     </style>
 </head>
@@ -355,8 +361,8 @@
     <!-- টপ বার -->
     <header class="top-nav">
         <div class="menu-btn"><i class="fa-solid fa-bars"></i> মেনু</div>
-        <div class="logo">BD JAPANESE</div>
-        <div class="login-btn">লগইন</div>
+        <a href="index.html" class="logo">BD JAPANESE</a>
+        <a href="login.html" class="login-nav-btn"><i class="fa-regular fa-user"></i> লগইন</a>
     </header>
 
     <main class="page-content">
@@ -400,61 +406,74 @@
             <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
             <h3 class="section-heading">বিগিনার লেভেল</h3>
             <div class="card-grid">
+                <!-- বর্ণমালা লিংক -->
                 <a href="alphabet.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
                     <h4>বর্ণমালা</h4>
                     <p>হিরাগানা ও কাতাকানা উচ্চারণসহ</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
+
                 <a href="n5.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
                     <p>সহজ ভাষায় N5 গ্রামার</p>
                 </a>
+
+                <!-- কাঞ্জি লিংক -->
                 <a href="kanji.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
                     <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
                     <h4>ক্রিয়াপদ</h4>
                     <p>Conjugation of Verbs</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
                     <h4>লেসন প্র্যাকটিস</h4>
                     <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
                     <h4>Appendices</h4>
                     <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
                     <h4>Reading</h4>
                     <p>N5 রিডিং প্র্যাকটিস</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
                     <h4>Listening</h4>
                     <p>N5 লিসেনিং প্র্যাকটিস</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
                     <h4>Listening Test</h4>
                     <p>N5 লিসেনিং পরীক্ষা</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
                     <h4>Skype/Zoom</h4>
                     <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <span class="mini-tag">শীঘ্রই আসছে</span>
                     <div class="icon-circle yellow-bg"><i class="fa-solid fa-file-signature"></i></div>
@@ -474,16 +493,20 @@
                     <h4>শব্দকোষ</h4>
                     <p>N4 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
+
+                <!-- N4 ব্যাকরণ লিংক -->
                 <a href="n4-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
-                    <p>সহজ ভাষায় N4 গ্রামার</p>
+                    <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
                     <p>N4 প্রয়োজনীয় কাঞ্জি</p>
                 </a>
+
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
                     <h4>Reading</h4>
@@ -511,7 +534,7 @@
         </div>
     </div>
 
-    <!-- বটম বার -->
+    <!-- বটম নেভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -521,7 +544,8 @@
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
         </button>
-        <a href="#" class="nav-item">
+        <!-- লগইন পেজ লিংক -->
+        <a href="login.html" class="nav-item">
             <i class="fa-solid fa-circle-user"></i>
             <span>লগইন</span>
         </a>
@@ -559,7 +583,7 @@
             const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
 
             if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার API Key বসান।";
+                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার আসল API Key বসান।";
                 return;
             }
 

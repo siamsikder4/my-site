@@ -61,6 +61,21 @@
             margin: 0 auto;
         }
 
+        /* লোডার */
+        .loading-state {
+            text-align: center;
+            padding: 40px 16px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .loading-state i {
+            font-size: 24px;
+            color: #047857;
+            margin-bottom: 8px;
+            display: block;
+        }
+
         /* টপ ৩ পোডিয়াম */
         .podium-section {
             background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
@@ -70,7 +85,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 24px;
             box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
         }
@@ -79,17 +94,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 30%;
+            width: 32%;
         }
 
         .podium-avatar {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #ffffff;
             border: 2px solid transparent;
@@ -98,9 +113,9 @@
         }
 
         .podium-avatar.first {
-            width: 60px;
-            height: 60px;
-            font-size: 22px;
+            width: 58px;
+            height: 58px;
+            font-size: 20px;
             border-color: #facc15;
             background: #047857;
         }
@@ -125,7 +140,7 @@
         .podium-name {
             font-size: 12px;
             font-weight: 700;
-            max-width: 80px;
+            max-width: 90px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -133,7 +148,7 @@
         }
 
         .podium-xp {
-            font-size: 10px;
+            font-size: 10.5px;
             color: #93c5fd;
             font-weight: 600;
             margin-bottom: 6px;
@@ -173,17 +188,17 @@
             align-items: center;
             margin-bottom: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-            transition: transform 0.15s ease;
         }
 
-        .leader-card:active {
-            transform: scale(0.99);
+        .leader-card.current-user-card {
+            border-color: #047857;
+            background: #f0fdf4;
         }
 
         .rank-number {
             font-size: 14px;
             font-weight: 800;
-            width: 24px;
+            width: 26px;
             color: #64748b;
         }
 
@@ -199,10 +214,12 @@
             font-size: 14px;
             font-weight: 700;
             margin-right: 12px;
+            flex-shrink: 0;
         }
 
         .user-meta {
             flex: 1;
+            overflow: hidden;
         }
 
         .user-meta h4 {
@@ -210,6 +227,9 @@
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .user-meta p {
@@ -221,10 +241,11 @@
             font-size: 12.5px;
             font-weight: 800;
             color: #047857;
-            background: #f0fdf4;
-            padding: 4px 9px;
+            background: #ffffff;
+            padding: 4px 10px;
             border-radius: 12px;
             border: 1px solid #bbf7d0;
+            white-space: nowrap;
         }
 
         /* বটম বার */
@@ -272,91 +293,55 @@
         <a href="index.html" class="back-btn">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <span class="nav-title">লিডারবোর্ড</span>
+        <span class="nav-title">লাইভ লিডারবোর্ড</span>
     </header>
 
     <main class="page-content">
 
-        <!-- পোডিয়াম ব্যানার (শীর্ষ ৩ জন) -->
-        <div class="podium-section">
-            <!-- ২য় স্থান -->
-            <div class="podium-col">
-                <div class="podium-avatar second">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <span class="podium-name">ফারহান</span>
-                <span class="podium-xp">৪৫০ XP</span>
-                <div class="podium-step step-2">২</div>
-            </div>
-
-            <!-- ১ম স্থান -->
-            <div class="podium-col">
-                <div class="podium-avatar first">
-                    <i class="fa-solid fa-crown crown-icon"></i>
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <span class="podium-name">তানভীর</span>
-                <span class="podium-xp">৫৮০ XP</span>
-                <div class="podium-step step-1">১</div>
-            </div>
-
-            <!-- ৩য় স্থান -->
-            <div class="podium-col">
-                <div class="podium-avatar third">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <span class="podium-name">আরিফ</span>
-                <span class="podium-xp">৩৮০ XP</span>
-                <div class="podium-step step-3">৩</div>
-            </div>
+        <!-- লোডিং অবস্থা -->
+        <div id="loadingBox" class="loading-state">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>ফায়ারবেস থেকে লাইভ স্কোর লোড হচ্ছে...</span>
         </div>
 
-        <div class="list-section-title">
-            <span>শীর্ষ শিক্ষার্থী তালিকা</span>
-            <span style="font-size: 11px; color: #64748b;"><i class="fa-solid fa-bolt" style="color: #eab308;"></i> সাপ্তাহিক স্কোর</span>
-        </div>
-
-        <!-- লিডারবোর্ড লিস্ট -->
-        <div id="leaderboardList">
-            <div class="leader-card">
-                <span class="rank-number">৪</span>
-                <div class="user-icon-circle">রা</div>
-                <div class="user-meta">
-                    <h4>রাকিব হোসেন</h4>
-                    <p>লেসন ১৫ সম্পন্ন</p>
+        <div id="leaderboardContent" style="display: none;">
+            <!-- পোডিয়াম ব্যানার (শীর্ষ ৩ জন) -->
+            <div class="podium-section" id="podiumArea">
+                <!-- ২য় স্থান -->
+                <div class="podium-col">
+                    <div class="podium-avatar second" id="rank2Avatar">২</div>
+                    <span class="podium-name" id="rank2Name">---</span>
+                    <span class="podium-xp" id="rank2XP">0 XP</span>
+                    <div class="podium-step step-2">২</div>
                 </div>
-                <span class="xp-score">৩১০ XP</span>
+
+                <!-- ১ম স্থান -->
+                <div class="podium-col">
+                    <div class="podium-avatar first">
+                        <i class="fa-solid fa-crown crown-icon"></i>
+                        <span id="rank1Avatar">১</span>
+                    </div>
+                    <span class="podium-name" id="rank1Name">---</span>
+                    <span class="podium-xp" id="rank1XP">0 XP</span>
+                    <div class="podium-step step-1">১</div>
+                </div>
+
+                <!-- ৩য় স্থান -->
+                <div class="podium-col">
+                    <div class="podium-avatar third" id="rank3Avatar">৩</div>
+                    <span class="podium-name" id="rank3Name">---</span>
+                    <span class="podium-xp" id="rank3XP">0 XP</span>
+                    <div class="podium-step step-3">৩</div>
+                </div>
             </div>
 
-            <div class="leader-card">
-                <span class="rank-number">৫</span>
-                <div class="user-icon-circle">স</div>
-                <div class="user-meta">
-                    <h4>সাদিয়া আক্তার</h4>
-                    <p>লেসন ১২ সম্পন্ন</p>
-                </div>
-                <span class="xp-score">২৯০ XP</span>
+            <div class="list-section-title">
+                <span>শীর্ষ শিক্ষার্থী তালিকা</span>
+                <span style="font-size: 11px; color: #047857;"><i class="fa-solid fa-circle-dot fa-fade"></i> লাইভ আপডেট</span>
             </div>
 
-            <div class="leader-card">
-                <span class="rank-number">৬</span>
-                <div class="user-icon-circle">হ</div>
-                <div class="user-meta">
-                    <h4>হাসান মাহমুদ</h4>
-                    <p>লেসন ১০ সম্পন্ন</p>
-                </div>
-                <span class="xp-score">২৫০ XP</span>
-            </div>
-
-            <div class="leader-card">
-                <span class="rank-number">৭</span>
-                <div class="user-icon-circle">ম</div>
-                <div class="user-meta">
-                    <h4>মাহমুদা খানম</h4>
-                    <p>লেসন ৮ সম্পন্ন</p>
-                </div>
-                <span class="xp-score">২২০ XP</span>
-            </div>
+            <!-- র‍্যাঙ্ক ৪ থেকে পরবর্তী লিস্ট -->
+            <div id="leaderboardList"></div>
         </div>
 
     </main>
@@ -381,10 +366,11 @@
         </a>
     </nav>
 
-    <!-- Firebase Auth স্ক্রিপ্ট -->
+    <!-- Firebase রিয়েলটাইম স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -398,22 +384,111 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
+        let currentUserId = null;
+
+        // বটম বার Auth স্ট্যাটাস
         const bottomAuthBtn = document.getElementById("bottomAuthBtn");
         const bottomAuthIcon = document.getElementById("bottomAuthIcon");
         const bottomAuthText = document.getElementById("bottomAuthText");
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
+                currentUserId = user.uid;
                 bottomAuthBtn.href = "profile.html";
                 bottomAuthIcon.className = "fa-solid fa-circle-user";
                 bottomAuthText.innerText = "প্রোফাইল";
             } else {
+                currentUserId = null;
                 bottomAuthBtn.href = "login.html";
                 bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
                 bottomAuthText.innerText = "লগইন";
             }
         });
+
+        // ফায়ারস্টোর থেকে রিয়েলটাইম লিডারবোর্ড লিসেনার
+        const loadingBox = document.getElementById("loadingBox");
+        const leaderboardContent = document.getElementById("leaderboardContent");
+        const leaderboardList = document.getElementById("leaderboardList");
+
+        // শীর্ষ ২০ জনকে XP অনুযায়ী রিয়েলটাইমে ফেচ করা হচ্ছে
+        const q = query(collection(db, "users"), orderBy("xp", "desc"), limit(20));
+
+        onSnapshot(q, (snapshot) => {
+            const users = [];
+            snapshot.forEach((doc) => {
+                users.push({ id: doc.id, ...doc.data() });
+            });
+
+            loadingBox.style.display = "none";
+            leaderboardContent.style.display = "block";
+
+            renderPodium(users);
+            renderList(users);
+        }, (error) => {
+            console.error("Leaderboard Realtime Error:", error);
+            loadingBox.innerHTML = `<span style="color: #ef4444;">স্কোর লোড করতে ব্যর্থ হয়েছে। ফায়ারস্টোর রুলস বা কালেকশন চেক করুন।</span>`;
+        });
+
+        function getDisplayName(user) {
+            return user.name || (user.email ? user.email.split('@')[0] : "শিক্ষার্থী");
+        }
+
+        function getFirstLetter(name) {
+            return name ? name.trim().charAt(0).toUpperCase() : "U";
+        }
+
+        // পোডিয়াম (টপ ৩) রেন্ডার
+        function renderPodium(users) {
+            // ১ম স্থান
+            const u1 = users[0];
+            document.getElementById("rank1Name").innerText = u1 ? getDisplayName(u1) : "খালি";
+            document.getElementById("rank1XP").innerText = u1 ? `${u1.xp || 0} XP` : "০ XP";
+            document.getElementById("rank1Avatar").innerText = u1 ? getFirstLetter(getDisplayName(u1)) : "-";
+
+            // ২য় স্থান
+            const u2 = users[1];
+            document.getElementById("rank2Name").innerText = u2 ? getDisplayName(u2) : "খালি";
+            document.getElementById("rank2XP").innerText = u2 ? `${u2.xp || 0} XP` : "০ XP";
+            document.getElementById("rank2Avatar").innerText = u2 ? getFirstLetter(getDisplayName(u2)) : "-";
+
+            // ৩য় স্থান
+            const u3 = users[2];
+            document.getElementById("rank3Name").innerText = u3 ? getDisplayName(u3) : "খালি";
+            document.getElementById("rank3XP").innerText = u3 ? `${u3.xp || 0} XP` : "০ XP";
+            document.getElementById("rank3Avatar").innerText = u3 ? getFirstLetter(getDisplayName(u3)) : "-";
+        }
+
+        // বাকিদের লিস্ট রেন্ডার
+        function renderList(users) {
+            leaderboardList.innerHTML = "";
+
+            if (users.length <= 3) {
+                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
+                return;
+            }
+
+            // ৪র্থ জন থেকে রেন্ডার শুরু
+            for (let i = 3; i < users.length; i++) {
+                const user = users[i];
+                const name = getDisplayName(user);
+                const isCurrent = (user.id === currentUserId);
+
+                const card = document.createElement("div");
+                card.className = `leader-card ${isCurrent ? 'current-user-card' : ''}`;
+                card.innerHTML = `
+                    <span class="rank-number">${i + 1}</span>
+                    <div class="user-icon-circle">${getFirstLetter(name)}</div>
+                    <div class="user-meta">
+                        <h4>${name} ${isCurrent ? '<span style="font-size:10px; color:#047857;">(আপনি)</span>' : ''}</h4>
+                        <p>${user.completedLessons ? `লেসন ${user.completedLessons} সম্পন্ন` : 'শিক্ষার্থী'}</p>
+                    </div>
+                    <span class="xp-score">${user.xp || 0} XP</span>
+                `;
+                leaderboardList.appendChild(card);
+            }
+        }
     </script>
 </body>
 </html>

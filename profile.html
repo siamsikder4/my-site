@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রোফাইল - Kotoba</title>
+    <!-- আইকন ও ফন্ট -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 80px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #0f3e2e;
+            font-size: 16px;
+            margin-right: 14px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .container {
+            padding: 20px 16px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        /* ইউজার কার্ড */
+        .profile-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 24px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            margin-bottom: 18px;
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 84px;
+            height: 84px;
+            margin: 0 auto 12px;
+        }
+
+        .user-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #047857;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 2px;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 14px;
+        }
+
+        .badge-target {
+            display: inline-block;
+            background: #e6f4ea;
+            color: #047857;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        /* স্ট্যাটিস্টিকস গ্রিড */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 6px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f3e2e;
+        }
+
+        .stat-label {
+            font-size: 10.5px;
+            color: #64748b;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* মেনু অপশন কার্ড */
+        .menu-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #1e293b;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .green-icon { background: #e6f4ea; color: #047857; }
+        .blue-icon { background: #e0f2fe; color: #0284c7; }
+        .red-icon { background: #fee2e2; color: #dc2626; }
+
+        /* লগআউট বাটন */
+        .logout-btn {
+            width: 100%;
+            background: #fff;
+            color: #dc2626;
+            border: 1px solid #fecdd3;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* লগইন না থাকলে দেখানোর স্টেট */
+        .guest-box {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .guest-icon {
+            font-size: 45px;
+            color: #94a3b8;
+            margin-bottom: 14px;
+        }
+
+        .guest-btn {
+            display: inline-block;
+            background: #0f3e2e;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-top: 14px;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo">আমার প্রোফাইল</div>
+    </header>
+
+    <main class="container">
+
+        <!-- লগইন করা অবস্থা -->
+        <div id="userProfile" style="display: none;">
+            
+            <div class="profile-card">
+                <div class="avatar-wrap">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" id="avatarImg" class="user-avatar" alt="Avatar">
+                </div>
+                <h3 class="user-name" id="profileName">শিক্ষার্থী</h3>
+                <p class="user-email" id="profileEmail">user@example.com</p>
+                <span class="badge-target"><i class="fa-solid fa-bullseye"></i> লক্ষ্য: JLPT N5 / N4</span>
+            </div>
+
+            <!-- স্টাডি স্ট্যাটাস -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">৪৬</div>
+                    <div class="stat-label">বর্ণমালা পাঠ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">১২০</div>
+                    <div class="stat-label">কাঞ্জি টার্গেট</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">২১টি</div>
+                    <div class="stat-label">N4 ব্যাকরণ</div>
+                </div>
+            </div>
+
+            <!-- কুইক মেনু -->
+            <div class="menu-card">
+                <a href="alphabet.html" class="menu-item">
+                    <div class="menu-item-left">
+                        <div class="menu-icon green-icon"><i class="fa-solid fa-font"></i></div>
+                        <span>বর্ণমালা প্র্যাকটিস</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
+                </a>
+                <a href="kanji.html" class="menu-item">
+                    <div class="menu-item-left">
+                        <div class="menu-icon blue-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <span>N5 কাঞ্জি চার্ট</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
+                </a>
+                <a href="n4-grammar.html" class="menu-item">
+                    <div class="menu-item-left">
+                        <div class="menu-icon green-icon"><i class="fa-solid fa-book-open"></i></div>
+                        <span>N4 ব্যাকরণ সমগ্র</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 12px;"></i>
+                </a>
+            </div>
+
+            <button class="logout-btn" id="signOutBtn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> অ্যাকাউন্ট সাইন আউট
+            </button>
+        </div>
+
+        <!-- গেস্ট / লগইন ছাড়া অবস্থা -->
+        <div id="guestBox" class="guest-box">
+            <i class="fa-regular fa-circle-user guest-icon"></i>
+            <h3 style="font-size: 17px; color: #0f3e2e; margin-bottom: 6px;">লগইন করা নেই</h3>
+            <p style="font-size: 12px; color: #64748b;">পড়াশোনার অগ্রগতি সংরক্ষণ করতে আপনার অ্যাকাউন্টে সাইন ইন করুন।</p>
+            <a href="login.html" class="guest-btn">লগইন / সাইন আপ করুন</a>
+        </div>
+
+    </main>
+
+    <!-- বটম নেভিগেশন বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <!-- Firebase স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const userProfile = document.getElementById("userProfile");
+        const guestBox = document.getElementById("guestBox");
+        const profileName = document.getElementById("profileName");
+        const profileEmail = document.getElementById("profileEmail");
+        const avatarImg = document.getElementById("avatarImg");
+        const signOutBtn = document.getElementById("signOutBtn");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                guestBox.style.display = "none";
+                userProfile.style.display = "block";
+                profileName.innerText = user.displayName || "জাপানিজ শিক্ষার্থী";
+                profileEmail.innerText = user.email;
+                if (user.photoURL) {
+                    avatarImg.src = user.photoURL;
+                }
+            } else {
+                userProfile.style.display = "none";
+                guestBox.style.display = "block";
+            }
+        });
+
+        signOutBtn.addEventListener("click", () => {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
+            });
+        });
+    </script>
+</body>
+</html>

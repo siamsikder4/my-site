@@ -23,7 +23,6 @@
             padding-bottom: 80px;
         }
 
-        /* টপ বার */
         .top-nav {
             display: flex;
             align-items: center;
@@ -75,7 +74,6 @@
             display: block;
         }
 
-        /* টপ ৩ পোডিয়াম */
         .podium-section {
             background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
             border-radius: 20px;
@@ -167,7 +165,6 @@
         .step-2 { height: 55px; background: rgba(203, 213, 225, 0.2); color: #cbd5e1; border-top: 3px solid #cbd5e1; }
         .step-3 { height: 42px; background: rgba(249, 115, 22, 0.2); color: #f97316; border-top: 3px solid #f97316; }
 
-        /* লিস্ট হেডার */
         .list-section-title {
             font-size: 15px;
             font-weight: 700;
@@ -247,7 +244,6 @@
             white-space: nowrap;
         }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -287,7 +283,6 @@
 </head>
 <body>
 
-    <!-- টপ বার -->
     <header class="top-nav">
         <a href="index.html" class="back-btn">
             <i class="fa-solid fa-arrow-left"></i>
@@ -297,16 +292,15 @@
 
     <main class="page-content">
 
-        <!-- লোডিং অবস্থা -->
         <div id="loadingBox" class="loading-state">
             <i class="fa-solid fa-spinner fa-spin"></i>
             <span>র‍্যাঙ্কিং লোড হচ্ছে...</span>
         </div>
 
         <div id="leaderboardContent" style="display: none;">
-            <!-- পোডিয়াম (টপ ৩ শিক্ষার্থী) -->
+            <!-- পোডিয়াম -->
             <div class="podium-section">
-                <!-- ২য় স্থান -->
+                <!-- ২য় -->
                 <div class="podium-col">
                     <div class="podium-avatar second" id="rank2Avatar">২</div>
                     <span class="podium-name" id="rank2Name">---</span>
@@ -314,7 +308,7 @@
                     <div class="podium-step step-2">২</div>
                 </div>
 
-                <!-- ১ম স্থান -->
+                <!-- ১ম -->
                 <div class="podium-col">
                     <div class="podium-avatar first">
                         <i class="fa-solid fa-crown crown-icon"></i>
@@ -325,7 +319,7 @@
                     <div class="podium-step step-1">১</div>
                 </div>
 
-                <!-- ৩য় স্থান -->
+                <!-- ৩য় -->
                 <div class="podium-col">
                     <div class="podium-avatar third" id="rank3Avatar">৩</div>
                     <span class="podium-name" id="rank3Name">---</span>
@@ -339,13 +333,11 @@
                 <span style="font-size: 11px; color: #047857;"><i class="fa-solid fa-bolt"></i> লাইভ পয়েন্ট</span>
             </div>
 
-            <!-- ৪ থেকে বাকি তালিকা -->
             <div id="leaderboardList"></div>
         </div>
 
     </main>
 
-    <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -365,11 +357,10 @@
         </a>
     </nav>
 
-    <!-- Firebase স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -391,12 +382,24 @@
         const bottomAuthIcon = document.getElementById("bottomAuthIcon");
         const bottomAuthText = document.getElementById("bottomAuthText");
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUserId = user.uid;
                 bottomAuthBtn.href = "profile.html";
                 bottomAuthIcon.className = "fa-solid fa-circle-user";
                 bottomAuthText.innerText = "প্রোফাইল";
+
+                // ইউজারের প্রাথমিক ডকুমেন্ট ও xp ফিল্ড না থাকলে সেট করা
+                try {
+                    const userRef = doc(db, "users", user.uid);
+                    await setDoc(userRef, {
+                        name: user.displayName || user.email.split('@')[0],
+                        email: user.email,
+                        xp: 0
+                    }, { merge: true });
+                } catch (e) {
+                    console.warn("User auto-init info:", e);
+                }
             } else {
                 currentUserId = null;
                 bottomAuthBtn.href = "login.html";
@@ -409,14 +412,22 @@
         const leaderboardContent = document.getElementById("leaderboardContent");
         const leaderboardList = document.getElementById("leaderboardList");
 
-        // ফায়ারস্টোর থেকে টপ ২০ জন ইউজার ফেচ
-        const q = query(collection(db, "users"), orderBy("xp", "desc"), limit(20));
+        // ক্লায়েন্ট সাইড ফ্লেক্সিবল লিসেনার (ইনডেক্স বা মিসিং ফিল্ড এরর এড়াতে)
+        const usersCol = collection(db, "users");
 
-        onSnapshot(q, (snapshot) => {
-            const users = [];
+        onSnapshot(usersCol, (snapshot) => {
+            let users = [];
             snapshot.forEach((doc) => {
-                users.push({ id: doc.id, ...doc.data() });
+                const data = doc.data();
+                users.push({
+                    id: doc.id,
+                    name: data.name || (data.email ? data.email.split('@')[0] : "শিক্ষার্থী"),
+                    xp: typeof data.xp === "number" ? data.xp : 0
+                });
             });
+
+            // বড় থেকে ছোট হিসেবে ক্রমানুসারে সাজানো
+            users.sort((a, b) => b.xp - a.xp);
 
             loadingBox.style.display = "none";
             leaderboardContent.style.display = "block";
@@ -424,67 +435,68 @@
             renderPodium(users);
             renderList(users);
         }, (error) => {
-            console.error("Leaderboard Error:", error);
-            loadingBox.innerHTML = `<span style="color: #ef4444;">লিডারবোর্ড তথ্য লোড হতে সমস্যা হয়েছে।</span>`;
+            console.error("Firestore Snapshot Error:", error);
+            loadingBox.innerHTML = `
+                <span style="color: #ef4444; font-weight: 600;">ডাটাবেস এক্সেস করা যায়নি!</span>
+                <p style="font-size: 11px; color: #64748b; margin-top: 5px;">Firestore Rules-এ read/write পারমিশন চালু আছে কি না পরীক্ষা করুন।</p>
+            `;
         });
-
-        function getDisplayName(user) {
-            return user.name || (user.email ? user.email.split('@')[0] : "শিক্ষার্থী");
-        }
 
         function getFirstLetter(name) {
             return name ? name.trim().charAt(0).toUpperCase() : "U";
         }
 
-        // ব্যবহারকারীর পয়েন্টের উপর ভিত্তি করে ডামি ব্যাজ/লেভেল (যাতে সময় বোঝা না যায়)
         function getUserLevel(xp) {
-            if (xp >= 1000) return "Master (JLPT N4)";
-            if (xp >= 500) return "Advanced Learner";
-            if (xp >= 200) return "Active Student";
-            return "Beginner Learner";
+            if (xp >= 1000) return "মাস্টার লার্নার (N4)";
+            if (xp >= 500) return "অ্যাডভান্সড শিক্ষার্থী";
+            if (xp >= 200) return "এক্টিভ লার্নার";
+            return "বিগিনার শিক্ষার্থী";
         }
 
         function renderPodium(users) {
             const u1 = users[0];
-            document.getElementById("rank1Name").innerText = u1 ? getDisplayName(u1) : "খালি";
-            document.getElementById("rank1XP").innerText = u1 ? `${u1.xp || 0} XP` : "০ XP";
-            document.getElementById("rank1Avatar").innerText = u1 ? getFirstLetter(getDisplayName(u1)) : "-";
+            document.getElementById("rank1Name").innerText = u1 ? u1.name : "খালি";
+            document.getElementById("rank1XP").innerText = u1 ? `${u1.xp} XP` : "০ XP";
+            document.getElementById("rank1Avatar").innerText = u1 ? getFirstLetter(u1.name) : "-";
 
             const u2 = users[1];
-            document.getElementById("rank2Name").innerText = u2 ? getDisplayName(u2) : "খালি";
-            document.getElementById("rank2XP").innerText = u2 ? `${u2.xp || 0} XP` : "০ XP";
-            document.getElementById("rank2Avatar").innerText = u2 ? getFirstLetter(getDisplayName(u2)) : "-";
+            document.getElementById("rank2Name").innerText = u2 ? u2.name : "খালি";
+            document.getElementById("rank2XP").innerText = u2 ? `${u2.xp} XP` : "০ XP";
+            document.getElementById("rank2Avatar").innerText = u2 ? getFirstLetter(u2.name) : "-";
 
             const u3 = users[2];
-            document.getElementById("rank3Name").innerText = u3 ? getDisplayName(u3) : "খালি";
-            document.getElementById("rank3XP").innerText = u3 ? `${u3.xp || 0} XP` : "০ XP";
-            document.getElementById("rank3Avatar").innerText = u3 ? getFirstLetter(getDisplayName(u3)) : "-";
+            document.getElementById("rank3Name").innerText = u3 ? u3.name : "খালি";
+            document.getElementById("rank3XP").innerText = u3 ? `${u3.xp} XP` : "০ XP";
+            document.getElementById("rank3Avatar").innerText = u3 ? getFirstLetter(u3.name) : "-";
         }
 
         function renderList(users) {
             leaderboardList.innerHTML = "";
 
+            if (users.length === 0) {
+                leaderboardList.innerHTML = `<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:13px;">এখনও কোনো শিক্ষার্থী যুক্ত হয়নি।</div>`;
+                return;
+            }
+
             if (users.length <= 3) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
+                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">পোডিয়াম ছাড়া তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
                 return;
             }
 
             for (let i = 3; i < users.length; i++) {
                 const user = users[i];
-                const name = getDisplayName(user);
                 const isCurrent = (user.id === currentUserId);
-                const score = user.xp || 0;
 
                 const card = document.createElement("div");
                 card.className = `leader-card ${isCurrent ? 'current-user-card' : ''}`;
                 card.innerHTML = `
                     <span class="rank-number">${i + 1}</span>
-                    <div class="user-icon-circle">${getFirstLetter(name)}</div>
+                    <div class="user-icon-circle">${getFirstLetter(user.name)}</div>
                     <div class="user-meta">
-                        <h4>${name} ${isCurrent ? '<span style="font-size:10px; color:#047857;">(আপনি)</span>' : ''}</h4>
-                        <p>${getUserLevel(score)}</p>
+                        <h4>${user.name} ${isCurrent ? '<span style="font-size:10px; color:#047857;">(আপনি)</span>' : ''}</h4>
+                        <p>${getUserLevel(user.xp)}</p>
                     </div>
-                    <span class="xp-score">${score} XP</span>
+                    <span class="xp-score">${user.xp} XP</span>
                 `;
                 leaderboardList.appendChild(card);
             }

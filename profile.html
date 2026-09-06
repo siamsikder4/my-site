@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রোফাইল সেটিংস - KOTOBA</title>
+    <title>প্রোফাইল - KOTOBA</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -23,95 +23,9 @@
             padding-bottom: 85px;
         }
 
-        /* লোডার ওভারলে */
-        .loader-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(4px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
-        }
-
-        .loader-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .book-loader {
-            position: relative;
-            width: 64px;
-            height: 46px;
-            perspective: 200px;
-            margin-bottom: 18px;
-        }
-
-        .book-loader .cover-left {
-            position: absolute;
-            left: 2px; top: 2px;
-            width: 30px; height: 42px;
-            border: 2.2px solid #047857;
-            border-right: none;
-            border-radius: 4px 0 0 4px;
-            background: #ffffff;
-        }
-
-        .book-loader .cover-right {
-            position: absolute;
-            right: 2px; top: 2px;
-            width: 30px; height: 42px;
-            border: 2.2px solid #047857;
-            border-left: none;
-            border-radius: 0 4px 4px 0;
-            background: #ffffff;
-        }
-
-        .book-loader .spine {
-            position: absolute;
-            left: 31px; top: 0;
-            width: 2px; height: 46px;
-            background: #047857;
-        }
-
-        .book-loader .page {
-            position: absolute;
-            width: 29px; height: 42px;
-            top: 2px; right: 3px;
-            border: 2px solid #047857;
-            border-left: none;
-            border-radius: 0 4px 4px 0;
-            background: #ffffff;
-            transform-origin: left center;
-            animation: flipBook 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .book-loader .page:nth-child(1) { animation-delay: 0.15s; }
-        .book-loader .page:nth-child(2) { animation-delay: 0.35s; }
-        .book-loader .page:nth-child(3) { animation-delay: 0.55s; }
-
-        @keyframes flipBook {
-            0% { transform: rotateY(0deg); }
-            50%, 100% { transform: rotateY(-180deg); }
-        }
-
-        .loading-text {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: #1e293b;
-            letter-spacing: 0.8px;
-        }
-
         /* টপ বার */
         .top-nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 14px 18px;
             background: #ffffff;
@@ -119,247 +33,175 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            gap: 14px;
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 18px;
+        .back-btn {
             color: #0f3e2e;
+            font-size: 16px;
             text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .container {
-            padding: 20px 16px;
-            max-width: 460px;
-            margin: 0 auto;
-        }
-
-        /* প্রোফাইল হিরো সেকশন */
-        .profile-hero {
-            background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
-            border-radius: 20px;
-            padding: 28px 20px;
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(15, 62, 46, 0.15);
-            position: relative;
-        }
-
-        .avatar-circle {
-            width: 76px;
-            height: 76px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
-            font-size: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-weight: 800;
-            backdrop-filter: blur(4px);
-        }
-
-        .hero-email {
-            font-size: 13.5px;
-            color: #a7f3d0;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .hero-subtitle {
-            font-size: 11px;
-            color: #cbd5e1;
-            background: rgba(255, 255, 255, 0.1);
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-
-        /* কার্ড ডিজাইন */
-        .content-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 18px;
-            padding: 20px 18px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
-            margin-bottom: 16px;
-        }
-
-        .card-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .card-title-sm {
-            font-size: 15px;
-            font-weight: 800;
-            color: #0f3e2e;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* এডিট পেনসিল বাটন */
-        .edit-pencil-btn {
-            background: #e6f4ea;
-            color: #047857;
-            border: none;
+            background: #f1f5f9;
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            transition: all 0.2s;
         }
 
-        .edit-pencil-btn:active {
-            transform: scale(0.9);
-            background: #047857;
-            color: #ffffff;
-        }
-
-        .user-field-group {
-            margin-bottom: 14px;
-            text-align: left;
-        }
-
-        .user-field-group label {
-            display: block;
-            font-size: 11.5px;
+        .nav-title {
             font-weight: 700;
-            color: #64748b;
-            margin-bottom: 6px;
+            font-size: 17px;
+            color: #0f3e2e;
         }
 
-        .user-field-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: #1e293b;
-            padding: 11px 14px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            width: 100%;
+        .page-content {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
         }
 
-        .user-field-value.locked {
-            background: #f1f5f9;
-            color: #94a3b8;
-            cursor: not-allowed;
-            font-size: 13px;
-        }
-
-        .user-field-input {
-            width: 100%;
-            padding: 11px 14px;
-            border: 1.5px solid #047857;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            outline: none;
+        /* ইউজার কার্ড */
+        .profile-card {
             background: #ffffff;
-            display: none;
-            transition: border-color 0.2s;
+            border-radius: 18px;
+            padding: 24px 16px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            margin-bottom: 20px;
         }
 
-        .user-field-input:focus {
-            border-color: #059669;
-            box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+        .avatar-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e6f4ea;
+            color: #047857;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 12px;
+            border: 2px solid #a7f3d0;
         }
 
-        .save-profile-btn {
-            display: none;
-            width: 100%;
-            padding: 12px;
-            background: #047857;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
+        .user-name {
+            font-size: 18px;
             font-weight: 700;
-            cursor: pointer;
-            margin-top: 6px;
-            transition: background 0.2s;
+            color: #0f3e2e;
+            margin-bottom: 3px;
         }
 
-        .save-profile-btn:active {
-            background: #065f46;
+        .user-email {
+            font-size: 12.5px;
+            color: #64748b;
+            margin-bottom: 16px;
         }
 
-        .logout-container {
-            margin-top: 18px;
+        /* মিনি স্ট্যাটাস গ্রিড */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
             padding-top: 14px;
             border-top: 1px solid #f1f5f9;
+        }
+
+        .stat-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 12px 8px;
+        }
+
+        .stat-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #047857;
+            margin-bottom: 2px;
+        }
+
+        .stat-lbl {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* অ্যাকশন লিস্ট */
+        .menu-list {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #334155;
+            font-size: 13.5px;
+            font-weight: 600;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background 0.15s;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:active {
+            background: #f8fafc;
+        }
+
+        .menu-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-left i {
+            font-size: 16px;
+            color: #047857;
+            width: 20px;
             text-align: center;
         }
 
+        .menu-right {
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        /* লগআউট বাটন */
         .logout-btn {
-            background: #fef2f2;
-            color: #dc2626;
-            border: 1px solid #fecaca;
             width: 100%;
-            padding: 11px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            font-weight: 700;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #e11d48;
+            padding: 13px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.2s;
+            transition: background 0.2s;
         }
 
         .logout-btn:active {
-            background: #fee2e2;
+            background: #ffe4e6;
         }
 
-        .action-btn {
-            width: 100%;
-            padding: 12px;
-            background: #0f3e2e;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 4px;
-            transition: opacity 0.2s;
-        }
-
-        .action-btn:active {
-            opacity: 0.9;
-        }
-
-        .msg-box {
-            font-size: 12px;
-            margin-top: 12px;
-            padding: 10px;
-            border-radius: 10px;
-            display: none;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .error-msg { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
-        .success-msg { background: #e6f4ea; color: #047857; border: 1px solid #a7f3d0; }
-
-        /* বটম বার */
+        /* বটম বার (লিডারবোর্ড সহ) */
         .bottom-nav {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: 62px;
             background: #ffffff;
             border-top: 1px solid #eef2f5;
@@ -378,6 +220,9 @@
             align-items: center;
             gap: 4px;
             font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         .nav-item.active {
@@ -391,77 +236,66 @@
 </head>
 <body>
 
-    <!-- লোডার ওভারলে -->
-    <div id="pageLoader" class="loader-overlay">
-        <div class="book-loader">
-            <div class="cover-left"></div>
-            <div class="cover-right"></div>
-            <div class="spine"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-        </div>
-        <div class="loading-text">読み込み中...</div>
-    </div>
-
     <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="logo">KOTOBA</a>
-        <div style="font-size: 12.5px; font-weight: 700; color: #047857; background: #e6f4ea; padding: 4px 12px; border-radius: 20px;">প্রোফাইল সেটিংস</div>
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <span class="nav-title">আমার প্রোফাইল</span>
     </header>
 
-    <main class="container">
-        
-        <!-- প্রোফাইল হিরো কার্ড -->
-        <div class="profile-hero">
-            <div class="avatar-circle" id="userAvatar">U</div>
-            <div class="hero-email" id="heroEmailText">লোড হচ্ছে...</div>
-            <span class="hero-subtitle">KOTOBA Learner</span>
-        </div>
+    <main class="page-content">
 
-        <!-- ব্যক্তিগত তথ্য কার্ড -->
-        <div class="content-card">
-            <div class="card-header-flex">
-                <div class="card-title-sm"><i class="fa-solid fa-user-pen" style="color: #047857;"></i> ব্যক্তিগত তথ্য</div>
-                <button class="edit-pencil-btn" id="toggleEditBtn" title="এডিট করুন"><i class="fa-solid fa-pen"></i></button>
+        <!-- ইউজার কার্ড -->
+        <div class="profile-card">
+            <div class="avatar-circle">
+                <i class="fa-regular fa-user"></i>
             </div>
+            <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+            <p class="user-email" id="displayUserEmail">---</p>
 
-            <!-- নাম (এডিটযোগ্য) -->
-            <div class="user-field-group">
-                <label>আপনার নাম</label>
-                <div class="user-field-value" id="displayNameText">লোড হচ্ছে...</div>
-                <input type="text" class="user-field-input" id="displayNameInput" placeholder="আপনার নাম লিখুন">
-            </div>
-
-            <!-- ফোন নম্বর (এডিটযোগ্য) -->
-            <div class="user-field-group">
-                <label>মোবাইল নম্বর</label>
-                <div class="user-field-value" id="displayPhoneText">যোগ করা হয়নি</div>
-                <input type="tel" class="user-field-input" id="displayPhoneInput" placeholder="01XXXXXXXXX">
-            </div>
-
-            <!-- ইমেইল (Locked) -->
-            <div class="user-field-group">
-                <label>ইমেইল ঠিকানা (পরিবর্তন করা যাবে না)</label>
-                <div class="user-field-value locked" id="userEmailDisplay">লোড হচ্ছে...</div>
-            </div>
-
-            <!-- সেভ বাটন -->
-            <button class="save-profile-btn" id="saveProfileBtn">পরিবর্তনসমূহ সংরক্ষণ করুন</button>
-            <div class="msg-box" id="profileMsgBox"></div>
-
-            <div class="logout-container">
-                <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> লগআউট করুন</button>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-val" id="hlWordCount">০</div>
+                    <div class="stat-lbl">সংরক্ষিত শব্দার্থ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">JLPT N5</div>
+                    <div class="stat-lbl">বর্তমান লেভেল</div>
+                </div>
             </div>
         </div>
 
-        <!-- পাসওয়ার্ড রিসেট কার্ড -->
-        <div class="content-card">
-            <h3 class="card-title-sm" style="margin-bottom: 8px;"><i class="fa-solid fa-key" style="color: #047857;"></i> পাসওয়ার্ড রিসেট</h3>
-            <p style="font-size: 11.5px; color: #64748b; margin-bottom: 14px; line-height: 1.5;">আপনার বর্তমান ইমেইলে পাসওয়ার্ড পরিবর্তনের নিরাপদ লিংক পাঠাতে নিচের বাটনে ক্লিক করুন।</p>
-            <button class="action-btn" id="resetPassBtn">পাসওয়ার্ড পরিবর্তনের লিংক পাঠান</button>
-            <div class="msg-box" id="passMsgBox"></div>
+        <!-- অ্যাকশন মেনু -->
+        <div class="menu-list">
+            <a href="leaderboard.html" class="menu-item">
+                <div class="menu-left">
+                    <i class="fa-solid fa-trophy" style="color: #d97706;"></i>
+                    <span>র‍্যাঙ্কিং ও লিডারবোর্ড</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-right"></i>
+            </a>
+            <a href="n5-vocab.html" class="menu-item">
+                <div class="menu-left">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span>বুকমার্ক করা ভোকাবুলারি</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-right"></i>
+            </a>
+            <a href="ai-sensei.html" class="menu-item">
+                <div class="menu-left">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>AI সেনসেই চ্যাটবক্স</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-right"></i>
+            </a>
         </div>
+
+        <!-- লগআউট বাটন -->
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> লগআউট করুন
+        </button>
+
     </main>
 
     <!-- বটম বার -->
@@ -470,7 +304,11 @@
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
-        <a href="index.html" class="nav-item">
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="ai-sensei.html" class="nav-item">
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
         </a>
@@ -480,18 +318,11 @@
         </a>
     </nav>
 
-    <!-- স্ক্রিপ্ট ও ফায়ারবেস লজিক -->
-    <script>
-        window.addEventListener("load", () => {
-            const loader = document.getElementById("pageLoader");
-            if (loader) loader.classList.add("hidden");
-        });
-    </script>
-
+    <!-- Firebase Auth ও ডেটা লোড -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -507,134 +338,42 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const userEmailDisplay = document.getElementById("userEmailDisplay");
-        const heroEmailText = document.getElementById("heroEmailText");
-        const userAvatar = document.getElementById("userAvatar");
+        const nameEl = document.getElementById("displayUserName");
+        const emailEl = document.getElementById("displayUserEmail");
+        const hlCountEl = document.getElementById("hlWordCount");
         const logoutBtn = document.getElementById("logoutBtn");
-        
-        const toggleEditBtn = document.getElementById("toggleEditBtn");
-        const displayNameText = document.getElementById("displayNameText");
-        const displayNameInput = document.getElementById("displayNameInput");
-        const displayPhoneText = document.getElementById("displayPhoneText");
-        const displayPhoneInput = document.getElementById("displayPhoneInput");
-        const saveProfileBtn = document.getElementById("saveProfileBtn");
-        const profileMsgBox = document.getElementById("profileMsgBox");
-
-        const resetPassBtn = document.getElementById("resetPassBtn");
-        const passMsgBox = document.getElementById("passMsgBox");
-
-        let activeUser = null;
-        let isEditing = false;
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                activeUser = user;
-                userEmailDisplay.innerText = user.email;
-                heroEmailText.innerText = user.email;
-                userAvatar.innerText = user.email.charAt(0).toUpperCase();
+                emailEl.innerText = user.email;
+                nameEl.innerText = user.displayName || user.email.split("@")[0];
 
+                // সংরক্ষিত হাইলাইটের সংখ্যা লোড
                 try {
-                    const docRef = doc(db, "user_profiles", user.email);
+                    const docRef = doc(db, "user_highlights", user.email);
                     const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        displayNameText.innerText = data.name || "নাম সেট করা হয়নি";
-                        displayNameInput.value = data.name || "";
-                        displayPhoneText.innerText = data.phone || "যোগ করা হয়নি";
-                        displayPhoneInput.value = data.phone || "";
+                    if (docSnap.exists() && docSnap.data().words) {
+                        hlCountEl.innerText = docSnap.data().words.length;
                     } else {
-                        displayNameText.innerText = user.displayName || "ব্যবহারকারী";
-                        displayNameInput.value = user.displayName || "";
+                        const local = JSON.parse(localStorage.getItem("kotoba_n5_vocab_highlights")) || [];
+                        hlCountEl.innerText = local.length;
                     }
                 } catch (e) {
-                    console.error("Profile load error:", e);
+                    const local = JSON.parse(localStorage.getItem("kotoba_n5_vocab_highlights")) || [];
+                    hlCountEl.innerText = local.length;
                 }
             } else {
                 window.location.href = "login.html";
             }
         });
 
-        toggleEditBtn.addEventListener("click", () => {
-            isEditing = !isEditing;
-            if (isEditing) {
-                toggleEditBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-                toggleEditBtn.style.background = "#fee2e2";
-                toggleEditBtn.style.color = "#dc2626";
-
-                displayNameText.style.display = "none";
-                displayNameInput.style.display = "block";
-
-                displayPhoneText.style.display = "none";
-                displayPhoneInput.style.display = "block";
-
-                saveProfileBtn.style.display = "block";
-            } else {
-                exitEditMode();
-            }
-        });
-
-        function exitEditMode() {
-            isEditing = false;
-            toggleEditBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
-            toggleEditBtn.style.background = "#e6f4ea";
-            toggleEditBtn.style.color = "#047857";
-
-            displayNameText.style.display = "block";
-            displayNameInput.style.display = "none";
-
-            displayPhoneText.style.display = "block";
-            displayPhoneInput.style.display = "none";
-
-            saveProfileBtn.style.display = "none";
-        }
-
-        saveProfileBtn.addEventListener("click", async () => {
-            if (!activeUser) return;
-            profileMsgBox.style.display = "none";
-
-            const newName = displayNameInput.value.trim();
-            const newPhone = displayPhoneInput.value.trim();
-
-            try {
-                const docRef = doc(db, "user_profiles", activeUser.email);
-                await setDoc(docRef, {
-                    email: activeUser.email,
-                    name: newName,
-                    phone: newPhone,
-                    updatedAt: new Date().toISOString()
-                }, { merge: true });
-
-                displayNameText.innerText = newName || "নাম সেট করা হয়নি";
-                displayPhoneText.innerText = newPhone || "যোগ করা হয়নি";
-
-                showMsg(profileMsgBox, "প্রোফাইল সফলভাবে আপডেট করা হয়েছে!", "success");
-                setTimeout(exitEditMode, 1200);
-            } catch (err) {
-                showMsg(profileMsgBox, "সংরক্ষণ করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।", "error");
-            }
-        });
-
+        // লগআউট হ্যান্ডলার
         logoutBtn.addEventListener("click", async () => {
-            await signOut(auth);
-            window.location.href = "login.html";
-        });
-
-        resetPassBtn.addEventListener("click", async () => {
-            if (!activeUser) return;
-            passMsgBox.style.display = "none";
-            try {
-                await sendPasswordResetEmail(auth, activeUser.email);
-                showMsg(passMsgBox, "পাসওয়ার্ড পরিবর্তনের লিংক আপনার ইমেইলে পাঠানো হয়েছে।", "success");
-            } catch (err) {
-                showMsg(passMsgBox, "সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।", "error");
+            if (confirm("আপনি কি প্রোফাইল থেকে বের হতে চান?")) {
+                await signOut(auth);
+                window.location.href = "login.html";
             }
         });
-
-        function showMsg(box, text, type) {
-            box.innerText = text;
-            box.style.display = "block";
-            box.className = `msg-box ${type === 'error' ? 'error-msg' : 'success-msg'}`;
-        }
     </script>
 </body>
 </html>

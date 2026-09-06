@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জাপানিজ বর্ণমালা - BD Japanese</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 50px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #0f3e2e;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .content {
+            padding: 20px 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0e3b2c;
+            margin-bottom: 15px;
+        }
+
+        /* ট্যাব বাটন */
+        .tab-buttons {
+            display: flex;
+            background: #e2e8f0;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 700;
+            color: #4a5568;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #047857;
+            color: #ffffff;
+        }
+
+        /* ক্যারেক্টার গ্রিড */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .char-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 4px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .char-jp {
+            font-size: 22px;
+            font-weight: bold;
+            color: #0e3b2c;
+            line-height: 1.2;
+        }
+
+        .char-ro {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .char-bn {
+            font-size: 11px;
+            color: #047857;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo">জাপানিজ বর্ণমালা</div>
+    </header>
+
+    <main class="content">
+        <h2 class="page-title">মৌলিক বর্ণমালা চার্ট (৪৬টি)</h2>
+
+        <!-- সুইচ ট্যাব -->
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('hiragana', this)">হিরাগানা (Hiragana)</button>
+            <button class="tab-btn" onclick="switchTab('katakana', this)">কাতাকানা (Katakana)</button>
+        </div>
+
+        <!-- হিরাগানা চার্ট -->
+        <div id="hiragana" class="tab-content active">
+            <div class="char-grid">
+                <div class="char-card"><div class="char-jp">あ</div><div class="char-ro">a</div><div class="char-bn">আ</div></div>
+                <div class="char-card"><div class="char-jp">い</div><div class="char-ro">i</div><div class="char-bn">ই</div></div>
+                <div class="char-card"><div class="char-jp">う</div><div class="char-ro">u</div><div class="char-bn">উ</div></div>
+                <div class="char-card"><div class="char-jp">え</div><div class="char-ro">e</div><div class="char-bn">এ</div></div>
+                <div class="char-card"><div class="char-jp">お</div><div class="char-ro">o</div><div class="char-bn">ও</div></div>
+
+                <div class="char-card"><div class="char-jp">か</div><div class="char-ro">ka</div><div class="char-bn">কা</div></div>
+                <div class="char-card"><div class="char-jp">き</div><div class="char-ro">ki</div><div class="char-bn">কি</div></div>
+                <div class="char-card"><div class="char-jp">く</div><div class="char-ro">ku</div><div class="char-bn">কু</div></div>
+                <div class="char-card"><div class="char-jp">け</div><div class="char-ro">ke</div><div class="char-bn">কে</div></div>
+                <div class="char-card"><div class="char-jp">こ</div><div class="char-ro">ko</div><div class="char-bn">কো</div></div>
+
+                <div class="char-card"><div class="char-jp">さ</div><div class="char-ro">sa</div><div class="char-bn">সা</div></div>
+                <div class="char-card"><div class="char-jp">し</div><div class="char-ro">shi</div><div class="char-bn">শি</div></div>
+                <div class="char-card"><div class="char-jp">す</div><div class="char-ro">su</div><div class="char-bn">সু</div></div>
+                <div class="char-card"><div class="char-jp">せ</div><div class="char-ro">se</div><div class="char-bn">সে</div></div>
+                <div class="char-card"><div class="char-jp">そ</div><div class="char-ro">so</div><div class="char-bn">সো</div></div>
+
+                <div class="char-card"><div class="char-jp">た</div><div class="char-ro">ta</div><div class="char-bn">তা</div></div>
+                <div class="char-card"><div class="char-jp">ち</div><div class="char-ro">chi</div><div class="char-bn">চি</div></div>
+                <div class="char-card"><div class="char-jp">つ</div><div class="char-ro">tsu</div><div class="char-bn">ৎসু</div></div>
+                <div class="char-card"><div class="char-jp">て</div><div class="char-ro">te</div><div class="char-bn">তে</div></div>
+                <div class="char-card"><div class="char-jp">と</div><div class="char-ro">to</div><div class="char-bn">তো</div></div>
+
+                <div class="char-card"><div class="char-jp">な</div><div class="char-ro">na</div><div class="char-bn">না</div></div>
+                <div class="char-card"><div class="char-jp">に</div><div class="char-ro">ni</div><div class="char-bn">নি</div></div>
+                <div class="char-card"><div class="char-jp">ぬ</div><div class="char-ro">nu</div><div class="char-bn">নু</div></div>
+                <div class="char-card"><div class="char-jp">ね</div><div class="char-ro">ne</div><div class="char-bn">নে</div></div>
+                <div class="char-card"><div class="char-jp">の</div><div class="char-ro">no</div><div class="char-bn">নো</div></div>
+
+                <div class="char-card"><div class="char-jp">は</div><div class="char-ro">ha</div><div class="char-bn">হা</div></div>
+                <div class="char-card"><div class="char-jp">ひ</div><div class="char-ro">hi</div><div class="char-bn">হি</div></div>
+                <div class="char-card"><div class="char-jp">ふ</div><div class="char-ro">fu</div><div class="char-bn">ফু</div></div>
+                <div class="char-card"><div class="char-jp">へ</div><div class="char-ro">he</div><div class="char-bn">হে</div></div>
+                <div class="char-card"><div class="char-jp">ほ</div><div class="char-ro">ho</div><div class="char-bn">হো</div></div>
+
+                <div class="char-card"><div class="char-jp">ま</div><div class="char-ro">ma</div><div class="char-bn">মা</div></div>
+                <div class="char-card"><div class="char-jp">み</div><div class="char-ro">mi</div><div class="char-bn">মি</div></div>
+                <div class="char-card"><div class="char-jp">む</div><div class="char-ro">mu</div><div class="char-bn">মু</div></div>
+                <div class="char-card"><div class="char-jp">め</div><div class="char-ro">me</div><div class="char-bn">মে</div></div>
+                <div class="char-card"><div class="char-jp">も</div><div class="char-ro">mo</div><div class="char-bn">মো</div></div>
+
+                <div class="char-card"><div class="char-jp">や</div><div class="char-ro">ya</div><div class="char-bn">ইয়া</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ゆ</div><div class="char-ro">yu</div><div class="char-bn">ইউ</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">よ</div><div class="char-ro">yo</div><div class="char-bn">ইয়ো</div></div>
+
+                <div class="char-card"><div class="char-jp">ら</div><div class="char-ro">ra</div><div class="char-bn">রা</div></div>
+                <div class="char-card"><div class="char-jp">り</div><div class="char-ro">ri</div><div class="char-bn">রি</div></div>
+                <div class="char-card"><div class="char-jp">る</div><div class="char-ro">ru</div><div class="char-bn">রু</div></div>
+                <div class="char-card"><div class="char-jp">れ</div><div class="char-ro">re</div><div class="char-bn">রে</div></div>
+                <div class="char-card"><div class="char-jp">ろ</div><div class="char-ro">ro</div><div class="char-bn">রো</div></div>
+
+                <div class="char-card"><div class="char-jp">わ</div><div class="char-ro">wa</div><div class="char-bn">ওয়া</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ん</div><div class="char-ro">n</div><div class="char-bn">ং/ন</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">を</div><div class="char-ro">wo</div><div class="char-bn">ও</div></div>
+            </div>
+        </div>
+
+        <!-- কাতাকানা চার্ট -->
+        <div id="katakana" class="tab-content">
+            <div class="char-grid">
+                <div class="char-card"><div class="char-jp">ア</div><div class="char-ro">a</div><div class="char-bn">আ</div></div>
+                <div class="char-card"><div class="char-jp">イ</div><div class="char-ro">i</div><div class="char-bn">ই</div></div>
+                <div class="char-card"><div class="char-jp">ウ</div><div class="char-ro">u</div><div class="char-bn">উ</div></div>
+                <div class="char-card"><div class="char-jp">エ</div><div class="char-ro">e</div><div class="char-bn">এ</div></div>
+                <div class="char-card"><div class="char-jp">オ</div><div class="char-ro">o</div><div class="char-bn">ও</div></div>
+
+                <div class="char-card"><div class="char-jp">カ</div><div class="char-ro">ka</div><div class="char-bn">কা</div></div>
+                <div class="char-card"><div class="char-jp">キ</div><div class="char-ro">ki</div><div class="char-bn">কি</div></div>
+                <div class="char-card"><div class="char-jp">ク</div><div class="char-ro">ku</div><div class="char-bn">কু</div></div>
+                <div class="char-card"><div class="char-jp">ケ</div><div class="char-ro">ke</div><div class="char-bn">কে</div></div>
+                <div class="char-card"><div class="char-jp">コ</div><div class="char-ro">ko</div><div class="char-bn">কো</div></div>
+
+                <div class="char-card"><div class="char-jp">サ</div><div class="char-ro">sa</div><div class="char-bn">সা</div></div>
+                <div class="char-card"><div class="char-jp">シ</div><div class="char-ro">shi</div><div class="char-bn">শি</div></div>
+                <div class="char-card"><div class="char-jp">ス</div><div class="char-ro">su</div><div class="char-bn">সু</div></div>
+                <div class="char-card"><div class="char-jp">セ</div><div class="char-ro">se</div><div class="char-bn">সে</div></div>
+                <div class="char-card"><div class="char-jp">ソ</div><div class="char-ro">so</div><div class="char-bn">সো</div></div>
+
+                <div class="char-card"><div class="char-jp">タ</div><div class="char-ro">ta</div><div class="char-bn">তা</div></div>
+                <div class="char-card"><div class="char-jp">チ</div><div class="char-ro">chi</div><div class="char-bn">চি</div></div>
+                <div class="char-card"><div class="char-jp">ツ</div><div class="char-ro">tsu</div><div class="char-bn">ৎসু</div></div>
+                <div class="char-card"><div class="char-jp">テ</div><div class="char-ro">te</div><div class="char-bn">তে</div></div>
+                <div class="char-card"><div class="char-jp">ト</div><div class="char-ro">to</div><div class="char-bn">তো</div></div>
+
+                <div class="char-card"><div class="char-jp">ナ</div><div class="char-ro">na</div><div class="char-bn">না</div></div>
+                <div class="char-card"><div class="char-jp">ニ</div><div class="char-ro">ni</div><div class="char-bn">নি</div></div>
+                <div class="char-card"><div class="char-jp">ヌ</div><div class="char-ro">nu</div><div class="char-bn">নু</div></div>
+                <div class="char-card"><div class="char-jp">ネ</div><div class="char-ro">ne</div><div class="char-bn">নে</div></div>
+                <div class="char-card"><div class="char-jp">ノ</div><div class="char-ro">no</div><div class="char-bn">নো</div></div>
+
+                <div class="char-card"><div class="char-jp">ハ</div><div class="char-ro">ha</div><div class="char-bn">হা</div></div>
+                <div class="char-card"><div class="char-jp">ヒ</div><div class="char-ro">hi</div><div class="char-bn">হি</div></div>
+                <div class="char-card"><div class="char-jp">フ</div><div class="char-ro">fu</div><div class="char-bn">ফু</div></div>
+                <div class="char-card"><div class="char-jp">ヘ</div><div class="char-ro">he</div><div class="char-bn">হে</div></div>
+                <div class="char-card"><div class="char-jp">ホ</div><div class="char-ro">ho</div><div class="char-bn">হো</div></div>
+
+                <div class="char-card"><div class="char-jp">マ</div><div class="char-ro">ma</div><div class="char-bn">মা</div></div>
+                <div class="char-card"><div class="char-jp">ミ</div><div class="char-ro">mi</div><div class="char-bn">মি</div></div>
+                <div class="char-card"><div class="char-jp">ム</div><div class="char-ro">mu</div><div class="char-bn">মু</div></div>
+                <div class="char-card"><div class="char-jp">メ</div><div class="char-ro">me</div><div class="char-bn">মে</div></div>
+                <div class="char-card"><div class="char-jp">モ</div><div class="char-ro">mo</div><div class="char-bn">মো</div></div>
+
+                <div class="char-card"><div class="char-jp">ヤ</div><div class="char-ro">ya</div><div class="char-bn">ইয়া</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ユ</div><div class="char-ro">yu</div><div class="char-bn">ইউ</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ヨ</div><div class="char-ro">yo</div><div class="char-bn">ইয়ো</div></div>
+
+                <div class="char-card"><div class="char-jp">ラ</div><div class="char-ro">ra</div><div class="char-bn">রা</div></div>
+                <div class="char-card"><div class="char-jp">リ</div><div class="char-ro">ri</div><div class="char-bn">রি</div></div>
+                <div class="char-card"><div class="char-jp">ル</div><div class="char-ro">ru</div><div class="char-bn">রু</div></div>
+                <div class="char-card"><div class="char-jp">レ</div><div class="char-ro">re</div><div class="char-bn">রে</div></div>
+                <div class="char-card"><div class="char-jp">ロ</div><div class="char-ro">ro</div><div class="char-bn">রো</div></div>
+
+                <div class="char-card"><div class="char-jp">ワ</div><div class="char-ro">wa</div><div class="char-bn">ওয়া</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ン</div><div class="char-ro">n</div><div class="char-bn">ং/ন</div></div>
+                <div class="char-card" style="opacity:0.3;">-</div>
+                <div class="char-card"><div class="char-jp">ヲ</div><div class="char-ro">wo</div><div class="char-bn">ও</div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>

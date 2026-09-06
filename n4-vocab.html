@@ -138,12 +138,15 @@
         }
 
         .nav-right {
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 11.5px;
+            font-weight: 700;
             color: #047857;
+            background: #e6f4ea;
+            padding: 4px 10px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
 
         .main-container {
@@ -344,7 +347,7 @@
 
         .fc-jp-text {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 36px;
+            font-size: 34px;
             font-weight: 800;
             color: #144336;
             line-height: 1.2;
@@ -615,7 +618,7 @@
 </head>
 <body>
 
-    <!-- লোডার -->
+    <!-- লোডার ওভারলে -->
     <div id="pageLoader" class="loader-overlay">
         <div class="book-loader">
             <div class="cover-left"></div>
@@ -634,8 +637,8 @@
             <i class="fa-solid fa-bars" id="menuIcon"></i>
             <span class="nav-title">KOTOBA</span>
         </div>
-        <div class="nav-right" id="cloudSyncStatus">
-            <i class="fa-solid fa-cloud"></i> <span id="syncText">সিঙ্ক হচ্ছে...</span>
+        <div class="nav-right" id="userEmailDisplay">
+            <i class="fa-solid fa-cloud"></i> <span id="syncText">লোড হচ্ছে...</span>
         </div>
     </header>
 
@@ -751,7 +754,6 @@
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Firebase কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
             authDomain: "kotoba-b20b3.firebaseapp.com",
@@ -766,10 +768,9 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let currentUser = null;
+        let currentUserEmail = null;
         let highlightedWords = [];
 
-        // ডাটাসেট
         const lessons = {
             26: {
                 title: "অনুসন্ধান ও অবস্থা",
@@ -825,7 +826,7 @@
                     { kana: "つごうがいい", ro: "tsugou ga ii", bn: "সুবিধাজনক সময়" },
                     { kana: "つごうがわるい", ro: "tsugou ga warui", bn: "অসুবিধাজনক সময়" },
                     { kana: "しんぶんしゃ", ro: "shinbunsha", bn: "পত্রিকা কোম্পানি" },
-                    { kana: "じゅうどう", ro: "juudou", bn: "জুডো" },
+                    { kana: "じゅうどう", ro: "juudou", bn: "জুদো" },
                     { kana: "こどものひ", ro: "kodomo no hi", bn: "শিশু দিবস" },
                     { kana: "げつすいきん", ro: "getsu sui kin", bn: "সোম বুধ শুক্র" },
                     { kana: "おゆ", ro: "oyu", bn: "গরম পানি" },
@@ -1106,22 +1107,20 @@
             }, 300);
         });
 
-        // ================= FIRESTORE ক্লাউড সিঙ্ক লজিক =================
+        // ================= FIRESTORE সিঙ্ক লজিক =================
         onAuthStateChanged(auth, async (user) => {
-            currentUser = user;
             const syncText = document.getElementById("syncText");
 
-            if (user) {
-                syncText.innerText = "ক্লাউড সংযুক্ত";
+            if (user && user.email) {
+                syncText.innerText = user.email;
                 try {
-                    const docRef = doc(db, "user_highlights", user.uid);
+                    const docRef = doc(db, "user_highlights", user.email);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists() && docSnap.data().words) {
                         highlightedWords = docSnap.data().words;
                     } else {
-                        // লোকালস্টোরেজে আগের ডাটা থাকলে মাইগ্রেট করা
                         highlightedWords = JSON.parse(localStorage.getItem("kotoba_vocab_highlights")) || [];
-                        await setDoc(docRef, { words: highlightedWords });
+                        await setDoc(docRef, { email: user.email, words: highlightedWords });
                     }
                 } catch (e) {
                     highlightedWords = JSON.parse(localStorage.getItem("kotoba_vocab_highlights")) || [];
@@ -1134,14 +1133,19 @@
             renderTable();
         });
 
+        let currentUserEmail = null;
+        onAuthStateChanged(auth, (user) => {
+            currentUserEmail = user ? user.email : null;
+        });
+
         async function saveUserHighlights() {
             localStorage.setItem("kotoba_vocab_highlights", JSON.stringify(highlightedWords));
-            if (currentUser) {
+            if (currentUserEmail) {
                 try {
-                    const docRef = doc(db, "user_highlights", currentUser.uid);
-                    await setDoc(docRef, { words: highlightedWords }, { merge: true });
+                    const docRef = doc(db, "user_highlights", currentUserEmail);
+                    await setDoc(docRef, { email: currentUserEmail, words: highlightedWords }, { merge: true });
                 } catch (e) {
-                    console.error("Firestore save error:", e);
+                    console.error("Cloud save error:", e);
                 }
             }
         }
@@ -1196,13 +1200,13 @@
             }
         }
 
-        // ================= UI ও নেভিগেশন =================
+        // ================= UI লজিক =================
         function renderLessonGrid() {
             const container = document.getElementById("gridContainer");
             container.innerHTML = "";
 
             for (let i = 26; i <= 50; i++) {
-                const lesson = lessons[i] || { title: "পরবর্তী পাঠ", kanji: `第${i}課` };
+                const lesson = lessons[i] || { title: "শিঘ্রই আসছে", kanji: `第${i}課` };
 
                 const card = document.createElement("div");
                 card.className = "lesson-card";
@@ -1221,9 +1225,12 @@
         }
 
         function openLesson(num) {
+            if (!lessons[num]) {
+                alert("এই লেসনের ডেটা খুব শীঘ্রই যুক্ত করা হবে!");
+                return;
+            }
             currentLesson = num;
-            const targetLesson = lessons[num] || lessons[26];
-            currentWords = [...targetLesson.words];
+            currentWords = [...lessons[num].words];
             currentIndex = 0;
             isTableOpen = false;
 
@@ -1364,7 +1371,7 @@
             return n.toString().split('').map(d => bnDigits[d] || d).join('');
         }
 
-        // ইভেন্ট লিসেনার বাইন্ডিং
+        // ইভেন্ট বাইন্ডিং
         document.getElementById("btnBackToGrid").addEventListener("click", backToGrid);
         document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
         document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);

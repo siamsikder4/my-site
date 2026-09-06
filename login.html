@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন - BD Japanese</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 75px;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #0f3e2e;
+            font-size: 16px;
+            margin-right: 14px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .container {
+            padding: 24px 16px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .auth-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 6px;
+        }
+
+        .auth-sub {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        /* গুগল লগইন বাটন */
+        .google-btn {
+            width: 100%;
+            padding: 11px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .google-btn:active {
+            background: #f1f5f9;
+        }
+
+        .google-icon {
+            color: #ea4335;
+            font-size: 16px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 18px 0;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 10px;
+        }
+
+        /* ইনপুট ফিল্ড */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #047857;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 11px;
+            background: #0f3e2e;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .submit-btn:active {
+            background: #14532d;
+        }
+
+        .toggle-text {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 16px;
+        }
+
+        .toggle-link {
+            color: #c51636;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .error-msg {
+            color: #dc2626;
+            font-size: 11.5px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* প্রোফাইল স্টেট (লগইন থাকা অবস্থায়) */
+        .profile-card {
+            display: none;
+            text-align: center;
+        }
+
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            border: 2px solid #047857;
+            display: block;
+        }
+
+        .user-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f3e2e;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .logout-btn {
+            background: #c51636;
+            color: #ffffff;
+            border: none;
+            padding: 9px 24px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo">BD JAPANESE</div>
+    </header>
+
+    <main class="container">
+        
+        <!-- লগইন/রেজিস্ট্রেশন বক্স -->
+        <div class="auth-card" id="authBox">
+            <h2 class="auth-title" id="formTitle">লগইন করুন</h2>
+            <p class="auth-sub" id="formSubtitle">আপনার অ্যাকাউন্টে প্রবেশ করে প্রস্তুতি শুরু করুন</p>
+
+            <button class="google-btn" id="googleLoginBtn">
+                <i class="fa-brands fa-google google-icon"></i>
+                <span>Google দিয়ে সাইন ইন</span>
+            </button>
+
+            <div class="divider"><span>অথবা ইমেইল দিয়ে</span></div>
+
+            <div class="form-group">
+                <label>ইমেইল ঠিকানা</label>
+                <input type="email" id="emailInput" placeholder="name@example.com">
+            </div>
+
+            <div class="form-group">
+                <label>পাসওয়ার্ড</label>
+                <input type="password" id="passInput" placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড">
+            </div>
+
+            <button class="submit-btn" id="submitBtn">লগইন</button>
+            <div class="error-msg" id="errorMsg"></div>
+
+            <div class="toggle-text">
+                <span id="toggleQuestion">অ্যাকাউন্ট নেই?</span>
+                <span class="toggle-link" id="toggleMode">নতুন অ্যাকাউন্ট তৈরি করুন</span>
+            </div>
+        </div>
+
+        <!-- লগইন সফল হলে প্রোফাইল বক্স -->
+        <div class="auth-card profile-card" id="profileBox">
+            <img src="" id="userPhoto" class="user-avatar" alt="Profile">
+            <h3 class="user-name" id="userName">User</h3>
+            <p class="user-email" id="userEmail">user@example.com</p>
+            <button class="logout-btn" id="logoutBtn">সাইন আউট</button>
+        </div>
+
+    </main>
+
+    <!-- বটম নেভিগেশন -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="login.html" class="nav-item active">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>লগইন</span>
+        </a>
+    </nav>
+
+    <!-- Firebase মডিউলার স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            GoogleAuthProvider, 
+            signInWithPopup, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // আপনার Firebase Console থেকে পাওয়া কনফিগ এখানে বসান
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        let isSignUp = false;
+
+        const authBox = document.getElementById("authBox");
+        const profileBox = document.getElementById("profileBox");
+        const formTitle = document.getElementById("formTitle");
+        const formSubtitle = document.getElementById("formSubtitle");
+        const submitBtn = document.getElementById("submitBtn");
+        const toggleMode = document.getElementById("toggleMode");
+        const toggleQuestion = document.getElementById("toggleQuestion");
+        const errorMsg = document.getElementById("errorMsg");
+
+        const emailInput = document.getElementById("emailInput");
+        const passInput = document.getElementById("passInput");
+
+        // Auth স্টেট মনিটরিং
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                authBox.style.display = "none";
+                profileBox.style.display = "block";
+                document.getElementById("userName").innerText = user.displayName || "শিক্ষার্থী";
+                document.getElementById("userEmail").innerText = user.email;
+                document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+            } else {
+                authBox.style.display = "block";
+                profileBox.style.display = "none";
+            }
+        });
+
+        // লগইন / রেজিস্ট্রেশন মোড টগল
+        toggleMode.addEventListener("click", () => {
+            isSignUp = !isSignUp;
+            errorMsg.style.display = "none";
+            if (isSignUp) {
+                formTitle.innerText = "নতুন অ্যাকাউন্ট";
+                formSubtitle.innerText = "একটি অ্যাকাউন্ট খুলে পড়াশোনা শুরু করুন";
+                submitBtn.innerText = "রেজিস্ট্রেশন করুন";
+                toggleQuestion.innerText = "আগে থেকেই অ্যাকাউন্ট আছে?";
+                toggleMode.innerText = "লগইন করুন";
+            } else {
+                formTitle.innerText = "লগইন করুন";
+                formSubtitle.innerText = "আপনার অ্যাকাউন্টে প্রবেশ করে প্রস্তুতি শুরু করুন";
+                submitBtn.innerText = "লগইন";
+                toggleQuestion.innerText = "অ্যাকাউন্ট নেই?";
+                toggleMode.innerText = "নতুন অ্যাকাউন্ট তৈরি করুন";
+            }
+        });
+
+        // ইমেইল/পাসওয়ার্ড অ্যাকশন
+        submitBtn.addEventListener("click", async () => {
+            const email = emailInput.value.trim();
+            const pass = passInput.value.trim();
+            errorMsg.style.display = "none";
+
+            if (!email || !pass) {
+                showError("অনুগ্রহ করে ইমেইল ও পাসওয়ার্ড প্রদান করুন।");
+                return;
+            }
+
+            try {
+                if (isSignUp) {
+                    await createUserWithEmailAndPassword(auth, email, pass);
+                } else {
+                    await signInWithEmailAndPassword(auth, email, pass);
+                }
+            } catch (err) {
+                showError(err.message);
+            }
+        });
+
+        // গুগল সাইন ইন
+        document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+            try {
+                await signInWithPopup(auth, googleProvider);
+            } catch (err) {
+                showError(err.message);
+            }
+        });
+
+        // সাইন আউট
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            signOut(auth);
+        });
+
+        function showError(msg) {
+            errorMsg.innerText = msg;
+            errorMsg.style.display = "block";
+        }
+    </script>
+</body>
+</html>

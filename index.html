@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BD JAPANESE - জাপানিজ ভাষা শিখুন</title>
-    <!-- আইকনের জন্য FontAwesome -->
+    <!-- আইকন ও ফন্ট -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 50px;
+            padding-bottom: 75px;
         }
 
         /* টপ বার */
@@ -49,7 +51,7 @@
         }
 
         .page-content {
-            padding: 20px 16px;
+            padding: 16px;
             max-width: 480px;
             margin: 0 auto;
         }
@@ -57,7 +59,7 @@
         /* হিরো টেক্সট */
         .hero-text {
             text-align: center;
-            margin: 15px 0 25px;
+            margin: 10px 0 22px;
         }
 
         .hero-text h2 {
@@ -78,9 +80,9 @@
             background: #0f3e2e;
             color: #ffffff;
             border-radius: 18px;
-            padding: 26px 16px;
+            padding: 24px 16px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
             box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
         }
 
@@ -93,7 +95,7 @@
         .tutor-banner p {
             font-size: 12px;
             color: #cbd5e1;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .banner-btn {
@@ -101,7 +103,7 @@
             background: #c51636;
             color: #ffffff;
             border: none;
-            padding: 10px 24px;
+            padding: 9px 24px;
             border-radius: 25px;
             font-size: 14px;
             font-weight: 600;
@@ -110,7 +112,7 @@
 
         /* লেভেল সেকশন */
         .level-section {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .badge {
@@ -131,7 +133,7 @@
             font-size: 17px;
             font-weight: 700;
             color: #0e3b2c;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         /* গ্রিড ও কার্ড */
@@ -151,6 +153,11 @@
             position: relative;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
             display: block;
+            transition: transform 0.15s ease;
+        }
+
+        .item-card:active {
+            transform: scale(0.98);
         }
 
         .red-top { border-top: 3px solid #b91c1c; }
@@ -196,7 +203,7 @@
             border-radius: 6px;
         }
 
-        /* চ্যাটবক্স পপ-আপ */
+        /* চ্যাটবক্স মডাল */
         .chat-overlay {
             display: none;
             position: fixed;
@@ -237,7 +244,7 @@
             background: none;
             border: none;
             color: #ffffff;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
         }
 
@@ -252,7 +259,7 @@
         }
 
         .msg {
-            max-width: 82%;
+            max-width: 84%;
             padding: 10px 14px;
             border-radius: 14px;
             font-size: 13px;
@@ -303,6 +310,43 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 17px;
         }
     </style>
 </head>
@@ -430,7 +474,7 @@
                     <h4>শব্দকোষ</h4>
                     <p>N4 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
-                <a href="#" class="item-card green-top">
+                <a href="n4-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
                     <p>সহজ ভাষায় N4 গ্রামার</p>
@@ -467,22 +511,43 @@
         </div>
     </div>
 
+    <!-- বটম বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <button class="nav-item" id="bottomSenseiBtn">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </button>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>লগইন</span>
+        </a>
+    </nav>
+
     <!-- স্ক্রিপ্ট -->
     <script>
-        // এখানে Google AI Studio থেকে নেওয়া সঠিক কী (AIzaSy...) বসাবেন
         const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
 
         const openBtn = document.getElementById("openChatBtn");
+        const bottomSenseiBtn = document.getElementById("bottomSenseiBtn");
         const closeBtn = document.getElementById("closeChatBtn");
         const overlay = document.getElementById("chatOverlay");
         const chatMessages = document.getElementById("chatMessages");
         const userInput = document.getElementById("userInput");
         const sendBtn = document.getElementById("sendBtn");
 
-        openBtn.addEventListener("click", () => overlay.style.display = "flex");
+        function openModal() {
+            overlay.style.display = "flex";
+        }
+
+        openBtn.addEventListener("click", openModal);
+        bottomSenseiBtn.addEventListener("click", openModal);
         closeBtn.addEventListener("click", () => overlay.style.display = "none");
 
-        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
+        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।';";
 
         async function sendMessage() {
             const text = userInput.value.trim();
@@ -494,7 +559,7 @@
             const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
 
             if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-                loadingMsg.innerText = "API Key যোগ করা হয়নি। অনুগ্রহ করে আপনার আসল Gemini API Key বসান।";
+                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার API Key বসান।";
                 return;
             }
 

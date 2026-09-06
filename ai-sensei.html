@@ -308,11 +308,11 @@
     <!-- মূল চ্যাট লেআউট -->
     <div class="chat-container">
         <div class="chat-messages" id="chatMessages">
-            <div class="msg bot-msg">কোননিচিওয়া (こんにちは)! আমি আপনার জাপানি ভাষা শিক্ষক 'সেনসেই'। জাপানি ভাষা, ব্যাকরণ, কাঞ্জি বা ভোকাবুলারি নিয়ে যেকোনো প্রশ্ন আমাকে করতে পারেন!</div>
+            <div class="msg bot-msg">আসসালামু আলাইকুম / কোননিচিওয়া (こんにちは)! আমি আপনার জাপানি ভাষা শিক্ষক 'সেনসেই'। KOTOBA ওয়েবসাইটে আপনাকে স্বাগতম! জাপানি ভাষা, ব্যাকরণ, কাঞ্জি বা আমাদের ওয়েবসাইটে নতুন কি কি ফিচার যোগ হয়েছে সে সম্পর্কে যেকোনো প্রশ্ন আমাকে করতে পারেন।</div>
         </div>
 
         <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="জাপানি ভাষা বা ব্যাকরণ নিয়ে কিছু জিজ্ঞাসা করুন...">
+            <input type="text" id="userInput" placeholder="জাপানি ভাষা বা ওয়েবসাইট নিয়ে কিছু জিজ্ঞাসা করুন...">
             <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
@@ -341,12 +341,15 @@
         });
 
         const GROQ_API_KEY = "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";
-        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
+        
+        // সিস্টেম প্রম্পট যেখানে ভাষা ও ওয়েবসাইটের আপডেট উভয় বিষয়ের তথ্য রাখা হয়েছে
+        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher and assistant for the 'KOTOBA' website built for Bengali students. You answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4) AND questions about the KOTOBA website updates (such as N5/N4 vocabulary lists, interactive 3D flashcards, bookmarking with Firebase/LocalStorage sync, profile management, and AI Sensei chat). Always reply politely in Bengali. For Japanese words, include pronunciation/kana in brackets. If a user asks what is new on the website, mention features like interactive 3D flashcards, synchronized vocabulary bookmarks, and enhanced N5/N4 grammar guides.";
 
         const chatMessages = document.getElementById("chatMessages");
         const userInput = document.getElementById("userInput");
         const sendBtn = document.getElementById("sendBtn");
 
+        // চ্যাট হিস্ট্রি ট্র্যাকিং অ্যারে
         let messageHistory = [
             { role: "system", content: SYSTEM_INSTRUCTION }
         ];
@@ -357,6 +360,8 @@
 
             appendMessage(text, "user-msg");
             userInput.value = "";
+            
+            // ইউজারের মেসেজ হিস্টরিতে যোগ করা
             messageHistory.push({ role: "user", content: text });
 
             const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
@@ -370,7 +375,7 @@
                     },
                     body: JSON.stringify({
                         model: "openai/gpt-oss-120b",
-                        messages: messageHistory,
+                        messages: messageHistory, // সম্পূর্ণ হিস্ট্রি পাঠানো হচ্ছে যাতে আগের কথা মনে রাখতে পারে
                         temperature: 0.7
                     })
                 });
@@ -380,6 +385,8 @@
                 if (data.choices && data.choices[0].message.content) {
                     const botReply = data.choices[0].message.content;
                     loadingMsg.innerText = botReply;
+                    
+                    // বটের উত্তরও হিস্টরিতে সেভ করা হচ্ছে
                     messageHistory.push({ role: "assistant", content: botReply });
                 } else if (data.error) {
                     loadingMsg.innerText = "এরর: " + (data.error.message || "সমস্যা হয়েছে।");

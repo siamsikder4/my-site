@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI সেনসেই - KOTOBA</title>
-    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     
@@ -13,9 +12,7 @@
             --primary: #047857;
             --primary-dark: #064e3b;
             --primary-light: #ecfdf5;
-            --accent: #e11d48;
             --bg-body: #f8fafc;
-            --card-bg: #ffffff;
             --text-dark: #0f172a;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
@@ -39,11 +36,11 @@
             overflow: hidden;
         }
 
-        /* হেডার */
+        /* হেডার বার */
         .header {
             background: #ffffff;
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 14px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -53,10 +50,10 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .btn-icon {
+        .btn-back {
             background: #f1f5f9;
             border: none;
             width: 36px;
@@ -67,32 +64,26 @@
             align-items: center;
             justify-content: center;
             font-size: 15px;
-            cursor: pointer;
             text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .btn-icon:active {
-            background: #e2e8f0;
         }
 
         .tutor-profile {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .avatar-wrap {
             position: relative;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: var(--primary-light);
             color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+            font-size: 18px;
             border: 2px solid #a7f3d0;
         }
 
@@ -100,158 +91,48 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 9px;
-            height: 9px;
+            width: 10px;
+            height: 10px;
             background: #10b981;
             border: 2px solid #ffffff;
             border-radius: 50%;
         }
 
         .info-wrap h1 {
-            font-size: 14.5px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--primary-dark);
             line-height: 1.2;
         }
 
         .info-wrap p {
-            font-size: 10.5px;
+            font-size: 11px;
             color: var(--text-muted);
             font-weight: 500;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .new-chat-btn {
-            background: var(--primary-light);
-            border: 1px solid #a7f3d0;
-            color: var(--primary-dark);
-            font-size: 12px;
-            font-weight: 700;
-            padding: 6px 11px;
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .new-chat-btn:active {
-            background: #d1fae5;
-        }
-
-        /* সাইড ড্রয়ার (চ্যাট হিস্ট্রি) */
-        .drawer-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(2px);
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.25s ease;
-        }
-
-        .drawer-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .history-drawer {
-            position: fixed;
-            top: 0; left: 0; bottom: 0;
-            width: 285px;
-            background: #ffffff;
-            z-index: 2001;
-            transform: translateX(-100%);
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .drawer-overlay.active .history-drawer {
-            transform: translateX(0);
-        }
-
-        .drawer-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .drawer-header h3 {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--primary-dark);
-        }
-
-        .drawer-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .session-card {
-            padding: 10px 12px;
-            border-radius: 10px;
-            background: #f8fafc;
+        .btn-clear {
+            background: transparent;
             border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .session-card.active {
-            background: var(--primary-light);
-            border-color: #6ee7b7;
-        }
-
-        .session-card-left {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 12.5px;
-            font-weight: 600;
-            color: #334155;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-del-session {
-            background: none;
-            border: none;
-            color: #94a3b8;
             font-size: 13px;
-            padding: 4px 6px;
-            cursor: pointer;
         }
 
-        .btn-del-session:hover {
-            color: #ef4444;
-        }
-
-        /* চ্যাট স্ক্রিন */
+        /* চ্যাট কনটেইনার */
         .chat-container {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            max-width: 680px;
+            max-width: 700px;
             width: 100%;
             margin: 0 auto;
         }
@@ -259,17 +140,17 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 14px 14px 130px 14px;
+            padding: 16px 16px 130px 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             scroll-behavior: smooth;
         }
 
         .msg-row {
             display: flex;
             gap: 8px;
-            max-width: 86%;
+            max-width: 88%;
         }
 
         .msg-row.user {
@@ -282,24 +163,24 @@
         }
 
         .msg-avatar {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: var(--primary-light);
             color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 14px;
             flex-shrink: 0;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .bubble {
-            padding: 9px 13px;
-            border-radius: 14px;
-            font-size: 13px;
-            line-height: 1.5;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
             white-space: pre-wrap;
             word-break: break-word;
         }
@@ -308,41 +189,40 @@
             background: #ffffff;
             color: #1e293b;
             border: 1px solid var(--border-color);
-            border-top-left-radius: 3px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+            border-top-left-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .msg-row.user .bubble {
             background: var(--primary);
             color: #ffffff;
-            border-top-right-radius: 3px;
-            box-shadow: 0 2px 6px rgba(4, 120, 87, 0.15);
+            border-top-right-radius: 4px;
+            box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
         }
 
         .bubble-time {
-            font-size: 9.5px;
+            font-size: 10px;
             display: block;
-            margin-top: 3px;
-            opacity: 0.65;
+            margin-top: 4px;
+            opacity: 0.7;
             text-align: right;
         }
 
-        /* টাইপিং অ্যানিমেশন */
         .typing-dots {
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 10px 14px;
+            padding: 12px 16px;
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            border-top-left-radius: 3px;
+            border-radius: 16px;
+            border-top-left-radius: 4px;
             width: fit-content;
         }
 
         .typing-dots span {
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             background: var(--primary);
             border-radius: 50%;
             animation: bounce 1.4s infinite ease-in-out both;
@@ -352,21 +232,21 @@
         .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
         @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
             40% { transform: scale(1); opacity: 1; }
         }
 
-        /* ইনপুট ও সাজেশন বটম এরিয়া */
+        /* বটম কন্ট্রোল */
         .bottom-control-area {
             position: fixed;
             bottom: 60px;
             left: 0;
             right: 0;
             background: linear-gradient(to top, rgba(248, 250, 252, 1) 75%, rgba(248, 250, 252, 0));
-            padding: 6px 12px 10px 12px;
+            padding: 8px 12px 10px 12px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             z-index: 100;
         }
 
@@ -376,12 +256,12 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .suggestion-bar {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             overflow-x: auto;
             scrollbar-width: none;
         }
@@ -393,33 +273,28 @@
         .chip {
             background: #ffffff;
             border: 1px solid #cbd5e1;
-            padding: 5px 11px;
-            border-radius: 18px;
-            font-size: 11.5px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--primary-dark);
             white-space: nowrap;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
             display: flex;
             align-items: center;
-            gap: 4px;
-        }
-
-        .chip:active {
-            background: var(--primary-light);
-            border-color: var(--primary);
+            gap: 5px;
         }
 
         .input-bar {
             background: #ffffff;
             border: 1.5px solid #cbd5e1;
             border-radius: 28px;
-            padding: 4px 6px 4px 14px;
+            padding: 5px 6px 5px 16px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .input-bar:focus-within {
@@ -430,7 +305,7 @@
             flex: 1;
             border: none;
             outline: none;
-            font-size: 13px;
+            font-size: 13.5px;
             color: var(--text-dark);
             background: transparent;
         }
@@ -439,23 +314,17 @@
             background: var(--primary);
             color: #ffffff;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
-            transition: transform 0.15s;
             flex-shrink: 0;
         }
 
-        .btn-send:active {
-            transform: scale(0.92);
-        }
-
-        /* বটম নেভিগেশন */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -492,67 +361,46 @@
 </head>
 <body>
 
-    <!-- সাইড ড্রয়ার হিস্ট্রি ওভারলে -->
-    <div class="drawer-overlay" id="drawerOverlay">
-        <div class="history-drawer" id="historyDrawer">
-            <div class="drawer-header">
-                <h3>পূর্ববর্তী চ্যাটসমূহ</h3>
-                <button class="btn-icon" id="btnCloseDrawer"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="drawer-body" id="drawerList"></div>
-        </div>
-    </div>
-
-    <!-- হেডার -->
     <header class="header">
         <div class="header-left">
-            <a href="index.html" class="btn-icon" title="হোমপেজে ফিরুন">
+            <a href="index.html" class="btn-back">
                 <i class="fa-solid fa-chevron-left"></i>
             </a>
-            <button class="btn-icon" id="btnOpenHistory" title="আগের চ্যাট দেখুন">
-                <i class="fa-solid fa-clock-rotate-left"></i>
-            </button>
             <div class="tutor-profile">
                 <div class="avatar-wrap">
                     <i class="fa-solid fa-robot"></i>
                     <span class="online-dot"></span>
                 </div>
                 <div class="info-wrap">
-                    <h1>সেনসেই AI</h1>
-                    <p>জাপানি টিউটর</p>
+                    <h1>সেনসেই AI টিউটর</h1>
+                    <p>জাপানিজ লার্নিং এসিস্ট্যান্ট</p>
                 </div>
             </div>
         </div>
-        <div class="header-right">
-            <button class="new-chat-btn" id="btnNewChat">
-                <i class="fa-solid fa-plus"></i> নতুন চ্যাট
-            </button>
-        </div>
+        <button class="btn-clear" id="clearBtn" title="হিস্ট্রি মুছে ফেলুন">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
     </header>
 
-    <!-- চ্যাট কনটেইনার -->
     <div class="chat-container">
         <div class="chat-messages" id="chatArea"></div>
     </div>
 
-    <!-- নিচে সাজেশন ও ইনপুট -->
     <div class="bottom-control-area">
         <div class="control-wrapper">
             <div class="suggestion-bar">
-                <button class="chip" onclick="quickAsk('N5 এর প্রধান ১০টি শব্দার্থ সহজে লিখে দাও')"><i class="fa-solid fa-book"></i> N5 শব্দার্থ</button>
-                <button class="chip" onclick="quickAsk('তে-ফর্ম (Te-form) করার নিয়ম সংক্ষেপে বলো')"><i class="fa-solid fa-wand-magic-sparkles"></i> তে-ফর্ম রুল</button>
-                <button class="chip" onclick="quickAsk('কাঞ্জি মনে রাখার সহজ টেকনিক কি?')"><i class="fa-solid fa-lightbulb"></i> কাঞ্জি ট্রিকস</button>
-                <button class="chip" onclick="quickAsk('KOTOBA ওয়েবসাইটে নতুন কি ফিচার এসেছে?')"><i class="fa-solid fa-bolt"></i> নতুন ফিচার</button>
+                <button class="chip" onclick="quickAsk('N5 এর গুরুত্বপূর্ণ শব্দার্থ দাও')"><i class="fa-solid fa-book"></i> N5 ভোকাবুলারি</button>
+                <button class="chip" onclick="quickAsk('তে-ফর্ম (Te-form) তৈরির নিয়ম কি?')"><i class="fa-solid fa-wand-magic-sparkles"></i> তে-ফর্ম নিয়ম</button>
+                <button class="chip" onclick="quickAsk('কাঞ্জি মনে রাখার সহজ কৌশল বলো')"><i class="fa-solid fa-lightbulb"></i> কাঞ্জি ট্রিকস</button>
             </div>
 
             <div class="input-bar">
-                <input type="text" id="userInput" placeholder="জাপানিজ বা ব্যাকরণ নিয়ে লিখুন..." autocomplete="off">
+                <input type="text" id="userInput" placeholder="জাপানি ভাষা বা ব্যাকরণ নিয়ে লিখুন..." autocomplete="off">
                 <button class="btn-send" id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
-    <!-- বটম মেনু (লিডারবোর্ড সহ) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -574,80 +422,48 @@
 
     <script>
         const GROQ_API_KEY = "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";
-        const SESSIONS_STORAGE_KEY = "kotoba_multi_chat_sessions_v1";
+        const STORAGE_KEY = "kotoba_bdstyle_chat_history";
 
-        // ছোট, গোছানো এবং দ্রুত উত্তরের জন্য কাস্টম সিস্টেম প্রম্পট
-        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese teacher for Bengali students on the KOTOBA platform. Rules: 1. Keep your explanations VERY CONCISE, POLITE, and WELL-ORGANIZED (max 3-5 lines per explanation). 2. Avoid long essays or excessive filler words. 3. Always include Japanese Kanji/Kana with Bengali pronunciation and meaning in brackets. 4. Use simple bullet points for rules. 5. If asked about KOTOBA, mention its vocabulary, leaderboards, and grammar tools.";
+        // সংক্ষেপ ও পয়েন্ট আকারে উত্তরের প্রম্পট
+        const SYSTEM_INSTRUCTION = "You are 'Sensei', a Japanese teacher on KOTOBA. Always respond politely in Bengali. Keep answers SHORT, CONCISE and neatly structured (maximum 3-4 bullet points). Always include Kana/Kanji with pronunciation and Bengali meaning. Do not write long filler paragraphs.";
 
-        const DEFAULT_GREETING = "কোননিচিওয়া (こんにちは)! আমি সেনসেই। জাপানি ভাষা বা ব্যাকরণের যেকোনো প্রশ্ন সংক্ষেপে ও সহজে জানতে নিচে লিখে পাঠান।";
+        const DEFAULT_WELCOME = {
+            role: "assistant",
+            content: "কোননিচিওয়া (こんにちは)! আমি আপনার ব্যক্তিগত জাপানি ভাষা শিক্ষক 'সেনসেই'। ব্যাকরণ, কাঞ্জি বা শব্দার্থ নিয়ে যেকোনো প্রশ্ন সংক্ষেপে জানতে নিচে লিখুন।",
+            time: getTime()
+        };
 
         const chatArea = document.getElementById("chatArea");
         const userInput = document.getElementById("userInput");
         const sendBtn = document.getElementById("sendBtn");
-        const btnNewChat = document.getElementById("btnNewChat");
-        const btnOpenHistory = document.getElementById("btnOpenHistory");
-        const btnCloseDrawer = document.getElementById("btnCloseDrawer");
-        const drawerOverlay = document.getElementById("drawerOverlay");
-        const drawerList = document.getElementById("drawerList");
+        const clearBtn = document.getElementById("clearBtn");
 
-        let sessions = loadSessions();
-        let currentSessionId = localStorage.getItem("kotoba_active_session_id") || (sessions[0] ? sessions[0].id : createNewSession().id);
+        let messages = loadHistory();
 
         function getTime() {
             return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
-        function loadSessions() {
+        function loadHistory() {
             try {
-                const raw = localStorage.getItem(SESSIONS_STORAGE_KEY);
-                if (raw) {
-                    const parsed = JSON.parse(raw);
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
                     if (Array.isArray(parsed) && parsed.length > 0) return parsed;
                 }
             } catch (e) {}
-            return [createNewSessionObject("প্রথম চ্যাট")];
+            return [DEFAULT_WELCOME];
         }
 
-        function saveSessions() {
+        function saveHistory() {
             try {
-                localStorage.setItem(SESSIONS_STORAGE_KEY, JSON.stringify(sessions));
-                localStorage.setItem("kotoba_active_session_id", currentSessionId);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
             } catch (e) {}
-        }
-
-        function createNewSessionObject(title) {
-            return {
-                id: "sess_" + Date.now(),
-                title: title || "নতুন চ্যাট",
-                messages: [
-                    { role: "assistant", content: DEFAULT_GREETING, time: getTime() }
-                ]
-            };
-        }
-
-        function createNewSession() {
-            const newSess = createNewSessionObject("নতুন চ্যাট");
-            sessions.unshift(newSess);
-            currentSessionId = newSess.id;
-            saveSessions();
-            renderChat();
-            renderDrawer();
-            return newSess;
-        }
-
-        function getCurrentSession() {
-            let found = sessions.find(s => s.id === currentSessionId);
-            if (!found) {
-                found = sessions[0] || createNewSession();
-                currentSessionId = found.id;
-            }
-            return found;
         }
 
         function renderChat() {
             chatArea.innerHTML = "";
-            const current = getCurrentSession();
-            current.messages.forEach(msg => {
+            messages.forEach(msg => {
                 appendBubble(msg.content, msg.role === "user" ? "user" : "bot", msg.time);
             });
             scrollBottom();
@@ -710,27 +526,18 @@
             const query = userInput.value.trim();
             if (!query) return;
 
-            const current = getCurrentSession();
             const curTime = getTime();
-
-            // প্রথম মেসেজ দিয়ে চ্যাটের নাম আপডেট
-            if (current.messages.length <= 1) {
-                current.title = query.slice(0, 22);
-            }
-
             appendBubble(query, "user", curTime);
-            current.messages.push({ role: "user", content: query, time: curTime });
-            saveSessions();
+            messages.push({ role: "user", content: query, time: curTime });
+            saveHistory();
 
             userInput.value = "";
             scrollBottom();
             showTyping();
 
-            // শেষ ৬টি মেসেজ হিস্ট্রি হিসেবে পাঠাবে (ফাস্ট রেসপন্সের জন্য)
-            const recentMsgs = current.messages.slice(-6).map(m => ({ role: m.role, content: m.content }));
             const apiPayload = [
                 { role: "system", content: SYSTEM_INSTRUCTION },
-                ...recentMsgs
+                ...messages.slice(-5).map(m => ({ role: m.role, content: m.content }))
             ];
 
             try {
@@ -741,85 +548,39 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        model: "openai/gpt-oss-120b",
+                        model: "llama-3.3-70b-versatile",
                         messages: apiPayload,
-                        temperature: 0.6
+                        temperature: 0.6,
+                        max_tokens: 350
                     })
                 });
 
                 const data = await res.json();
                 hideTyping();
 
-                let reply = "দুঃখিত, কোনো উত্তর পাওয়া যায়নি।";
-                if (data.choices && data.choices[0].message.content) {
+                let reply = "";
+                if (data.choices && data.choices[0] && data.choices[0].message) {
                     reply = data.choices[0].message.content.trim();
                 } else if (data.error) {
-                    reply = "এরর: " + data.error.message;
+                    reply = "⚠️ এরর: " + data.error.message;
+                } else {
+                    reply = "দুঃখিত, কোনো উত্তর পাওয়া যায়নি।";
                 }
 
                 const replyTime = getTime();
                 appendBubble(reply, "bot", replyTime);
-                current.messages.push({ role: "assistant", content: reply, time: replyTime });
-                saveSessions();
+                messages.push({ role: "assistant", content: reply, time: replyTime });
+                saveHistory();
 
             } catch (e) {
                 hideTyping();
                 const errTime = getTime();
-                appendBubble("সার্ভারের সাথে যোগাযোগ করা সম্ভব হয়নি। ইন্টারনেট কানেকশন চেক করুন।", "bot", errTime);
-                current.messages.push({ role: "assistant", content: "সংযোগ পাওয়া যায়নি।", time: errTime });
-                saveSessions();
+                appendBubble("সার্ভারের সাথে সংযোগ বিচ্ছিন্ন হয়েছে। ইন্টারনেট চেক করুন।", "bot", errTime);
+                messages.push({ role: "assistant", content: "সার্ভারে সংযোগ পাওয়া যায়নি।", time: errTime });
+                saveHistory();
             }
 
             scrollBottom();
-        }
-
-        function renderDrawer() {
-            drawerList.innerHTML = "";
-            sessions.forEach(sess => {
-                const card = document.createElement("div");
-                card.className = `session-card ${sess.id === currentSessionId ? 'active' : ''}`;
-
-                card.innerHTML = `
-                    <div class="session-card-left">
-                        <i class="fa-regular fa-message"></i>
-                        <span>${sess.title || 'চ্যাট'}</span>
-                    </div>
-                    <button class="btn-del-session" title="ডিলিট করুন"><i class="fa-solid fa-trash"></i></button>
-                `;
-
-                card.querySelector(".session-card-left").addEventListener("click", () => {
-                    currentSessionId = sess.id;
-                    saveSessions();
-                    renderChat();
-                    closeDrawer();
-                });
-
-                card.querySelector(".btn-del-session").addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    if (confirm("এই চ্যাটটি মুছে ফেলতে চান?")) {
-                        sessions = sessions.filter(s => s.id !== sess.id);
-                        if (sessions.length === 0) {
-                            createNewSession();
-                        } else if (currentSessionId === sess.id) {
-                            currentSessionId = sessions[0].id;
-                        }
-                        saveSessions();
-                        renderChat();
-                        renderDrawer();
-                    }
-                });
-
-                drawerList.appendChild(card);
-            });
-        }
-
-        function openDrawer() {
-            renderDrawer();
-            drawerOverlay.classList.add("active");
-        }
-
-        function closeDrawer() {
-            drawerOverlay.classList.remove("active");
         }
 
         function quickAsk(text) {
@@ -827,14 +588,12 @@
             handleSend();
         }
 
-        btnNewChat.addEventListener("click", () => {
-            createNewSession();
-        });
-
-        btnOpenHistory.addEventListener("click", openDrawer);
-        btnCloseDrawer.addEventListener("click", closeDrawer);
-        drawerOverlay.addEventListener("click", (e) => {
-            if (e.target === drawerOverlay) closeDrawer();
+        clearBtn.addEventListener("click", () => {
+            if (confirm("আপনি কি চ্যাট হিস্ট্রি মুছে নতুন করে শুরু করতে চান?")) {
+                messages = [DEFAULT_WELCOME];
+                saveHistory();
+                renderChat();
+            }
         });
 
         sendBtn.addEventListener("click", handleSend);

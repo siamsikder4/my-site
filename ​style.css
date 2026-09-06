@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #dc2626; /* জাপান ফ্ল্যাগ রেড */
+}
+
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #dc2626;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #fee2e2 0%, #ffffff 100%);
+}
+
+.hero h1 {
+    font-size: 28px;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #4b5563;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    display: inline-block;
+    background: #dc2626;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Course Cards Section */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    color: #dc2626;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.card a {
+    text-decoration: none;
+    color: #1d4ed8;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #111827;
+    color: #9ca3af;
+    font-size: 14px;
+    margin-top: 40px;
+}

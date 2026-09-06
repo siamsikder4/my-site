@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N5 কাঞ্জি তালিকা - BD Japanese</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 50px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #0f3e2e;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .content {
+            padding: 20px 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0e3b2c;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        /* সার্চ বক্স */
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 11px 16px 11px 40px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 13px;
+            outline: none;
+            background: #ffffff;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* কাঞ্জি গ্রিড */
+        .kanji-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .kanji-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 3px solid #047857;
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.15s;
+        }
+
+        .kanji-card:active {
+            transform: scale(0.98);
+        }
+
+        .kanji-char {
+            font-size: 38px;
+            font-weight: bold;
+            color: #0e3b2c;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .kanji-meaning {
+            font-size: 13px;
+            font-weight: 700;
+            color: #b91c1c;
+            margin-bottom: 6px;
+        }
+
+        .reading-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 6px 4px;
+            font-size: 11px;
+            color: #334155;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .reading-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+
+        .reading-label {
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo">JLPT N5 কাঞ্জি</div>
+    </header>
+
+    <main class="content">
+        <h2 class="page-title">জরুরি N5 কাঞ্জি সংগ্রহ</h2>
+        <p class="subtitle">অর্থ বা উচ্চারণ লিখে দ্রুত খুঁজুন</p>
+
+        <!-- সার্চ বার -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="kanjiSearch" placeholder="কাঞ্জি, অর্থ বা উচ্চারণ দিয়ে খুঁজুন..." onkeyup="filterKanji()">
+        </div>
+
+        <!-- কাঞ্জি কার্ড তালিকা -->
+        <div class="kanji-grid" id="kanjiList">
+
+            <!-- সংখ্যা -->
+            <div class="kanji-card" data-key="এক ichi hito এক">
+                <div class="kanji-char">一</div>
+                <div class="kanji-meaning">এক (One)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>イチ (ichi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひと (hito)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="দুই ni futa দুই">
+                <div class="kanji-char">二</div>
+                <div class="kanji-meaning">দুই (Two)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ニ (ni)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ふた (futa)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="তিন san mi তিন">
+                <div class="kanji-char">三</div>
+                <div class="kanji-meaning">তিন (Three)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>サン (san)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>み (mi)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="চার yon shi চার">
+                <div class="kanji-char">四</div>
+                <div class="kanji-meaning">চার (Four)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>シ (shi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>よん / よ (yon)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="পাঁচ go itsu পাঁচ">
+                <div class="kanji-char">五</div>
+                <div class="kanji-meaning">পাঁচ (Five)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ゴ (go)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>いつ (itsu)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="ছয় roku mu ছয়">
+                <div class="kanji-char">六</div>
+                <div class="kanji-meaning">ছয় (Six)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ロク (roku)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>む (mu)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="সাত nana shichi সাত">
+                <div class="kanji-char">七</div>
+                <div class="kanji-meaning">সাত (Seven)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>シチ (shichi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>なな (nana)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="আট hachi ya আট">
+                <div class="kanji-char">八</div>
+                <div class="kanji-meaning">আট (Eight)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ハチ (hachi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>や (ya)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="নয় kyuu kokono নয়">
+                <div class="kanji-char">九</div>
+                <div class="kanji-meaning">নয় (Nine)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>キュウ (kyuu)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ここの (kokono)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="দশ juu too দশ">
+                <div class="kanji-char">十</div>
+                <div class="kanji-meaning">দশ (Ten)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジュウ (juu)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>とお (too)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="একশত hyaku শত">
+                <div class="kanji-char">百</div>
+                <div class="kanji-meaning">শত (Hundred)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ヒャク (hyaku)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>-</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="হাজার sen chi হাজার">
+                <div class="kanji-char">千</div>
+                <div class="kanji-meaning">হাজার (Thousand)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>セン (sen)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ち (chi)</span></div>
+                </div>
+            </div>
+
+            <!-- প্রকৃতি ও সময় -->
+            <div class="kanji-card" data-key="সূর্য দিন nichi hi nichi">
+                <div class="kanji-char">日</div>
+                <div class="kanji-meaning">সূর্য / দিন</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ニチ (nichi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひ / び (hi/bi)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="চাঁদ মাস getsu gatsu tsuki">
+                <div class="kanji-char">月</div>
+                <div class="kanji-meaning">চাঁদ / মাস</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ゲツ (getsu)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>つき (tsuki)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="আগুন ka hi আগুন">
+                <div class="kanji-char">火</div>
+                <div class="kanji-meaning">আগুন (Fire)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>カ (ka)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひ (hi)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="পানি sui mizu পানি">
+                <div class="kanji-char">水</div>
+                <div class="kanji-meaning">পানি (Water)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>スイ (sui)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>みず (mizu)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="গাছ moku ki গাছ">
+                <div class="kanji-char">木</div>
+                <div class="kanji-meaning">গাছ / কাঠ</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>モク (moku)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>き (ki)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="টাকা স্বর্ণ kin kane টাকা">
+                <div class="kanji-char">金</div>
+                <div class="kanji-meaning">টাকা / স্বর্ণ</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>キン (kin)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>かね (kane)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="মাটি do tsuchi মাটি">
+                <div class="kanji-char">土</div>
+                <div class="kanji-meaning">মাটি / ভূমি</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ド (do)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>つち (tsuchi)</span></div>
+                </div>
+            </div>
+
+            <!-- মানুষ ও সম্পর্ক -->
+            <div class="kanji-card" data-key="মানুষ jin nin hito মানুষ">
+                <div class="kanji-char">人</div>
+                <div class="kanji-meaning">মানুষ / ব্যক্তি</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジン (jin)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひと (hito)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="সন্তান বাচ্চা shi ko সন্তান">
+                <div class="kanji-char">子</div>
+                <div class="kanji-meaning">বাচ্চা / সন্তান</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>シ (shi)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>こ (ko)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="নারী মহিলা jo onna নারী">
+                <div class="kanji-char">女</div>
+                <div class="kanji-meaning">নারী / মেয়ে</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジョ (jo)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>おんな (onna)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="পুরুষ dan otoko পুরুষ">
+                <div class="kanji-char">男</div>
+                <div class="kanji-meaning">পুরুষ / ছেলে</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>ダン (dan)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>おとこ (otoko)</span></div>
+                </div>
+            </div>
+
+            <div class="kanji-card" data-key="চোখ moku me চোখ">
+                <div class="kanji-char">目</div>
+                <div class="kanji-meaning">চোখ (Eye)</div>
+                <div class="reading-box">
+                    <div class="reading-item"><span class="reading-label">On:</span> <span>モク (moku)</span></div>
+                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>め (me)</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- সার্চ ফিল্টারিং স্ক্রিপ্ট -->
+    <script>
+        function filterKanji() {
+            const query = document.getElementById('kanjiSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.kanji-card');
+
+            cards.forEach(card => {
+                const text = card.getAttribute('data-key').toLowerCase();
+                const kanji = card.querySelector('.kanji-char').innerText.toLowerCase();
+                if (text.includes(query) || kanji.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -326,6 +326,7 @@
             padding: 24px 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
             box-sizing: border-box;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .flashcard-front {
@@ -336,6 +337,14 @@
             transform: rotateY(180deg);
             background: #fbfdfc;
             border-top: 4px solid #b91c1c;
+        }
+
+        /* কার্ড হাইলাইট লাল স্টাইল */
+        .flashcard-container.is-highlighted .flashcard-face {
+            border-color: #ef4444 !important;
+            border-top-color: #dc2626 !important;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.16) !important;
+            background: #fffafa !important;
         }
 
         .fc-jp-text {
@@ -380,6 +389,31 @@
             font-weight: 600;
         }
 
+        /* ফ্ল্যাশকার্ড হাইলাইট বাটন */
+        .fc-highlight-btn {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            color: #94a3b8;
+            background: #f1f5f9;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .fc-highlight-btn.active {
+            color: #ffffff;
+            background: #ef4444;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+        }
+
         .fc-speaker-icon {
             position: absolute;
             top: 16px;
@@ -404,7 +438,7 @@
             color: #ffffff;
         }
 
-        /* কন্ট্রোল বার (কাউন্টার ও স্লাইডার) */
+        /* কন্ট্রোল বার */
         .fc-nav-bar {
             display: flex;
             align-items: center;
@@ -522,10 +556,17 @@
             border-bottom: 1px solid #f1f5f9;
             color: #334155;
             vertical-align: middle;
+            transition: background 0.2s;
         }
 
         .vocab-table tr:nth-child(even) {
             background: #fafcfb;
+        }
+
+        /* টেবিলে হাইলাইট করা রো (লাল UI) */
+        .vocab-table tr.highlighted-row {
+            background-color: #fff1f2 !important;
+            border-left: 4px solid #ef4444;
         }
 
         .col-kana {
@@ -553,6 +594,23 @@
             font-size: 12.5px;
             font-weight: 700;
             color: #1e293b;
+        }
+
+        .table-hl-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: transform 0.15s, color 0.15s;
+        }
+
+        .table-hl-btn:active {
+            transform: scale(1.25);
+        }
+
+        .table-hl-btn.active {
+            color: #ef4444;
         }
 
         /* ফিক্সড বটম বার */
@@ -649,6 +707,9 @@
                 <div class="flashcard-inner">
                     <!-- সামনের পিঠ (জাপানিজ) -->
                     <div class="flashcard-face flashcard-front">
+                        <button class="fc-highlight-btn" id="fcFrontHlBtn" onclick="toggleCurrentHighlight(event)">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </button>
                         <button class="fc-speaker-icon" onclick="speakVoice(event)"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-jp-text" id="fcKana">みます</div>
                         <div class="fc-kanji-sub" id="fcKanji">見ます・診ます</div>
@@ -659,6 +720,9 @@
                     </div>
                     <!-- পেছনের পিঠ (বাংলা ও রোমাজি) -->
                     <div class="flashcard-face flashcard-back">
+                        <button class="fc-highlight-btn" id="fcBackHlBtn" onclick="toggleCurrentHighlight(event)">
+                            <i class="fa-solid fa-bookmark"></i>
+                        </button>
                         <button class="fc-speaker-icon" onclick="speakVoice(event)"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-meaning-text" id="fcMeaning">দেখা, চেক করা</div>
                         <div class="fc-ro-text" id="fcRomaji">mimasu</div>
@@ -670,7 +734,7 @@
                 </div>
             </div>
 
-            <!-- কন্ট্রোল বার (কাউন্টার ও প্রিভ/নেক্সট বাটন) -->
+            <!-- কন্ট্রোল বার -->
             <div class="fc-nav-bar">
                 <button class="fc-arrow-btn" onclick="prevCard()"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="fc-progress-wrap">
@@ -691,14 +755,15 @@
                 <i class="fa-solid fa-chevron-right acc-icon" id="accChevron"></i>
             </div>
 
-            <!-- শব্দার্থ টেবিল -->
+            <!-- শব্দার্থ টেবিল (হাইলাইট বাটন কলামসহ) -->
             <div class="vocab-table-card" id="tableCard">
                 <table class="vocab-table">
                     <thead>
                         <tr>
-                            <th style="width: 34%;">জাপানিজ<br>(কানা)</th>
-                            <th style="width: 33%;">রোমাজি /<br>উচ্চারণ</th>
-                            <th style="width: 33%;">বাংলা অর্থ</th>
+                            <th style="width: 32%;">জাপানিজ<br>(কানা)</th>
+                            <th style="width: 28%;">রোমাজি /<br>উচ্চারণ</th>
+                            <th style="width: 28%;">বাংলা অর্থ</th>
+                            <th style="width: 12%;">মার্ক</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -727,7 +792,7 @@
         </a>
     </nav>
 
-    <!-- জাভাস্ক্রিপ্ট ও ডেটাসেট -->
+    <!-- জাভাস্ক্রিপ্ট কোড ও ডেটাসেট -->
     <script>
         const lessons = {
             26: {
@@ -1027,7 +1092,72 @@
             }, 300);
         });
 
-        // লেসন গ্রিড তৈরি
+        // ================= লোকালস্টোরেজ হাইলাইট লজিক =================
+        function getHighlights() {
+            try {
+                return JSON.parse(localStorage.getItem("kotoba_vocab_highlights")) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveHighlights(list) {
+            localStorage.setItem("kotoba_vocab_highlights", JSON.stringify(list));
+        }
+
+        function getWordKey(lessonNo, kana) {
+            return `L${lessonNo}_${kana}`;
+        }
+
+        function isWordHighlighted(lessonNo, kana) {
+            const list = getHighlights();
+            return list.includes(getWordKey(lessonNo, kana));
+        }
+
+        function toggleWordHighlight(lessonNo, kana, e) {
+            if (e) e.stopPropagation();
+            const key = getWordKey(lessonNo, kana);
+            let list = getHighlights();
+
+            if (list.includes(key)) {
+                list = list.filter(k => k !== key);
+            } else {
+                list.push(key);
+            }
+
+            saveHighlights(list);
+            updateCardHighlightState();
+            renderTable();
+        }
+
+        function toggleCurrentHighlight(e) {
+            if (e) e.stopPropagation();
+            if (currentWords.length === 0) return;
+            const currentItem = currentWords[currentIndex];
+            toggleWordHighlight(currentLesson, currentItem.kana, e);
+        }
+
+        function updateCardHighlightState() {
+            if (currentWords.length === 0) return;
+            const item = currentWords[currentIndex];
+            const highlighted = isWordHighlighted(currentLesson, item.kana);
+
+            const cardContainer = document.getElementById("flashcardContainer");
+            const frontBtn = document.getElementById("fcFrontHlBtn");
+            const backBtn = document.getElementById("fcBackHlBtn");
+
+            if (highlighted) {
+                cardContainer.classList.add("is-highlighted");
+                frontBtn.classList.add("active");
+                backBtn.classList.add("active");
+            } else {
+                cardContainer.classList.remove("is-highlighted");
+                frontBtn.classList.remove("active");
+                backBtn.classList.remove("active");
+            }
+        }
+
+        // ================= লেসন গ্রিড রেন্ডার =================
         function renderLessonGrid() {
             const container = document.getElementById("gridContainer");
             container.innerHTML = "";
@@ -1066,7 +1196,6 @@
             document.getElementById("tableCard").style.display = "none";
             document.getElementById("accChevron").style.transform = "rotate(0deg)";
 
-            // কার্ড ফ্লিপ রিসেট ও ডেটা সেট
             document.getElementById("flashcardContainer").classList.remove("flipped");
             fillCardData();
             renderTable();
@@ -1097,6 +1226,8 @@
             document.getElementById("cardCounter").innerText = `CARD ${currentIndex + 1} / ${currentWords.length}`;
             const pct = ((currentIndex + 1) / currentWords.length) * 100;
             document.getElementById("progressFill").style.width = `${pct}%`;
+
+            updateCardHighlightState();
         }
 
         // ৩ডি ফ্লিপ লজিক
@@ -1105,7 +1236,6 @@
             container.classList.toggle("flipped");
         }
 
-        // নেক্সট ও প্রিভিয়াস কার্ড
         function nextCard() {
             if (currentIndex < currentWords.length - 1) {
                 currentIndex++;
@@ -1157,7 +1287,10 @@
             tbody.innerHTML = "";
 
             lessons[currentLesson].words.forEach(item => {
+                const highlighted = isWordHighlighted(currentLesson, item.kana);
                 const tr = document.createElement("tr");
+                if (highlighted) tr.className = "highlighted-row";
+
                 tr.innerHTML = `
                     <td>
                         <span class="col-kana">${item.kana}</span>
@@ -1168,6 +1301,11 @@
                     </td>
                     <td>
                         <span class="col-bn">${item.bn}</span>
+                    </td>
+                    <td>
+                        <button class="table-hl-btn ${highlighted ? 'active' : ''}" onclick="toggleWordHighlight(${currentLesson}, '${item.kana}', event)">
+                            <i class="fa-${highlighted ? 'solid' : 'regular'} fa-bookmark"></i>
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1197,7 +1335,7 @@
             return n.toString().split('').map(d => bnDigits[d] || d).join('');
         }
 
-        // শুরুতে রেন্ডার
+        // শুরুতেই গ্রিড রেন্ডার
         renderLessonGrid();
     </script>
 </body>

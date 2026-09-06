@@ -3,411 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N5 কাঞ্জি তালিকা - BD Japanese</title>
+    <title>N5 কাঞ্জি লেসন - BD Japanese</title>
+    <!-- আইকন ও ফন্ট -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 50px;
+            padding-bottom: 75px; /* বটম বারের জায়গা */
         }
 
-        /* টপ বার */
-        .top-nav {
-            display: flex;
-            align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* টপ সাব-হেডার */
+        .top-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            padding: 12px 10px 4px;
+            font-weight: 600;
         }
 
-        .back-btn {
-            text-decoration: none;
-            color: #0f3e2e;
-            font-size: 16px;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 17px;
-            color: #0f3e2e;
-        }
-
-        .content {
-            padding: 20px 16px;
+        .main-container {
+            padding: 12px 16px;
             max-width: 480px;
             margin: 0 auto;
         }
 
-        .page-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #0e3b2c;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-
-        /* সার্চ বক্স */
-        .search-box {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 11px 16px 11px 40px;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            font-size: 13px;
-            outline: none;
-            background: #ffffff;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 14px;
-        }
-
-        /* কাঞ্জি গ্রিড */
-        .kanji-grid {
+        /* ================= ভিউ ১: লেসন কার্ড গ্রিড (Screenshot 1) ================= */
+        .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            margin-top: 10px;
         }
 
-        .kanji-card {
+        .lesson-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-top: 3px solid #047857;
-            border-radius: 12px;
-            padding: 14px 10px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: transform 0.15s;
+            border-left: 4px solid #144336;
+            border-radius: 14px;
+            padding: 16px 12px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: 0.2s ease;
         }
 
-        .kanji-card:active {
+        .lesson-card:active {
             transform: scale(0.98);
         }
 
-        .kanji-char {
-            font-size: 38px;
-            font-weight: bold;
-            color: #0e3b2c;
-            line-height: 1.1;
-            margin-bottom: 6px;
-        }
-
-        .kanji-meaning {
-            font-size: 13px;
-            font-weight: 700;
-            color: #b91c1c;
-            margin-bottom: 6px;
-        }
-
-        .reading-box {
-            background: #f8fafc;
-            border-radius: 6px;
-            padding: 6px 4px;
-            font-size: 11px;
-            color: #334155;
-            line-height: 1.4;
-            text-align: left;
-        }
-
-        .reading-item {
+        .card-top-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2px;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
-        .reading-label {
-            color: #64748b;
+        .kl-badge {
+            background: #f1f5f9;
+            color: #475569;
             font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .kanji-watermark {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .lesson-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #144336;
+            margin-bottom: 4px;
+        }
+
+        .lesson-sub {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .card-bottom-icon {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        /* লক করা লেসন */
+        .lesson-card.locked {
+            opacity: 0.75;
+            border-left-color: #cbd5e1;
+        }
+
+        /* ================= ভিউ ২: কাঞ্জি লিস্ট ও একর্ডিয়ন (Screenshot 2 & 3) ================= */
+        .kanji-view {
+            display: none; /* ডিফল্ট লুকানো */
+        }
+
+        .view-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .back-icon-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #144336;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+
+        .section-headline {
+            font-size: 18px;
+            font-weight: 800;
+            color: #144336;
+            text-align: center;
+            flex: 1;
+            margin-right: 36px; /* সেন্টারিং ব্যালেন্স */
+        }
+
+        /* একর্ডিয়ন আইটেম */
+        .kanji-accordion-item {
+            margin-bottom: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .accordion-header {
+            background: #144336;
+            color: #ffffff;
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
+        }
+
+        .accordion-header .left-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .accordion-header .arrow-icon {
+            font-size: 13px;
+            transition: transform 0.2s ease;
+        }
+
+        /* ড্রপডাউন বিস্তারিত বডি (Screenshot 3) */
+        .accordion-body {
+            background: #ffffff;
+            padding: 20px 16px;
+            display: none;
+        }
+
+        .kanji-accordion-item.open .accordion-body {
+            display: block;
+        }
+
+        .kanji-accordion-item.open .arrow-icon {
+            transform: rotate(90deg);
+        }
+
+        /* বড় কাঞ্জি প্রদর্শন */
+        .big-kanji-display {
+            font-family: 'Noto Sans JP', serif;
+            font-size: 72px;
+            text-align: center;
+            color: #144336;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        /* অ্যাকশন বাটনসমূহ (Play, Practice, Test) */
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .action-btn {
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .action-btn.test {
+            color: #c51636;
+            border-color: #fecdd3;
+            background: #fff1f2;
+        }
+
+        /* রিডিং ও মিনিং */
+        .readings-box {
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #334155;
+        }
+
+        .readings-box strong {
+            color: #0f172a;
+        }
+
+        /* সেকশন সাব-টাইটেল (ভোকাবুলারি ও বাক্য) */
+        .detail-sub-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #144336;
+            margin: 14px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .vocab-list, .sentence-list {
+            list-style: none;
+            font-size: 12.5px;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .vocab-list li, .sentence-list li {
+            position: relative;
+            padding-left: 14px;
+            margin-bottom: 8px;
+        }
+
+        .vocab-list li::before, .sentence-list li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: #64748b;
+            font-weight: bold;
+        }
+
+        .romaji-text {
+            color: #64748b;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        /* ================= বটম বার (Bottom Navigation) ================= */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #144336;
+        }
+
+        .nav-item i {
+            font-size: 17px;
         }
     </style>
 </head>
 <body>
 
-    <header class="top-nav">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="logo">JLPT N5 কাঞ্জি</div>
-    </header>
+    <!-- সাবটাইটেল -->
+    <div class="top-subtitle">মোট ১২০টি এনিমেটেড কাঞ্জি • ব্যাখ্যাসহ</div>
 
-    <main class="content">
-        <h2 class="page-title">জরুরি N5 কাঞ্জি সংগ্রহ</h2>
-        <p class="subtitle">অর্থ বা উচ্চারণ লিখে দ্রুত খুঁজুন</p>
+    <main class="main-container">
 
-        <!-- সার্চ বার -->
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="kanjiSearch" placeholder="কাঞ্জি, অর্থ বা উচ্চারণ দিয়ে খুঁজুন..." onkeyup="filterKanji()">
+        <!-- ১. লেসন গ্রিড ভিউ (Screenshot 1) -->
+        <div id="lessonListView">
+            <div class="lesson-grid">
+                
+                <!-- লেসন ১ (ক্লিক করা যাবে) -->
+                <div class="lesson-card" onclick="openLesson(1)">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-01</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title">কাঞ্জি লেসন ১</div>
+                    <div class="lesson-sub">কাঞ্জি ১-১০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- লেসন ২ -->
+                <div class="lesson-card" onclick="openLesson(2)">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-02</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title">কাঞ্জি লেসন ২</div>
+                    <div class="lesson-sub">কাঞ্জি ১১-২০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- লেসন ৩ -->
+                <div class="lesson-card">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-03</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title">কাঞ্জি লেসন ৩</div>
+                    <div class="lesson-sub">কাঞ্জি ২১-৩০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- লেসন ৪ -->
+                <div class="lesson-card">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-04</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title">কাঞ্জি লেসন ৪</div>
+                    <div class="lesson-sub">কাঞ্জি ৩১-৪০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- লেসন ৫ -->
+                <div class="lesson-card">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-05</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title">কাঞ্জি লেসন ৫</div>
+                    <div class="lesson-sub">কাঞ্জি ৪১-৫০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- লেসন ৬ (লকড) -->
+                <div class="lesson-card locked">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-06</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title" style="color: #64748b;">কাঞ্জি লেসন ৬</div>
+                    <div class="lesson-sub">কাঞ্জি ৫১-৬০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-lock"></i></div>
+                </div>
+
+                <!-- লেসন ৭ (লকড) -->
+                <div class="lesson-card locked">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-07</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title" style="color: #64748b;">কাঞ্জি লেসন ৭</div>
+                    <div class="lesson-sub">কাঞ্জি ৬১-৭০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-lock"></i></div>
+                </div>
+
+                <!-- লেসন ৮ (লকড) -->
+                <div class="lesson-card locked">
+                    <div class="card-top-row">
+                        <span class="kl-badge">KL-08</span>
+                        <span class="kanji-watermark">漢字</span>
+                    </div>
+                    <div class="lesson-title" style="color: #64748b;">কাঞ্জি লেসন ৮</div>
+                    <div class="lesson-sub">কাঞ্জি ৭১-৮০</div>
+                    <div class="card-bottom-icon"><i class="fa-solid fa-lock"></i></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- কাঞ্জি কার্ড তালিকা -->
-        <div class="kanji-grid" id="kanjiList">
-
-            <!-- সংখ্যা -->
-            <div class="kanji-card" data-key="এক ichi hito এক">
-                <div class="kanji-char">一</div>
-                <div class="kanji-meaning">এক (One)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>イチ (ichi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひと (hito)</span></div>
-                </div>
+        <!-- ২. কাঞ্জি লিস্ট ও একর্ডিয়ন ভিউ (Screenshot 2 & 3) -->
+        <div id="kanjiDetailView" class="kanji-view">
+            <div class="view-header">
+                <div class="back-icon-btn" onclick="backToLessons()"><i class="fa-solid fa-arrow-left"></i></div>
+                <h3 class="section-headline">কাঞ্জিগুলো নিম্নরূপ</h3>
             </div>
 
-            <div class="kanji-card" data-key="দুই ni futa দুই">
-                <div class="kanji-char">二</div>
-                <div class="kanji-meaning">দুই (Two)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ニ (ni)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ふた (futa)</span></div>
+            <div class="accordion-container">
+                
+                <!-- Kanji 01: 人 -->
+                <div class="kanji-accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 01: 人</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">人</div>
+                        <div class="action-btns">
+                            <button class="action-btn"><i class="fa-solid fa-play"></i> Play</button>
+                            <button class="action-btn"><i class="fa-solid fa-pen"></i> Practice</button>
+                            <button class="action-btn test"><i class="fa-solid fa-star"></i> Test</button>
+                        </div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> ひと (hito)</div>
+                            <div><strong>Onyomi:</strong> ジン・ニン (jin / nin)</div>
+                            <div><strong>Meaning:</strong> মানুষ / ব্যক্তি (Person)</div>
+                        </div>
+                        <div class="detail-sub-title">🧩 Vocabulary</div>
+                        <ul class="vocab-list">
+                            <li>あの人 (あのひと / ano hito) - ঐ ব্যক্তি</li>
+                            <li>日本人 (にほんじん / nihonjin) - জাপানি ব্যক্তি</li>
+                            <li>三人 (さんにん / sannin) - তিন জন ব্যক্তি</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="তিন san mi তিন">
-                <div class="kanji-char">三</div>
-                <div class="kanji-meaning">তিন (Three)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>サン (san)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>み (mi)</span></div>
+                <!-- Kanji 02: 日 (Screenshot 3-এর হুবহু ডেমো) -->
+                <div class="kanji-accordion-item open">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 02: 日</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">日</div>
+                        <div class="action-btns">
+                            <button class="action-btn"><i class="fa-solid fa-play"></i> Play</button>
+                            <button class="action-btn"><i class="fa-solid fa-pen"></i> Practice</button>
+                            <button class="action-btn test"><i class="fa-solid fa-star"></i> Test</button>
+                        </div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> ひ・か (hi / ka)</div>
+                            <div><strong>Onyomi:</strong> ニチ (nichi)</div>
+                            <div><strong>Meaning:</strong> দিন / সূর্য (Day / Sun)</div>
+                        </div>
+                        <div class="detail-sub-title">🧩 Vocabulary</div>
+                        <ul class="vocab-list">
+                            <li>日 (ひ / hi) — দিন, সূর্য</li>
+                            <li>三日 (みっか / mikka) — মাসের ৩ তারিখ / তিন দিন</li>
+                            <li>十五日 (じゅうごにち / juu-go-nichi) — মাসের ১৫ তারিখ</li>
+                            <li>日曜日 (にちようび / nichiyoubi) — রবিবার</li>
+                        </ul>
+                        <div class="detail-sub-title">💬 Example Sentences</div>
+                        <ul class="sentence-list">
+                            <li>
+                                すみません。その日は いそがしいです。<br>
+                                (そのひはいそがしいです。)<br>
+                                <span class="romaji-text">sono hi wa isogashii desu.</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="চার yon shi চার">
-                <div class="kanji-char">四</div>
-                <div class="kanji-meaning">চার (Four)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>シ (shi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>よん / よ (yon)</span></div>
+                <!-- Kanji 03: 一 -->
+                <div class="kanji-accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 03: 一</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">一</div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> ひと (hito)</div>
+                            <div><strong>Onyomi:</strong> イチ (ichi)</div>
+                            <div><strong>Meaning:</strong> এক (One)</div>
+                        </div>
+                        <div class="detail-sub-title">🧩 Vocabulary</div>
+                        <ul class="vocab-list">
+                            <li>一つ (ひとつ / hitotsu) — একটি</li>
+                            <li>一日 (ついたち / tsuitachi) — মাসের ১ তারিখ</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="পাঁচ go itsu পাঁচ">
-                <div class="kanji-char">五</div>
-                <div class="kanji-meaning">পাঁচ (Five)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ゴ (go)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>いつ (itsu)</span></div>
+                <!-- Kanji 04: 二 -->
+                <div class="kanji-accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 04: 二</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">二</div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> ふた (futa)</div>
+                            <div><strong>Onyomi:</strong> ニ (ni)</div>
+                            <div><strong>Meaning:</strong> দুই (Two)</div>
+                        </div>
+                        <div class="detail-sub-title">🧩 Vocabulary</div>
+                        <ul class="vocab-list">
+                            <li>二つ (ふたつ / futatsu) — দুইটি</li>
+                            <li>二月 (にがつ / nigatsu) — ফেব্রুয়ারি মাস</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="ছয় roku mu ছয়">
-                <div class="kanji-char">六</div>
-                <div class="kanji-meaning">ছয় (Six)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ロク (roku)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>む (mu)</span></div>
+                <!-- Kanji 05: 三 -->
+                <div class="kanji-accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 05: 三</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">三</div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> み (mi)</div>
+                            <div><strong>Onyomi:</strong> サン (san)</div>
+                            <div><strong>Meaning:</strong> তিন (Three)</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="সাত nana shichi সাত">
-                <div class="kanji-char">七</div>
-                <div class="kanji-meaning">সাত (Seven)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>シチ (shichi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>なな (nana)</span></div>
+                <!-- Kanji 06: 四 -->
+                <div class="kanji-accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="left-info">
+                            <i class="fa-regular fa-folder-closed"></i>
+                            <span>Kanji 06: 四</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="big-kanji-display">四</div>
+                        <div class="readings-box">
+                            <div><strong>Kunyomi:</strong> よん / よ (yon)</div>
+                            <div><strong>Onyomi:</strong> シ (shi)</div>
+                            <div><strong>Meaning:</strong> চার (Four)</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="kanji-card" data-key="আট hachi ya আট">
-                <div class="kanji-char">八</div>
-                <div class="kanji-meaning">আট (Eight)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ハチ (hachi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>や (ya)</span></div>
-                </div>
             </div>
-
-            <div class="kanji-card" data-key="নয় kyuu kokono নয়">
-                <div class="kanji-char">九</div>
-                <div class="kanji-meaning">নয় (Nine)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>キュウ (kyuu)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ここの (kokono)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="দশ juu too দশ">
-                <div class="kanji-char">十</div>
-                <div class="kanji-meaning">দশ (Ten)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジュウ (juu)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>とお (too)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="একশত hyaku শত">
-                <div class="kanji-char">百</div>
-                <div class="kanji-meaning">শত (Hundred)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ヒャク (hyaku)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>-</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="হাজার sen chi হাজার">
-                <div class="kanji-char">千</div>
-                <div class="kanji-meaning">হাজার (Thousand)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>セン (sen)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ち (chi)</span></div>
-                </div>
-            </div>
-
-            <!-- প্রকৃতি ও সময় -->
-            <div class="kanji-card" data-key="সূর্য দিন nichi hi nichi">
-                <div class="kanji-char">日</div>
-                <div class="kanji-meaning">সূর্য / দিন</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ニチ (nichi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひ / び (hi/bi)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="চাঁদ মাস getsu gatsu tsuki">
-                <div class="kanji-char">月</div>
-                <div class="kanji-meaning">চাঁদ / মাস</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ゲツ (getsu)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>つき (tsuki)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="আগুন ka hi আগুন">
-                <div class="kanji-char">火</div>
-                <div class="kanji-meaning">আগুন (Fire)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>カ (ka)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひ (hi)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="পানি sui mizu পানি">
-                <div class="kanji-char">水</div>
-                <div class="kanji-meaning">পানি (Water)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>スイ (sui)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>みず (mizu)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="গাছ moku ki গাছ">
-                <div class="kanji-char">木</div>
-                <div class="kanji-meaning">গাছ / কাঠ</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>モク (moku)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>き (ki)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="টাকা স্বর্ণ kin kane টাকা">
-                <div class="kanji-char">金</div>
-                <div class="kanji-meaning">টাকা / স্বর্ণ</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>キン (kin)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>かね (kane)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="মাটি do tsuchi মাটি">
-                <div class="kanji-char">土</div>
-                <div class="kanji-meaning">মাটি / ভূমি</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ド (do)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>つち (tsuchi)</span></div>
-                </div>
-            </div>
-
-            <!-- মানুষ ও সম্পর্ক -->
-            <div class="kanji-card" data-key="মানুষ jin nin hito মানুষ">
-                <div class="kanji-char">人</div>
-                <div class="kanji-meaning">মানুষ / ব্যক্তি</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジン (jin)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>ひと (hito)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="সন্তান বাচ্চা shi ko সন্তান">
-                <div class="kanji-char">子</div>
-                <div class="kanji-meaning">বাচ্চা / সন্তান</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>シ (shi)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>こ (ko)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="নারী মহিলা jo onna নারী">
-                <div class="kanji-char">女</div>
-                <div class="kanji-meaning">নারী / মেয়ে</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ジョ (jo)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>おんな (onna)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="পুরুষ dan otoko পুরুষ">
-                <div class="kanji-char">男</div>
-                <div class="kanji-meaning">পুরুষ / ছেলে</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>ダン (dan)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>おとこ (otoko)</span></div>
-                </div>
-            </div>
-
-            <div class="kanji-card" data-key="চোখ moku me চোখ">
-                <div class="kanji-char">目</div>
-                <div class="kanji-meaning">চোখ (Eye)</div>
-                <div class="reading-box">
-                    <div class="reading-item"><span class="reading-label">On:</span> <span>モク (moku)</span></div>
-                    <div class="reading-item"><span class="reading-label">Kun:</span> <span>め (me)</span></div>
-                </div>
-            </div>
-
         </div>
+
     </main>
 
-    <!-- সার্চ ফিল্টারিং স্ক্রিপ্ট -->
-    <script>
-        function filterKanji() {
-            const query = document.getElementById('kanjiSearch').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.kanji-card');
+    <!-- ৩. ফিক্সড বটম নেভিগেশন বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>লগইন</span>
+        </a>
+    </nav>
 
-            cards.forEach(card => {
-                const text = card.getAttribute('data-key').toLowerCase();
-                const kanji = card.querySelector('.kanji-char').innerText.toLowerCase();
-                if (text.includes(query) || kanji.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+    <!-- স্ক্রিপ্ট: ভিউ পরিবর্তন ও একর্ডিয়ন টগল -->
+    <script>
+        function openLesson(lessonNumber) {
+            document.getElementById('lessonListView').style.display = 'none';
+            document.getElementById('kanjiDetailView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToLessons() {
+            document.getElementById('kanjiDetailView').style.display = 'none';
+            document.getElementById('lessonListView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAccordion(headerElement) {
+            const item = headerElement.parentElement;
+            item.classList.toggle('open');
         }
     </script>
 </body>

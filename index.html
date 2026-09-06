@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BD Japanese - জাপানিজ ভাষা শিখুন</title>
-    <!-- আইকনের জন্য FontAwesome -->
+    <!-- আইকন লাইব্রেরি -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -48,7 +48,6 @@
             cursor: pointer;
         }
 
-        /* কন্টেইনার */
         .page-content {
             padding: 20px 16px;
             max-width: 480px;
@@ -101,11 +100,12 @@
             display: inline-block;
             background: #c51636;
             color: #ffffff;
-            text-decoration: none;
-            padding: 9px 24px;
+            border: none;
+            padding: 10px 24px;
             border-radius: 25px;
             font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
         }
 
         /* লেভেল ব্যাজ ও হেডিং */
@@ -134,7 +134,7 @@
             margin-bottom: 14px;
         }
 
-        /* কার্ড গ্রিড */
+        /* গ্রিড ও কার্ড */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -156,7 +156,6 @@
         .red-top { border-top: 3px solid #b91c1c; }
         .green-top { border-top: 3px solid #059669; }
 
-        /* আইকন সার্কেল */
         .icon-circle {
             width: 38px;
             height: 38px;
@@ -172,7 +171,6 @@
         .red-bg { background: #fce8e6; color: #b91c1c; }
         .yellow-bg { background: #fef3c7; color: #d97706; }
 
-        /* কার্ড টেক্সট */
         .item-card h4 {
             font-size: 13.5px;
             font-weight: 700;
@@ -186,7 +184,6 @@
             line-height: 1.3;
         }
 
-        /* ছোট কামিং সুন ট্যাগ */
         .mini-tag {
             position: absolute;
             top: 6px;
@@ -197,6 +194,115 @@
             font-weight: 700;
             padding: 2px 6px;
             border-radius: 6px;
+        }
+
+        /* ===== AI চ্যাটবক্স পপ-আপ ডিজাইন ===== */
+        .chat-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .chat-modal {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            height: 80vh;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        }
+
+        .chat-header {
+            background: #0f3e2e;
+            color: #ffffff;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h4 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg {
+            max-width: 82%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .bot-msg {
+            background: #ffffff;
+            color: #1e293b;
+            align-self: flex-start;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 2px;
+        }
+
+        .user-msg {
+            background: #059669;
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px 12px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            gap: 8px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .chat-input-area button {
+            background: #c51636;
+            color: #ffffff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -217,13 +323,13 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- এআই টিউটর ব্যানার -->
+        <!-- সেনসেই এআই ব্যানার -->
         <section class="tutor-banner">
             <h3>সেনসেই টেক্সট (AI Tutor)</h3>
             <p>ব্যাকরণগত সংশয় দূর করতে এবং উত্তর জানতে।</p>
-            <a href="#" class="banner-btn">
+            <button class="banner-btn" id="openChatBtn">
                 <i class="fa-solid fa-comment-dots"></i> কথা বলুন
-            </a>
+            </button>
         </section>
 
         <!-- সেকশন ১: A1-A2 -->
@@ -231,24 +337,17 @@
             <span class="badge red-badge">A1-A2 - JFT</span>
             <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
             <div class="card-grid">
-                
                 <a href="#" class="item-card red-top">
-                    <div class="icon-circle red-bg">
-                        <i class="fa-solid fa-comments"></i>
-                    </div>
+                    <div class="icon-circle red-bg"><i class="fa-solid fa-comments"></i></div>
                     <h4>Conversation</h4>
                     <p>কথোপকথন গাইড</p>
                 </a>
-
                 <a href="#" class="item-card red-top">
                     <span class="mini-tag">শীঘ্রই আসছে</span>
-                    <div class="icon-circle yellow-bg">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                    </div>
+                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-book-open-reader"></i></div>
                     <h4>Grammar</h4>
                     <p>ব্যাকরণ পাঠ</p>
                 </a>
-
             </div>
         </section>
 
@@ -257,117 +356,115 @@
             <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
             <h3 class="section-heading">বিগিনার লেভেল</h3>
             <div class="card-grid">
-
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
                     <h4>বর্ণমালা</h4>
                     <p>হিরাগানা ও কাতাকানা উচ্চারণসহ</p>
                 </a>
-
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
-
                 <a href="n5.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
                     <p>সহজ ভাষায় N5 গ্রামার</p>
                 </a>
-
                 <a href="kanji.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
                     <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
                 </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
-                    <h4>ক্রিয়াপদ</h4>
-                    <p>Conjugation of Verbs</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
-                    <h4>লেসন প্র্যাকটিস</h4>
-                    <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
-                    <h4>Appendices</h4>
-                    <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
-                    <h4>Reading</h4>
-                    <p>N5 রিডিং প্র্যাকটিস</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
-                    <h4>Listening</h4>
-                    <p>N5 লিসেনিং প্র্যাকটিস</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
-                    <h4>Listening Test</h4>
-                    <p>N5 লিসেনিং পরীক্ষা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
-                    <h4>Skype/Zoom</h4>
-                    <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <span class="mini-tag">শীঘ্রই আসছে</span>
-                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>পূর্বের প্রশ্নাবলী</h4>
-                    <p>NAT / JLPT বিগত প্রশ্ন</p>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- সেকশন ৩: N4 লেভেল -->
-        <section class="level-section">
-            <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
-            <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
-            <div class="card-grid">
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
-                    <h4>শব্দকোষ</h4>
-                    <p>N4 ভোকাবুলারি এবং মূলশব্দ</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
-                    <h4>ব্যাকরণ</h4>
-                    <p>সহজ ভাষায় N4 গ্রামার</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
-                    <h4>কাঞ্জি</h4>
-                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
-                    <h4>Reading</h4>
-                    <p>N4 রিডিং প্র্যাকটিস</p>
-                </a>
-
             </div>
         </section>
 
     </main>
 
+    <!-- চ্যাটবক্স মডাল (পপ-আপ) -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="chat-modal">
+            <div class="chat-header">
+                <h4>সেনসেই এআই (জাপানি টিউটর)</h4>
+                <button class="close-btn" id="closeChatBtn">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg bot-msg">কোননিচিওয়া (こんにちは)! আমি সেনসেই। জাপানি ভাষা, ব্যাকরণ বা কাঞ্জি সম্পর্কিত যেকোনো প্রশ্ন আমাকে করতে পারেন।</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="জাপানি ভাষা নিয়ে কিছু লিখুন...">
+                <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gemini AI স্ক্রিপ্ট -->
+    <script>
+        // এখানে আপনার আসল Gemini API Key বসিয়ে দিন
+        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+
+        const openBtn = document.getElementById("openChatBtn");
+        const closeBtn = document.getElementById("closeChatBtn");
+        const overlay = document.getElementById("chatOverlay");
+        const chatMessages = document.getElementById("chatMessages");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        openBtn.addEventListener("click", () => overlay.style.display = "flex");
+        closeBtn.addEventListener("click", () => overlay.style.display = "none");
+
+        // সেনসেই-এর নিয়ম (System Instruction)
+        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // ইউজারের মেসেজ স্ক্রিনে দেখানো
+            appendMessage(text, "user-msg");
+            userInput.value = "";
+
+            // লোডিং স্টেট
+            const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        system_instruction: {
+                            parts: [{ text: SYSTEM_INSTRUCTION }]
+                        },
+                        contents: [
+                            { role: "user", parts: [{ text: text }] }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    loadingMsg.innerText = data.candidates[0].content.parts[0].text;
+                } else {
+                    loadingMsg.innerText = "দুঃখিত, কোনো উত্তর পাওয়া যায়নি। API Key ঠিক আছে কিনা দেখুন।";
+                }
+            } catch (err) {
+                loadingMsg.innerText = "সার্ভারের সাথে সংযোগ করা সম্ভব হয়নি।";
+            }
+        }
+
+        function appendMessage(text, className) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `msg ${className}`;
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgDiv;
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
 </body>
 </html>

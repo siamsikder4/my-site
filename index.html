@@ -3,64 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জাপানি ভাষা শিখুন বাংলায়</title>
+    <title>BD Japanese - জাপানিজ ভাষা শিখুন</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- হেডার ও মেনুবার -->
-    <header>
-        <div class="logo">BD-Japanese</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="n5.html">N5</a>
-            <a href="kanji.html">Kanji</a>
-        </nav>
+    <header class="top-nav">
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i> মেনু</div>
+        <div class="logo">BD JAPANESE</div>
+        <div class="login-btn">লগইন</div>
     </header>
 
-    <!-- হিরো সেকশন -->
-    <section class="hero">
-        <h1>সহজে বাংলায় জাপানি ভাষা শিখুন</h1>
-        <p>JLPT ও NAT-TEST প্রস্তুতির জন্য সম্পূর্ণ ফ্রি রিসোর্স এবং গাইডলাইন।</p>
-        <a href="#courses" class="btn">পড়া শুরু করুন</a>
-    </section>
+    <main class="page-content">
 
-    <!-- কোর্স ও ক্যাটাগরি কার্ড -->
-    <main class="container" id="courses">
-        <h2 class="section-title">পড়াশোনার ক্যাটাগরি</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <h3>Minna no Nihongo (N5)</h3>
-                <p>লেসন ১ থেকে ২৫ পর্যন্ত ব্যাকরণ, শব্দভাণ্ডার এবং সহজ বাংলা ব্যাখ্যা।</p>
-                <a href="n5.html">লেসনগুলো দেখুন &rarr;</a>
+        <section class="hero-text">
+            <h2>“জাপানিজ ভাষা শেখা আর কঠিন নয়”</h2>
+            <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
+        </section>
+
+        <section class="tutor-banner">
+            <h3>সেনসেই টেক্সট (AI Tutor)</h3>
+            <p>ব্যাকরণগত সংশয় দূর করতে এবং উত্তর জানতে।</p>
+            <a href="#" class="banner-btn">
+                <i class="fa-solid fa-comment-dots"></i> কথা বলুন
+            </a>
+        </section>
+
+        <section class="level-section">
+            <span class="badge red-badge">A1-A2 - JFT</span>
+            <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
+            <div class="card-grid">
+                
+                <a href="#" class="item-card red-top">
+                    <div class="icon-circle red-bg">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h4>Conversation</h4>
+                    <p>কথোপকথন গাইড</p>
+                </a>
+
+                <a href="#" class="item-card red-top">
+                    <span class="mini-tag">শীঘ্রই আসছে</span>
+                    <div class="icon-circle yellow-bg">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                    <h4>Grammar</h4>
+                    <p>ব্যাকরণ পাঠ</p>
+                </a>
+
             </div>
+        </section>
 
-            <div class="card">
-                <h3>কাঞ্জি শিক্ষা (Kanji)</h3>
-                <p>N5 লেভেলের জরুরি ১০০+ কাঞ্জি, অর্থ ও স্ট্রোক অর্ডারসহ বিস্তারিত।</p>
-                <a href="kanji.html">কাঞ্জি প্র্যাকটিস &rarr;</a>
+        <section class="level-section">
+            <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
+            <h3 class="section-heading">বিগিনার লেভেল</h3>
+            <div class="card-grid">
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
+                    <h4>বর্ণমালা</h4>
+                    <p>হিরাগানা ও কাতাকানা উচ্চারণসহ</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h4>শব্দকোষ</h4>
+                    <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
+                </a>
+
+                <a href="n5.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>সহজ ভাষায় N5 গ্রামার</p>
+                </a>
+
+                <a href="kanji.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h4>কাঞ্জি</h4>
+                    <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4>ক্রিয়াপদ</h4>
+                    <p>Conjugation of Verbs</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
+                    <h4>লেসন প্র্যাকটিস</h4>
+                    <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
+                    <h4>Appendices</h4>
+                    <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                    <h4>Reading</h4>
+                    <p>N5 রিডিং প্র্যাকটিস</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h4>Listening</h4>
+                    <p>N5 লিসেনিং প্র্যাকটিস</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
+                    <h4>Listening Test</h4>
+                    <p>N5 লিসেনিং পরীক্ষা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
+                    <h4>Skype/Zoom</h4>
+                    <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <span class="mini-tag">শীঘ্রই আসছে</span>
+                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>পূর্বের প্রশ্নাবলী</h4>
+                    <p>NAT / JLPT বিগত প্রশ্ন</p>
+                </a>
+
             </div>
+        </section>
 
-            <div class="card">
-                <h3>ভোকাবুলারি ব্যাংক</h3>
-                <p>প্রতিদিনের প্রয়োজনীয় জাপানি শব্দ এবং অডিও উচ্চারণ গাইড।</p>
-                <a href="#">শব্দতালিকা দেখুন &rarr;</a>
+        <section class="level-section">
+            <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
+            <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
+            <div class="card-grid">
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h4>শব্দকোষ</h4>
+                    <p>N4 ভোকাবুলারি এবং মূলশব্দ</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>সহজ ভাষায় N4 গ্রামার</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h4>কাঞ্জি</h4>
+                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                    <h4>Reading</h4>
+                    <p>N4 রিডিং প্র্যাকটিস</p>
+                </a>
+
             </div>
+        </section>
 
-            <div class="card">
-                <h3>প্রশ্ন ও মডেল টেস্ট</h3>
-                <p>বিগত বছরের পরীক্ষার প্রশ্ন সমাধান এবং অনলাইন কুইজ টেস্ট।</p>
-                <a href="#">টেস্ট দিন &rarr;</a>
-            </div>
-
-        </div>
     </main>
-
-    <!-- ফুটার -->
-    <footer>
-        <p>&copy; 2026 BD-Japanese. সর্বস্বত্ব সংরক্ষিত।</p>
-    </footer>
 
 </body>
 </html>

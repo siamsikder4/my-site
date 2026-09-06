@@ -97,6 +97,13 @@
             text-align: center;
             margin-bottom: 28px;
             box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
+            text-decoration: none;
+            display: block;
+            transition: transform 0.15s ease;
+        }
+
+        .tutor-banner:active {
+            transform: scale(0.98);
         }
 
         .tutor-banner h3 {
@@ -216,115 +223,6 @@
             border-radius: 6px;
         }
 
-        /* চ্যাটবক্স মডাল */
-        .chat-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 999;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .chat-modal {
-            background: #ffffff;
-            width: 100%;
-            max-width: 480px;
-            height: 80vh;
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-        }
-
-        .chat-header {
-            background: #0f3e2e;
-            color: #ffffff;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header h4 {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 14px;
-            overflow-y: auto;
-            background: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .msg {
-            max-width: 84%;
-            padding: 10px 14px;
-            border-radius: 14px;
-            font-size: 13px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
-
-        .bot-msg {
-            background: #ffffff;
-            color: #1e293b;
-            align-self: flex-start;
-            border: 1px solid #e2e8f0;
-            border-bottom-left-radius: 2px;
-        }
-
-        .user-msg {
-            background: #059669;
-            color: #ffffff;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px 12px;
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            gap: 8px;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 20px;
-            outline: none;
-            font-size: 13px;
-        }
-
-        .chat-input-area button {
-            background: #c51636;
-            color: #ffffff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         /* বটম বার */
         .bottom-nav {
             position: fixed;
@@ -369,11 +267,9 @@
     <header class="top-nav">
         <a href="index.html" class="logo">KOTOBA</a>
         <div class="top-nav-right">
-            <!-- লগইন থাকলে এই বাটনটি লুকিয়ে যাবে -->
             <a href="login.html" id="topLoginBtn" class="top-nav-link">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i> লগইন
             </a>
-            <!-- লগইন থাকলে এই বাটনটি দৃশ্যমান হবে -->
             <a href="profile.html" id="topProfileBtn" class="top-nav-link" style="display: none;">
                 <i class="fa-regular fa-user"></i> প্রোফাইল
             </a>
@@ -388,14 +284,14 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- সেনসেই এআই ব্যানার -->
-        <section class="tutor-banner">
+        <!-- সেনসেই এআই ব্যানার (ai-sensei.html এ রিডাইরেক্ট করবে) -->
+        <a href="ai-sensei.html" class="tutor-banner">
             <h3>সেনসেই টেক্সট (AI Tutor)</h3>
             <p>ব্যাকরণগত সংশয় দূর করতে এবং উত্তর জানতে।</p>
-            <button class="banner-btn" id="openChatBtn">
+            <span class="banner-btn">
                 <i class="fa-solid fa-comment-dots"></i> কথা বলুন
-            </button>
-        </section>
+            </span>
+        </a>
 
         <!-- সেকশন ১: A1-A2 -->
         <section class="level-section">
@@ -422,28 +318,24 @@
             <h3 class="section-heading">বিগিনার লেভেল</h3>
             <div class="card-grid">
                 
-                <!-- বর্ণমালা লিংক -->
                 <a href="alphabet.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
                     <h4>বর্ণমালা</h4>
                     <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
                 </a>
 
-                <!-- N5 ভোকাবুলারি লিংক -->
                 <a href="n5-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
 
-                <!-- N5 ব্যাকরণ লিংক (সঠিক করা হয়েছে) -->
                 <a href="n5-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
                     <p>সহজ ভাষায় N5 গ্রামার</p>
                 </a>
 
-                <!-- কাঞ্জি লিংক -->
                 <a href="kanji.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
@@ -507,14 +399,12 @@
             <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
             <div class="card-grid">
                 
-                <!-- N4 শব্দকোষ লিংক -->
                 <a href="n4-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
                 </a>
 
-                <!-- N4 ব্যাকরণ লিংক -->
                 <a href="n4-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
@@ -537,34 +427,16 @@
 
     </main>
 
-    <!-- সেনসেই AI চ্যাটবক্স মডাল -->
-    <div class="chat-overlay" id="chatOverlay">
-        <div class="chat-modal">
-            <div class="chat-header">
-                <h4>সেনসেই এআই (জাপানি টিউটর)</h4>
-                <button class="close-btn" id="closeChatBtn">&times;</button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="msg bot-msg">কোননিচিওয়া (こんにちは)! আমি সেনসেই। জাপানি ভাষা, ব্যাকরণ বা কাঞ্জি সম্পর্কিত যেকোনো প্রশ্ন আমাকে করতে পারেন।</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="userInput" placeholder="জাপানি ভাষা নিয়ে কিছু লিখুন...">
-                <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
     <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
-        <button class="nav-item" id="bottomSenseiBtn">
+        <a href="ai-sensei.html" class="nav-item">
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
-        </button>
-        <!-- লগইন থাকলে এটি 'প্রোফাইল' হবে, লগআউট থাকলে 'লগইন' হবে -->
+        </a>
         <a href="login.html" class="nav-item" id="bottomAuthBtn">
             <i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i>
             <span id="bottomAuthText">লগইন</span>
@@ -576,7 +448,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // আপনার Firebase কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
             authDomain: "kotoba-b20b3.firebaseapp.com",
@@ -596,7 +467,6 @@
         const bottomAuthIcon = document.getElementById("bottomAuthIcon");
         const bottomAuthText = document.getElementById("bottomAuthText");
 
-        // ইউজারের লগইন স্ট্যাটাস পরীক্ষা করা
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 topLoginBtn.style.display = "none";
@@ -613,82 +483,6 @@
                 bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
                 bottomAuthText.innerText = "লগইন";
             }
-        });
-
-        // ================= সেনসেই AI চ্যাটবক্স ফাংশন =================
-        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
-
-        const openBtn = document.getElementById("openChatBtn");
-        const bottomSenseiBtn = document.getElementById("bottomSenseiBtn");
-        const closeBtn = document.getElementById("closeChatBtn");
-        const overlay = document.getElementById("chatOverlay");
-        const chatMessages = document.getElementById("chatMessages");
-        const userInput = document.getElementById("userInput");
-        const sendBtn = document.getElementById("sendBtn");
-
-        function openModal() {
-            overlay.style.display = "flex";
-        }
-
-        openBtn.addEventListener("click", openModal);
-        bottomSenseiBtn.addEventListener("click", openModal);
-        closeBtn.addEventListener("click", () => overlay.style.display = "none");
-
-        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
-
-        async function sendMessage() {
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            appendMessage(text, "user-msg");
-            userInput.value = "";
-
-            const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
-
-            if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার আসল API Key বসান।";
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        system_instruction: {
-                            parts: [{ text: SYSTEM_INSTRUCTION }]
-                        },
-                        contents: [
-                            { role: "user", parts: [{ text: text }] }
-                        ]
-                    })
-                });
-
-                const data = await response.json();
-                if (data.candidates && data.candidates[0].content.parts[0].text) {
-                    loadingMsg.innerText = data.candidates[0].content.parts[0].text;
-                } else if (data.error) {
-                    loadingMsg.innerText = "API এরর: " + (data.error.message || "সমস্যা হয়েছে।");
-                } else {
-                    loadingMsg.innerText = "দুঃখিত, কোনো উত্তর পাওয়া যায়নি।";
-                }
-            } catch (err) {
-                loadingMsg.innerText = "সার্ভারের সাথে সংযোগ করা সম্ভব হয়নি।";
-            }
-        }
-
-        function appendMessage(text, className) {
-            const msgDiv = document.createElement("div");
-            msgDiv.className = `msg ${className}`;
-            msgDiv.innerText = text;
-            chatMessages.appendChild(msgDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            return msgDiv;
-        }
-
-        sendBtn.addEventListener("click", sendMessage);
-        userInput.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") sendMessage();
         });
     </script>
 </body>

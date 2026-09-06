@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BD JAPANESE - জাপানিজ ভাষা শিখুন</title>
-    <!-- আইকন ও ফন্ট -->
+    <title>KOTOBA - জাপানিজ ভাষা শিখুন</title>
+    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -38,22 +38,26 @@
 
         .logo {
             font-weight: 800;
-            font-size: 17px;
+            font-size: 18px;
             color: #0f3e2e;
             letter-spacing: 0.5px;
             text-decoration: none;
         }
 
-        .menu-btn, .login-nav-btn {
-            font-size: 14px;
-            font-weight: 600;
-            color: #4a5568;
-            cursor: pointer;
-            text-decoration: none;
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .login-nav-btn {
+        .top-nav-link {
+            font-size: 13.5px;
+            font-weight: 600;
             color: #0f3e2e;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .page-content {
@@ -318,7 +322,7 @@
             justify-content: center;
         }
 
-        /* বটম নেভিগেশন */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -360,9 +364,11 @@
 
     <!-- টপ বার -->
     <header class="top-nav">
-        <div class="menu-btn"><i class="fa-solid fa-bars"></i> মেনু</div>
-        <a href="index.html" class="logo">BD JAPANESE</a>
-        <a href="login.html" class="login-nav-btn"><i class="fa-regular fa-user"></i> লগইন</a>
+        <a href="index.html" class="logo">KOTOBA</a>
+        <div class="top-nav-right">
+            <a href="login.html" class="top-nav-link"><i class="fa-solid fa-arrow-right-to-bracket"></i> লগইন</a>
+            <a href="profile.html" class="top-nav-link"><i class="fa-regular fa-user"></i> প্রোফাইল</a>
+        </div>
     </header>
 
     <main class="page-content">
@@ -406,11 +412,12 @@
             <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
             <h3 class="section-heading">বিগিনার লেভেল</h3>
             <div class="card-grid">
+                
                 <!-- বর্ণমালা লিংক -->
                 <a href="alphabet.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
                     <h4>বর্ণমালা</h4>
-                    <p>হিরাগানা ও কাতাকানা উচ্চারণসহ</p>
+                    <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
                 </a>
 
                 <a href="#" class="item-card green-top">
@@ -517,7 +524,7 @@
 
     </main>
 
-    <!-- চ্যাটবক্স মডাল -->
+    <!-- সেনসেই AI চ্যাটবক্স মডাল -->
     <div class="chat-overlay" id="chatOverlay">
         <div class="chat-modal">
             <div class="chat-header">
@@ -534,7 +541,7 @@
         </div>
     </div>
 
-    <!-- বটম নেভিগেশন বার -->
+    <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -544,10 +551,9 @@
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
         </button>
-        <!-- লগইন পেজ লিংক -->
-        <a href="login.html" class="nav-item">
+        <a href="profile.html" class="nav-item">
             <i class="fa-solid fa-circle-user"></i>
-            <span>লগইন</span>
+            <span>প্রোফাইল</span>
         </a>
     </nav>
 
@@ -583,7 +589,7 @@
             const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
 
             if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
-                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার আসল API Key বসান।";
+                loadingMsg.innerText = "API Key যোগ করা হয়নি। Google AI Studio থেকে আপনার API Key বসান।";
                 return;
             }
 

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N4 শব্দভাণ্ডার - Kotoba</title>
+    <title>N4 Vocabulary - Kotoba</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -20,14 +20,14 @@
         body {
             background-color: #f7faf9;
             color: #1a202c;
-            padding-bottom: 85px;
+            padding-bottom: 75px;
         }
 
         /* টপ নেভিগেশন */
         .top-nav {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             padding: 14px 18px;
             background: #ffffff;
             border-bottom: 1px solid #eef2f5;
@@ -40,245 +40,382 @@
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .back-btn {
-            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
             color: #0f3e2e;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: #f1f5f9;
+            cursor: pointer;
         }
 
-        .logo-text {
+        .nav-title {
             font-weight: 800;
-            font-size: 17px;
+            font-size: 16.5px;
             color: #0f3e2e;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            letter-spacing: 0.5px;
         }
 
-        .level-pill {
-            background: #047857;
-            color: #ffffff;
+        .nav-right {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .main-container {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ================= ভিউ ১: লেসন সিলেকশন গ্রিড (Screenshot 3) ================= */
+        .grid-header-wrap {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .main-category-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0e3b2c;
+            margin-bottom: 4px;
+        }
+
+        .sub-category-desc {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .lesson-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #144336;
+            border-radius: 14px;
+            padding: 16px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s ease;
+        }
+
+        .lesson-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .l-badge {
+            background: #f1f5f9;
+            color: #475569;
             font-size: 10px;
             font-weight: 700;
             padding: 2px 7px;
             border-radius: 6px;
         }
 
-        .container {
-            padding: 16px;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        /* সার্চ বক্স */
-        .search-wrap {
-            position: relative;
-            margin-bottom: 14px;
-        }
-
-        .search-wrap input {
-            width: 100%;
-            padding: 12px 16px 12px 42px;
-            border: 1px solid #cbd5e1;
-            border-radius: 14px;
-            font-size: 13.5px;
-            outline: none;
-            background: #ffffff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-
-        .search-wrap input:focus {
-            border-color: #047857;
-        }
-
-        .search-wrap i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 15px;
-        }
-
-        /* লেসন ফিল্টার স্ক্রোল */
-        .lesson-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            scrollbar-width: none;
-        }
-
-        .lesson-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .lesson-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
+        .kanji-lesson-tag {
+            font-family: 'Noto Sans JP', sans-serif;
             font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .lesson-btn.active {
-            background: #0f3e2e;
-            border-color: #0f3e2e;
-            color: #ffffff;
-            box-shadow: 0 2px 6px rgba(15, 62, 46, 0.2);
-        }
-
-        /* লেসন কার্ড */
-        .vocab-group {
-            margin-bottom: 16px;
-        }
-
-        .group-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-left: 5px solid #047857;
-            border-radius: 12px;
-            padding: 12px 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            margin-bottom: 8px;
-        }
-
-        .group-title {
-            font-size: 14.5px;
-            font-weight: 800;
-            color: #0f3e2e;
-        }
-
-        .group-badge {
-            font-size: 11px;
-            color: #64748b;
+            color: #94a3b8;
             font-weight: 600;
         }
 
-        .group-arrow {
-            color: #94a3b8;
-            font-size: 12px;
-            transition: transform 0.2s ease;
-            margin-left: 8px;
-        }
-
-        .vocab-group.open .group-arrow {
-            transform: rotate(90deg);
-            color: #047857;
-        }
-
-        .vocab-list {
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .vocab-group.open .vocab-list {
-            display: flex;
-        }
-
-        /* শব্দ আইটেম কার্ড */
-        .vocab-card {
-            background: #ffffff;
-            border: 1px solid #eef2f5;
-            border-radius: 12px;
-            padding: 12px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        .vocab-left {
-            flex: 1;
-            padding-right: 10px;
-        }
-
-        .vocab-main {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
+        .card-lesson-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #144336;
             margin-bottom: 3px;
         }
 
-        .vocab-kana {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 16px;
+        .card-lesson-desc {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .card-arrow {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        /* ================= ভিউ ২: ফ্ল্যাশকার্ড ও টেবিল (Screenshot 1 & 2) ================= */
+        .detail-view {
+            display: none;
+        }
+
+        .fc-top-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .fc-title {
+            font-size: 20px;
             font-weight: 800;
             color: #0f3e2e;
         }
 
-        .vocab-kanji {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #047857;
-            background: #e6f4ea;
-            padding: 1px 6px;
-            border-radius: 6px;
-        }
-
-        .vocab-pronounce {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 2px;
-            font-weight: 600;
-        }
-
-        .vocab-meaning {
-            font-size: 12.5px;
-            font-weight: 700;
-            color: #b91c1c;
-        }
-
-        .vocab-eng {
-            font-size: 11px;
-            color: #64748b;
-        }
-
-        /* স্পিকার বাটন */
-        .sound-btn {
-            background: #f1f5f9;
-            border: none;
-            color: #047857;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
+        .help-icon {
+            color: #94a3b8;
+            font-size: 16px;
             cursor: pointer;
+        }
+
+        .fc-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding: 0 4px;
+        }
+
+        .fc-tool-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #475569;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* ফ্ল্যাশকার্ড */
+        .flashcard {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .flashcard:active {
+            transform: scale(0.99);
+        }
+
+        .fc-jp-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #144336;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .fc-kanji-sub {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #047857;
+            margin-bottom: 6px;
+        }
+
+        .fc-meaning-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #b91c1c;
+            margin-bottom: 4px;
+        }
+
+        .fc-ro-text {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .fc-tap-hint {
+            position: absolute;
+            bottom: 16px;
             font-size: 12px;
-            flex-shrink: 0;
-            transition: all 0.15s;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
         }
 
-        .sound-btn:active {
-            transform: scale(0.9);
-            background: #047857;
+        .fc-speaker-icon {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        /* কন্ট্রোল বার (কাউন্টার ও স্লাইডার) */
+        .fc-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0 24px;
+            gap: 12px;
+        }
+
+        .fc-arrow-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .fc-progress-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fc-counter-text {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #475569;
+            letter-spacing: 0.5px;
+        }
+
+        .fc-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .fc-progress-fill {
+            height: 100%;
+            background: #144336;
+            width: 5%;
+            transition: width 0.2s ease;
+        }
+
+        /* একর্ডিয়ন বাটন (Screenshot 1 & 2) */
+        .vocab-accordion-header {
+            background: #144336;
             color: #ffffff;
+            border-radius: 12px;
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13.5px;
+            box-shadow: 0 3px 6px rgba(20, 67, 54, 0.15);
         }
 
-        /* বটম নেভিগেশন */
+        .vocab-accordion-header .acc-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .vocab-accordion-header .acc-icon {
+            font-size: 13px;
+            transition: transform 0.2s ease;
+        }
+
+        /* টেবিল কনটেইনার */
+        .vocab-table-card {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .vocab-table th {
+            background: #f8fafc;
+            color: #144336;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 12px 6px;
+            border-bottom: 1px solid #e2e8f0;
+            line-height: 1.3;
+        }
+
+        .vocab-table td {
+            padding: 12px 6px;
+            font-size: 12.5px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .vocab-table tr:nth-child(even) {
+            background: #fafcfb;
+        }
+
+        .col-kana {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #0f3e2e;
+        }
+
+        .col-kanji {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 11px;
+            color: #047857;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .col-ro {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .col-bn {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* ফিক্সড বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -302,10 +439,13 @@
             align-items: center;
             gap: 4px;
             font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         .nav-item.active {
-            color: #0f3e2e;
+            color: #144336;
         }
 
         .nav-item i {
@@ -315,1337 +455,591 @@
 </head>
 <body>
 
-    <!-- হেডার -->
+    <!-- টপ বার -->
     <header class="top-nav">
-        <div class="nav-left">
-            <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-            <div class="logo-text">
-                KOTOBA <span class="level-pill">N4 VOCABULARY</span>
-            </div>
+        <div class="nav-left" onclick="backToGrid()">
+            <i class="fa-solid fa-bars" id="menuIcon"></i>
+            <span class="nav-title" id="navHeaderTitle">BD JAPANESE</span>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: #047857;">লেসন ২৬–৫০</div>
+        <div class="nav-right">সহায়তা</div>
     </header>
 
-    <main class="container">
+    <main class="main-container">
 
-        <!-- সার্চ বক্স -->
-        <div class="search-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="জাপানি শব্দ, উচ্চারণ বা অর্থ দিয়ে খুঁজুন..." onkeyup="filterVocab()">
+        <!-- ভিউ ১: লেসন তালিকা (Screenshot 3) -->
+        <div id="lessonGridView">
+            <div class="grid-header-wrap">
+                <h2 class="main-category-title">N4 Vocabulary</h2>
+                <p class="sub-category-desc">মোট ২৫টি লেসন • শব্দভাণ্ডার</p>
+            </div>
+
+            <div class="lesson-grid" id="gridContainer">
+                <!-- ডায়নামিক জাভাস্ক্রিপ্ট দিয়ে ২৫টি লেসন কার্ড তৈরি হবে -->
+            </div>
         </div>
 
-        <!-- লেসন জাম্প পিলস -->
-        <div class="lesson-scroll" id="lessonPills">
-            <button class="lesson-btn active" onclick="jumpLesson('all', this)">সকল</button>
-            <button class="lesson-btn" onclick="jumpLesson('l26', this)">লেসন ২৬</button>
-            <button class="lesson-btn" onclick="jumpLesson('l27', this)">লেসন ২৭</button>
-            <button class="lesson-btn" onclick="jumpLesson('l28', this)">লেসন ২৮</button>
-            <button class="lesson-btn" onclick="jumpLesson('l29', this)">লেসন ২৯</button>
-            <button class="lesson-btn" onclick="jumpLesson('l30', this)">লেসন ৩০</button>
-            <button class="lesson-btn" onclick="jumpLesson('l31', this)">লেসন ৩১</button>
-            <button class="lesson-btn" onclick="jumpLesson('l32', this)">লেসন ৩২</button>
-            <button class="lesson-btn" onclick="jumpLesson('l33', this)">লেসন ৩৩</button>
-            <button class="lesson-btn" onclick="jumpLesson('l34', this)">লেসন ৩৪</button>
-            <button class="lesson-btn" onclick="jumpLesson('l35', this)">লেসন ৩৫</button>
-            <button class="lesson-btn" onclick="jumpLesson('l36', this)">লেসন ৩৬</button>
-            <button class="lesson-btn" onclick="jumpLesson('l37', this)">লেসন ৩৭</button>
-            <button class="lesson-btn" onclick="jumpLesson('l38', this)">লেসন ৩৮</button>
-            <button class="lesson-btn" onclick="jumpLesson('l39', this)">লেসন ৩৯</button>
-            <button class="lesson-btn" onclick="jumpLesson('l40', this)">লেসন ৪০</button>
-            <button class="lesson-btn" onclick="jumpLesson('l41', this)">লেসন ৪১</button>
-            <button class="lesson-btn" onclick="jumpLesson('l42', this)">লেসন ৪২</button>
-            <button class="lesson-btn" onclick="jumpLesson('l43', this)">লেসন ৪৩</button>
-            <button class="lesson-btn" onclick="jumpLesson('l44', this)">লেসন ৪৪</button>
-            <button class="lesson-btn" onclick="jumpLesson('l45', this)">লেসন ৪৫</button>
-            <button class="lesson-btn" onclick="jumpLesson('l46', this)">লেসন ৪৬</button>
-            <button class="lesson-btn" onclick="jumpLesson('l47', this)">লেসন ৪৭</button>
-            <button class="lesson-btn" onclick="jumpLesson('l48', this)">লেসন ৪৮</button>
-            <button class="lesson-btn" onclick="jumpLesson('l49', this)">লেসন ৪৯</button>
-            <button class="lesson-btn" onclick="jumpLesson('l50', this)">লেসন ৫০</button>
-        </div>
+        <!-- ভিউ ২: ফ্ল্যাশকার্ড ও টেবিল ভিউ (Screenshot 1 & 2) -->
+        <div id="lessonDetailView" class="detail-view">
+            
+            <div class="fc-top-header">
+                <h3 class="fc-title">শব্দার্থ ফ্ল্যাশকার্ড</h3>
+                <i class="fa-regular fa-circle-question help-icon"></i>
+            </div>
 
-        <div id="vocabContainer">
+            <!-- শাফেল ও মোড সুইচ -->
+            <div class="fc-tools">
+                <button class="fc-tool-btn" onclick="shuffleCards()"><i class="fa-solid fa-shuffle"></i></button>
+                <button class="fc-tool-btn" onclick="togglePlayVoice()"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
 
-            <!-- লেসন ২৬ -->
-            <div class="vocab-group open" id="l26">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ২৬ (Lesson 26)</span>
-                        <span class="group-badge">• অনুসন্ধান ও অবস্থা</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
+            <!-- ফ্ল্যাশকার্ড -->
+            <div class="flashcard" id="flashCard" onclick="flipCard()">
+                <i class="fa-solid fa-volume-high fc-speaker-icon" onclick="speakCurrent(event)"></i>
+                <div id="fcFront">
+                    <div class="fc-jp-text" id="fcKana">みます</div>
+                    <div class="fc-kanji-sub" id="fcKanji">見ます・診ます</div>
                 </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="みます 見ます 診ます মিমাস দেখা চেক করা examine">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">みます</span><span class="vocab-kanji">見ます・診ます</span></div>
-                            <div class="vocab-pronounce">মিমাস (Group II)</div>
-                            <div class="vocab-meaning">দেখা, চেক করা / ডাক্তার দেখানো</div>
-                            <div class="vocab-eng">Check, take a look at[span_2](start_span)[span_2](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('見ます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="さがします 探します 捜します সাগাশিমাস খোঁজা অনুসন্ধান search">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">さがします</span><span class="vocab-kanji">探します・捜します</span></div>
-                            <div class="vocab-pronounce">সাগাশিমাস (Group I)</div>
-                            <div class="vocab-meaning">খোঁজা, অনুসন্ধান করা</div>
-                            <div class="vocab-eng">Look for, search[span_3](start_span)[span_3](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('探します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="おくれます 遅れます ওকুরেমাস দেরি করা late">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">おくれます</span><span class="vocab-kanji">遅れます</span></div>
-                            <div class="vocab-pronounce">ওকুরেমাস [জিকান নি~]</div>
-                            <div class="vocab-meaning">দেরি করা (সময়ে)</div>
-                            <div class="vocab-eng">Be late for appointment[span_4](start_span)[span_4](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('遅れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="まにあいます 間に合います মানিআইমাস সময়মত পৌঁছানো in time">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">まにあいます</span><span class="vocab-kanji">間に合います</span></div>
-                            <div class="vocab-pronounce">মানি আইমাস [জিকান নি~]</div>
-                            <div class="vocab-meaning">সময় মতো পৌঁছানো</div>
-                            <div class="vocab-eng">Be in time[span_5](start_span)[span_5](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('間に合います')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="れんらくします 連絡します রেনরাকুশিমাস যোগাযোগ করা contact">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">れんらくします</span><span class="vocab-kanji">連絡します</span></div>
-                            <div class="vocab-pronounce">রেনরাকুশিমাস (Group III)</div>
-                            <div class="vocab-meaning">যোগাযোগ করা</div>
-                            <div class="vocab-eng">Contact, get in touch[span_6](start_span)[span_6](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('連絡します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="きぶんがいい 気分がいい কিবুন গা ইই ভালো অনুভব করা feel well">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">きぶんがいい</span><span class="vocab-kanji">気分がいい</span></div>
-                            <div class="vocab-pronounce">কিবুন গা ইই</div>
-                            <div class="vocab-meaning">শরীর বা মন ভালো অনুভব করা</div>
-                            <div class="vocab-eng">Feel well[span_7](start_span)[span_7](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('気分がいい')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="さいふ 財布 সাইফু মানিব্যাগ wallet">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">さいふ</span><span class="vocab-kanji">財布</span></div>
-                            <div class="vocab-pronounce">সাইফু</div>
-                            <div class="vocab-meaning">মানিব্যাগ, ওয়ালেট</div>
-                            <div class="vocab-eng">Wallet, purse[span_8](start_span)[span_8](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('財布')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="ごみ গোমি ময়লা বর্জ্য garbage">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ごみ</span><span class="vocab-kanji">ゴミ</span></div>
-                            <div class="vocab-pronounce">গোমি</div>
-                            <div class="vocab-meaning">বর্জ্য, ময়লা-আবর্জনা</div>
-                            <div class="vocab-eng">Garbage, dust, rubbish[span_9](start_span)[span_9](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('ごみ')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
+                <div id="fcBack" style="display: none;">
+                    <div class="fc-meaning-text" id="fcMeaning">দেখা, চেক করা</div>
+                    <div class="fc-ro-text" id="fcRomaji">mimasu</div>
+                </div>
+                <div class="fc-tap-hint">
+                    <i class="fa-solid fa-arrow-pointer"></i>
+                    <span>ফ্লিপ করুন</span>
                 </div>
             </div>
 
-            <!-- লেসন ২৭ -->
-            <div class="vocab-group" id="l27">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ২৭ (Lesson 27)</span>
-                        <span class="group-badge">• সক্ষমতা ও পারিপার্শ্বিক</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="かいます 飼います কাইমাস পালন করা keep pet">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かいます</span><span class="vocab-kanji">飼います</span></div>
-                            <div class="vocab-pronounce">কাইমাস (Group I)</div>
-                            <div class="vocab-meaning">পোষা প্রাণী পালন করা</div>
-                            <div class="vocab-eng">Keep, raise an animal[span_10](start_span)[span_10](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('飼います')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="みえます 見えます মিয়েমাস দেখতে পাওয়া can be seen">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">みえます</span><span class="vocab-kanji">見えます</span></div>
-                            <div class="vocab-pronounce">মিয়েমাস [ইয়ামা গা~]</div>
-                            <div class="vocab-meaning">চোখে পড়া, দেখতে পাওয়া</div>
-                            <div class="vocab-eng">Can be seen[span_11](start_span)[span_11](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('見えます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="きこえます 聞こえます কিকোয়েমাস শুনতে পাওয়া can be heard">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">きこえます</span><span class="vocab-kanji">聞こえます</span></div>
-                            <div class="vocab-pronounce">কিকোয়েমাস [ওতো গা~]</div>
-                            <div class="vocab-meaning">কানে আসা, শুনতে পাওয়া</div>
-                            <div class="vocab-eng">Can be heard[span_12](start_span)[span_12](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('聞こえます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="できます দেকিমাস তৈরি হওয়া সমাপ্ত be made">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">できます</span><span class="vocab-kanji">出来ます</span></div>
-                            <div class="vocab-pronounce">দেকিমাস [মিচি গা~]</div>
-                            <div class="vocab-meaning">তৈরি হওয়া, অস্তিত্ব লাভ করা</div>
-                            <div class="vocab-eng">Be made, completed[span_13](start_span)[span_13](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('できます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="しんぱい 心配 শিনপাই দুশ্চিন্তা worried">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しんぱい [な]</span><span class="vocab-kanji">心配 [な]</span></div>
-                            <div class="vocab-pronounce">শিনপাই [না]</div>
-                            <div class="vocab-meaning">দুশ্চিন্তা, উদ্বিগ্ন</div>
-                            <div class="vocab-eng">Worried, anxious[span_14](start_span)[span_14](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('心配')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="どうぐ 道具 দৌগু যন্ত্রপাতি সরঞ্জাম tools">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">どうぐ</span><span class="vocab-kanji">道具</span></div>
-                            <div class="vocab-pronounce">দৌগু</div>
-                            <div class="vocab-meaning">যন্ত্রপাতি, সরঞ্জাম</div>
-                            <div class="vocab-eng">Tool, equipment[span_15](start_span)[span_15](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('道具')"><i class="fa-solid fa-volume-high"></i></button>
+            <!-- প্রিভিয়াস, স্লাইডার ও নেক্সট বার -->
+            <div class="fc-nav-bar">
+                <button class="fc-arrow-btn" onclick="prevCard()"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="fc-progress-wrap">
+                    <div class="fc-counter-text" id="cardCounter">CARD 1 / 20</div>
+                    <div class="fc-progress-bar">
+                        <div class="fc-progress-fill" id="progressFill"></div>
                     </div>
                 </div>
+                <button class="fc-arrow-btn" onclick="nextCard()"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
-            <!-- লেসন ২৮ -->
-            <div class="vocab-group" id="l28">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ২৮ (Lesson 28)</span>
-                        <span class="group-badge">• যুগপৎ কাজ ও দক্ষতা</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
+            <!-- শব্দার্থ টেবিল একর্ডিয়ন বাটন (Screenshot 1) -->
+            <div class="vocab-accordion-header" onclick="toggleTable()">
+                <div class="acc-title">
+                    <i class="fa-regular fa-hand-point-right"></i>
+                    <span id="accButtonText">লেসন ২৬ এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন</span>
                 </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="うれます 売れます উরেমাস বিক্রি হওয়া be sold">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">うれます</span><span class="vocab-kanji">売れます</span></div>
-                            <div class="vocab-pronounce">উরেমাস [পান গা~]</div>
-                            <div class="vocab-meaning">বিক্রি হওয়া (পণ্য)</div>
-                            <div class="vocab-eng">Be sold, sell[span_16](start_span)[span_16](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('売れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="おどります 踊ります ওদোরিমাস নাচা dance">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">おどります</span><span class="vocab-kanji">踊ります</span></div>
-                            <div class="vocab-pronounce">ওদোরিমাস (Group I)</div>
-                            <div class="vocab-meaning">নাচ করা</div>
-                            <div class="vocab-eng">Dance[span_17](start_span)[span_17](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('踊ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="えらびます 選びます এরাবিমাস পছন্দ বাছাই choose">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">えらびます</span><span class="vocab-kanji">選びます</span></div>
-                            <div class="vocab-pronounce">এরাবিমাস (Group I)</div>
-                            <div class="vocab-meaning">পছন্দ করা, বাছাই করা</div>
-                            <div class="vocab-eng">Choose, select[span_18](start_span)[span_18](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('選びます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="まじめ মাজিমে সিরিয়াস নিষ্ঠাবান serious">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">まじめ [な]</span><span class="vocab-kanji">真面目</span></div>
-                            <div class="vocab-pronounce">মাজিমে [না]</div>
-                            <div class="vocab-meaning">সিরিয়াস, আন্তরিক, নীতিবান</div>
-                            <div class="vocab-eng">Serious, earnest[span_19](start_span)[span_19](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('真面目')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="けいけん 経験 কেইকেন অভিজ্ঞতা experience">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">けいけん</span><span class="vocab-kanji">経験</span></div>
-                            <div class="vocab-pronounce">কেইকেন</div>
-                            <div class="vocab-meaning">অভিজ্ঞতা</div>
-                            <div class="vocab-eng">Experience[span_20](start_span)[span_20](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('経験')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="ねだん 値段 নেদান দাম মূল্য price">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ねだん</span><span class="vocab-kanji">値段</span></div>
-                            <div class="vocab-pronounce">নেদান</div>
-                            <div class="vocab-meaning">দাম, পণ্যের মূল্য</div>
-                            <div class="vocab-eng">Price[span_21](start_span)[span_21](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('値段')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
+                <i class="fa-solid fa-chevron-right acc-icon" id="accChevron"></i>
             </div>
 
-            <!-- লেসন ২৯ -->
-            <div class="vocab-group" id="l29">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ২৯ (Lesson 29)</span>
-                        <span class="group-badge">• অটুট অবস্থা ও দুর্ঘটনা</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="あきます 開きます আকিমাস খোলা open">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あきます</span><span class="vocab-kanji">開きます</span></div>
-                            <div class="vocab-pronounce">আকিমাস [দোআ গা~]</div>
-                            <div class="vocab-meaning">খোলা থাকা (দরজা)</div>
-                            <div class="vocab-eng">Open (intransitive)[span_22](start_span)[span_22](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('開きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="しまります 閉まります শিমারিমাস বন্ধ হওয়া close">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しまります</span><span class="vocab-kanji">閉まります</span></div>
-                            <div class="vocab-pronounce">শিমারিমাস [দোআ গা~]</div>
-                            <div class="vocab-meaning">বন্ধ থাকা (দরজা)</div>
-                            <div class="vocab-eng">Close, shut[span_23](start_span)[span_23](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('閉まります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="こわれます 壊れます কোওয়ারেমাস নষ্ট ভাঙা break">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">こわれます</span><span class="vocab-kanji">壊れます</span></div>
-                            <div class="vocab-pronounce">কোওয়ারেমাস [ইসু গা~]</div>
-                            <div class="vocab-meaning">ভেঙে যাওয়া, নষ্ট হওয়া</div>
-                            <div class="vocab-eng">Break, get broken[span_24](start_span)[span_24](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('壊れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="われます 割れます ওয়ারেমাস ভাঙা কাঁচ smash">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">われます</span><span class="vocab-kanji">割れます</span></div>
-                            <div class="vocab-pronounce">ওয়ারেমাস [কোপ্পু গা~]</div>
-                            <div class="vocab-meaning">ভেঙে চুরমার হওয়া (গ্লাস/কাপ)</div>
-                            <div class="vocab-eng">Break, smash[span_25](start_span)[span_25](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('割れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="よごれます 汚れます ইয়োগোরেমাস ময়লা হওয়া get dirty">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">よごれます</span><span class="vocab-kanji">汚れます</span></div>
-                            <div class="vocab-pronounce">ইয়োগোরেমাস [ফুকু গা~]</div>
-                            <div class="vocab-meaning">ময়লা হয়ে যাওয়া (পোশাক)</div>
-                            <div class="vocab-eng">Get dirty[span_26](start_span)[span_26](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('汚れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩০ -->
-            <div class="vocab-group" id="l30">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩০ (Lesson 30)</span>
-                        <span class="group-badge">• উদ্দেশ্য ও পূর্বপ্রস্তুতি</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="はります হারিমাস সাঁটানো লাগানো post paste">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">はります</span><span class="vocab-kanji">貼ります</span></div>
-                            <div class="vocab-pronounce">হারিমাস (Group I)</div>
-                            <div class="vocab-meaning">আঠা দিয়ে লাগানো, সাঁটানো</div>
-                            <div class="vocab-eng">Post, paste, put up[span_27](start_span)[span_27](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('貼ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="かけます 掛けます কাকেমাস ঝোলানো hang">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かけます</span><span class="vocab-kanji">掛けます</span></div>
-                            <div class="vocab-pronounce">কাকেমাস (Group II)</div>
-                            <div class="vocab-meaning">ঝোলানো (ছবি/ঘড়ি)</div>
-                            <div class="vocab-eng">Hang[span_28](start_span)[span_28](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('掛けます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="かざります 飾ります কাজারিমাস সাজানো decorate">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かざります</span><span class="vocab-kanji">飾ります</span></div>
-                            <div class="vocab-pronounce">কাজারিমাস (Group I)</div>
-                            <div class="vocab-meaning">সাজানো, প্রদর্শন করা</div>
-                            <div class="vocab-eng">Display, decorate[span_29](start_span)[span_29](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('飾ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="もどします 戻します মোদোশিমাস আগের জায়গায় রাখা put back">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">もどします</span><span class="vocab-kanji">戻します</span></div>
-                            <div class="vocab-pronounce">মোদোশিমাস (Group I)</div>
-                            <div class="vocab-meaning">নির্দিষ্ট আগের জায়গায় ফিরিয়ে রাখা</div>
-                            <div class="vocab-eng">Return, put back[span_30](start_span)[span_30](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('戻します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="よてい 予定 ইয়োতেই পরিকল্পনা plan">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">よてい</span><span class="vocab-kanji">予定</span></div>
-                            <div class="vocab-pronounce">ইয়োতেই</div>
-                            <div class="vocab-meaning">কর্মপরিকল্পনা, শিডিউল</div>
-                            <div class="vocab-eng">Plan, schedule[span_31](start_span)[span_31](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('予定')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩১ -->
-            <div class="vocab-group" id="l31">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩১ (Lesson 31)</span>
-                        <span class="group-badge">• পরিকল্পনা ও অনুষ্ঠান</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="つづけます 続けます ৎসুজুকেমাস চালিয়ে যাওয়া continue">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">つづけます</span><span class="vocab-kanji">続けます</span></div>
-                            <div class="vocab-pronounce">ৎসুজুকেমাস (Group II)</div>
-                            <div class="vocab-meaning">চালিয়ে যাওয়া, অবিরাম রাখা</div>
-                            <div class="vocab-eng">Continue[span_32](start_span)[span_32](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('続けます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="みつけます 見つけます মিৎসুকেমাস খুঁজে পাওয়া find">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">みつけます</span><span class="vocab-kanji">見つけます</span></div>
-                            <div class="vocab-pronounce">মিৎসুকেমাস (Group II)</div>
-                            <div class="vocab-meaning">খুঁজে পাওয়া</div>
-                            <div class="vocab-eng">Find[span_33](start_span)[span_33](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('見つけます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="けっこんしき 結婚式 কেক্কোনশিকি বিয়ের অনুষ্ঠান wedding">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">けっこんしき</span><span class="vocab-kanji">結婚式</span></div>
-                            <div class="vocab-pronounce">কেক্কোনশিকি</div>
-                            <div class="vocab-meaning">বিয়ের অনুষ্ঠান</div>
-                            <div class="vocab-eng">Wedding ceremony[span_34](start_span)[span_34](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('結婚式')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="ほんしゃ 本社 হোনশা প্রধান কার্যালয় head office">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ほんしゃ</span><span class="vocab-kanji">本社</span></div>
-                            <div class="vocab-pronounce">হোনশা</div>
-                            <div class="vocab-meaning">কোম্পানির প্রধান কার্যালয়</div>
-                            <div class="vocab-eng">Head office[span_35](start_span)[span_35](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('本社')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩২ -->
-            <div class="vocab-group" id="l32">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩২ (Lesson 32)</span>
-                        <span class="group-badge">• স্বাস্থ্য ও আবহাওয়া</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="せいこうします 成功します সেইকৌশিমাস সফল হওয়া succeed">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">せいこうします</span><span class="vocab-kanji">成功します</span></div>
-                            <div class="vocab-pronounce">সেইকৌশিমাস (Group III)</div>
-                            <div class="vocab-meaning">সফল হওয়া</div>
-                            <div class="vocab-eng">Succeed[span_36](start_span)[span_36](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('成功します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="しっぱいします 失敗します শিল্পাইশিমাস ব্যর্থ হওয়া fail">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しっぱいします</span><span class="vocab-kanji">失敗します</span></div>
-                            <div class="vocab-pronounce">শিল্পাইশিমাস [শিকেন নি~]</div>
-                            <div class="vocab-meaning">ব্যর্থ হওয়া, ফেল করা</div>
-                            <div class="vocab-eng">Fail an exam[span_37](start_span)[span_37](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('失敗します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="ごうかくします 合格します গৌকাকুশিমাস পাশ করা pass">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ごうかくします</span><span class="vocab-kanji">合格します</span></div>
-                            <div class="vocab-pronounce">গৌকাকুশিমাস [শিকেন নি~]</div>
-                            <div class="vocab-meaning">উত্তীর্ণ হওয়া, পরীক্ষায় পাশ করা</div>
-                            <div class="vocab-eng">Pass an examination[span_38](start_span)[span_38](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('合格します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="やみます ইয়ামিমাস বৃষ্টি থামা stop raining">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">やみます</span><span class="vocab-kanji">止みます</span></div>
-                            <div class="vocab-pronounce">ইয়ামিমাস [আমে গা~]</div>
-                            <div class="vocab-meaning">থামা, বন্ধ হওয়া (বৃষ্টি/তুষার)</div>
-                            <div class="vocab-eng">Rain stops[span_39](start_span)[span_39](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('止みます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="けが 怪我 কেগা আঘাত চোট injury">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">けが</span><span class="vocab-kanji">怪我</span></div>
-                            <div class="vocab-pronounce">কেগা</div>
-                            <div class="vocab-meaning">চোট, আঘাত পাওয়া</div>
-                            <div class="vocab-eng">Injury, wound[span_40](start_span)[span_40](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('怪我')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৩ -->
-            <div class="vocab-group" id="l33">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৩ (Lesson 33)</span>
-                        <span class="group-badge">• আদেশ, নিষেধ ও ট্রাফিক</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="にげます 逃げます নিগেমাস পালানো run away">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">にげます</span><span class="vocab-kanji">逃げます</span></div>
-                            <div class="vocab-pronounce">নিগেমাস (Group II)</div>
-                            <div class="vocab-meaning">পালিয়ে যাওয়া, দৌড়ানো</div>
-                            <div class="vocab-eng">Run away[span_41](start_span)[span_41](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('逃げます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="あきらめます 諦めます আকিরামেমাস হাল ছাড়া give up">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あきらめます</span><span class="vocab-kanji">諦めます</span></div>
-                            <div class="vocab-pronounce">আকিরামেমাস (Group II)</div>
-                            <div class="vocab-meaning">হাল ছেড়ে দেওয়া, ত্যাগ করা</div>
-                            <div class="vocab-eng">Give up[span_42](start_span)[span_42](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('諦めます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="まもります 守ります মামোরিমাস মান্য করা obey">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">まもります</span><span class="vocab-kanji">守ります</span></div>
-                            <div class="vocab-pronounce">মামোরিমাস (Group I)</div>
-                            <div class="vocab-meaning">নিয়ম মান্য করা, রক্ষা করা</div>
-                            <div class="vocab-eng">Obey, keep, follow[span_43](start_span)[span_43](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('守ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="たちいりきんし 立ち入り禁止 তাচিইরিকিনশি প্রবেশ নিষেধ no entry">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">たちいりきんし</span><span class="vocab-kanji">立ち入り禁止</span></div>
-                            <div class="vocab-pronounce">তাচিইরিকিনশি</div>
-                            <div class="vocab-meaning">প্রবেশ নিষেধ</div>
-                            <div class="vocab-eng">Keep out, No entry[span_44](start_span)[span_44](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('立ち入り禁止')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৪ -->
-            <div class="vocab-group" id="l34">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৪ (Lesson 34)</span>
-                        <span class="group-badge">• রন্ধন ও কার্যপ্রণালী</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="みがきます 磨きます মিগাকিমাস ব্রাশ মাজা polish">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">みがきます</span><span class="vocab-kanji">磨きます</span></div>
-                            <div class="vocab-pronounce">মিগাকিমাস [হা ও~]</div>
-                            <div class="vocab-meaning">দাঁত ব্রাশ করা, মাজা</div>
-                            <div class="vocab-eng">Brush teeth, polish[span_45](start_span)[span_45](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('磨きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="くみたてます 組み立てます কুমিতাতেমাস একত্রিত assemble">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">くみたてます</span><span class="vocab-kanji">組み立てます</span></div>
-                            <div class="vocab-pronounce">কুমিতাতেমাস (Group II)</div>
-                            <div class="vocab-meaning">একত্রিত করা, জোড়া লাগানো</div>
-                            <div class="vocab-eng">Assemble[span_46](start_span)[span_46](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('組み立てます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="せつめいしょ 説明書 সেৎসুমেইশো নির্দেশিকা instruction">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">せつめいしょ</span><span class="vocab-kanji">説明書</span></div>
-                            <div class="vocab-pronounce">সেৎসুমেইশো</div>
-                            <div class="vocab-meaning">ব্যবহারের নির্দেশিকা বই</div>
-                            <div class="vocab-eng">Instruction book[span_47](start_span)[span_47](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('説明書')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="しょうゆ 醤油 শৌইউ সয়াসস soy sauce">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しょうゆ</span><span class="vocab-kanji">醤油</span></div>
-                            <div class="vocab-pronounce">শৌইউ</div>
-                            <div class="vocab-meaning">সয়া সস</div>
-                            <div class="vocab-eng">Soy sauce[span_48](start_span)[span_48](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('醤油')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৫ -->
-            <div class="vocab-group" id="l35">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৫ (Lesson 35)</span>
-                        <span class="group-badge">• শর্ত ও সুযোগ</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="さきます 咲きます সাকিমাস ফুল ফোটা bloom">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">さきます</span><span class="vocab-kanji">咲きます</span></div>
-                            <div class="vocab-pronounce">সাকিমাস [হানা গা~]</div>
-                            <div class="vocab-meaning">ফুল ফোটা</div>
-                            <div class="vocab-eng">Bloom (flowers)[span_49](start_span)[span_49](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('咲きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="なおります 治ります 直ります নাওরিমাস সেরে উঠা recover">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">なおります</span><span class="vocab-kanji">治ります・直ります</span></div>
-                            <div class="vocab-pronounce">নাওরিমাস (Group I)</div>
-                            <div class="vocab-meaning">রোগ সেরে ওঠা / ত্রুটি মেরামত হওয়া</div>
-                            <div class="vocab-eng">Recover / Be repaired[span_50](start_span)[span_50](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('治ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="きかい 機会 কিকাই সুযোগ opportunity">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">きかい</span><span class="vocab-kanji">機会</span></div>
-                            <div class="vocab-pronounce">কিকাই</div>
-                            <div class="vocab-meaning">সুযোগ, চান্স</div>
-                            <div class="vocab-eng">Chance, opportunity[span_51](start_span)[span_51](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('機会')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৬ -->
-            <div class="vocab-group" id="l36">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৬ (Lesson 36)</span>
-                        <span class="group-badge">• অভ্যাস ও লক্ষ্য</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="ちょきんします 貯金します চোকিনশিমাস সঞ্চয় save money">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ちょきんします</span><span class="vocab-kanji">貯金します</span></div>
-                            <div class="vocab-pronounce">চৌকিনশিমাস (Group III)</div>
-                            <div class="vocab-meaning">টাকা জমানো, সঞ্চয় করা</div>
-                            <div class="vocab-eng">Save money[span_52](start_span)[span_52](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('貯金します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="なれます 慣れます নারেমাস অভ্যস্ত হওয়া accustomed">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">なれます</span><span class="vocab-kanji">慣れます</span></div>
-                            <div class="vocab-pronounce">নারেমাস [শিগোতো নি~]</div>
-                            <div class="vocab-meaning">কাজে অভ্যস্ত হয়ে যাওয়া</div>
-                            <div class="vocab-eng">Get accustomed to[span_53](start_span)[span_53](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('慣れます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="かならず 必ず কানারাজু অবশ্যই without fail">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かならず</span><span class="vocab-kanji">必ず</span></div>
-                            <div class="vocab-pronounce">কানারাজু</div>
-                            <div class="vocab-meaning">অবশ্যই, যেকোনো মূল্যে</div>
-                            <div class="vocab-eng">Without fail[span_54](start_span)[span_54](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('必ず')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৭ -->
-            <div class="vocab-group" id="l37">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৭ (Lesson 37)</span>
-                        <span class="group-badge">• বাচ্য ও আবিষ্কার</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="ほめます 褒めます হোমেমাস প্রশংসা praise">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ほめます</span><span class="vocab-kanji">褒めます</span></div>
-                            <div class="vocab-pronounce">হোমেমাস (Group II)</div>
-                            <div class="vocab-meaning">প্রশংসা করা</div>
-                            <div class="vocab-eng">Praise[span_55](start_span)[span_55](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('褒めます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="しかります 叱ります শিকারিমাস বকা scold">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しかります</span><span class="vocab-kanji">叱ります</span></div>
-                            <div class="vocab-pronounce">শিকারিমাস (Group I)</div>
-                            <div class="vocab-meaning">ধমক দেওয়া, বকা দেওয়া</div>
-                            <div class="vocab-eng">Scold[span_56](start_span)[span_56](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('叱ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="はつめいします 発明します হাৎসুমেইশিমাস উদ্ভাবন invent">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">はつめいします</span><span class="vocab-kanji">発明します</span></div>
-                            <div class="vocab-pronounce">হাৎসুমেইশিমাস (Group III)</div>
-                            <div class="vocab-meaning">উদ্ভাবন করা</div>
-                            <div class="vocab-eng">Invent[span_57](start_span)[span_57](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('発明します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="げんりょう 原料 গেনরিয়ৌ কাঁচামাল raw material">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">げんりょう</span><span class="vocab-kanji">原料</span></div>
-                            <div class="vocab-pronounce">গেনরিয়ৌ</div>
-                            <div class="vocab-meaning">কাঁচামাল</div>
-                            <div class="vocab-eng">Raw material[span_58](start_span)[span_58](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('原料')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৮ -->
-            <div class="vocab-group" id="l38">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৮ (Lesson 38)</span>
-                        <span class="group-badge">• পরিচর্যা ও অনুভূতি</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="そだてます 育てます সোদাতেমাস লালনপালন bring up">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">そだてます</span><span class="vocab-kanji">育てます</span></div>
-                            <div class="vocab-pronounce">সোদাতেমাস (Group II)</div>
-                            <div class="vocab-meaning">লালনপালন করা, বড় করা</div>
-                            <div class="vocab-eng">Bring up, breed[span_59](start_span)[span_59](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('育てます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="にゅういんします 入院します নিয়্যুইনশিমাস ভর্তি hospital">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">にゅういんします</span><span class="vocab-kanji">入院します</span></div>
-                            <div class="vocab-pronounce">নিয়্যুইনশিমাস (Group III)</div>
-                            <div class="vocab-meaning">হাসপাতালে ভর্তি হওয়া</div>
-                            <div class="vocab-eng">Enter hospital[span_60](start_span)[span_60](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('入院します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="きもちがいい 気持ちがいい কিমোচি গা ইই আরামদায়ক pleasant">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">きもちがいい</span><span class="vocab-kanji">気持ちがいい</span></div>
-                            <div class="vocab-pronounce">কিমোচি গা ইই</div>
-                            <div class="vocab-meaning">মনোরম, আরামদায়ক অনুভূতি</div>
-                            <div class="vocab-eng">Pleasant, comfortable[span_61](start_span)[span_61](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('気持ちがいい')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৩৯ -->
-            <div class="vocab-group" id="l39">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৩৯ (Lesson 39)</span>
-                        <span class="group-badge">• প্রাকৃতিক কারণ ও দুর্যোগ</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="びっくりします বিক্কুরিশিমাস অবাক চমক surprised">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">びっくりします</span><span class="vocab-kanji">吃驚します</span></div>
-                            <div class="vocab-pronounce">বিক্কুরিশিমাস (Group III)</div>
-                            <div class="vocab-meaning">অবাক হওয়া, চমকে যাওয়া</div>
-                            <div class="vocab-eng">Be surprised[span_62](start_span)[span_62](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('びっくりします')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="あんしんします 安心します আনশিনশিমাস নিশ্চিন্ত relieved">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あんしんします</span><span class="vocab-kanji">安心します</span></div>
-                            <div class="vocab-pronounce">আনশিনশিমাস (Group III)</div>
-                            <div class="vocab-meaning">নিশ্চিন্ত হওয়া, স্বস্তি পাওয়া</div>
-                            <div class="vocab-eng">Be relieved[span_63](start_span)[span_63](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('安心します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="じしん 地震 জিশিন ভূমিকম্প earthquake">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">じしん</span><span class="vocab-kanji">地震</span></div>
-                            <div class="vocab-pronounce">জিশিন</div>
-                            <div class="vocab-meaning">ভূমিকম্প</div>
-                            <div class="vocab-eng">Earthquake[span_64](start_span)[span_64](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('地震')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="たいふう 台風 তাইফুউ টাইফুন typhoon">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">たいふう</span><span class="vocab-kanji">台風</span></div>
-                            <div class="vocab-pronounce">তাইফুউ</div>
-                            <div class="vocab-meaning">ঘূর্ণিঝড়, টাইফুন</div>
-                            <div class="vocab-eng">Typhoon[span_65](start_span)[span_65](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('台風')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪০ -->
-            <div class="vocab-group" id="l40">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪০ (Lesson 40)</span>
-                        <span class="group-badge">• পরিমাপ ও যাচাই</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="かぞえます 数えます কাজোয়েমাস গণনা count">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かぞえます</span><span class="vocab-kanji">数えます</span></div>
-                            <div class="vocab-pronounce">কাজোয়েমাস (Group II)</div>
-                            <div class="vocab-meaning">গণনা করা</div>
-                            <div class="vocab-eng">Count[span_66](start_span)[span_66](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('数えます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="はかります 測ります 量ります হাকারিমাস পরিমাপ measure">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">はかります</span><span class="vocab-kanji">測ります・量ります</span></div>
-                            <div class="vocab-pronounce">হাকারিমাস (Group I)</div>
-                            <div class="vocab-meaning">মাপা, ওজন বা দৈর্ঘ্য নির্ণয় করা</div>
-                            <div class="vocab-eng">Measure, weigh[span_67](start_span)[span_67](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('測ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="たしかめます 確かめます তাশিকামেমাস নিশ্চিত confirm">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">たしかめます</span><span class="vocab-kanji">確かめます</span></div>
-                            <div class="vocab-pronounce">তাশিকামেমাস (Group II)</div>
-                            <div class="vocab-meaning">যাচাই করা, নিশ্চিত হওয়া</div>
-                            <div class="vocab-eng">Confirm, make sure[span_68](start_span)[span_68](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('確かめます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪১ -->
-            <div class="vocab-group" id="l41">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪১ (Lesson 41)</span>
-                        <span class="group-badge">• আদান-প্রদান ও উপহার</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="いただきます ইতাদাকিমাস গ্রহণ receive">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">いただきます</span><span class="vocab-kanji">頂きます</span></div>
-                            <div class="vocab-pronounce">ইতাদাকিমাস (Group I)</div>
-                            <div class="vocab-meaning">বড়দের কাছ থেকে গ্রহণ করা (Polite)</div>
-                            <div class="vocab-eng">Receive (humble)[span_69](start_span)[span_69](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('頂きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="くださいます কুদাসাইমাস দেওয়া give">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">くださいます</span><span class="vocab-kanji">下さいます</span></div>
-                            <div class="vocab-pronounce">কুদাসাইমাস (Group I)</div>
-                            <div class="vocab-meaning">বড়রা আমাকে কিছু দেওয়া (Polite)</div>
-                            <div class="vocab-eng">Give (respectful)[span_70](start_span)[span_70](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('下さいます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="やります ইয়ারিমাস ছোটদের দেওয়া give">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">やります</span><span class="vocab-kanji">遣ります</span></div>
-                            <div class="vocab-pronounce">ইয়ারিমাস (Group I)</div>
-                            <div class="vocab-meaning">ছোটদের, পোষ্যকে বা গাছে কিছু দেওয়া</div>
-                            <div class="vocab-eng">Give to younger / pet[span_71](start_span)[span_71](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('遣ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪২ -->
-            <div class="vocab-group" id="l42">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪২ (Lesson 42)</span>
-                        <span class="group-badge">• উদ্দেশ্য ও কার্যকারণ</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="つつみます 包みます ৎসুৎসুমিমাস মোড়ানো wrap">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">つつみます</span><span class="vocab-kanji">包みます</span></div>
-                            <div class="vocab-pronounce">ৎসুৎসুমিমাস (Group I)</div>
-                            <div class="vocab-meaning">মোড়ানো, প্যাকেট করা</div>
-                            <div class="vocab-eng">Wrap[span_72](start_span)[span_72](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('包みます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="わかします 沸かします ওয়াকাশিমাস ফোটানো boil">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">わかします</span><span class="vocab-kanji">沸かします</span></div>
-                            <div class="vocab-pronounce">ওয়াকাশিমাস (Group I)</div>
-                            <div class="vocab-meaning">পানি ফোটানো, গরম করা</div>
-                            <div class="vocab-eng">Boil[span_73](start_span)[span_73](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('沸かします')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="べんごし 弁護士 বেনগোশি আইনজীবী lawyer">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">べんごし</span><span class="vocab-kanji">弁護士</span></div>
-                            <div class="vocab-pronounce">বেনগোশি</div>
-                            <div class="vocab-meaning">আইনজীবী, অ্যাডভোকেট</div>
-                            <div class="vocab-eng">Lawyer[span_74](start_span)[span_74](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('弁護士')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৩ -->
-            <div class="vocab-group" id="l43">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৩ (Lesson 43)</span>
-                        <span class="group-badge">• পরিবর্তন ও অনুমান</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="ふえます 増えます ফুয়েমাস বৃদ্ধি পাওয়া increase">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ふえます</span><span class="vocab-kanji">増えます</span></div>
-                            <div class="vocab-pronounce">ফুয়েমাস [ইউশুৎসু গা~]</div>
-                            <div class="vocab-meaning">বৃদ্ধি পাওয়া (রপ্তানি)</div>
-                            <div class="vocab-eng">Increase[span_75](start_span)[span_75](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('増えます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="へります 減ります হেরিমাস হ্রাস পাওয়া decrease">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">へります</span><span class="vocab-kanji">減ります</span></div>
-                            <div class="vocab-pronounce">হেরিমাস [ইউশুৎসু গা~]</div>
-                            <div class="vocab-meaning">কমে যাওয়া, হ্রাস পাওয়া</div>
-                            <div class="vocab-eng">Decrease[span_76](start_span)[span_76](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('減ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="あがります 上がります আগারিমাস বৃদ্ধি rise">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あがります</span><span class="vocab-kanji">上がります</span></div>
-                            <div class="vocab-pronounce">আগারিমাস [নেদান গা~]</div>
-                            <div class="vocab-meaning">মূল্য বা দাম বৃদ্ধি পাওয়া</div>
-                            <div class="vocab-eng">Rise, go up[span_77](start_span)[span_77](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('上がります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৪ -->
-            <div class="vocab-group" id="l44">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৪ (Lesson 44)</span>
-                        <span class="group-badge">• মাত্রা ও অবস্থা</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="なきます 泣きます নাকিমাস কান্না cry">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">なきます</span><span class="vocab-kanji">泣きます</span></div>
-                            <div class="vocab-pronounce">নাকিমাস (Group I)</div>
-                            <div class="vocab-meaning">কান্না করা</div>
-                            <div class="vocab-eng">Cry[span_78](start_span)[span_78](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('泣きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="かわきます 乾きます কাওয়াকিমাস শুকানো dry">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かわきます</span><span class="vocab-kanji">乾きます</span></div>
-                            <div class="vocab-pronounce">কাওয়াকিমাস [শার্ট গা~]</div>
-                            <div class="vocab-meaning">শুকিয়ে যাওয়া (কাপড়)</div>
-                            <div class="vocab-eng">Dry[span_79](start_span)[span_79](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('乾きます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="あんぜん 安全 আনজেন নিরাপদ safe">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あんぜん [な]</span><span class="vocab-kanji">安全 [な]</span></div>
-                            <div class="vocab-pronounce">আনজেন [না]</div>
-                            <div class="vocab-meaning">নিরাপদ</div>
-                            <div class="vocab-eng">Safe[span_80](start_span)[span_80](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('安全')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৫ -->
-            <div class="vocab-group" id="l45">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৫ (Lesson 45)</span>
-                        <span class="group-badge">• অনাকাঙ্ক্ষিত পরিস্থিতি</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="しんじます 信じます শিনজিমাস বিশ্বাস believe">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">しんじます</span><span class="vocab-kanji">信じます</span></div>
-                            <div class="vocab-pronounce">শিনজিমাস (Group II)</div>
-                            <div class="vocab-meaning">বিশ্বাস করা, ভরসা রাখা</div>
-                            <div class="vocab-eng">Believe, trust[span_81](start_span)[span_81](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('信じます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="りょうしゅうしょ 領収書 রিয়ৌশ্যুশো রসিদ receipt">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">りょうしゅうしょ</span><span class="vocab-kanji">領収書</span></div>
-                            <div class="vocab-pronounce">রিয়ৌশ্যুশো</div>
-                            <div class="vocab-meaning">টাকার রসিদ, ভাউচার</div>
-                            <div class="vocab-eng">Receipt[span_82](start_span)[span_82](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('領収書')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="ちゅうし 中止 চ্যুশি বাতিল cancel">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">ちゅうし</span><span class="vocab-kanji">中止</span></div>
-                            <div class="vocab-pronounce">চ্যুশি</div>
-                            <div class="vocab-meaning">বাতিলকরণ, স্থগিত রাখা</div>
-                            <div class="vocab-eng">Calling off, cancellation[span_83](start_span)[span_83](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('中止')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৬ -->
-            <div class="vocab-group" id="l46">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৬ (Lesson 46)</span>
-                        <span class="group-badge">• ডেলিভারি ও তাৎক্ষণিক পর্যায়</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="わたします 渡します ওয়াতাশিমাস হস্তান্তর hand over">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">わたします</span><span class="vocab-kanji">渡します</span></div>
-                            <div class="vocab-pronounce">ওয়াতাশিমাস (Group I)</div>
-                            <div class="vocab-meaning">হস্তান্তর করা, হাতে তুলে দেওয়া</div>
-                            <div class="vocab-eng">Hand over[span_84](start_span)[span_84](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('渡します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="たくはいびん 宅配便 তাকুহাইবীন হোম ডেলিভারি home delivery">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">たくはいびん</span><span class="vocab-kanji">宅配便</span></div>
-                            <div class="vocab-pronounce">তাকুহাইবীন</div>
-                            <div class="vocab-meaning">হোম ডেলিভারি সেবা</div>
-                            <div class="vocab-eng">Home delivery service[span_85](start_span)[span_85](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('宅配便')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="たったいま たった今 তাত্তাইমা এইমাত্র just now">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">たったいま</span><span class="vocab-kanji">たった今</span></div>
-                            <div class="vocab-pronounce">তাত্তাইমা</div>
-                            <div class="vocab-meaning">এইমাত্র, মাত্র কিছুক্ষণ পূর্বে</div>
-                            <div class="vocab-eng">Just now[span_86](start_span)[span_86](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('たった今')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৭ -->
-            <div class="vocab-group" id="l47">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৭ (Lesson 47)</span>
-                        <span class="group-badge">• বিজ্ঞান ও সমাজ</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="あつまります 集まります আৎসুমারিমাস জড়ো হওয়া gather">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">あつまります</span><span class="vocab-kanji">集まります</span></div>
-                            <div class="vocab-pronounce">আৎসুমারিমাস [হিতো গা~]</div>
-                            <div class="vocab-meaning">মানুষজন সমবেত বা জড়ো হওয়া</div>
-                            <div class="vocab-eng">People gather[span_87](start_span)[span_87](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('集まります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="じんこう 人口 জিনকৌ জনসংখ্যা population">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">じんこう</span><span class="vocab-kanji">人口</span></div>
-                            <div class="vocab-pronounce">জিনকৌ</div>
-                            <div class="vocab-meaning">জনসংখ্যা</div>
-                            <div class="vocab-eng">Population[span_88](start_span)[span_88](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('人口')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="かがく 科学 কাগাকু বিজ্ঞান science">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">かがく</span><span class="vocab-kanji">科学</span></div>
-                            <div class="vocab-pronounce">কাগাকু</div>
-                            <div class="vocab-meaning">বিজ্ঞান</div>
-                            <div class="vocab-eng">Science[span_89](start_span)[span_89](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('科学')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৮ -->
-            <div class="vocab-group" id="l48">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৮ (Lesson 48)</span>
-                        <span class="group-badge">• শিক্ষা ও প্রবর্তন</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="おろします 降ろします ওরোশিমাস নামানো unload">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">おろします</span><span class="vocab-kanji">降ろします</span></div>
-                            <div class="vocab-pronounce">ওরোশিমাস (Group I)</div>
-                            <div class="vocab-meaning">নামিয়ে রাখা, খালি করা</div>
-                            <div class="vocab-eng">Put down, unload[span_90](start_span)[span_90](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('降ろします')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="せわをします 世話をします সেওয়া ও শিমাস যত্ন নেওয়া take care">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">せわをします</span><span class="vocab-kanji">世話をします</span></div>
-                            <div class="vocab-pronounce">সেওয়া ও শিমাস (Group III)</div>
-                            <div class="vocab-meaning">কারো সেবা বা যত্ন নেওয়া</div>
-                            <div class="vocab-eng">Take care of[span_91](start_span)[span_91](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('世話をします')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৪৯ -->
-            <div class="vocab-group" id="l49">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৪৯ (Lesson 49)</span>
-                        <span class="group-badge">• সম্মানসূচক রূপ (Sonkeigo)</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="いらっしゃいます ইরাশ্শাইমাস থাকা যাওয়া আসা">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">いらっしゃいます</span><span class="vocab-kanji">いらっしゃる</span></div>
-                            <div class="vocab-pronounce">ইরাশ্শাইমাস (Group I)</div>
-                            <div class="vocab-meaning">থাকা / যাওয়া / আসা (います・いきます・きます এর সম্মানসূচক রূপ)</div>
-                            <div class="vocab-eng">Be, go, come (Sonkeigo)[span_92](start_span)[span_92](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('いらっしゃいます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="めしあがります 召し上がります মেশিআগারিমাস খাওয়া পান করা">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">めしあがります</span><span class="vocab-kanji">召し上がります</span></div>
-                            <div class="vocab-pronounce">মেশিআগারিমাস (Group I)</div>
-                            <div class="vocab-meaning">খাওয়া বা পান করা (たべます・のみます এর সম্মানসূচক রূপ)</div>
-                            <div class="vocab-eng">Eat, drink (Sonkeigo)[span_93](start_span)[span_93](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('召し上がります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="おっしゃいます ওশ্শাইমাস বলা">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">おっしゃいます</span><span class="vocab-kanji">仰る</span></div>
-                            <div class="vocab-pronounce">ওশ্শাইমাস (Group I)</div>
-                            <div class="vocab-meaning">বলা (いいます এর সম্মানসূচক রূপ)</div>
-                            <div class="vocab-eng">Say (Sonkeigo)[span_94](start_span)[span_94](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('おっしゃいます')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- লেসন ৫০ -->
-            <div class="vocab-group" id="l50">
-                <div class="group-header" onclick="toggleGroup(this)">
-                    <div>
-                        <span class="group-title">লেসন ৫০ (Lesson 50)</span>
-                        <span class="group-badge">• বিনম্র রূপ (Kenjougo)</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-right group-arrow"></i>
-                </div>
-                <div class="vocab-list">
-                    <div class="vocab-card" data-key="まいります 参ります মাইরিমাস যাওয়া আসা">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">まいります</span><span class="vocab-kanji">参ります</span></div>
-                            <div class="vocab-pronounce">মাইরিমাস (Group I)</div>
-                            <div class="vocab-meaning">যাওয়া বা আসা (いきます・きます এর বিনম্র রূপ)</div>
-                            <div class="vocab-eng">Go, come (Humble)[span_95](start_span)[span_95](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('参ります')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="もうします 申します মৌশিমাস বলা নাম হওয়া">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">もうします</span><span class="vocab-kanji">申します</span></div>
-                            <div class="vocab-pronounce">মৌশিমাস (Group I)</div>
-                            <div class="vocab-meaning">বলা বা নাম হওয়া (いいます এর বিনম্র রূপ)</div>
-                            <div class="vocab-eng">Say (one's name)[span_96](start_span)[span_96](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('申します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    <div class="vocab-card" data-key="いたします 致します ইতাশিমাস করা">
-                        <div class="vocab-left">
-                            <div class="vocab-main"><span class="vocab-kana">いたします</span><span class="vocab-kanji">致します</span></div>
-                            <div class="vocab-pronounce">ইতাশিমাস (Group I)</div>
-                            <div class="vocab-meaning">করা (します এর বিনম্র রূপ)</div>
-                            <div class="vocab-eng">Do (Humble)[span_97](start_span)[span_97](end_span)</div>
-                        </div>
-                        <button class="sound-btn" onclick="speakText('致します')"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                </div>
+            <!-- শব্দার্থ টেবিল (Screenshot 1) -->
+            <div class="vocab-table-card" id="tableCard">
+                <table class="vocab-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 34%;">জাপানিজ<br>(কানা)</th>
+                            <th style="width: 33%;">রোমাজি /<br>উচ্চারণ</th>
+                            <th style="width: 33%;">বাংলা অর্থ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- জাভাস্ক্রিপ্ট দিয়ে টেবিল তৈরি হবে -->
+                    </tbody>
+                </table>
             </div>
 
         </div>
+
     </main>
 
-    <!-- বটম নেভিগেশন বার -->
+    <!-- ফিক্সড বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
-        <a href="index.html" class="nav-item">
+        <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-robot"></i>
             <span>AI সেনসেই</span>
         </a>
         <a href="profile.html" class="nav-item">
             <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
+            <span>লগইন</span>
         </a>
     </nav>
 
-    <!-- স্ক্রিপ্ট -->
+    <!-- N4 Vocabulary ডেটাসেট ও লজিক -->
     <script>
-        function toggleGroup(header) {
-            const group = header.parentElement;
-            group.classList.toggle('open');
+        const lessons = {
+            26: {
+                title: "অনুসন্ধান ও অবস্থা",
+                kanji: "第26課",
+                words: [
+                    { kana: "みます", kanji: "見ます、診ます", ro: "mimasu", bn: "দেখা, চেক করা" },
+                    { kana: "さがします", kanji: "探します、捜します", ro: "sagashimasu", bn: "খোঁজা, অনুসন্ধান করা" },
+                    { kana: "おくれます", kanji: "遅れます", ro: "okuremasu", bn: "দেরি করা (সময়ে)" },
+                    { kana: "まにあいます", kanji: "間に合います", ro: "maniaimasu", bn: "সময়মতো পৌঁছানো" },
+                    { kana: "やります", kanji: "やります", ro: "yarimasu", bn: "করা" },
+                    { kana: "ひろいます", kanji: "拾います", ro: "hiroimasu", bn: "তুলে নেওয়া" },
+                    { kana: "れんらくします", kanji: "連絡します", ro: "renrakushimasu", bn: "যোগাযোগ করা" },
+                    { kana: "きぶんがいい", kanji: "気分がいい", ro: "kibun ga ii", bn: "ভালো অনুভব করা" },
+                    { kana: "きぶんがわるい", kanji: "気分が悪い", ro: "kibun ga warui", bn: "খারাপ অনুভব করা" },
+                    { kana: "さいふ", kanji: "財布", ro: "saifu", bn: "মানিব্যাগ" },
+                    { kana: "ごみ", kanji: "ごみ", ro: "gomi", bn: "বর্জ্য, ময়লা" },
+                    { kana: "へいじつ", kanji: "平日", ro: "heijitsu", bn: "সাপ্তাহিক কর্মদিবস" },
+                    { kana: "こんど", kanji: "今度", ro: "kondo", bn: "পরের বার, অন্য সময়" },
+                    { kana: "ずいぶん", kanji: "ずいぶん", ro: "zuibun", bn: "খুব, বেশ" },
+                    { kana: "ちょくせつ", kanji: "直接", ro: "chokusetsu", bn: "সরাসরি" },
+                    { kana: "いつでも", kanji: "いつでも", ro: "itsudemo", bn: "যেকোনো সময়" },
+                    { kana: "どこでも", kanji: "どこでも", ro: "dokodemo", bn: "যেকোনো জায়গা" },
+                    { kana: "だれでも", kanji: "だれでも", ro: "daredemo", bn: "যে কেউ" },
+                    { kana: "なんでも", kanji: "何でも", ro: "nandemo", bn: "যেকোনো কিছু" },
+                    { kana: "かたづきます", kanji: "片付きます", ro: "katadukimasu", bn: "গোছানো, সাজানো" }
+                ]
+            },
+            27: {
+                title: "সক্ষমতা ও পারিপার্শ্বিক",
+                kanji: "第27課",
+                words: [
+                    { kana: "かいます", kanji: "飼います", ro: "kaimasu", bn: "পোষা প্রাণী পালন করা" },
+                    { kana: "はしります", kanji: "走ります", ro: "hashirimasu", bn: "দৌড়ানো, চালানো" },
+                    { kana: "みえます", kanji: "見えます", ro: "miemasu", bn: "দেখতে পাওয়া (স্বাভাবিক)" },
+                    { kana: "きこえます", kanji: "聞こえます", ro: "kikoemasu", bn: "শুনতে পাওয়া (স্বাভাবিক)" },
+                    { kana: "できます", kanji: "出来ます", ro: "dekimasu", bn: "তৈরি হওয়া, সমাপ্ত হওয়া" },
+                    { kana: "ひらきます", kanji: "開きます", ro: "hirakimasu", bn: "খোলা, চালু করা" },
+                    { kana: "しんぱい", kanji: "心配 [な]", ro: "shinpai", bn: "দুশ্চিন্তা, উদ্বিগ্ন" },
+                    { kana: "ペット", kanji: "ペット", ro: "petto", bn: "পোষা প্রাণী" },
+                    { kana: "とり", kanji: "鳥", ro: "tori", bn: "পাখি" },
+                    { kana: "こえ", kanji: "声", ro: "koe", bn: "কণ্ঠস্বর" },
+                    { kana: "なみ", kanji: "波", ro: "nami", bn: "ঢেউ" },
+                    { kana: "はなび", kanji: "花火", ro: "hanabi", bn: "আতশবাজি" },
+                    { kana: "どうぐ", kanji: "道具", ro: "dougu", bn: "যন্ত্রপাতি, সরঞ্জাম" },
+                    { kana: "はっきり", kanji: "はっきり", ro: "hakkiri", bn: "পরিষ্কার, স্পষ্ট" },
+                    { kana: "たてます", kanji: "建てます", ro: "tatemasu", bn: "নির্মাণ করা" }
+                ]
+            },
+            28: {
+                title: "যুগপৎ কাজ ও দক্ষতা",
+                kanji: "第28課",
+                words: [
+                    { kana: "うれます", kanji: "売れます", ro: "uremasu", bn: "বিক্রি হওয়া" },
+                    { kana: "おどります", kanji: "踊ります", ro: "odorimasu", bn: "নাচ করা" },
+                    { kana: "かみます", kanji: "噛みます", ro: "kamimasu", bn: "চিবানো, কামড় দেওয়া" },
+                    { kana: "えらびます", kanji: "選びます", ro: "erabimasu", bn: "পছন্দ করা, বাছাই করা" },
+                    { kana: "かよいます", kanji: "通います", ro: "kayoimasu", bn: "নিয়মিত যাতায়াত করা" },
+                    { kana: "まじめ", kanji: "真面目 [な]", ro: "majime", bn: "সিরিয়াস, নিষ্ঠাবান" },
+                    { kana: "ねっしん", kanji: "熱心 [な]", ro: "nesshin", bn: "আন্তরিক, উদ্যমী" },
+                    { kana: "けいけん", kanji: "経験", ro: "keiken", bn: "অভিজ্ঞতা" },
+                    { kana: "ちから", kanji: "力", ro: "chikara", bn: "শক্তি, ক্ষমতা" },
+                    { kana: "にんき", kanji: "人気", ro: "ninki", bn: "জনপ্রিয়তা" },
+                    { kana: "ねだん", kanji: "値段", ro: "nedan", bn: "দাম, মূল্য" },
+                    { kana: "きゅうりょう", kanji: "給料", ro: "kyuuryou", bn: "বেতন" }
+                ]
+            },
+            29: {
+                title: "অটুট অবস্থা ও ফলাফল",
+                kanji: "第29課",
+                words: [
+                    { kana: "あきます", kanji: "開きます", ro: "akimasu", bn: "খোলা থাকা (দরজা)" },
+                    { kana: "しまります", kanji: "閉まります", ro: "shimarimasu", bn: "বন্ধ থাকা (দরজা)" },
+                    { kana: "つきます", kanji: "付きます", ro: "tsukimasu", bn: "চালু থাকা (লাইট)" },
+                    { kana: "きえます", kanji: "消えます", ro: "kiemasu", bn: "নিভে যাওয়া (লাইট)" },
+                    { kana: "こわれます", kanji: "壊れます", ro: "kowaremasu", bn: "ভেঙে নষ্ট হওয়া" },
+                    { kana: "われます", kanji: "割れます", ro: "waremasu", bn: "ভেঙে যাওয়া (গ্লাস)" },
+                    { kana: "おれます", kanji: "折れます", ro: "oremasu", bn: "মচকে ভাঙা (গাছ)" },
+                    { kana: "よごれます", kanji: "汚れます", ro: "yogoremasu", bn: "ময়লা হওয়া" },
+                    { kana: "おとします", kanji: "落とします", ro: "otoshimasu", bn: "ফেলে দেওয়া, হারানো" },
+                    { kana: "かかります", kanji: "掛かります", ro: "kakarimasu", bn: "তালা বন্ধ থাকা" }
+                ]
+            },
+            30: {
+                title: "উদ্দেশ্য ও পূর্বপ্রস্তুতি",
+                kanji: "第30課",
+                words: [
+                    { kana: "はります", kanji: "貼ります", ro: "harimasu", bn: "সাঁটানো, আঠা দিয়ে লাগানো" },
+                    { kana: "かけます", kanji: "掛けます", ro: "kakemasu", bn: "ঝোলানো" },
+                    { kana: "かざります", kanji: "飾ります", ro: "kazarimasu", bn: "সাজানো, প্রদর্শন করা" },
+                    { kana: "ならべます", kanji: "並べます", ro: "narabemasu", bn: "সারিবদ্ধ করা" },
+                    { kana: "うえます", kanji: "植えます", ro: "uemasu", bn: "রোপণ করা" },
+                    { kana: "もどします", kanji: "戻します", ro: "modoshimasu", bn: "আগের স্থানে রাখা" },
+                    { kana: "よてい", kanji: "予定", ro: "yotei", bn: "পরিকল্পনা, শিডিউল" },
+                    { kana: "カレンダー", kanji: "カレンダー", ro: "karendaa", bn: "ক্যালেন্ডার" },
+                    { kana: "ごみばこ", kanji: "ごみ箱", ro: "gomibako", bn: "ময়লার ঝুড়ি" }
+                ]
+            },
+            31: {
+                title: "পরিকল্পনা ও অনুষ্ঠান",
+                kanji: "第31課",
+                words: [
+                    { kana: "つづけます", kanji: "続けます", ro: "tsudukemasu", bn: "অব্যাহত রাখা" },
+                    { kana: "みつけます", kanji: "見つけます", ro: "mitsukemasu", bn: "খুঁজে পাওয়া" },
+                    { kana: "うけます", kanji: "受けます", ro: "ukemasu", bn: "অংশগ্রহণ করা (পরীক্ষা)" },
+                    { kana: "けっこんしき", kanji: "結婚式", ro: "kekkonshiki", bn: "বিয়ের অনুষ্ঠান" },
+                    { kana: "ほんしゃ", kanji: "本社", ro: "honsha", bn: "প্রধান কার্যালয়" },
+                    { kana: "してん", kanji: "支店", ro: "shiten", bn: "শাখা অফিস" }
+                ]
+            },
+            32: {
+                title: "স্বাস্থ্য ও আবহাওয়া",
+                kanji: "第32課",
+                words: [
+                    { kana: "せいこうします", kanji: "成功します", ro: "seikoushimasu", bn: "সফল হওয়া" },
+                    { kana: "しっぱいします", kanji: "失敗します", ro: "shippaishimasu", bn: "ব্যর্থ হওয়া" },
+                    { kana: "ごうかくします", kanji: "合格します", ro: "goukukushimasu", bn: "উত্তীর্ণ হওয়া" },
+                    { kana: "やみます", kanji: "止みます", ro: "yamimasu", bn: "থামা (বৃষ্টি)" },
+                    { kana: "ひやします", kanji: "冷やします", ro: "hiyashimasu", bn: "ঠান্ডা করা" },
+                    { kana: "けが", kanji: "怪我", ro: "kega", bn: "আঘাত, চোট" }
+                ]
+            },
+            33: {
+                title: "আদেশ, নিষেধ ও সংকেত",
+                kanji: "第33課",
+                words: [
+                    { kana: "にげます", kanji: "逃げます", ro: "nigemasu", bn: "পালিয়ে যাওয়া" },
+                    { kana: "さわぎます", kanji: "騒ぎます", ro: "sawagimasu", bn: "শোরগোল করা" },
+                    { kana: "あきらめます", kanji: "諦めます", ro: "akiramemasu", bn: "হাল ছেড়ে দেওয়া" },
+                    { kana: "まもります", kanji: "守ります", ro: "mamorimasu", bn: "নিয়ম মেনে চলা" },
+                    { kana: "たちいりきんし", kanji: "立ち入り禁止", ro: "tachiiri kinshi", bn: "প্রবেশ নিষেধ" }
+                ]
+            },
+            34: {
+                title: "প্রণালী ও রন্ধন",
+                kanji: "第34課",
+                words: [
+                    { kana: "みがきます", kanji: "磨きます", ro: "migakimasu", bn: "দাঁত মাজা, ব্রাশ করা" },
+                    { kana: "くみたてます", kanji: "組み立てます", ro: "kumitatemasu", bn: "একত্রিত করা" },
+                    { kana: "おります", kanji: "折ります", ro: "orimasu", bn: "ভাঁজ করা" },
+                    { kana: "せつめいしょ", kanji: "説明書", ro: "setsumeisho", bn: "নির্দেশিকা বই" },
+                    { kana: "しょうゆ", kanji: "醤油", ro: "shouyu", bn: "সয়া সস" }
+                ]
+            },
+            35: {
+                title: "শর্ত ও সুযোগ",
+                kanji: "第35課",
+                words: [
+                    { kana: "さきます", kanji: "咲きます", ro: "sakimasu", bn: "ফুল ফোটা" },
+                    { kana: "かわります", kanji: "変わります", ro: "kawarimasu", bn: "রং পরিবর্তন হওয়া" },
+                    { kana: "なおります", kanji: "治ります", ro: "naorimasu", bn: "রোগ সেরে যাওয়া" },
+                    { kana: "きかい", kanji: "機会", ro: "kikai", bn: "সুযোগ" }
+                ]
+            },
+            36: {
+                title: "লক্ষ্য ও অভ্যাস",
+                kanji: "第36課",
+                words: [
+                    { kana: "ちょきんします", kanji: "貯金します", ro: "chokinshimasu", bn: "টাকা জমানো" },
+                    { kana: "なれます", kanji: "慣れます", ro: "naremasu", bn: "অভ্যস্ত হওয়া" },
+                    { kana: "かならず", kanji: "必ず", ro: "kanarazu", bn: "অবশ্যই" }
+                ]
+            },
+            37: {
+                title: "বাচ্য ও আবিষ্কার",
+                kanji: "第37課",
+                words: [
+                    { kana: "ほめます", kanji: "褒めます", ro: "homemasu", bn: "প্রশংসা করা" },
+                    { kana: "しかります", kanji: "叱ります", ro: "shikarimasu", bn: "ধমক দেওয়া" },
+                    { kana: "はつめいします", kanji: "発明します", ro: "hatsumeishimasu", bn: "উদ্ভাবন করা" },
+                    { kana: "げんりょう", kanji: "原料", ro: "genryou", bn: "কাঁচামাল" }
+                ]
+            },
+            38: {
+                title: "পরিচর্যা ও বিশেষ্য",
+                kanji: "第38課",
+                words: [
+                    { kana: "そだてます", kanji: "育てます", ro: "sodatemasu", bn: "লালনপালন করা" },
+                    { kana: "はこびます", kanji: "運びます", ro: "hakobimasu", bn: "বহন করা" },
+                    { kana: "にゅういんします", kanji: "入院します", ro: "nyuuinshimasu", bn: "হাসপাতালে ভর্তি হওয়া" },
+                    { kana: "きもちがいい", kanji: "気持ちがいい", ro: "kimochi ga ii", bn: "আরামদায়ক" }
+                ]
+            },
+            39: {
+                title: "প্রাকৃতিক দুর্যোগ",
+                kanji: "第39課",
+                words: [
+                    { kana: "びっくりします", kanji: "吃驚します", ro: "bikkurishimasu", bn: "অবাক হওয়া" },
+                    { kana: "あんしんします", kanji: "安心します", ro: "anshinshimasu", bn: "স্বস্তি পাওয়া" },
+                    { kana: "じしん", kanji: "地震", ro: "jishin", bn: "ভূমিকম্প" },
+                    { kana: "たいふう", kanji: "台風", ro: "taifuu", bn: "টাইফুন" }
+                ]
+            },
+            40: {
+                title: "পরিমাপ ও নিশ্চয়তা",
+                kanji: "第40課",
+                words: [
+                    { kana: "かぞえます", kanji: "数えます", ro: "kazoemasu", bn: "গণনা করা" },
+                    { kana: "はかります", kanji: "測ります", ro: "hakarimasu", bn: "পরিমাপ করা" },
+                    { kana: "たしかめます", kanji: "確かめます", ro: "tashikamemasu", bn: "নিশ্চিত হওয়া" }
+                ]
+            },
+            41: {
+                title: "আদান-প্রদান রূপ",
+                kanji: "第41課",
+                words: [
+                    { kana: "いただきます", kanji: "頂きます", ro: "itadakimasu", bn: "গ্রহণ করা (বিনম্র)" },
+                    { kana: "くださいます", kanji: "下さいます", ro: "kudasaimasu", bn: "দেওয়া (বড়রা)" },
+                    { kana: "やります", kanji: "遣ります", ro: "yarimasu", bn: "ছোটদের দেওয়া" }
+                ]
+            },
+            42: {
+                title: "উদ্দেশ্য ও স্বার্থ",
+                kanji: "第42課",
+                words: [
+                    { kana: "つつみます", kanji: "包みます", ro: "tsutsumimasu", bn: "মোড়ানো" },
+                    { kana: "わかします", kanji: "沸かします", ro: "wakashimasu", bn: "ফোটানো" },
+                    { kana: "べんごし", kanji: "弁護士", ro: "bengoshi", bn: "আইনজীবী" }
+                ]
+            },
+            43: {
+                title: "বাহ্যিক অনুমান",
+                kanji: "第43課",
+                words: [
+                    { kana: "ふえます", kanji: "増えます", ro: "fuemasu", bn: "বৃদ্ধি পাওয়া" },
+                    { kana: "へります", kanji: "減ります", ro: "herimasu", bn: "কমে যাওয়া" },
+                    { kana: "あがります", kanji: "上がります", ro: "agarimasu", bn: "মূল্য বৃদ্ধি পাওয়া" }
+                ]
+            },
+            44: {
+                title: "মাত্রাতিরিক্ততা",
+                kanji: "第44課",
+                words: [
+                    { kana: "なきます", kanji: "泣きます", ro: "nakimasu", bn: "কান্না করা" },
+                    { kana: "かわきます", kanji: "乾きます", ro: "kawakimasu", bn: "শুকানো" },
+                    { kana: "あんぜん", kanji: "安全 [な]", ro: "anzen", bn: "নিরাপদ" }
+                ]
+            },
+            45: {
+                title: "অনাকাঙ্ক্ষিত অবস্থা",
+                kanji: "第45課",
+                words: [
+                    { kana: "しんじます", kanji: "信じます", ro: "shinjimasu", bn: "বিশ্বাস করা" },
+                    { kana: "りょうしゅうしょ", kanji: "領収書", ro: "ryoushuusho", bn: "রসিদ" },
+                    { kana: "ちゅうし", kanji: "中止", ro: "chuushi", bn: "বাতিল" }
+                ]
+            },
+            46: {
+                title: "তাৎক্ষণিক অবস্থা",
+                kanji: "第46課",
+                words: [
+                    { kana: "わたします", kanji: "渡します", ro: "watashimasu", bn: "হস্তান্তর করা" },
+                    { kana: "たくはいびん", kanji: "宅配便", ro: "takuhaibin", bn: "হোম ডেলিভারি" },
+                    { kana: "たったいま", kanji: "たった今", ro: "tattaima", bn: "এইমাত্র" }
+                ]
+            },
+            47: {
+                title: "সংবাদ ও প্রথা",
+                kanji: "第47課",
+                words: [
+                    { kana: "あつまります", kanji: "集まります", ro: "atsumarimasu", bn: "জড়ো হওয়া" },
+                    { kana: "じんこう", kanji: "人口", ro: "jinkou", bn: "জনসংখ্যা" },
+                    { kana: "かがく", kanji: "科学", ro: "kagaku", bn: "বিজ্ঞান" }
+                ]
+            },
+            48: {
+                title: "কারণমূলক ক্রিয়া",
+                kanji: "第48課",
+                words: [
+                    { kana: "おろします", kanji: "降ろします", ro: "oroshimasu", bn: "নামিয়ে রাখা" },
+                    { kana: "せわをします", kanji: "世話をします", ro: "sewa o shimasu", bn: "যত্ন নেওয়া" }
+                ]
+            },
+            49: {
+                title: "সম্মানসূচক রূপ",
+                kanji: "第49課",
+                words: [
+                    { kana: "いらっしゃいます", kanji: "いらっしゃる", ro: "irasshaimasu", bn: "থাকা, যাওয়া, আসা (সম্মানজনক)" },
+                    { kana: "めしあがります", kanji: "召し上がります", ro: "meshiagarimasu", bn: "খাওয়া, পান করা (সম্মানজনক)" },
+                    { kana: "おっしゃいます", kanji: "仰る", ro: "osshaimasu", bn: "বলা (সম্মানজনক)" }
+                ]
+            },
+            50: {
+                title: "বিনম্র রূপ",
+                kanji: "第50課",
+                words: [
+                    { kana: "まいります", kanji: "参ります", ro: "mairimasu", bn: "যাওয়া, আসা (বিনম্র)" },
+                    { kana: "もうします", kanji: "申します", ro: "moushimasu", bn: "বলা, নাম হওয়া (বিনম্র)" },
+                    { kana: "いたします", kanji: "致します", ro: "itashimasu", bn: "করা (বিনম্র)" }
+                ]
+            }
+        };
+
+        let currentLesson = 26;
+        let currentWords = [];
+        let currentIndex = 0;
+        let isFlipped = false;
+        let isTableOpen = false;
+
+        // লেসন গ্রিড রেন্ডার
+        function renderLessonGrid() {
+            const container = document.getElementById("gridContainer");
+            container.innerHTML = "";
+
+            for (let i = 26; i <= 50; i++) {
+                const lesson = lessons[i];
+                if (!lesson) continue;
+
+                const card = document.createElement("div");
+                card.className = "lesson-card";
+                card.onclick = () => openLesson(i);
+                card.innerHTML = `
+                    <div class="card-top">
+                        <span class="l-badge">L-${i}</span>
+                        <span class="kanji-lesson-tag">${lesson.kanji}</span>
+                    </div>
+                    <div class="card-lesson-title">লেসন ${convertBengaliNumber(i)}</div>
+                    <div class="card-lesson-desc">${lesson.title}</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                `;
+                container.appendChild(card);
+            }
         }
 
-        function jumpLesson(lessonId, btn) {
-            document.querySelectorAll('.lesson-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        // লেসন ওপেন করা
+        function openLesson(num) {
+            currentLesson = num;
+            currentWords = [...lessons[num].words];
+            currentIndex = 0;
+            isFlipped = false;
+            isTableOpen = false;
 
-            const groups = document.querySelectorAll('.vocab-group');
-            if (lessonId === 'all') {
-                groups.forEach(g => {
-                    g.style.display = 'block';
-                    g.classList.remove('open');
-                });
-                if (groups[0]) groups[0].classList.add('open');
+            document.getElementById("lessonGridView").style.display = "none";
+            document.getElementById("lessonDetailView").style.display = "block";
+            document.getElementById("accButtonText").innerText = `লেসন ${convertBengaliNumber(num)} এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন`;
+            
+            document.getElementById("tableCard").style.display = "none";
+            document.getElementById("accChevron").style.transform = "rotate(0deg)";
+
+            updateCard();
+            renderTable();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // গ্রিডে ফিরে যাওয়া
+        function backToGrid() {
+            if (document.getElementById("lessonDetailView").style.display === "block") {
+                document.getElementById("lessonDetailView").style.display = "none";
+                document.getElementById("lessonGridView").style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }
+
+        // কার্ড আপডেট
+        function updateCard() {
+            if (currentWords.length === 0) return;
+            const item = currentWords[currentIndex];
+
+            document.getElementById("fcKana").innerText = item.kana;
+            document.getElementById("fcKanji").innerText = item.kanji;
+            document.getElementById("fcMeaning").innerText = item.bn;
+            document.getElementById("fcRomaji").innerText = item.ro;
+
+            // ফ্লিপ রিসেট
+            isFlipped = false;
+            document.getElementById("fcFront").style.display = "block";
+            document.getElementById("fcBack").style.display = "none";
+
+            // কাউন্টার ও প্রগ্রেস বার
+            document.getElementById("cardCounter").innerText = `CARD ${currentIndex + 1} / ${currentWords.length}`;
+            const pct = ((currentIndex + 1) / currentWords.length) * 100;
+            document.getElementById("progressFill").style.width = `${pct}%`;
+        }
+
+        // কার্ড ফ্লিপ
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                document.getElementById("fcFront").style.display = "none";
+                document.getElementById("fcBack").style.display = "block";
             } else {
-                groups.forEach(g => {
-                    if (g.id === lessonId) {
-                        g.style.display = 'block';
-                        g.classList.add('open');
-                        g.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                        g.style.display = 'none';
-                    }
-                });
+                document.getElementById("fcFront").style.display = "block";
+                document.getElementById("fcBack").style.display = "none";
             }
         }
 
-        function filterVocab() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.vocab-card');
-            const groups = document.querySelectorAll('.vocab-group');
-
-            if (query === '') {
-                groups.forEach(g => g.style.display = 'block');
-                cards.forEach(c => c.style.display = 'flex');
-                return;
+        function nextCard() {
+            if (currentIndex < currentWords.length - 1) {
+                currentIndex++;
+                updateCard();
             }
+        }
 
-            groups.forEach(group => {
-                let hasMatch = false;
-                const groupCards = group.querySelectorAll('.vocab-card');
-                groupCards.forEach(card => {
-                    const key = card.getAttribute('data-key').toLowerCase();
-                    if (key.includes(query)) {
-                        card.style.display = 'flex';
-                        hasMatch = true;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+        function prevCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
 
-                if (hasMatch) {
-                    group.style.display = 'block';
-                    group.classList.add('open');
-                } else {
-                    group.style.display = 'none';
-                }
+        function shuffleCards() {
+            currentWords.sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            updateCard();
+        }
+
+        // একর্ডিয়ন টেবিল টগল
+        function toggleTable() {
+            isTableOpen = !isTableOpen;
+            const tableCard = document.getElementById("tableCard");
+            const chevron = document.getElementById("accChevron");
+
+            if (isTableOpen) {
+                tableCard.style.display = "block";
+                chevron.style.transform = "rotate(90deg)";
+            } else {
+                tableCard.style.display = "none";
+                chevron.style.transform = "rotate(0deg)";
+            }
+        }
+
+        // টেবিল রেন্ডার
+        function renderTable() {
+            const tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+
+            lessons[currentLesson].words.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>
+                        <span class="col-kana">${item.kana}</span>
+                        <span class="col-kanji">${item.kanji}</span>
+                    </td>
+                    <td>
+                        <span class="col-ro">${item.ro}</span>
+                    </td>
+                    <td>
+                        <span class="col-bn">${item.bn}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
             });
         }
 
-        function speakText(text) {
+        // উচ্চারণ
+        function speakCurrent(e) {
+            e.stopPropagation();
+            const text = currentWords[currentIndex].kana;
+            speak(text);
+        }
+
+        function togglePlayVoice() {
+            const text = currentWords[currentIndex].kana;
+            speak(text);
+        }
+
+        function speak(text) {
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ja-JP';
-                utterance.rate = 0.85;
-                window.speechSynthesis.speak(utterance);
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'ja-JP';
+                u.rate = 0.85;
+                window.speechSynthesis.speak(u);
             }
         }
+
+        function convertBengaliNumber(n) {
+            const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return n.toString().split('').map(d => bnDigits[d] || d).join('');
+        }
+
+        // শুরুতে গ্রিড লোড
+        renderLessonGrid();
     </script>
 </body>
 </html>

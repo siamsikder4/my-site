@@ -6,7 +6,7 @@
     <title>প্রোফাইল - KOTOBA</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -72,18 +72,23 @@
             margin-bottom: 20px;
         }
 
+        /* নামের অক্ষরের লোগো */
         .avatar-circle {
-            width: 72px;
-            height: 72px;
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
-            background: #e6f4ea;
-            color: #047857;
+            background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%);
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
+            font-weight: 800;
             margin: 0 auto 12px;
-            border: 2px solid #a7f3d0;
+            border: 3px solid #a7f3d0;
+            box-shadow: 0 4px 14px rgba(4, 120, 87, 0.2);
+            text-transform: uppercase;
+            user-select: none;
         }
 
         .user-name {
@@ -196,7 +201,7 @@
             background: #ffe4e6;
         }
 
-        /* বটম বার (লিডারবোর্ড সহ) */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -248,8 +253,8 @@
 
         <!-- ইউজার কার্ড -->
         <div class="profile-card">
-            <div class="avatar-circle">
-                <i class="fa-regular fa-user"></i>
+            <div class="avatar-circle" id="avatarInitial">
+                <i class="fa-regular fa-user" style="font-size: 24px;"></i>
             </div>
             <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
             <p class="user-email" id="displayUserEmail">---</p>
@@ -338,6 +343,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        const avatarInitialEl = document.getElementById("avatarInitial");
         const nameEl = document.getElementById("displayUserName");
         const emailEl = document.getElementById("displayUserEmail");
         const hlCountEl = document.getElementById("hlWordCount");
@@ -345,8 +351,13 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
+                const displayName = user.displayName || user.email.split("@")[0];
                 emailEl.innerText = user.email;
-                nameEl.innerText = user.displayName || user.email.split("@")[0];
+                nameEl.innerText = displayName;
+
+                // নামের প্রথম অক্ষর সেট করা (বাংলা বা ইংরেজি উভয় অক্ষর সাপোর্ট করবে)
+                const firstChar = displayName.trim().charAt(0).toUpperCase();
+                avatarInitialEl.innerText = firstChar;
 
                 // সংরক্ষিত হাইলাইটের সংখ্যা লোড
                 try {

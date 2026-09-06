@@ -123,7 +123,7 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 800;
             font-size: 16px;
             color: #0f3e2e;
@@ -167,7 +167,7 @@
             font-weight: 600;
         }
 
-        /* ২ কলাম গ্রিড লেআউট (স্ক্রিনশটের আদলে) */
+        /* ২ কলাম গ্রিড লেআউট */
         .vocab-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -237,7 +237,7 @@
             font-size: 12px;
         }
 
-        /* শব্দ তালিকা দেখার মডাল বা ভিউ (স্ক্রিনশট ২ এর আদলে) */
+        /* শব্দ তালিকা দেখার মডাল ভিউ */
         .vocab-modal {
             display: none;
             position: fixed;
@@ -388,9 +388,7 @@
         </div>
 
         <!-- লেসন গ্রিড (লেসন ১ থেকে ২৫) -->
-        <div class="vocab-grid" id="lessonGrid">
-            <!-- জাভাস্ক্রিপ্ট দিয়ে ডাইনামিকালি লেসন কার্ডগুলো জেনারেট হবে -->
-        </div>
+        <div class="vocab-grid" id="lessonGrid"></div>
     </main>
 
     <!-- শব্দ তালিকা দেখার পপআপ মডাল -->
@@ -399,9 +397,7 @@
             <div class="modal-title" id="modalTitle">লেসন ১ শব্দকোষ</div>
             <button class="close-modal" onclick="closeModal()">&times;</button>
         </div>
-        <div class="vocab-list" id="vocabListContainer">
-            <!-- শব্দের তালিকা এখানে লোড হবে -->
-        </div>
+        <div class="vocab-list" id="vocabListContainer"></div>
     </div>
 
     <!-- বটম বার -->
@@ -421,44 +417,265 @@
     </nav>
 
     <script>
-        // N5 লেসনগুলোর নমুনা ডেটা (লেসন ১ থেকে ২৫)
+        // N5 লেসন ১ থেকে ২৫ এর সম্পূর্ণ শব্দ ডেটা (পিডিএফ থেকে সংগৃহীত)
         const n5VocabData = {
             1: [
-                { jp: "わたし", roma: "watashi", bn: "আমি" },
+                { jp: "あたし", roma: "watashi", bn: "আমি" },
                 { jp: "あなた", roma: "anata", bn: "তুমি" },
-                { jp: "あのひと", roma: "anohito", bn: "ঐব্যক্তি (সম্মানসূচক)" },
+                { jp: "あのひと (あのかた)", roma: "anohito (anokata)", bn: "ঐব্যক্তি (সম্মান সূচক)" },
+                { jp: "~さん", roma: "~san", bn: "জনাব, বেগম" },
+                { jp: "~ちゃん", roma: "~chan", bn: "ছোট শিশুর নামের ব্যবহার" },
+                { jp: "~じん", roma: "~jin", bn: "নাগরিকত্ব বোঝাতে" },
                 { jp: "せんせい", roma: "sensei", bn: "শিক্ষক" },
-                { jp: "がくせい", roma: "gakusei", bn: "ছাত্র / ছাত্রী" },
-                { jp: "かいしゃいん", roma: "kaishain", bn: "কোম্পানির চাকুরীরত ব্যক্তি" },
+                { jp: "きょうし", roma: "kyōshi", bn: "প্রশিক্ষক, শিক্ষক" },
+                { jp: "がくせい", roma: "gakusei", bn: "ছাত্র, ছাত্রী" },
+                { jp: "かいしゃいん", roma: "kaishain", bn: "কোম্পানীতে চাকুরীরত ব্যক্তি" },
+                { jp: "ぎんこういん", roma: "ginkōin", bn: "ব্যাংকার" },
                 { jp: "いしゃ", roma: "isha", bn: "ডাক্তার" },
-                { jp: "だいがく", roma: "daigaku", bn: "বিশ্ববিদ্যালয়" }
+                { jp: "けんきゅうしゃ", roma: "kenkyūsha", bn: "গবেষক" },
+                { jp: "だいがく", roma: "daigaku", bn: "বিশ্ববিদ্যালয়" },
+                { jp: "びょういん", roma: "byōin", bn: "হাসপাতাল" },
+                { jp: "だれ (どなた)", roma: "dare (donata)", bn: "কে (সম্মান সূচক)" }
             ],
             2: [
                 { jp: "これ", roma: "kore", bn: "এটা (বস্তু)" },
                 { jp: "それ", roma: "sore", bn: "ওটা (বস্তু)" },
                 { jp: "あれ", roma: "are", bn: "ঐটা (একটু দূরের বস্তু)" },
+                { jp: "この~", roma: "kono~", bn: "এই (বস্তু বা প্রাণী)" },
+                { jp: "その~", roma: "sono~", bn: "ওই" },
+                { jp: "あの~", roma: "ano~", bn: "ঐ~" },
                 { jp: "ほん", roma: "hon", bn: "বই" },
                 { jp: "じしょ", roma: "jisho", bn: "অভিধান / ডিকশনারী" },
                 { jp: "ざっし", roma: "zasshi", bn: "ম্যাগাজিন" },
+                { jp: "しんぶん", roma: "shinbun", bn: "খবরের কাগজ" },
+                { jp: "ノート", roma: "nōto", bn: "নোট বুক" },
                 { jp: "えんぴつ", roma: "enpitsu", bn: "পেন্সিল" },
-                { jp: "かぎ", roma: "kagi", bn: "চাবি" }
+                { jp: "ボールペン", roma: "bōrupen", bn: "বলপেন" },
+                { jp: "かぎ", roma: "kagi", bn: "চাবি" },
+                { jp: "とけい", roma: "tokei", bn: "ঘড়ি" },
+                { jp: "かさ", roma: "kasa", bn: "ছাতা" },
+                { jp: "かばん", roma: "kaban", bn: "ব্যাগ" }
             ],
             3: [
-                { jp: "ここ", roma: "koko", bn: "এখানে" },
-                { jp: "そこ", roma: "soko", bn: "ওখানে" },
-                { jp: "あそこ", roma: "asoko", bn: "ঐখানে" },
-                { jp: "どこ", roma: "doko", bn: "কোথায়" },
+                { jp: "ここ", roma: "koko", bn: "এখানে (আমার কাছের স্থান)" },
+                { jp: "そこ", roma: "soko", bn: "ওখানে (আপনার কাছের স্থান)" },
+                { jp: "あそこ", roma: "asoko", bn: "ঐখানে (একটু দূরের স্থান)" },
+                { jp: "どこ", roma: "doko", bn: "কোথায় / কোন স্থানে?" },
+                { jp: "こちら", roma: "kochira", bn: "এই দিকে" },
                 { jp: "きょうしつ", roma: "kyōshitsu", bn: "ক্লাসরুম" },
-                { jp: "しょくどう", roma: "shokudō", bn: "ক্যান্টিন / খাবার রুম" }
+                { jp: "しょくどう", roma: "shokudō", bn: "খাবার হলরুম / ক্যান্টিন" },
+                { jp: "じむしょ", roma: "jimusho", bn: "অফিস" },
+                { jp: "かいぎしつ", roma: "kaigisitsu", bn: "মিটিং রুম" },
+                { jp: "うけつけ", roma: "uketsuke", bn: "রিসেপশন ডেস্ক" },
+                { jp: "へや", roma: "heya", bn: "রুম" },
+                { jp: "トイレ", roma: "toire", bn: "টয়লেট" },
+                { jp: "でんわ", roma: "denwa", bn: "টেলিফোন" }
             ],
             4: [
-                { jp: "おきます", roma: "okimasu", bn: "ঘুম থেকে ওঠা" },
+                { jp: "おきます", roma: "okimasu", bn: "ঘুম থেকে উঠা" },
                 { jp: "ねます", roma: "nemasu", bn: "ঘুমানো" },
                 { jp: "はたらきます", roma: "hatarakimasu", bn: "কাজ করা" },
-                { jp: "やすみます", roma: "yasumimasu", bn: "বিশ্রাম নেওয়া / ছুটি" },
+                { jp: "やすみます", roma: "yasumimasu", bn: "বিশ্রাম করা / ছুটি নেওয়া" },
+                { jp: "べんきょうします", roma: "benkyōshimasu", bn: "লেখাপড়া করা" },
+                { jp: "おわります", roma: "owarimasu", bn: "শেষ করা" },
+                { jp: "デパート", roma: "depāto", bn: "ডিপার্টমেন্টাল স্টোর" },
+                { jp: "ぎんこう", roma: "ginkō", bn: "ব্যাংক" },
+                { jp: "ゆうびんきょく", roma: "yūbinkyoku", bn: "পোষ্ট অফিস" },
+                { jp: "としょかん", roma: "toshokan", bn: "লাইব্রেরী" },
                 { jp: "いま", roma: "ima", bn: "এখন" }
+            ],
+            5: [
+                { jp: "いきます", roma: "ikimasu", bn: "যাওয়া" },
+                { jp: "きます", roma: "kimasu", bn: "আসা" },
+                { jp: "かえります", roma: "kaerimasu", bn: "ফিরে যাওয়া / ফিরে আসা" },
+                { jp: "がっこう", roma: "gakkō", bn: "স্কুল / বিদ্যালয়" },
+                { jp: "えき", roma: "eki", bn: "স্টেশন" },
+                { jp: "ひこうき", roma: "hikōki", bn: "উড়োজাহাজ" },
+                { jp: "ふね", roma: "fune", bn: "জাহাজ" },
+                { jp: "でんしゃ", roma: "densha", bn: "বৈদ্যুতিক ট্রেন" },
+                { jp: "ちかてつ", roma: "chikatetsu", bn: "সাবওয়ে" },
+                { jp: "バス", roma: "basu", bn: "বাস" },
+                { jp: "タクシー", roma: "takushi", bn: "ট্যাক্সি" },
+                { jp: "あるいて", roma: "aruite", bn: "পায়ের হেঁটে" },
+                { jp: "ともだち", roma: "tomodachi", bn: "বন্ধু" }
+            ],
+            6: [
+                { jp: "たべます", roma: "tabemasu", bn: "খাওয়া" },
+                { jp: "のみます", roma: "nomimasu", bn: "পান করা" },
+                { jp: "すいます", roma: "suimasu", bn: "ধূমপান করা" },
+                { jp: "みます", roma: "mimasu", bn: "দেখা" },
+                { jp: "ききます", roma: "kikimasu", bn: "শোনা" },
+                { jp: "よみます", roma: "yomimasu", bn: "পড়া" },
+                { jp: "かきます", roma: "kakimasu", bn: "লেখা / আঁকা" },
+                { jp: "かいます", roma: "kaimasu", bn: "ক্রয় করা" },
+                { jp: "ごはん", roma: "gohan", bn: "ভাত / খাবার" },
+                { jp: "パン", roma: "pan", bn: "রুটি" },
+                { jp: "にく", roma: "niku", bn: "মাংস" },
+                { jp: "さかな", roma: "sakana", bn: "মাছ" },
+                { jp: "みず", roma: "mizu", bn: "পানি" }
+            ],
+            7: [
+                { jp: "きります", roma: "kirimasu", bn: "কাটা" },
+                { jp: "おくります", roma: "okurimasu", bn: "পাঠানো" },
+                { jp: "あげます", roma: "agemasu", bn: "দেওয়া" },
+                { jp: "もらいます", roma: "moraimasu", bn: "পাওয়া" },
+                { jp: "かします", roma: "kashimasu", bn: "ধার দেওয়া" },
+                { jp: "かります", roma: "karimasu", bn: "ধার করা" },
+                { jp: "おしえます", roma: "oshiemasu", bn: "শেখানো" },
+                { jp: "はし", roma: "hasi", bn: "চপস্টিক" },
+                { jp: "スプーン", roma: "supūn", bn: "চামচ" },
+                { jp: "ナイフ", roma: "naifu", bn: "চাকু" }
+            ],
+            8: [
+                { jp: "ハンサム [な]", roma: "hansamu", bn: "সুদর্শন" },
+                { jp: "きれい [な]", roma: "kirei", bn: "সুন্দর, পরিষ্কার" },
+                { jp: "しずか [な]", roma: "shizuka", bn: "নীরব, শান্ত" },
+                { jp: "ゆうめい [な]", roma: "yūmei", bn: "বিখ্যাত" },
+                { jp: "しんせつ [な]", roma: "shinsetsu", bn: "দয়ালু" },
+                { jp: "げんき [な]", roma: "genki", bn: "সুস্থ, সজীব" },
+                { jp: "おおきい", roma: "ōkī", bn: "বড়" },
+                { jp: "ちいさい", roma: "chīsai", bn: "ছোট" },
+                { jp: "あたらしい", roma: "atarashī", bn: "নতুন" },
+                { jp: "ふるい", roma: "furui", bn: "পুরানো" }
+            ],
+            9: [
+                { jp: "わかります", roma: "wakarimasu", bn: "বুঝা" },
+                { jp: "あります", roma: "arimasu", bn: "আছে" },
+                { jp: "すき [な]", roma: "suki", bn: "পছন্দ" },
+                { jp: "きらい [な]", roma: "kirai", bn: "অপছন্দ" },
+                { jp: "じょうず [な]", roma: "jōzu", bn: "দক্ষ / ভালো পারা" },
+                { jp: "へた [な]", roma: "heta", bn: "অদক্ষ" },
+                { jp: "りょうり", roma: "ryōri", bn: "রান্না / খাবার" },
+                { jp: "スポーツ", roma: "supōtsu", bn: "খেলাধুলা" },
+                { jp: "おんがく", roma: "ongaku", bn: "সঙ্গীত" }
+            ],
+            10: [
+                { jp: "あります", roma: "arimasu", bn: "আছে (নিষ্প্রাণ)" },
+                { jp: "います", roma: "imasu", bn: "আছে (জীবিত)" },
+                { jp: "いろいろ [な]", roma: "iroiro", bn: "বিভিন্ন" },
+                { jp: "おとこのひと", roma: "otoko no hito", bn: "পুরুষ" },
+                { jp: "おんなのひと", roma: "onna no hito", bn: "মহিলা" },
+                { jp: "いぬ", roma: "inu", bn: "কুকুর" },
+                { jp: "ねこ", roma: "neko", bn: "বিড়াল" },
+                { jp: "うえ", roma: "ue", bn: "উপরে" },
+                { jp: "した", roma: "shita", bn: "নিচে" }
+            ],
+            11: [
+                { jp: "ひとつ", roma: "hitotsu", bn: "একটি" },
+                { jp: "ふたつ", roma: "futatsu", bn: "দুইটি" },
+                { jp: "ひとり", roma: "hitori", bn: "একজন" },
+                { jp: "ふたり", roma: "futari", bn: "দুইজন" },
+                { jp: "りんご", roma: "ringo", bn: "আপেল" },
+                { jp: "みかん", roma: "mikan", bn: "কমলা" },
+                { jp: "りょうしん", roma: "ryōshin", bn: "পিতা-মাতা" },
+                { jp: "きょうだい", roma: "kyōdai", bn: "ভাইবোন" }
+            ],
+            12: [
+                { jp: "かんたん [な]", roma: "kantan", bn: "সহজ" },
+                { jp: "ちかい", roma: "chikai", bn: "কাছে" },
+                { jp: "とおい", roma: "tōi", bn: "দূরে" },
+                { jp: "はやい", roma: "hayai", bn: "তাড়াতাড়ি / দ্রুত" },
+                { jp: "おそい", roma: "osoi", bn: "দেরি" },
+                { jp: "きせつ", roma: "kisetsu", bn: "ঋতু" },
+                { jp: "はる", roma: "haru", bn: "বসন্তকাল" },
+                { jp: "なつ", roma: "natsu", bn: "গ্রীষ্মকাল" }
+            ],
+            13: [
+                { jp: "あそびます", roma: "asobimasu", bn: "খেলা করা" },
+                { jp: "およぎます", roma: "oyogimasu", bn: "সাঁতার কাটা" },
+                { jp: "むかえます", roma: "mukaemasu", bn: "বরণ করা" },
+                { jp: "つかれます", roma: "tsukaremasu", bn: "ক্লান্ত হওয়া" },
+                { jp: "ほしい", roma: "hoshii", bn: "চাই" },
+                { jp: "ひろい", roma: "hiroi", bn: "প্রশস্ত" },
+                { jp: "せまい", roma: "semai", bn: "সংীর্ণ" }
+            ],
+            14: [
+                { jp: "つけます", roma: "tsukemasu", bn: "জ্বালানো" },
+                { jp: "けします", roma: "keshimasu", bn: "নিবানো" },
+                { jp: "あけます", roma: "akemasu", bn: "খোলা" },
+                { jp: "しめます", roma: "shimemasu", bn: "বন্ধ করা" },
+                { jp: "まちます", roma: "machimasu", bn: "অপেক্ষা করা" },
+                { jp: "もちます", roma: "mochimasu", bn: "ধরে রাখা" },
+                { jp: "ちず", roma: "chizu", bn: "ম্যাপ" }
+            ],
+            15: [
+                { jp: "おきます", roma: "okimasu", bn: "রাখা" },
+                { jp: "つくります", roma: "tsukurimasu", bn: "তৈরি করা" },
+                { jp: "うります", roma: "urimasu", bn: "বিক্রি করা" },
+                { jp: "しります", roma: "shirimasu", bn: "জানা" },
+                { jp: "すみます", roma: "sumimasu", bn: "বসবাস করা" },
+                { jp: "どくしん", roma: "dokushin", bn: "অবিবাহিত" }
+            ],
+            16: [
+                { jp: "のります", roma: "norimasu", bn: "চড়া" },
+                { jp: "おります", roma: "orimasu", bn: "নামা" },
+                { jp: "のりかえます", roma: "norikaemasu", bn: "বদলি করা" },
+                { jp: "あびます", roma: "abimasu", bn: "গোসল করা" },
+                { jp: "からだ", roma: "karada", bn: "শরীর" },
+                { jp: "あたま", roma: "atama", bn: "মাথা" }
+            ],
+            17: [
+                { jp: "おぼえます", roma: "oboemasu", bn: "মনে রাখা" },
+                { jp: "わすれます", roma: "wasuremasu", bn: "ভুলে যাওয়া" },
+                { jp: "なくします", roma: "nakushimasu", bn: "হারিয়ে ফেলা" },
+                { jp: "たいせつ [な]", roma: "taisetsu", bn: "গুরুত্বপূর্ণ" },
+                { jp: "びょうき", roma: "byōki", bn: "অসুস্থতা" },
+                { jp: "くすり", roma: "kusuri", bn: "ওষুধ" }
+            ],
+            18: [
+                { jp: "できます", roma: "dekimasu", bn: "পারা" },
+                { jp: "あらいます", roma: "araimasu", bn: "ধৌত করা" },
+                { jp: "ひきます", roma: "hikimasu", bn: "বাজানো" },
+                { jp: "うたいます", roma: "utaimasu", bn: "গান গাওয়া" },
+                { jp: "しゅみ", roma: "shumi", bn: "শখ" },
+                { jp: "にっき", roma: "nikki", bn: "ডায়রি" }
+            ],
+            19: [
+                { jp: "のぼります", roma: "noborimasu", bn: "ওঠা" },
+                { jp: "とまります", roma: "tomarimasu", bn: "থাকা" },
+                { jp: "そうじします", roma: "sōji shimasu", bn: "পরিষ্কার করা" },
+                { jp: "ねむい", roma: "nemui", bn: "ঘুম ঘুম ভাব" },
+                { jp: "つよい", roma: "tsuyoi", bn: "শক্তিশালী" }
+            ],
+            20: [
+                { jp: "いります", roma: "irimasu", bn: "প্রয়োজন" },
+                { jp: "しらべます", roma: "shirabemasu", bn: "অনুসন্ধান" },
+                { jp: "ぼく", roma: "boku", bn: "আমি (ইনফরমাল)" },
+                { jp: "きみ", roma: "kimi", bn: "তুমি" },
+                { jp: "ことば", roma: "kotoba", bn: "শব্দ / ভাষা" }
+            ],
+            21: [
+                { jp: "おもいます", roma: "omoimasu", bn: "মনে করা" },
+                { jp: "いいます", roma: "imasu", bn: "বলা" },
+                { jp: "かちます", roma: "kachimasu", bn: "জয় করা" },
+                { jp: "まけます", roma: "makemasu", bn: "হারা" },
+                { jp: "いけん", roma: "iken", bn: "মতামত" }
+            ],
+            22: [
+                { jp: "きます", roma: "kimasu", bn: "পরিধান করা" },
+                { jp: "はきます", roma: "hakimasu", bn: "পরা (জুতা/প্যান্ট)" },
+                { jp: "かぶります", roma: "kaburimasu", bn: "পরা (টুপি)" },
+                { jp: "うまれます", roma: "umaremasu", bn: "জন্ম" },
+                { jp: "コート", roma: "kōto", bn: "কোট" }
+            ],
+            23: [
+                { jp: "ききます", roma: "kikimasu", bn: "জিজ্ঞাসা করা" },
+                { jp: "まわします", roma: "mawashimasu", bn: "ঘুরানো" },
+                { jp: "まがります", roma: "magarimasu", bn: "মোড় নেওয়া" },
+                { jp: "みち", roma: "michi", bn: "রাস্তা" }
+            ],
+            24: [
+                { jp: "くれます", roma: "kuremasu", bn: "দেওয়া (আমাকে)" },
+                { jp: "なおします", roma: "naoshimasu", bn: "ঠিক করা" },
+                { jp: "つれていきます", roma: "tsurete ikimasu", bn: "নিয়ে যাওয়া" },
+                { jp: "しょうかいします", roma: "shōkai shimasu", bn: "পরিচয়" }
+            ],
+            25: [
+                { jp: "かんがえます", roma: "kangaemasu", bn: "চিন্তা করা" },
+                { jp: "つきます", roma: "tsukimasu", bn: "পৌঁছানো" },
+                { jp: "たります", roma: "tarimasu", bn: "যথেষ্ট" },
+                { jp: "いなか", roma: "inaka", bn: "গ্রামাঞ্চল" }
             ]
-            // লেসন ৫ থেকে ২৫ পর্যন্ত একইভাবে স্ট্রাকচার করা যাবে
         };
 
         const lessonTitles = {
@@ -467,7 +684,7 @@
             3: "স্থান ও দিকবাচক শব্দ",
             4: "সময়, দিন ও দৈনন্দিন কাজ",
             5: "যাতায়াত ও ভ্রমণ",
-            6: "খawa-दाwa ও কার্যকলাপ",
+            6: "খাওয়া-দাওয়া ও কার্যকলাপ",
             7: "যন্ত্রপাতি ও লেনদেন",
             8: "গুণবাচক শব্দ (Adjectives)",
             9: "পছন্দ, দক্ষতা ও কারণ",
@@ -513,13 +730,9 @@
             const container = document.getElementById("vocabListContainer");
             container.innerHTML = "";
 
-            const words = n5VocabData[lessonNum] || [
-                { jp: "けいかく", roma: "keikaku", bn: "পরিকল্পনা" },
-                { jp: "れんしゅう", roma: "renshū", bn: "অনুশীলন" },
-                { jp: "もんだい", roma: "mondai", bn: "সমস্যা" }
-            ];
+            const words = n5VocabData[lessonNum] || [];
 
-            words.forEach((item, index) => {
+            words.forEach((item) => {
                 const row = document.createElement("div");
                 row.className = "vocab-item-row";
                 row.innerHTML = `

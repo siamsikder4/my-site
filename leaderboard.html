@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লিডারবোর্ড - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 80px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 14px;
+        }
+
+        .back-btn {
+            color: #0f3e2e;
+            font-size: 16px;
+            text-decoration: none;
+            background: #f1f5f9;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-title {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .page-content {
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* টপ ৩ পোডিয়াম */
+        .podium-section {
+            background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
+            border-radius: 20px;
+            padding: 22px 14px 18px;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
+        }
+
+        .podium-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+
+        .podium-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            border: 2px solid transparent;
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .podium-avatar.first {
+            width: 60px;
+            height: 60px;
+            font-size: 22px;
+            border-color: #facc15;
+            background: #047857;
+        }
+
+        .podium-avatar.second {
+            border-color: #cbd5e1;
+            background: #1e3a34;
+        }
+
+        .podium-avatar.third {
+            border-color: #f97316;
+            background: #1e3a34;
+        }
+
+        .crown-icon {
+            position: absolute;
+            top: -12px;
+            color: #facc15;
+            font-size: 16px;
+        }
+
+        .podium-name {
+            font-size: 12px;
+            font-weight: 700;
+            max-width: 80px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        .podium-xp {
+            font-size: 10px;
+            color: #93c5fd;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .podium-step {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .step-1 { height: 75px; background: rgba(250, 204, 21, 0.25); color: #facc15; border-top: 3px solid #facc15; }
+        .step-2 { height: 55px; background: rgba(203, 213, 225, 0.2); color: #cbd5e1; border-top: 3px solid #cbd5e1; }
+        .step-3 { height: 42px; background: rgba(249, 115, 22, 0.2); color: #f97316; border-top: 3px solid #f97316; }
+
+        /* লিডারবোর্ড লিস্ট */
+        .list-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0e3b2c;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leader-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s ease;
+        }
+
+        .leader-card:active {
+            transform: scale(0.99);
+        }
+
+        .rank-number {
+            font-size: 14px;
+            font-weight: 800;
+            width: 24px;
+            color: #64748b;
+        }
+
+        .user-icon-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e6f4ea;
+            color: #047857;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .user-meta {
+            flex: 1;
+        }
+
+        .user-meta h4 {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 2px;
+        }
+
+        .user-meta p {
+            font-size: 10.5px;
+            color: #64748b;
+        }
+
+        .xp-score {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #047857;
+            background: #f0fdf4;
+            padding: 4px 9px;
+            border-radius: 12px;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- টপ বার -->
+    <header class="top-nav">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <span class="nav-title">লিডারবোর্ড</span>
+    </header>
+
+    <main class="page-content">
+
+        <!-- পোডিয়াম ব্যানার (শীর্ষ ৩ জন) -->
+        <div class="podium-section">
+            <!-- ২য় স্থান -->
+            <div class="podium-col">
+                <div class="podium-avatar second">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span class="podium-name">ফারহান</span>
+                <span class="podium-xp">৪৫০ XP</span>
+                <div class="podium-step step-2">২</div>
+            </div>
+
+            <!-- ১ম স্থান -->
+            <div class="podium-col">
+                <div class="podium-avatar first">
+                    <i class="fa-solid fa-crown crown-icon"></i>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span class="podium-name">তানভীর</span>
+                <span class="podium-xp">৫৮০ XP</span>
+                <div class="podium-step step-1">১</div>
+            </div>
+
+            <!-- ৩য় স্থান -->
+            <div class="podium-col">
+                <div class="podium-avatar third">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <span class="podium-name">আরিফ</span>
+                <span class="podium-xp">৩৮০ XP</span>
+                <div class="podium-step step-3">৩</div>
+            </div>
+        </div>
+
+        <div class="list-section-title">
+            <span>শীর্ষ শিক্ষার্থী তালিকা</span>
+            <span style="font-size: 11px; color: #64748b;"><i class="fa-solid fa-bolt" style="color: #eab308;"></i> সাপ্তাহিক স্কোর</span>
+        </div>
+
+        <!-- লিডারবোর্ড লিস্ট -->
+        <div id="leaderboardList">
+            <div class="leader-card">
+                <span class="rank-number">৪</span>
+                <div class="user-icon-circle">রা</div>
+                <div class="user-meta">
+                    <h4>রাকিব হোসেন</h4>
+                    <p>লেসন ১৫ সম্পন্ন</p>
+                </div>
+                <span class="xp-score">৩১০ XP</span>
+            </div>
+
+            <div class="leader-card">
+                <span class="rank-number">৫</span>
+                <div class="user-icon-circle">স</div>
+                <div class="user-meta">
+                    <h4>সাদিয়া আক্তার</h4>
+                    <p>লেসন ১২ সম্পন্ন</p>
+                </div>
+                <span class="xp-score">২৯০ XP</span>
+            </div>
+
+            <div class="leader-card">
+                <span class="rank-number">৬</span>
+                <div class="user-icon-circle">হ</div>
+                <div class="user-meta">
+                    <h4>হাসান মাহমুদ</h4>
+                    <p>লেসন ১০ সম্পন্ন</p>
+                </div>
+                <span class="xp-score">২৫০ XP</span>
+            </div>
+
+            <div class="leader-card">
+                <span class="rank-number">৭</span>
+                <div class="user-icon-circle">ম</div>
+                <div class="user-meta">
+                    <h4>মাহমুদা খানম</h4>
+                    <p>লেসন ৮ সম্পন্ন</p>
+                </div>
+                <span class="xp-score">২২০ XP</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- বটম বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item active">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="ai-sensei.html" class="nav-item">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="login.html" class="nav-item" id="bottomAuthBtn">
+            <i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i>
+            <span id="bottomAuthText">লগইন</span>
+        </a>
+    </nav>
+
+    <!-- Firebase Auth স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const bottomAuthBtn = document.getElementById("bottomAuthBtn");
+        const bottomAuthIcon = document.getElementById("bottomAuthIcon");
+        const bottomAuthText = document.getElementById("bottomAuthText");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                bottomAuthBtn.href = "profile.html";
+                bottomAuthIcon.className = "fa-solid fa-circle-user";
+                bottomAuthText.innerText = "প্রোফাইল";
+            } else {
+                bottomAuthBtn.href = "login.html";
+                bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
+                bottomAuthText.innerText = "লগইন";
+            }
+        });
+    </script>
+</body>
+</html>

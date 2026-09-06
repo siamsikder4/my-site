@@ -429,13 +429,14 @@
                     <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
+                <!-- N5 ভোকাবুলারি লিংক -->
+                <a href="n5-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
                 </a>
 
-                <!-- ব্যাকরণ পেজ লিংক (এখানে n5-grammar.html বা n5.html যুক্ত করা হয়েছে) -->
+                <!-- N5 ব্যাকরণ লিংক -->
                 <a href="n5-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
@@ -598,7 +599,6 @@
         // ইউজারের লগইন স্ট্যাটাস পরীক্ষা করা
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // ইউজার লগইন করা থাকলে:
                 topLoginBtn.style.display = "none";
                 topProfileBtn.style.display = "flex";
 
@@ -606,7 +606,6 @@
                 bottomAuthIcon.className = "fa-solid fa-circle-user";
                 bottomAuthText.innerText = "প্রোফাইল";
             } else {
-                // ইউজার লগআউট থাকলে:
                 topLoginBtn.style.display = "flex";
                 topProfileBtn.style.display = "none";
 

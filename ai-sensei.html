@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI সেনসেই - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* লোডার ওভারলে */
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .book-loader {
+            position: relative;
+            width: 64px;
+            height: 46px;
+            perspective: 200px;
+            margin-bottom: 18px;
+        }
+
+        .book-loader .cover-left {
+            position: absolute;
+            left: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            background: #ffffff;
+        }
+
+        .book-loader .cover-right {
+            position: absolute;
+            right: 2px; top: 2px;
+            width: 30px; height: 42px;
+            border: 2.2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+        }
+
+        .book-loader .spine {
+            position: absolute;
+            left: 31px; top: 0;
+            width: 2px; height: 46px;
+            background: #047857;
+        }
+
+        .book-loader .page {
+            position: absolute;
+            width: 29px; height: 42px;
+            top: 2px; right: 3px;
+            border: 2px solid #047857;
+            border-left: none;
+            border-radius: 0 4px 4px 0;
+            background: #ffffff;
+            transform-origin: left center;
+            animation: flipBook 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .book-loader .page:nth-child(1) { animation-delay: 0.15s; }
+        .book-loader .page:nth-child(2) { animation-delay: 0.35s; }
+        .book-loader .page:nth-child(3) { animation-delay: 0.55s; }
+
+        @keyframes flipBook {
+            0% { transform: rotateY(0deg); }
+            50%, 100% { transform: rotateY(-180deg); }
+        }
+
+        .loading-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: 0.8px;
+        }
+
+        /* টপ বার */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 14px;
+        }
+
+        .back-btn {
+            color: #0f3e2e;
+            font-size: 16px;
+            text-decoration: none;
+            background: #f1f5f9;
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-title-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-title {
+            font-weight: 800;
+            font-size: 16px;
+            color: #0f3e2e;
+        }
+
+        .nav-subtitle {
+            font-size: 11px;
+            color: #047857;
+            font-weight: 600;
+        }
+
+        /* চ্যাট কন্টেইনার */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #f8fafc;
+            padding-bottom: 62px; /* বটম বারের জায়গা */
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .bot-msg {
+            background: #ffffff;
+            color: #1e293b;
+            align-self: flex-start;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .user-msg {
+            background: #047857;
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* চ্যাট ইনপুট এরিয়া */
+        .chat-input-area {
+            display: flex;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 24px;
+            outline: none;
+            font-size: 14px;
+            background: #f8fafc;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input-area input:focus {
+            border-color: #047857;
+            background: #ffffff;
+        }
+
+        .chat-input-area button {
+            background: #047857;
+            color: #ffffff;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: background 0.2s;
+            box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
+        }
+
+        .chat-input-area button:active {
+            transform: scale(0.93);
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- লোডার ওভারলে -->
+    <div id="pageLoader" class="loader-overlay">
+        <div class="book-loader">
+            <div class="cover-left"></div>
+            <div class="cover-right"></div>
+            <div class="spine"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+            <div class="page"></div>
+        </div>
+        <div class="loading-text">読み込み中...</div>
+    </div>
+
+    <!-- টপ বার -->
+    <header class="top-nav">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div class="nav-title-wrap">
+            <span class="nav-title">সেনসেই AI টিউটর</span>
+            <span class="nav-subtitle"><i class="fa-solid fa-circle" style="font-size: 8px; color: #10b981;"></i> অনলাইন ও প্রস্তুত</span>
+        </div>
+    </header>
+
+    <!-- মূল চ্যাট লেআউট -->
+    <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot-msg">কোননিচিওয়া (こんにちは)! আমি আপনার জাপানি ভাষা শিক্ষক 'সেনসেই'। জাপানি ভাষা, ব্যাকরণ, কাঞ্জি বা ভোকাবুলারি নিয়ে যেকোনো প্রশ্ন আমাকে করতে পারেন!</div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="জাপানি ভাষা বা ব্যাকরণ নিয়ে কিছু জিজ্ঞাসা করুন...">
+            <button id="sendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- ফিক্সড বটম বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="ai-sensei.html" class="nav-item active">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <!-- স্ক্রিপ্ট ও Groq API লজিক -->
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pageLoader");
+            if (loader) loader.classList.add("hidden");
+        });
+
+        const GROQ_API_KEY = "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";
+        const SYSTEM_INSTRUCTION = "You are 'Sensei' (সেনসেই), an expert Japanese language teacher who teaches Bengali students. You ONLY answer questions related to the Japanese language (Hiragana, Katakana, Kanji, Grammar, Vocabulary, Minna no Nihongo, JLPT N5/N4, NAT-TEST, Japanese culture). Always reply in Bengali with Japanese text and pronunciation in brackets. If anyone asks any question that is NOT related to Japanese language or Japan, strictly and politely decline in Bengali saying: 'আমি শুধুমাত্র জাপানি ভাষা ও ব্যাকরণ শেখানোর জন্য তৈরি। জাপানিজ ভাষা নিয়ে যেকোনো প্রশ্ন আমাকে জিজ্ঞাসা করতে পারেন।'";
+
+        const chatMessages = document.getElementById("chatMessages");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        let messageHistory = [
+            { role: "system", content: SYSTEM_INSTRUCTION }
+        ];
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, "user-msg");
+            userInput.value = "";
+            messageHistory.push({ role: "user", content: text });
+
+            const loadingMsg = appendMessage("সেনসেই ভাবছে...", "bot-msg");
+
+            try {
+                const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${GROQ_API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "llama-3.3-70b-versatile",
+                        messages: messageHistory,
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.choices && data.choices[0].message.content) {
+                    const botReply = data.choices[0].message.content;
+                    loadingMsg.innerText = botReply;
+                    messageHistory.push({ role: "assistant", content: botReply });
+                } else if (data.error) {
+                    loadingMsg.innerText = "এরর: " + (data.error.message || "সমস্যা হয়েছে।");
+                } else {
+                    loadingMsg.innerText = "দুঃখিত, কোনো উত্তর পাওয়া যায়নি।";
+                }
+            } catch (err) {
+                loadingMsg.innerText = "সার্ভারের সাথে সংযোগ করা সম্ভব হয়নি। ইন্টারনেট কানেকশন চেক করুন।";
+            }
+        }
+
+        function appendMessage(text, className) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `msg ${className}`;
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgDiv;
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লিডারবোর্ড - KOTOBA</title>
+    <title>KOTOBA (言葉) - জাপানিজ ভাষা শিখুন</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -23,36 +23,95 @@
             padding-bottom: 80px;
         }
 
-        /* টপ বার */
+        /* প্রিমিয়াম ব্লার টপ বার */
         .top-nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid #eef2f5;
             position: sticky;
             top: 0;
             z-index: 100;
-            gap: 14px;
         }
 
-        .back-btn {
-            color: #0f3e2e;
-            font-size: 16px;
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
-            background: #f1f5f9;
+        }
+
+        .brand-icon-box {
             width: 36px;
             height: 36px;
+            background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #ffffff;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            box-shadow: 0 4px 10px rgba(4, 120, 87, 0.25);
         }
 
-        .nav-title {
+        .brand-text-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
             font-size: 17px;
+            letter-spacing: 0.8px;
             color: #0f3e2e;
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .brand-kanji {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 11px;
+            color: #b91c1c;
+            font-weight: 700;
+        }
+
+        .brand-tagline {
+            font-size: 10px;
+            font-weight: 600;
+            color: #059669;
+            letter-spacing: 0.3px;
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-nav-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f3e2e;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            transition: all 0.2s;
+        }
+
+        .top-nav-link:active {
+            background: #e2e8f0;
         }
 
         .page-content {
@@ -61,191 +120,159 @@
             margin: 0 auto;
         }
 
-        /* লোডার */
-        .loading-state {
+        /* হিরো টেক্সট */
+        .hero-text {
             text-align: center;
-            padding: 40px 16px;
-            color: #64748b;
-            font-size: 14px;
+            margin: 10px 0 20px;
         }
 
-        .loading-state i {
-            font-size: 24px;
-            color: #047857;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        /* টপ ৩ পোডিয়াম */
-        .podium-section {
-            background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
-            border-radius: 20px;
-            padding: 22px 14px 18px;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 10px;
-            margin-bottom: 24px;
-            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
-        }
-
-        .podium-col {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 32%;
-        }
-
-        .podium-avatar {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            border: 2px solid transparent;
-            margin-bottom: 6px;
-            position: relative;
-        }
-
-        .podium-avatar.first {
-            width: 58px;
-            height: 58px;
+        .hero-text h2 {
             font-size: 20px;
-            border-color: #facc15;
-            background: #047857;
-        }
-
-        .podium-avatar.second {
-            border-color: #cbd5e1;
-            background: #1e3a34;
-        }
-
-        .podium-avatar.third {
-            border-color: #f97316;
-            background: #1e3a34;
-        }
-
-        .crown-icon {
-            position: absolute;
-            top: -12px;
-            color: #facc15;
-            font-size: 16px;
-        }
-
-        .podium-name {
-            font-size: 12px;
-            font-weight: 700;
-            max-width: 90px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-        }
-
-        .podium-xp {
-            font-size: 10.5px;
-            color: #93c5fd;
-            font-weight: 600;
+            font-weight: 800;
+            color: #0e3b2c;
             margin-bottom: 6px;
         }
 
-        .podium-step {
-            width: 100%;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 14px;
+        .hero-text p {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #4a5568;
         }
 
-        .step-1 { height: 75px; background: rgba(250, 204, 21, 0.25); color: #facc15; border-top: 3px solid #facc15; }
-        .step-2 { height: 55px; background: rgba(203, 213, 225, 0.2); color: #cbd5e1; border-top: 3px solid #cbd5e1; }
-        .step-3 { height: 42px; background: rgba(249, 115, 22, 0.2); color: #f97316; border-top: 3px solid #f97316; }
+        /* প্রিমিয়াম এআই ব্যানার */
+        .tutor-banner {
+            background: linear-gradient(135deg, #0f3e2e 0%, #064e3b 100%);
+            color: #ffffff;
+            border-radius: 18px;
+            padding: 22px 16px;
+            text-align: center;
+            margin-bottom: 26px;
+            box-shadow: 0 6px 18px rgba(15, 62, 46, 0.16);
+            text-decoration: none;
+            display: block;
+            transition: transform 0.15s ease;
+        }
 
-        /* লিডারবোর্ড লিস্ট */
-        .list-section-title {
-            font-size: 15px;
+        .tutor-banner:active {
+            transform: scale(0.98);
+        }
+
+        .tutor-banner h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .tutor-banner p {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+        }
+
+        .banner-btn {
+            display: inline-block;
+            background: #c51636;
+            color: #ffffff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 25px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(197, 22, 54, 0.3);
+        }
+
+        /* সেকশন হেডিং ও ব্যাজ */
+        .level-section {
+            margin-bottom: 28px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .red-badge { background: #b91c1c; }
+        .green-badge { background: #047857; }
+        .dark-badge { background: #1e3a34; }
+
+        .section-heading {
+            font-size: 16px;
             font-weight: 700;
             color: #0e3b2c;
             margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .leader-card {
+        /* গ্রিড ও আধুনিক কার্ড */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .item-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 14px;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            padding: 15px 8px;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            display: block;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .leader-card.current-user-card {
-            border-color: #047857;
-            background: #f0fdf4;
+        .item-card:active {
+            transform: scale(0.98);
         }
 
-        .rank-number {
-            font-size: 14px;
-            font-weight: 800;
-            width: 26px;
-            color: #64748b;
-        }
+        .red-top { border-top: 3.5px solid #b91c1c; }
+        .green-top { border-top: 3.5px solid #059669; }
 
-        .user-icon-circle {
-            width: 36px;
-            height: 36px;
+        .icon-circle {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: #e6f4ea;
-            color: #047857;
+            margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
-            margin-right: 12px;
-            flex-shrink: 0;
+            font-size: 15px;
         }
 
-        .user-meta {
-            flex: 1;
-            overflow: hidden;
-        }
+        .green-bg { background: #e6f4ea; color: #047857; }
+        .red-bg { background: #fce8e6; color: #b91c1c; }
+        .yellow-bg { background: #fef3c7; color: #d97706; }
 
-        .user-meta h4 {
+        .item-card h4 {
             font-size: 13.5px;
             font-weight: 700;
             color: #1f2937;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            margin-bottom: 3px;
         }
 
-        .user-meta p {
+        .item-card p {
             font-size: 10.5px;
             color: #64748b;
+            line-height: 1.3;
         }
 
-        .xp-score {
-            font-size: 12.5px;
-            font-weight: 800;
-            color: #047857;
-            background: #ffffff;
-            padding: 4px 10px;
-            border-radius: 12px;
-            border: 1px solid #bbf7d0;
-            white-space: nowrap;
+        .mini-tag {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #fef08a;
+            color: #854d0e;
+            font-size: 8.5px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
         }
 
         /* বটম বার */
@@ -290,69 +317,181 @@
 
     <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
+        <a href="index.html" class="brand-container">
+            <div class="brand-icon-box">言</div>
+            <div class="brand-text-wrap">
+                <span class="brand-name">KOTOBA <span class="brand-kanji">言葉</span></span>
+                <span class="brand-tagline">সহজ জাপানি শিক্ষা</span>
+            </div>
         </a>
-        <span class="nav-title">লাইভ লিডারবোর্ড</span>
+        <div class="top-nav-right">
+            <a href="login.html" id="topLoginBtn" class="top-nav-link">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> লগইন
+            </a>
+            <a href="profile.html" id="topProfileBtn" class="top-nav-link" style="display: none;">
+                <i class="fa-regular fa-user"></i> প্রোফাইল
+            </a>
+        </div>
     </header>
 
     <main class="page-content">
 
-        <!-- লোডিং অবস্থা -->
-        <div id="loadingBox" class="loading-state">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            <span>ফায়ারবেস থেকে লাইভ স্কোর লোড হচ্ছে...</span>
-        </div>
+        <!-- হিরো টেক্সট -->
+        <section class="hero-text">
+            <h2>“জাপানিজ ভাষা শেখা আর কঠিন নয়”</h2>
+            <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
+        </section>
 
-        <div id="leaderboardContent" style="display: none;">
-            <!-- পোডিয়াম ব্যানার (শীর্ষ ৩ জন) -->
-            <div class="podium-section" id="podiumArea">
-                <!-- ২য় স্থান -->
-                <div class="podium-col">
-                    <div class="podium-avatar second" id="rank2Avatar">২</div>
-                    <span class="podium-name" id="rank2Name">---</span>
-                    <span class="podium-xp" id="rank2XP">0 XP</span>
-                    <div class="podium-step step-2">২</div>
-                </div>
+        <!-- সেনসেই এআই ব্যানার -->
+        <a href="ai-sensei.html" class="tutor-banner">
+            <h3>সেনসেই টেক্সট (AI Tutor)</h3>
+            <p>ব্যাকরণগত সংশয় দূর করতে এবং সঠিক উত্তর জানতে।</p>
+            <span class="banner-btn">
+                <i class="fa-solid fa-comment-dots"></i> কথা বলুন
+            </span>
+        </a>
 
-                <!-- ১ম স্থান -->
-                <div class="podium-col">
-                    <div class="podium-avatar first">
-                        <i class="fa-solid fa-crown crown-icon"></i>
-                        <span id="rank1Avatar">১</span>
-                    </div>
-                    <span class="podium-name" id="rank1Name">---</span>
-                    <span class="podium-xp" id="rank1XP">0 XP</span>
-                    <div class="podium-step step-1">১</div>
-                </div>
-
-                <!-- ৩য় স্থান -->
-                <div class="podium-col">
-                    <div class="podium-avatar third" id="rank3Avatar">৩</div>
-                    <span class="podium-name" id="rank3Name">---</span>
-                    <span class="podium-xp" id="rank3XP">0 XP</span>
-                    <div class="podium-step step-3">৩</div>
-                </div>
+        <!-- সেকশন ১: A1-A2 -->
+        <section class="level-section">
+            <span class="badge red-badge">A1-A2 - JFT</span>
+            <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
+            <div class="card-grid">
+                <a href="#" class="item-card red-top">
+                    <div class="icon-circle red-bg"><i class="fa-solid fa-comments"></i></div>
+                    <h4>কথোপকথন</h4>
+                    <p>দৈনন্দিন জীবনের ডায়ালগ</p>
+                </a>
+                <a href="#" class="item-card red-top">
+                    <span class="mini-tag">শীঘ্রই আসছে</span>
+                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-book-open-reader"></i></div>
+                    <h4>ব্যাকরণ পাঠ</h4>
+                    <p>সহজ বাক্যের গঠনরীতি</p>
+                </a>
             </div>
+        </section>
 
-            <div class="list-section-title">
-                <span>শীর্ষ শিক্ষার্থী তালিকা</span>
-                <span style="font-size: 11px; color: #047857;"><i class="fa-solid fa-circle-dot fa-fade"></i> লাইভ আপডেট</span>
+        <!-- সেকশন ২: N5 লেভেল -->
+        <section class="level-section">
+            <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
+            <h3 class="section-heading">বিগিনার লেভেল</h3>
+            <div class="card-grid">
+                
+                <a href="alphabet.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
+                    <h4>বর্ণমালা</h4>
+                    <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
+                </a>
+
+                <a href="n5-vocab.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h4>শব্দভাণ্ডার</h4>
+                    <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
+                </a>
+
+                <a href="n5-grammar.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>সহজ ভাষায় N5 গ্রামার</p>
+                </a>
+
+                <a href="kanji.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h4>কাঞ্জি</h4>
+                    <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
+                </a>
+
+                <a href="verbs.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4>ক্রিয়াপদ</h4>
+                    <p>গ্রুপ ও রূপান্তরের নিয়ম</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
+                    <h4>লেসন প্র্যাকটিস</h4>
+                    <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
+                    <h4>সহায়ক তালিকা</h4>
+                    <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                    <h4>পড়ার অনুশীলন</h4>
+                    <p>N5 রিডিং প্র্যাকটিস</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h4>শোনার অনুশীলন</h4>
+                    <p>N5 লিসেনিং প্র্যাকটিস</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
+                    <h4>লিসেনিং টেস্ট</h4>
+                    <p>N5 লিসেনিং পরীক্ষা</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
+                    <h4>অনলাইন ক্লাস</h4>
+                    <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <span class="mini-tag">শীঘ্রই আসছে</span>
+                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>পূর্বের প্রশ্নাবলী</h4>
+                    <p>NAT / JLPT বিগত প্রশ্ন</p>
+                </a>
             </div>
+        </section>
 
-            <!-- র‍্যাঙ্ক ৪ থেকে পরবর্তী লিস্ট -->
-            <div id="leaderboardList"></div>
-        </div>
+        <!-- সেকশন ৩: N4 লেভেল -->
+        <section class="level-section">
+            <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
+            <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
+            <div class="card-grid">
+                
+                <a href="n4-vocab.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h4>শব্দভাণ্ডার</h4>
+                    <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
+                </a>
+
+                <a href="n4-grammar.html" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h4>কাঞ্জি</h4>
+                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
+                </a>
+
+                <a href="#" class="item-card green-top">
+                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                    <h4>পড়ার অনুশীলন</h4>
+                    <p>N4 রিডিং প্র্যাকটিস</p>
+                </a>
+            </div>
+        </section>
 
     </main>
 
-    <!-- বটম বার -->
+    <!-- বটম বার (লিডারবোর্ড সহ) -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
+        <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
-        <a href="leaderboard.html" class="nav-item active">
+        <a href="leaderboard.html" class="nav-item">
             <i class="fa-solid fa-trophy"></i>
             <span>লিডারবোর্ড</span>
         </a>
@@ -366,11 +505,11 @@
         </a>
     </nav>
 
-    <!-- Firebase রিয়েলটাইম স্ক্রিপ্ট -->
+    <!-- Firebase স্ক্রিপ্ট ও গোপন টাইম ট্র্যাকার -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -386,108 +525,55 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let currentUserId = null;
-
-        // বটম বার Auth স্ট্যাটাস
+        const topLoginBtn = document.getElementById("topLoginBtn");
+        const topProfileBtn = document.getElementById("topProfileBtn");
         const bottomAuthBtn = document.getElementById("bottomAuthBtn");
         const bottomAuthIcon = document.getElementById("bottomAuthIcon");
         const bottomAuthText = document.getElementById("bottomAuthText");
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                currentUserId = user.uid;
+                topLoginBtn.style.display = "none";
+                topProfileBtn.style.display = "flex";
+
                 bottomAuthBtn.href = "profile.html";
                 bottomAuthIcon.className = "fa-solid fa-circle-user";
                 bottomAuthText.innerText = "প্রোফাইল";
+
+                // গোপন এক্টিভ টাইম ট্র্যাকার রান হচ্ছে
+                startSecretTimeTracker(user);
             } else {
-                currentUserId = null;
+                topLoginBtn.style.display = "flex";
+                topProfileBtn.style.display = "none";
+
                 bottomAuthBtn.href = "login.html";
                 bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
                 bottomAuthText.innerText = "লগইন";
             }
         });
 
-        // ফায়ারস্টোর থেকে রিয়েলটাইম লিডারবোর্ড লিসেনার
-        const loadingBox = document.getElementById("loadingBox");
-        const leaderboardContent = document.getElementById("leaderboardContent");
-        const leaderboardList = document.getElementById("leaderboardList");
-
-        // শীর্ষ ২০ জনকে XP অনুযায়ী রিয়েলটাইমে ফেচ করা হচ্ছে
-        const q = query(collection(db, "users"), orderBy("xp", "desc"), limit(20));
-
-        onSnapshot(q, (snapshot) => {
-            const users = [];
-            snapshot.forEach((doc) => {
-                users.push({ id: doc.id, ...doc.data() });
-            });
-
-            loadingBox.style.display = "none";
-            leaderboardContent.style.display = "block";
-
-            renderPodium(users);
-            renderList(users);
-        }, (error) => {
-            console.error("Leaderboard Realtime Error:", error);
-            loadingBox.innerHTML = `<span style="color: #ef4444;">স্কোর লোড করতে ব্যর্থ হয়েছে। ফায়ারস্টোর রুলস বা কালেকশন চেক করুন।</span>`;
-        });
-
-        function getDisplayName(user) {
-            return user.name || (user.email ? user.email.split('@')[0] : "শিক্ষার্থী");
-        }
-
-        function getFirstLetter(name) {
-            return name ? name.trim().charAt(0).toUpperCase() : "U";
-        }
-
-        // পোডিয়াম (টপ ৩) রেন্ডার
-        function renderPodium(users) {
-            // ১ম স্থান
-            const u1 = users[0];
-            document.getElementById("rank1Name").innerText = u1 ? getDisplayName(u1) : "খালি";
-            document.getElementById("rank1XP").innerText = u1 ? `${u1.xp || 0} XP` : "০ XP";
-            document.getElementById("rank1Avatar").innerText = u1 ? getFirstLetter(getDisplayName(u1)) : "-";
-
-            // ২য় স্থান
-            const u2 = users[1];
-            document.getElementById("rank2Name").innerText = u2 ? getDisplayName(u2) : "খালি";
-            document.getElementById("rank2XP").innerText = u2 ? `${u2.xp || 0} XP` : "০ XP";
-            document.getElementById("rank2Avatar").innerText = u2 ? getFirstLetter(getDisplayName(u2)) : "-";
-
-            // ৩য় স্থান
-            const u3 = users[2];
-            document.getElementById("rank3Name").innerText = u3 ? getDisplayName(u3) : "খালি";
-            document.getElementById("rank3XP").innerText = u3 ? `${u3.xp || 0} XP` : "০ XP";
-            document.getElementById("rank3Avatar").innerText = u3 ? getFirstLetter(getDisplayName(u3)) : "-";
-        }
-
-        // বাকিদের লিস্ট রেন্ডার
-        function renderList(users) {
-            leaderboardList.innerHTML = "";
-
-            if (users.length <= 3) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
-                return;
-            }
-
-            // ৪র্থ জন থেকে রেন্ডার শুরু
-            for (let i = 3; i < users.length; i++) {
-                const user = users[i];
-                const name = getDisplayName(user);
-                const isCurrent = (user.id === currentUserId);
-
-                const card = document.createElement("div");
-                card.className = `leader-card ${isCurrent ? 'current-user-card' : ''}`;
-                card.innerHTML = `
-                    <span class="rank-number">${i + 1}</span>
-                    <div class="user-icon-circle">${getFirstLetter(name)}</div>
-                    <div class="user-meta">
-                        <h4>${name} ${isCurrent ? '<span style="font-size:10px; color:#047857;">(আপনি)</span>' : ''}</h4>
-                        <p>${user.completedLessons ? `লেসন ${user.completedLessons} সম্পন্ন` : 'শিক্ষার্থী'}</p>
-                    </div>
-                    <span class="xp-score">${user.xp || 0} XP</span>
-                `;
-                leaderboardList.appendChild(card);
-            }
+        // ব্যাকগ্রাউন্ড ট্র্যাকার (প্রতি ৬০ সেকেন্ডে ৫ XP গোপনে যোগ হবে)
+        function startSecretTimeTracker(user) {
+            let activeSeconds = 0;
+            setInterval(async () => {
+                if (!document.hidden) {
+                    activeSeconds++;
+                    if (activeSeconds >= 60) {
+                        activeSeconds = 0;
+                        try {
+                            const userRef = doc(db, "users", user.uid);
+                            await setDoc(userRef, {
+                                name: user.displayName || user.email.split('@')[0],
+                                email: user.email,
+                                xp: increment(5),
+                                lastActive: new Date().toISOString()
+                            }, { merge: true });
+                        } catch (err) {
+                            console.error("Time tracker error:", err);
+                        }
+                    }
+                }
+            }, 1000);
         }
     </script>
 </body>

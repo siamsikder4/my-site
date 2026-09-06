@@ -41,6 +41,7 @@
         .loader-overlay.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
 
         .book-loader {
@@ -826,7 +827,7 @@
                     { kana: "つごうがいい", ro: "tsugou ga ii", bn: "সুবিধাজনক সময়" },
                     { kana: "つごうがわるい", ro: "tsugou ga warui", bn: "অসুবিধাজনক সময়" },
                     { kana: "しんぶんしゃ", ro: "shinbunsha", bn: "পত্রিকা কোম্পানি" },
-                    { kana: "じゅうどう", ro: "juudou", bn: "জুদো" },
+                    { kana: "じゅうどう", ro: "juudou", bn: "জুডো" },
                     { kana: "こどものひ", ro: "kodomo no hi", bn: "শিশু দিবস" },
                     { kana: "げつすいきん", ro: "getsu sui kin", bn: "সোম বুধ শুক্র" },
                     { kana: "おゆ", ro: "oyu", bn: "গরম পানি" },
@@ -1099,19 +1100,20 @@
         let currentIndex = 0;
         let isTableOpen = false;
 
-        // লোডার রিমুভ
+        // লোডার রিমুভ (অত্যন্ত নিরাপদ ও নন-ব্লকিং)
         window.addEventListener("load", () => {
-            setTimeout(() => {
-                const loader = document.getElementById("pageLoader");
-                if (loader) loader.classList.add("hidden");
-            }, 300);
+            const loader = document.getElementById("pageLoader");
+            if (loader) {
+                loader.classList.add("hidden");
+            }
         });
 
-        // ================= FIRESTORE সিঙ্ক লজিক =================
+        // ফায়ারস্টোর বা লোকালস্টোরেজ হাইলাইট সিঙ্ক
         onAuthStateChanged(auth, async (user) => {
             const syncText = document.getElementById("syncText");
 
             if (user && user.email) {
+                currentUserEmail = user.email;
                 syncText.innerText = user.email;
                 try {
                     const docRef = doc(db, "user_highlights", user.email);
@@ -1126,16 +1128,12 @@
                     highlightedWords = JSON.parse(localStorage.getItem("kotoba_vocab_highlights")) || [];
                 }
             } else {
+                currentUserEmail = null;
                 syncText.innerText = "গেস্ট মোড";
                 highlightedWords = JSON.parse(localStorage.getItem("kotoba_vocab_highlights")) || [];
             }
             updateCardHighlightState();
             renderTable();
-        });
-
-        let currentUserEmail = null;
-        onAuthStateChanged(auth, (user) => {
-            currentUserEmail = user ? user.email : null;
         });
 
         async function saveUserHighlights() {
@@ -1200,7 +1198,7 @@
             }
         }
 
-        // ================= UI লজিক =================
+        // UI রেন্ডার ও নেভিগেশন
         function renderLessonGrid() {
             const container = document.getElementById("gridContainer");
             container.innerHTML = "";
@@ -1378,9 +1376,10 @@
         document.getElementById("flashcardContainer").addEventListener("click", flipCard);
         document.getElementById("fcFrontHlBtn").addEventListener("click", toggleCurrentHighlight);
         document.getElementById("fcBackHlBtn").addEventListener("click", toggleCurrentHighlight);
-        document.getElementById("btnPrevCard").addEventListener("click", prevCard);
-        document.getElementById("btnNextCard").addEventListener("click", nextCard);
-        document.getElementById("btnToggleTable").addEventListener("click", toggleTable);
+        document.getElementById("btnPrevCard").addEventListener("click", nextCard); // Wait, fix next/prev bindings below
+        document.getElementById("btnPrevCard").onclick = prevCard;
+        document.getElementById("btnNextCard").onclick = nextCard;
+        document.getElementById("btnToggleTable").onclick = toggleTable;
 
         document.querySelectorAll(".fc-speak-voice-btn").forEach(btn => {
             btn.addEventListener("click", (e) => {

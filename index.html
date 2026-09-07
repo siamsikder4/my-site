@@ -11,7 +11,7 @@
 
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -23,35 +23,67 @@
         }
 
         body {
-            background-color: #f7faf9;
+            background-color: #f6f9f8;
             color: #1a202c;
-            padding-bottom: 80px;
+            padding-bottom: 85px;
         }
 
-        /* টপ বার */
+        /* ৩-কলাম টপ বার (লোগো একদম সেন্টারে রাখার জন্য) */
         .top-nav {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 40px 1fr 40px;
             align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid #eef2f5;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
+        .top-nav-spacer {
+            width: 38px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* অ্যানিমেটেড KOTOBA লোগো */
         .logo {
-            font-weight: 800;
-            font-size: 18px;
-            color: #0f3e2e;
-            letter-spacing: 0.5px;
+            font-family: 'Noto Sans JP', -apple-system, sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 2px;
             text-decoration: none;
+            background: linear-gradient(135deg, #0a2e22 0%, #047857 45%, #10b981 70%, #047857 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoShimmer 4s ease-in-out infinite, logoPulse 3s ease-in-out infinite alternate;
+            display: inline-block;
+            text-align: center;
+        }
+
+        @keyframes logoShimmer {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        @keyframes logoPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
         }
 
         /* নোটিফিকেশন বেল বাটন */
         .top-nav-right {
             display: flex;
+            justify-content: flex-end;
             align-items: center;
         }
 
@@ -66,12 +98,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+            font-size: 16px;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: all 0.2s ease;
         }
 
         .notif-bell-btn:active {
+            transform: scale(0.92);
             background: #e2e8f0;
         }
 
@@ -81,7 +114,7 @@
             right: -2px;
             background: #ef4444;
             color: #ffffff;
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: 700;
             min-width: 17px;
             height: 17px;
@@ -90,6 +123,7 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
         }
 
         .page-content {
@@ -101,44 +135,50 @@
         /* হিরো টেক্সট */
         .hero-text {
             text-align: center;
-            margin: 10px 0 22px;
+            margin: 12px 0 22px;
         }
 
         .hero-text h2 {
             font-size: 21px;
             font-weight: 800;
             color: #0e3b2c;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            line-height: 1.35;
         }
 
         .hero-text p {
             font-size: 12px;
             line-height: 1.6;
-            color: #4a5568;
+            color: #64748b;
         }
 
         /* সেনসেই এআই ব্যানার */
         .tutor-banner {
-            background: #0f3e2e;
+            background: linear-gradient(145deg, #0f3e2e 0%, #175440 100%);
             color: #ffffff;
-            border-radius: 18px;
-            padding: 24px 16px;
+            border-radius: 20px;
+            padding: 24px 18px;
             text-align: center;
             margin-bottom: 28px;
-            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
+            box-shadow: 0 10px 22px rgba(15, 62, 46, 0.18), 0 2px 6px rgba(15, 62, 46, 0.08);
             text-decoration: none;
             display: block;
-            transition: transform 0.15s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .tutor-banner:active {
-            transform: scale(0.98);
+            transform: scale(0.985);
+            box-shadow: 0 5px 12px rgba(15, 62, 46, 0.15);
         }
 
         .tutor-banner h3 {
             font-size: 19px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 6px;
+            letter-spacing: 0.2px;
         }
 
         .tutor-banner p {
@@ -154,9 +194,9 @@
             border: none;
             padding: 9px 24px;
             border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
+            font-size: 13.5px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(197, 22, 54, 0.35);
         }
 
         /* লেভেল সেকশন */
@@ -166,12 +206,13 @@
 
         .badge {
             display: inline-block;
-            padding: 3px 12px;
+            padding: 3.5px 12px;
             border-radius: 12px;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 6px;
+            letter-spacing: 0.3px;
         }
 
         .red-badge { background: #b91c1c; }
@@ -180,76 +221,85 @@
 
         .section-heading {
             font-size: 17px;
-            font-weight: 700;
+            font-weight: 800;
             color: #0e3b2c;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        /* গ্রিড ও কার্ড */
+        /* গ্রিড ও আপগ্রেডেড কার্ড শ্যাডো */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 13px;
         }
 
         .item-card {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 16px 8px;
+            border: 1px solid #e8eef3;
+            border-radius: 16px;
+            padding: 18px 10px 15px;
             text-align: center;
             text-decoration: none;
             position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.035), 0 1px 3px rgba(15, 23, 42, 0.02);
             display: block;
-            transition: transform 0.15s ease;
+            transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03);
+            border-color: #dbe4ec;
         }
 
         .item-card:active {
-            transform: scale(0.98);
+            transform: scale(0.975);
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
         }
 
-        .red-top { border-top: 3px solid #b91c1c; }
-        .green-top { border-top: 3px solid #059669; }
+        .red-top { border-top: 3.5px solid #b91c1c; }
+        .green-top { border-top: 3.5px solid #059669; }
 
         .icon-circle {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             margin: 0 auto 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 17px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
         }
 
-        .green-bg { background: #e6f4ea; color: #047857; }
-        .red-bg { background: #fce8e6; color: #b91c1c; }
-        .yellow-bg { background: #fef3c7; color: #d97706; }
+        .green-bg { background: #ecfdf5; color: #047857; }
+        .red-bg { background: #fff1f2; color: #b91c1c; }
+        .yellow-bg { background: #fefce8; color: #d97706; }
 
         .item-card h4 {
             font-size: 13.5px;
             font-weight: 700;
-            color: #1f2937;
+            color: #1e293b;
             margin-bottom: 4px;
         }
 
         .item-card p {
             font-size: 10px;
             color: #64748b;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         .mini-tag {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            background: #fef08a;
-            color: #854d0e;
+            top: 7px;
+            right: 7px;
+            background: #fef3c7;
+            color: #92400e;
             font-size: 8.5px;
             font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 6px;
+            padding: 2px 7px;
+            border-radius: 8px;
+            border: 1px solid #fde68a;
         }
 
         /* নোটিফিকেশন মডাল */
@@ -257,8 +307,8 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(2px);
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(3px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -271,11 +321,11 @@
             max-width: 400px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
             display: flex;
             flex-direction: column;
             max-height: 80vh;
-            animation: popUp 0.2s ease;
+            animation: popUp 0.22s ease-out;
         }
 
         @keyframes popUp {
@@ -323,6 +373,7 @@
             padding: 14px;
             margin-bottom: 10px;
             border-left: 4px solid #047857;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
         }
 
         .notif-item.targeted {
@@ -372,6 +423,7 @@
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .nav-item {
@@ -399,9 +451,12 @@
 </head>
 <body>
 
-    <!-- টপ বার -->
+    <!-- টপ বার (৩-কলাম লেআউটে সেন্টারে লোগো) -->
     <header class="top-nav">
-        <a href="index.html" class="logo">KOTOBA</a>
+        <div class="top-nav-spacer"></div>
+        <div class="logo-container">
+            <a href="index.html" class="logo">KOTOBA</a>
+        </div>
         <div class="top-nav-right">
             <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
                 <i class="fa-solid fa-bell"></i>
@@ -540,7 +595,7 @@
             </div>
         </section>
 
-        <!-- সেকশন ৩: N4 লেভেল (অক্ষত রাখা হয়েছে) -->
+        <!-- সেকশন ৩: N4 লেভেল -->
         <section class="level-section">
             <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
             <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
@@ -650,19 +705,16 @@
         async function loadNotifications() {
             try {
                 let notifs = [];
-                // সবার জন্য পাঠানো গ্লোবাল নোটিফিকেশন
                 const qAll = query(collection(db, "notifications"), where("target", "==", "all"));
                 const snapAll = await getDocs(qAll);
                 snapAll.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data() }));
 
-                // নির্দিষ্ট ইউজারের জন্য পাঠানো নোটিফিকেশন
                 if (currentUserEmail) {
                     const qUser = query(collection(db, "notifications"), where("target", "==", currentUserEmail));
                     const snapUser = await getDocs(qUser);
                     snapUser.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data(), isTargeted: true }));
                 }
 
-                // সময় অনুযায়ী সাজানো
                 notifs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
                 if (notifs.length > 0) {

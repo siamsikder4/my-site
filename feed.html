@@ -23,6 +23,7 @@
         .top-icon-btn {
             background: #f1f5f9; color: #0f3e2e; border: none; width: 36px; height: 36px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; position: relative;
+            text-decoration: none;
         }
         .notif-dot {
             position: absolute; top: 2px; right: 2px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: none;
@@ -56,7 +57,6 @@
             padding: 8px 12px; font-size: 12px; color: #334155; margin-top: 8px; outline: none; font-weight: 600;
         }
 
-        /* পোল ক্রিয়েটর সেকশন */
         .poll-creator-box {
             background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px; margin-top: 10px; display: none;
         }
@@ -108,7 +108,6 @@
         .feed-image-box { border-radius: 12px; overflow: hidden; margin-bottom: 12px; max-height: 260px; background: #000; }
         .feed-image-box img { width: 100%; max-height: 260px; object-fit: cover; display: block; }
         
-        /* পোল অপশন স্টাইল */
         .poll-container { margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px; }
         .poll-option-btn {
             background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 9px 12px;
@@ -141,7 +140,7 @@
         .comment-input { flex: 1; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 10px; font-size: 12px; outline: none; }
         .comment-send-btn { background: #047857; color: #fff; border: none; padding: 0 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
 
-        /* মডাল (নোটিফিকেশন ও ডাইরেক্ট চ্যাট) */
+        /* নোটিফিকেশন মডাল */
         .modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);
             z-index: 9999; justify-content: center; align-items: center; padding: 16px;
@@ -152,12 +151,6 @@
         .modal-header { background: #0f3e2e; color: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
         .modal-body { padding: 14px; overflow-y: auto; background: #f8fafc; flex: 1; }
         .close-modal-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
-
-        /* চ্যাট উইন্ডো স্টাইল */
-        .chat-messages-box { height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; padding: 4px; }
-        .chat-bubble { max-width: 75%; padding: 8px 12px; border-radius: 12px; font-size: 12.5px; word-break: break-word; }
-        .chat-bubble.my { align-self: flex-end; background: #047857; color: #fff; }
-        .chat-bubble.other { align-self: flex-start; background: #fff; border: 1px solid #e2e8f0; color: #1e293b; }
 
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
@@ -175,7 +168,7 @@
     <header class="top-nav">
         <span class="nav-title"><i class="fa-solid fa-earth-americas" style="color:#047857;"></i> স্টাডি কমিউনিটি</span>
         <div class="nav-right-cluster">
-            <button class="top-icon-btn" id="openChatModalBtn" title="ইনবক্স / চ্যাট"><i class="fa-regular fa-paper-plane"></i></button>
+            <a href="chat.html" class="top-icon-btn" title="ইনবক্স / চ্যাট"><i class="fa-regular fa-paper-plane"></i></a>
             <button class="top-icon-btn" id="openNotifModalBtn" title="নোটিফিকেশন">
                 <i class="fa-regular fa-bell"></i>
                 <span class="notif-dot" id="notifDot"></span>
@@ -196,25 +189,6 @@
         </div>
     </div>
 
-    <!-- ডাইরেক্ট চ্যাট মডাল -->
-    <div class="modal-overlay" id="chatModal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <span id="chatModalTitle">ডাইরেক্ট চ্যাট</span>
-                <button class="close-modal-btn" onclick="document.getElementById('chatModal').style.display='none'">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="chat-messages-box" id="chatMessagesBox">
-                    <div style="text-align:center; color:#94a3b8; padding:40px;">কাউকে মেসেজ পাঠাতে লিডারবোর্ড বা প্রোফাইলে যান</div>
-                </div>
-                <div class="comment-input-row" id="chatSendRow" style="display:none;">
-                    <input type="text" class="comment-input" id="chatInputMsg" placeholder="মেসেজ লিখুন...">
-                    <button class="comment-send-btn" id="sendDirectChatBtn">পাঠান</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <main class="page-content">
         <div class="feed-tabs">
             <button class="feed-tab active" id="tabRecent" onclick="switchTab('recent')">সর্বশেষ (Recent)</button>
@@ -230,7 +204,6 @@
             
             <input type="text" id="postTopicInput" class="topic-input" placeholder="টপিক বা হ্যাশট্যাগ দিন (যেমন: #kanji)">
 
-            <!-- পোল ক্রিয়েটর বক্স -->
             <div class="poll-creator-box" id="pollCreatorBox">
                 <div style="font-size: 11.5px; font-weight:700; color:#047857; margin-bottom:6px;">📊 পোল তৈরি করুন</div>
                 <div class="poll-input-row"><input type="text" class="poll-opt-input" id="pollOpt1" placeholder="অপশন ১"></div>
@@ -264,8 +237,8 @@
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
         <a href="feed.html" class="nav-item active"><i class="fa-solid fa-comments"></i><span>কমিউনিটি</span></a>
-        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
-        <a href="login.html" class="nav-item" id="bottomAuthBtn"><i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i><span id="bottomAuthText">লগইন</span></a>
+        <a href="chat.html" class="nav-item"><i class="fa-solid fa-paper-plane"></i><span>ইনবক্স</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>র‍্যাঙ্কিং</span></a>
     </nav>
 
     <script type="module">
@@ -302,16 +275,10 @@
             if (user) {
                 currentUser = user;
                 document.getElementById("createPostBox").style.display = "block";
-                document.getElementById("bottomAuthBtn").href = "profile.html";
-                document.getElementById("bottomAuthIcon").className = "fa-solid fa-circle-user";
-                document.getElementById("bottomAuthText").innerText = "প্রোফাইল";
                 loadNotifications(user.email.toLowerCase());
             } else {
                 currentUser = null;
                 document.getElementById("createPostBox").style.display = "none";
-                document.getElementById("bottomAuthBtn").href = "login.html";
-                document.getElementById("bottomAuthIcon").className = "fa-solid fa-arrow-right-to-bracket";
-                document.getElementById("bottomAuthText").innerText = "লগইন";
             }
             loadFeedPosts();
         });
@@ -427,7 +394,6 @@
 
         function loadFeedPosts() {
             const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
-
             onSnapshot(q, (snapshot) => {
                 cachedPosts = [];
                 snapshot.forEach(docSnap => {
@@ -453,9 +419,9 @@
 
             displayPosts.forEach(post => {
                 const postId = post.id;
+                const isMyPost = currentUser && currentUser.email.toLowerCase() === post.userId;
                 const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
                 const isBookmarked = currentUser && post.bookmarks && post.bookmarks.includes(currentUser.email.toLowerCase());
-                const isOwner = currentUser && currentUser.email.toLowerCase() === post.userId;
                 const comments = post.comments || [];
 
                 const avatarHtml = post.userPhoto 
@@ -466,7 +432,6 @@
                     ? `<div class="feed-image-box"><img src="${post.imageBase64}" alt="Post Image"></div>` 
                     : '';
 
-                // পোল রেন্ডারিং
                 let pollHtml = '';
                 if (post.poll && post.poll.options) {
                     let totalVotes = post.poll.options.reduce((sum, opt) => sum + (opt.votes ? opt.votes.length : 0), 0);
@@ -494,7 +459,6 @@
                             </button>
                         `;
                     }).join('');
-
                     pollHtml = `<div class="poll-container">${optionsList}</div>`;
                 }
 
@@ -506,12 +470,13 @@
                 const commentsHtml = comments.map((c, index) => {
                     const cLikes = c.likes || [];
                     const isCLiked = currentUser && cLikes.includes(currentUser.email.toLowerCase());
+                    const isMyComment = currentUser && currentUser.email.toLowerCase() === c.userEmail;
                     return `
                         <div class="comment-bubble">
                             <div class="comment-content">
                                 <b>${c.userName}:</b> ${escapeHtml(c.text)}
                             </div>
-                            <button class="comment-react-btn ${isCLiked ? 'liked' : ''}" onclick="toggleCommentLike('${postId}', ${index})">
+                            <button class="comment-react-btn ${isCLiked ? 'liked' : ''}" onclick="toggleCommentLike('${postId}', ${index}, ${isMyComment})">
                                 <i class="fa-solid fa-heart"></i> <span>${cLikes.length}</span>
                             </button>
                         </div>
@@ -530,8 +495,8 @@
                             </div>
                         </div>
                         <div style="display:flex; gap:6px; align-items:center;">
-                            ${!isOwner && currentUser ? `<button class="post-options-btn" onclick="openDirectChat('${post.userId}', '${post.userName}')" title="মেসেজ পাঠান"><i class="fa-regular fa-paper-plane" style="font-size:13px; color:#047857;"></i></button>` : ''}
-                            ${isOwner ? `<button class="post-options-btn" onclick="deletePost('${postId}')" title="ডিলিট করুন"><i class="fa-solid fa-trash-can" style="font-size: 13px; color: #ef4444;"></i></button>` : ''}
+                            ${!isMyPost && currentUser ? `<button class="post-options-btn" onclick="window.location.href='chat.html?with=${encodeURIComponent(post.userId)}'" title="মেসেজ পাঠান"><i class="fa-regular fa-paper-plane" style="font-size:13px; color:#047857;"></i></button>` : ''}
+                            ${isMyPost ? `<button class="post-options-btn" onclick="deletePost('${postId}')" title="ডিলিট করুন"><i class="fa-solid fa-trash-can" style="font-size: 13px; color: #ef4444;"></i></button>` : ''}
                         </div>
                     </div>
                     ${post.topic ? `<span class="topic-pill">${post.topic}</span>` : ''}
@@ -540,7 +505,7 @@
                     ${pollHtml}
                     <div class="feed-footer">
                         <div class="action-cluster">
-                            <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])})">
+                            <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])}, ${isMyPost})">
                                 <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length}</span>
                             </button>
                             <button class="action-icon-btn ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark('${postId}', ${JSON.stringify(post.bookmarks || [])})">
@@ -584,8 +549,11 @@
             } catch(e) {}
         };
 
-        window.toggleLike = async function(postId, currentLikes) {
+        // নিজের পোস্টে নিজে লাইক দেওয়া রেস্ট্রিক্টেড
+        window.toggleLike = async function(postId, currentLikes, isMyPost) {
             if (!currentUser) { alert("লাইক দিতে হলে আগে লগইন করুন!"); window.location.href = "login.html"; return; }
+            if (isMyPost) { alert("নিজের পোস্টে নিজে লাইক দিতে পারবেন না!"); return; }
+
             const myEmail = currentUser.email.toLowerCase();
             const postRef = doc(db, "posts", postId);
             let newLikes = [...currentLikes];
@@ -594,13 +562,45 @@
             try { await setDoc(postRef, { likes: newLikes }, { merge: true }); } catch(e) {}
         };
 
+        // নিজের কমেন্টে নিজে রিয়েক্ট দেওয়া রেস্ট্রিক্টেড
+        window.toggleCommentLike = async function(postId, commentIndex, isMyComment) {
+            if (!currentUser) { alert("রিয়েক্ট দিতে হলে আগে লগইন করুন!"); window.location.href = "login.html"; return; }
+            if (isMyComment) { alert("নিজের কমেন্টে নিজে রিয়েক্ট দিতে পারবেন না!"); return; }
+
+            const myEmail = currentUser.email.toLowerCase();
+            try {
+                const postRef = doc(db, "posts", postId);
+                const postSnap = await getDoc(postRef);
+                if (!postSnap.exists()) return;
+
+                const postData = postSnap.data();
+                const comments = postData.comments || [];
+                if (!comments[commentIndex]) return;
+
+                let cLikes = comments[commentIndex].likes || [];
+                if (cLikes.includes(myEmail)) {
+                    cLikes = cLikes.filter(email => email !== myEmail);
+                } else {
+                    cLikes.push(myEmail);
+                }
+                comments[commentIndex].likes = cLikes;
+
+                await setDoc(postRef, { comments: comments }, { merge: true });
+            } catch(e) {}
+        };
+
         window.toggleBookmark = async function(postId, currentBookmarks) {
             if (!currentUser) { alert("পোস্ট সেভ করতে হলে লগইন করুন!"); window.location.href = "login.html"; return; }
             const myEmail = currentUser.email.toLowerCase();
             const postRef = doc(db, "posts", postId);
             let newBookmarks = [...currentBookmarks];
-            if (newBookmarks.includes(myEmail)) newBookmarks = newBookmarks.filter(email => email !== myEmail);
-            else newBookmarks.push(myEmail);
+            if (newBookmarks.includes(myEmail)) {
+                newBookmarks = newBookmarks.filter(email => email !== myEmail);
+                alert("পোস্টটি বুকমার্ক থেকে সরিয়ে নেওয়া হয়েছে!");
+            } else {
+                newBookmarks.push(myEmail);
+                alert("পোস্টটি সফলভাবে সেভ করা হয়েছে!");
+            }
             try { await setDoc(postRef, { bookmarks: newBookmarks }, { merge: true }); } catch(e) {}
         };
 
@@ -632,13 +632,18 @@
                 const userData = userSnap.exists() ? userSnap.data() : {};
                 const userName = userData.userName || currentUser.displayName || currentUser.email.split('@')[0];
 
-                comments.push({ userName, text, timestamp: Date.now(), likes: [] });
+                comments.push({ 
+                    userEmail: currentUser.email.toLowerCase(), 
+                    userName, 
+                    text, 
+                    timestamp: Date.now(), 
+                    likes: [] 
+                });
                 await setDoc(postRef, { comments: comments }, { merge: true });
                 input.value = "";
             } catch(e) {}
         };
 
-        // নোটিফিকেশন লোড
         function loadNotifications(myEmail) {
             onSnapshot(query(collection(db, "notifications")), (snap) => {
                 const list = document.getElementById("notifModalList");
@@ -656,54 +661,6 @@
         }
 
         document.getElementById("openNotifModalBtn").onclick = () => document.getElementById("notifModal").style.display = "flex";
-
-        // ডাইরেক্ট চ্যাট হ্যান্ডলার
-        let activeChatTargetEmail = null;
-        window.openDirectChat = function(targetEmail, targetName) {
-            if (!currentUser) { alert("ইনবক্স করতে হলে লগইন করুন!"); window.location.href="login.html"; return; }
-            activeChatTargetEmail = targetEmail;
-            document.getElementById("chatModalTitle").innerText = `${targetName} এর সাথে চ্যাট`;
-            document.getElementById("chatModal").style.display = "flex";
-            document.getElementById("chatSendRow").style.display = "flex";
-
-            const chatId = [currentUser.email.toLowerCase(), targetEmail.toLowerCase()].sort().join("_");
-            const box = document.getElementById("chatMessagesBox");
-
-            onSnapshot(query(collection(db, "direct_chats", chatId, "messages"), orderBy("timestamp", "asc")), (snap) => {
-                box.innerHTML = "";
-                if(snap.empty) {
-                    box.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:30px;">কথোপকথন শুরু করুন</div>`;
-                    return;
-                }
-                snap.forEach(m => {
-                    const data = m.data();
-                    const isMy = data.sender === currentUser.email.toLowerCase();
-                    box.innerHTML += `<div class="chat-bubble ${isMy ? 'my' : 'other'}">${escapeHtml(data.text)}</div>`;
-                });
-                box.scrollTop = box.scrollHeight;
-            });
-        };
-
-        document.getElementById("sendDirectChatBtn").onclick = async () => {
-            const input = document.getElementById("chatInputMsg");
-            const text = input.value.trim();
-            if(!text || !activeChatTargetEmail || !currentUser) return;
-            input.value = "";
-
-            const chatId = [currentUser.email.toLowerCase(), activeChatTargetEmail.toLowerCase()].sort().join("_");
-            try {
-                await addDoc(collection(db, "direct_chats", chatId, "messages"), {
-                    sender: currentUser.email.toLowerCase(),
-                    text: text,
-                    timestamp: Date.now()
-                });
-            } catch(e) {}
-        };
-
-        document.getElementById("openChatModalBtn").onclick = () => {
-            if (!currentUser) { alert("ইনবক্স দেখতে হলে লগইন করুন!"); window.location.href="login.html"; return; }
-            alert("কাউকে মেসেজ পাঠাতে লিডারবোর্ড বা পোস্টের হেডার থেকে প্লেন আইকনে ক্লিক করুন।");
-        };
 
         function escapeHtml(str) {
             return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

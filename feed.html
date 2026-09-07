@@ -11,7 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: #f1f5f9; color: #1e293b; padding-bottom: 85px; }
 
-        /* টপ বার (ইনবক্স আইকন রিমুভ করা, শুধু নোটিফিকেশন বেল) */
         .top-nav {
             display: flex; align-items: center; justify-content: space-between; padding: 14px 18px;
             background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
@@ -50,27 +49,11 @@
         }
         .post-input:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1); }
         
-        .topic-input {
-            width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
-            padding: 8px 12px; font-size: 12px; color: #334155; margin-top: 8px; outline: none; font-weight: 600;
-        }
-
-        .poll-creator-box {
-            background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px; margin-top: 10px; display: none;
-        }
-        .poll-input-row { display: flex; gap: 6px; margin-bottom: 6px; }
-        .poll-opt-input { flex: 1; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 12px; outline: none; background: #fff; }
-
-        .post-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .post-tools { display: flex; gap: 6px; align-items: center; }
-        .tool-icon-btn {
-            background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; width: 34px; height: 34px;
-            border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;
-        }
         .btn-post-submit {
             background: #047857; color: #ffffff; border: none; padding: 8px 20px;
             border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
+            margin-top: 10px; width: 100%; justify-content: center;
         }
 
         .feed-card {
@@ -84,7 +67,6 @@
             display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;
             overflow: hidden; border: 1.5px solid #a7f3d0; flex-shrink: 0;
         }
-        .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
         
         .learner-badge { font-size: 9px; font-weight: 700; background: #e0f2fe; color: #0369a1; padding: 1px 6px; border-radius: 6px; }
@@ -95,7 +77,6 @@
         .feed-footer {
             display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 12px;
         }
-        .action-cluster { display: flex; gap: 8px; }
         .action-icon-btn {
             background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px;
             color: #64748b; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600;
@@ -114,7 +95,7 @@
         .modal-body { padding: 14px; overflow-y: auto; background: #f8fafc; flex: 1; }
         .close-modal-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
 
-        /* বটম নেভিগেশন বার */
+        /* বটম নেভিগেশন বার (৪টি বাটন: হোম, কমিউনিটি, র‍্যাঙ্কিং, প্রোফাইল) */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
@@ -128,7 +109,6 @@
 </head>
 <body>
 
-    <!-- টপ বার (ইনবক্স শর্টকাট রিমুভ করা হয়েছে) -->
     <header class="top-nav">
         <span class="nav-title"><i class="fa-solid fa-earth-americas" style="color:#047857;"></i> স্টাডি কমিউনিটি</span>
         <div class="nav-right-cluster">
@@ -139,7 +119,6 @@
         </div>
     </header>
 
-    <!-- নোটিফিকেশন মডাল -->
     <div class="modal-overlay" id="notifModal">
         <div class="modal-box">
             <div class="modal-header">
@@ -164,21 +143,7 @@
                 <span>আজ কী শিখলেন বা জানতে চান?</span>
             </div>
             <textarea id="postTextInput" class="post-input" maxlength="400" placeholder="আপনার স্টাডি আপডেট এখানে লিখুন..."></textarea>
-            
-            <input type="text" id="postTopicInput" class="topic-input" placeholder="টপিক বা হ্যাশট্যাগ দিন (যেমন: #kanji)">
-
-            <div class="poll-creator-box" id="pollCreatorBox">
-                <div style="font-size: 11.5px; font-weight:700; color:#047857; margin-bottom:6px;">📊 পোল তৈরি করুন</div>
-                <div class="poll-input-row"><input type="text" class="poll-opt-input" id="pollOpt1" placeholder="অপশন ১"></div>
-                <div class="poll-input-row"><input type="text" class="poll-opt-input" id="pollOpt2" placeholder="অপশন ২"></div>
-            </div>
-
-            <div class="post-footer-row">
-                <div class="post-tools">
-                    <button class="tool-icon-btn" id="togglePollBoxBtn" title="পোল যুক্ত করুন"><i class="fa-solid fa-square-poll-vertical"></i></button>
-                </div>
-                <button class="btn-post-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> পোস্ট করুন</button>
-            </div>
+            <button class="btn-post-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> পোস্ট করুন</button>
         </div>
 
         <div id="feedListContainer">
@@ -189,7 +154,7 @@
         </div>
     </main>
 
-    <!-- বটম নেভ বার -->
+    <!-- বটম নেভ বার (ইনবক্স বাটন রিমুভ করা) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -198,10 +163,6 @@
         <a href="feed.html" class="nav-item active">
             <i class="fa-solid fa-comments"></i>
             <span>কমিউনিটি</span>
-        </a>
-        <a href="chat.html" class="nav-item">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>ইনবক্স</span>
         </a>
         <a href="leaderboard.html" class="nav-item">
             <i class="fa-solid fa-trophy"></i>
@@ -222,7 +183,7 @@
         const auth = getAuth(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        let currentUser = null, currentTab = "recent", cachedPosts = [], isPollBoxOpen = false;
+        let currentUser = null, currentTab = "recent", cachedPosts = [];
 
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
@@ -238,30 +199,27 @@
             renderPosts();
         };
 
-        document.getElementById("togglePollBoxBtn").onclick = () => {
-            isPollBoxOpen = !isPollBoxOpen;
-            document.getElementById("pollCreatorBox").style.display = isPollBoxOpen ? "block" : "none";
-        };
-
         document.getElementById("submitPostBtn").onclick = async () => {
             const text = document.getElementById("postTextInput").value.trim();
-            if (!text && !isPollBoxOpen) return;
+            if (!text || !currentUser) return;
 
-            const userDoc = await getDoc(doc(db, "users", currentUser.email.toLowerCase()));
-            const userData = userDoc.exists() ? userDoc.data() : {};
+            let userName = currentUser.displayName || currentUser.email.split('@')[0];
+            try {
+                const userDoc = await getDoc(doc(db, "users", currentUser.email.toLowerCase()));
+                if (userDoc.exists() && userDoc.data().userName) {
+                    userName = userDoc.data().userName;
+                }
+            } catch(e) {}
 
             await addDoc(collection(db, "posts"), {
                 userId: currentUser.email.toLowerCase(),
-                userName: userData.userName || currentUser.displayName || currentUser.email.split('@')[0],
+                userName: userName,
                 text: text,
                 timestamp: Date.now(),
-                likes: [],
-                comments: []
+                likes: []
             });
 
             document.getElementById("postTextInput").value = "";
-            isPollBoxOpen = false;
-            document.getElementById("pollCreatorBox").style.display = "none";
         };
 
         function loadFeedPosts() {
@@ -269,6 +227,8 @@
                 cachedPosts = [];
                 snap.forEach(d => cachedPosts.push({ id: d.id, ...d.data() }));
                 renderPosts();
+            }, (error) => {
+                document.getElementById("feedListContainer").innerHTML = `<div style="text-align: center; color: #ef4444; padding: 30px; font-size: 13px;">ডেটা লোড করতে সমস্যা হয়েছে!</div>`;
             });
         }
 
@@ -282,7 +242,7 @@
             }
 
             if (displayPosts.length === 0) {
-                container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">কোনো পোস্ট পাওয়া যায়নি।</div>`;
+                container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">এখনও কোনো পোস্ট করা হয়নি। প্রথম পোস্টটি আপনি করুন!</div>`;
                 return;
             }
 
@@ -290,6 +250,7 @@
                 const isMyPost = currentUser && currentUser.email.toLowerCase() === post.userId;
                 const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
                 const isAdminPost = post.userId === ADMIN_EMAIL.toLowerCase();
+                const uName = post.userName || "Student";
                 
                 const badgeHtml = isAdminPost 
                     ? `<span style="font-size:10px; font-weight:700; background:#eff6ff; color:#0284c7; padding:1px 6px; border-radius:6px; display:inline-flex; align-items:center; gap:3px;"><i class="fa-solid fa-circle-check"></i> ADMIN</span>` 
@@ -299,17 +260,17 @@
                     <div class="feed-card">
                         <div class="feed-header">
                             <div class="feed-user-box" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
-                                <div class="feed-avatar">${post.userName.charAt(0).toUpperCase()}</div>
+                                <div class="feed-avatar">${uName.charAt(0).toUpperCase()}</div>
                                 <div class="feed-user-info">
-                                    <h4>${post.userName} ${badgeHtml}</h4>
-                                    <p>${new Date(post.timestamp).toLocaleDateString('bn-BD', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'})}</p>
+                                    <h4>${uName} ${badgeHtml}</h4>
+                                    <p>${post.timestamp ? new Date(post.timestamp).toLocaleDateString('bn-BD', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : ""}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="feed-body">${post.text}</div>
                         <div class="feed-footer">
-                            <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}', ${JSON.stringify(post.likes)}, ${isMyPost})">
-                                <i class="fa-solid fa-heart"></i> <span>${post.likes.length}</span>
+                            <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}', ${JSON.stringify(post.likes || [])}, ${isMyPost})">
+                                <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length}</span>
                             </button>
                         </div>
                     </div>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কমিউনিটি ফিড - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 85px; }
+
+        .top-nav {
+            display: flex; align-items: center; justify-content: space-between; padding: 14px 18px;
+            background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
+        }
+        .nav-title { font-weight: 800; font-size: 17px; color: #0f3e2e; }
+
+        .page-content { padding: 16px; max-width: 480px; margin: 0 auto; }
+
+        /* পোস্ট ক্রিয়েট বক্স */
+        .post-box {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px;
+            margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .post-input {
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 10px 12px;
+            font-size: 13.5px; outline: none; background: #f8fafc; resize: none; min-height: 80px;
+        }
+        .post-input:focus { border-color: #047857; background: #ffffff; }
+        .post-btn-row { display: flex; justify-content: flex-end; margin-top: 10px; }
+        .btn-post-submit {
+            background: #047857; color: #ffffff; border: none; padding: 8px 18px;
+            border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* পোস্ট কার্ড */
+        .feed-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px;
+            margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .feed-avatar {
+            width: 38px; height: 38px; border-radius: 50%; background: #e6f4ea; color: #047857;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; overflow: hidden;
+        }
+        .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .feed-user-info h4 { font-size: 13.5px; font-weight: 700; color: #0f3e2e; }
+        .feed-user-info p { font-size: 10px; color: #94a3b8; }
+
+        .feed-body { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 12px; word-break: break-word; }
+        
+        .feed-footer {
+            display: flex; align-items: center; gap: 16px; border-top: 1px solid #f1f5f9; padding-top: 10px; font-size: 12px; color: #64748b;
+        }
+        .action-icon-btn { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; }
+        .action-icon-btn.liked { color: #e11d48; }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
+            background: #ffffff; border-top: 1px solid #eef2f5;
+            display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+        }
+        .nav-item { text-decoration: none; color: #8392a5; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; }
+        .nav-item.active { color: #0f3e2e; }
+        .nav-item i { font-size: 19px; }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <span class="nav-title"><i class="fa-solid fa-earth-americas" style="color:#047857; margin-right:6px;"></i> স্টাডি কমিউনিটি ফিড</span>
+    </header>
+
+    <main class="page-content">
+        <!-- পোস্ট লেখার বক্স -->
+        <div class="post-box" id="createPostBox" style="display: none;">
+            <textarea id="postTextInput" class="post-input" placeholder="আপনার আজকের জাপানিজ স্টাডি বা জিজ্ঞাসা এখানে শেয়ার করুন..."></textarea>
+            <div class="post-btn-row">
+                <button class="btn-post-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> পোস্ট করুন</button>
+            </div>
+        </div>
+
+        <div id="feedListContainer">
+            <div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">ফিড লোড হচ্ছে...</div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="feed.html" class="nav-item active"><i class="fa-solid fa-comments"></i><span>কমিউনিটি</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+        <a href="login.html" class="nav-item" id="bottomAuthBtn"><i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i><span id="bottomAuthText">লগইন</span></a>
+    </nav>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById("createPostBox").style.display = "block";
+                document.getElementById("bottomAuthBtn").href = "profile.html";
+                document.getElementById("bottomAuthIcon").className = "fa-solid fa-circle-user";
+                document.getElementById("bottomAuthText").innerText = "প্রোফাইল";
+            } else {
+                currentUser = null;
+                document.getElementById("createPostBox").style.display = "none";
+                document.getElementById("bottomAuthBtn").href = "login.html";
+                document.getElementById("bottomAuthIcon").className = "fa-solid fa-arrow-right-to-bracket";
+                document.getElementById("bottomAuthText").innerText = "লগইন";
+            }
+            loadFeedPosts();
+        });
+
+        document.getElementById("submitPostBtn").onclick = async () => {
+            const text = document.getElementById("postTextInput").value.trim();
+            if (!text || !currentUser) return;
+
+            try {
+                const userDocRef = doc(db, "users", currentUser.email.toLowerCase());
+                const userSnap = await getDoc(userDocRef);
+                const userData = userSnap.exists() ? userSnap.data() : {};
+
+                await addDoc(collection(db, "posts"), {
+                    userId: currentUser.email.toLowerCase(),
+                    userName: userData.userName || currentUser.displayName || currentUser.email.split('@')[0],
+                    userPhoto: userData.photoBase64 || currentUser.photoURL || null,
+                    text: text,
+                    timestamp: Date.now(),
+                    likes: []
+                });
+
+                document.getElementById("postTextInput").value = "";
+            } catch (e) {
+                alert("পোস্ট প্রকাশ করতে সমস্যা হয়েছে!");
+            }
+        };
+
+        function loadFeedPosts() {
+            const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+            const container = document.getElementById("feedListContainer");
+
+            onSnapshot(q, (snapshot) => {
+                container.innerHTML = "";
+                if (snapshot.empty) {
+                    container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">এখনও কোনো পোস্ট করা হয়নি। প্রথম পোস্টটি আপনি করুন!</div>`;
+                    return;
+                }
+
+                snapshot.forEach(docSnap => {
+                    const post = docSnap.data();
+                    const postId = docSnap.id;
+                    const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
+
+                    const avatarHtml = post.userPhoto 
+                        ? `<img src="${post.userPhoto}" alt="User">` 
+                        : (post.userName ? post.userName.charAt(0).toUpperCase() : "U");
+
+                    const card = document.createElement("div");
+                    card.className = "feed-card";
+                    card.innerHTML = `
+                        <div class="feed-header" style="cursor: pointer;" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
+                            <div class="feed-avatar">${avatarHtml}</div>
+                            <div class="feed-user-info">
+                                <h4>${post.userName}</h4>
+                                <p>${post.timestamp ? new Date(post.timestamp).toLocaleDateString('bn-BD', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : ""}</p>
+                            </div>
+                        </div>
+                        <div class="feed-body">${escapeHtml(post.text)}</div>
+                        <div class="feed-footer">
+                            <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])})">
+                                <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length} লাইক</span>
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        window.toggleLike = async function(postId, currentLikes) {
+            if (!currentUser) {
+                alert("লাইক দিতে হলে আগে লগইন করুন!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const myEmail = currentUser.email.toLowerCase();
+            const postRef = doc(db, "posts", postId);
+
+            let newLikes = [...currentLikes];
+            if (newLikes.includes(myEmail)) {
+                newLikes = newLikes.filter(email => email !== myEmail);
+            } else {
+                newLikes.push(myEmail);
+            }
+
+            try {
+                await setDoc(postRef, { likes: newLikes }, { merge: true });
+            } catch(e) {}
+        };
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>

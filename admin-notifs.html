@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নোটিফিকেশন সেন্টার - KOTOBA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 70px; }
+        .top-nav { display: flex; align-items: center; padding: 14px 18px; background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; gap: 14px; }
+        .back-btn { color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .nav-title { font-weight: 700; font-size: 17px; color: #0f3e2e; }
+        .page-content { padding: 18px 16px; max-width: 550px; margin: 0 auto; }
+        .section-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; }
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #475569; }
+        .input-control { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 13px; }
+        textarea.input-control { min-height: 80px; resize: vertical; }
+        .btn-submit { width: 100%; padding: 11px; background: #047857; color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; }
+        .table-responsive { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .data-table th { background: #f1f5f9; color: #475569; padding: 10px 8px; text-align: left; }
+        .data-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; }
+        .badge { padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+        .badge-all { background: #dcfce7; color: #15803d; }
+        .badge-user { background: #e0f2fe; color: #0369a1; }
+        .act-btn { border: none; padding: 5px 7px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-left: 4px; }
+        .edit-btn { color: #0284c7; background: #f0f9ff; }
+        .del-btn { color: #dc2626; background: #fef2f2; }
+    </style>
+</head>
+<body>
+    <header class="top-nav">
+        <a href="admin.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title">নোটিফিকেশন সেন্টার</span>
+    </header>
+
+    <main class="page-content">
+        <div class="section-card">
+            <h4 style="margin-bottom: 14px; font-size: 15px; color:#0f3e2e;" id="formTitle">নোটিফিকেশন তৈরি করুন</h4>
+            <input type="hidden" id="editId">
+            <div class="input-group">
+                <label>টার্গেট:</label>
+                <select id="targetType" class="input-control">
+                    <option value="all">সবাইকে (All Users)</option>
+                    <option value="specific">নির্দিষ্ট ইউজার (Specific User)</option>
+                </select>
+            </div>
+            <div class="input-group" id="emailGroup" style="display: none;">
+                <label>ইউজারের ইমেইল:</label>
+                <input type="email" id="targetEmail" class="input-control" placeholder="user@gmail.com">
+            </div>
+            <div class="input-group">
+                <label>শিরোনাম:</label>
+                <input type="text" id="titleInput" class="input-control">
+            </div>
+            <div class="input-group">
+                <label>বার্তা:</label>
+                <textarea id="msgInput" class="input-control"></textarea>
+            </div>
+            <button class="btn-submit" id="sendBtn">সেন্ড করুন</button>
+        </div>
+
+        <div class="section-card">
+            <h4 style="margin-bottom: 14px; font-size: 15px; color:#0f3e2e;">পাঠানো তালিকা</h4>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>টাইটেল</th>
+                            <th>টার্গেট</th>
+                            <th style="text-align: right;">অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notifTableBody">
+                        <tr><td colspan="3" style="text-align: center; color:#94a3b8; padding: 20px;">লোড হচ্ছে...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
+        let notifs = [];
+
+        onAuthStateChanged(auth, (u) => {
+            if (u && u.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                loadNotifs();
+            } else {
+                window.location.href = "profile.html";
+            }
+        });
+
+        document.getElementById("targetType").onchange = (e) => {
+            document.getElementById("emailGroup").style.display = e.target.value === "specific" ? "block" : "none";
+        };
+
+        async function loadNotifs() {
+            const snap = await getDocs(collection(db, "notifications"));
+            notifs = [];
+            snap.forEach(d => notifs.push({ id: d.id, ...d.data() }));
+            notifs.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+            renderNotifs();
+        }
+
+        function renderNotifs() {
+            const tb = document.getElementById("notifTableBody");
+            tb.innerHTML = "";
+            if (!notifs.length) {
+                tb.innerHTML = `<tr><td colspan="3" style="text-align: center; color:#94a3b8; padding: 20px;">কোনো নোটিফিকেশন নেই।</td></tr>`;
+                return;
+            }
+            notifs.forEach(n => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 700; color: #0f3e2e;">${n.title}</div>
+                        <div style="font-size: 11px; color: #64748b;">${n.message}</div>
+                    </td>
+                    <td><span class="badge ${n.target === 'all' ? 'badge-all' : 'badge-user'}">${n.target}</span></td>
+                    <td style="text-align: right;">
+                        <button class="act-btn edit-btn" onclick="editN('${n.id}')"><i class="fa-solid fa-pen"></i></button>
+                        <button class="act-btn del-btn" onclick="deleteN('${n.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        document.getElementById("sendBtn").onclick = async () => {
+            const id = document.getElementById("editId").value;
+            const type = document.getElementById("targetType").value;
+            const email = document.getElementById("targetEmail").value.trim().toLowerCase();
+            const title = document.getElementById("titleInput").value.trim();
+            const message = document.getElementById("msgInput").value.trim();
+
+            if (!title || !message) return alert("শিরোনাম ও বার্তা দিন!");
+            const target = type === "all" ? "all" : email;
+            if (type === "specific" && !email) return alert("ইমেইল দিন!");
+
+            if (id) {
+                await updateDoc(doc(db, "notifications", id), { title, message, target });
+            } else {
+                await addDoc(collection(db, "notifications"), { title, message, target, timestamp: Date.now() });
+            }
+
+            document.getElementById("editId").value = "";
+            document.getElementById("titleInput").value = "";
+            document.getElementById("msgInput").value = "";
+            document.getElementById("targetEmail").value = "";
+            document.getElementById("formTitle").innerText = "নোটিফিকেশন তৈরি করুন";
+            loadNotifs();
+        };
+
+        window.editN = (id) => {
+            const n = notifs.find(x => x.id === id);
+            if (!n) return;
+            document.getElementById("editId").value = n.id;
+            document.getElementById("titleInput").value = n.title;
+            document.getElementById("msgInput").value = n.message;
+            if (n.target === "all") {
+                document.getElementById("targetType").value = "all";
+                document.getElementById("emailGroup").style.display = "none";
+            } else {
+                document.getElementById("targetType").value = "specific";
+                document.getElementById("emailGroup").style.display = "block";
+                document.getElementById("targetEmail").value = n.target;
+            }
+            document.getElementById("formTitle").innerText = "নোটিফিকেশন এডিট করুন";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        window.deleteN = async (id) => {
+            if (confirm("মুছে ফেলতে চান?")) {
+                await deleteDoc(doc(db, "notifications", id));
+                loadNotifs();
+            }
+        };
+    </script>
+</body>
+</html>

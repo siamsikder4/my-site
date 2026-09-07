@@ -71,145 +71,123 @@
         input:checked + .slider { background-color: #047857; }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* ================= লার্নিং অ্যানালিটিক্স প্রিমিয়াম UI (মডিউল ৩) ================= */
+        /* লার্নিং অ্যানালিটিক্স প্রিমিয়াম UI (মডিউল ৩) */
         .analytics-pill-header {
             background: #f1f5f9; padding: 3px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; color: #0284c7;
         }
-
         .metrics-circular-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 18px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
         }
-
         .metric-circle-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 12px 6px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;
         }
-
-        .gauge-svg {
-            width: 60px;
-            height: 60px;
-            transform: rotate(-90deg);
-        }
-
-        .gauge-bg {
-            fill: none;
-            stroke: #e2e8f0;
-            stroke-width: 4;
-        }
-
-        .gauge-fill {
-            fill: none;
-            stroke-width: 4.5;
-            stroke-linecap: round;
-            stroke-dasharray: 100;
-            transition: stroke-dashoffset 0.8s ease;
-        }
-
-        .metric-circle-card .percent-text {
-            font-size: 13.5px;
-            font-weight: 800;
-            color: #0f3e2e;
-            margin-top: -42px;
-            margin-bottom: 22px;
-        }
-
-        .metric-circle-card .card-lbl {
-            font-size: 10.5px;
-            font-weight: 700;
-            color: #475569;
-            line-height: 1.2;
-        }
-
-        /* প্রগ্রেস বার কার্ডস */
-        .analytics-bar-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 14px;
-        }
-
+        .gauge-svg { width: 60px; height: 60px; transform: rotate(-90deg); }
+        .gauge-bg { fill: none; stroke: #e2e8f0; stroke-width: 4; }
+        .gauge-fill { fill: none; stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 100; transition: stroke-dashoffset 0.8s ease; }
+        .metric-circle-card .percent-text { font-size: 13.5px; font-weight: 800; color: #0f3e2e; margin-top: -42px; margin-bottom: 22px; }
+        .metric-circle-card .card-lbl { font-size: 10.5px; font-weight: 700; color: #475569; line-height: 1.2; }
+        .analytics-bar-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
         .analytics-item { margin-bottom: 10px; }
         .analytics-item:last-child { margin-bottom: 0; }
+        .analytics-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #334155; }
+        .analytics-progress { width: 100%; height: 7px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .analytics-fill { height: 100%; border-radius: 10px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .analytics-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .insight-card { background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+        .insight-icon-box { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+        .insight-data h6 { font-size: 10.5px; color: #64748b; font-weight: 600; margin-bottom: 1px; }
+        .insight-data p { font-size: 13px; font-weight: 800; color: #0f3e2e; }
 
-        .analytics-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #334155;
+        /* ================= ইউজার কন্ট্রোল ও অ্যাক্টিভিটি আপগ্রেডেড UI (মডিউল ২) ================= */
+        .user-mgmt-header {
+            display: flex; gap: 8px; align-items: center;
+        }
+        .search-wrapper {
+            position: relative; margin-bottom: 12px;
+        }
+        .search-box-custom {
+            display: flex; align-items: center; background: #f8fafc; border: 1.5px solid #e2e8f0;
+            border-radius: 12px; padding: 10px 14px; gap: 10px; transition: all 0.2s;
+        }
+        .search-box-custom:focus-within {
+            border-color: #047857; background: #ffffff; box-shadow: 0 2px 8px rgba(4, 120, 87, 0.08);
+        }
+        .search-box-custom input {
+            border: none; background: transparent; outline: none; width: 100%; font-size: 13.5px; color: #1e293b;
         }
 
-        .analytics-progress {
-            width: 100%;
-            height: 7px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
+        .user-cards-container {
+            display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 2px;
         }
 
-        .analytics-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        .user-entry-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 14px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .user-entry-card:hover {
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
         }
 
-        /* অ্যানালিটিক্স ফুটনোট ট্র্যাকার গ্রিড */
-        .analytics-insights-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .user-entry-card.banned {
+            background: #fffafa; border-color: #fecdd3; border-left: 4px solid #e11d48;
         }
 
-        .insight-card {
-            background: #ffffff;
-            border: 1px dashed #cbd5e1;
-            border-radius: 12px;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .user-main-info {
+            display: flex; align-items: center; gap: 12px; min-width: 0;
         }
 
-        .insight-icon-box {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
+        .user-avatar-tag {
+            width: 40px; height: 40px; border-radius: 12px;
+            background: linear-gradient(135deg, #e6f4ea 0%, #cbf0dd 100%);
+            color: #047857; font-weight: 800; font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; text-transform: uppercase;
         }
 
-        .insight-data h6 {
-            font-size: 10.5px;
-            color: #64748b;
-            font-weight: 600;
-            margin-bottom: 1px;
+        .user-entry-card.banned .user-avatar-tag {
+            background: #fee2e2; color: #b91c1c;
         }
 
-        .insight-data p {
-            font-size: 13px;
-            font-weight: 800;
-            color: #0f3e2e;
+        .user-details {
+            display: flex; flex-direction: column; min-width: 0;
         }
 
-        /* সার্চ বক্স */
-        .search-box {
-            display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; margin-bottom: 14px; gap: 8px;
+        .user-name-line {
+            display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
         }
-        .search-box input { border: none; background: transparent; outline: none; width: 100%; font-size: 13px; color: #1e293b; }
+        .user-display-name {
+            font-size: 14px; font-weight: 800; color: #0f3e2e;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .status-dot {
+            width: 7px; height: 7px; border-radius: 50%; background: #10b981; flex-shrink: 0;
+        }
+        .status-dot.banned {
+            background: #ef4444;
+        }
+
+        .user-email-text {
+            font-size: 11.5px; color: #64748b;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .user-actions-cluster {
+            display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+        }
+
+        .user-circle-action {
+            width: 32px; height: 32px; border-radius: 10px; border: none;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; cursor: pointer; transition: transform 0.15s;
+        }
+        .user-circle-action:active { transform: scale(0.92); }
+
+        .btn-act-msg { background: #e0f2fe; color: #0284c7; }
+        .btn-act-ban { background: #fef3c7; color: #b45309; }
+        .btn-act-unban { background: #dcfce7; color: #15803d; }
+        .btn-act-edit { background: #f1f5f9; color: #475569; }
+        .btn-act-del { background: #fee2e2; color: #dc2626; }
 
         /* ফর্ম ইনপুট */
         .input-group { margin-bottom: 12px; }
@@ -228,18 +206,8 @@
         .data-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         .data-table th { background: #f1f5f9; color: #475569; font-weight: 700; padding: 10px 8px; position: sticky; top: 0; z-index: 10; }
         .data-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
-        
-        .badge-status { padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
-        .badge-active { background: #dcfce7; color: #15803d; }
-        .badge-banned { background: #fee2e2; color: #b91c1c; }
-        
-        .action-btns { display: flex; gap: 6px; }
-        .act-btn { border: none; background: none; cursor: pointer; font-size: 13px; padding: 5px 7px; border-radius: 6px; }
-        .ban-btn { color: #b45309; background: #fef3c7; }
-        .unban-btn { color: #15803d; background: #dcfce7; }
-        .edit-btn { color: #0284c7; background: #f0f9ff; }
-        .del-btn { color: #dc2626; background: #fef2f2; }
-        .direct-msg-btn { color: #047857; background: #e6f4ea; }
+        .badge-target { background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+        .badge-target.all { background: #dcfce7; color: #15803d; }
 
         /* মোডাল */
         .modal-overlay {
@@ -323,14 +291,14 @@
             </div>
         </div>
 
-        <!-- মডিউল ৩: লার্নিং অ্যানালিটিক্স ও পারফরম্যান্স মেট্রিক্স (নতুন আপগ্রেডেড UI) -->
+        <!-- মডিউল ৩: লার্নিং অ্যানালিটিক্স ও পারফরম্যান্স মেট্রিক্স -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-chart-line" style="color: #0284c7; margin-right: 6px;"></i> লার্নিং অ্যানালিটিক্স (৩)</span>
                 <span class="analytics-pill-header"><i class="fa-solid fa-circle" style="font-size: 7px; color: #10b981; margin-right: 4px;"></i>রিয়েলটাইম ইনসাইট</span>
             </h3>
 
-            <!-- ১. সার্কুলার রিং গেজ চার্ট -->
+            <!-- সার্কুলার রিং গেজ চার্ট -->
             <div class="metrics-circular-grid">
                 <div class="metric-circle-card">
                     <svg class="gauge-svg" viewBox="0 0 36 36">
@@ -360,7 +328,7 @@
                 </div>
             </div>
 
-            <!-- ২. প্রগ্রেস বার ট্র্যাকার -->
+            <!-- প্রগ্রেস বার ট্র্যাকার -->
             <div class="analytics-bar-box">
                 <div class="analytics-item">
                     <div class="analytics-meta">
@@ -383,7 +351,7 @@
                 </div>
             </div>
 
-            <!-- ৩. কুইক ট্র্যাকার ইনসাইটস -->
+            <!-- কুইক ট্র্যাকার ইনসাইটস -->
             <div class="analytics-insights-grid">
                 <div class="insight-card">
                     <div class="insight-icon-box" style="background:#fef3c7; color:#d97706;">
@@ -407,34 +375,30 @@
             </div>
         </div>
 
-        <!-- মডিউল ২: ইউজার ব্যান/আনব্যান ও অ্যাক্টিভিটি ট্র্যাকিং -->
+        <!-- ================= মডিউল ২: ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (নতুন আপগ্রেডেড কার্ড UI) ================= -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (২)</span>
-                <div style="display: flex; gap: 8px;">
-                    <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:4px 9px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
-                    <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:13px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
+                <div class="user-mgmt-header">
+                    <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:5px 11px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
+                    <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:14px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
                 </div>
             </h3>
 
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 13px;"></i>
-                <input type="text" id="userSearchInput" placeholder="নাম বা ইমেইল দিয়ে ইউজার খুঁজুন...">
+            <!-- সার্চ ফিল্টার -->
+            <div class="search-wrapper">
+                <div class="search-box-custom">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i>
+                    <input type="text" id="userSearchInput" placeholder="নাম বা ইমেইল দিয়ে ইউজার ফিল্টার করুন...">
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>নাম ও ইমেইল</th>
-                            <th>স্ট্যাটাস</th>
-                            <th style="text-align: right;">অ্যাকশন</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userTableBody">
-                        <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>
-                    </tbody>
-                </table>
+            <!-- ইউজার ডিরেক্টরি কার্ডস -->
+            <div class="user-cards-container" id="userCardsContainer">
+                <div style="text-align:center; color:#94a3b8; padding:30px;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
+                    <p style="font-size:12px; margin-top:6px;">ইউজার ডেটা লোড হচ্ছে...</p>
+                </div>
             </div>
         </div>
 
@@ -595,10 +559,14 @@
             } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
         });
 
-        // ================= মডিউল ২: ইউজার কন্ট্রোল, ব্যান ও ট্র্যাকিং =================
+        // ================= মডিউল ২: ইউজার কন্ট্রোল, ব্যান ও আপগ্রেডেড কার্ড রেন্ডারিং =================
         async function fetchAllUsers() {
-            const tbody = document.getElementById("userTableBody");
-            tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>`;
+            const container = document.getElementById("userCardsContainer");
+            container.innerHTML = `
+                <div style="text-align:center; color:#94a3b8; padding:30px;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
+                    <p style="font-size:12px; margin-top:6px;">ইউজার ডেটা লোড হচ্ছে...</p>
+                </div>`;
             try {
                 const snap = await getDocs(collection(db, "user_highlights"));
                 allUserData = [];
@@ -609,62 +577,66 @@
                     const isBanned = !!data.isBanned;
                     if (!isBanned) activeCount++;
 
+                    const finalEmail = data.email || docSnap.id;
+                    const finalName = data.displayName || data.name || (finalEmail ? finalEmail.split('@')[0] : "অজানা");
+
                     allUserData.push({
                         docId: docSnap.id,
-                        email: data.email || docSnap.id,
-                        name: data.displayName || data.name || (data.email ? data.email.split('@')[0] : "অজানা"),
+                        email: finalEmail,
+                        name: finalName,
                         isBanned: isBanned,
-                        lastActive: data.lastActive || "সক্রিয়"
+                        initial: finalName.trim().charAt(0).toUpperCase()
                     });
                 });
 
                 document.getElementById("totalUsersCount").innerText = allUserData.length;
                 document.getElementById("activeUsersCount").innerText = activeCount;
-                renderUserTable(allUserData);
+                renderUserCards(allUserData);
             } catch(e) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; padding:20px;">ইউজার ডেটা লোড করতে ব্যর্থ!</td></tr>`;
+                container.innerHTML = `<div style="text-align:center; color:#ef4444; padding:20px; font-size:13px; font-weight:700;">ইউজার ডেটা লোড করতে ব্যর্থ!</div>`;
                 console.error(e);
             }
         }
 
-        function renderUserTable(list) {
-            const tbody = document.getElementById("userTableBody");
-            tbody.innerHTML = "";
+        function renderUserCards(list) {
+            const container = document.getElementById("userCardsContainer");
+            container.innerHTML = "";
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:18px;">কোনো ইউজার পাওয়া যায়নি।</td></tr>`;
+                container.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:30px; font-size:13px; font-weight:600;">কোনো ইউজার পাওয়া যায়নি।</div>`;
                 return;
             }
 
             list.forEach(u => {
-                const tr = document.createElement("tr");
-                const statusBadge = u.isBanned 
-                    ? `<span class="badge-status badge-banned"><i class="fa-solid fa-ban"></i> Banned</span>` 
-                    : `<span class="badge-status badge-active"><i class="fa-solid fa-circle-check"></i> Active</span>`;
-
-                tr.innerHTML = `
-                    <td>
-                        <div style="font-weight: 700; color: #0f3e2e;">${u.name}</div>
-                        <div style="font-size: 11px; color: #64748b;">${u.email}</div>
-                    </td>
-                    <td>${statusBadge}</td>
-                    <td style="text-align: right;">
-                        <div class="action-btns" style="justify-content: flex-end;">
-                            <button class="act-btn direct-msg-btn" title="নোটিফিকেশন পাঠান" onclick="selectUserForNotif('${u.email}')">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                            <button class="act-btn ${u.isBanned ? 'unban-btn' : 'ban-btn'}" title="${u.isBanned ? 'আনব্যান করুন' : 'ব্যান করুন'}" onclick="toggleUserBan('${u.docId}', ${u.isBanned})">
-                                <i class="fa-solid ${u.isBanned ? 'fa-unlock' : 'fa-user-slash'}"></i>
-                            </button>
-                            <button class="act-btn edit-btn" title="এডিট করুন" onclick="openEditUserModal('${u.docId}', '${u.name}', '${u.email}')">
-                                <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button class="act-btn del-btn" title="মুছে ফেলুন" onclick="deleteUserRecord('${u.docId}')">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                const card = document.createElement("div");
+                card.className = `user-entry-card ${u.isBanned ? 'banned' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="user-main-info">
+                        <div class="user-avatar-tag">${u.initial}</div>
+                        <div class="user-details">
+                            <div class="user-name-line">
+                                <span class="status-dot ${u.isBanned ? 'banned' : ''}" title="${u.isBanned ? 'Banned' : 'Active'}"></span>
+                                <span class="user-display-name">${u.name}</span>
+                            </div>
+                            <span class="user-email-text">${u.email}</span>
                         </div>
-                    </td>
+                    </div>
+                    <div class="user-actions-cluster">
+                        <button class="user-circle-action btn-act-msg" title="নোটিফিকেশন পাঠান" onclick="selectUserForNotif('${u.email}')">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                        <button class="user-circle-action ${u.isBanned ? 'btn-act-unban' : 'btn-act-ban'}" title="${u.isBanned ? 'আনব্যান করুন' : 'ব্যান করুন'}" onclick="toggleUserBan('${u.docId}', ${u.isBanned})">
+                            <i class="fa-solid ${u.isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
+                        </button>
+                        <button class="user-circle-action btn-act-edit" title="এডিট করুন" onclick="openEditUserModal('${u.docId}', '${u.name}', '${u.email}')">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="user-circle-action btn-act-del" title="মুছে ফেলুন" onclick="deleteUserRecord('${u.docId}')">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                container.appendChild(card);
             });
         }
 
@@ -685,11 +657,12 @@
         document.getElementById("userSearchInput").addEventListener("input", (e) => {
             const q = e.target.value.toLowerCase().trim();
             const filtered = allUserData.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
-            renderUserTable(filtered);
+            renderUserCards(filtered);
         });
 
         document.getElementById("refreshUsersBtn").addEventListener("click", fetchAllUsers);
 
+        // ইউজার ক্রিয়েট / এডিট মডাল
         const userModal = document.getElementById("userModal");
         document.getElementById("closeUserModalBtn").onclick = () => userModal.style.display = "none";
 
@@ -755,7 +728,7 @@
             document.getElementById("notifTargetType").value = "specific";
             document.getElementById("emailInputGroup").style.display = "block";
             document.getElementById("notifSpecificEmail").value = email;
-            window.scrollTo({ top: 620, behavior: "smooth" });
+            window.scrollTo({ top: 680, behavior: "smooth" });
         };
 
         // ================= নোটিফিকেশন হ্যান্ডলার =================
@@ -791,7 +764,7 @@
 
             allNotifications.forEach(n => {
                 const tr = document.createElement("tr");
-                const targetText = n.target === "all" ? `<span class="badge-status badge-active">All Users</span>` : `<span class="badge-status" style="background:#e0f2fe; color:#0369a1;">${n.target}</span>`;
+                const targetText = n.target === "all" ? `<span class="badge-target all">All Users</span>` : `<span class="badge-target">${n.target}</span>`;
                 tr.innerHTML = `
                     <td>
                         <div style="font-weight: 700; color: #0f3e2e; margin-bottom: 3px;">${n.title}</div>
@@ -873,7 +846,7 @@
                 }
                 
                 document.getElementById("saveNotifBtn").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> আপডেট সংরক্ষণ করুন`;
-                window.scrollTo({ top: 620, behavior: "smooth" });
+                window.scrollTo({ top: 680, behavior: "smooth" });
             }
         };
 

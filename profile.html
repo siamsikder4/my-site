@@ -210,7 +210,7 @@
                 </button>
             </div>
 
-            <!-- স্ট্যাটাস কাউন্টার (বুকমার্ক ছাড়া শুধু ফলোয়ার্স ও ফলোয়িং) -->
+            <!-- স্ট্যাটাস কাউন্টার -->
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-val" id="followersCount">০</div>
@@ -235,13 +235,6 @@
                 <div class="menu-left">
                     <i class="fa-solid fa-trophy" style="color: #d97706;"></i>
                     <span>র‍্যাঙ্কিং ও লিডারবোর্ড</span>
-                </div>
-                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
-            </a>
-            <a href="ai-sensei.html" class="menu-item">
-                <div class="menu-left">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>AI সেনসেই চ্যাটবক্স</span>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
@@ -275,18 +268,31 @@
         </div>
     </div>
 
+    <!-- বটম নেভিগেশন বার (কমিউনিটি সহ) -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
-        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
-        <a href="ai-sensei.html" class="nav-item"><i class="fa-solid fa-robot"></i><span>AI সেনসেই</span></a>
-        <a href="profile.html" class="nav-item active"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="feed.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>কমিউনিটি</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
     </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {

@@ -21,7 +21,6 @@
 
         .page-content { padding: 16px; max-width: 480px; margin: 0 auto; }
 
-        /* ট্যাব ফিল্টার (Trending / Recent) */
         .feed-tabs {
             display: flex; background: #e2e8f0; padding: 4px; border-radius: 12px; margin-bottom: 14px; gap: 4px;
         }
@@ -31,7 +30,6 @@
         }
         .feed-tab.active { background: #ffffff; color: #047857; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
-        /* পোস্ট ক্রিয়েট বক্স */
         .post-box {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
             margin-bottom: 16px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
@@ -44,11 +42,11 @@
         }
         .post-input:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1); }
         
-        /* টপিক সিলেক্টর ড্রপডাউন */
-        .topic-selector {
+        .topic-input {
             width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
             padding: 8px 12px; font-size: 12px; color: #334155; margin-top: 10px; outline: none; font-weight: 600;
         }
+        .topic-input:focus { border-color: #047857; background: #fff; }
 
         .post-img-preview-container {
             position: relative; margin-top: 10px; display: none; max-height: 200px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;
@@ -71,7 +69,6 @@
             display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
         }
 
-        /* পোস্ট কার্ড */
         .feed-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
             margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03); position: relative;
@@ -86,13 +83,11 @@
         .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
         
-        /* স্টুডেন্ট লেভেল ব্যাজ */
         .learner-badge {
             font-size: 9px; font-weight: 700; background: #e0f2fe; color: #0369a1; padding: 1px 6px; border-radius: 6px;
         }
         .feed-user-info p { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
 
-        /* পোস্ট ডিলিট/এডিট মেনু */
         .post-options-btn { background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px; }
 
         .topic-pill {
@@ -115,13 +110,16 @@
         .action-icon-btn.liked { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
         .action-icon-btn.bookmarked { background: #f0fdf4; border-color: #bbf7d0; color: #047857; }
 
-        /* কমেন্ট সেকশন */
+        /* কমেন্ট ও কমেন্ট রিয়েক্ট সেকশন */
         .comments-section {
             margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 10px; display: none;
         }
-        .comments-list { max-height: 180px; overflow-y: auto; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
-        .comment-bubble { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 10px; font-size: 12px; }
-        .comment-bubble b { color: #0f3e2e; margin-right: 4px; }
+        .comments-list { max-height: 200px; overflow-y: auto; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
+        .comment-bubble { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .comment-content { flex: 1; }
+        .comment-content b { color: #0f3e2e; margin-right: 4px; }
+        .comment-react-btn { background: none; border: none; cursor: pointer; font-size: 11px; color: #64748b; display: flex; align-items: center; gap: 3px; font-weight: 600; }
+        .comment-react-btn.liked { color: #e11d48; }
         
         .comment-input-row { display: flex; gap: 6px; }
         .comment-input {
@@ -129,7 +127,6 @@
         }
         .comment-send-btn { background: #047857; color: #fff; border: none; padding: 0 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
@@ -148,13 +145,11 @@
     </header>
 
     <main class="page-content">
-        <!-- ট্যাব ফিল্টার -->
         <div class="feed-tabs">
             <button class="feed-tab active" id="tabRecent" onclick="switchTab('recent')">সর্বশেষ (Recent)</button>
             <button class="feed-tab" id="tabTrending" onclick="switchTab('trending')">জনপ্রিয় (Trending)</button>
         </div>
 
-        <!-- পোস্ট লেখার বক্স -->
         <div class="post-box" id="createPostBox" style="display: none;">
             <div class="post-box-header">
                 <i class="fa-solid fa-pen-nib" style="color: #047857;"></i>
@@ -162,15 +157,9 @@
             </div>
             <textarea id="postTextInput" class="post-input" maxlength="400" placeholder="আপনার স্টাডি আপডেট এখানে লিখুন..."></textarea>
             
-            <select id="postTopicSelect" class="topic-selector">
-                <option value="General">💬 সাধারণ আলোচনা (General)</option>
-                <option value="Kanji">✍️ কাঞ্জি নোটস (Kanji)</option>
-                <option value="Grammar">📘 ব্যাকরণ টিপস (Grammar)</option>
-                <option value="N5">🎯 এন৫ পরীক্ষা (N5 Level)</option>
-                <option value="N4">🏆 এন৪ পরীক্ষা (N4 Level)</option>
-            </select>
+            <!-- নিজে হ্যাশট্যাগ তৈরি করার ইনপুট -->
+            <input type="text" id="postTopicInput" class="topic-input" placeholder="টপিক বা হ্যাশট্যাগ দিন (যেমন: #kanji, #vocab)">
 
-            <!-- ছবি প্রিভিউ -->
             <div class="post-img-preview-container" id="postImgPreviewBox">
                 <img id="postImgPreview" alt="Preview">
                 <button class="remove-img-btn" id="removeImgBtn"><i class="fa-solid fa-xmark"></i></button>
@@ -218,6 +207,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
         let currentUser = null;
         let selectedPostImageBase64 = null;
@@ -252,7 +242,6 @@
             renderPosts();
         };
 
-        // ইমেজ আপলোড হ্যান্ডলিং
         document.getElementById("triggerImgUpload").onclick = () => postImageInput.click();
 
         postImageInput.addEventListener("change", (e) => {
@@ -288,8 +277,12 @@
 
         document.getElementById("submitPostBtn").onclick = async () => {
             const text = document.getElementById("postTextInput").value.trim();
-            const topic = document.getElementById("postTopicSelect").value;
+            let topic = document.getElementById("postTopicInput").value.trim();
             if ((!text && !selectedPostImageBase64) || !currentUser) return;
+
+            if (topic && !topic.startsWith("#")) {
+                topic = "#" + topic;
+            }
 
             const btn = document.getElementById("submitPostBtn");
             btn.disabled = true;
@@ -305,7 +298,7 @@
                     userName: userData.userName || currentUser.displayName || currentUser.email.split('@')[0],
                     userPhoto: userData.photoBase64 || currentUser.photoURL || null,
                     text: text,
-                    topic: topic,
+                    topic: topic || null,
                     imageBase64: selectedPostImageBase64 || null,
                     timestamp: Date.now(),
                     likes: [],
@@ -314,6 +307,7 @@
                 });
 
                 document.getElementById("postTextInput").value = "";
+                document.getElementById("postTopicInput").value = "";
                 selectedPostImageBase64 = null;
                 postImageInput.value = "";
                 postImgPreviewBox.style.display = "none";
@@ -366,9 +360,25 @@
                     ? `<div class="feed-image-box"><img src="${post.imageBase64}" alt="Post Image"></div>` 
                     : '';
 
-                const commentsHtml = comments.map(c => `
-                    <div class="comment-bubble"><b>${c.userName}:</b> ${escapeHtml(c.text)}</div>
-                `).join('');
+                const isAdminPost = post.userId === ADMIN_EMAIL.toLowerCase();
+                const badgeHtml = isAdminPost 
+                    ? `<span style="font-size:10px; font-weight:700; background:#eff6ff; color:#0284c7; padding:1px 6px; border-radius:6px; display:inline-flex; align-items:center; gap:3px;"><i class="fa-solid fa-circle-check"></i> ADMIN</span>` 
+                    : `<span class="learner-badge">Student</span>`;
+
+                const commentsHtml = comments.map((c, index) => {
+                    const cLikes = c.likes || [];
+                    const isCLiked = currentUser && cLikes.includes(currentUser.email.toLowerCase());
+                    return `
+                        <div class="comment-bubble">
+                            <div class="comment-content">
+                                <b>${c.userName}:</b> ${escapeHtml(c.text)}
+                            </div>
+                            <button class="comment-react-btn ${isCLiked ? 'liked' : ''}" onclick="toggleCommentLike('${postId}', ${index})">
+                                <i class="fa-solid fa-heart"></i> <span>${cLikes.length}</span>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
 
                 const card = document.createElement("div");
                 card.className = "feed-card";
@@ -377,13 +387,13 @@
                         <div class="feed-user-box" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
                             <div class="feed-avatar">${avatarHtml}</div>
                             <div class="feed-user-info">
-                                <h4>${post.userName} <span class="learner-badge">Student</span></h4>
+                                <h4>${post.userName} ${badgeHtml}</h4>
                                 <p>${post.timestamp ? new Date(post.timestamp).toLocaleDateString('bn-BD', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : ""}</p>
                             </div>
                         </div>
                         ${isOwner ? `<button class="post-options-btn" onclick="deletePost('${postId}')" title="পোস্ট ডিলিট করুন"><i class="fa-solid fa-trash-can" style="font-size: 13px; color: #ef4444;"></i></button>` : ''}
                     </div>
-                    ${post.topic ? `<span class="topic-pill">#${post.topic}</span>` : ''}
+                    ${post.topic ? `<span class="topic-pill">${post.topic}</span>` : ''}
                     <div class="feed-body">${escapeHtml(post.text)}</div>
                     ${imageHtml}
                     <div class="feed-footer">
@@ -430,6 +440,35 @@
 
             try {
                 await setDoc(postRef, { likes: newLikes }, { merge: true });
+            } catch(e) {}
+        };
+
+        window.toggleCommentLike = async function(postId, commentIndex) {
+            if (!currentUser) {
+                alert("রিয়েক্ট দিতে হলে আগে লগইন করুন!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const myEmail = currentUser.email.toLowerCase();
+            try {
+                const postRef = doc(db, "posts", postId);
+                const postSnap = await getDoc(postRef);
+                if (!postSnap.exists()) return;
+
+                const postData = postSnap.data();
+                const comments = postData.comments || [];
+                if (!comments[commentIndex]) return;
+
+                let cLikes = comments[commentIndex].likes || [];
+                if (cLikes.includes(myEmail)) {
+                    cLikes = cLikes.filter(email => email !== myEmail);
+                } else {
+                    cLikes.push(myEmail);
+                }
+                comments[commentIndex].likes = cLikes;
+
+                await setDoc(postRef, { comments: comments }, { merge: true });
             } catch(e) {}
         };
 
@@ -498,7 +537,8 @@
                 comments.push({
                     userName: userName,
                     text: text,
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    likes: []
                 });
 
                 await setDoc(postRef, { comments: comments }, { merge: true });

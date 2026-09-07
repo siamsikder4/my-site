@@ -38,7 +38,6 @@
             overflow: hidden;
         }
 
-        /* কাস্টম স্ক্রলবার */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -67,7 +66,7 @@
             100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
         }
 
-        /* প্রিমিয়াম টপবার */
+        /* টপবার */
         .fs-nav {
             background: #090d16;
             color: #ffffff;
@@ -158,7 +157,7 @@
         }
         .ext-console-btn:hover { opacity: 0.92; }
 
-        /* শেল স্টাইল ব্রেডক্রাম্ব */
+        /* ব্রেডক্রাম্ব পাথ */
         .breadcrumb-bar {
             background: #0f172a;
             color: #94a3b8;
@@ -179,9 +178,7 @@
             overflow-x: auto;
             white-space: nowrap;
         }
-        .path-root {
-            color: #64748b;
-        }
+        .path-root { color: #64748b; }
         .path-segment {
             color: #38bdf8;
             cursor: pointer;
@@ -207,7 +204,7 @@
         }
         .refresh-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
 
-        /* ৩-কলাম ওয়ার্কস্পেস */
+        /* ৩-কলাম কনসোল গ্রিড */
         .fs-console-grid {
             flex: 1;
             display: grid;
@@ -239,7 +236,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* সার্চ ইনপুট */
         .search-box-wrap {
             padding: 8px 10px;
             border-bottom: 1px solid var(--panel-border);
@@ -383,7 +379,7 @@
             border-color: #fda4af;
         }
 
-        /* ফিল্ড কার্ড */
+        /* ফিল্ড কার্ড ও ছবি প্রিভিউ */
         .field-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -441,6 +437,31 @@
             line-height: 1.5;
         }
 
+        /* সরাসরি ইমেজ প্রিভিউ কার্ড */
+        .field-img-preview-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 6px;
+        }
+        .field-img-preview-box img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #059669;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.15);
+        }
+        .img-info-text {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
         .empty-placeholder {
             text-align: center;
             color: #94a3b8;
@@ -472,7 +493,7 @@
         <p style="font-size: 13px; font-weight: 700; color: #334155;">কনসোল সুরক্ষিত করা হচ্ছে...</p>
     </div>
 
-    <!-- আধুনিক টপবার -->
+    <!-- টপবার -->
     <header class="fs-nav">
         <div class="fs-nav-left">
             <a href="admin.html" class="back-icon-btn" title="ড্যাশবোর্ডে ফিরুন">
@@ -494,12 +515,12 @@
         </div>
     </header>
 
-    <!-- ব্রেডক্রাম্ব পাথ ও রিফ্রেশ -->
+    <!-- ব্রেডক্রাম্ব পাথ ও রিফ্রেশ বাটন -->
     <div class="breadcrumb-bar">
         <div class="path-display" id="pathDisplay">
             <span class="path-root"><i class="fa-solid fa-database" style="margin-right: 4px;"></i> (default)</span>
             <span>/</span>
-            <span class="path-segment active" id="crumbCol">user_highlights</span>
+            <span class="path-segment active" id="crumbCol">users</span>
             <span id="crumbDivider" style="display: none;">/</span>
             <span class="path-segment active" id="crumbDoc" style="display: none;"></span>
         </div>
@@ -513,15 +534,18 @@
     <!-- মূল ৩-কলাম কনসোল গ্রিড -->
     <main class="fs-console-grid">
         
-        <!-- কলাম ১: কালেকশন তালিকা -->
+        <!-- কলাম ১: কালেকশন তালিকা (users কালেকশন সহ) -->
         <div class="panel-column">
             <div class="col-header">
                 <span>Collections</span>
                 <i class="fa-solid fa-folder-tree" style="color: #94a3b8;"></i>
             </div>
             <div class="col-list" id="colList">
-                <div class="item-row active" onclick="selectCollection('user_highlights')">
-                    <span><i class="fa-regular fa-folder-open" style="color:#f59e0b; margin-right:8px;"></i>user_highlights</span>
+                <div class="item-row active" onclick="selectCollection('users')">
+                    <span><i class="fa-regular fa-folder-open" style="color:#ec4899; margin-right:8px;"></i>users</span>
+                </div>
+                <div class="item-row" onclick="selectCollection('user_highlights')">
+                    <span><i class="fa-regular fa-folder" style="color:#f59e0b; margin-right:8px;"></i>user_highlights</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('support_chats')">
                     <span><i class="fa-regular fa-folder" style="color:#0ea5e9; margin-right:8px;"></i>support_chats</span>
@@ -580,14 +604,14 @@
         const db = getFirestore(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        let currentCollection = "user_highlights";
+        let currentCollection = "users";
         let currentDocId = null;
         let allDocsCache = [];
 
         onAuthStateChanged(auth, async (user) => {
             if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                 document.getElementById("authCheckingScreen").style.display = "none";
-                selectCollection("user_highlights");
+                selectCollection("users");
             } else {
                 alert("অনুমতি নেই! এই পেজে শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
                 window.location.href = "profile.html";
@@ -714,13 +738,22 @@
                 const card = document.createElement("div");
                 card.className = "field-card";
 
-                let formattedVal = val;
-                if (type === 'object' && val !== null) {
-                    formattedVal = JSON.stringify(val, null, 2);
-                } else if (type === 'array') {
-                    formattedVal = `[ ${val.length} items ]\n${JSON.stringify(val, null, 2)}`;
+                let displayElement = '';
+
+                // ছবি শনাক্তকরণ (Base64 ইমেজ স্ট্রিং বা ইমেজ লিংক)
+                if (typeof val === 'string' && (val.startsWith('data:image/') || val.includes('http') && val.match(/\.(jpeg|jpg|gif|png)(\?.*)?$/i))) {
+                    displayElement = `
+                        <div class="field-img-preview-box">
+                            <img src="${val}" alt="User Avatar Preview">
+                            <div class="img-info-text">
+                                <b style="color:#0f172a;">প্রোফাইল ইমেজ প্রিভিউ</b><br>
+                                <span style="font-size:10.5px; font-family:'JetBrains Mono', monospace;">ফাইল ফরম্যাট: Base64/Image</span>
+                            </div>
+                        </div>
+                    `;
                 } else {
-                    formattedVal = String(val);
+                    let formattedVal = (type === 'object' && val !== null) ? JSON.stringify(val, null, 2) : (type === 'array' ? `[ ${val.length} items ]\n${JSON.stringify(val, null, 2)}` : String(val));
+                    displayElement = `<div class="field-val-box">${escapeHtml(formattedVal)}</div>`;
                 }
 
                 card.innerHTML = `
@@ -729,15 +762,20 @@
                             <span class="field-key">${key}</span>
                             <span class="field-type-pill type-${type}">${type}</span>
                         </div>
-                        <button class="copy-pill-btn" onclick="navigator.clipboard.writeText(\`${encodeURIComponent(formattedVal)}\`)">
+                        <button class="copy-pill-btn" onclick="copyFieldValue(\`${encodeURIComponent(typeof val === 'object' ? JSON.stringify(val) : String(val))}\`)">
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
-                    <div class="field-val-box">${escapeHtml(formattedVal)}</div>
+                    ${displayElement}
                 `;
                 panel.appendChild(card);
             }
         }
+
+        window.copyFieldValue = function(encodedVal) {
+            navigator.clipboard.writeText(decodeURIComponent(encodedVal));
+            alert("ফিল্ডের মান কপি করা হয়েছে!");
+        };
 
         function escapeHtml(str) {
             return String(str)

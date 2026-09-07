@@ -28,7 +28,7 @@
             padding-bottom: 85px;
         }
 
-        /* ৩-কলাম টপ বার (লোগো একদম সেন্টারে রাখার জন্য) */
+        /* ৩-কলাম টপ বার */
         .top-nav {
             display: grid;
             grid-template-columns: 40px 1fr 40px;
@@ -135,68 +135,98 @@
         /* হিরো টেক্সট */
         .hero-text {
             text-align: center;
-            margin: 12px 0 22px;
+            margin: 10px 0 16px;
         }
 
         .hero-text h2 {
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 800;
             color: #0e3b2c;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             line-height: 1.35;
         }
 
         .hero-text p {
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 11.5px;
+            line-height: 1.5;
             color: #64748b;
         }
 
-        /* সেনসেই এআই ব্যানার */
-        .tutor-banner {
-            background: linear-gradient(145deg, #0f3e2e 0%, #175440 100%);
-            color: #ffffff;
-            border-radius: 20px;
-            padding: 24px 18px;
-            text-align: center;
-            margin-bottom: 28px;
-            box-shadow: 0 10px 22px rgba(15, 62, 46, 0.18), 0 2px 6px rgba(15, 62, 46, 0.08);
+        /* কম্প্যাক্ট ও স্লিক সেনসেই AI ব্যানার */
+        .tutor-banner-compact {
+            background: linear-gradient(135deg, #0f3e2e 0%, #175440 100%);
+            border-radius: 16px;
+            padding: 12px 14px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             text-decoration: none;
-            display: block;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.12);
+            transition: all 0.2s ease;
         }
 
-        .tutor-banner:active {
+        .tutor-banner-compact:active {
             transform: scale(0.985);
-            box-shadow: 0 5px 12px rgba(15, 62, 46, 0.15);
+            box-shadow: 0 3px 8px rgba(15, 62, 46, 0.1);
         }
 
-        .tutor-banner h3 {
-            font-size: 19px;
-            font-weight: 800;
-            margin-bottom: 6px;
-            letter-spacing: 0.2px;
+        .tutor-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
         }
 
-        .tutor-banner p {
-            font-size: 12px;
+        .tutor-icon-box {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #34d399;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .tutor-info {
+            min-width: 0;
+        }
+
+        .tutor-info h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 2px;
+        }
+
+        .tutor-info p {
+            font-size: 11px;
             color: #cbd5e1;
-            margin-bottom: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .banner-btn {
-            display: inline-block;
+        .tutor-btn-mini {
             background: #c51636;
             color: #ffffff;
-            border: none;
-            padding: 9px 24px;
-            border-radius: 25px;
-            font-size: 13.5px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11.5px;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(197, 22, 54, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(197, 22, 54, 0.3);
         }
 
         /* লেভেল সেকশন */
@@ -451,7 +481,7 @@
 </head>
 <body>
 
-    <!-- টপ বার (৩-কলাম লেআউটে সেন্টারে লোগো) -->
+    <!-- টপ বার -->
     <header class="top-nav">
         <div class="top-nav-spacer"></div>
         <div class="logo-container">
@@ -486,13 +516,21 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- সেনসেই এআই ব্যানার -->
-        <a href="ai-sensei.html" class="tutor-banner">
-            <h3>সেনসেই টেক্সট (AI Tutor)</h3>
-            <p>ব্যাকরণগত সংশয় দূর করতে এবং উত্তর জানতে।</p>
-            <span class="banner-btn">
-                <i class="fa-solid fa-comment-dots"></i> কথা বলুন
-            </span>
+        <!-- কম্প্যাক্ট ও স্লিক সেনসেই AI ব্যানার -->
+        <a href="ai-sensei.html" class="tutor-banner-compact">
+            <div class="tutor-left">
+                <div class="tutor-icon-box">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="tutor-info">
+                    <h3>AI সেনসেই</h3>
+                    <p>ব্যাকরণ ও ভাষা চর্চায় সরাসরি উত্তর পান</p>
+                </div>
+            </div>
+            <div class="tutor-btn-mini">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span>চ্যাট</span>
+            </div>
         </a>
 
         <!-- সেকশন ১: A1-A2 -->

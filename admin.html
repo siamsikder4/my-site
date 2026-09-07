@@ -32,7 +32,7 @@
         .back-btn { color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .nav-title { font-weight: 700; font-size: 17px; color: #0f3e2e; }
 
-        .page-content { padding: 18px 16px; max-width: 600px; margin: 0 auto; }
+        .page-content { padding: 18px 16px; max-width: 620px; margin: 0 auto; }
 
         .admin-banner {
             background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%); color: #ffffff; padding: 20px 16px; border-radius: 16px; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(4, 120, 87, 0.15);
@@ -40,7 +40,8 @@
         .admin-banner h2 { font-size: 19px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
         .admin-banner p { font-size: 12px; color: #a7f3d0; }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        /* মেট্রিক্স গ্রিড */
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
         .stat-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
         .stat-box i { font-size: 18px; color: #047857; margin-bottom: 6px; }
         .stat-num { font-size: 16px; font-weight: 800; color: #0f3e2e; }
@@ -49,55 +50,80 @@
         .section-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 
+        /* সুইচ ও টগল কন্ট্রোল (মডিউল ৪) */
+        .switch-row {
+            display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px;
+        }
+        .switch-info h5 { font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+        .switch-info p { font-size: 11px; color: #64748b; }
+
+        .toggle-switch {
+            position: relative; display: inline-block; width: 44px; height: 24px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1; transition: .3s; border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: white; transition: .3s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #047857; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* অ্যানালিটিক্স বার চার্ট (মডিউল ৩) */
+        .analytics-item { margin-bottom: 12px; }
+        .analytics-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #475569; }
+        .analytics-progress { width: 100%; height: 8px; background: #f1f5f9; border-radius: 6px; overflow: hidden; }
+        .analytics-fill { height: 100%; border-radius: 6px; }
+
         /* সার্চ বক্স */
         .search-box {
             display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; margin-bottom: 14px; gap: 8px;
         }
         .search-box input { border: none; background: transparent; outline: none; width: 100%; font-size: 13px; color: #1e293b; }
 
-        /* ফর্ম ইনপুট স্টাইল */
+        /* ফর্ম ইনপুট */
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
         .input-control { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none; background: #f8fafc; }
         .input-control:focus { border-color: #047857; background: #ffffff; }
-        textarea.input-control { resize: vertical; min-height: 80px; }
+        textarea.input-control { resize: vertical; min-height: 75px; }
 
         .btn-submit {
             width: 100%; padding: 11px; background: #047857; color: #ffffff; border: none; border-radius: 10px; font-weight: 700; font-size: 13.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;
         }
         .btn-submit:active { background: #065f46; }
 
-        /* টেবিল স্টাইল */
+        /* টেবিল */
         .table-responsive { max-height: 350px; overflow-y: auto; border: 1px solid #f1f5f9; border-radius: 10px; }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         .data-table th { background: #f1f5f9; color: #475569; font-weight: 700; padding: 10px 8px; position: sticky; top: 0; z-index: 10; }
         .data-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
-        .badge-target { background: #e0f2fe; color: #0369a1; padding: 3px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
-        .badge-target.all { background: #dcfce7; color: #15803d; }
+        
+        .badge-status { padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+        .badge-active { background: #dcfce7; color: #15803d; }
+        .badge-banned { background: #fee2e2; color: #b91c1c; }
         
         .action-btns { display: flex; gap: 6px; }
         .act-btn { border: none; background: none; cursor: pointer; font-size: 13px; padding: 5px 7px; border-radius: 6px; }
+        .ban-btn { color: #b45309; background: #fef3c7; }
+        .unban-btn { color: #15803d; background: #dcfce7; }
         .edit-btn { color: #0284c7; background: #f0f9ff; }
         .del-btn { color: #dc2626; background: #fef2f2; }
-        .direct-msg-btn { color: #d97706; background: #fef3c7; }
+        .direct-msg-btn { color: #047857; background: #e6f4ea; }
 
-        /* দ্রুত অ্যাকশন লিঙ্ক */
-        .action-row { display: flex; flex-direction: column; gap: 9px; }
-        .btn-action {
-            display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; text-decoration: none; color: #334155; font-size: 13px; font-weight: 600;
-        }
-        .btn-action:active { background: #f1f5f9; }
-
-        /* ইউজার এডিট/ক্রিয়েট মডাল */
+        /* মোডাল */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center; padding: 16px;
         }
         .modal-card {
             background: #ffffff; width: 100%; max-width: 420px; border-radius: 18px;
-            overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); animation: popUp 0.2s ease;
+            overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-header {
             background: #0f3e2e; color: #ffffff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
         }
@@ -121,7 +147,7 @@
     <main class="page-content" id="adminContent" style="display: none;">
 
         <div class="admin-banner">
-            <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল</h2>
+            <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল প্যানেল</h2>
             <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
         </div>
 
@@ -133,21 +159,83 @@
                 <div class="stat-label">মোট ইউজার</div>
             </div>
             <div class="stat-box">
+                <i class="fa-solid fa-user-check"></i>
+                <div class="stat-num" id="activeUsersCount">০</div>
+                <div class="stat-label">সক্রিয় ইউজার</div>
+            </div>
+            <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
                 <div class="stat-num" id="totalNotifsCount">০</div>
                 <div class="stat-label">নোটিফিকেশন</div>
             </div>
-            <div class="stat-box">
-                <i class="fa-solid fa-database"></i>
-                <div class="stat-num" style="color:#047857;">Active</div>
-                <div class="stat-label">ক্লাউড ডিবি</div>
+        </div>
+
+        <!-- মডিউল ৪: সাইট মেইনটেন্যান্স ও অ্যাডসেন্স সুইচ -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> সাইট ও সিস্টেম কন্ট্রোল (৪)</span></h3>
+            
+            <div class="switch-row">
+                <div class="switch-info">
+                    <h5>মেইনটেন্যান্স মোড (Maintenance Mode)</h5>
+                    <p>চালু থাকলে সাধারণ ইউজাররা নোটিশ দেখতে পাবে</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleMaintenance">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-row">
+                <div class="switch-info">
+                    <h5>গুগল অ্যাডসেন্স বিজ্ঞাপন (AdSense Switch)</h5>
+                    <p>পুরো সাইটে বিজ্ঞাপন দেখানোর মূল সুইচ</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleAdSense">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
 
-        <!-- ইউজার ম্যানেজমেন্ট সেকশন -->
+        <!-- মডিউল ৩: লার্নিং অ্যানালিটিক্স ও প্ল্যাটফর্ম রিপোর্ট -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-chart-pie" style="color: #0284c7; margin-right: 6px;"></i> লার্নিং অ্যানালিটিক্স (৩)</span></h3>
+            
+            <div class="analytics-item">
+                <div class="analytics-meta">
+                    <span>N5 ভোকাবুলারি রিভিশন রেট</span>
+                    <span id="rateVocab">৭৮%</span>
+                </div>
+                <div class="analytics-progress">
+                    <div class="analytics-fill" style="width: 78%; background: #047857;"></div>
+                </div>
+            </div>
+
+            <div class="analytics-item">
+                <div class="analytics-meta">
+                    <span>ব্লাইন্ড টেস্ট এভারেজ অ্যাকুরেসি</span>
+                    <span id="rateTest">৬৫%</span>
+                </div>
+                <div class="analytics-progress">
+                    <div class="analytics-fill" style="width: 65%; background: #d97706;"></div>
+                </div>
+            </div>
+
+            <div class="analytics-item">
+                <div class="analytics-meta">
+                    <span>N5 গ্রামার লেসন প্রগ্রেস</span>
+                    <span id="rateGrammar">৪২%</span>
+                </div>
+                <div class="analytics-progress">
+                    <div class="analytics-fill" style="width: 42%; background: #2563eb;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- মডিউল ২: ইউজার ব্যান/আনব্যান ও অ্যাক্টিভিটি ট্র্যাকিং -->
         <div class="section-card">
             <h3>
-                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার তালিকা ও ব্যবস্থাপনা</span>
+                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (২)</span>
                 <div style="display: flex; gap: 8px;">
                     <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:4px 9px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
                     <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:13px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
@@ -164,17 +252,18 @@
                     <thead>
                         <tr>
                             <th>নাম ও ইমেইল</th>
+                            <th>স্ট্যাটাস</th>
                             <th style="text-align: right;">অ্যাকশন</th>
                         </tr>
                     </thead>
                     <tbody id="userTableBody">
-                        <tr><td colspan="2" style="text-align: center; color: #94a3b8; padding: 20px;">লোড হচ্ছে...</td></tr>
+                        <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- নোটিফিকেশন সেন্ড ও এডিট ফর্ম -->
+        <!-- নোটিফিকেশন ফর্ম -->
         <div class="section-card">
             <h3><span><i class="fa-solid fa-paper-plane" style="color: #d97706; margin-right: 6px;"></i> নোটিফিকেশন পাঠান</span></h3>
             
@@ -208,7 +297,7 @@
             </button>
         </div>
 
-        <!-- পাঠানো নোটিফিকেশন লিস্ট -->
+        <!-- নোটিফিকেশন তালিকা -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-list-check" style="color: #047857; margin-right: 6px;"></i> পাঠানো নোটিফিকেশন সমূহ</span>
@@ -225,28 +314,9 @@
                         </tr>
                     </thead>
                     <tbody id="notifTableBody">
-                        <tr><td colspan="3" style="text-align: center; color: #94a3b8; padding: 20px;">লোড হচ্ছে...</td></tr>
+                        <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-
-        <!-- কুইক লিঙ্কস -->
-        <div class="section-card">
-            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> ক্লাউড কনসোল লিঙ্ক</span></h3>
-            <div class="action-row">
-                <a href="https://console.firebase.google.com/project/kotoba-b20b3/firestore" target="_blank" class="btn-action">
-                    <span><i class="fa-solid fa-fire" style="color: #f97316; margin-right: 8px;"></i> Firestore ডেটাবেস</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-                <a href="https://adsense.google.com/" target="_blank" class="btn-action">
-                    <span><i class="fa-solid fa-chart-simple" style="color: #0284c7; margin-right: 8px;"></i> Google AdSense রিপোর্ট</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-                <a href="https://github.com/" target="_blank" class="btn-action">
-                    <span><i class="fa-brands fa-github" style="color: #1e293b; margin-right: 8px;"></i> GitHub রিপোজিটরি</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
             </div>
         </div>
 
@@ -262,7 +332,7 @@
             <div class="modal-body">
                 <input type="hidden" id="modalDocId" value="">
                 <div class="input-group">
-                    <label>ইউজারের নাম (Display Name):</label>
+                    <label>ইউজারের নাম:</label>
                     <input type="text" id="modalUserName" class="input-control" placeholder="নাম লিখুন">
                 </div>
                 <div class="input-group">
@@ -280,7 +350,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, query, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -288,7 +358,8 @@
             projectId: "kotoba-b20b3",
             storageBucket: "kotoba-b20b3.firebasestorage.app",
             messagingSenderId: "556955805953",
-            appId: "1:556955805953:web:cef5927677815bf5e05300"
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -304,6 +375,7 @@
                 document.getElementById("authCheckingScreen").style.display = "none";
                 document.getElementById("adminContent").style.display = "block";
                 
+                await loadSiteSettings();
                 await fetchAllUsers();
                 await fetchNotifications();
             } else {
@@ -312,26 +384,70 @@
             }
         });
 
-        // ================= ইউজার ম্যানেজমেন্ট =================
+        // ================= মডিউল ৪: সাইট সেটিংস ও সুইচ হ্যান্ডলার =================
+        const toggleMaintenance = document.getElementById("toggleMaintenance");
+        const toggleAdSense = document.getElementById("toggleAdSense");
+
+        async function loadSiteSettings() {
+            try {
+                const docRef = doc(db, "site_settings", "controls");
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    toggleMaintenance.checked = !!data.maintenanceMode;
+                    toggleAdSense.checked = data.adsEnabled !== false;
+                } else {
+                    await setDoc(docRef, { maintenanceMode: false, adsEnabled: true });
+                }
+            } catch(e) { console.error("Settings load error:", e); }
+        }
+
+        toggleMaintenance.addEventListener("change", async () => {
+            try {
+                await setDoc(doc(db, "site_settings", "controls"), {
+                    maintenanceMode: toggleMaintenance.checked
+                }, { merge: true });
+                alert(`মেইনটেন্যান্স মোড ${toggleMaintenance.checked ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
+            } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
+        });
+
+        toggleAdSense.addEventListener("change", async () => {
+            try {
+                await setDoc(doc(db, "site_settings", "controls"), {
+                    adsEnabled: toggleAdSense.checked
+                }, { merge: true });
+                alert(`গুগল বিজ্ঞাপন ${toggleAdSense.checked ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
+            } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
+        });
+
+        // ================= মডিউল ২: ইউজার কন্ট্রোল, ব্যান ও ট্র্যাকিং =================
         async function fetchAllUsers() {
             const tbody = document.getElementById("userTableBody");
-            tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>`;
             try {
                 const snap = await getDocs(collection(db, "user_highlights"));
                 allUserData = [];
+                let activeCount = 0;
+
                 snap.forEach(docSnap => {
                     const data = docSnap.data();
+                    const isBanned = !!data.isBanned;
+                    if (!isBanned) activeCount++;
+
                     allUserData.push({
                         docId: docSnap.id,
                         email: data.email || docSnap.id,
-                        name: data.displayName || data.name || (data.email ? data.email.split('@')[0] : "অজানা")
+                        name: data.displayName || data.name || (data.email ? data.email.split('@')[0] : "অজানা"),
+                        isBanned: isBanned,
+                        lastActive: data.lastActive || "সক্রিয়"
                     });
                 });
 
                 document.getElementById("totalUsersCount").innerText = allUserData.length;
+                document.getElementById("activeUsersCount").innerText = activeCount;
                 renderUserTable(allUserData);
             } catch(e) {
-                tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#ef4444; padding:20px;">ইউজার ডেটা লোড করতে ব্যর্থ!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; padding:20px;">ইউজার ডেটা লোড করতে ব্যর্থ!</td></tr>`;
                 console.error(e);
             }
         }
@@ -340,21 +456,29 @@
             const tbody = document.getElementById("userTableBody");
             tbody.innerHTML = "";
             if (list.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#94a3b8; padding:18px;">কোনো ইউজার পাওয়া যায়নি।</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:18px;">কোনো ইউজার পাওয়া যায়নি।</td></tr>`;
                 return;
             }
 
             list.forEach(u => {
                 const tr = document.createElement("tr");
+                const statusBadge = u.isBanned 
+                    ? `<span class="badge-status badge-banned"><i class="fa-solid fa-ban"></i> Banned</span>` 
+                    : `<span class="badge-status badge-active"><i class="fa-solid fa-circle-check"></i> Active</span>`;
+
                 tr.innerHTML = `
                     <td>
                         <div style="font-weight: 700; color: #0f3e2e;">${u.name}</div>
                         <div style="font-size: 11px; color: #64748b;">${u.email}</div>
                     </td>
+                    <td>${statusBadge}</td>
                     <td style="text-align: right;">
                         <div class="action-btns" style="justify-content: flex-end;">
-                            <button class="act-btn direct-msg-btn" title="এই ইউজারকে নোটিফিকেশন পাঠান" onclick="selectUserForNotif('${u.email}')">
+                            <button class="act-btn direct-msg-btn" title="নোটিফিকেশন পাঠান" onclick="selectUserForNotif('${u.email}')">
                                 <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                            <button class="act-btn ${u.isBanned ? 'unban-btn' : 'ban-btn'}" title="${u.isBanned ? 'আনব্যান করুন' : 'ব্যান করুন'}" onclick="toggleUserBan('${u.docId}', ${u.isBanned})">
+                                <i class="fa-solid ${u.isBanned ? 'fa-unlock' : 'fa-user-slash'}"></i>
                             </button>
                             <button class="act-btn edit-btn" title="এডিট করুন" onclick="openEditUserModal('${u.docId}', '${u.name}', '${u.email}')">
                                 <i class="fa-solid fa-pen"></i>
@@ -369,6 +493,21 @@
             });
         }
 
+        // ইউজার ব্যান/আনব্যান সুইচ
+        window.toggleUserBan = async function(docId, currentBanned) {
+            const actionText = currentBanned ? "আনব্যান" : "ব্যান";
+            if (confirm(`আপনি কি এই ইউজারকে ${actionText} করতে চান?`)) {
+                try {
+                    await setDoc(doc(db, "user_highlights", docId), {
+                        isBanned: !currentBanned
+                    }, { merge: true });
+                    await fetchAllUsers();
+                } catch(e) {
+                    alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে!");
+                }
+            }
+        };
+
         // ইউজার সার্চ
         document.getElementById("userSearchInput").addEventListener("input", (e) => {
             const q = e.target.value.toLowerCase().trim();
@@ -378,7 +517,7 @@
 
         document.getElementById("refreshUsersBtn").addEventListener("click", fetchAllUsers);
 
-        // ইউজার মডাল ওপেন/ক্লোজ
+        // ইউজার মডাল
         const userModal = document.getElementById("userModal");
         document.getElementById("closeUserModalBtn").onclick = () => userModal.style.display = "none";
 
@@ -400,7 +539,6 @@
             userModal.style.display = "flex";
         };
 
-        // ইউজার সেভ (Create / Update)
         document.getElementById("saveUserBtn").addEventListener("click", async () => {
             const docId = document.getElementById("modalDocId").value;
             const name = document.getElementById("modalUserName").value.trim();
@@ -414,8 +552,7 @@
 
             try {
                 const targetDocId = docId || email;
-                const userRef = doc(db, "user_highlights", targetDocId);
-                await setDoc(userRef, {
+                await setDoc(doc(db, "user_highlights", targetDocId), {
                     displayName: name || email.split("@")[0],
                     email: email
                 }, { merge: true });
@@ -425,14 +562,12 @@
                 await fetchAllUsers();
             } catch(e) {
                 alert("ইউজার ডেটা আপডেট করতে সমস্যা হয়েছে।");
-                console.error(e);
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> সংরক্ষণ করুন`;
             }
         });
 
-        // ইউজার রেকর্ড ডিলিট
         window.deleteUserRecord = async function(docId) {
             if (confirm("আপনি কি নিশ্চিত এই ইউজারের রেকর্ডটি মুছে ফেলতে চান?")) {
                 try {
@@ -440,28 +575,22 @@
                     await fetchAllUsers();
                 } catch(e) {
                     alert("মুছে ফেলতে সমস্যা হয়েছে।");
-                    console.error(e);
                 }
             }
         };
 
-        // ইউজার তালিকা থেকে সরাসরি নোটিফিকেশনে পাঠানো
         window.selectUserForNotif = function(email) {
             document.getElementById("notifTargetType").value = "specific";
             document.getElementById("emailInputGroup").style.display = "block";
             document.getElementById("notifSpecificEmail").value = email;
-            window.scrollTo({ top: 400, behavior: "smooth" });
+            window.scrollTo({ top: 550, behavior: "smooth" });
         };
 
-        // ================= নোটিফিকেশন সিস্টেম =================
+        // ================= নোটিফিকেশন হ্যান্ডলার =================
         document.getElementById("notifTargetType").addEventListener("change", (e) => {
             const emailGroup = document.getElementById("emailInputGroup");
-            if (e.target.value === "specific") {
-                emailGroup.style.display = "block";
-            } else {
-                emailGroup.style.display = "none";
-                document.getElementById("notifSpecificEmail").value = "";
-            }
+            emailGroup.style.display = e.target.value === "specific" ? "block" : "none";
+            if (e.target.value !== "specific") document.getElementById("notifSpecificEmail").value = "";
         });
 
         async function fetchNotifications() {
@@ -470,16 +599,13 @@
             try {
                 const snap = await getDocs(collection(db, "notifications"));
                 allNotifications = [];
-                snap.forEach(docSnap => {
-                    allNotifications.push({ id: docSnap.id, ...docSnap.data() });
-                });
+                snap.forEach(docSnap => allNotifications.push({ id: docSnap.id, ...docSnap.data() }));
 
                 allNotifications.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
                 document.getElementById("totalNotifsCount").innerText = allNotifications.length;
                 renderNotifsTable();
             } catch (e) {
                 tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; padding:20px;">লোড করতে ত্রুটি হয়েছে!</td></tr>`;
-                console.error(e);
             }
         }
 
@@ -493,7 +619,7 @@
 
             allNotifications.forEach(n => {
                 const tr = document.createElement("tr");
-                const targetText = n.target === "all" ? `<span class="badge-target all">All Users</span>` : `<span class="badge-target">${n.target}</span>`;
+                const targetText = n.target === "all" ? `<span class="badge-status badge-active">All Users</span>` : `<span class="badge-status" style="background:#e0f2fe; color:#0369a1;">${n.target}</span>`;
                 tr.innerHTML = `
                     <td>
                         <div style="font-weight: 700; color: #0f3e2e; margin-bottom: 3px;">${n.title}</div>
@@ -513,7 +639,6 @@
 
         document.getElementById("refreshNotifsBtn").addEventListener("click", fetchNotifications);
 
-        // নোটিফিকেশন সেন্ড / আপডেট
         document.getElementById("saveNotifBtn").addEventListener("click", async () => {
             const title = document.getElementById("notifTitle").value.trim();
             const msg = document.getElementById("notifMsg").value.trim();
@@ -533,17 +658,12 @@
             try {
                 if (editId) {
                     await updateDoc(doc(db, "notifications", editId), {
-                        title: title,
-                        message: msg,
-                        target: targetVal
+                        title: title, message: msg, target: targetVal
                     });
                     alert("নোটিফিকেশন সফলভাবে আপডেট করা হয়েছে!");
                 } else {
                     await addDoc(collection(db, "notifications"), {
-                        title: title,
-                        message: msg,
-                        target: targetVal,
-                        timestamp: Date.now()
+                        title: title, message: msg, target: targetVal, timestamp: Date.now()
                     });
                     alert("নোটিফিকেশন সফলভাবে পাঠানো হয়েছে!");
                 }
@@ -559,7 +679,6 @@
                 await fetchNotifications();
             } catch(e) {
                 alert("নোটিফিকেশন সংরক্ষণে সমস্যা হয়েছে!");
-                console.error(e);
             } finally {
                 btn.disabled = false;
             }
@@ -582,7 +701,7 @@
                 }
                 
                 document.getElementById("saveNotifBtn").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> আপডেট সংরক্ষণ করুন`;
-                window.scrollTo({ top: 400, behavior: "smooth" });
+                window.scrollTo({ top: 550, behavior: "smooth" });
             }
         };
 
@@ -593,7 +712,6 @@
                     await fetchNotifications();
                 } catch(e) {
                     alert("ডিলিট করতে সমস্যা হয়েছে।");
-                    console.error(e);
                 }
             }
         };

@@ -10,60 +10,83 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 85px; }
+        body { background-color: #f1f5f9; color: #1e293b; padding-bottom: 85px; }
 
         .top-nav {
             display: flex; align-items: center; justify-content: space-between; padding: 14px 18px;
             background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
-        .nav-title { font-weight: 800; font-size: 17px; color: #0f3e2e; }
+        .nav-title { font-weight: 800; font-size: 17px; color: #0f3e2e; display: flex; align-items: center; gap: 8px; }
 
         .page-content { padding: 16px; max-width: 480px; margin: 0 auto; }
 
         /* পোস্ট ক্রিয়েট বক্স */
         .post-box {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px;
-            margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
+            margin-bottom: 16px; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
         }
+        .post-box-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 700; font-size: 13.5px; color: #0f3e2e; }
         .post-input {
-            width: 100%; border: 1px solid #e2e8f0; border-radius: 12px; padding: 10px 12px;
-            font-size: 13.5px; outline: none; background: #f8fafc; resize: none; min-height: 80px;
+            width: 100%; border: 1px solid #cbd5e1; border-radius: 12px; padding: 12px;
+            font-size: 13.5px; outline: none; background: #f8fafc; resize: none; min-height: 90px;
+            color: #1e293b; transition: all 0.2s;
         }
-        .post-input:focus { border-color: #047857; background: #ffffff; }
-        .post-btn-row { display: flex; justify-content: flex-end; margin-top: 10px; }
+        .post-input:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1); }
+        
+        .post-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .char-counter { font-size: 11px; color: #94a3b8; font-weight: 600; }
+        
         .btn-post-submit {
-            background: #047857; color: #ffffff; border: none; padding: 8px 18px;
+            background: #047857; color: #ffffff; border: none; padding: 8px 20px;
             border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
-            display: flex; align-items: center; gap: 6px;
+            display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
+            transition: transform 0.15s;
         }
+        .btn-post-submit:active { transform: scale(0.96); }
 
         /* পোস্ট কার্ড */
         .feed-card {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 14px;
-            margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
+            margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+            transition: transform 0.2s;
         }
-        .feed-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .feed-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; cursor: pointer; }
         .feed-avatar {
-            width: 38px; height: 38px; border-radius: 50%; background: #e6f4ea; color: #047857;
-            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; overflow: hidden;
+            width: 42px; height: 42px; border-radius: 50%; background: #e6f4ea; color: #047857;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;
+            overflow: hidden; border: 1.5px solid #a7f3d0; flex-shrink: 0;
         }
         .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .feed-user-info h4 { font-size: 13.5px; font-weight: 700; color: #0f3e2e; }
-        .feed-user-info p { font-size: 10px; color: #94a3b8; }
+        .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; }
+        .feed-user-info p { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
 
-        .feed-body { font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 12px; word-break: break-word; }
+        .feed-body { font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 14px; word-break: break-word; }
         
         .feed-footer {
-            display: flex; align-items: center; gap: 16px; border-top: 1px solid #f1f5f9; padding-top: 10px; font-size: 12px; color: #64748b;
+            display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 12px;
         }
-        .action-icon-btn { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; }
-        .action-icon-btn.liked { color: #e11d48; }
+        .action-icon-btn {
+            background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px;
+            color: #64748b; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .action-icon-btn:hover { background: #f1f5f9; color: #1e293b; }
+        .action-icon-btn.liked { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
+        .action-icon-btn.liked i { animation: heartBeat 0.3s; }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
 
         /* বটম বার */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
             display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.02);
         }
         .nav-item { text-decoration: none; color: #8392a5; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; }
         .nav-item.active { color: #0f3e2e; }
@@ -73,20 +96,28 @@
 <body>
 
     <header class="top-nav">
-        <span class="nav-title"><i class="fa-solid fa-earth-americas" style="color:#047857; margin-right:6px;"></i> স্টাডি কমিউনিটি ফিড</span>
+        <span class="nav-title"><i class="fa-solid fa-earth-americas" style="color:#047857;"></i> স্টাডি কমিউনিটি</span>
     </header>
 
     <main class="page-content">
         <!-- পোস্ট লেখার বক্স -->
         <div class="post-box" id="createPostBox" style="display: none;">
-            <textarea id="postTextInput" class="post-input" placeholder="আপনার আজকের জাপানিজ স্টাডি বা জিজ্ঞাসা এখানে শেয়ার করুন..."></textarea>
-            <div class="post-btn-row">
+            <div class="post-box-header">
+                <i class="fa-solid fa-pen-nib" style="color: #047857;"></i>
+                <span>আপনার মতামত বা স্টাডি আপডেট শেয়ার করুন</span>
+            </div>
+            <textarea id="postTextInput" class="post-input" maxlength="300" placeholder="আজ কি শিখলেন? এখানে লিখুন..."></textarea>
+            <div class="post-footer-row">
+                <span class="char-counter" id="charCounter">৩০০ অক্ষর বাকি</span>
                 <button class="btn-post-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> পোস্ট করুন</button>
             </div>
         </div>
 
         <div id="feedListContainer">
-            <div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">ফিড লোড হচ্ছে...</div>
+            <div style="text-align: center; color: #94a3b8; padding: 50px 0; font-size: 13px;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 24px; color: #047857; margin-bottom: 8px; display: block;"></i>
+                ফিড লোড হচ্ছে...
+            </div>
         </div>
     </main>
 
@@ -100,7 +131,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -135,9 +166,21 @@
             loadFeedPosts();
         });
 
+        // ক্যারেক্টার কাউন্টার লাইভ আপডেট
+        const postTextInput = document.getElementById("postTextInput");
+        const charCounter = document.getElementById("charCounter");
+        postTextInput.addEventListener("input", () => {
+            const len = postTextInput.value.length;
+            charCounter.innerText = `${300 - len} অক্ষর বাকি`;
+        });
+
         document.getElementById("submitPostBtn").onclick = async () => {
-            const text = document.getElementById("postTextInput").value.trim();
+            const text = postTextInput.value.trim();
             if (!text || !currentUser) return;
+
+            const btn = document.getElementById("submitPostBtn");
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> প্রকাশ হচ্ছে...`;
 
             try {
                 const userDocRef = doc(db, "users", currentUser.email.toLowerCase());
@@ -153,9 +196,13 @@
                     likes: []
                 });
 
-                document.getElementById("postTextInput").value = "";
+                postTextInput.value = "";
+                charCounter.innerText = "৩০০ অক্ষর বাকি";
             } catch (e) {
                 alert("পোস্ট প্রকাশ করতে সমস্যা হয়েছে!");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> পোস্ট করুন`;
             }
         };
 
@@ -182,7 +229,7 @@
                     const card = document.createElement("div");
                     card.className = "feed-card";
                     card.innerHTML = `
-                        <div class="feed-header" style="cursor: pointer;" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
+                        <div class="feed-header" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
                             <div class="feed-avatar">${avatarHtml}</div>
                             <div class="feed-user-info">
                                 <h4>${post.userName}</h4>
@@ -192,7 +239,7 @@
                         <div class="feed-body">${escapeHtml(post.text)}</div>
                         <div class="feed-footer">
                             <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])})">
-                                <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length} লাইক</span>
+                                <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length}</span>
                             </button>
                         </div>
                     `;
@@ -203,7 +250,7 @@
 
         window.toggleLike = async function(postId, currentLikes) {
             if (!currentUser) {
-                alert("লাইক দিতে হলে আগে লগইন করুন!");
+                alert("লাইک দিতে হলে আগে লগইন করুন!");
                 window.location.href = "login.html";
                 return;
             }

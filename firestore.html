@@ -6,7 +6,6 @@
     <title>Firestore Explorer - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
 
@@ -451,7 +450,7 @@
         .field-img-preview-box img {
             width: 72px;
             height: 72px;
-            border-radius: 50%;
+            border-radius: 8px;
             object-fit: cover;
             border: 2px solid #059669;
             box-shadow: 0 4px 10px rgba(5, 150, 105, 0.15);
@@ -485,7 +484,6 @@
 </head>
 <body>
 
-    <!-- অথ লোডিং স্ক্রিন -->
     <div id="authCheckingScreen">
         <div class="pulse-loader">
             <i class="fa-solid fa-fire"></i>
@@ -493,7 +491,6 @@
         <p style="font-size: 13px; font-weight: 700; color: #334155;">কনসোল সুরক্ষিত করা হচ্ছে...</p>
     </div>
 
-    <!-- টপবার -->
     <header class="fs-nav">
         <div class="fs-nav-left">
             <a href="admin.html" class="back-icon-btn" title="ড্যাশবোর্ডে ফিরুন">
@@ -515,7 +512,6 @@
         </div>
     </header>
 
-    <!-- ব্রেডক্রাম্ব পাথ ও রিফ্রেশ বাটন -->
     <div class="breadcrumb-bar">
         <div class="path-display" id="pathDisplay">
             <span class="path-root"><i class="fa-solid fa-database" style="margin-right: 4px;"></i> (default)</span>
@@ -531,10 +527,8 @@
         </div>
     </div>
 
-    <!-- মূল ৩-কলাম কনসোল গ্রিড -->
     <main class="fs-console-grid">
         
-        <!-- কলাম ১: কালেকশন তালিকা (users কালেকশন সহ) -->
         <div class="panel-column">
             <div class="col-header">
                 <span>Collections</span>
@@ -543,6 +537,9 @@
             <div class="col-list" id="colList">
                 <div class="item-row active" onclick="selectCollection('users')">
                     <span><i class="fa-regular fa-folder-open" style="color:#ec4899; margin-right:8px;"></i>users</span>
+                </div>
+                <div class="item-row" onclick="selectCollection('posts')">
+                    <span><i class="fa-regular fa-folder" style="color:#3b82f6; margin-right:8px;"></i>posts</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('user_highlights')">
                     <span><i class="fa-regular fa-folder" style="color:#f59e0b; margin-right:8px;"></i>user_highlights</span>
@@ -559,7 +556,6 @@
             </div>
         </div>
 
-        <!-- কলাম ২: ডকুমেন্ট তালিকা -->
         <div class="panel-column">
             <div class="col-header">
                 <span>Documents</span>
@@ -573,7 +569,6 @@
             </div>
         </div>
 
-        <!-- কলাম ৩: ফিল্ড ও ডেটা ভিউয়ার -->
         <div class="panel-column fields-panel" id="fieldsPanel">
             <div class="empty-placeholder">
                 <i class="fa-regular fa-folder-open" style="font-size: 32px; color:#cbd5e1; margin-bottom: 12px; display: block;"></i>
@@ -583,7 +578,6 @@
 
     </main>
 
-    <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -740,13 +734,13 @@
 
                 let displayElement = '';
 
-                // ছবি শনাক্তকরণ (Base64 ইমেজ স্ট্রিং বা ইমেজ লিংক)
+                // ছবি বা পোস্টের ইমেজ প্রিভিউ শনাক্তকরণ
                 if (typeof val === 'string' && (val.startsWith('data:image/') || val.includes('http') && val.match(/\.(jpeg|jpg|gif|png)(\?.*)?$/i))) {
                     displayElement = `
                         <div class="field-img-preview-box">
-                            <img src="${val}" alt="User Avatar Preview">
+                            <img src="${val}" alt="Image Preview">
                             <div class="img-info-text">
-                                <b style="color:#0f172a;">প্রোফাইল ইমেজ প্রিভিউ</b><br>
+                                <b style="color:#0f172a;">মিডিয়া / ইমেজ প্রিভিউ</b><br>
                                 <span style="font-size:10.5px; font-family:'JetBrains Mono', monospace;">ফাইল ফরম্যাট: Base64/Image</span>
                             </div>
                         </div>

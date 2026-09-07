@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাডমিন প্যানেল - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 70px;
+        }
+
+        /* অথ চেকিং স্ক্রিন */
+        #authCheckingScreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 38px;
+            height: 38px;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #047857;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 14px;
+        }
+
+        .back-btn {
+            color: #0f3e2e;
+            font-size: 16px;
+            text-decoration: none;
+            background: #f1f5f9;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 17px;
+            color: #0f3e2e;
+        }
+
+        .page-content {
+            padding: 18px 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .admin-banner {
+            background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%);
+            color: #ffffff;
+            padding: 20px 16px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(4, 120, 87, 0.15);
+        }
+
+        .admin-banner h2 {
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-banner p {
+            font-size: 12px;
+            color: #a7f3d0;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 16px 14px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .stat-box i {
+            font-size: 20px;
+            color: #047857;
+            margin-bottom: 6px;
+        }
+
+        .stat-num {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f3e2e;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f3e2e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #334155;
+            font-size: 13.5px;
+            font-weight: 600;
+            transition: background 0.15s;
+        }
+
+        .btn-action:active {
+            background: #f1f5f9;
+        }
+
+        .btn-action i {
+            color: #047857;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- অথেন্টিকোশন ভেরিফাই স্ক্রিন -->
+    <div id="authCheckingScreen">
+        <div class="spinner"></div>
+        <p style="font-size: 13px; font-weight: 600; color: #475569;">অ্যাডমিন এক্সেস যাচাই করা হচ্ছে...</p>
+    </div>
+
+    <!-- টপ বার -->
+    <header class="top-nav">
+        <a href="profile.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <span class="nav-title">KOTOBA অ্যাডমিন প্যানেল</span>
+    </header>
+
+    <main class="page-content" id="adminContent" style="display: none;">
+
+        <div class="admin-banner">
+            <h2><i class="fa-solid fa-user-shield"></i> স্বাগতম, সিয়াম!</h2>
+            <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-box">
+                <i class="fa-solid fa-server"></i>
+                <div class="stat-num">GitHub Pages</div>
+                <div class="stat-label">হোস্টিং স্ট্যাটাস</div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-fire"></i>
+                <div class="stat-num">Active</div>
+                <div class="stat-label">Firebase Auth</div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h3><i class="fa-solid fa-gears"></i> দ্রুত অ্যাকশন ও কনসোল</h3>
+            <div class="action-row">
+                <a href="https://console.firebase.google.com/project/kotoba-b20b3/overview" target="_blank" class="btn-action">
+                    <span><i class="fa-solid fa-database" style="margin-right: 8px;"></i> Firebase ড্যাশবোর্ড</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="https://adsense.google.com/" target="_blank" class="btn-action">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 8px;"></i> Google AdSense রিপোর্ট</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="https://github.com/" target="_blank" class="btn-action">
+                    <span><i class="fa-brands fa-github" style="margin-right: 8px;"></i> গিটহাব রিপোজিটরি</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Firebase Auth সিকিউরিটি গার্ড -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
+        const authScreen = document.getElementById("authCheckingScreen");
+        const adminContent = document.getElementById("adminContent");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                // অথেনটিকেশন সফল
+                authScreen.style.display = "none";
+                adminContent.style.display = "block";
+            } else {
+                // আনঅথরাইজড ইউজার হলে সরাসরি প্রোফাইলে রিডাইরেক্ট
+                alert("অনুমতি নেই! এই পেজে শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
+                window.location.href = "profile.html";
+            }
+        });
+    </script>
+</body>
+</html>

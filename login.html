@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লগইন - Kotoba</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -138,6 +138,7 @@
             border-radius: 10px;
             font-size: 13px;
             outline: none;
+            transition: border-color 0.2s;
         }
 
         .form-group input:focus {
@@ -274,6 +275,12 @@
 
             <div class="divider"><span>অথবা ইমেইল দিয়ে</span></div>
 
+            <!-- নাম ইনপুট ফিল্ড (ডিফল্টভাবে লুকানো, সাইন আপে প্রদর্শিত হবে) -->
+            <div class="form-group" id="nameGroup" style="display: none;">
+                <label>আপনার পূর্ণ নাম</label>
+                <input type="text" id="nameInput" placeholder="যেমন: সিয়াম হোসাইন">
+            </div>
+
             <div class="form-group">
                 <label>ইমেইল ঠিকানা</label>
                 <input type="email" id="emailInput" placeholder="name@example.com">
@@ -325,6 +332,7 @@
             signInWithPopup, 
             signInWithEmailAndPassword, 
             createUserWithEmailAndPassword, 
+            updateProfile,
             signOut, 
             onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -354,6 +362,8 @@
         const toggleQuestion = document.getElementById("toggleQuestion");
         const errorMsg = document.getElementById("errorMsg");
 
+        const nameGroup = document.getElementById("nameGroup");
+        const nameInput = document.getElementById("nameInput");
         const emailInput = document.getElementById("emailInput");
         const passInput = document.getElementById("passInput");
 
@@ -379,33 +389,51 @@
                 submitBtn.innerText = "রেজিস্ট্রেশন করুন";
                 toggleQuestion.innerText = "আগে থেকেই অ্যাকাউন্ট আছে?";
                 toggleMode.innerText = "লগইন করুন";
+                nameGroup.style.display = "block";
             } else {
                 formTitle.innerText = "লগইন করুন";
                 formSubtitle.innerText = "আপনার অ্যাকাউন্টে প্রবেশ করে প্রস্তুতি শুরু করুন";
                 submitBtn.innerText = "লগইন";
                 toggleQuestion.innerText = "অ্যাকাউন্ট নেই?";
                 toggleMode.innerText = "নতুন অ্যাকাউন্ট তৈরি করুন";
+                nameGroup.style.display = "none";
             }
         });
 
         submitBtn.addEventListener("click", async () => {
+            const name = nameInput.value.trim();
             const email = emailInput.value.trim();
             const pass = passInput.value.trim();
             errorMsg.style.display = "none";
+
+            if (isSignUp && !name) {
+                showError("অনুগ্রহ করে আপনার পুরো নাম প্রদান করুন।");
+                return;
+            }
 
             if (!email || !pass) {
                 showError("অনুগ্রহ করে ইমেইল ও পাসওয়ার্ড প্রদান করুন।");
                 return;
             }
 
+            submitBtn.disabled = true;
+            submitBtn.innerText = "প্রসেসিং হচ্ছে...";
+
             try {
                 if (isSignUp) {
-                    await createUserWithEmailAndPassword(auth, email, pass);
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                    await updateProfile(userCredential.user, {
+                        displayName: name
+                    });
+                    document.getElementById("userName").innerText = name;
                 } else {
                     await signInWithEmailAndPassword(auth, email, pass);
                 }
             } catch (err) {
-                showError(err.message);
+                showError(translateFirebaseError(err.code) || err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = isSignUp ? "রেজিস্ট্রেশন করুন" : "লগইন";
             }
         });
 
@@ -413,7 +441,7 @@
             try {
                 await signInWithPopup(auth, googleProvider);
             } catch (err) {
-                showError(err.message);
+                showError(translateFirebaseError(err.code) || err.message);
             }
         });
 
@@ -424,6 +452,23 @@
         function showError(msg) {
             errorMsg.innerText = msg;
             errorMsg.style.display = "block";
+        }
+
+        function translateFirebaseError(code) {
+            switch (code) {
+                case "auth/email-already-in-use":
+                    return "এই ইমেইল দিয়ে ইতোমধ্যে একটি অ্যাকাউন্ট রয়েছে।";
+                case "auth/invalid-email":
+                    return "একটি সঠিক ইমেইল ঠিকানা দিন।";
+                case "auth/weak-password":
+                    return "পাসওয়ার্ডটি অন্তত ৬ অক্ষরের হতে হবে।";
+                case "auth/user-not-found":
+                case "auth/wrong-password":
+                case "auth/invalid-credential":
+                    return "ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে।";
+                default:
+                    return null;
+            }
         }
     </script>
 </body>

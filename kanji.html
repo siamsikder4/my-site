@@ -10,9 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&family=Noto+Serif+JP:wght@600;900&family=Yuji+Boku&display=swap" rel="stylesheet">
     
-    <!-- AnimCJK কাঞ্জি স্ট্রোক অ্যানিমেশন ইঞ্জিন -->
-    <script src="https://cdn.jsdelivr.net/npm/animcjk@2.0.7/dist/animcjk.min.js"></script>
-
     <style>
         :root {
             --primary-dark: #103b2f;
@@ -181,6 +178,7 @@
             color: var(--primary-dark);
         }
 
+        /* কার্ড স্টাইল আইটেম (হুবহু bdjapanese স্টাইল) */
         .kanji-item {
             margin-bottom: 10px;
             border-radius: 12px;
@@ -190,7 +188,7 @@
         }
 
         .kanji-header {
-            background: var(--primary-card);
+            background: #154235;
             color: #ffffff;
             padding: 13px 16px;
             display: flex;
@@ -245,9 +243,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        /* জাপানিজ ক্যালিগ্রাফি নির্দেশিকা লাইন */
+        /* কাঞ্জি গাইডলাইন */
         .kanji-anim-stage::before {
             content: "";
             position: absolute;
@@ -270,21 +269,25 @@
             pointer-events: none;
         }
 
-        .kanji-anim-box svg {
+        .kanji-svg-wrap {
             width: 150px;
             height: 150px;
-            display: block;
-            margin: 0 auto;
+            position: relative;
             z-index: 2;
+        }
+
+        .kanji-svg-wrap svg {
+            width: 100%;
+            height: 100%;
         }
 
         .static-kanji-fallback {
             font-family: 'Yuji Boku', 'Noto Serif JP', serif;
             font-size: 96px;
             color: #12372a;
-            line-height: 1;
+            line-height: 150px;
+            text-align: center;
             user-select: none;
-            z-index: 2;
         }
 
         /* অ্যাকশন বাটনসমূহ */
@@ -298,7 +301,7 @@
         .action-btn {
             border: 1px solid #cbd5e1;
             background: #ffffff;
-            padding: 7px 18px;
+            padding: 8px 18px;
             border-radius: 25px;
             font-size: 13px;
             font-weight: 700;
@@ -369,7 +372,7 @@
             color: #1e293b;
         }
 
-        /* ব্লাইন্ড টেস্ট মডাল UI */
+        /* ================= ব্লাইন্ড টেস্ট ও প্র্যাকটিস মডাল UI ================= */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -456,10 +459,10 @@
         }
 
         .blind-status-text {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--primary-green);
-            min-height: 22px;
+            min-height: 24px;
             margin-bottom: 12px;
         }
 
@@ -471,9 +474,9 @@
 
         .blind-btn {
             border: none;
-            padding: 8px 20px;
+            padding: 9px 22px;
             border-radius: 24px;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -590,7 +593,7 @@
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
-            <h4 class="blind-title">Blind Test (না দেখে লিখুন)</h4>
+            <h4 class="blind-title" id="blindModalTitle">Blind Test (না দেখে লিখুন)</h4>
 
             <div class="blind-canvas-box">
                 <div class="blind-hint-char" id="blindWatermark">五</div>
@@ -623,11 +626,13 @@
     </nav>
 
     <script>
+        // কাঞ্জি তালিকা ও হেক্স কোড (SVG লাইভ অ্যানিমেশনের জন্য)
         const kanjiData = {
             1: [
                 {
                     id: "01",
                     char: "人",
+                    code: "04eba",
                     kun: "ひと (hito)",
                     on: "ジン・ニン (jin / nin)",
                     meaning: "মানুষ / ব্যক্তি",
@@ -640,6 +645,7 @@
                 {
                     id: "02",
                     char: "日",
+                    code: "065e5",
                     kun: "ひ・か (hi / ka)",
                     on: "ニチ・ジツ (nichi / jitsu)",
                     meaning: "দিন / সূর্য",
@@ -652,6 +658,7 @@
                 {
                     id: "03",
                     char: "一",
+                    code: "04e00",
                     kun: "ひと (hito)",
                     on: "イチ (ichi)",
                     meaning: "এক / One",
@@ -663,6 +670,7 @@
                 {
                     id: "04",
                     char: "二",
+                    code: "04e8c",
                     kun: "ふた (futa)",
                     on: "ニ (ni)",
                     meaning: "দুই / Two",
@@ -674,6 +682,7 @@
                 {
                     id: "05",
                     char: "三",
+                    code: "04e09",
                     kun: "み (mi)",
                     on: "サン (san)",
                     meaning: "তিন / Three",
@@ -685,6 +694,7 @@
                 {
                     id: "06",
                     char: "四",
+                    code: "056db",
                     kun: "よん・よ (yon / yo)",
                     on: "シ (shi)",
                     meaning: "চার / Four",
@@ -696,6 +706,7 @@
                 {
                     id: "07",
                     char: "五",
+                    code: "04e94",
                     kun: "いつ (itsu)",
                     on: "ゴ (go)",
                     meaning: "পাঁচ / Five",
@@ -707,6 +718,7 @@
                 {
                     id: "08",
                     char: "六",
+                    code: "0516d",
                     kun: "む (mu)",
                     on: "ロク (roku)",
                     meaning: "ছয় / Six",
@@ -718,6 +730,7 @@
                 {
                     id: "09",
                     char: "七",
+                    code: "04e03",
                     kun: "なな (nana)",
                     on: "シチ (shichi)",
                     meaning: "সাত / Seven",
@@ -729,6 +742,7 @@
                 {
                     id: "10",
                     char: "八",
+                    code: "0516b",
                     kun: "や (ya)",
                     on: "ハチ (hachi)",
                     meaning: "আট / Eight",
@@ -739,8 +753,6 @@
                 }
             ]
         };
-
-        const animInstances = {};
 
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
@@ -767,21 +779,21 @@
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                     <div class="kanji-body">
-                        <!-- অ্যানিমেটেড কাঞ্জি কন্টেইনার -->
+                        <!-- অ্যানিমেশন ফ্রেম -->
                         <div class="kanji-anim-stage">
-                            <div class="kanji-anim-box" id="animBox_${index}">
+                            <div class="kanji-svg-wrap" id="svgHolder_${index}">
                                 <div class="static-kanji-fallback">${k.char}</div>
                             </div>
                         </div>
 
                         <div class="action-btns">
-                            <button class="action-btn play" onclick="playKanjiAnimation('${k.char}', ${index})">
+                            <button class="action-btn play" onclick="playKanjiStroke('${k.char}', '${k.code}', ${index})">
                                 <i class="fa-solid fa-play"></i> Play
                             </button>
-                            <button class="action-btn practice" onclick="openBlindModal('${k.char}', false)">
+                            <button class="action-btn practice" onclick="openCanvasModal('${k.char}', 'practice')">
                                 <i class="fa-solid fa-pencil"></i> Practice
                             </button>
-                            <button class="action-btn test" onclick="openBlindModal('${k.char}', true)">
+                            <button class="action-btn test" onclick="openCanvasModal('${k.char}', 'test')">
                                 <i class="fa-solid fa-star"></i> Test
                             </button>
                         </div>
@@ -815,11 +827,11 @@
             }
         }
 
-        // ================= Play অ্যানিমেশন লজিক (SVG Stroke Order) =================
-        function playKanjiAnimation(char, index) {
-            const targetEl = document.getElementById(`animBox_${index}`);
-            
-            // ১. অডিও উচ্চারণ চালানো
+        // ================= লাইভ স্ট্রোক অ্যানিমেশন (KanjiVG SVG ভিত্তিক) =================
+        async function playKanjiStroke(char, hexCode, index) {
+            const holder = document.getElementById(`svgHolder_${index}`);
+
+            // ১. সাউন্ড প্লে
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(char);
@@ -828,32 +840,57 @@
                 window.speechSynthesis.speak(u);
             }
 
-            // ২. AnimCJK দিয়ে স্ট্রোক বাই স্ট্রোক অ্যানিমেশন
-            if (window.AnimCJK) {
-                targetEl.innerHTML = "";
-                const ac = new AnimCJK({
-                    char: char,
-                    target: targetEl,
-                    type: "stroke",
-                    strokeColor: "#103b2f",
-                    strokeWidth: 42,
-                    showNumbers: true,
-                    numberColor: "#94a3b8",
-                    autoplay: true,
-                    speed: 1.1
+            try {
+                // KanjiVG ওপেন ডেটাবেস থেকে সঠিক স্ট্রোক অর্ডার ফেচ করা
+                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const svgText = await res.text();
+
+                holder.innerHTML = svgText;
+                const svgEl = holder.querySelector('svg');
+                svgEl.setAttribute("viewBox", "0 0 109 109");
+                svgEl.style.width = "100%";
+                svgEl.style.height = "100%";
+
+                // স্ট্রোক পাথ সিলেক্ট ও ক্যালিগ্রাফি স্টাইল দেওয়া
+                const paths = svgEl.querySelectorAll("path");
+                let delay = 0;
+
+                paths.forEach((path, i) => {
+                    const len = path.getTotalLength();
+                    path.style.stroke = "#103b2f";
+                    path.style.strokeWidth = "4";
+                    path.style.strokeLinecap = "round";
+                    path.style.strokeLinejoin = "round";
+                    path.style.fill = "none";
+                    path.style.strokeDasharray = len;
+                    path.style.strokeDashoffset = len;
+                    path.style.transition = "none";
+
+                    setTimeout(() => {
+                        path.style.transition = "stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+                        path.style.strokeDashoffset = "0";
+                    }, delay);
+
+                    delay += 600;
                 });
-                animInstances[index] = ac;
-            } else {
-                // অফলাইন বা ব্রাউজার ফলব্যাক অ্যানিমেশন
-                targetEl.innerHTML = `<div class="static-kanji-fallback" style="animation: popUp 0.3s ease;">${char}</div>`;
+
+            } catch (err) {
+                // অফলাইন বা নেটওয়ার্ক ফেইলিউরে স্মুথ ফলব্যাক
+                holder.innerHTML = `<div class="static-kanji-fallback" style="transform: scale(1.18); color: var(--primary-green); transition: 0.3s;">${char}</div>`;
+                setTimeout(() => {
+                    holder.innerHTML = `<div class="static-kanji-fallback">${char}</div>`;
+                }, 800);
             }
         }
 
-        /* ড্রয়িং ও ব্লাইন্ড টেস্ট */
+        // ================= ব্লাইন্ড টেস্ট ও প্র্যাকটিস মোড =================
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
         const watermark = document.getElementById("blindWatermark");
         const statusText = document.getElementById("blindStatus");
+        const modalTitle = document.getElementById("blindModalTitle");
         let isDrawing = false;
         let strokeCount = 0;
 
@@ -862,14 +899,18 @@
         ctx.lineJoin = "round";
         ctx.strokeStyle = "#1e293b";
 
-        function openBlindModal(char, isBlind) {
+        function openCanvasModal(char, mode) {
             watermark.innerText = char;
-            if (isBlind) {
-                watermark.classList.remove("show");
-            } else {
-                watermark.classList.add("show");
-            }
             resetCanvas();
+
+            if (mode === "test") {
+                modalTitle.innerText = "Blind Test (না দেখে লিখুন)";
+                watermark.classList.remove("show"); // টেস্টে লুকানো থাকবে
+            } else {
+                modalTitle.innerText = "Practice (অনুশীলন করুন)";
+                watermark.classList.add("show"); // প্র্যাকটিসে ওয়াটারমার্ক দেখা যাবে
+            }
+
             document.getElementById("blindTestModal").style.display = "flex";
         }
 
@@ -896,7 +937,7 @@
             if (isDrawing) {
                 isDrawing = false;
                 ctx.beginPath();
-                if (strokeCount > 15) {
+                if (strokeCount > 12) {
                     statusText.innerText = "সঠিক!";
                 }
             }

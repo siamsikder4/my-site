@@ -20,7 +20,7 @@
         body {
             background-color: #f8fafc;
             color: #1e293b;
-            padding-bottom: 70px;
+            padding-bottom: 80px;
         }
 
         /* অথ চেকিং স্ক্রিন */
@@ -84,7 +84,7 @@
 
         .page-content {
             padding: 18px 16px;
-            max-width: 480px;
+            max-width: 540px;
             margin: 0 auto;
         }
 
@@ -111,10 +111,11 @@
             color: #a7f3d0;
         }
 
+        /* স্ট্যাটাস মেট্রিক্স */
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             margin-bottom: 20px;
         }
 
@@ -122,73 +123,186 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 14px;
-            padding: 16px 14px;
+            padding: 14px 8px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .stat-box i {
-            font-size: 20px;
+            font-size: 18px;
             color: #047857;
             margin-bottom: 6px;
         }
 
         .stat-num {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #0f3e2e;
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 10.5px;
             color: #64748b;
         }
 
+        /* কার্ড সেকশন */
         .section-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 16px;
             padding: 18px 16px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
         .section-card h3 {
-            font-size: 15px;
+            font-size: 15.5px;
             font-weight: 700;
             color: #0f3e2e;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        /* সার্চ বক্স */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 14px;
             gap: 8px;
         }
 
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        /* ইউজার টেবিল */
+        .table-responsive {
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            text-align: left;
+        }
+
+        .user-table th {
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 700;
+            padding: 10px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .user-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .user-table tr:hover {
+            background: #fafafa;
+        }
+
+        .badge-count {
+            background: #e6f4ea;
+            color: #047857;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        /* ফর্ম ইনপুট স্টাইল */
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        .input-control:focus {
+            border-color: #047857;
+            background: #ffffff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 11px;
+            background: #047857;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:active {
+            background: #065f46;
+        }
+
+        /* দ্রুত অ্যাকশন লিঙ্ক */
         .action-row {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 9px;
         }
 
         .btn-action {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 14px;
+            padding: 11px 14px;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             text-decoration: none;
             color: #334155;
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 600;
-            transition: background 0.15s;
         }
 
         .btn-action:active {
             background: #f1f5f9;
-        }
-
-        .btn-action i {
-            color: #047857;
         }
     </style>
 </head>
@@ -205,42 +319,90 @@
         <a href="profile.html" class="back-btn">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <span class="nav-title">KOTOBA অ্যাডমিন প্যানেল</span>
+        <span class="nav-title">KOTOBA অ্যাডমিন ড্যাশবোর্ড</span>
     </header>
 
     <main class="page-content" id="adminContent" style="display: none;">
 
         <div class="admin-banner">
-            <h2><i class="fa-solid fa-user-shield"></i> স্বাগতম, সিয়াম!</h2>
+            <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল</h2>
             <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
         </div>
 
+        <!-- লাইভ মেট্রিক্স -->
         <div class="stat-grid">
             <div class="stat-box">
-                <i class="fa-solid fa-server"></i>
-                <div class="stat-num">GitHub Pages</div>
-                <div class="stat-label">হোস্টিং স্ট্যাটাস</div>
+                <i class="fa-solid fa-users"></i>
+                <div class="stat-num" id="totalUsersCount">০</div>
+                <div class="stat-label">মোট ইউজার</div>
             </div>
             <div class="stat-box">
-                <i class="fa-solid fa-fire"></i>
-                <div class="stat-num">Active</div>
-                <div class="stat-label">Firebase Auth</div>
+                <i class="fa-solid fa-bookmark"></i>
+                <div class="stat-num" id="totalBookmarksCount">০</div>
+                <div class="stat-label">মোট বুকমার্ক</div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-database"></i>
+                <div class="stat-num" style="color: #047857;">Live</div>
+                <div class="stat-label">ক্লাউড ডিবি</div>
             </div>
         </div>
 
+        <!-- ইউজার ডিটেইলস ও সার্চ টেবিল -->
         <div class="section-card">
-            <h3><i class="fa-solid fa-gears"></i> দ্রুত অ্যাকশন ও কনসোল</h3>
+            <h3>
+                <span><i class="fa-solid fa-address-book" style="color: #047857; margin-right: 6px;"></i> ইউজার তালিকা</span>
+                <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:13px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i> রিফ্রেশ</button>
+            </h3>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 13px;"></i>
+                <input type="text" id="userSearchInput" placeholder="ইমেইল দিয়ে ইউজার খুঁজুন...">
+            </div>
+
+            <div class="table-responsive">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ইমেইল / আইডি</th>
+                            <th style="text-align: center;">বুকমার্ক</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <tr>
+                            <td colspan="2" style="text-align: center; color: #94a3b8; padding: 20px;">লোড হচ্ছে...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- নোটিশ ও গ্লোবাল অ্যানাউন্সমেন্ট কন্ট্রোল -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-bullhorn" style="color: #d97706; margin-right: 6px;"></i> সাইট নোটিশ বা অ্যালার্ট</span></h3>
+            <div class="input-group">
+                <label>নোটিশ বার্তা লিখুন:</label>
+                <input type="text" id="noticeInput" class="input-control" placeholder="যেমন: নতুন N5 লেসন ২৫ পর্যন্ত যোগ করা হয়েছে!">
+            </div>
+            <button class="btn-submit" id="saveNoticeBtn">
+                <i class="fa-solid fa-paper-plane"></i> নোটিশ আপডেট করুন
+            </button>
+        </div>
+
+        <!-- এক্সটার্নাল লিঙ্ক কনসোল -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> দ্রুত কনসোল</span></h3>
             <div class="action-row">
-                <a href="https://console.firebase.google.com/project/kotoba-b20b3/overview" target="_blank" class="btn-action">
-                    <span><i class="fa-solid fa-database" style="margin-right: 8px;"></i> Firebase ড্যাশবোর্ড</span>
+                <a href="https://console.firebase.google.com/project/kotoba-b20b3/firestore" target="_blank" class="btn-action">
+                    <span><i class="fa-solid fa-fire" style="color: #f97316; margin-right: 8px;"></i> Firestore ডেটাবেস</span>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
                 <a href="https://adsense.google.com/" target="_blank" class="btn-action">
-                    <span><i class="fa-solid fa-chart-line" style="margin-right: 8px;"></i> Google AdSense রিপোর্ট</span>
+                    <span><i class="fa-solid fa-chart-simple" style="color: #0284c7; margin-right: 8px;"></i> Google AdSense</span>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
                 <a href="https://github.com/" target="_blank" class="btn-action">
-                    <span><i class="fa-brands fa-github" style="margin-right: 8px;"></i> গিটহাব রিপোজিটরি</span>
+                    <span><i class="fa-brands fa-github" style="color: #1e293b; margin-right: 8px;"></i> GitHub রিপোজিটরি</span>
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
             </div>
@@ -248,10 +410,11 @@
 
     </main>
 
-    <!-- Firebase Auth সিকিউরিটি গার্ড -->
+    <!-- Firebase Auth ও অ্যাডমিন লজিক -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -265,20 +428,123 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
         const authScreen = document.getElementById("authCheckingScreen");
         const adminContent = document.getElementById("adminContent");
+        
+        const totalUsersCountEl = document.getElementById("totalUsersCount");
+        const totalBookmarksCountEl = document.getElementById("totalBookmarksCount");
+        const userTableBody = document.getElementById("userTableBody");
+        const userSearchInput = document.getElementById("userSearchInput");
+        const refreshUsersBtn = document.getElementById("refreshUsersBtn");
+        const noticeInput = document.getElementById("noticeInput");
+        const saveNoticeBtn = document.getElementById("saveNoticeBtn");
 
-        onAuthStateChanged(auth, (user) => {
+        let allUserData = [];
+
+        onAuthStateChanged(auth, async (user) => {
             if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                // অথেনটিকেশন সফল
                 authScreen.style.display = "none";
                 adminContent.style.display = "block";
+                await loadAllUsers();
+                await loadCurrentNotice();
             } else {
-                // আনঅথরাইজড ইউজার হলে সরাসরি প্রোফাইলে রিডাইরেক্ট
                 alert("অনুমতি নেই! এই পেজে শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
                 window.location.href = "profile.html";
+            }
+        });
+
+        // ফায়ারস্টোর থেকে সব ইউজারের ডেটা লোড করা
+        async function loadAllUsers() {
+            userTableBody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: #94a3b8; padding: 20px;">ডেটা লোড হচ্ছে...</td></tr>`;
+            try {
+                const querySnapshot = await getDocs(collection(db, "user_highlights"));
+                allUserData = [];
+                let totalBookmarks = 0;
+
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const wordsCount = (data.words && Array.isArray(data.words)) ? data.words.length : 0;
+                    totalBookmarks += wordsCount;
+                    allUserData.push({
+                        email: data.email || docSnap.id,
+                        count: wordsCount
+                    });
+                });
+
+                totalUsersCountEl.innerText = allUserData.length;
+                totalBookmarksCountEl.innerText = totalBookmarks;
+                renderUserTable(allUserData);
+            } catch (err) {
+                userTableBody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: #ef4444; padding: 20px;">ডেটা লোড করতে ব্যর্থ হয়েছে!</td></tr>`;
+                console.error(err);
+            }
+        }
+
+        // ইউজার তালিকা রেন্ডার
+        function renderUserTable(list) {
+            userTableBody.innerHTML = "";
+            if (list.length === 0) {
+                userTableBody.innerHTML = `<tr><td colspan="2" style="text-align: center; color: #94a3b8; padding: 18px;">কোনো ইউজার পাওয়া যায়নি।</td></tr>`;
+                return;
+            }
+
+            list.forEach(u => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 600; color: #0f3e2e;">${u.email}</div>
+                    </td>
+                    <td style="text-align: center;">
+                        <span class="badge-count">${u.count} টি</span>
+                    </td>
+                `;
+                userTableBody.appendChild(tr);
+            });
+        }
+
+        // লাইভ সার্চ ফিল্টার
+        userSearchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = allUserData.filter(u => u.email.toLowerCase().includes(query));
+            renderUserTable(filtered);
+        });
+
+        refreshUsersBtn.addEventListener("click", loadAllUsers);
+
+        // সাইট নোটিশ লোড ও সেভ
+        async function loadCurrentNotice() {
+            try {
+                const docRef = doc(db, "site_meta", "announcement");
+                const snap = await getDoc(docRef);
+                if (snap.exists() && snap.data().text) {
+                    noticeInput.value = snap.data().text;
+                }
+            } catch(e) {
+                console.warn(e);
+            }
+        }
+
+        saveNoticeBtn.addEventListener("click", async () => {
+            const text = noticeInput.value.trim();
+            if (!text) return alert("দয়া করে নোটিশ লিখুন");
+            saveNoticeBtn.disabled = true;
+            saveNoticeBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+
+            try {
+                await setDoc(doc(db, "site_meta", "announcement"), {
+                    text: text,
+                    updatedAt: new Date().toISOString()
+                });
+                alert("নোটিশ সফলভাবে সাইটে আপডেট হয়েছে!");
+            } catch(e) {
+                alert("নোটিশ সেভ করতে সমস্যা হয়েছে!");
+                console.error(e);
+            } finally {
+                saveNoticeBtn.disabled = false;
+                saveNoticeBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> নোটিশ আপডেট করুন`;
             }
         });
     </script>

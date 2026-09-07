@@ -3,76 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firestore Console - KOTOBA</title>
+    <title>Firestore Explorer - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --bg-main: #f8fafc;
+            --sidebar-bg: #0f172a;
+            --panel-border: #e2e8f0;
+            --brand-orange: #f59e0b;
+            --brand-emerald: #059669;
+            --text-primary: #0f172a;
+            --text-muted: #64748b;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+        }
+
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f1f5f9;
-            color: #1e293b;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
             height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        #authCheckingScreen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; gap: 12px;
-        }
-        .spinner {
-            width: 36px; height: 36px; border: 3px solid #e2e8f0; border-top: 3px solid #ff9100; border-radius: 50%; animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* কাস্টম স্ক্রলবার */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        /* টপ ন্যাভবার */
+        /* অথ লোডিং স্ক্রিন */
+        #authCheckingScreen {
+            position: fixed; inset: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(6px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 99999; gap: 14px;
+        }
+        .pulse-loader {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 20px;
+            box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+            animation: pulseWave 1.4s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+        @keyframes pulseWave {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+            70% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+        /* প্রিমিয়াম টপবার */
         .fs-nav {
-            background: #0f172a;
+            background: #090d16;
             color: #ffffff;
-            height: 52px;
-            padding: 0 16px;
+            height: 56px;
+            padding: 0 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             flex-shrink: 0;
         }
 
         .fs-nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .back-icon-btn {
             color: #94a3b8;
-            font-size: 15px;
+            font-size: 14px;
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
         }
-        .back-icon-btn:hover { background: #1e293b; color: #ffffff; }
+        .back-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            transform: translateX(-2px);
+        }
 
-        .brand-logo {
+        .brand-badge-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo-img {
+            width: 26px; height: 26px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .brand-title {
+            font-size: 14px;
             font-weight: 700;
-            font-size: 15px;
+            letter-spacing: 0.3px;
             display: flex;
             align-items: center;
             gap: 8px;
-            letter-spacing: 0.3px;
+        }
+        .env-pill {
+            font-size: 9.5px;
+            font-weight: 700;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 7px;
+            border-radius: 12px;
+            text-transform: uppercase;
         }
 
         .fs-nav-right {
@@ -82,57 +143,81 @@
         }
 
         .ext-console-btn {
-            background: #ff9100;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 600;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+            transition: opacity 0.2s;
         }
+        .ext-console-btn:hover { opacity: 0.92; }
 
-        /* পাথ ট্র্যাকার / ব্রেডক্রাম্ব */
+        /* শেল স্টাইল ব্রেডক্রাম্ব */
         .breadcrumb-bar {
-            background: #1e293b;
-            color: #cbd5e1;
-            padding: 8px 16px;
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 9px 18px;
             font-size: 12px;
             font-family: 'JetBrains Mono', monospace;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             flex-shrink: 0;
         }
 
         .path-display {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             overflow-x: auto;
             white-space: nowrap;
         }
-
+        .path-root {
+            color: #64748b;
+        }
         .path-segment {
             color: #38bdf8;
             cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.15s;
         }
+        .path-segment:hover { background: rgba(56, 189, 248, 0.1); }
         .path-segment.active { color: #fde047; font-weight: 600; }
 
-        /* মূল ৩-কলাম কনসোল গ্রিড */
+        .refresh-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .refresh-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+        /* ৩-কলাম ওয়ার্কস্পেস */
         .fs-console-grid {
             flex: 1;
             display: grid;
-            grid-template-columns: 200px 240px 1fr;
+            grid-template-columns: 220px 290px 1fr;
             background: #ffffff;
             overflow: hidden;
         }
 
         .panel-column {
-            border-right: 1px solid #e2e8f0;
+            border-right: 1px solid var(--panel-border);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -140,9 +225,9 @@
         }
 
         .col-header {
-            padding: 10px 14px;
+            padding: 12px 14px;
             background: #f8fafc;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--panel-border);
             font-size: 12px;
             font-weight: 700;
             color: #475569;
@@ -150,196 +235,282 @@
             align-items: center;
             justify-content: space-between;
             flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
+        /* সার্চ ইনপুট */
+        .search-box-wrap {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--panel-border);
+            background: #ffffff;
+        }
+        .search-box {
+            width: 100%;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 7px;
+            padding: 6px 10px;
+            font-size: 11.5px;
+            outline: none;
+            color: #1e293b;
+        }
+        .search-box:focus { border-color: #059669; background: #fff; }
 
         .col-list {
             flex: 1;
             overflow-y: auto;
-            padding: 6px;
+            padding: 8px;
         }
 
         /* কালেকশন আইটেম */
         .item-row {
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
             font-family: 'JetBrains Mono', monospace;
             color: #334155;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 2px;
-            transition: all 0.15s;
+            margin-bottom: 4px;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
         }
         .item-row:hover { background: #f1f5f9; }
         .item-row.active {
-            background: #e0f2fe;
-            color: #0369a1;
+            background: #eff6ff;
+            color: #1d4ed8;
             font-weight: 600;
+            border-color: #bfdbfe;
         }
 
         /* ডকুমেন্ট আইটেম */
         .doc-row {
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 11.5px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             font-family: 'JetBrains Mono', monospace;
             color: #1e293b;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 2px;
-            word-break: break-all;
-            border: 1px solid transparent;
+            margin-bottom: 4px;
+            border: 1px solid #f1f5f9;
+            background: #ffffff;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
         }
-        .doc-row:hover { background: #f8fafc; border-color: #f1f5f9; }
+        .doc-row:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
         .doc-row.active {
             background: #ecfdf5;
-            border-color: #a7f3d0;
+            border-color: #6ee7b7;
             color: #065f46;
             font-weight: 600;
+            box-shadow: 0 2px 5px rgba(5, 150, 105, 0.08);
+        }
+        .doc-row-id {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 220px;
         }
 
         /* ফিল্ডস প্যানেল */
         .fields-panel {
-            background: #fafafa;
+            background: #fafbfc;
             overflow-y: auto;
-            padding: 16px;
+            padding: 20px;
         }
 
         .doc-action-header {
+            background: #ffffff;
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-lg);
+            padding: 14px 18px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
         }
 
+        .doc-id-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .doc-badge-id {
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
             color: #0f172a;
         }
+        .copy-pill-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .copy-pill-btn:hover { background: #e2e8f0; color: #0f172a; }
 
+        .btn-del-doc {
+            background: #fff1f2;
+            color: #e11d48;
+            border: 1px solid #fecdd3;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+        .btn-del-doc:hover {
+            background: #ffe4e6;
+            border-color: #fda4af;
+        }
+
+        /* ফিল্ড কার্ড */
         .field-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 10px 14px;
-            margin-bottom: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(15, 23, 42, 0.015);
+            transition: border-color 0.15s;
         }
+        .field-card:hover { border-color: #cbd5e1; }
 
+        .field-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
         .field-meta {
             display: flex;
             align-items: center;
             gap: 8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 12.5px;
         }
 
         .field-key {
-            color: #7c3aed;
+            color: #6366f1;
             font-weight: 700;
         }
 
         .field-type-pill {
             font-size: 10px;
-            padding: 1px 6px;
-            border-radius: 4px;
-            background: #f1f5f9;
-            color: #64748b;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 5px;
             text-transform: lowercase;
+            font-family: 'JetBrains Mono', monospace;
         }
+        .type-string { background: #fef3c7; color: #b45309; }
+        .type-number { background: #dcfce7; color: #15803d; }
+        .type-boolean { background: #e0e7ff; color: #4338ca; }
+        .type-array { background: #f3e8ff; color: #7e22ce; }
+        .type-object { background: #f1f5f9; color: #475569; }
 
         .field-val-box {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            color: #047857;
+            color: #1e293b;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 6px;
+            padding: 8px 12px;
             word-break: break-word;
             white-space: pre-wrap;
+            line-height: 1.5;
         }
-
-        .field-val-box.string { color: #d97706; }
-        .field-val-box.boolean { color: #2563eb; }
-        .field-val-box.number { color: #059669; }
 
         .empty-placeholder {
             text-align: center;
             color: #94a3b8;
-            padding: 50px 14px;
-            font-size: 12.5px;
+            padding: 70px 14px;
+            font-size: 13px;
         }
 
-        .btn-del-doc {
-            background: #fee2e2;
-            color: #dc2626;
-            border: 1px solid #fca5a5;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 11.5px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 820px) {
+            body { height: auto; overflow: visible; }
             .fs-console-grid {
                 grid-template-columns: 1fr;
-                overflow-y: auto;
+                height: auto;
             }
             .panel-column {
-                min-height: 200px;
-                border-bottom: 1px solid #e2e8f0;
+                min-height: 280px;
+                border-bottom: 2px solid var(--panel-border);
+                border-right: none;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- অথ লোডিং স্ক্রিন -->
     <div id="authCheckingScreen">
-        <div class="spinner"></div>
-        <p style="font-size: 13px; font-weight: 600; color: #475569;">অ্যাডমিন নিরাপত্তা যাচাই করা হচ্ছে...</p>
+        <div class="pulse-loader">
+            <i class="fa-solid fa-fire"></i>
+        </div>
+        <p style="font-size: 13px; font-weight: 700; color: #334155;">কনসোল সুরক্ষিত করা হচ্ছে...</p>
     </div>
 
-    <!-- টপবার -->
+    <!-- আধুনিক টপবার -->
     <header class="fs-nav">
         <div class="fs-nav-left">
-            <a href="admin.html" class="back-icon-btn" title="অ্যাডমিন ড্যাশবোর্ডে ফিরুন">
+            <a href="admin.html" class="back-icon-btn" title="ড্যাশবোর্ডে ফিরুন">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
-            <div class="brand-logo">
-                <i class="fa-solid fa-fire" style="color: #ff9100;"></i>
-                <span>Cloud Firestore Viewer</span>
+            <div class="brand-badge-wrap">
+                <img src="logo.png" alt="Logo" class="brand-logo-img">
+                <div class="brand-title">
+                    <span>Firestore Studio</span>
+                    <span class="env-pill">Live DB</span>
+                </div>
             </div>
         </div>
         <div class="fs-nav-right">
-            <a href="https://console.firebase.google.com/project/kotoba-b20b3/firestore" target="_blank" class="ext-console-direct ext-console-btn">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Firebase Console
+            <a href="https://console.firebase.google.com/project/kotoba-b20b3/firestore" target="_blank" class="ext-console-btn">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>Google Console</span>
             </a>
         </div>
     </header>
 
-    <!-- ব্রেডক্রাম্ব পাথ -->
+    <!-- ব্রেডক্রাম্ব পাথ ও রিফ্রেশ -->
     <div class="breadcrumb-bar">
         <div class="path-display" id="pathDisplay">
-            <span class="path-segment" onclick="resetToRoot()">(default)</span>
+            <span class="path-root"><i class="fa-solid fa-database" style="margin-right: 4px;"></i> (default)</span>
             <span>/</span>
             <span class="path-segment active" id="crumbCol">user_highlights</span>
             <span id="crumbDivider" style="display: none;">/</span>
             <span class="path-segment active" id="crumbDoc" style="display: none;"></span>
         </div>
         <div>
-            <button id="refreshDataBtn" style="background:none; border:none; color:#cbd5e1; font-size:12px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i> রিফ্রেশ</button>
+            <button id="refreshDataBtn" class="refresh-btn">
+                <i class="fa-solid fa-rotate-right"></i> রিফ্রেশ
+            </button>
         </div>
     </div>
 
-    <!-- ৩-কলাম ডাটাবেস গ্রিড -->
+    <!-- মূল ৩-কলাম কনসোল গ্রিড -->
     <main class="fs-console-grid">
         
         <!-- কলাম ১: কালেকশন তালিকা -->
@@ -350,16 +521,16 @@
             </div>
             <div class="col-list" id="colList">
                 <div class="item-row active" onclick="selectCollection('user_highlights')">
-                    <span><i class="fa-regular fa-folder" style="margin-right: 6px;"></i>user_highlights</span>
+                    <span><i class="fa-regular fa-folder-open" style="color:#f59e0b; margin-right:8px;"></i>user_highlights</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('support_chats')">
-                    <span><i class="fa-regular fa-folder" style="margin-right: 6px;"></i>support_chats</span>
+                    <span><i class="fa-regular fa-folder" style="color:#0ea5e9; margin-right:8px;"></i>support_chats</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('notifications')">
-                    <span><i class="fa-regular fa-folder" style="margin-right: 6px;"></i>notifications</span>
+                    <span><i class="fa-regular fa-folder" style="color:#10b981; margin-right:8px;"></i>notifications</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('site_settings')">
-                    <span><i class="fa-regular fa-folder" style="margin-right: 6px;"></i>site_settings</span>
+                    <span><i class="fa-regular fa-folder" style="color:#8b5cf6; margin-right:8px;"></i>site_settings</span>
                 </div>
             </div>
         </div>
@@ -368,7 +539,10 @@
         <div class="panel-column">
             <div class="col-header">
                 <span>Documents</span>
-                <span id="docCountBadge" style="font-size: 10px; background: #e2e8f0; padding: 2px 6px; border-radius: 10px;">০</span>
+                <span id="docCountBadge" style="font-size: 10px; font-weight:700; background: #e2e8f0; color:#334155; padding: 2px 7px; border-radius: 10px;">০</span>
+            </div>
+            <div class="search-box-wrap">
+                <input type="text" id="docSearchInput" class="search-box" placeholder="আইডি খুঁজুন...">
             </div>
             <div class="col-list" id="docList">
                 <div class="empty-placeholder">লোড হচ্ছে...</div>
@@ -378,8 +552,8 @@
         <!-- কলাম ৩: ফিল্ড ও ডেটা ভিউয়ার -->
         <div class="panel-column fields-panel" id="fieldsPanel">
             <div class="empty-placeholder">
-                <i class="fa-regular fa-file-code" style="font-size: 26px; margin-bottom: 8px; display: block;"></i>
-                বাম পাশ থেকে কোনো ডকুমেন্ট সিলেক্ট করুন
+                <i class="fa-regular fa-folder-open" style="font-size: 32px; color:#cbd5e1; margin-bottom: 12px; display: block;"></i>
+                বাম পাশ থেকে একটি ডকুমেন্ট নির্বাচন করুন
             </div>
         </div>
 
@@ -408,7 +582,7 @@
 
         let currentCollection = "user_highlights";
         let currentDocId = null;
-        let currentDocData = null;
+        let allDocsCache = [];
 
         onAuthStateChanged(auth, async (user) => {
             if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
@@ -423,27 +597,32 @@
         window.selectCollection = async function(colName) {
             currentCollection = colName;
             currentDocId = null;
-            currentDocData = null;
+            allDocsCache = [];
 
-            // ব্রেডক্রাম্ব আপডেট
             document.getElementById("crumbCol").innerText = colName;
             document.getElementById("crumbDivider").style.display = "none";
             document.getElementById("crumbDoc").style.display = "none";
 
-            // সিলেকশন হাইলাইট
             document.querySelectorAll("#colList .item-row").forEach(el => {
-                if (el.innerText.trim() === colName) el.classList.add("active");
-                else el.classList.remove("active");
+                const text = el.innerText.trim();
+                const icon = el.querySelector("i");
+                if (text.includes(colName)) {
+                    el.classList.add("active");
+                    icon.className = "fa-regular fa-folder-open";
+                } else {
+                    el.classList.remove("active");
+                    icon.className = "fa-regular fa-folder";
+                }
             });
 
             document.getElementById("fieldsPanel").innerHTML = `
                 <div class="empty-placeholder">
-                    <i class="fa-regular fa-file-code" style="font-size: 26px; margin-bottom: 8px; display: block;"></i>
-                    বাম পাশ থেকে কোনো ডকুমেন্ট সিলেক্ট করুন
+                    <i class="fa-regular fa-folder-open" style="font-size: 32px; color:#cbd5e1; margin-bottom: 12px; display: block;"></i>
+                    বাম পাশ থেকে একটি ডকুমেন্ট নির্বাচন করুন
                 </div>`;
 
             const docListEl = document.getElementById("docList");
-            docListEl.innerHTML = `<div class="empty-placeholder"><i class="fa-solid fa-spinner fa-spin"></i> ডকুমেন্টস লোড হচ্ছে...</div>`;
+            docListEl.innerHTML = `<div class="empty-placeholder"><i class="fa-solid fa-spinner fa-spin"></i> ফেচিং...</div>`;
 
             try {
                 const snap = await getDocs(collection(db, colName));
@@ -451,30 +630,54 @@
                 document.getElementById("docCountBadge").innerText = snap.size;
 
                 if (snap.empty) {
-                    docListEl.innerHTML = `<div class="empty-placeholder">কোনো ডকুমেন্ট নেই</div>`;
+                    docListEl.innerHTML = `<div class="empty-placeholder">কোনো রেকর্ড পাওয়া যায়নি</div>`;
                     return;
                 }
 
                 snap.forEach(d => {
-                    const row = document.createElement("div");
-                    row.className = "doc-row";
-                    row.innerHTML = `<span>${d.id}</span> <i class="fa-solid fa-chevron-right" style="font-size:10px; color:#cbd5e1;"></i>`;
-                    row.onclick = () => selectDocument(d.id, d.data(), row);
-                    docListEl.appendChild(row);
+                    allDocsCache.push({ id: d.id, data: d.data() });
                 });
+
+                renderDocList(allDocsCache);
             } catch (e) {
                 docListEl.innerHTML = `<div class="empty-placeholder" style="color:#ef4444;">লোড ব্যর্থ হয়েছে!</div>`;
             }
         };
 
+        function renderDocList(docs) {
+            const docListEl = document.getElementById("docList");
+            docListEl.innerHTML = "";
+
+            if (docs.length === 0) {
+                docListEl.innerHTML = `<div class="empty-placeholder">মিল খুঁজে পাওয়া যায়নি</div>`;
+                return;
+            }
+
+            docs.forEach(item => {
+                const row = document.createElement("div");
+                row.className = "doc-row" + (currentDocId === item.id ? " active" : "");
+                row.innerHTML = `
+                    <span class="doc-row-id">${item.id}</span>
+                    <i class="fa-solid fa-chevron-right" style="font-size:10px; color:#cbd5e1;"></i>
+                `;
+                row.onclick = () => selectDocument(item.id, item.data, row);
+                docListEl.appendChild(row);
+            });
+        }
+
+        // ডকুমেন্ট সার্চ ফিল্টার
+        document.getElementById("docSearchInput").addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = allDocsCache.filter(d => d.id.toLowerCase().includes(query));
+            renderDocList(filtered);
+        });
+
         function selectDocument(docId, data, elTarget) {
             currentDocId = docId;
-            currentDocData = data;
 
             document.querySelectorAll("#docList .doc-row").forEach(r => r.classList.remove("active"));
             if (elTarget) elTarget.classList.add("active");
 
-            // ব্রেডক্রাম্ব আপডেট
             document.getElementById("crumbDivider").style.display = "inline";
             document.getElementById("crumbDoc").style.display = "inline";
             document.getElementById("crumbDoc").innerText = docId;
@@ -486,19 +689,23 @@
             const panel = document.getElementById("fieldsPanel");
             panel.innerHTML = "";
 
-            // অ্যাকশন বার
             const header = document.createElement("div");
             header.className = "doc-action-header";
             header.innerHTML = `
-                <span class="doc-badge-id"><i class="fa-regular fa-file-lines" style="color:#047857; margin-right:6px;"></i>${docId}</span>
-                <button class="btn-del-doc" id="btnDeleteDoc"><i class="fa-solid fa-trash-can"></i> ডকুমেন্ট মুছুন</button>
+                <div class="doc-id-display">
+                    <span class="doc-badge-id">${docId}</span>
+                    <button class="copy-pill-btn" onclick="navigator.clipboard.writeText('${docId}')">
+                        <i class="fa-regular fa-copy"></i> কপি ID
+                    </button>
+                </div>
+                <button class="btn-del-doc" id="btnDeleteDoc"><i class="fa-regular fa-trash-can"></i> ডিলিট</button>
             `;
             panel.appendChild(header);
 
             header.querySelector("#btnDeleteDoc").onclick = () => deleteCurrentDocument();
 
             if (!data || Object.keys(data).length === 0) {
-                panel.innerHTML += `<div class="empty-placeholder">এই ডকুমেন্টে কোনো ফিল্ড নেই (খালি)</div>`;
+                panel.innerHTML += `<div class="empty-placeholder">এই ডকুমেন্টে কোনো ফিল্ড সংরক্ষিত নেই</div>`;
                 return;
             }
 
@@ -511,28 +718,41 @@
                 if (type === 'object' && val !== null) {
                     formattedVal = JSON.stringify(val, null, 2);
                 } else if (type === 'array') {
-                    formattedVal = `[ ${val.length} টি উপাদান ]\n${JSON.stringify(val, null, 2)}`;
+                    formattedVal = `[ ${val.length} items ]\n${JSON.stringify(val, null, 2)}`;
                 } else {
                     formattedVal = String(val);
                 }
 
                 card.innerHTML = `
-                    <div class="field-meta">
-                        <span class="field-key">${key}:</span>
-                        <span class="field-type-pill">${type}</span>
+                    <div class="field-top-row">
+                        <div class="field-meta">
+                            <span class="field-key">${key}</span>
+                            <span class="field-type-pill type-${type}">${type}</span>
+                        </div>
+                        <button class="copy-pill-btn" onclick="navigator.clipboard.writeText(\`${encodeURIComponent(formattedVal)}\`)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
                     </div>
-                    <div class="field-val-box ${type}">${formattedVal}</div>
+                    <div class="field-val-box">${escapeHtml(formattedVal)}</div>
                 `;
                 panel.appendChild(card);
             }
         }
 
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
         async function deleteCurrentDocument() {
             if (!currentDocId || !currentCollection) return;
-            if (confirm(`আপনি কি নিশ্চিত "${currentDocId}" ডকুমেন্টটি ফায়ারস্টোর থেকে চিরতরে মুছে ফেলতে চান?`)) {
+            if (confirm(`আপনি কি নিশ্চিত "${currentDocId}" ডকুমেন্টটি মুছে ফেলতে চান?`)) {
                 try {
                     await deleteDoc(doc(db, currentCollection, currentDocId));
-                    alert("ডকুমেন্ট সফলভাবে ডিলিট করা হয়েছে!");
                     selectCollection(currentCollection);
                 } catch(e) {
                     alert("ডকুমেন্ট ডিলিট করতে সমস্যা হয়েছে!");

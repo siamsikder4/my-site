@@ -52,11 +52,11 @@
         }
 
         /* মেট্রিক্স গ্রিড */
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
-        .stat-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .stat-box i { font-size: 18px; color: #047857; margin-bottom: 6px; }
-        .stat-num { font-size: 16px; font-weight: 800; color: #0f3e2e; }
-        .stat-label { font-size: 10.5px; color: #64748b; }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
+        .stat-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .stat-box i { font-size: 16px; color: #047857; margin-bottom: 4px; }
+        .stat-num { font-size: 15px; font-weight: 800; color: #0f3e2e; }
+        .stat-label { font-size: 10px; color: #64748b; }
 
         .section-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
@@ -220,12 +220,17 @@
             </div>
         </div>
 
-        <!-- মেট্রিক্স -->
+        <!-- মেট্রিক্স (ফলোয়ার্স ও ফলোয়িং কাউন্ট সহ) -->
         <div class="stat-grid">
             <div class="stat-box">
                 <i class="fa-solid fa-users"></i>
                 <div class="stat-num" id="totalUsersCount">০</div>
                 <div class="stat-label">মোট ইউজার</div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-user-group"></i>
+                <div class="stat-num" id="totalFollowsCount">০</div>
+                <div class="stat-label">মোট ফলো</div>
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-comments"></i>
@@ -244,12 +249,10 @@
             <h3><span><i class="fa-solid fa-headset" style="color: #0d9488; margin-right: 6px;"></i> ইউজার সাপোর্ট চ্যাট ও রিপ্লাই</span></h3>
             
             <div class="support-inbox-grid">
-                <!-- ইউজার চ্যাট থ্রেড সিলেকশন -->
                 <div class="support-threads-list" id="chatThreadsList">
                     <span style="font-size: 12px; color: #94a3b8;">লোড হচ্ছে...</span>
                 </div>
 
-                <!-- চ্যাট ভিউয়ার এবং রিপ্লাই উইন্ডো -->
                 <div class="admin-chat-viewer" id="adminChatViewer" style="display: none;">
                     <div class="chat-viewer-header">
                         <span id="activeChatTargetText">ইউজারের সাথে চ্যাট</span>
@@ -296,14 +299,13 @@
         <!-- ইউজার কন্ট্রোল ও অ্যাক্টিভিটি -->
         <div class="section-card">
             <h3>
-                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি</span>
+                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও ফলোয়ার্স</span>
                 <div class="user-mgmt-header">
                     <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:5px 11px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
                     <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:14px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
                 </div>
             </h3>
 
-            <!-- সার্চ ফিল্টার -->
             <div class="search-wrapper">
                 <div class="search-box-custom">
                     <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i>
@@ -311,7 +313,6 @@
                 </div>
             </div>
 
-            <!-- ইউজার ডিরেক্টরি কার্ডস -->
             <div class="user-cards-container" id="userCardsContainer">
                 <div style="text-align:center; color:#94a3b8; padding:30px;">
                     <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
@@ -481,7 +482,6 @@
             document.getElementById("activeChatTargetText").innerText = `${userName} এর মেসেজ`;
             document.getElementById("activeChatTargetEmail").innerText = userEmail;
 
-            // অ্যাডমিন দেখার পর আনরিড মার্ক সরানো
             setDoc(doc(db, "support_chats", userEmail), { unreadByAdmin: false }, { merge: true });
 
             if (unsubscribeActiveChat) unsubscribeActiveChat();
@@ -566,7 +566,7 @@
             } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
         });
 
-        // ================= ইউজার কন্ট্রোল =================
+        // ================= ইউজার কন্ট্রোল ও ফলোয়ার্স ডেটা =================
         async function fetchAllUsers() {
             const container = document.getElementById("userCardsContainer");
             container.innerHTML = `
@@ -575,26 +575,33 @@
                     <p style="font-size:12px; margin-top:6px;">ইউজার ডেটা লোড হচ্ছে...</p>
                 </div>`;
             try {
-                const snap = await getDocs(collection(db, "user_highlights"));
+                const snap = await getDocs(collection(db, "users"));
                 allUserData = [];
+                let totalFollows = 0;
 
                 snap.forEach(docSnap => {
                     const data = docSnap.data();
                     const isBanned = !!data.isBanned;
 
                     const finalEmail = data.email || docSnap.id;
-                    const finalName = data.displayName || data.name || (finalEmail ? finalEmail.split('@')[0] : "অজানা");
+                    const finalName = data.userName || data.name || (finalEmail ? finalEmail.split('@')[0] : "অজানা");
+                    const followers = data.followersCount || 0;
+                    const following = data.followingCount || 0;
+                    totalFollows += followers;
 
                     allUserData.push({
                         docId: docSnap.id,
                         email: finalEmail,
                         name: finalName,
                         isBanned: isBanned,
+                        followers: followers,
+                        following: following,
                         initial: finalName.trim().charAt(0).toUpperCase()
                     });
                 });
 
                 document.getElementById("totalUsersCount").innerText = allUserData.length;
+                document.getElementById("totalFollowsCount").innerText = totalFollows;
                 renderUserCards(allUserData);
             } catch(e) {
                 container.innerHTML = `<div style="text-align:center; color:#ef4444; padding:20px; font-size:13px; font-weight:700;">ইউজার ডেটা লোড করতে ব্যর্থ!</div>`;
@@ -621,7 +628,7 @@
                                 <span class="status-dot ${u.isBanned ? 'banned' : ''}" title="${u.isBanned ? 'Banned' : 'Active'}"></span>
                                 <span class="user-display-name">${u.name}</span>
                             </div>
-                            <span class="user-email-text">${u.email}</span>
+                            <span class="user-email-text">${u.email} &bull; <b style="color:#047857;">${u.followers}</b> Followers</span>
                         </div>
                     </div>
                     <div class="user-actions-cluster">
@@ -647,7 +654,7 @@
             const actionText = currentBanned ? "আনব্যান" : "ব্যান";
             if (confirm(`আপনি কি এই ইউজারকে ${actionText} করতে চান?`)) {
                 try {
-                    await setDoc(doc(db, "user_highlights", docId), {
+                    await setDoc(doc(db, "users", docId), {
                         isBanned: !currentBanned
                     }, { merge: true });
                     await fetchAllUsers();
@@ -665,7 +672,6 @@
 
         document.getElementById("refreshUsersBtn").addEventListener("click", fetchAllUsers);
 
-        // ইউজার ক্রিয়েট / এডিট মডাল
         const userModal = document.getElementById("userModal");
         document.getElementById("closeUserModalBtn").onclick = () => userModal.style.display = "none";
 
@@ -700,8 +706,8 @@
 
             try {
                 const targetDocId = docId || email;
-                await setDoc(doc(db, "user_highlights", targetDocId), {
-                    displayName: name || email.split("@")[0],
+                await setDoc(doc(db, "users", targetDocId), {
+                    userName: name || email.split("@")[0],
                     email: email
                 }, { merge: true });
 
@@ -719,7 +725,7 @@
         window.deleteUserRecord = async function(docId) {
             if (confirm("আপনি কি নিশ্চিত এই ইউজারের রেকর্ডটি মুছে ফেলতে চান?")) {
                 try {
-                    await deleteDoc(doc(db, "user_highlights", docId));
+                    await deleteDoc(doc(db, "users", docId));
                     await fetchAllUsers();
                 } catch(e) {
                     alert("মুছে ফেলতে সমস্যা হয়েছে।");

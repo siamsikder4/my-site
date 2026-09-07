@@ -184,6 +184,18 @@
             font-size: 12px;
         }
 
+        /* অ্যাডমিন বাটন স্পেশাল স্টাইল */
+        .admin-item {
+            background: #f0fdf4;
+        }
+        .admin-item .menu-left i {
+            color: #047857;
+        }
+        .admin-item span {
+            color: #065f46;
+            font-weight: 700;
+        }
+
         /* লগআউট বাটন */
         .logout-btn {
             width: 100%;
@@ -278,6 +290,15 @@
 
         <!-- অ্যাকশন মেনু -->
         <div class="menu-list">
+            <!-- অ্যাডমিন অপশন (ডিফল্টভাবে লুকানো) -->
+            <a href="admin.html" class="menu-item admin-item" id="adminOption" style="display: none;">
+                <div class="menu-left">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>অ্যাডমিন কন্ট্রোল প্যানেল</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-right" style="color: #10b981;"></i>
+            </a>
+
             <a href="leaderboard.html" class="menu-item">
                 <div class="menu-left">
                     <i class="fa-solid fa-trophy" style="color: #d97706;"></i>
@@ -348,11 +369,14 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
+
         const avatarInitialEl = document.getElementById("avatarInitial");
         const nameEl = document.getElementById("displayUserName");
         const emailEl = document.getElementById("displayUserEmail");
         const hlCountEl = document.getElementById("hlWordCount");
         const logoutBtn = document.getElementById("logoutBtn");
+        const adminOption = document.getElementById("adminOption");
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -362,6 +386,13 @@
 
                 const firstChar = displayName.trim().charAt(0).toUpperCase();
                 avatarInitialEl.innerText = firstChar;
+
+                // শুধুমাত্র নির্ধারিত ইমেইল হলে বাটন প্রদর্শন করবে
+                if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    adminOption.style.display = "flex";
+                } else {
+                    adminOption.style.display = "none";
+                }
 
                 try {
                     const docRef = doc(db, "user_highlights", user.email);

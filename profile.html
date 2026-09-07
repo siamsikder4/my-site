@@ -77,7 +77,6 @@
             margin-bottom: 20px;
         }
 
-        /* নামের প্রথম অক্ষরের লোগো */
         .avatar-circle {
             width: 76px;
             height: 76px;
@@ -109,7 +108,6 @@
             margin-bottom: 16px;
         }
 
-        /* মিনি স্ট্যাটাস গ্রিড */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -156,6 +154,7 @@
             font-weight: 600;
             border-bottom: 1px solid #f1f5f9;
             transition: background 0.15s;
+            cursor: pointer;
         }
 
         .menu-item:last-child {
@@ -184,7 +183,6 @@
             font-size: 12px;
         }
 
-        /* অ্যাডমিন বাটন স্পেশাল স্টাইল */
         .admin-item {
             background: #f0fdf4;
         }
@@ -194,6 +192,13 @@
         .admin-item span {
             color: #065f46;
             font-weight: 700;
+        }
+
+        .support-item {
+            background: #f0fdfa;
+        }
+        .support-item .menu-left i {
+            color: #0d9488;
         }
 
         /* লগআউট বাটন */
@@ -254,6 +259,165 @@
         .nav-item i {
             font-size: 19px;
         }
+
+        /* সাপোর্ট চ্যাট মডাল UI */
+        .chat-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(3px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 14px;
+        }
+
+        .chat-box-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            height: 520px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .chat-header {
+            background: #0f3e2e;
+            color: #ffffff;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #10b981;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .chat-header h4 {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .chat-header p {
+            font-size: 11px;
+            color: #a7f3d0;
+        }
+
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chat-messages-area {
+            flex: 1;
+            background: #f8fafc;
+            padding: 14px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-msg {
+            max-width: 78%;
+            padding: 9px 13px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.4;
+            word-break: break-word;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: #047857;
+            color: #ffffff;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-msg.admin {
+            align-self: flex-start;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-time {
+            font-size: 9.5px;
+            opacity: 0.7;
+            align-self: flex-end;
+            margin-top: 3px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input-field {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 24px;
+            font-size: 13px;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        .chat-input-field:focus {
+            border-color: #047857;
+            background: #ffffff;
+        }
+
+        .chat-send-btn {
+            background: #047857;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .chat-send-btn:active {
+            transform: scale(0.92);
+        }
     </style>
 </head>
 <body>
@@ -299,6 +463,15 @@
                 <i class="fa-solid fa-chevron-right menu-right" style="color: #10b981;"></i>
             </a>
 
+            <!-- সরাসরি অ্যাডমিন চ্যাট ও সাপোর্ট বাটন -->
+            <div class="menu-item support-item" id="openChatBtn">
+                <div class="menu-left">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>সাপোর্ট ও অ্যাডমিন চ্যাট</span>
+                </div>
+                <i class="fa-solid fa-chevron-right menu-right" style="color: #0d9488;"></i>
+            </div>
+
             <a href="leaderboard.html" class="menu-item">
                 <div class="menu-left">
                     <i class="fa-solid fa-trophy" style="color: #d97706;"></i>
@@ -329,6 +502,37 @@
 
     </main>
 
+    <!-- অ্যাডমিন সাপোর্ট চ্যাট মডাল -->
+    <div class="chat-modal-overlay" id="chatModalOverlay">
+        <div class="chat-box-card">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-header-avatar">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h4>অ্যাডমিন সাপোর্ট</h4>
+                        <p>যেকোনো প্রশ্ন বা সমস্যা লিখুন</p>
+                    </div>
+                </div>
+                <button class="chat-close-btn" id="closeChatBtn">&times;</button>
+            </div>
+
+            <div class="chat-messages-area" id="chatMessagesArea">
+                <div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">
+                    কথোপকথন লোড হচ্ছে...
+                </div>
+            </div>
+
+            <div class="chat-input-row">
+                <input type="text" id="chatInputMessage" class="chat-input-field" placeholder="এখানে মেসেজ লিখুন...">
+                <button class="chat-send-btn" id="chatSendBtn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
@@ -349,11 +553,11 @@
         </a>
     </nav>
 
-    <!-- Firebase Auth ও ডেটা স্ক্রিপ্ট -->
+    <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, collection, addDoc, onSnapshot, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -378,8 +582,20 @@
         const logoutBtn = document.getElementById("logoutBtn");
         const adminOption = document.getElementById("adminOption");
 
+        // চ্যাট ইলিমেন্টস
+        const openChatBtn = document.getElementById("openChatBtn");
+        const closeChatBtn = document.getElementById("closeChatBtn");
+        const chatModalOverlay = document.getElementById("chatModalOverlay");
+        const chatMessagesArea = document.getElementById("chatMessagesArea");
+        const chatInputMessage = document.getElementById("chatInputMessage");
+        const chatSendBtn = document.getElementById("chatSendBtn");
+
+        let currentUser = null;
+        let unsubscribeChat = null;
+
         onAuthStateChanged(auth, async (user) => {
             if (user) {
+                currentUser = user;
                 const displayName = user.displayName || user.email.split("@")[0];
                 emailEl.innerText = user.email;
                 nameEl.innerText = displayName;
@@ -387,7 +603,6 @@
                 const firstChar = displayName.trim().charAt(0).toUpperCase();
                 avatarInitialEl.innerText = firstChar;
 
-                // শুধুমাত্র নির্ধারিত ইমেইল হলে বাটন প্রদর্শন করবে
                 if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     adminOption.style.display = "flex";
                 } else {
@@ -410,6 +625,86 @@
             } else {
                 window.location.href = "login.html";
             }
+        });
+
+        // চ্যাট মডাল হ্যান্ডলিং
+        openChatBtn.addEventListener("click", () => {
+            if (!currentUser) return;
+            chatModalOverlay.style.display = "flex";
+            loadChatMessages(currentUser.email);
+        });
+
+        closeChatBtn.addEventListener("click", () => {
+            chatModalOverlay.style.display = "none";
+            if (unsubscribeChat) unsubscribeChat();
+        });
+
+        function loadChatMessages(userEmail) {
+            const messagesRef = collection(db, "support_chats", userEmail, "messages");
+            const q = query(messagesRef, orderBy("timestamp", "asc"));
+
+            unsubscribeChat = onSnapshot(q, (snapshot) => {
+                chatMessagesArea.innerHTML = "";
+                if (snapshot.empty) {
+                    chatMessagesArea.innerHTML = `
+                        <div style="text-align: center; color: #94a3b8; padding: 30px; font-size: 13px;">
+                            কোনো বার্তা নেই। আপনার সমস্যা বা প্রশ্ন লিখে পাঠান!
+                        </div>`;
+                    return;
+                }
+
+                snapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const isUser = data.sender === "user";
+                    const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "";
+
+                    const msgDiv = document.createElement("div");
+                    msgDiv.className = `chat-msg ${isUser ? 'user' : 'admin'}`;
+                    msgDiv.innerHTML = `
+                        <div>${data.text}</div>
+                        <div class="msg-time">${timeStr}</div>
+                    `;
+                    chatMessagesArea.appendChild(msgDiv);
+                });
+
+                chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+            });
+        }
+
+        async function sendMessage() {
+            const text = chatInputMessage.value.trim();
+            if (!text || !currentUser) return;
+
+            chatInputMessage.value = "";
+
+            try {
+                const userEmail = currentUser.email;
+                const displayName = currentUser.displayName || userEmail.split("@")[0];
+
+                // চ্যাট লিস্টে ইউজারের মেটাডাটা আপডেট
+                await setDoc(doc(db, "support_chats", userEmail), {
+                    userEmail: userEmail,
+                    userName: displayName,
+                    lastMessage: text,
+                    lastUpdated: Date.now(),
+                    unreadByAdmin: true
+                }, { merge: true });
+
+                // মেসেজ যোগ করা
+                await addDoc(collection(db, "support_chats", userEmail, "messages"), {
+                    sender: "user",
+                    text: text,
+                    timestamp: Date.now()
+                });
+            } catch (error) {
+                alert("মেসেজ পাঠাতে সমস্যা হয়েছে!");
+                console.error(error);
+            }
+        }
+
+        chatSendBtn.addEventListener("click", sendMessage);
+        chatInputMessage.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
         });
 
         logoutBtn.addEventListener("click", async () => {

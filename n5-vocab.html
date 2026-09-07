@@ -1858,7 +1858,7 @@
             }
         }
 
-        function openLesson(num) {
+        function openLesson(num, pushToHistory = true) {
             if (!lessons[num]) {
                 alert("এই লেসনের ডেটা খুব শীঘ্রই যুক্ত করা হবে!");
                 return;
@@ -1880,6 +1880,10 @@
             renderTable();
             updateJumpNavButtons();
             window.scrollTo({ top: 0, behavior: "smooth" });
+
+            if (pushToHistory) {
+                history.pushState({ view: "detail", lesson: num }, "");
+            }
         }
 
         function goToPrevLesson() {
@@ -1894,15 +1898,28 @@
             }
         }
 
-        function backToGrid() {
+        function backToGrid(fromHistory = false) {
             if (document.getElementById("lessonDetailView").style.display === "block") {
                 document.getElementById("lessonDetailView").style.display = "none";
                 document.getElementById("lessonGridView").style.display = "block";
                 window.scrollTo({ top: 0, behavior: "smooth" });
+
+                if (!fromHistory && history.state && history.state.view === "detail") {
+                    history.back();
+                }
             } else {
                 window.location.href = "index.html";
             }
         }
+
+        // ব্রাউজার ও ফোনের ব্যাক বাটন হ্যান্ডলিং
+        window.addEventListener("popstate", (event) => {
+            if (event.state && event.state.view === "detail") {
+                openLesson(event.state.lesson, false);
+            } else {
+                backToGrid(true);
+            }
+        });
 
         function fillCardData() {
             if (currentWords.length === 0) return;
@@ -2019,7 +2036,7 @@
         }
 
         // ইভেন্ট বাইন্ডিং
-        document.getElementById("btnBackToGrid").addEventListener("click", backToGrid);
+        document.getElementById("btnBackToGrid").addEventListener("click", () => backToGrid(false));
         document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
         document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);
         document.getElementById("flashcardContainer").addEventListener("click", flipCard);
@@ -2039,6 +2056,9 @@
                 speakCurrent();
             });
         });
+
+        // ইনিশিয়াল হিস্ট্রি স্টেট সেট
+        history.replaceState({ view: "grid" }, "");
 
         renderLessonGrid();
     </script>

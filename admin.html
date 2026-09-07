@@ -50,6 +50,55 @@
         .section-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 
+        /* সাপোর্ট ডেস্ক চ্যাট স্টাইল */
+        .support-inbox-grid {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .support-threads-list {
+            display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;
+        }
+        .thread-chip {
+            padding: 8px 12px; border-radius: 12px; background: #f8fafc; border: 1.5px solid #e2e8f0;
+            font-size: 12px; font-weight: 700; color: #334155; cursor: pointer; white-space: nowrap;
+            display: flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .thread-chip.active {
+            background: #e6f4ea; border-color: #047857; color: #0f3e2e;
+        }
+        .thread-chip .badge-unread {
+            width: 7px; height: 7px; background: #ef4444; border-radius: 50%;
+        }
+
+        .admin-chat-viewer {
+            border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff;
+        }
+        .chat-viewer-header {
+            background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0;
+            font-size: 12.5px; font-weight: 700; color: #0f3e2e; display: flex; justify-content: space-between;
+        }
+        .admin-messages-box {
+            height: 280px; overflow-y: auto; padding: 14px; background: #f8fafc; display: flex; flex-direction: column; gap: 8px;
+        }
+        .admin-msg-bubble {
+            max-width: 80%; padding: 8px 12px; border-radius: 12px; font-size: 12.5px; line-height: 1.4; word-break: break-word;
+        }
+        .admin-msg-bubble.user {
+            align-self: flex-start; background: #ffffff; border: 1px solid #e2e8f0; color: #1e293b;
+        }
+        .admin-msg-bubble.admin {
+            align-self: flex-end; background: #047857; color: #ffffff;
+        }
+        .admin-reply-box {
+            display: flex; gap: 8px; padding: 10px 12px; background: #ffffff; border-top: 1px solid #e2e8f0;
+        }
+        .admin-reply-input {
+            flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none;
+        }
+        .admin-reply-input:focus { border-color: #047857; }
+        .admin-reply-btn {
+            background: #047857; color: #ffffff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer;
+        }
+
         /* সুইচ ও টগল কন্ট্রোল (মডিউল ৪) */
         .switch-row {
             display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
@@ -98,13 +147,9 @@
         .insight-data h6 { font-size: 10.5px; color: #64748b; font-weight: 600; margin-bottom: 1px; }
         .insight-data p { font-size: 13px; font-weight: 800; color: #0f3e2e; }
 
-        /* ================= ইউজার কন্ট্রোল ও অ্যাক্টিভিটি আপগ্রেডেড UI (মডিউল ২) ================= */
-        .user-mgmt-header {
-            display: flex; gap: 8px; align-items: center;
-        }
-        .search-wrapper {
-            position: relative; margin-bottom: 12px;
-        }
+        /* ইউজার কন্ট্রোল */
+        .user-mgmt-header { display: flex; gap: 8px; align-items: center; }
+        .search-wrapper { position: relative; margin-bottom: 12px; }
         .search-box-custom {
             display: flex; align-items: center; background: #f8fafc; border: 1.5px solid #e2e8f0;
             border-radius: 12px; padding: 10px 14px; gap: 10px; transition: all 0.2s;
@@ -112,77 +157,37 @@
         .search-box-custom:focus-within {
             border-color: #047857; background: #ffffff; box-shadow: 0 2px 8px rgba(4, 120, 87, 0.08);
         }
-        .search-box-custom input {
-            border: none; background: transparent; outline: none; width: 100%; font-size: 13.5px; color: #1e293b;
-        }
+        .search-box-custom input { border: none; background: transparent; outline: none; width: 100%; font-size: 13.5px; color: #1e293b; }
 
-        .user-cards-container {
-            display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 2px;
-        }
-
+        .user-cards-container { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
         .user-entry-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 14px;
             display: flex; align-items: center; justify-content: space-between; gap: 12px;
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
-        .user-entry-card:hover {
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .user-entry-card.banned {
-            background: #fffafa; border-color: #fecdd3; border-left: 4px solid #e11d48;
-        }
-
-        .user-main-info {
-            display: flex; align-items: center; gap: 12px; min-width: 0;
-        }
-
+        .user-entry-card:hover { box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04); }
+        .user-entry-card.banned { background: #fffafa; border-color: #fecdd3; border-left: 4px solid #e11d48; }
+        .user-main-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
         .user-avatar-tag {
             width: 40px; height: 40px; border-radius: 12px;
             background: linear-gradient(135deg, #e6f4ea 0%, #cbf0dd 100%);
             color: #047857; font-weight: 800; font-size: 16px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; text-transform: uppercase;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-transform: uppercase;
         }
+        .user-entry-card.banned .user-avatar-tag { background: #fee2e2; color: #b91c1c; }
+        .user-details { display: flex; flex-direction: column; min-width: 0; }
+        .user-name-line { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+        .user-display-name { font-size: 14px; font-weight: 800; color: #0f3e2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; flex-shrink: 0; }
+        .status-dot.banned { background: #ef4444; }
+        .user-email-text { font-size: 11.5px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .user-entry-card.banned .user-avatar-tag {
-            background: #fee2e2; color: #b91c1c;
-        }
-
-        .user-details {
-            display: flex; flex-direction: column; min-width: 0;
-        }
-
-        .user-name-line {
-            display: flex; align-items: center; gap: 6px; margin-bottom: 2px;
-        }
-        .user-display-name {
-            font-size: 14px; font-weight: 800; color: #0f3e2e;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .status-dot {
-            width: 7px; height: 7px; border-radius: 50%; background: #10b981; flex-shrink: 0;
-        }
-        .status-dot.banned {
-            background: #ef4444;
-        }
-
-        .user-email-text {
-            font-size: 11.5px; color: #64748b;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-
-        .user-actions-cluster {
-            display: flex; align-items: center; gap: 6px; flex-shrink: 0;
-        }
-
+        .user-actions-cluster { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
         .user-circle-action {
-            width: 32px; height: 32px; border-radius: 10px; border: none;
-            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 10px; border: none; display: flex; align-items: center; justify-content: center;
             font-size: 13px; cursor: pointer; transition: transform 0.15s;
         }
         .user-circle-action:active { transform: scale(0.92); }
-
         .btn-act-msg { background: #e0f2fe; color: #0284c7; }
         .btn-act-ban { background: #fef3c7; color: #b45309; }
         .btn-act-unban { background: #dcfce7; color: #15803d; }
@@ -253,14 +258,43 @@
                 <div class="stat-label">মোট ইউজার</div>
             </div>
             <div class="stat-box">
-                <i class="fa-solid fa-user-check"></i>
-                <div class="stat-num" id="activeUsersCount">০</div>
-                <div class="stat-label">সক্রিয় ইউজার</div>
+                <i class="fa-solid fa-comments"></i>
+                <div class="stat-num" id="totalChatsCount">০</div>
+                <div class="stat-label">সাপোর্ট চ্যাট</div>
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
                 <div class="stat-num" id="totalNotifsCount">০</div>
                 <div class="stat-label">নোটিফিকেশন</div>
+            </div>
+        </div>
+
+        <!-- সাপোর্ট চ্যাট ও হেল্পডেস্ক সেকশন (লাইভ রিপ্লাই) -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-headset" style="color: #0d9488; margin-right: 6px;"></i> ইউজার সাপোর্ট চ্যাট ও রিপ্লাই</span></h3>
+            
+            <div class="support-inbox-grid">
+                <!-- ইউজার চ্যাট থ্রেড সিলেকশন -->
+                <div class="support-threads-list" id="chatThreadsList">
+                    <span style="font-size: 12px; color: #94a3b8;">লোড হচ্ছে...</span>
+                </div>
+
+                <!-- চ্যাট ভিউয়ার এবং রিপ্লাই উইন্ডো -->
+                <div class="admin-chat-viewer" id="adminChatViewer" style="display: none;">
+                    <div class="chat-viewer-header">
+                        <span id="activeChatTargetText">ইউজারের সাথে চ্যাট</span>
+                        <span id="activeChatTargetEmail" style="font-size: 11px; color: #64748b;"></span>
+                    </div>
+
+                    <div class="admin-messages-box" id="adminMessagesBox">
+                        <!-- মেসেজসমূহ আসবে -->
+                    </div>
+
+                    <div class="admin-reply-box">
+                        <input type="text" id="adminReplyInput" class="admin-reply-input" placeholder="অ্যাডমিন হিসেবে রিপ্লাই লিখুন...">
+                        <button class="admin-reply-btn" id="adminSendReplyBtn"><i class="fa-solid fa-paper-plane"></i> পাঠান</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -298,7 +332,6 @@
                 <span class="analytics-pill-header"><i class="fa-solid fa-circle" style="font-size: 7px; color: #10b981; margin-right: 4px;"></i>রিয়েলটাইম ইনসাইট</span>
             </h3>
 
-            <!-- সার্কুলার রিং গেজ চার্ট -->
             <div class="metrics-circular-grid">
                 <div class="metric-circle-card">
                     <svg class="gauge-svg" viewBox="0 0 36 36">
@@ -328,7 +361,6 @@
                 </div>
             </div>
 
-            <!-- প্রগ্রেস বার ট্র্যাকার -->
             <div class="analytics-bar-box">
                 <div class="analytics-item">
                     <div class="analytics-meta">
@@ -351,7 +383,6 @@
                 </div>
             </div>
 
-            <!-- কুইক ট্র্যাকার ইনসাইটস -->
             <div class="analytics-insights-grid">
                 <div class="insight-card">
                     <div class="insight-icon-box" style="background:#fef3c7; color:#d97706;">
@@ -375,7 +406,7 @@
             </div>
         </div>
 
-        <!-- ================= মডিউল ২: ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (নতুন আপগ্রেডেড কার্ড UI) ================= -->
+        <!-- মডিউল ২: ইউজার কন্ট্রোল ও অ্যাক্টিভিটি -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (২)</span>
@@ -385,7 +416,6 @@
                 </div>
             </h3>
 
-            <!-- সার্চ ফিল্টার -->
             <div class="search-wrapper">
                 <div class="search-box-custom">
                     <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i>
@@ -393,7 +423,6 @@
                 </div>
             </div>
 
-            <!-- ইউজার ডিরেক্টরি কার্ডস -->
             <div class="user-cards-container" id="userCardsContainer">
                 <div style="text-align:center; color:#94a3b8; padding:30px;">
                     <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
@@ -489,7 +518,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -508,6 +537,8 @@
 
         let allUserData = [];
         let allNotifications = [];
+        let selectedChatUserEmail = null;
+        let unsubscribeActiveChat = null;
 
         onAuthStateChanged(auth, async (user) => {
             if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
@@ -517,13 +548,100 @@
                 await loadSiteSettings();
                 await fetchAllUsers();
                 await fetchNotifications();
+                initSupportChatList();
             } else {
                 alert("অনুমতি নেই! এই পেজে শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
                 window.location.href = "profile.html";
             }
         });
 
-        // ================= মডিউল ৪: সাইট সেটিংস ও সুইচ হ্যান্ডলার =================
+        // ================= সাপোর্ট চ্যাট ও রিপ্লাই সিস্টেম =================
+        function initSupportChatList() {
+            const chatThreadsList = document.getElementById("chatThreadsList");
+            const chatsColRef = collection(db, "support_chats");
+
+            onSnapshot(chatsColRef, (snapshot) => {
+                chatThreadsList.innerHTML = "";
+                document.getElementById("totalChatsCount").innerText = snapshot.size;
+
+                if (snapshot.empty) {
+                    chatThreadsList.innerHTML = `<span style="font-size: 12px; color: #94a3b8; padding: 4px;">কোনো সাপোর্ট বার্তা নেই</span>`;
+                    return;
+                }
+
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const chip = document.createElement("div");
+                    chip.className = `thread-chip ${selectedChatUserEmail === data.userEmail ? 'active' : ''}`;
+                    chip.innerHTML = `
+                        ${data.unreadByAdmin ? '<span class="badge-unread"></span>' : ''}
+                        <span>${data.userName || data.userEmail}</span>
+                    `;
+                    chip.onclick = () => openUserChat(data.userEmail, data.userName || data.userEmail);
+                    chatThreadsList.appendChild(chip);
+                });
+            });
+        }
+
+        function openUserChat(userEmail, userName) {
+            selectedChatUserEmail = userEmail;
+            document.querySelectorAll(".thread-chip").forEach(el => el.classList.remove("active"));
+            
+            const viewer = document.getElementById("adminChatViewer");
+            viewer.style.display = "block";
+            document.getElementById("activeChatTargetText").innerText = `${userName} এর মেসেজ`;
+            document.getElementById("activeChatTargetEmail").innerText = userEmail;
+
+            // অ্যাডমিন দেখার পর রিড হিসেবে মার্ক করা
+            setDoc(doc(db, "support_chats", userEmail), { unreadByAdmin: false }, { merge: true });
+
+            if (unsubscribeActiveChat) unsubscribeActiveChat();
+
+            const messagesRef = collection(db, "support_chats", userEmail, "messages");
+            const q = query(messagesRef, orderBy("timestamp", "asc"));
+            const box = document.getElementById("adminMessagesBox");
+
+            unsubscribeActiveChat = onSnapshot(q, (snapshot) => {
+                box.innerHTML = "";
+                snapshot.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const div = document.createElement("div");
+                    div.className = `admin-msg-bubble ${data.sender === 'admin' ? 'admin' : 'user'}`;
+                    div.innerText = data.text;
+                    box.appendChild(div);
+                });
+                box.scrollTop = box.scrollHeight;
+            });
+        }
+
+        async function sendAdminReply() {
+            const input = document.getElementById("adminReplyInput");
+            const text = input.value.trim();
+            if (!text || !selectedChatUserEmail) return;
+
+            input.value = "";
+            try {
+                await addDoc(collection(db, "support_chats", selectedChatUserEmail, "messages"), {
+                    sender: "admin",
+                    text: text,
+                    timestamp: Date.now()
+                });
+
+                await setDoc(doc(db, "support_chats", selectedChatUserEmail), {
+                    lastMessage: text,
+                    lastUpdated: Date.now()
+                }, { merge: true });
+            } catch(e) {
+                alert("রিপ্লাই পাঠাতে ব্যর্থ হয়েছে!");
+            }
+        }
+
+        document.getElementById("adminSendReplyBtn").addEventListener("click", sendAdminReply);
+        document.getElementById("adminReplyInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendAdminReply();
+        });
+
+        // ================= সাইট সেটিংস ও কন্ট্রোল =================
         const toggleMaintenance = document.getElementById("toggleMaintenance");
         const toggleAdSense = document.getElementById("toggleAdSense");
 
@@ -559,7 +677,7 @@
             } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
         });
 
-        // ================= মডিউল ২: ইউজার কন্ট্রোল, ব্যান ও আপগ্রেডেড কার্ড রেন্ডারিং =================
+        // ================= ইউজার কন্ট্রোল =================
         async function fetchAllUsers() {
             const container = document.getElementById("userCardsContainer");
             container.innerHTML = `
@@ -570,12 +688,10 @@
             try {
                 const snap = await getDocs(collection(db, "user_highlights"));
                 allUserData = [];
-                let activeCount = 0;
 
                 snap.forEach(docSnap => {
                     const data = docSnap.data();
                     const isBanned = !!data.isBanned;
-                    if (!isBanned) activeCount++;
 
                     const finalEmail = data.email || docSnap.id;
                     const finalName = data.displayName || data.name || (finalEmail ? finalEmail.split('@')[0] : "অজানা");
@@ -590,11 +706,9 @@
                 });
 
                 document.getElementById("totalUsersCount").innerText = allUserData.length;
-                document.getElementById("activeUsersCount").innerText = activeCount;
                 renderUserCards(allUserData);
             } catch(e) {
                 container.innerHTML = `<div style="text-align:center; color:#ef4444; padding:20px; font-size:13px; font-weight:700;">ইউজার ডেটা লোড করতে ব্যর্থ!</div>`;
-                console.error(e);
             }
         }
 

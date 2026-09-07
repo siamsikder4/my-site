@@ -6,11 +6,13 @@
     <title>N5 কাঞ্জি লেসন ও টেস্ট - KOTOBA</title>
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- আসল জাপানি ব্রাশ ও ক্যালিগ্রাফি ফন্ট: Yuji Boku, Klee One, Noto Serif JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&family=Noto+Serif+JP:wght@600;900&family=Yuji+Boku&display=swap" rel="stylesheet">
     
+    <!-- AnimCJK কাঞ্জি স্ট্রোক অ্যানিমেশন ইঞ্জিন -->
+    <script src="https://cdn.jsdelivr.net/npm/animcjk@2.0.7/dist/animcjk.min.js"></script>
+
     <style>
         :root {
             --primary-dark: #103b2f;
@@ -179,7 +181,6 @@
             color: var(--primary-dark);
         }
 
-        /* কার্ড স্টাইল আইটেম */
         .kanji-item {
             margin-bottom: 10px;
             border-radius: 12px;
@@ -211,7 +212,6 @@
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 12px;
-            letter-spacing: 0.5px;
         }
 
         .kanji-header .arrow-icon {
@@ -233,25 +233,58 @@
             display: block;
         }
 
-        /* কাঞ্জি ব্রাশ ফন্ট ডিসপ্লে */
-        .big-kanji-wrap {
-            text-align: center;
-            margin: 10px 0 16px;
+        /* অ্যানিমেশন গ্রিড ফ্রেম */
+        .kanji-anim-stage {
+            width: 170px;
+            height: 170px;
+            margin: 4px auto 14px;
+            position: relative;
+            background: #fafafa;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .big-kanji-display {
+        /* জাপানিজ ক্যালিগ্রাফি নির্দেশিকা লাইন */
+        .kanji-anim-stage::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            border-left: 1px dashed #e2e8f0;
+            pointer-events: none;
+        }
+
+        .kanji-anim-stage::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            border-top: 1px dashed #e2e8f0;
+            pointer-events: none;
+        }
+
+        .kanji-anim-box svg {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .static-kanji-fallback {
             font-family: 'Yuji Boku', 'Noto Serif JP', serif;
-            font-size: 92px;
+            font-size: 96px;
             color: #12372a;
             line-height: 1;
-            display: inline-block;
-            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
             user-select: none;
-        }
-
-        .big-kanji-display.pulsing {
-            transform: scale(1.15);
-            color: var(--primary-green);
+            z-index: 2;
         }
 
         /* অ্যাকশন বাটনসমূহ */
@@ -259,13 +292,13 @@
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .action-btn {
             border: 1px solid #cbd5e1;
             background: #ffffff;
-            padding: 8px 18px;
+            padding: 7px 18px;
             border-radius: 25px;
             font-size: 13px;
             font-weight: 700;
@@ -491,14 +524,14 @@
                 KOTOBA <span class="level-pill">N5 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">১২০টি কাঞ্জি</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">অ্যানিমেটেড কাঞ্জি</div>
     </header>
 
     <main class="container">
 
         <!-- ১. লেসন গ্রিড ভিউ -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">কাঞ্জি শিখুন • ড্রয়িং অনুশীলন ও ব্লাইন্ড টেস্ট</div>
+            <div class="subtitle-bar">কাঞ্জি শিখুন • স্ট্রোক অর্ডার অ্যানিমেশন ও টেস্ট</div>
             <div class="lesson-grid">
                 
                 <div class="lesson-card" onclick="openLesson(1)">
@@ -707,6 +740,8 @@
             ]
         };
 
+        const animInstances = {};
+
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
@@ -732,11 +767,15 @@
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                     <div class="kanji-body">
-                        <div class="big-kanji-wrap">
-                            <div class="big-kanji-display" id="char_${index}">${k.char}</div>
+                        <!-- অ্যানিমেটেড কাঞ্জি কন্টেইনার -->
+                        <div class="kanji-anim-stage">
+                            <div class="kanji-anim-box" id="animBox_${index}">
+                                <div class="static-kanji-fallback">${k.char}</div>
+                            </div>
                         </div>
+
                         <div class="action-btns">
-                            <button class="action-btn play" onclick="playAudio('${k.char}', ${index})">
+                            <button class="action-btn play" onclick="playKanjiAnimation('${k.char}', ${index})">
                                 <i class="fa-solid fa-play"></i> Play
                             </button>
                             <button class="action-btn practice" onclick="openBlindModal('${k.char}', false)">
@@ -776,18 +815,37 @@
             }
         }
 
-        function playAudio(char, idx) {
-            const el = document.getElementById(`char_${idx}`);
-            if (el) {
-                el.classList.add("pulsing");
-                setTimeout(() => el.classList.remove("pulsing"), 400);
-            }
+        // ================= Play অ্যানিমেশন লজিক (SVG Stroke Order) =================
+        function playKanjiAnimation(char, index) {
+            const targetEl = document.getElementById(`animBox_${index}`);
+            
+            // ১. অডিও উচ্চারণ চালানো
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(char);
                 u.lang = 'ja-JP';
-                u.rate = 0.85;
+                u.rate = 0.8;
                 window.speechSynthesis.speak(u);
+            }
+
+            // ২. AnimCJK দিয়ে স্ট্রোক বাই স্ট্রোক অ্যানিমেশন
+            if (window.AnimCJK) {
+                targetEl.innerHTML = "";
+                const ac = new AnimCJK({
+                    char: char,
+                    target: targetEl,
+                    type: "stroke",
+                    strokeColor: "#103b2f",
+                    strokeWidth: 42,
+                    showNumbers: true,
+                    numberColor: "#94a3b8",
+                    autoplay: true,
+                    speed: 1.1
+                });
+                animInstances[index] = ac;
+            } else {
+                // অফলাইন বা ব্রাউজার ফলব্যাক অ্যানিমেশন
+                targetEl.innerHTML = `<div class="static-kanji-fallback" style="animation: popUp 0.3s ease;">${char}</div>`;
             }
         }
 

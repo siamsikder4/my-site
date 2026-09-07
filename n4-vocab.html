@@ -582,6 +582,70 @@
             color: #ef4444;
         }
 
+        /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন */
+        .lesson-jump-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding: 16px 8px;
+            position: relative;
+        }
+
+        .lesson-jump-nav::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background-color: #e2e8f0;
+            transform: translateX(-50%);
+        }
+
+        .jump-btn {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        .jump-btn.prev-btn {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .jump-btn.next-btn {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .jump-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #144336;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .jump-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0e3b2c;
+            line-height: 1.3;
+        }
+
+        .jump-btn:disabled,
+        .jump-btn.disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -729,6 +793,18 @@
                 </table>
             </div>
 
+            <!-- প্রিভিয়াস ও নেক্সট লেসন বাটন -->
+            <div class="lesson-jump-nav">
+                <button class="jump-btn prev-btn" id="btnPrevLesson">
+                    <span class="jump-label">PREVIOUS</span>
+                    <span class="jump-title" id="prevLessonTitle">(শব্দার্থ) লেসন ২৫</span>
+                </button>
+                <button class="jump-btn next-btn" id="btnNextLesson">
+                    <span class="jump-label">NEXT</span>
+                    <span class="jump-title" id="nextLessonTitle">(শব্দার্থ) লেসন ২৭</span>
+                </button>
+            </div>
+
         </div>
 
     </main>
@@ -780,7 +856,7 @@
                     { kana: "みます II", ro: "mimasu", bn: "দেখা, চেক করা" },
                     { kana: "さがします I", ro: "sagashimasu", bn: "খোঁজা, অনুসন্ধান করা" },
                     { kana: "おくれます II [じかんに~]", ro: "okuremasu [jikan ni]", bn: "দেরি করা [সময়]" },
-                    { kana: "まにあいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
+                    { kana: "まニアいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
                     { kana: "やります I", ro: "yarimasu", bn: "করা" },
                     { kana: "ひろいます I", ro: "hiroimasu", bn: "তুলে নেওয়া" },
                     { kana: "れんらくします III", ro: "renrakushimasu", bn: "যোগাযোগ করা" },
@@ -1008,7 +1084,7 @@
                     { kana: "たしか", ro: "tashika", bn: "অবশ্যই ঠিক" },
                     { kana: "ああよかった", ro: "aa yokatta", bn: "আহ, এটা ভালো ছিল / শুকরিয়া" },
                     { kana: "しんじゅく", ro: "shinjuku", bn: "শিনজুকু স্টেশন" },
-                    { kana: "じしん", ro: "jishin", bn: "ভূমিকম্প" },
+                    { kana: "じしん", ro: "じしん", bn: "ভূমিকম্প" },
                     { kana: "かべ", ro: "kabe", bn: "দেয়াল" },
                     { kana: "はり", ro: "hari", bn: "ঘড়ির কাঁটা" },
                     { kana: "さします I", ro: "sashimasu", bn: "বিন্দু, কেন্দ্রবিন্দু" },
@@ -1100,7 +1176,7 @@
         let currentIndex = 0;
         let isTableOpen = false;
 
-        // লোডার রিমুভ (অত্যন্ত নিরাপদ ও নন-ব্লকিং)
+        // লোডার রিমুভ (নন-ব্লকিং)
         window.addEventListener("load", () => {
             const loader = document.getElementById("pageLoader");
             if (loader) {
@@ -1222,6 +1298,34 @@
             }
         }
 
+        function updateJumpNavButtons() {
+            const prevBtn = document.getElementById("btnPrevLesson");
+            const nextBtn = document.getElementById("btnNextLesson");
+            const prevTitle = document.getElementById("prevLessonTitle");
+            const nextTitle = document.getElementById("nextLessonTitle");
+
+            const prevLessonNum = currentLesson - 1;
+            const nextLessonNum = currentLesson + 1;
+
+            if (prevLessonNum < 26) {
+                prevBtn.classList.add("disabled");
+                prevTitle.innerText = "শুরু";
+            } else {
+                prevBtn.classList.remove("disabled");
+                const formattedNum = prevLessonNum < 10 ? `০${convertBengaliNumber(prevLessonNum)}` : convertBengaliNumber(prevLessonNum);
+                prevTitle.innerText = `(শব্দার্থ) লেসন ${formattedNum}`;
+            }
+
+            if (nextLessonNum > 50) {
+                nextBtn.classList.add("disabled");
+                nextTitle.innerText = "শেষ";
+            } else {
+                nextBtn.classList.remove("disabled");
+                const formattedNum = nextLessonNum < 10 ? `০${convertBengaliNumber(nextLessonNum)}` : convertBengaliNumber(nextLessonNum);
+                nextTitle.innerText = `(শব্দার্থ) লেসন ${formattedNum}`;
+            }
+        }
+
         function openLesson(num) {
             if (!lessons[num]) {
                 alert("এই লেসনের ডেটা খুব শীঘ্রই যুক্ত করা হবে!");
@@ -1242,7 +1346,20 @@
             document.getElementById("flashcardContainer").classList.remove("flipped");
             fillCardData();
             renderTable();
+            updateJumpNavButtons();
             window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function goToPrevLesson() {
+            if (currentLesson > 26) {
+                openLesson(currentLesson - 1);
+            }
+        }
+
+        function goToNextLesson() {
+            if (currentLesson < 50) {
+                openLesson(currentLesson + 1);
+            }
         }
 
         function backToGrid() {
@@ -1376,10 +1493,13 @@
         document.getElementById("flashcardContainer").addEventListener("click", flipCard);
         document.getElementById("fcFrontHlBtn").addEventListener("click", toggleCurrentHighlight);
         document.getElementById("fcBackHlBtn").addEventListener("click", toggleCurrentHighlight);
-        document.getElementById("btnPrevCard").addEventListener("click", nextCard); // Wait, fix next/prev bindings below
         document.getElementById("btnPrevCard").onclick = prevCard;
         document.getElementById("btnNextCard").onclick = nextCard;
         document.getElementById("btnToggleTable").onclick = toggleTable;
+
+        // প্রিভিয়াস ও নেক্সট লেসন ইভেন্ট
+        document.getElementById("btnPrevLesson").onclick = goToPrevLesson;
+        document.getElementById("btnNextLesson").onclick = goToNextLesson;
 
         document.querySelectorAll(".fc-speak-voice-btn").forEach(btn => {
             btn.addEventListener("click", (e) => {

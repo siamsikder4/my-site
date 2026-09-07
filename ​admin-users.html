@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইউজার ম্যানেজমেন্ট - KOTOBA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 70px; }
+        .top-nav { display: flex; align-items: center; padding: 14px 18px; background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; gap: 14px; }
+        .back-btn { color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .nav-title { font-weight: 700; font-size: 17px; color: #0f3e2e; }
+        .page-content { padding: 18px 16px; max-width: 550px; margin: 0 auto; }
+        .search-box { display: flex; align-items: center; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; gap: 8px; }
+        .search-box input { border: none; outline: none; width: 100%; font-size: 13.5px; }
+        .table-responsive { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        .data-table th { background: #f1f5f9; color: #475569; padding: 11px 10px; text-align: left; }
+        .data-table td { padding: 11px 10px; border-bottom: 1px solid #f1f5f9; }
+        .badge { padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+        .badge-active { background: #dcfce7; color: #15803d; }
+        .badge-banned { background: #fee2e2; color: #b91c1c; }
+        .action-btns { display: flex; gap: 6px; justify-content: flex-end; }
+        .act-btn { border: none; padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        .ban-btn { color: #b45309; background: #fef3c7; }
+        .unban-btn { color: #15803d; background: #dcfce7; }
+        .edit-btn { color: #0284c7; background: #f0f9ff; }
+        .del-btn { color: #dc2626; background: #fef2f2; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; padding: 16px; }
+        .modal-card { background: #fff; width: 100%; max-width: 400px; border-radius: 16px; overflow: hidden; padding: 18px; }
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+        .input-control { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; }
+        .btn-submit { width: 100%; padding: 10px; background: #047857; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header class="top-nav">
+        <a href="admin.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title">ইউজার ম্যানেজমেন্ট</span>
+    </header>
+
+    <main class="page-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h4 style="font-size: 15px; color:#0f3e2e;">নিবন্ধিত ইউজার তালিকা</h4>
+            <button id="openAddBtn" style="background:#047857; color:#fff; border:none; padding:7px 12px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-plus"></i> নতুন ইউজার</button>
+        </div>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8;"></i>
+            <input type="text" id="searchInput" placeholder="ইমেইল বা নাম দিয়ে খুঁজুন...">
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ইউজার</th>
+                        <th>অবস্থা</th>
+                        <th style="text-align: right;">অ্যাকশন</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <tr><td colspan="3" style="text-align: center; color:#94a3b8; padding: 20px;">লোড হচ্ছে...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="userModal">
+        <div class="modal-card">
+            <h4 id="modalTitle" style="margin-bottom: 14px; font-size: 16px; color:#0f3e2e;">ইউজার এডিট</h4>
+            <input type="hidden" id="modalDocId">
+            <div class="input-group">
+                <label>নাম:</label>
+                <input type="text" id="modalName" class="input-control">
+            </div>
+            <div class="input-group">
+                <label>ইমেইল:</label>
+                <input type="email" id="modalEmail" class="input-control">
+            </div>
+            <button class="btn-submit" id="saveUserBtn">সংরক্ষণ করুন</button>
+            <button onclick="document.getElementById('userModal').style.display='none'" style="width: 100%; background: none; border: none; padding: 8px; color: #64748b; margin-top: 6px; cursor: pointer;">বাতিল</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
+        let users = [];
+
+        onAuthStateChanged(auth, async (u) => {
+            if (u && u.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                loadUsers();
+            } else {
+                window.location.href = "profile.html";
+            }
+        });
+
+        async function loadUsers() {
+            const snap = await getDocs(collection(db, "user_highlights"));
+            users = [];
+            snap.forEach(d => {
+                const data = d.data();
+                users.push({
+                    id: d.id,
+                    email: data.email || d.id,
+                    name: data.displayName || (data.email ? data.email.split('@')[0] : "অজানা"),
+                    isBanned: !!data.isBanned
+                });
+            });
+            renderUsers(users);
+        }
+
+        function renderUsers(list) {
+            const tb = document.getElementById("userTableBody");
+            tb.innerHTML = "";
+            if (!list.length) {
+                tb.innerHTML = `<tr><td colspan="3" style="text-align: center; color:#94a3b8; padding: 20px;">কোনো ইউজার পাওয়া যায়নি।</td></tr>`;
+                return;
+            }
+            list.forEach(u => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 700; color: #0f3e2e;">${u.name}</div>
+                        <div style="font-size: 11px; color: #64748b;">${u.email}</div>
+                    </td>
+                    <td><span class="badge ${u.isBanned ? 'badge-banned' : 'badge-active'}">${u.isBanned ? 'Banned' : 'Active'}</span></td>
+                    <td style="text-align: right;">
+                        <div class="action-btns">
+                            <button class="act-btn ${u.isBanned ? 'unban-btn' : 'ban-btn'}" onclick="toggleBan('${u.id}', ${u.isBanned})">
+                                <i class="fa-solid ${u.isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
+                            </button>
+                            <button class="act-btn edit-btn" onclick="openEdit('${u.id}', '${u.name}', '${u.email}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="act-btn del-btn" onclick="deleteUser('${u.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        document.getElementById("searchInput").oninput = (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            renderUsers(users.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)));
+        };
+
+        window.toggleBan = async (id, banned) => {
+            await setDoc(doc(db, "user_highlights", id), { isBanned: !banned }, { merge: true });
+            loadUsers();
+        };
+
+        window.openEdit = (id, name, email) => {
+            document.getElementById("modalDocId").value = id;
+            document.getElementById("modalName").value = name;
+            document.getElementById("modalEmail").value = email;
+            document.getElementById("userModal").style.display = "flex";
+        };
+
+        document.getElementById("openAddBtn").onclick = () => {
+            document.getElementById("modalDocId").value = "";
+            document.getElementById("modalName").value = "";
+            document.getElementById("modalEmail").value = "";
+            document.getElementById("userModal").style.display = "flex";
+        };
+
+        document.getElementById("saveUserBtn").onclick = async () => {
+            const id = document.getElementById("modalDocId").value;
+            const name = document.getElementById("modalName").value.trim();
+            const email = document.getElementById("modalEmail").value.trim().toLowerCase();
+            if (!email) return alert("ইমেইল দিন!");
+
+            await setDoc(doc(db, "user_highlights", id || email), {
+                displayName: name,
+                email: email
+            }, { merge: true });
+            document.getElementById("userModal").style.display = "none";
+            loadUsers();
+        };
+
+        window.deleteUser = async (id) => {
+            if (confirm("ইউজারটি ডিলিট করতে চান?")) {
+                await deleteDoc(doc(db, "user_highlights", id));
+                loadUsers();
+            }
+        };
+    </script>
+</body>
+</html>

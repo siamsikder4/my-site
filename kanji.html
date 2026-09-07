@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&family=Noto+Serif+JP:wght@600;900&family=Yuji+Boku&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -138,7 +138,6 @@
         }
 
         .kanji-watermark {
-            font-family: 'Yuji Boku', 'Noto Serif JP', serif;
             font-size: 15px;
             color: #94a3b8;
             font-weight: 700;
@@ -178,7 +177,6 @@
             color: var(--primary-dark);
         }
 
-        /* কার্ড স্টাইল আইটেম */
         .kanji-item {
             margin-bottom: 10px;
             border-radius: 12px;
@@ -232,7 +230,7 @@
             display: block;
         }
 
-        /* ================= সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স ================= */
+        /* সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স (স্ক্রিনশটের মতো পারফেক্ট গ্রিড) */
         .kanji-anim-stage {
             width: 180px;
             height: 180px;
@@ -247,7 +245,6 @@
             overflow: hidden;
         }
 
-        /* কাঞ্জি অনুশীলন ক্রস গ্রিড */
         .kanji-anim-stage::before {
             content: "";
             position: absolute;
@@ -273,8 +270,8 @@
         }
 
         .kanji-svg-wrap {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -286,20 +283,6 @@
             width: 100% !important;
             height: 100% !important;
             display: block;
-            margin: auto;
-        }
-
-        .static-kanji-fallback {
-            font-family: 'Yuji Boku', 'Noto Serif JP', serif;
-            font-size: 100px;
-            color: #143d32;
-            line-height: 160px;
-            height: 160px;
-            text-align: center;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* অ্যাকশন বাটনসমূহ */
@@ -342,7 +325,7 @@
         }
 
         .readings-box span.jp-font {
-            font-family: 'Klee One', 'Noto Serif JP', sans-serif;
+            font-family: 'Klee One', sans-serif;
             font-weight: 600;
             color: #0f172a;
         }
@@ -384,7 +367,7 @@
             color: #1e293b;
         }
 
-        /* ================= ব্লাইন্ড টেস্ট ও প্র্যাকটিস মডাল UI ================= */
+        /* ব্লাইন্ড টেস্ট ও প্র্যাকটিস মডাল UI */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -447,19 +430,29 @@
             overflow: hidden;
         }
 
-        .blind-hint-char {
+        .blind-hint-holder {
             position: absolute;
-            font-family: 'Yuji Boku', 'Noto Serif JP', serif;
-            font-size: 175px;
-            color: #e2e8f0;
-            user-select: none;
-            pointer-events: none;
-            line-height: 1;
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: opacity 0.2s ease;
+            pointer-events: none;
         }
 
-        .blind-hint-char.show { opacity: 1; }
+        .blind-hint-holder.show { opacity: 1; }
+
+        .blind-hint-holder svg path {
+            stroke: #cbd5e1 !important;
+            stroke-width: 4.5px !important;
+            fill: none !important;
+        }
+
+        .blind-hint-holder svg text {
+            display: none !important;
+        }
 
         #drawCanvas {
             position: absolute;
@@ -608,7 +601,7 @@
             <h4 class="blind-title" id="blindModalTitle">Blind Test (না দেখে লিখুন)</h4>
 
             <div class="blind-canvas-box">
-                <div class="blind-hint-char" id="blindWatermark">五</div>
+                <div class="blind-hint-holder" id="blindSvgHolder"></div>
                 <canvas id="drawCanvas" width="250" height="250"></canvas>
             </div>
 
@@ -746,8 +739,8 @@
                     on: "シチ (shichi)",
                     meaning: "সাত / Seven",
                     vocab: [
-                        { w: "七つ (ななつ / nanatsu)", m: "সাতটি" },
-                        { w: "七月 (しちがつ / shichigatsu)", m: "জুলাই মাস" }
+                        { w: "七つ (nanatsu)", m: "সাতটি" },
+                        { w: "七月 (shichigatsu)", m: "জুলাই মাস" }
                     ]
                 },
                 {
@@ -758,12 +751,56 @@
                     on: "ハチ (hachi)",
                     meaning: "আট / Eight",
                     vocab: [
-                        { w: "八つ (やっつ / yattsu)", m: "আটটি" },
-                        { w: "八月 (はちがつ / hachigatsu)", m: "আগস্ট মাস" }
+                        { w: "八つ (yattsu)", m: "আটটি" },
+                        { w: "八月 (hachigatsu)", m: "আগস্ট মাস" }
                     ]
                 }
             ]
         };
+
+        const svgCache = {};
+
+        async function fetchKanjiSvg(hexCode) {
+            if (svgCache[hexCode]) return svgCache[hexCode];
+            try {
+                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const text = await res.text();
+                svgCache[hexCode] = text;
+                return text;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // শুরুতেই কাঞ্জি ভেক্টর (Static State) রেন্ডার করা
+        async function renderStaticSvg(holderId, hexCode) {
+            const holder = document.getElementById(holderId);
+            if (!holder) return;
+            const svgText = await fetchKanjiSvg(hexCode);
+            if (svgText) {
+                holder.innerHTML = svgText;
+                const svg = holder.querySelector('svg');
+                svg.setAttribute("viewBox", "0 0 109 109");
+                svg.style.width = "100%";
+                svg.style.height = "100%";
+
+                // নম্বরগুলো শুরুতেই লুকিয়ে রাখা
+                const numbers = svg.querySelectorAll("text");
+                numbers.forEach(t => t.style.display = "none");
+
+                // প্রতিটি স্ট্রোক অ্যানিমেশনের মতো নিখুঁত ডার্ক-গ্রিন কালারে সেন্টারে থাকবে
+                const paths = svg.querySelectorAll("path");
+                paths.forEach(p => {
+                    p.style.stroke = "#143d32";
+                    p.style.strokeWidth = "4.2";
+                    p.style.strokeLinecap = "round";
+                    p.style.strokeLinejoin = "round";
+                    p.style.fill = "none";
+                });
+            }
+        }
 
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
@@ -793,7 +830,7 @@
                         <!-- সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স -->
                         <div class="kanji-anim-stage">
                             <div class="kanji-svg-wrap" id="svgHolder_${index}">
-                                <div class="static-kanji-fallback">${k.char}</div>
+                                <!-- প্রথম থেকেই অ্যানিমেশন পরবর্তী সঠিক SVG লোড হবে -->
                             </div>
                         </div>
 
@@ -801,10 +838,10 @@
                             <button class="action-btn play" onclick="playKanjiStroke('${k.char}', '${k.code}', ${index})">
                                 <i class="fa-solid fa-play"></i> Play
                             </button>
-                            <button class="action-btn practice" onclick="openCanvasModal('${k.char}', 'practice')">
+                            <button class="action-btn practice" onclick="openCanvasModal('${k.code}', 'practice')">
                                 <i class="fa-solid fa-pencil"></i> Practice
                             </button>
-                            <button class="action-btn test" onclick="openCanvasModal('${k.char}', 'test')">
+                            <button class="action-btn test" onclick="openCanvasModal('${k.code}', 'test')">
                                 <i class="fa-solid fa-star"></i> Test
                             </button>
                         </div>
@@ -818,6 +855,9 @@
                     </div>
                 `;
                 container.appendChild(itemDiv);
+
+                // শুরুতেই অ্যানিমেশন পরবর্তী আসল ভেক্টর রেন্ডার করা
+                renderStaticSvg(`svgHolder_${index}`, k.code);
             });
 
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -838,11 +878,10 @@
             }
         }
 
-        // ================= লাইভ স্ট্রোক অ্যানিমেশন ও স্ট্যাটিক রেন্ডারিং =================
+        // প্লে বাটনে চাপ দিলে লাইভ স্ট্রোক অ্যানিমেশন
         async function playKanjiStroke(char, hexCode, index) {
             const holder = document.getElementById(`svgHolder_${index}`);
 
-            // সাউন্ড প্লে
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(char);
@@ -851,64 +890,52 @@
                 window.speechSynthesis.speak(u);
             }
 
-            try {
-                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error();
-                const svgText = await res.text();
+            const svgText = await fetchKanjiSvg(hexCode);
+            if (!svgText) return;
 
-                // কোনো ভাঙা টেক্সট ছাড়াই সম্পূর্ণ SVG ইনজেক্ট করা
-                holder.innerHTML = svgText;
-                const svgEl = holder.querySelector('svg');
-                svgEl.setAttribute("viewBox", "0 0 109 109");
-                svgEl.style.width = "100%";
-                svgEl.style.height = "100%";
+            holder.innerHTML = svgText;
+            const svgEl = holder.querySelector('svg');
+            svgEl.setAttribute("viewBox", "0 0 109 109");
+            svgEl.style.width = "100%";
+            svgEl.style.height = "100%";
 
-                // স্ট্রোক নাম্বারগুলো সেন্টারে পরিষ্কারভাবে দেখানো
-                const numbers = svgEl.querySelectorAll("text");
-                numbers.forEach(t => {
-                    t.style.fill = "#94a3b8";
-                    t.style.fontSize = "8px";
-                    t.style.fontFamily = "-apple-system, sans-serif";
-                    t.style.opacity = "0";
-                    t.style.transition = "opacity 0.3s";
-                });
+            const numbers = svgEl.querySelectorAll("text");
+            numbers.forEach(t => {
+                t.style.fill = "#94a3b8";
+                t.style.fontSize = "8px";
+                t.style.fontFamily = "-apple-system, sans-serif";
+                t.style.opacity = "0";
+                t.style.transition = "opacity 0.3s";
+            });
 
-                const paths = svgEl.querySelectorAll("path");
-                let delay = 0;
+            const paths = svgEl.querySelectorAll("path");
+            let delay = 0;
 
-                paths.forEach((path, i) => {
-                    const len = path.getTotalLength();
-                    path.style.stroke = "#143d32";
-                    path.style.strokeWidth = "4.2";
-                    path.style.strokeLinecap = "round";
-                    path.style.strokeLinejoin = "round";
-                    path.style.fill = "none";
-                    path.style.strokeDasharray = len;
-                    path.style.strokeDashoffset = len;
-                    path.style.transition = "none";
+            paths.forEach((path, i) => {
+                const len = path.getTotalLength();
+                path.style.stroke = "#143d32";
+                path.style.strokeWidth = "4.2";
+                path.style.strokeLinecap = "round";
+                path.style.strokeLinejoin = "round";
+                path.style.fill = "none";
+                path.style.strokeDasharray = len;
+                path.style.strokeDashoffset = len;
+                path.style.transition = "none";
 
-                    setTimeout(() => {
-                        if (numbers[i]) numbers[i].style.opacity = "1";
-                        path.style.transition = "stroke-dashoffset 0.65s cubic-bezier(0.4, 0, 0.2, 1)";
-                        path.style.strokeDashoffset = "0";
-                    }, delay);
-
-                    delay += 600;
-                });
-
-            } catch (err) {
-                holder.innerHTML = `<div class="static-kanji-fallback" style="transform: scale(1.15); transition: 0.3s;">${char}</div>`;
                 setTimeout(() => {
-                    holder.innerHTML = `<div class="static-kanji-fallback">${char}</div>`;
-                }, 600);
-            }
+                    if (numbers[i]) numbers[i].style.opacity = "1";
+                    path.style.transition = "stroke-dashoffset 0.65s cubic-bezier(0.4, 0, 0.2, 1)";
+                    path.style.strokeDashoffset = "0";
+                }, delay);
+
+                delay += 600;
+            });
         }
 
         // ================= ব্লাইন্ড টেস্ট ও প্র্যাকটিস মোড =================
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
-        const watermark = document.getElementById("blindWatermark");
+        const blindSvgHolder = document.getElementById("blindSvgHolder");
         const statusText = document.getElementById("blindStatus");
         const modalTitle = document.getElementById("blindModalTitle");
         let isDrawing = false;
@@ -919,16 +946,17 @@
         ctx.lineJoin = "round";
         ctx.strokeStyle = "#1e293b";
 
-        function openCanvasModal(char, mode) {
-            watermark.innerText = char;
+        async function openCanvasModal(hexCode, mode) {
             resetCanvas();
+            const svgText = await fetchKanjiSvg(hexCode);
+            blindSvgHolder.innerHTML = svgText || "";
 
             if (mode === "test") {
                 modalTitle.innerText = "Blind Test (না দেখে লিখুন)";
-                watermark.classList.remove("show");
+                blindSvgHolder.classList.remove("show");
             } else {
                 modalTitle.innerText = "Practice (অনুশীলন করুন)";
-                watermark.classList.add("show");
+                blindSvgHolder.classList.add("show");
             }
 
             document.getElementById("blindTestModal").style.display = "flex";
@@ -939,7 +967,7 @@
         }
 
         function toggleHint() {
-            watermark.classList.toggle("show");
+            blindSvgHolder.classList.toggle("show");
         }
 
         function resetCanvas() {

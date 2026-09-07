@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appendices - KOTOBA</title>
+    <!-- ফন্ট ও আইকন -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7faf9;
+            color: #1a202c;
+            padding-bottom: 85px;
+        }
+
+        /* টপ নেভিগেশন */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f3e2e;
+            cursor: pointer;
+        }
+
+        .nav-title {
+            font-weight: 800;
+            font-size: 17px;
+            color: #0f3e2e;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right {
+            font-size: 12px;
+            font-weight: 700;
+            color: #047857;
+            background: #e6f4ea;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        .main-container {
+            padding: 16px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* হেডার */
+        .grid-header-wrap {
+            text-align: center;
+            margin: 10px 0 20px;
+        }
+
+        .main-category-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0e3b2c;
+            margin-bottom: 4px;
+        }
+
+        .sub-category-desc {
+            font-size: 12.5px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* গ্রিড কার্ডস */
+        .appendix-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .appendix-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #144336;
+            border-radius: 14px;
+            padding: 16px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 145px;
+        }
+
+        .appendix-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .a-badge {
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+        }
+
+        .kanji-tag {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #144336;
+            margin-bottom: 4px;
+            line-height: 1.35;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .card-arrow {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+        /* ডিটেইল ভিউ */
+        .detail-view {
+            display: none;
+        }
+
+        .detail-header-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .detail-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #0f3e2e;
+        }
+
+        .btn-back-pill {
+            background: #f1f5f9;
+            color: #334155;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* টেবিল ব্লক */
+        .table-section-box {
+            margin-bottom: 22px;
+        }
+
+        .table-section-title {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #0f3e2e;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .appendix-table-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .appendix-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .appendix-table th {
+            background: #0f3e2e;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 10px 12px;
+        }
+
+        .appendix-table td {
+            padding: 10px 12px;
+            font-size: 12.5px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .appendix-table tr:nth-child(even) {
+            background: #fafcfb;
+        }
+
+        .appendix-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-num {
+            font-weight: 700;
+            color: #0f3e2e;
+            width: 25%;
+        }
+
+        .col-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #144336;
+            width: 45%;
+        }
+
+        .col-ro {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+            width: 30%;
+        }
+
+        /* ব্যতিক্রমী উচ্চারণ লাল রং */
+        .highlight-red {
+            color: #dc2626 !important;
+            font-weight: 800 !important;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- টপ বার -->
+    <header class="top-nav">
+        <div class="nav-left" id="btnHeaderBack">
+            <i class="fa-solid fa-arrow-left" id="headerBackIcon"></i>
+            <span class="nav-title">Appendices</span>
+        </div>
+        <a href="index.html" class="nav-right">
+            <i class="fa-solid fa-house"></i> <span>হোম</span>
+        </a>
+    </header>
+
+    <main class="main-container">
+
+        <!-- ভিউ ১: অ্যাপেনডিক্স গ্রিড তালিকা -->
+        <div id="appendixGridView">
+            <div class="grid-header-wrap">
+                <h2 class="main-category-title">Appendices</h2>
+                <p class="sub-category-desc">সহায়ক স্টাডি মেটেরিয়ালস • প্রয়োজনীয় চার্ট</p>
+            </div>
+
+            <div class="appendix-grid">
+                
+                <!-- কার্ড ১: জাপানিজ সংখ্যা -->
+                <div class="appendix-card" onclick="openAppendix(1)">
+                    <div>
+                        <div class="card-top">
+                            <span class="a-badge">Appendices</span>
+                            <span class="kanji-tag">付録</span>
+                        </div>
+                        <div class="card-title">জাপানিজ সংখ্যা</div>
+                        <div class="card-desc">(Japanese Numbers)</div>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- কার্ড ২: সময়, দিন, তারিখ, মাস -->
+                <div class="appendix-card" onclick="openAppendix(2)">
+                    <div>
+                        <div class="card-top">
+                            <span class="a-badge">Appendices</span>
+                            <span class="kanji-tag">付録</span>
+                        </div>
+                        <div class="card-title">জাপানিজ সময়, দিন, তারিখ, মাস</div>
+                        <div class="card-desc">(Japanese time, Day, Months, Date)</div>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- কার্ড ৩: জাপানিজ ঘণ্টা -->
+                <div class="appendix-card" onclick="openAppendix(3)">
+                    <div>
+                        <div class="card-top">
+                            <span class="a-badge">Appendices</span>
+                            <span class="kanji-tag">付録</span>
+                        </div>
+                        <div class="card-title">জাপানিজ ঘণ্টা</div>
+                        <div class="card-desc">(Japanese Period)</div>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- কার্ড ৪: জাপানিজ গণনা নিয়ম -->
+                <div class="appendix-card" onclick="openAppendix(4)">
+                    <div>
+                        <div class="card-top">
+                            <span class="a-badge">Appendices</span>
+                            <span class="kanji-tag">付録</span>
+                        </div>
+                        <div class="card-title">জাপানিজ গণনা নিয়ম</div>
+                        <div class="card-desc">(Japanese Counting System)</div>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ভিউ ২: জাপানিজ সংখ্যা বিস্তারিত টেবিল (ছবি ২ এর হুবহু) -->
+        <div id="appendixDetailView" class="detail-view">
+            
+            <div class="detail-header-card">
+                <div class="detail-title" id="detailHeaderTitle">জাপানিজ সংখ্যা</div>
+                <button class="btn-back-pill" onclick="backToGrid()"><i class="fa-solid fa-chevron-left"></i> তালিকা</button>
+            </div>
+
+            <div id="detailContentContainer">
+                
+                <!-- ১. মৌলিক সংখ্যা (Basic Numbers 0-10) -->
+                <div class="table-section-box">
+                    <h3 class="table-section-title">১. মৌলিক সংখ্যা (Basic Numbers 0-10)</h3>
+                    <div class="appendix-table-card">
+                        <table class="appendix-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">সংখ্যা</th>
+                                    <th style="width: 45%;">জাপানিজ কানা</th>
+                                    <th style="width: 30%;">রোমাজি</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="col-num">0</td><td class="col-jp">ゼロ, れい</td><td class="col-ro">zero, rei</td></tr>
+                                <tr><td class="col-num">1</td><td class="col-jp">いち</td><td class="col-ro">ichi</td></tr>
+                                <tr><td class="col-num">2</td><td class="col-jp">に</td><td class="col-ro">ni</td></tr>
+                                <tr><td class="col-num">3</td><td class="col-jp">さん</td><td class="col-ro">san</td></tr>
+                                <tr><td class="col-num">4</td><td class="col-jp">よん, し</td><td class="col-ro">yon, shi</td></tr>
+                                <tr><td class="col-num">5</td><td class="col-jp">ご</td><td class="col-ro">go</td></tr>
+                                <tr><td class="col-num">6</td><td class="col-jp">ろく</td><td class="col-ro">roku</td></tr>
+                                <tr><td class="col-num">7</td><td class="col-jp">なな, しち</td><td class="col-ro">nana, shichi</td></tr>
+                                <tr><td class="col-num">8</td><td class="col-jp">はち</td><td class="col-ro">hachi</td></tr>
+                                <tr><td class="col-num">9</td><td class="col-jp">きゅう, く</td><td class="col-ro">kyuu, ku</td></tr>
+                                <tr><td class="col-num">10</td><td class="col-jp">じゅう</td><td class="col-ro">juu</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ২. শতক (Hundreds) -->
+                <div class="table-section-box">
+                    <h3 class="table-section-title">২. শতক (Hundreds)</h3>
+                    <div class="appendix-table-card">
+                        <table class="appendix-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">সংখ্যা</th>
+                                    <th style="width: 45%;">জাপানিজ কানা</th>
+                                    <th style="width: 30%;">রোমাজি</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="col-num">100</td><td class="col-jp">ひゃく</td><td class="col-ro">hyaku</td></tr>
+                                <tr><td class="col-num">200</td><td class="col-jp">にひゃく</td><td class="col-ro">nihyaku</td></tr>
+                                <tr><td class="col-num">300</td><td class="col-jp highlight-red">さんびゃく</td><td class="col-ro highlight-red">sanbyaku</td></tr>
+                                <tr><td class="col-num">400</td><td class="col-jp">よんひゃく</td><td class="col-ro">yonhyaku</td></tr>
+                                <tr><td class="col-num">500</td><td class="col-jp">ごひゃく</td><td class="col-ro">gohyaku</td></tr>
+                                <tr><td class="col-num">600</td><td class="col-jp highlight-red">ろっぴゃく</td><td class="col-ro highlight-red">roppyaku</td></tr>
+                                <tr><td class="col-num">700</td><td class="col-jp">ななひゃく</td><td class="col-ro">nanahyaku</td></tr>
+                                <tr><td class="col-num">800</td><td class="col-jp highlight-red">はっぴゃく</td><td class="col-ro highlight-red">happyaku</td></tr>
+                                <tr><td class="col-num">900</td><td class="col-jp">きゅうひゃく</td><td class="col-ro">kyuuhyaku</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ৩. হাজার (Thousands) -->
+                <div class="table-section-box">
+                    <h3 class="table-section-title">৩. হাজার (Thousands)</h3>
+                    <div class="appendix-table-card">
+                        <table class="appendix-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">সংখ্যা</th>
+                                    <th style="width: 45%;">জাপানিজ কানা</th>
+                                    <th style="width: 30%;">রোমাজি</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="col-num">1,000</td><td class="col-jp">せん</td><td class="col-ro">sen</td></tr>
+                                <tr><td class="col-num">2,000</td><td class="col-jp">にせん</td><td class="col-ro">nisen</td></tr>
+                                <tr><td class="col-num">3,000</td><td class="col-jp highlight-red">さんぜん</td><td class="col-ro highlight-red">sanzen</td></tr>
+                                <tr><td class="col-num">4,000</td><td class="col-jp">よんせん</td><td class="col-ro">yonsen</td></tr>
+                                <tr><td class="col-num">5,000</td><td class="col-jp">ごせん</td><td class="col-ro">gosen</td></tr>
+                                <tr><td class="col-num">6,000</td><td class="col-jp">ろくせん</td><td class="col-ro">rokusen</td></tr>
+                                <tr><td class="col-num">7,000</td><td class="col-jp">ななせん</td><td class="col-ro">nanasen</td></tr>
+                                <tr><td class="col-num">8,000</td><td class="col-jp highlight-red">はっせん</td><td class="col-ro highlight-red">hassen</td></tr>
+                                <tr><td class="col-num">9,000</td><td class="col-jp">きゅうせん</td><td class="col-ro">kyuusen</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ৪. বড় সংখ্যা (Large Numbers) -->
+                <div class="table-section-box">
+                    <h3 class="table-section-title">৪. বড় সংখ্যা (Large Numbers)</h3>
+                    <div class="appendix-table-card">
+                        <table class="appendix-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%;">সংখ্যা</th>
+                                    <th style="width: 40%;">জাপানিজ কানা</th>
+                                    <th style="width: 30%;">রোমাজি</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="col-num">10,000</td><td class="col-jp">いちまん</td><td class="col-ro">ichiman</td></tr>
+                                <tr><td class="col-num">100,000</td><td class="col-jp">じゅうまん</td><td class="col-ro">juuman</td></tr>
+                                <tr><td class="col-num">1,000,000</td><td class="col-jp">ひゃくまん</td><td class="col-ro">hyakuman</td></tr>
+                                <tr><td class="col-num">10,000,000</td><td class="col-jp">せんまん</td><td class="col-ro">senman</td></tr>
+                                <tr><td class="col-num">100,000,000</td><td class="col-jp">いちおく</td><td class="col-ro">ichioku</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions) -->
+                <div class="table-section-box">
+                    <h3 class="table-section-title">৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions)</h3>
+                    <div class="appendix-table-card">
+                        <table class="appendix-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">সংখ্যা</th>
+                                    <th style="width: 38%;">জাপানিজ কানা</th>
+                                    <th style="width: 27%;">রোমাজি</th>
+                                    <th style="width: 15%;">বাংলা</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-num">17.5</td>
+                                    <td class="col-jp">じゅうななてんご</td>
+                                    <td class="col-ro">juunanatengo</td>
+                                    <td>১৭.৫</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-num">0.83</td>
+                                    <td class="col-jp">れいてんはちさん</td>
+                                    <td class="col-ro">reitenhachisan</td>
+                                    <td>শূণ্য.৮৩</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-num">1/2</td>
+                                    <td class="col-jp">にぶんのいち</td>
+                                    <td class="col-ro">nibunnoichi</td>
+                                    <td>অর্ধেক</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-num">3/4</td>
+                                    <td class="col-jp">よんぶんのさん</td>
+                                    <td class="col-ro">yonbunnosan</td>
+                                    <td>চার ভাগের তিন</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ফিক্সড বটম বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="ai-sensei.html" class="nav-item">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI সেনসেই</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <script>
+        const gridView = document.getElementById("appendixGridView");
+        const detailView = document.getElementById("appendixDetailView");
+        const headerTitle = document.getElementById("detailHeaderTitle");
+
+        function openAppendix(id, pushToHistory = true) {
+            if (id === 1) {
+                headerTitle.innerText = "জাপানিজ সংখ্যা (Japanese Numbers)";
+                gridView.style.display = "none";
+                detailView.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+
+                if (pushToHistory) {
+                    history.pushState({ view: "detail", id: id }, "");
+                }
+            } else {
+                alert("এই সেকশনটির চার্ট খুব শীঘ্রই যুক্ত করা হবে!");
+            }
+        }
+
+        function backToGrid(fromHistory = false) {
+            if (detailView.style.display === "block") {
+                detailView.style.display = "none";
+                gridView.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+
+                if (!fromHistory && history.state && history.state.view === "detail") {
+                    history.back();
+                }
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        // ব্রাউজার বা মোবাইলের ব্যাক বাটন সাপোর্ট
+        window.addEventListener("popstate", (event) => {
+            if (event.state && event.state.view === "detail") {
+                openAppendix(event.state.id, false);
+            } else {
+                backToGrid(true);
+            }
+        });
+
+        // টপবার ব্যাক বাটন ইভেন্ট
+        document.getElementById("btnHeaderBack").addEventListener("click", () => backToGrid(false));
+
+        // ইনিশিয়াল হিস্ট্রি স্টেট সেট
+        history.replaceState({ view: "grid" }, "");
+    </script>
+</body>
+</html>

@@ -27,18 +27,29 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .top-nav {
-            display: flex; align-items: center; padding: 14px 18px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; gap: 14px;
+            display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;
         }
+        .nav-left-box { display: flex; align-items: center; gap: 12px; }
         .back-btn { color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .nav-title { font-weight: 700; font-size: 17px; color: #0f3e2e; }
+
+        .btn-firestore-link {
+            background: #fff7ed; color: #c2410c; border: 1.5px solid #ffedd5; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+        }
+        .btn-firestore-link:hover { background: #ffedd5; }
 
         .page-content { padding: 18px 16px; max-width: 620px; margin: 0 auto; }
 
         .admin-banner {
             background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%); color: #ffffff; padding: 20px 16px; border-radius: 16px; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(4, 120, 87, 0.15);
         }
+        .banner-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .admin-banner h2 { font-size: 19px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
         .admin-banner p { font-size: 12px; color: #a7f3d0; }
+
+        .banner-firestore-btn {
+            background: #ffffff; color: #047857; padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
 
         /* মেট্রিক্স গ্রিড */
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
@@ -51,55 +62,28 @@
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 
         /* সাপোর্ট ডেস্ক চ্যাট স্টাইল */
-        .support-inbox-grid {
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .support-threads-list {
-            display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;
-        }
+        .support-inbox-grid { display: flex; flex-direction: column; gap: 12px; }
+        .support-threads-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
         .thread-chip {
             padding: 8px 12px; border-radius: 12px; background: #f8fafc; border: 1.5px solid #e2e8f0;
             font-size: 12px; font-weight: 700; color: #334155; cursor: pointer; white-space: nowrap;
             display: flex; align-items: center; gap: 6px; transition: all 0.2s;
         }
-        .thread-chip.active {
-            background: #e6f4ea; border-color: #047857; color: #0f3e2e;
-        }
-        .thread-chip .badge-unread {
-            width: 7px; height: 7px; background: #ef4444; border-radius: 50%;
-        }
+        .thread-chip.active { background: #e6f4ea; border-color: #047857; color: #0f3e2e; }
+        .thread-chip .badge-unread { width: 7px; height: 7px; background: #ef4444; border-radius: 50%; }
 
-        .admin-chat-viewer {
-            border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff;
-        }
-        .chat-viewer-header {
-            background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0;
-            font-size: 12.5px; font-weight: 700; color: #0f3e2e; display: flex; justify-content: space-between;
-        }
-        .admin-messages-box {
-            height: 280px; overflow-y: auto; padding: 14px; background: #f8fafc; display: flex; flex-direction: column; gap: 8px;
-        }
-        .admin-msg-bubble {
-            max-width: 80%; padding: 8px 12px; border-radius: 12px; font-size: 12.5px; line-height: 1.4; word-break: break-word;
-        }
-        .admin-msg-bubble.user {
-            align-self: flex-start; background: #ffffff; border: 1px solid #e2e8f0; color: #1e293b;
-        }
-        .admin-msg-bubble.admin {
-            align-self: flex-end; background: #047857; color: #ffffff;
-        }
-        .admin-reply-box {
-            display: flex; gap: 8px; padding: 10px 12px; background: #ffffff; border-top: 1px solid #e2e8f0;
-        }
-        .admin-reply-input {
-            flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none;
-        }
+        .admin-chat-viewer { border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff; }
+        .chat-viewer-header { background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 12.5px; font-weight: 700; color: #0f3e2e; display: flex; justify-content: space-between; }
+        .admin-messages-box { height: 260px; overflow-y: auto; padding: 14px; background: #f8fafc; display: flex; flex-direction: column; gap: 8px; }
+        .admin-msg-bubble { max-width: 80%; padding: 8px 12px; border-radius: 12px; font-size: 12.5px; line-height: 1.4; word-break: break-word; }
+        .admin-msg-bubble.user { align-self: flex-start; background: #ffffff; border: 1px solid #e2e8f0; color: #1e293b; }
+        .admin-msg-bubble.admin { align-self: flex-end; background: #047857; color: #ffffff; }
+        .admin-reply-box { display: flex; gap: 8px; padding: 10px 12px; background: #ffffff; border-top: 1px solid #e2e8f0; }
+        .admin-reply-input { flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none; }
         .admin-reply-input:focus { border-color: #047857; }
-        .admin-reply-btn {
-            background: #047857; color: #ffffff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer;
-        }
+        .admin-reply-btn { background: #047857; color: #ffffff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
-        /* সুইচ ও টগল কন্ট্রোল (মডিউল ৪) */
+        /* সুইচ ও টগল কন্ট্রোল */
         .switch-row {
             display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
             background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px;
@@ -119,33 +103,6 @@
         }
         input:checked + .slider { background-color: #047857; }
         input:checked + .slider:before { transform: translateX(20px); }
-
-        /* লার্নিং অ্যানালিটিক্স প্রিমিয়াম UI (মডিউল ৩) */
-        .analytics-pill-header {
-            background: #f1f5f9; padding: 3px 8px; border-radius: 8px; font-size: 11px; font-weight: 700; color: #0284c7;
-        }
-        .metrics-circular-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
-        }
-        .metric-circle-card {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;
-        }
-        .gauge-svg { width: 60px; height: 60px; transform: rotate(-90deg); }
-        .gauge-bg { fill: none; stroke: #e2e8f0; stroke-width: 4; }
-        .gauge-fill { fill: none; stroke-width: 4.5; stroke-linecap: round; stroke-dasharray: 100; transition: stroke-dashoffset 0.8s ease; }
-        .metric-circle-card .percent-text { font-size: 13.5px; font-weight: 800; color: #0f3e2e; margin-top: -42px; margin-bottom: 22px; }
-        .metric-circle-card .card-lbl { font-size: 10.5px; font-weight: 700; color: #475569; line-height: 1.2; }
-        .analytics-bar-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
-        .analytics-item { margin-bottom: 10px; }
-        .analytics-item:last-child { margin-bottom: 0; }
-        .analytics-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: #334155; }
-        .analytics-progress { width: 100%; height: 7px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
-        .analytics-fill { height: 100%; border-radius: 10px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .analytics-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .insight-card { background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
-        .insight-icon-box { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-        .insight-data h6 { font-size: 10.5px; color: #64748b; font-weight: 600; margin-bottom: 1px; }
-        .insight-data p { font-size: 13px; font-weight: 800; color: #0f3e2e; }
 
         /* ইউজার কন্ট্রোল */
         .user-mgmt-header { display: flex; gap: 8px; align-items: center; }
@@ -239,15 +196,28 @@
     </div>
 
     <header class="top-nav">
-        <a href="profile.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <span class="nav-title">KOTOBA অ্যাডমিন ড্যাশবোর্ড</span>
+        <div class="nav-left-box">
+            <a href="profile.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+            <span class="nav-title">KOTOBA অ্যাডমিন</span>
+        </div>
+        <a href="firestore.html" class="btn-firestore-link" title="Firestore ডাটাবেস পেজে যান">
+            <i class="fa-solid fa-database" style="color: #ea580c;"></i>
+            <span>Firestore পেজ</span>
+        </a>
     </header>
 
     <main class="page-content" id="adminContent" style="display: none;">
 
         <div class="admin-banner">
-            <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল প্যানেল</h2>
-            <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
+            <div class="banner-flex">
+                <div>
+                    <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল প্যানেল</h2>
+                    <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
+                </div>
+                <a href="firestore.html" class="banner-firestore-btn">
+                    <i class="fa-solid fa-database" style="color: #ff9100;"></i> Firestore ব্রাউজার
+                </a>
+            </div>
         </div>
 
         <!-- মেট্রিক্স -->
@@ -286,9 +256,7 @@
                         <span id="activeChatTargetEmail" style="font-size: 11px; color: #64748b;"></span>
                     </div>
 
-                    <div class="admin-messages-box" id="adminMessagesBox">
-                        <!-- মেসেজসমূহ আসবে -->
-                    </div>
+                    <div class="admin-messages-box" id="adminMessagesBox"></div>
 
                     <div class="admin-reply-box">
                         <input type="text" id="adminReplyInput" class="admin-reply-input" placeholder="অ্যাডমিন হিসেবে রিপ্লাই লিখুন...">
@@ -298,9 +266,9 @@
             </div>
         </div>
 
-        <!-- মডিউল ৪: সাইট মেইনটেন্যান্স ও অ্যাডসেন্স সুইচ -->
+        <!-- সাইট মেইনটেন্যান্স ও অ্যাডসেন্স সুইচ -->
         <div class="section-card">
-            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> সাইট ও সিস্টেম কন্ট্রোল (৪)</span></h3>
+            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> সাইট ও সিস্টেম কন্ট্রোল</span></h3>
             
             <div class="switch-row">
                 <div class="switch-info">
@@ -325,97 +293,17 @@
             </div>
         </div>
 
-        <!-- মডিউল ৩: লার্নিং অ্যানালিটিক্স ও পারফরম্যান্স মেট্রিক্স -->
+        <!-- ইউজার কন্ট্রোল ও অ্যাক্টিভিটি -->
         <div class="section-card">
             <h3>
-                <span><i class="fa-solid fa-chart-line" style="color: #0284c7; margin-right: 6px;"></i> লার্নিং অ্যানালিটিক্স (৩)</span>
-                <span class="analytics-pill-header"><i class="fa-solid fa-circle" style="font-size: 7px; color: #10b981; margin-right: 4px;"></i>রিয়েলটাইম ইনসাইট</span>
-            </h3>
-
-            <div class="metrics-circular-grid">
-                <div class="metric-circle-card">
-                    <svg class="gauge-svg" viewBox="0 0 36 36">
-                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                        <path class="gauge-fill" stroke="#047857" stroke-dashoffset="22" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                    </svg>
-                    <div class="percent-text">৭৮%</div>
-                    <span class="card-lbl">শব্দভাণ্ডার রিভিশন</span>
-                </div>
-
-                <div class="metric-circle-card">
-                    <svg class="gauge-svg" viewBox="0 0 36 36">
-                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                        <path class="gauge-fill" stroke="#d97706" stroke-dashoffset="35" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                    </svg>
-                    <div class="percent-text">৬৫%</div>
-                    <span class="card-lbl">ব্লাইন্ড টেস্ট স্কোর</span>
-                </div>
-
-                <div class="metric-circle-card">
-                    <svg class="gauge-svg" viewBox="0 0 36 36">
-                        <path class="gauge-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                        <path class="gauge-fill" stroke="#2563eb" stroke-dashoffset="58" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                    </svg>
-                    <div class="percent-text">৪২%</div>
-                    <span class="card-lbl">গ্রামার কমপ্লিশন</span>
-                </div>
-            </div>
-
-            <div class="analytics-bar-box">
-                <div class="analytics-item">
-                    <div class="analytics-meta">
-                        <span>N5 বর্ণমালা ও কাঞ্জি অনুশীলন</span>
-                        <span style="color:#047857;">৮৫%</span>
-                    </div>
-                    <div class="analytics-progress">
-                        <div class="analytics-fill" style="width: 85%; background: #047857;"></div>
-                    </div>
-                </div>
-
-                <div class="analytics-item" style="margin-top: 10px;">
-                    <div class="analytics-meta">
-                        <span>AI সেনসেই অ্যাক্টিভ চ্যাট সেশন</span>
-                        <span style="color:#0284c7;">৫৬%</span>
-                    </div>
-                    <div class="analytics-progress">
-                        <div class="analytics-fill" style="width: 56%; background: #0284c7;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="analytics-insights-grid">
-                <div class="insight-card">
-                    <div class="insight-icon-box" style="background:#fef3c7; color:#d97706;">
-                        <i class="fa-solid fa-fire"></i>
-                    </div>
-                    <div class="insight-data">
-                        <h6>জনপ্রিয় লেসন</h6>
-                        <p>N5 লেসন ০১-০৫</p>
-                    </div>
-                </div>
-
-                <div class="insight-card">
-                    <div class="insight-icon-box" style="background:#fee2e2; color:#dc2626;">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <div class="insight-data">
-                        <h6>কঠিন কাঞ্জি</h6>
-                        <p style="font-family:'Noto Sans JP', sans-serif;">五 (Go / ৫)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- মডিউল ২: ইউজার কন্ট্রোল ও অ্যাক্টিভিটি -->
-        <div class="section-card">
-            <h3>
-                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি (২)</span>
+                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও অ্যাক্টিভিটি</span>
                 <div class="user-mgmt-header">
                     <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:5px 11px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
                     <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:14px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
                 </div>
             </h3>
 
+            <!-- সার্চ ফিল্টার -->
             <div class="search-wrapper">
                 <div class="search-box-custom">
                     <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i>
@@ -423,6 +311,7 @@
                 </div>
             </div>
 
+            <!-- ইউজার ডিরেক্টরি কার্ডস -->
             <div class="user-cards-container" id="userCardsContainer">
                 <div style="text-align:center; color:#94a3b8; padding:30px;">
                     <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
@@ -592,7 +481,7 @@
             document.getElementById("activeChatTargetText").innerText = `${userName} এর মেসেজ`;
             document.getElementById("activeChatTargetEmail").innerText = userEmail;
 
-            // অ্যাডমিন দেখার পর রিড হিসেবে মার্ক করা
+            // অ্যাডমিন দেখার পর আনরিড মার্ক সরানো
             setDoc(doc(db, "support_chats", userEmail), { unreadByAdmin: false }, { merge: true });
 
             if (unsubscribeActiveChat) unsubscribeActiveChat();
@@ -842,7 +731,7 @@
             document.getElementById("notifTargetType").value = "specific";
             document.getElementById("emailInputGroup").style.display = "block";
             document.getElementById("notifSpecificEmail").value = email;
-            window.scrollTo({ top: 680, behavior: "smooth" });
+            window.scrollTo({ top: 950, behavior: "smooth" });
         };
 
         // ================= নোটিফিকেশন হ্যান্ডলার =================
@@ -864,7 +753,7 @@
                 document.getElementById("totalNotifsCount").innerText = allNotifications.length;
                 renderNotifsTable();
             } catch (e) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; padding:20px;">লোড করতে ত্রুটি হয়েছে!</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:color:#ef4444; padding:20px;">লোড করতে ত্রুটি হয়েছে!</td></tr>`;
             }
         }
 
@@ -886,9 +775,9 @@
                     </td>
                     <td style="text-align: center;">${targetText}</td>
                     <td style="text-align: right;">
-                        <div class="action-btns" style="justify-content: flex-end;">
-                            <button class="act-btn edit-btn" onclick="editNotif('${n.id}')"><i class="fa-solid fa-pen"></i></button>
-                            <button class="act-btn del-btn" onclick="deleteNotif('${n.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        <div class="action-btns" style="justify-content: flex-end; display: flex; gap: 4px;">
+                            <button class="act-btn edit-btn" onclick="editNotif('${n.id}')" style="background:#f1f5f9; border:none; padding:4px 8px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
+                            <button class="act-btn del-btn" onclick="deleteNotif('${n.id}')" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:6px; color:#dc2626; cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </td>
                 `;
@@ -960,7 +849,7 @@
                 }
                 
                 document.getElementById("saveNotifBtn").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> আপডেট সংরক্ষণ করুন`;
-                window.scrollTo({ top: 680, behavior: "smooth" });
+                window.scrollTo({ top: 950, behavior: "smooth" });
             }
         };
 

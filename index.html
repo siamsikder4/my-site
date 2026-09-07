@@ -150,7 +150,7 @@
 
         .hero-text {
             text-align: center;
-            margin: 10px 0 16px;
+            margin: 10px 0 20px;
         }
 
         .hero-text h2 {
@@ -165,78 +165,6 @@
             font-size: 11.5px;
             line-height: 1.5;
             color: #64748b;
-        }
-
-        .tutor-banner-compact {
-            background: linear-gradient(135deg, #0f3e2e 0%, #175440 100%);
-            border-radius: 16px;
-            padding: 12px 14px;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.12);
-            transition: all 0.2s ease;
-        }
-
-        .tutor-banner-compact:active {
-            transform: scale(0.985);
-            box-shadow: 0 3px 8px rgba(15, 62, 46, 0.1);
-        }
-
-        .tutor-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 0;
-        }
-
-        .tutor-icon-box {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.12);
-            color: #34d399;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .tutor-info h3 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 2px;
-        }
-
-        .tutor-info p {
-            font-size: 11px;
-            color: #cbd5e1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .tutor-btn-mini {
-            background: #c51636;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11.5px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(197, 22, 54, 0.3);
         }
 
         .level-section {
@@ -525,23 +453,6 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- কম্প্যাক্ট সেনসেই AI ব্যানার -->
-        <a href="ai-sensei.html" class="tutor-banner-compact">
-            <div class="tutor-left">
-                <div class="tutor-icon-box">
-                    <i class="fa-solid fa-robot"></i>
-                </div>
-                <div class="tutor-info">
-                    <h3>AI সেনসেই</h3>
-                    <p>ব্যাকরণ ও ভাষা চর্চায় সরাসরি উত্তর পান</p>
-                </div>
-            </div>
-            <div class="tutor-btn-mini">
-                <i class="fa-solid fa-comment-dots"></i>
-                <span>চ্যাট</span>
-            </div>
-        </a>
-
         <!-- সেকশন ১: A1-A2 -->
         <section class="level-section">
             <span class="badge red-badge">A1-A2 - JFT</span>
@@ -676,19 +587,19 @@
 
     </main>
 
-    <!-- বটম বার -->
+    <!-- বটম বার (কমিউনিটি ফিড সহ আপডেট করা) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
+        <a href="feed.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>কমিউনিটি</span>
+        </a>
         <a href="leaderboard.html" class="nav-item">
             <i class="fa-solid fa-trophy"></i>
             <span>লিডারবোর্ড</span>
-        </a>
-        <a href="ai-sensei.html" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
         </a>
         <a href="login.html" class="nav-item" id="bottomAuthBtn">
             <i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i>

@@ -68,19 +68,32 @@
         }
 
         .user-name { font-size: 17.5px; font-weight: 700; color: #0f2e23; margin-bottom: 2px; }
-        .user-email { font-size: 12px; color: #64748b; margin-bottom: 18px; font-weight: 500; }
+        .user-email { font-size: 12px; color: #64748b; margin-bottom: 14px; font-weight: 500; }
+
+        /* ফলো বাটন */
+        .follow-btn-wrap { margin-bottom: 16px; }
+        .btn-follow {
+            background: #047857; color: #ffffff; border: none;
+            padding: 8px 24px; border-radius: 20px; font-size: 13px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+            box-shadow: 0 2px 8px rgba(4, 120, 87, 0.2); transition: all 0.2s;
+        }
+        .btn-follow.following {
+            background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1;
+            box-shadow: none;
+        }
 
         .stats-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
             padding-top: 14px; border-top: 1px solid #f1f5f9;
         }
 
         .stat-item {
-            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 12px; padding: 10px 8px;
+            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 12px; padding: 10px 6px;
         }
 
         .stat-val { font-size: 15px; font-weight: 700; color: #047857; margin-bottom: 1px; }
-        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; }
+        .stat-lbl { font-size: 10.5px; color: #64748b; font-weight: 600; }
 
         .menu-list {
             background: #ffffff; border-radius: 18px; border: 1px solid #e2e8f0;
@@ -105,7 +118,7 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* প্রিমিয়াম ক্রপার মডাল UI */
+        /* ক্রপার মডাল */
         .cropper-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px);
@@ -115,13 +128,6 @@
         .cropper-box-card {
             background: #ffffff; width: 100%; max-width: 380px; border-radius: 22px;
             overflow: hidden; display: flex; flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-            animation: modalFade 0.2s ease-out;
-        }
-
-        @keyframes modalFade {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .cropper-header {
@@ -131,19 +137,11 @@
         .cropper-header h4 { font-size: 15px; font-weight: 700; }
         .btn-crop-close { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
 
-        .crop-container {
-            width: 100%; height: 280px; background: #0f172a; position: relative;
-        }
+        .crop-container { width: 100%; height: 280px; background: #0f172a; position: relative; }
         .crop-container img { max-width: 100%; }
 
-        /* ক্রপারে সার্কুলার গাইড ভিউ */
-        .cropper-view-box, .cropper-face {
-            border-radius: 50% !important;
-        }
-        .cropper-view-box {
-            outline: 2px solid #10b981 !important;
-            outline-color: rgba(16, 185, 129, 0.8) !important;
-        }
+        .cropper-view-box, .cropper-face { border-radius: 50% !important; }
+        .cropper-view-box { outline: 2px solid #10b981 !important; }
 
         .crop-toolbar {
             background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0;
@@ -154,11 +152,9 @@
             border-radius: 8px; color: #334155; font-size: 13px; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
         }
-        .tool-btn:active { background: #f1f5f9; transform: scale(0.95); }
 
         .cropper-actions {
-            padding: 12px 18px; display: flex; justify-content: space-between;
-            align-items: center; background: #ffffff;
+            padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;
         }
 
         .btn-crop-cancel {
@@ -189,36 +185,48 @@
 <body>
 
     <header class="top-nav">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <span class="nav-title">আমার প্রোফাইল</span>
+        <a href="leaderboard.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title" id="navPageTitle">আমার প্রোফাইল</span>
     </header>
 
     <main class="page-content">
         <input type="file" id="imageInput" accept="image/*" style="display: none;">
 
         <div class="profile-card">
-            <div class="avatar-wrap" id="avatarTrigger" title="ছবি পরিবর্তন করুন">
+            <div class="avatar-wrap" id="avatarTrigger">
                 <div class="avatar-circle" id="avatarContainer">
                     <span id="avatarInitial"><i class="fa-regular fa-user" style="font-size: 24px;"></i></span>
                 </div>
-                <div class="camera-badge"><i class="fa-solid fa-camera"></i></div>
+                <div class="camera-badge" id="cameraBadge"><i class="fa-solid fa-camera"></i></div>
             </div>
             <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
             <p class="user-email" id="displayUserEmail">---</p>
 
+            <!-- ফলো বাটন (অন্যের প্রোফাইল হলে প্রদর্শিত হবে) -->
+            <div class="follow-btn-wrap" id="followBtnWrap" style="display: none;">
+                <button class="btn-follow" id="followActionBtn">
+                    <i class="fa-solid fa-user-plus"></i> <span>Follow</span>
+                </button>
+            </div>
+
+            <!-- স্ট্যাটাস কাউন্টার -->
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-val" id="hlWordCount">০</div>
-                    <div class="stat-lbl">সংরক্ষিত শব্দার্থ</div>
+                    <div class="stat-val" id="followersCount">০</div>
+                    <div class="stat-lbl">Followers</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-val">JLPT N5</div>
-                    <div class="stat-lbl">বর্তমান লেভেল</div>
+                    <div class="stat-val" id="followingCount">০</div>
+                    <div class="stat-lbl">Following</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val" id="hlWordCount">০</div>
+                    <div class="stat-lbl">সংরক্ষিত শব্দ</div>
                 </div>
             </div>
         </div>
 
-        <div class="menu-list">
+        <div class="menu-list" id="ownProfileMenus">
             <a href="admin.html" class="menu-item" id="adminOption" style="display: none; background: #f0fdf4;">
                 <div class="menu-left">
                     <i class="fa-solid fa-shield-halved" style="color: #047857;"></i>
@@ -240,13 +248,6 @@
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
-            <a href="ai-sensei.html" class="menu-item">
-                <div class="menu-left">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>AI সেনসেই চ্যাটবক্স</span>
-                </div>
-                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
-            </a>
         </div>
 
         <button class="logout-btn" id="logoutBtn">
@@ -254,7 +255,7 @@
         </button>
     </main>
 
-    <!-- রাউন্ডেড গাইড ক্রপার মডাল -->
+    <!-- ক্রপার মডাল -->
     <div class="cropper-modal-overlay" id="cropperModal">
         <div class="cropper-box-card">
             <div class="cropper-header">
@@ -264,15 +265,12 @@
             <div class="crop-container">
                 <img id="imageToCrop" src="" alt="Crop Area">
             </div>
-            
-            <!-- কন্ট্রোল টুলবার -->
             <div class="crop-toolbar">
-                <button class="tool-btn" id="btnZoomIn" title="জুম ইন"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-                <button class="tool-btn" id="btnZoomOut" title="জুম আউট"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-                <button class="tool-btn" id="btnRotateLeft" title="বামে ঘোরান"><i class="fa-solid fa-rotate-left"></i></button>
-                <button class="tool-btn" id="btnRotateRight" title="ডানে ঘোরান"><i class="fa-solid fa-rotate-right"></i></button>
+                <button class="tool-btn" id="btnZoomIn"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                <button class="tool-btn" id="btnZoomOut"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                <button class="tool-btn" id="btnRotateLeft"><i class="fa-solid fa-rotate-left"></i></button>
+                <button class="tool-btn" id="btnRotateRight"><i class="fa-solid fa-rotate-right"></i></button>
             </div>
-
             <div class="cropper-actions">
                 <button class="btn-crop-cancel" id="btnCancelCropAction">বাতিল</button>
                 <button class="btn-crop-save" id="btnSaveCrop"><i class="fa-solid fa-check"></i> সেভ করুন</button>
@@ -292,7 +290,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -309,137 +307,211 @@
         const db = getFirestore(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        const avatarTrigger = document.getElementById("avatarTrigger");
-        const avatarContainer = document.getElementById("avatarContainer");
-        const imageInput = document.getElementById("imageInput");
-        const cropperModal = document.getElementById("cropperModal");
-        const imageToCrop = document.getElementById("imageToCrop");
-        const btnSaveCrop = document.getElementById("btnSaveCrop");
-        const btnCancelCrop = document.getElementById("btnCancelCrop");
-        const btnCancelCropAction = document.getElementById("btnCancelCropAction");
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUserId = urlParams.get("uid"); // অন্য ইউজারের ইমেইল বা আইডি
 
         let currentUser = null;
+        let isOwnProfile = true;
+        let isFollowing = false;
         let cropper = null;
+
+        const avatarTrigger = document.getElementById("avatarTrigger");
+        const avatarContainer = document.getElementById("avatarContainer");
+        const cameraBadge = document.getElementById("cameraBadge");
+        const imageInput = document.getElementById("imageInput");
+        const followBtnWrap = document.getElementById("followBtnWrap");
+        const followActionBtn = document.getElementById("followActionBtn");
+        const ownProfileMenus = document.getElementById("ownProfileMenus");
+        const logoutBtn = document.getElementById("logoutBtn");
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
-                const displayName = user.displayName || user.email.split("@")[0];
-                document.getElementById("displayUserName").innerText = displayName;
-                document.getElementById("displayUserEmail").innerText = user.email;
+                const myId = user.email.toLowerCase();
 
-                // Firestore থেকে ছবি লোড
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.email));
-                    if (userDoc.exists() && userDoc.data().photoBase64) {
-                        avatarContainer.innerHTML = `<img src="${userDoc.data().photoBase64}" alt="Profile">`;
-                    } else if (user.photoURL) {
-                        avatarContainer.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
-                    } else {
-                        avatarContainer.innerHTML = displayName.trim().charAt(0).toUpperCase();
+                // যাচাই: এটি কি নিজের প্রোফাইল নাকি অন্যের?
+                isOwnProfile = !targetUserId || targetUserId.toLowerCase() === myId;
+
+                const viewingId = isOwnProfile ? myId : targetUserId.toLowerCase();
+
+                if (!isOwnProfile) {
+                    document.getElementById("navPageTitle").innerText = "শিক্ষার্থী প্রোফাইল";
+                    cameraBadge.style.display = "none";
+                    avatarTrigger.style.cursor = "default";
+                    ownProfileMenus.style.display = "none";
+                    logoutBtn.style.display = "none";
+                    followBtnWrap.style.display = "block";
+                    checkFollowStatus(myId, viewingId);
+                } else {
+                    if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                        document.getElementById("adminOption").style.display = "flex";
                     }
-                } catch (e) {
-                    avatarContainer.innerHTML = displayName.trim().charAt(0).toUpperCase();
                 }
 
-                if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                    document.getElementById("adminOption").style.display = "flex";
-                }
-
-                try {
-                    const docSnap = await getDoc(doc(db, "user_highlights", user.email));
-                    if (docSnap.exists() && docSnap.data().words) {
-                        document.getElementById("hlWordCount").innerText = docSnap.data().words.length;
-                    }
-                } catch (e) {}
+                loadProfileData(viewingId);
             } else {
                 window.location.href = "login.html";
             }
         });
 
-        avatarTrigger.addEventListener("click", () => imageInput.click());
+        // প্রোফাইল তথ্য এবং ফলোয়ার কাউন্ট লোড
+        async function loadProfileData(userId) {
+            try {
+                const userDoc = await getDoc(doc(db, "users", userId));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    const name = data.userName || data.name || userId.split("@")[0];
+                    document.getElementById("displayUserName").innerText = name;
+                    document.getElementById("displayUserEmail").innerText = data.email || userId;
+
+                    document.getElementById("followersCount").innerText = data.followersCount || 0;
+                    document.getElementById("followingCount").innerText = data.followingCount || 0;
+
+                    if (data.photoBase64) {
+                        avatarContainer.innerHTML = `<img src="${data.photoBase64}" alt="Avatar">`;
+                    } else {
+                        avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
+                    }
+                }
+
+                const hlSnap = await getDoc(doc(db, "user_highlights", userId));
+                if (hlSnap.exists() && hlSnap.data().words) {
+                    document.getElementById("hlWordCount").innerText = hlSnap.data().words.length;
+                }
+            } catch(e) {
+                console.error("Profile loading error:", e);
+            }
+        }
+
+        // ফলো অবস্থা যাচাই
+        async function checkFollowStatus(myId, targetId) {
+            try {
+                const followDoc = await getDoc(doc(db, "users", myId, "following", targetId));
+                isFollowing = followDoc.exists();
+                updateFollowBtnUI();
+            } catch(e) {}
+        }
+
+        function updateFollowBtnUI() {
+            if (isFollowing) {
+                followActionBtn.className = "btn-follow following";
+                followActionBtn.innerHTML = `<i class="fa-solid fa-check"></i> <span>Following</span>`;
+            } else {
+                followActionBtn.className = "btn-follow";
+                followActionBtn.innerHTML = `<i class="fa-solid fa-user-plus"></i> <span>Follow</span>`;
+            }
+        }
+
+        // ফলো / আনফলো টগল ফাংশন
+        followActionBtn.addEventListener("click", async () => {
+            if (!currentUser || isOwnProfile) return;
+
+            const myId = currentUser.email.toLowerCase();
+            const targetId = targetUserId.toLowerCase();
+
+            followActionBtn.disabled = true;
+
+            try {
+                const myFollowingRef = doc(db, "users", myId, "following", targetId);
+                const targetFollowerRef = doc(db, "users", targetId, "followers", myId);
+                const myUserRef = doc(db, "users", myId);
+                const targetUserRef = doc(db, "users", targetId);
+
+                if (isFollowing) {
+                    // Unfollow করা
+                    await deleteDoc(myFollowingRef);
+                    await deleteDoc(targetFollowerRef);
+
+                    await setDoc(myUserRef, { followingCount: increment(-1) }, { merge: true });
+                    await setDoc(targetUserRef, { followersCount: increment(-1) }, { merge: true });
+
+                    isFollowing = false;
+                } else {
+                    // Follow করা
+                    await setDoc(myFollowingRef, { timestamp: Date.now() });
+                    await setDoc(targetFollowerRef, { timestamp: Date.now() });
+
+                    await setDoc(myUserRef, { followingCount: increment(1) }, { merge: true });
+                    await setDoc(targetUserRef, { followersCount: increment(1) }, { merge: true });
+
+                    isFollowing = true;
+                }
+
+                updateFollowBtnUI();
+                loadProfileData(targetId);
+            } catch(e) {
+                alert("ফলো একশনে সমস্যা হয়েছে!");
+                console.error(e);
+            } finally {
+                followActionBtn.disabled = false;
+            }
+        });
+
+        // ছবি আপলোড ও ক্রপার সেটআপ
+        avatarTrigger.addEventListener("click", () => {
+            if (isOwnProfile) imageInput.click();
+        });
 
         imageInput.addEventListener("change", (e) => {
             const files = e.target.files;
             if (files && files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = (event) => {
-                    imageToCrop.src = event.target.result;
-                    cropperModal.style.display = "flex";
+                    document.getElementById("imageToCrop").src = event.target.result;
+                    document.getElementById("cropperModal").style.display = "flex";
 
                     if (cropper) cropper.destroy();
-                    cropper = new Cropper(imageToCrop, {
+                    cropper = new Cropper(document.getElementById("imageToCrop"), {
                         aspectRatio: 1,
                         viewMode: 1,
                         dragMode: 'move',
-                        autoCropArea: 0.85,
-                        restore: false,
-                        guides: false,
-                        center: false,
-                        highlight: false,
-                        cropBoxMovable: true,
-                        cropBoxResizable: true,
-                        toggleDragModeOnDblclick: false
+                        autoCropArea: 0.85
                     });
                 };
                 reader.readAsDataURL(files[0]);
             }
         });
 
-        // ক্রপার টুলবার ইভেন্ট
         document.getElementById("btnZoomIn").onclick = () => cropper && cropper.zoom(0.1);
         document.getElementById("btnZoomOut").onclick = () => cropper && cropper.zoom(-0.1);
         document.getElementById("btnRotateLeft").onclick = () => cropper && cropper.rotate(-90);
         document.getElementById("btnRotateRight").onclick = () => cropper && cropper.rotate(90);
 
         function closeCropModal() {
-            cropperModal.style.display = "none";
+            document.getElementById("cropperModal").style.display = "none";
             if (cropper) cropper.destroy();
             imageInput.value = "";
         }
-        btnCancelCrop.onclick = closeCropModal;
-        btnCancelCropAction.onclick = closeCropModal;
+        document.getElementById("btnCancelCrop").onclick = closeCropModal;
+        document.getElementById("btnCancelCropAction").onclick = closeCropModal;
 
-        btnSaveCrop.addEventListener("click", async () => {
+        document.getElementById("btnSaveCrop").addEventListener("click", async () => {
             if (!cropper || !currentUser) return;
+            const btn = document.getElementById("btnSaveCrop");
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+            btn.disabled = true;
 
-            btnSaveCrop.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
-            btnSaveCrop.disabled = true;
-
-            // অপ্টিমাইজড ২০০x২০০ পিক্সেল ক্রপ
-            const canvas = cropper.getCroppedCanvas({
-                width: 200, height: 200,
-                imageSmoothingEnabled: true,
-                imageSmoothingQuality: 'high'
-            });
-
-            const base64Image = canvas.toDataURL("image/jpeg", 0.75);
+            const canvas = cropper.getCroppedCanvas({ width: 200, height: 200 });
+            const base64 = canvas.toDataURL("image/jpeg", 0.75);
 
             try {
-                // ১. Firestore-এ সেভ
-                await setDoc(doc(db, "users", currentUser.email), {
-                    email: currentUser.email,
-                    userName: currentUser.displayName || currentUser.email.split("@")[0],
-                    photoBase64: base64Image,
+                await setDoc(doc(db, "users", currentUser.email.toLowerCase()), {
+                    photoBase64: base64,
                     updatedAt: Date.now()
                 }, { merge: true });
 
-                // ২. Auth প্রোফাইল আপডেট
-                await updateProfile(currentUser, { photoURL: base64Image });
-
-                avatarContainer.innerHTML = `<img src="${base64Image}" alt="Profile">`;
+                avatarContainer.innerHTML = `<img src="${base64}" alt="Avatar">`;
                 closeCropModal();
-                alert("প্রোফাইল ছবি সফলভাবে আপডেট করা হয়েছে!");
-            } catch (err) {
-                console.error(err);
-                alert("ছবি সেভ করতে সমস্যা হয়েছে!");
+                alert("ছবি সফলভাবে আপডেট হয়েছে!");
+            } catch(e) {
+                alert("ছবি সংরক্ষণ করতে সমস্যা হয়েছে!");
             } finally {
-                btnSaveCrop.innerHTML = `<i class="fa-solid fa-check"></i> সেভ করুন`;
-                btnSaveCrop.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> সেভ করুন`;
+                btn.disabled = false;
             }
         });
 
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
+        logoutBtn.addEventListener("click", async () => {
             if (confirm("আপনি কি নিশ্চিত লগআউট করতে চান?")) {
                 await signOut(auth);
                 window.location.href = "login.html";

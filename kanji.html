@@ -12,12 +12,12 @@
     
     <style>
         :root {
-            --primary-dark: #103b2f;
-            --primary-card: #154235;
+            --primary-dark: #12372a;
+            --primary-card: #143d32;
             --primary-green: #047857;
-            --bg-page: #f6f8f7;
-            --border-color: #e5e7eb;
-            --text-dark: #1e293b;
+            --bg-page: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-dark: #0f172a;
             --text-muted: #64748b;
         }
 
@@ -88,7 +88,7 @@
         }
 
         .container {
-            padding: 16px;
+            padding: 14px 16px;
             max-width: 480px;
             margin: 0 auto;
         }
@@ -178,17 +178,18 @@
             color: var(--primary-dark);
         }
 
-        /* কার্ড স্টাইল আইটেম (হুবহু bdjapanese স্টাইল) */
+        /* কার্ড স্টাইল আইটেম */
         .kanji-item {
             margin-bottom: 10px;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             border: 1px solid var(--border-color);
+            background: #ffffff;
         }
 
         .kanji-header {
-            background: #154235;
+            background: var(--primary-card);
             color: #ffffff;
             padding: 13px 16px;
             display: flex;
@@ -206,7 +207,7 @@
         }
 
         .kanji-header .left-info .icon-box {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.14);
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 12px;
@@ -223,7 +224,7 @@
 
         .kanji-body {
             background: #ffffff;
-            padding: 18px 16px;
+            padding: 20px 16px;
             display: none;
         }
 
@@ -231,22 +232,22 @@
             display: block;
         }
 
-        /* অ্যানিমেশন গ্রিড ফ্রেম */
+        /* ================= সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স ================= */
         .kanji-anim-stage {
-            width: 170px;
-            height: 170px;
-            margin: 4px auto 14px;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 16px;
             position: relative;
-            background: #fafafa;
-            border: 1px dashed #cbd5e1;
-            border-radius: 14px;
+            background: #ffffff;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
 
-        /* কাঞ্জি গাইডলাইন */
+        /* কাঞ্জি অনুশীলন ক্রস গ্রিড */
         .kanji-anim-stage::before {
             content: "";
             position: absolute;
@@ -256,6 +257,7 @@
             width: 1px;
             border-left: 1px dashed #e2e8f0;
             pointer-events: none;
+            z-index: 1;
         }
 
         .kanji-anim-stage::after {
@@ -267,27 +269,37 @@
             height: 1px;
             border-top: 1px dashed #e2e8f0;
             pointer-events: none;
+            z-index: 1;
         }
 
         .kanji-svg-wrap {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             position: relative;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .kanji-svg-wrap svg {
-            width: 100%;
-            height: 100%;
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+            margin: auto;
         }
 
         .static-kanji-fallback {
             font-family: 'Yuji Boku', 'Noto Serif JP', serif;
-            font-size: 96px;
-            color: #12372a;
-            line-height: 150px;
+            font-size: 100px;
+            color: #143d32;
+            line-height: 160px;
+            height: 160px;
             text-align: center;
             user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* অ্যাকশন বাটনসমূহ */
@@ -301,7 +313,7 @@
         .action-btn {
             border: 1px solid #cbd5e1;
             background: #ffffff;
-            padding: 8px 18px;
+            padding: 7px 18px;
             border-radius: 25px;
             font-size: 13px;
             font-weight: 700;
@@ -626,7 +638,6 @@
     </nav>
 
     <script>
-        // কাঞ্জি তালিকা ও হেক্স কোড (SVG লাইভ অ্যানিমেশনের জন্য)
         const kanjiData = {
             1: [
                 {
@@ -779,7 +790,7 @@
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                     <div class="kanji-body">
-                        <!-- অ্যানিমেশন ফ্রেম -->
+                        <!-- সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স -->
                         <div class="kanji-anim-stage">
                             <div class="kanji-svg-wrap" id="svgHolder_${index}">
                                 <div class="static-kanji-fallback">${k.char}</div>
@@ -827,11 +838,11 @@
             }
         }
 
-        // ================= লাইভ স্ট্রোক অ্যানিমেশন (KanjiVG SVG ভিত্তিক) =================
+        // ================= লাইভ স্ট্রোক অ্যানিমেশন ও স্ট্যাটিক রেন্ডারিং =================
         async function playKanjiStroke(char, hexCode, index) {
             const holder = document.getElementById(`svgHolder_${index}`);
 
-            // ১. সাউন্ড প্লে
+            // সাউন্ড প্লে
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(char);
@@ -841,26 +852,35 @@
             }
 
             try {
-                // KanjiVG ওপেন ডেটাবেস থেকে সঠিক স্ট্রোক অর্ডার ফেচ করা
                 const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
                 const res = await fetch(url);
                 if (!res.ok) throw new Error();
                 const svgText = await res.text();
 
+                // কোনো ভাঙা টেক্সট ছাড়াই সম্পূর্ণ SVG ইনজেক্ট করা
                 holder.innerHTML = svgText;
                 const svgEl = holder.querySelector('svg');
                 svgEl.setAttribute("viewBox", "0 0 109 109");
                 svgEl.style.width = "100%";
                 svgEl.style.height = "100%";
 
-                // স্ট্রোক পাথ সিলেক্ট ও ক্যালিগ্রাফি স্টাইল দেওয়া
+                // স্ট্রোক নাম্বারগুলো সেন্টারে পরিষ্কারভাবে দেখানো
+                const numbers = svgEl.querySelectorAll("text");
+                numbers.forEach(t => {
+                    t.style.fill = "#94a3b8";
+                    t.style.fontSize = "8px";
+                    t.style.fontFamily = "-apple-system, sans-serif";
+                    t.style.opacity = "0";
+                    t.style.transition = "opacity 0.3s";
+                });
+
                 const paths = svgEl.querySelectorAll("path");
                 let delay = 0;
 
                 paths.forEach((path, i) => {
                     const len = path.getTotalLength();
-                    path.style.stroke = "#103b2f";
-                    path.style.strokeWidth = "4";
+                    path.style.stroke = "#143d32";
+                    path.style.strokeWidth = "4.2";
                     path.style.strokeLinecap = "round";
                     path.style.strokeLinejoin = "round";
                     path.style.fill = "none";
@@ -869,7 +889,8 @@
                     path.style.transition = "none";
 
                     setTimeout(() => {
-                        path.style.transition = "stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+                        if (numbers[i]) numbers[i].style.opacity = "1";
+                        path.style.transition = "stroke-dashoffset 0.65s cubic-bezier(0.4, 0, 0.2, 1)";
                         path.style.strokeDashoffset = "0";
                     }, delay);
 
@@ -877,11 +898,10 @@
                 });
 
             } catch (err) {
-                // অফলাইন বা নেটওয়ার্ক ফেইলিউরে স্মুথ ফলব্যাক
-                holder.innerHTML = `<div class="static-kanji-fallback" style="transform: scale(1.18); color: var(--primary-green); transition: 0.3s;">${char}</div>`;
+                holder.innerHTML = `<div class="static-kanji-fallback" style="transform: scale(1.15); transition: 0.3s;">${char}</div>`;
                 setTimeout(() => {
                     holder.innerHTML = `<div class="static-kanji-fallback">${char}</div>`;
-                }, 800);
+                }, 600);
             }
         }
 
@@ -905,10 +925,10 @@
 
             if (mode === "test") {
                 modalTitle.innerText = "Blind Test (না দেখে লিখুন)";
-                watermark.classList.remove("show"); // টেস্টে লুকানো থাকবে
+                watermark.classList.remove("show");
             } else {
                 modalTitle.innerText = "Practice (অনুশীলন করুন)";
-                watermark.classList.add("show"); // প্র্যাকটিসে ওয়াটারমার্ক দেখা যাবে
+                watermark.classList.add("show");
             }
 
             document.getElementById("blindTestModal").style.display = "flex";

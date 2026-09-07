@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লিডারবোর্ড - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
@@ -95,8 +97,8 @@
         }
 
         .podium-avatar {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -107,14 +109,29 @@
             border: 2px solid transparent;
             margin-bottom: 6px;
             position: relative;
+            overflow: hidden;
+            background: #1e3a34;
+        }
+
+        .podium-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .podium-avatar.first {
-            width: 58px;
-            height: 58px;
+            width: 60px;
+            height: 60px;
             font-size: 20px;
             border-color: #facc15;
             background: #047857;
+            overflow: visible;
+        }
+
+        .podium-avatar.first img {
+            border-radius: 50%;
+            border: 2px solid #facc15;
         }
 
         .podium-avatar.second {
@@ -129,9 +146,12 @@
 
         .crown-icon {
             position: absolute;
-            top: -12px;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
             color: #facc15;
-            font-size: 16px;
+            font-size: 17px;
+            z-index: 2;
         }
 
         .podium-name {
@@ -199,8 +219,8 @@
         }
 
         .user-icon-circle {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: #e6f4ea;
             color: #047857;
@@ -211,6 +231,14 @@
             font-weight: 700;
             margin-right: 12px;
             flex-shrink: 0;
+            overflow: hidden;
+            border: 1.5px solid #a7f3d0;
+        }
+
+        .user-icon-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .user-meta {
@@ -302,7 +330,9 @@
             <div class="podium-section">
                 <!-- ২য় -->
                 <div class="podium-col">
-                    <div class="podium-avatar second" id="rank2Avatar">২</div>
+                    <div class="podium-avatar second" id="rank2AvatarContainer">
+                        <span id="rank2Avatar">২</span>
+                    </div>
                     <span class="podium-name" id="rank2Name">---</span>
                     <span class="podium-xp" id="rank2XP">0 XP</span>
                     <div class="podium-step step-2">২</div>
@@ -310,7 +340,7 @@
 
                 <!-- ১ম -->
                 <div class="podium-col">
-                    <div class="podium-avatar first">
+                    <div class="podium-avatar first" id="rank1AvatarContainer">
                         <i class="fa-solid fa-crown crown-icon"></i>
                         <span id="rank1Avatar">১</span>
                     </div>
@@ -321,7 +351,9 @@
 
                 <!-- ৩য় -->
                 <div class="podium-col">
-                    <div class="podium-avatar third" id="rank3Avatar">৩</div>
+                    <div class="podium-avatar third" id="rank3AvatarContainer">
+                        <span id="rank3Avatar">৩</span>
+                    </div>
                     <span class="podium-name" id="rank3Name">---</span>
                     <span class="podium-xp" id="rank3XP">0 XP</span>
                     <div class="podium-step step-3">৩</div>
@@ -377,6 +409,7 @@
         const db = getFirestore(app);
 
         let currentUserId = null;
+        let currentUserEmail = null;
 
         const bottomAuthBtn = document.getElementById("bottomAuthBtn");
         const bottomAuthIcon = document.getElementById("bottomAuthIcon");
@@ -385,13 +418,14 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUserId = user.uid;
+                currentUserEmail = user.email ? user.email.toLowerCase() : null;
                 bottomAuthBtn.href = "profile.html";
                 bottomAuthIcon.className = "fa-solid fa-circle-user";
                 bottomAuthText.innerText = "প্রোফাইল";
 
-                // ইউজারের প্রাথমিক ডকুমেন্ট ও xp ফিল্ড না থাকলে সেট করা
                 try {
-                    const userRef = doc(db, "users", user.uid);
+                    const docId = user.email ? user.email.toLowerCase() : user.uid;
+                    const userRef = doc(db, "users", docId);
                     await setDoc(userRef, {
                         name: user.displayName || user.email.split('@')[0],
                         email: user.email,
@@ -402,6 +436,7 @@
                 }
             } else {
                 currentUserId = null;
+                currentUserEmail = null;
                 bottomAuthBtn.href = "login.html";
                 bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
                 bottomAuthText.innerText = "লগইন";
@@ -412,7 +447,6 @@
         const leaderboardContent = document.getElementById("leaderboardContent");
         const leaderboardList = document.getElementById("leaderboardList");
 
-        // ক্লায়েন্ট সাইড ফ্লেক্সিবল লিসেনার (ইনডেক্স বা মিসিং ফিল্ড এরর এড়াতে)
         const usersCol = collection(db, "users");
 
         onSnapshot(usersCol, (snapshot) => {
@@ -421,12 +455,14 @@
                 const data = doc.data();
                 users.push({
                     id: doc.id,
-                    name: data.name || (data.email ? data.email.split('@')[0] : "শিক্ষার্থী"),
-                    xp: typeof data.xp === "number" ? data.xp : 0
+                    email: data.email ? data.email.toLowerCase() : "",
+                    name: data.userName || data.name || (data.email ? data.email.split('@')[0] : "শিক্ষার্থী"),
+                    xp: typeof data.xp === "number" ? data.xp : 0,
+                    photo: data.photoBase64 || data.photoURL || null
                 });
             });
 
-            // বড় থেকে ছোট হিসেবে ক্রমানুসারে সাজানো
+            // এক্সপি পয়েন্ট অনুযায়ী বড় থেকে ছোট ক্রমানুসারে সাজানো
             users.sort((a, b) => b.xp - a.xp);
 
             loadingBox.style.display = "none";
@@ -438,7 +474,7 @@
             console.error("Firestore Snapshot Error:", error);
             loadingBox.innerHTML = `
                 <span style="color: #ef4444; font-weight: 600;">ডাটাবেস এক্সেস করা যায়নি!</span>
-                <p style="font-size: 11px; color: #64748b; margin-top: 5px;">Firestore Rules-এ read/write পারমিশন চালু আছে কি না পরীক্ষা করুন।</p>
+                <p style="font-size: 11px; color: #64748b; margin-top: 5px;">Firestore Rules-এ রিড পারমিশন চালু আছে কি না পরীক্ষা করুন।</p>
             `;
         });
 
@@ -453,21 +489,34 @@
             return "বিগিনার শিক্ষার্থী";
         }
 
+        function setAvatarElement(container, user, isFirst = false) {
+            const crownHtml = isFirst ? '<i class="fa-solid fa-crown crown-icon"></i>' : '';
+            if (user && user.photo) {
+                container.innerHTML = `${crownHtml}<img src="${user.photo}" alt="${user.name}">`;
+            } else {
+                const initial = user ? getFirstLetter(user.name) : "-";
+                container.innerHTML = `${crownHtml}<span>${initial}</span>`;
+            }
+        }
+
         function renderPodium(users) {
+            // ১ম স্থান
             const u1 = users[0];
             document.getElementById("rank1Name").innerText = u1 ? u1.name : "খালি";
             document.getElementById("rank1XP").innerText = u1 ? `${u1.xp} XP` : "০ XP";
-            document.getElementById("rank1Avatar").innerText = u1 ? getFirstLetter(u1.name) : "-";
+            setAvatarElement(document.getElementById("rank1AvatarContainer"), u1, true);
 
+            // ২য় স্থান
             const u2 = users[1];
             document.getElementById("rank2Name").innerText = u2 ? u2.name : "খালি";
             document.getElementById("rank2XP").innerText = u2 ? `${u2.xp} XP` : "০ XP";
-            document.getElementById("rank2Avatar").innerText = u2 ? getFirstLetter(u2.name) : "-";
+            setAvatarElement(document.getElementById("rank2AvatarContainer"), u2, false);
 
+            // ৩য় স্থান
             const u3 = users[2];
             document.getElementById("rank3Name").innerText = u3 ? u3.name : "খালি";
             document.getElementById("rank3XP").innerText = u3 ? `${u3.xp} XP` : "০ XP";
-            document.getElementById("rank3Avatar").innerText = u3 ? getFirstLetter(u3.name) : "-";
+            setAvatarElement(document.getElementById("rank3AvatarContainer"), u3, false);
         }
 
         function renderList(users) {
@@ -479,21 +528,25 @@
             }
 
             if (users.length <= 3) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">পোডিয়াম ছাড়া তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
+                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">শীর্ষ ৩ জন ছাড়া তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
                 return;
             }
 
             for (let i = 3; i < users.length; i++) {
                 const user = users[i];
-                const isCurrent = (user.id === currentUserId);
+                const isCurrent = (user.id === currentUserId || (currentUserEmail && user.email === currentUserEmail));
+
+                const avatarHtml = user.photo 
+                    ? `<img src="${user.photo}" alt="${user.name}">` 
+                    : getFirstLetter(user.name);
 
                 const card = document.createElement("div");
                 card.className = `leader-card ${isCurrent ? 'current-user-card' : ''}`;
                 card.innerHTML = `
                     <span class="rank-number">${i + 1}</span>
-                    <div class="user-icon-circle">${getFirstLetter(user.name)}</div>
+                    <div class="user-icon-circle">${avatarHtml}</div>
                     <div class="user-meta">
-                        <h4>${user.name} ${isCurrent ? '<span style="font-size:10px; color:#047857;">(আপনি)</span>' : ''}</h4>
+                        <h4>${user.name} ${isCurrent ? '<span style="font-size:10px; color:#047857; font-weight:700;">(আপনি)</span>' : ''}</h4>
                         <p>${getUserLevel(user.xp)}</p>
                     </div>
                     <span class="xp-score">${user.xp} XP</span>

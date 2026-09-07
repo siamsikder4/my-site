@@ -179,7 +179,7 @@
         }
 
         .detail-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             color: #0f3e2e;
         }
@@ -236,7 +236,7 @@
         }
 
         .appendix-table td {
-            padding: 10px 12px;
+            padding: 9px 12px;
             font-size: 12.5px;
             border-bottom: 1px solid #f1f5f9;
             color: #334155;
@@ -251,10 +251,9 @@
             border-bottom: none;
         }
 
-        .col-num {
+        .col-item-name {
             font-weight: 700;
             color: #0f3e2e;
-            width: 25%;
         }
 
         .col-jp {
@@ -262,14 +261,12 @@
             font-size: 13.5px;
             font-weight: 700;
             color: #144336;
-            width: 45%;
         }
 
         .col-ro {
             font-size: 12px;
             color: #64748b;
             font-weight: 500;
-            width: 30%;
         }
 
         /* ব্যতিক্রমী উচ্চারণ লাল রং */
@@ -359,7 +356,7 @@
                             <span class="kanji-tag">付録</span>
                         </div>
                         <div class="card-title">জাপানিজ সময়, দিন, তারিখ, মাস</div>
-                        <div class="card-desc">(Japanese time, Day, Months, Date)</div>
+                        <div class="card-desc">(Japanese Time, Day, Months, Date)</div>
                     </div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
@@ -371,8 +368,8 @@
                             <span class="a-badge">Appendices</span>
                             <span class="kanji-tag">付録</span>
                         </div>
-                        <div class="card-title">জাপানিজ ঘণ্টা</div>
-                        <div class="card-desc">(Japanese Period)</div>
+                        <div class="card-title">জাপানিজ ঘণ্টা ও সময়কাল</div>
+                        <div class="card-desc">(Japanese Period & Duration)</div>
                     </div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
@@ -393,166 +390,15 @@
             </div>
         </div>
 
-        <!-- ভিউ ২: জাপানিজ সংখ্যা বিস্তারিত টেবিল (ছবি ২ এর হুবহু) -->
+        <!-- ভিউ ২: বিস্তারিত টেবিল সেকশন -->
         <div id="appendixDetailView" class="detail-view">
             
             <div class="detail-header-card">
-                <div class="detail-title" id="detailHeaderTitle">জাপানিজ সংখ্যা</div>
+                <div class="detail-title" id="detailHeaderTitle">লোড হচ্ছে...</div>
                 <button class="btn-back-pill" onclick="backToGrid()"><i class="fa-solid fa-chevron-left"></i> তালিকা</button>
             </div>
 
-            <div id="detailContentContainer">
-                
-                <!-- ১. মৌলিক সংখ্যা (Basic Numbers 0-10) -->
-                <div class="table-section-box">
-                    <h3 class="table-section-title">১. মৌলিক সংখ্যা (Basic Numbers 0-10)</h3>
-                    <div class="appendix-table-card">
-                        <table class="appendix-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">সংখ্যা</th>
-                                    <th style="width: 45%;">জাপানিজ কানা</th>
-                                    <th style="width: 30%;">রোমাজি</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="col-num">0</td><td class="col-jp">ゼロ, れい</td><td class="col-ro">zero, rei</td></tr>
-                                <tr><td class="col-num">1</td><td class="col-jp">いち</td><td class="col-ro">ichi</td></tr>
-                                <tr><td class="col-num">2</td><td class="col-jp">に</td><td class="col-ro">ni</td></tr>
-                                <tr><td class="col-num">3</td><td class="col-jp">さん</td><td class="col-ro">san</td></tr>
-                                <tr><td class="col-num">4</td><td class="col-jp">よん, し</td><td class="col-ro">yon, shi</td></tr>
-                                <tr><td class="col-num">5</td><td class="col-jp">ご</td><td class="col-ro">go</td></tr>
-                                <tr><td class="col-num">6</td><td class="col-jp">ろく</td><td class="col-ro">roku</td></tr>
-                                <tr><td class="col-num">7</td><td class="col-jp">なな, しち</td><td class="col-ro">nana, shichi</td></tr>
-                                <tr><td class="col-num">8</td><td class="col-jp">はち</td><td class="col-ro">hachi</td></tr>
-                                <tr><td class="col-num">9</td><td class="col-jp">きゅう, く</td><td class="col-ro">kyuu, ku</td></tr>
-                                <tr><td class="col-num">10</td><td class="col-jp">じゅう</td><td class="col-ro">juu</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ২. শতক (Hundreds) -->
-                <div class="table-section-box">
-                    <h3 class="table-section-title">২. শতক (Hundreds)</h3>
-                    <div class="appendix-table-card">
-                        <table class="appendix-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">সংখ্যা</th>
-                                    <th style="width: 45%;">জাপানিজ কানা</th>
-                                    <th style="width: 30%;">রোমাজি</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="col-num">100</td><td class="col-jp">ひゃく</td><td class="col-ro">hyaku</td></tr>
-                                <tr><td class="col-num">200</td><td class="col-jp">にひゃく</td><td class="col-ro">nihyaku</td></tr>
-                                <tr><td class="col-num">300</td><td class="col-jp highlight-red">さんびゃく</td><td class="col-ro highlight-red">sanbyaku</td></tr>
-                                <tr><td class="col-num">400</td><td class="col-jp">よんひゃく</td><td class="col-ro">yonhyaku</td></tr>
-                                <tr><td class="col-num">500</td><td class="col-jp">ごひゃく</td><td class="col-ro">gohyaku</td></tr>
-                                <tr><td class="col-num">600</td><td class="col-jp highlight-red">ろっぴゃく</td><td class="col-ro highlight-red">roppyaku</td></tr>
-                                <tr><td class="col-num">700</td><td class="col-jp">ななひゃく</td><td class="col-ro">nanahyaku</td></tr>
-                                <tr><td class="col-num">800</td><td class="col-jp highlight-red">はっぴゃく</td><td class="col-ro highlight-red">happyaku</td></tr>
-                                <tr><td class="col-num">900</td><td class="col-jp">きゅうひゃく</td><td class="col-ro">kyuuhyaku</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ৩. হাজার (Thousands) -->
-                <div class="table-section-box">
-                    <h3 class="table-section-title">৩. হাজার (Thousands)</h3>
-                    <div class="appendix-table-card">
-                        <table class="appendix-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">সংখ্যা</th>
-                                    <th style="width: 45%;">জাপানিজ কানা</th>
-                                    <th style="width: 30%;">রোমাজি</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="col-num">1,000</td><td class="col-jp">せん</td><td class="col-ro">sen</td></tr>
-                                <tr><td class="col-num">2,000</td><td class="col-jp">にせん</td><td class="col-ro">nisen</td></tr>
-                                <tr><td class="col-num">3,000</td><td class="col-jp highlight-red">さんぜん</td><td class="col-ro highlight-red">sanzen</td></tr>
-                                <tr><td class="col-num">4,000</td><td class="col-jp">よんせん</td><td class="col-ro">yonsen</td></tr>
-                                <tr><td class="col-num">5,000</td><td class="col-jp">ごせん</td><td class="col-ro">gosen</td></tr>
-                                <tr><td class="col-num">6,000</td><td class="col-jp">ろくせん</td><td class="col-ro">rokusen</td></tr>
-                                <tr><td class="col-num">7,000</td><td class="col-jp">ななせん</td><td class="col-ro">nanasen</td></tr>
-                                <tr><td class="col-num">8,000</td><td class="col-jp highlight-red">はっせん</td><td class="col-ro highlight-red">hassen</td></tr>
-                                <tr><td class="col-num">9,000</td><td class="col-jp">きゅうせん</td><td class="col-ro">kyuusen</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ৪. বড় সংখ্যা (Large Numbers) -->
-                <div class="table-section-box">
-                    <h3 class="table-section-title">৪. বড় সংখ্যা (Large Numbers)</h3>
-                    <div class="appendix-table-card">
-                        <table class="appendix-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 30%;">সংখ্যা</th>
-                                    <th style="width: 40%;">জাপানিজ কানা</th>
-                                    <th style="width: 30%;">রোমাজি</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="col-num">10,000</td><td class="col-jp">いちまん</td><td class="col-ro">ichiman</td></tr>
-                                <tr><td class="col-num">100,000</td><td class="col-jp">じゅうまん</td><td class="col-ro">juuman</td></tr>
-                                <tr><td class="col-num">1,000,000</td><td class="col-jp">ひゃくまん</td><td class="col-ro">hyakuman</td></tr>
-                                <tr><td class="col-num">10,000,000</td><td class="col-jp">せんまん</td><td class="col-ro">senman</td></tr>
-                                <tr><td class="col-num">100,000,000</td><td class="col-jp">いちおく</td><td class="col-ro">ichioku</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions) -->
-                <div class="table-section-box">
-                    <h3 class="table-section-title">৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions)</h3>
-                    <div class="appendix-table-card">
-                        <table class="appendix-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 20%;">সংখ্যা</th>
-                                    <th style="width: 38%;">জাপানিজ কানা</th>
-                                    <th style="width: 27%;">রোমাজি</th>
-                                    <th style="width: 15%;">বাংলা</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="col-num">17.5</td>
-                                    <td class="col-jp">じゅうななてんご</td>
-                                    <td class="col-ro">juunanatengo</td>
-                                    <td>১৭.৫</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-num">0.83</td>
-                                    <td class="col-jp">れいてんはちさん</td>
-                                    <td class="col-ro">reitenhachisan</td>
-                                    <td>শূণ্য.৮৩</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-num">1/2</td>
-                                    <td class="col-jp">にぶんのいち</td>
-                                    <td class="col-ro">nibunnoichi</td>
-                                    <td>অর্ধেক</td>
-                                </tr>
-                                <tr>
-                                    <td class="col-num">3/4</td>
-                                    <td class="col-jp">よんぶんのさん</td>
-                                    <td class="col-ro">yonbunnosan</td>
-                                    <td>চার ভাগের তিন</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
+            <div id="detailContentContainer"></div>
 
         </div>
 
@@ -582,10 +428,357 @@
         const gridView = document.getElementById("appendixGridView");
         const detailView = document.getElementById("appendixDetailView");
         const headerTitle = document.getElementById("detailHeaderTitle");
+        const contentContainer = document.getElementById("detailContentContainer");
+
+        // ৪টি প্রধান সেকশনের এইচটিএমএল ডেটা
+        const appendixData = {
+            1: {
+                title: "জাপানিজ সংখ্যা (Japanese Numbers)",
+                html: `
+                    <!-- ১. মৌলিক সংখ্যা (Basic Numbers 0-10) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">১. মৌলিক সংখ্যা (Basic Numbers 0-10)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">0</td><td class="col-jp">ゼロ, れい</td><td class="col-ro">zero, rei</td></tr>
+                                    <tr><td class="col-item-name">1</td><td class="col-jp">いち</td><td class="col-ro">ichi</td></tr>
+                                    <tr><td class="col-item-name">2</td><td class="col-jp">に</td><td class="col-ro">ni</td></tr>
+                                    <tr><td class="col-item-name">3</td><td class="col-jp">さん</td><td class="col-ro">san</td></tr>
+                                    <tr><td class="col-item-name">4</td><td class="col-jp">よん, し</td><td class="col-ro">yon, shi</td></tr>
+                                    <tr><td class="col-item-name">5</td><td class="col-jp">ご</td><td class="col-ro">go</td></tr>
+                                    <tr><td class="col-item-name">6</td><td class="col-jp">ろく</td><td class="col-ro">roku</td></tr>
+                                    <tr><td class="col-item-name">7</td><td class="col-jp">なな, しち</td><td class="col-ro">nana, shichi</td></tr>
+                                    <tr><td class="col-item-name">8</td><td class="col-jp">はち</td><td class="col-ro">hachi</td></tr>
+                                    <tr><td class="col-item-name">9</td><td class="col-jp">きゅう, く</td><td class="col-ro">kyuu, ku</td></tr>
+                                    <tr><td class="col-item-name">10</td><td class="col-jp">じゅう</td><td class="col-ro">juu</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ২. শতক (Hundreds) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">২. শতক (Hundreds)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">100</td><td class="col-jp">ひゃく</td><td class="col-ro">hyaku</td></tr>
+                                    <tr><td class="col-item-name">200</td><td class="col-jp">にひゃく</td><td class="col-ro">nihyaku</td></tr>
+                                    <tr><td class="col-item-name">300</td><td class="col-jp highlight-red">さんびゃく</td><td class="col-ro highlight-red">sanbyaku</td></tr>
+                                    <tr><td class="col-item-name">400</td><td class="col-jp">よんひゃく</td><td class="col-ro">yonhyaku</td></tr>
+                                    <tr><td class="col-item-name">500</td><td class="col-jp">ごひゃく</td><td class="col-ro">gohyaku</td></tr>
+                                    <tr><td class="col-item-name">600</td><td class="col-jp highlight-red">ろっぴゃく</td><td class="col-ro highlight-red">roppyaku</td></tr>
+                                    <tr><td class="col-item-name">700</td><td class="col-jp">ななひゃく</td><td class="col-ro">nanahyaku</td></tr>
+                                    <tr><td class="col-item-name">800</td><td class="col-jp highlight-red">はっぴゃく</td><td class="col-ro highlight-red">happyaku</td></tr>
+                                    <tr><td class="col-item-name">900</td><td class="col-jp">きゅうひゃく</td><td class="col-ro">kyuuhyaku</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৩. হাজার (Thousands) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৩. হাজার (Thousands)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">1,000</td><td class="col-jp">せん</td><td class="col-ro">sen</td></tr>
+                                    <tr><td class="col-item-name">2,000</td><td class="col-jp">にせん</td><td class="col-ro">nisen</td></tr>
+                                    <tr><td class="col-item-name">3,000</td><td class="col-jp highlight-red">さんぜん</td><td class="col-ro highlight-red">sanzen</td></tr>
+                                    <tr><td class="col-item-name">4,000</td><td class="col-jp">よんせん</td><td class="col-ro">yonsen</td></tr>
+                                    <tr><td class="col-item-name">5,000</td><td class="col-jp">ごせん</td><td class="col-ro">gosen</td></tr>
+                                    <tr><td class="col-item-name">6,000</td><td class="col-jp">ろくせん</td><td class="col-ro">rokusen</td></tr>
+                                    <tr><td class="col-item-name">7,000</td><td class="col-jp">ななせん</td><td class="col-ro">nanasen</td></tr>
+                                    <tr><td class="col-item-name">8,000</td><td class="col-jp highlight-red">はっせん</td><td class="col-ro highlight-red">hassen</td></tr>
+                                    <tr><td class="col-item-name">9,000</td><td class="col-jp">きゅうせん</td><td class="col-ro">kyuusen</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৪. বড় সংখ্যা (Large Numbers) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৪. বড় সংখ্যা (Large Numbers)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 30%;">সংখ্যা</th><th style="width: 40%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">10,000</td><td class="col-jp">いちまん</td><td class="col-ro">ichiman</td></tr>
+                                    <tr><td class="col-item-name">100,000</td><td class="col-jp">じゅうまん</td><td class="col-ro">juuman</td></tr>
+                                    <tr><td class="col-item-name">1,000,000</td><td class="col-jp">ひゃくまん</td><td class="col-ro">hyakuman</td></tr>
+                                    <tr><td class="col-item-name">10,000,000</td><td class="col-jp">せんまん</td><td class="col-ro">senman</td></tr>
+                                    <tr><td class="col-item-name">100,000,000</td><td class="col-jp">いちおく</td><td class="col-ro">ichioku</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৫. দশমিক ও ভগ্নাংশ -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 20%;">সংখ্যা</th><th style="width: 38%;">জাপানিজ কানা</th><th style="width: 27%;">রোমাজি</th><th style="width: 15%;">বাংলা</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">17.5</td><td class="col-jp">じゅうななてんご</td><td class="col-ro">juunanatengo</td><td>১৭.৫</td></tr>
+                                    <tr><td class="col-item-name">0.83</td><td class="col-jp">れいてんはちさん</td><td class="col-ro">reitenhachisan</td><td>০.৮৩</td></tr>
+                                    <tr><td class="col-item-name">1/2</td><td class="col-jp">にぶんのいち</td><td class="col-ro">nibunnoichi</td><td>অর্ধেক</td></tr>
+                                    <tr><td class="col-item-name">3/4</td><td class="col-jp">よんぶんのさん</td><td class="col-ro">yonbunnosan</td><td>চার ভাগের তিন</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                title: "জাপানিজ সময়, দিন, তারিখ, মাস",
+                html: `
+                    <!-- ১. সপ্তাহের ৭ দিন -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">১. সপ্তাহের দিনসমূহ (Days of the Week)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 30%;">বার</th><th style="width: 40%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">রবিবার</td><td class="col-jp">にちようび</td><td class="col-ro">nichiyoubi</td></tr>
+                                    <tr><td class="col-item-name">সোমবার</td><td class="col-jp">げつようび</td><td class="col-ro">getsuyoubi</td></tr>
+                                    <tr><td class="col-item-name">মঙ্গলবার</td><td class="col-jp">かようび</td><td class="col-ro">kayoubi</td></tr>
+                                    <tr><td class="col-item-name">বুধবার</td><td class="col-jp">すいようび</td><td class="col-ro">suiyoubi</td></tr>
+                                    <tr><td class="col-item-name">বৃহস্পতিবার</td><td class="col-jp">もくようび</td><td class="col-ro">mokuyoubi</td></tr>
+                                    <tr><td class="col-item-name">শুক্রবার</td><td class="col-jp">きんようび</td><td class="col-ro">kinyoubi</td></tr>
+                                    <tr><td class="col-item-name">শনিবার</td><td class="col-jp">どようび</td><td class="col-ro">doyoubi</td></tr>
+                                    <tr><td class="col-item-name">কী বার?</td><td class="col-jp highlight-red">なんようび</td><td class="col-ro highlight-red">nanyoubi</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ২. মাসের দিন / তারিখ (১ - ৩১ তারিখ) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">২. মাসের তারিখ (Days of the Month)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">তারিখ</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১ তারিখ</td><td class="col-jp highlight-red">ついたち</td><td class="col-ro highlight-red">tsuitachi</td></tr>
+                                    <tr><td class="col-item-name">২ তারিখ</td><td class="col-jp highlight-red">ふつか</td><td class="col-ro highlight-red">futsuka</td></tr>
+                                    <tr><td class="col-item-name">৩ তারিখ</td><td class="col-jp highlight-red">みっか</td><td class="col-ro highlight-red">mikka</td></tr>
+                                    <tr><td class="col-item-name">৪ তারিখ</td><td class="col-jp highlight-red">よっか</td><td class="col-ro highlight-red">yokka</td></tr>
+                                    <tr><td class="col-item-name">৫ তারিখ</td><td class="col-jp highlight-red">いつか</td><td class="col-ro highlight-red">itsuka</td></tr>
+                                    <tr><td class="col-item-name">৬ তারিখ</td><td class="col-jp highlight-red">むいか</td><td class="col-ro highlight-red">muika</td></tr>
+                                    <tr><td class="col-item-name">৭ তারিখ</td><td class="col-jp highlight-red">なのか</td><td class="col-ro highlight-red">nanoka</td></tr>
+                                    <tr><td class="col-item-name">৮ তারিখ</td><td class="col-jp highlight-red">ようか</td><td class="col-ro highlight-red">youka</td></tr>
+                                    <tr><td class="col-item-name">৯ তারিখ</td><td class="col-jp highlight-red">ここのか</td><td class="col-ro highlight-red">kokonoka</td></tr>
+                                    <tr><td class="col-item-name">১০ তারিখ</td><td class="col-jp highlight-red">とおか</td><td class="col-ro highlight-red">tooka</td></tr>
+                                    <tr><td class="col-item-name">১৪ তারিখ</td><td class="col-jp highlight-red">じゅうよっか</td><td class="col-ro highlight-red">juuyokka</td></tr>
+                                    <tr><td class="col-item-name">২০ তারিখ</td><td class="col-jp highlight-red">はつか</td><td class="col-ro highlight-red">hatsuka</td></tr>
+                                    <tr><td class="col-item-name">২৪ তারিখ</td><td class="col-jp highlight-red">にじゅうよっか</td><td class="col-ro highlight-red">nijuuyokka</td></tr>
+                                    <tr><td class="col-item-name">সাধারণ দিন</td><td class="col-jp">সংখ্যা + にち</td><td class="col-ro">~nichi</td></tr>
+                                    <tr><td class="col-item-name">কত তারিখ?</td><td class="col-jp highlight-red">なんにち</td><td class="col-ro highlight-red">nannichi</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৩. ১২ মাসের নাম (Months of the Year) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৩. ১২ মাসের নাম (Months - がつ)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">মাস</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">জানুয়ারি</td><td class="col-jp">いちがつ</td><td class="col-ro">ichigatsu</td></tr>
+                                    <tr><td class="col-item-name">ফেব্রুয়ারি</td><td class="col-jp">にがつ</td><td class="col-ro">nigatsu</td></tr>
+                                    <tr><td class="col-item-name">মার্চ</td><td class="col-jp">さんがつ</td><td class="col-ro">sangatsu</td></tr>
+                                    <tr><td class="col-item-name">এপ্রিল</td><td class="col-jp highlight-red">しがつ</td><td class="col-ro highlight-red">shigatsu</td></tr>
+                                    <tr><td class="col-item-name">মে</td><td class="col-jp">ごがつ</td><td class="col-ro">gogatsu</td></tr>
+                                    <tr><td class="col-item-name">জুন</td><td class="col-jp">ろくがつ</td><td class="col-ro">rokugatsu</td></tr>
+                                    <tr><td class="col-item-name">জুলাই</td><td class="col-jp highlight-red">しちがつ</td><td class="col-ro highlight-red">shichigatsu</td></tr>
+                                    <tr><td class="col-item-name">আগস্ট</td><td class="col-jp">はちがつ</td><td class="col-ro">hachigatsu</td></tr>
+                                    <tr><td class="col-item-name">সেপ্টেম্বর</td><td class="col-jp highlight-red">くがつ</td><td class="col-ro highlight-red">kugatsu</td></tr>
+                                    <tr><td class="col-item-name">অক্টোবর</td><td class="col-jp">じゅうがつ</td><td class="col-ro">juugatsu</td></tr>
+                                    <tr><td class="col-item-name">নভেম্বর</td><td class="col-jp">じゅういちがつ</td><td class="col-ro">juuichigatsu</td></tr>
+                                    <tr><td class="col-item-name">ডিসেম্বর</td><td class="col-jp">じゅうにがつ</td><td class="col-ro">juunigatsu</td></tr>
+                                    <tr><td class="col-item-name">কোন মাস?</td><td class="col-jp highlight-red">なんがつ</td><td class="col-ro highlight-red">nangatsu</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                title: "জাপানিজ ঘণ্টা ও সময়কাল (Period & Hours)",
+                html: `
+                    <!-- ১. ঘড়ির সময় (Hours - じ) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">১. ঘড়ির ঘণ্টা (O'clock - じ)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">সময়</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১:০০</td><td class="col-jp">いちじ</td><td class="col-ro">ichiji</td></tr>
+                                    <tr><td class="col-item-name">২:০০</td><td class="col-jp">にじ</td><td class="col-ro">niji</td></tr>
+                                    <tr><td class="col-item-name">৩:০০</td><td class="col-jp">さんじ</td><td class="col-ro">sanji</td></tr>
+                                    <tr><td class="col-item-name">৪:০০</td><td class="col-jp highlight-red">よじ</td><td class="col-ro highlight-red">yoji</td></tr>
+                                    <tr><td class="col-item-name">৫:০০</td><td class="col-jp">ごじ</td><td class="col-ro">goji</td></tr>
+                                    <tr><td class="col-item-name">৬:০০</td><td class="col-jp">ろくじ</td><td class="col-ro">rokuji</td></tr>
+                                    <tr><td class="col-item-name">৭:০০</td><td class="col-jp highlight-red">しちじ</td><td class="col-ro highlight-red">shichiji</td></tr>
+                                    <tr><td class="col-item-name">৮:০০</td><td class="col-jp">はちじ</td><td class="col-ro">hachiji</td></tr>
+                                    <tr><td class="col-item-name">৯:০০</td><td class="col-jp highlight-red">くじ</td><td class="col-ro highlight-red">kuji</td></tr>
+                                    <tr><td class="col-item-name">১০:০০</td><td class="col-jp">じゅうじ</td><td class="col-ro">juuji</td></tr>
+                                    <tr><td class="col-item-name">১১:০০</td><td class="col-jp">じゅういちじ</td><td class="col-ro">juuichiji</td></tr>
+                                    <tr><td class="col-item-name">১২:০০</td><td class="col-jp">じゅうにじ</td><td class="col-ro">juuniji</td></tr>
+                                    <tr><td class="col-item-name">কয়টা বাজে?</td><td class="col-jp highlight-red">なんじ</td><td class="col-ro highlight-red">nanji</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ২. মিনিট (Minutes - ふん / ぷん) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">২. মিনিট গণনা (Minutes)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">মিনিট</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১ মিনিট</td><td class="col-jp highlight-red">いっぷん</td><td class="col-ro highlight-red">ippun</td></tr>
+                                    <tr><td class="col-item-name">২ মিনিট</td><td class="col-jp">にふん</td><td class="col-ro">nifun</td></tr>
+                                    <tr><td class="col-item-name">৩ মিনিট</td><td class="col-jp highlight-red">さんぷん</td><td class="col-ro highlight-red">sanpun</td></tr>
+                                    <tr><td class="col-item-name">৪ মিনিট</td><td class="col-jp highlight-red">よんぷん</td><td class="col-ro highlight-red">yonpun</td></tr>
+                                    <tr><td class="col-item-name">৫ মিনিট</td><td class="col-jp">ごふん</td><td class="col-ro">gofun</td></tr>
+                                    <tr><td class="col-item-name">৬ মিনিট</td><td class="col-jp highlight-red">ろっぷん</td><td class="col-ro highlight-red">roppun</td></tr>
+                                    <tr><td class="col-item-name">৭ মিনিট</td><td class="col-jp">ななふん</td><td class="col-ro">nanafun</td></tr>
+                                    <tr><td class="col-item-name">৮ মিনিট</td><td class="col-jp highlight-red">はっぷん</td><td class="col-ro highlight-red">happun</td></tr>
+                                    <tr><td class="col-item-name">৯ মিনিট</td><td class="col-jp">きゅうふん</td><td class="col-ro">kyuufun</td></tr>
+                                    <tr><td class="col-item-name">১০ মিনিট</td><td class="col-jp highlight-red">じゅっぷん</td><td class="col-ro highlight-red">juppun</td></tr>
+                                    <tr><td class="col-item-name">৩০ মিনিট/অর্ধেক</td><td class="col-jp">はん / さんじゅっぷん</td><td class="col-ro">han / sanjuppun</td></tr>
+                                    <tr><td class="col-item-name">কত মিনিট?</td><td class="col-jp highlight-red">なんぷん</td><td class="col-ro highlight-red">nanpun</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৩. সময়কাল / ঘণ্টা ব্যপ্তি (Duration - じかん) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৩. সময়কাল / ঘণ্টার স্থায়িত্ব (Duration - じかん)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">স্থায়িত্ব</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১ ঘণ্টা</td><td class="col-jp">いちじかん</td><td class="col-ro">ichijikan</td></tr>
+                                    <tr><td class="col-item-name">৪ ঘণ্টা</td><td class="col-jp highlight-red">よじかん</td><td class="col-ro highlight-red">yojikan</td></tr>
+                                    <tr><td class="col-item-name">৭ ঘণ্টা</td><td class="col-jp highlight-red">しちじかん / ななじかん</td><td class="col-ro highlight-red">shichijikan</td></tr>
+                                    <tr><td class="col-item-name">৯ ঘণ্টা</td><td class="col-jp highlight-red">くじかん</td><td class="col-ro highlight-red">kujikan</td></tr>
+                                    <tr><td class="col-item-name">কত ঘণ্টা?</td><td class="col-jp highlight-red">なんじかん</td><td class="col-ro highlight-red">nanjikan</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            },
+            4: {
+                title: "জাপানিজ গণনা নিয়ম (Counting System)",
+                html: `
+                    <!-- ১. সাধারণ বস্তু গণনা (つ - Counter) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">১. সাধারণ বস্তু গণনা (~つ)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">গণনা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১টি</td><td class="col-jp">ひとつ</td><td class="col-ro">hitotsu</td></tr>
+                                    <tr><td class="col-item-name">২টি</td><td class="col-jp">ふたつ</td><td class="col-ro">futatsu</td></tr>
+                                    <tr><td class="col-item-name">৩টি</td><td class="col-jp">みっつ</td><td class="col-ro">mittsu</td></tr>
+                                    <tr><td class="col-item-name">৪টি</td><td class="col-jp">よっつ</td><td class="col-ro">yottsu</td></tr>
+                                    <tr><td class="col-item-name">৫টি</td><td class="col-jp">いつつ</td><td class="col-ro">itsutsu</td></tr>
+                                    <tr><td class="col-item-name">৬টি</td><td class="col-jp">むっつ</td><td class="col-ro">muttsu</td></tr>
+                                    <tr><td class="col-item-name">৭টি</td><td class="col-jp">ななつ</td><td class="col-ro">nanatsu</td></tr>
+                                    <tr><td class="col-item-name">৮টি</td><td class="col-jp">やっつ</td><td class="col-ro">yattsu</td></tr>
+                                    <tr><td class="col-item-name">৯টি</td><td class="col-jp">ここのつ</td><td class="col-ro">kokonotsu</td></tr>
+                                    <tr><td class="col-item-name">১০টি</td><td class="col-jp">とお</td><td class="col-ro">too</td></tr>
+                                    <tr><td class="col-item-name">কয়টি?</td><td class="col-jp highlight-red">いくつ</td><td class="col-ro highlight-red">ikutsu</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ২. ব্যক্তি গণনা (~にん / 人) -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">২. মানুষ গণনা (~にん)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">জন</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">১ জন</td><td class="col-jp highlight-red">ひとり</td><td class="col-ro highlight-red">hitori</td></tr>
+                                    <tr><td class="col-item-name">২ জন</td><td class="col-jp highlight-red">ふたり</td><td class="col-ro highlight-red">futari</td></tr>
+                                    <tr><td class="col-item-name">৩ জন</td><td class="col-jp">さんにん</td><td class="col-ro">sannin</td></tr>
+                                    <tr><td class="col-item-name">৪ জন</td><td class="col-jp highlight-red">よにん</td><td class="col-ro highlight-red">yonin</td></tr>
+                                    <tr><td class="col-item-name">কত জন?</td><td class="col-jp highlight-red">なんにん</td><td class="col-ro highlight-red">nannin</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- ৩. বিভিন্ন বস্তু ভিত্তিক কাউন্টার সাফিক্স চার্ট -->
+                    <div class="table-section-box">
+                        <h3 class="table-section-title">৩. প্রধান কাউন্টার প্রত্যয় (Counter Suffixes)</h3>
+                        <div class="appendix-table-card">
+                            <table class="appendix-table">
+                                <thead>
+                                    <tr><th style="width: 25%;">কাউন্টার</th><th style="width: 40%;">ব্যবহারের ক্ষেত্র</th><th style="width: 35%;">প্রশ্নবোধক শব্দ</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="col-item-name">〜まい (枚)</td><td>কাগজ, ছবি, টিকিট, শার্ট (পাতলা বস্তু)</td><td class="col-jp">なんまい (nanmai)</td></tr>
+                                    <tr><td class="col-item-name">〜だい (台)</td><td>গাড়ি, কম্পিউটার, সাইকেল (যন্ত্রপাতি)</td><td class="col-jp">なんだい (nandai)</td></tr>
+                                    <tr><td class="col-item-name">〜かい (回)</td><td>বার / সংখ্যা (ফ্রিকোয়েন্সি)</td><td class="col-jp">なんかい (nankai)</td></tr>
+                                    <tr><td class="col-item-name">〜ほん (本)</td><td>বোতল, পেন্সিল, ছাতা, গাছ (লম্বা জিনিস)</td><td class="col-jp highlight-red">なんぼん (nanbon)</td></tr>
+                                    <tr><td class="col-item-name">〜さつ (冊)</td><td>বই, খাতা, ম্যাগাজিন (বাঁধাইকৃত)</td><td class="col-jp">なんさつ (nansatsu)</td></tr>
+                                    <tr><td class="col-item-name">〜ひき (匹)</td><td>কুকুর, বিড়াল, মাছ (ছোট প্রাণী)</td><td class="col-jp highlight-red">なんびき (nanbiki)</td></tr>
+                                    <tr><td class="col-item-name">〜かい (階)</td><td>ভবনের তলা (Floor)</td><td class="col-jp highlight-red">なんがい (nangai)</td></tr>
+                                    <tr><td class="col-item-name">〜はい (杯)</td><td>কাপ, গ্লাস (পানীয় পরিমাপে)</td><td class="col-jp highlight-red">なんばい (nanbai)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `
+            }
+        };
 
         function openAppendix(id, pushToHistory = true) {
-            if (id === 1) {
-                headerTitle.innerText = "জাপানিজ সংখ্যা (Japanese Numbers)";
+            const data = appendixData[id];
+            if (data) {
+                headerTitle.innerText = data.title;
+                contentContainer.innerHTML = data.html;
                 gridView.style.display = "none";
                 detailView.style.display = "block";
                 window.scrollTo({ top: 0, behavior: "smooth" });
@@ -593,8 +786,6 @@
                 if (pushToHistory) {
                     history.pushState({ view: "detail", id: id }, "");
                 }
-            } else {
-                alert("এই সেকশনটির চার্ট খুব শীঘ্রই যুক্ত করা হবে!");
             }
         }
 

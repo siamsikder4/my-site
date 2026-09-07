@@ -29,19 +29,33 @@
         .post-box-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 700; font-size: 13.5px; color: #0f3e2e; }
         .post-input {
             width: 100%; border: 1px solid #cbd5e1; border-radius: 12px; padding: 12px;
-            font-size: 13.5px; outline: none; background: #f8fafc; resize: none; min-height: 90px;
+            font-size: 13.5px; outline: none; background: #f8fafc; resize: none; min-height: 80px;
             color: #1e293b; transition: all 0.2s;
         }
         .post-input:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1); }
         
+        /* ইমেজ প্রিভিউ বক্স */
+        .post-img-preview-container {
+            position: relative; margin-top: 10px; display: none; max-height: 200px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;
+        }
+        .post-img-preview-container img { width: 100%; max-height: 200px; object-fit: cover; }
+        .remove-img-btn {
+            position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: #fff; border: none;
+            width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px;
+        }
+
         .post-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .char-counter { font-size: 11px; color: #94a3b8; font-weight: 600; }
-        
+        .post-tools { display: flex; gap: 8px; align-items: center; }
+        .tool-icon-btn {
+            background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; width: 34px; height: 34px;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;
+        }
+        .tool-icon-btn:hover { background: #e2e8f0; }
+
         .btn-post-submit {
             background: #047857; color: #ffffff; border: none; padding: 8px 20px;
             border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
-            transition: transform 0.15s;
         }
         .btn-post-submit:active { transform: scale(0.96); }
 
@@ -49,7 +63,6 @@
         .feed-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
             margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
-            transition: transform 0.2s;
         }
         .feed-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; cursor: pointer; }
         .feed-avatar {
@@ -61,25 +74,32 @@
         .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; }
         .feed-user-info p { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
 
-        .feed-body { font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 14px; word-break: break-word; }
+        .feed-body { font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 12px; word-break: break-word; }
+        .feed-image-box { border-radius: 12px; overflow: hidden; margin-bottom: 12px; max-height: 260px; background: #000; }
+        .feed-image-box img { width: 100%; max-height: 260px; object-fit: cover; display: block; }
         
         .feed-footer {
-            display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 12px;
+            display: flex; align-items: center; gap: 10px; border-top: 1px solid #f1f5f9; padding-top: 12px;
         }
         .action-icon-btn {
             background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px;
             color: #64748b; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600;
-            transition: all 0.2s;
         }
-        .action-icon-btn:hover { background: #f1f5f9; color: #1e293b; }
         .action-icon-btn.liked { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
-        .action-icon-btn.liked i { animation: heartBeat 0.3s; }
 
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
+        /* কমেন্ট সেকশন */
+        .comments-section {
+            margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 10px; display: none;
         }
+        .comments-list { max-height: 180px; overflow-y: auto; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
+        .comment-bubble { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 10px; font-size: 12px; }
+        .comment-bubble b { color: #0f3e2e; margin-right: 4px; }
+        
+        .comment-input-row { display: flex; gap: 6px; }
+        .comment-input {
+            flex: 1; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 10px; font-size: 12px; outline: none;
+        }
+        .comment-send-btn { background: #047857; color: #fff; border: none; padding: 0 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
 
         /* বটম বার */
         .bottom-nav {
@@ -104,11 +124,21 @@
         <div class="post-box" id="createPostBox" style="display: none;">
             <div class="post-box-header">
                 <i class="fa-solid fa-pen-nib" style="color: #047857;"></i>
-                <span>আপনার মতামত বা স্টাডি আপডেট শেয়ার করুন</span>
+                <span>আজ কী শিখলেন বা জানতে চান?</span>
             </div>
-            <textarea id="postTextInput" class="post-input" maxlength="300" placeholder="আজ কি শিখলেন? এখানে লিখুন..."></textarea>
+            <textarea id="postTextInput" class="post-input" maxlength="400" placeholder="আপনার স্টাডি আপডেট এখানে লিখুন..."></textarea>
+            
+            <!-- ছবি প্রিভিউ -->
+            <div class="post-img-preview-container" id="postImgPreviewBox">
+                <img id="postImgPreview" src="" alt="Preview">
+                <button class="remove-img-btn" id="removeImgBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <input type="file" id="postImageInput" accept="image/*" style="display: none;">
+
             <div class="post-footer-row">
-                <span class="char-counter" id="charCounter">৩০০ অক্ষর বাকি</span>
+                <div class="post-tools">
+                    <button class="tool-icon-btn" id="triggerImgUpload" title="ছবি যুক্ত করুন"><i class="fa-regular fa-image"></i></button>
+                </div>
                 <button class="btn-post-submit" id="submitPostBtn"><i class="fa-solid fa-paper-plane"></i> পোস্ট করুন</button>
             </div>
         </div>
@@ -148,6 +178,11 @@
         const db = getFirestore(app);
 
         let currentUser = null;
+        let selectedPostImageBase64 = null;
+
+        const postImageInput = document.getElementById("postImageInput");
+        const postImgPreviewBox = document.getElementById("postImgPreviewBox");
+        const postImgPreview = document.getElementById("postImgPreview");
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -166,17 +201,43 @@
             loadFeedPosts();
         });
 
-        // ক্যারেক্টার কাউন্টার লাইভ আপডেট
-        const postTextInput = document.getElementById("postTextInput");
-        const charCounter = document.getElementById("charCounter");
-        postTextInput.addEventListener("input", () => {
-            const len = postTextInput.value.length;
-            charCounter.innerText = `${300 - len} অক্ষর বাকি`;
+        // ইমেজ আপলোড হ্যান্ডলিং
+        document.getElementById("triggerImgUpload").onclick = () => postImageInput.click();
+
+        postImageInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement("canvas");
+                        const MAX_WIDTH = 600;
+                        const scaleSize = MAX_WIDTH / img.width;
+                        canvas.width = MAX_WIDTH;
+                        canvas.height = img.height * scaleSize;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        selectedPostImageBase64 = canvas.toDataURL("image/jpeg", 0.7);
+                        postImgPreview.src = selectedPostImageBase64;
+                        postImgPreviewBox.style.display = "block";
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
+        document.getElementById("removeImgBtn").onclick = () => {
+            selectedPostImageBase64 = null;
+            postImageInput.value = "";
+            postImgPreviewBox.style.display = "none";
+        };
+
         document.getElementById("submitPostBtn").onclick = async () => {
-            const text = postTextInput.value.trim();
-            if (!text || !currentUser) return;
+            const text = document.getElementById("postTextInput").value.trim();
+            if ((!text && !selectedPostImageBase64) || !currentUser) return;
 
             const btn = document.getElementById("submitPostBtn");
             btn.disabled = true;
@@ -192,12 +253,16 @@
                     userName: userData.userName || currentUser.displayName || currentUser.email.split('@')[0],
                     userPhoto: userData.photoBase64 || currentUser.photoURL || null,
                     text: text,
+                    imageBase64: selectedPostImageBase64 || null,
                     timestamp: Date.now(),
-                    likes: []
+                    likes: [],
+                    comments: []
                 });
 
-                postTextInput.value = "";
-                charCounter.innerText = "৩০০ অক্ষর বাকি";
+                document.getElementById("postTextInput").value = "";
+                selectedPostImageBase64 = null;
+                postImageInput.value = "";
+                postImgPreviewBox.style.display = "none";
             } catch (e) {
                 alert("পোস্ট প্রকাশ করতে সমস্যা হয়েছে!");
             } finally {
@@ -221,10 +286,19 @@
                     const post = docSnap.data();
                     const postId = docSnap.id;
                     const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
+                    const comments = post.comments || [];
 
                     const avatarHtml = post.userPhoto 
                         ? `<img src="${post.userPhoto}" alt="User">` 
                         : (post.userName ? post.userName.charAt(0).toUpperCase() : "U");
+
+                    const imageHtml = post.imageBase64 
+                        ? `<div class="feed-image-box"><img src="${post.imageBase64}" alt="Post Image"></div>` 
+                        : '';
+
+                    const commentsHtml = comments.map(c => `
+                        <div class="comment-bubble"><b>${c.userName}:</b> ${escapeHtml(c.text)}</div>
+                    `).join('');
 
                     const card = document.createElement("div");
                     card.className = "feed-card";
@@ -237,10 +311,21 @@
                             </div>
                         </div>
                         <div class="feed-body">${escapeHtml(post.text)}</div>
+                        ${imageHtml}
                         <div class="feed-footer">
                             <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])})">
                                 <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length}</span>
                             </button>
+                            <button class="action-icon-btn" onclick="toggleComments('${postId}')">
+                                <i class="fa-regular fa-comment"></i> <span>${comments.length} কমেন্ট</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" id="commentSection_${postId}">
+                            <div class="comments-list">${commentsHtml || '<div style="font-size:11px; color:#94a3b8; text-align:center;">কোনো কমেন্ট নেই</div>'}</div>
+                            <div class="comment-input-row">
+                                <input type="text" class="comment-input" id="commentInput_${postId}" placeholder="কমেন্ট লিখুন...">
+                                <button class="comment-send-btn" onclick="sendComment('${postId}')">পাঠান</button>
+                            </div>
                         </div>
                     `;
                     container.appendChild(card);
@@ -250,7 +335,7 @@
 
         window.toggleLike = async function(postId, currentLikes) {
             if (!currentUser) {
-                alert("লাইک দিতে হলে আগে লগইন করুন!");
+                alert("লাইক দিতে হলে আগে লগইন করুন!");
                 window.location.href = "login.html";
                 return;
             }
@@ -268,6 +353,47 @@
             try {
                 await setDoc(postRef, { likes: newLikes }, { merge: true });
             } catch(e) {}
+        };
+
+        window.toggleComments = function(postId) {
+            const sec = document.getElementById(`commentSection_${postId}`);
+            sec.style.display = sec.style.display === "block" ? "none" : "block";
+        };
+
+        window.sendComment = async function(postId) {
+            if (!currentUser) {
+                alert("কমেন্ট করতে হলে লগইন করুন!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const input = document.getElementById(`commentInput_${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+
+            try {
+                const postRef = doc(db, "posts", postId);
+                const postSnap = await getDoc(postRef);
+                if (!postSnap.exists()) return;
+
+                const postData = postSnap.data();
+                const comments = postData.comments || [];
+
+                const userSnap = await getDoc(doc(db, "users", currentUser.email.toLowerCase()));
+                const userData = userSnap.exists() ? userSnap.data() : {};
+                const userName = userData.userName || currentUser.displayName || currentUser.email.split('@')[0];
+
+                comments.push({
+                    userName: userName,
+                    text: text,
+                    timestamp: Date.now()
+                });
+
+                await setDoc(postRef, { comments: comments }, { merge: true });
+                input.value = "";
+            } catch(e) {
+                alert("কমেন্ট পাঠাতে সমস্যা হয়েছে!");
+            }
         };
 
         function escapeHtml(str) {

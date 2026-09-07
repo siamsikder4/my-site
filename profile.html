@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>প্রোফাইল - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Cropper.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
 
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988"
@@ -84,12 +88,13 @@
             margin-bottom: 18px;
         }
 
-        /* সফট ও প্রফেশনাল মিনিমাল অ্যাভাটার */
+        /* অবতার ও ক্যামেরা বাটন */
         .avatar-wrap {
             position: relative;
-            width: 76px;
-            height: 76px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 12px;
+            cursor: pointer;
         }
 
         .avatar-circle {
@@ -106,17 +111,31 @@
             font-weight: 700;
             text-transform: uppercase;
             user-select: none;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .online-dot {
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-badge {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 13px;
-            height: 13px;
-            background: #10b981;
+            bottom: 0;
+            right: 0;
+            width: 26px;
+            height: 26px;
+            background: #047857;
+            color: #ffffff;
             border: 2px solid #ffffff;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
         }
 
         .user-name {
@@ -259,42 +278,81 @@
             transform: scale(0.98);
         }
 
-        /* বটম বার */
-        .bottom-nav {
+        /* ক্রপার মডাল */
+        .cropper-modal-overlay {
+            display: none;
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
-            display: flex;
-            justify-content: space-around;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
             align-items: center;
-            z-index: 1000;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.02);
+            padding: 16px;
         }
 
-        .nav-item {
-            text-decoration: none;
-            color: #8392a5;
-            font-size: 11px;
+        .cropper-box-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 18px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+        }
+
+        .cropper-header {
+            padding: 14px 18px;
+            background: #0f3e2e;
+            color: #ffffff;
+            font-size: 14.5px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 4px;
-            font-weight: 600;
-            background: none;
+        }
+
+        .crop-container {
+            width: 100%;
+            height: 260px;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        .crop-container img {
+            max-width: 100%;
+        }
+
+        .cropper-actions {
+            padding: 12px 16px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn-crop-cancel {
+            background: #e2e8f0;
             border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
+            color: #334155;
         }
 
-        .nav-item.active {
-            color: #0f3e2e;
-        }
-
-        .nav-item i {
-            font-size: 18px;
+        .btn-crop-save {
+            background: #047857;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #ffffff;
         }
 
         /* চ্যাট মডাল UI */
@@ -455,6 +513,44 @@
         .chat-send-btn:active {
             transform: scale(0.92);
         }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #ffffff;
+            border-top: 1px solid #eef2f5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8392a5;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #0f3e2e;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -469,13 +565,16 @@
 
     <main class="page-content">
 
+        <!-- ছবি সিলেক্ট করার ইনপুট -->
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+
         <!-- ক্লিন প্রোফাইল কার্ড -->
         <div class="profile-card">
-            <div class="avatar-wrap">
-                <div class="avatar-circle" id="avatarInitial">
-                    <i class="fa-regular fa-user" style="font-size: 22px;"></i>
+            <div class="avatar-wrap" id="avatarTrigger" title="ছবি পরিবর্তন করতে চাপুন">
+                <div class="avatar-circle" id="avatarContainer">
+                    <span id="avatarInitial"><i class="fa-regular fa-user" style="font-size: 22px;"></i></span>
                 </div>
-                <div class="online-dot"></div>
+                <div class="camera-badge"><i class="fa-solid fa-camera"></i></div>
             </div>
             <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
             <p class="user-email" id="displayUserEmail">---</p>
@@ -542,6 +641,23 @@
 
     </main>
 
+    <!-- ক্রপার পপ-আপ মডাল -->
+    <div class="cropper-modal-overlay" id="cropperModal">
+        <div class="cropper-box-card">
+            <div class="cropper-header">
+                <span>ছবি ক্রপ করুন</span>
+                <span style="cursor: pointer;" id="btnCancelCrop">&times;</span>
+            </div>
+            <div class="crop-container">
+                <img id="imageToCrop" src="" alt="Crop Preview">
+            </div>
+            <div class="cropper-actions">
+                <button class="btn-crop-cancel" id="btnCancelCropAction">বাতিল</button>
+                <button class="btn-crop-save" id="btnSaveCrop">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+
     <!-- অ্যাডমিন সাপোর্ট চ্যাট মডাল -->
     <div class="chat-modal-overlay" id="chatModalOverlay">
         <div class="chat-box-card">
@@ -593,6 +709,9 @@
         </a>
     </nav>
 
+    <!-- Cropper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
     <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -615,7 +734,15 @@
 
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        const avatarInitialEl = document.getElementById("avatarInitial");
+        const avatarTrigger = document.getElementById("avatarTrigger");
+        const avatarContainer = document.getElementById("avatarContainer");
+        const imageInput = document.getElementById("imageInput");
+        const cropperModal = document.getElementById("cropperModal");
+        const imageToCrop = document.getElementById("imageToCrop");
+        const btnSaveCrop = document.getElementById("btnSaveCrop");
+        const btnCancelCrop = document.getElementById("btnCancelCrop");
+        const btnCancelCropAction = document.getElementById("btnCancelCropAction");
+
         const nameEl = document.getElementById("displayUserName");
         const emailEl = document.getElementById("displayUserEmail");
         const hlCountEl = document.getElementById("hlWordCount");
@@ -632,6 +759,7 @@
 
         let currentUser = null;
         let unsubscribeChat = null;
+        let cropper = null;
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -640,8 +768,21 @@
                 emailEl.innerText = user.email;
                 nameEl.innerText = displayName;
 
-                const firstChar = displayName.trim().charAt(0).toUpperCase();
-                avatarInitialEl.innerText = firstChar;
+                // Firestore থেকে ইউজারের ছবি লোড করা (Base64)
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.email));
+                    if (userDoc.exists() && userDoc.data().photoBase64) {
+                        avatarContainer.innerHTML = `<img src="${userDoc.data().photoBase64}" alt="Profile">`;
+                    } else if (user.photoURL) {
+                        avatarContainer.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
+                    } else {
+                        const firstChar = displayName.trim().charAt(0).toUpperCase();
+                        avatarContainer.innerHTML = firstChar;
+                    }
+                } catch (e) {
+                    const firstChar = displayName.trim().charAt(0).toUpperCase();
+                    avatarContainer.innerHTML = firstChar;
+                }
 
                 if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     adminOption.style.display = "flex";
@@ -664,6 +805,71 @@
                 }
             } else {
                 window.location.href = "login.html";
+            }
+        });
+
+        // ছবি ক্রপ ও আপলোড লজিক (Firestore Base64 - কার্ড ছাড়া ফ্রি)
+        avatarTrigger.addEventListener("click", () => imageInput.click());
+
+        imageInput.addEventListener("change", (e) => {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    imageToCrop.src = event.target.result;
+                    cropperModal.style.display = "flex";
+
+                    if (cropper) cropper.destroy();
+                    cropper = new Cropper(imageToCrop, {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 0.9,
+                        background: false
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function closeCropModal() {
+            cropperModal.style.display = "none";
+            if (cropper) cropper.destroy();
+            imageInput.value = "";
+        }
+        btnCancelCrop.onclick = closeCropModal;
+        btnCancelCropAction.onclick = closeCropModal;
+
+        btnSaveCrop.addEventListener("click", async () => {
+            if (!cropper || !currentUser) return;
+
+            btnSaveCrop.innerText = "সংরক্ষণ হচ্ছে...";
+            btnSaveCrop.disabled = true;
+
+            // ক্যানভাসে ২০০x২০০ সাইজ (যাতে সাইজ মাত্র ২০-৩০ KB হয়)
+            const canvas = cropper.getCroppedCanvas({
+                width: 200,
+                height: 200
+            });
+
+            const base64Image = canvas.toDataURL("image/jpeg", 0.7);
+
+            try {
+                await setDoc(doc(db, "users", currentUser.email), {
+                    photoBase64: base64Image,
+                    userName: currentUser.displayName || currentUser.email.split("@")[0],
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                avatarContainer.innerHTML = `<img src="${base64Image}" alt="Profile">`;
+                closeCropModal();
+                alert("প্রোফাইল ছবি সফলভাবে আপডেট করা হয়েছে!");
+            } catch (error) {
+                console.error(error);
+                alert("ছবি সেভ করতে সমস্যা হয়েছে!");
+            } finally {
+                btnSaveCrop.innerText = "সেভ করুন";
+                btnSaveCrop.disabled = false;
             }
         });
 

@@ -83,17 +83,18 @@
             box-shadow: none;
         }
 
+        /* ফলোয়ার্স ও ফলোয়িং গ্রিড */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
             padding-top: 14px; border-top: 1px solid #f1f5f9;
         }
 
         .stat-item {
-            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 12px; padding: 10px 6px;
+            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 12px; padding: 10px 8px;
         }
 
-        .stat-val { font-size: 15px; font-weight: 700; color: #047857; margin-bottom: 1px; }
-        .stat-lbl { font-size: 10.5px; color: #64748b; font-weight: 600; }
+        .stat-val { font-size: 16px; font-weight: 700; color: #047857; margin-bottom: 1px; }
+        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; }
 
         .menu-list {
             background: #ffffff; border-radius: 18px; border: 1px solid #e2e8f0;
@@ -209,7 +210,7 @@
                 </button>
             </div>
 
-            <!-- স্ট্যাটাস কাউন্টার -->
+            <!-- স্ট্যাটাস কাউন্টার (বুকমার্ক ছাড়া শুধু ফলোয়ার্স ও ফলোয়িং) -->
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-val" id="followersCount">০</div>
@@ -218,10 +219,6 @@
                 <div class="stat-item">
                     <div class="stat-val" id="followingCount">০</div>
                     <div class="stat-lbl">Following</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-val" id="hlWordCount">০</div>
-                    <div class="stat-lbl">সংরক্ষিত শব্দ</div>
                 </div>
             </div>
         </div>
@@ -241,10 +238,10 @@
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
-            <a href="n5-vocab.html" class="menu-item">
+            <a href="ai-sensei.html" class="menu-item">
                 <div class="menu-left">
-                    <i class="fa-solid fa-book-bookmark"></i>
-                    <span>বুকমার্ক করা ভোকাবুলারি</span>
+                    <i class="fa-solid fa-robot"></i>
+                    <span>AI সেনসেই চ্যাটবক্স</span>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
@@ -290,7 +287,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -308,7 +305,7 @@
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
         const urlParams = new URLSearchParams(window.location.search);
-        const targetUserId = urlParams.get("uid"); // অন্য ইউজারের ইমেইল বা আইডি
+        const targetUserId = urlParams.get("uid");
 
         let currentUser = null;
         let isOwnProfile = true;
@@ -329,9 +326,7 @@
                 currentUser = user;
                 const myId = user.email.toLowerCase();
 
-                // যাচাই: এটি কি নিজের প্রোফাইল নাকি অন্যের?
                 isOwnProfile = !targetUserId || targetUserId.toLowerCase() === myId;
-
                 const viewingId = isOwnProfile ? myId : targetUserId.toLowerCase();
 
                 if (!isOwnProfile) {
@@ -354,7 +349,6 @@
             }
         });
 
-        // প্রোফাইল তথ্য এবং ফলোয়ার কাউন্ট লোড
         async function loadProfileData(userId) {
             try {
                 const userDoc = await getDoc(doc(db, "users", userId));
@@ -373,17 +367,11 @@
                         avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
                     }
                 }
-
-                const hlSnap = await getDoc(doc(db, "user_highlights", userId));
-                if (hlSnap.exists() && hlSnap.data().words) {
-                    document.getElementById("hlWordCount").innerText = hlSnap.data().words.length;
-                }
             } catch(e) {
                 console.error("Profile loading error:", e);
             }
         }
 
-        // ফলো অবস্থা যাচাই
         async function checkFollowStatus(myId, targetId) {
             try {
                 const followDoc = await getDoc(doc(db, "users", myId, "following", targetId));
@@ -402,7 +390,6 @@
             }
         }
 
-        // ফলো / আনফলো টগল ফাংশন
         followActionBtn.addEventListener("click", async () => {
             if (!currentUser || isOwnProfile) return;
 
@@ -418,7 +405,6 @@
                 const targetUserRef = doc(db, "users", targetId);
 
                 if (isFollowing) {
-                    // Unfollow করা
                     await deleteDoc(myFollowingRef);
                     await deleteDoc(targetFollowerRef);
 
@@ -427,7 +413,6 @@
 
                     isFollowing = false;
                 } else {
-                    // Follow করা
                     await setDoc(myFollowingRef, { timestamp: Date.now() });
                     await setDoc(targetFollowerRef, { timestamp: Date.now() });
 
@@ -440,14 +425,12 @@
                 updateFollowBtnUI();
                 loadProfileData(targetId);
             } catch(e) {
-                alert("ফলো একশনে সমস্যা হয়েছে!");
-                console.error(e);
+                alert("ফলো আপডেটে সমস্যা হয়েছে!");
             } finally {
                 followActionBtn.disabled = false;
             }
         });
 
-        // ছবি আপলোড ও ক্রপার সেটআপ
         avatarTrigger.addEventListener("click", () => {
             if (isOwnProfile) imageInput.click();
         });

@@ -21,6 +21,16 @@
 
         .page-content { padding: 16px; max-width: 480px; margin: 0 auto; }
 
+        /* ট্যাব ফিল্টার (Trending / Recent) */
+        .feed-tabs {
+            display: flex; background: #e2e8f0; padding: 4px; border-radius: 12px; margin-bottom: 14px; gap: 4px;
+        }
+        .feed-tab {
+            flex: 1; text-align: center; padding: 8px; font-size: 12.5px; font-weight: 700; color: #64748b;
+            border-radius: 9px; cursor: pointer; transition: all 0.2s; background: transparent; border: none;
+        }
+        .feed-tab.active { background: #ffffff; color: #047857; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
         /* পোস্ট ক্রিয়েট বক্স */
         .post-box {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
@@ -34,7 +44,12 @@
         }
         .post-input:focus { border-color: #047857; background: #ffffff; box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1); }
         
-        /* ইমেজ প্রিভিউ বক্স */
+        /* টপিক সিলেক্টর ড্রপডাউন */
+        .topic-selector {
+            width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
+            padding: 8px 12px; font-size: 12px; color: #334155; margin-top: 10px; outline: none; font-weight: 600;
+        }
+
         .post-img-preview-container {
             position: relative; margin-top: 10px; display: none; max-height: 200px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;
         }
@@ -50,42 +65,55 @@
             background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; width: 34px; height: 34px;
             border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;
         }
-        .tool-icon-btn:hover { background: #e2e8f0; }
-
         .btn-post-submit {
             background: #047857; color: #ffffff; border: none; padding: 8px 20px;
             border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
         }
-        .btn-post-submit:active { transform: scale(0.96); }
 
         /* পোস্ট কার্ড */
         .feed-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px;
-            margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+            margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03); position: relative;
         }
-        .feed-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; cursor: pointer; }
+        .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .feed-user-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .feed-avatar {
             width: 42px; height: 42px; border-radius: 50%; background: #e6f4ea; color: #047857;
             display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;
             overflow: hidden; border: 1.5px solid #a7f3d0; flex-shrink: 0;
         }
         .feed-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; }
+        .feed-user-info h4 { font-size: 14px; font-weight: 700; color: #0f3e2e; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
+        
+        /* স্টুডেন্ট লেভেল ব্যাজ */
+        .learner-badge {
+            font-size: 9px; font-weight: 700; background: #e0f2fe; color: #0369a1; padding: 1px 6px; border-radius: 6px;
+        }
         .feed-user-info p { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
+
+        /* পোস্ট ডিলিট/এডিট মেনু */
+        .post-options-btn { background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px; }
+
+        .topic-pill {
+            display: inline-block; font-size: 10.5px; font-weight: 700; background: #fef3c7; color: #b45309;
+            padding: 2px 8px; border-radius: 6px; margin-bottom: 8px; border: 1px solid #fde68a;
+        }
 
         .feed-body { font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 12px; word-break: break-word; }
         .feed-image-box { border-radius: 12px; overflow: hidden; margin-bottom: 12px; max-height: 260px; background: #000; }
         .feed-image-box img { width: 100%; max-height: 260px; object-fit: cover; display: block; }
         
         .feed-footer {
-            display: flex; align-items: center; gap: 10px; border-top: 1px solid #f1f5f9; padding-top: 12px;
+            display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 12px;
         }
+        .action-cluster { display: flex; gap: 8px; }
         .action-icon-btn {
             background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px;
             color: #64748b; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 600;
         }
         .action-icon-btn.liked { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
+        .action-icon-btn.bookmarked { background: #f0fdf4; border-color: #bbf7d0; color: #047857; }
 
         /* কমেন্ট সেকশন */
         .comments-section {
@@ -120,6 +148,12 @@
     </header>
 
     <main class="page-content">
+        <!-- ট্যাব ফিল্টার -->
+        <div class="feed-tabs">
+            <button class="feed-tab active" id="tabRecent" onclick="switchTab('recent')">সর্বশেষ (Recent)</button>
+            <button class="feed-tab" id="tabTrending" onclick="switchTab('trending')">জনপ্রিয় (Trending)</button>
+        </div>
+
         <!-- পোস্ট লেখার বক্স -->
         <div class="post-box" id="createPostBox" style="display: none;">
             <div class="post-box-header">
@@ -128,9 +162,17 @@
             </div>
             <textarea id="postTextInput" class="post-input" maxlength="400" placeholder="আপনার স্টাডি আপডেট এখানে লিখুন..."></textarea>
             
+            <select id="postTopicSelect" class="topic-selector">
+                <option value="General">💬 সাধারণ আলোচনা (General)</option>
+                <option value="Kanji">✍️ কাঞ্জি নোটস (Kanji)</option>
+                <option value="Grammar">📘 ব্যাকরণ টিপস (Grammar)</option>
+                <option value="N5">🎯 এন৫ পরীক্ষা (N5 Level)</option>
+                <option value="N4">🏆 এন৪ পরীক্ষা (N4 Level)</option>
+            </select>
+
             <!-- ছবি প্রিভিউ -->
             <div class="post-img-preview-container" id="postImgPreviewBox">
-                <img id="postImgPreview" src="" alt="Preview">
+                <img id="postImgPreview" alt="Preview">
                 <button class="remove-img-btn" id="removeImgBtn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <input type="file" id="postImageInput" accept="image/*" style="display: none;">
@@ -161,7 +203,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -179,6 +221,8 @@
 
         let currentUser = null;
         let selectedPostImageBase64 = null;
+        let currentTab = "recent";
+        let cachedPosts = [];
 
         const postImageInput = document.getElementById("postImageInput");
         const postImgPreviewBox = document.getElementById("postImgPreviewBox");
@@ -200,6 +244,13 @@
             }
             loadFeedPosts();
         });
+
+        window.switchTab = function(tab) {
+            currentTab = tab;
+            document.getElementById("tabRecent").className = `feed-tab ${tab === 'recent' ? 'active' : ''}`;
+            document.getElementById("tabTrending").className = `feed-tab ${tab === 'trending' ? 'active' : ''}`;
+            renderPosts();
+        };
 
         // ইমেজ আপলোড হ্যান্ডলিং
         document.getElementById("triggerImgUpload").onclick = () => postImageInput.click();
@@ -237,6 +288,7 @@
 
         document.getElementById("submitPostBtn").onclick = async () => {
             const text = document.getElementById("postTextInput").value.trim();
+            const topic = document.getElementById("postTopicSelect").value;
             if ((!text && !selectedPostImageBase64) || !currentUser) return;
 
             const btn = document.getElementById("submitPostBtn");
@@ -253,9 +305,11 @@
                     userName: userData.userName || currentUser.displayName || currentUser.email.split('@')[0],
                     userPhoto: userData.photoBase64 || currentUser.photoURL || null,
                     text: text,
+                    topic: topic,
                     imageBase64: selectedPostImageBase64 || null,
                     timestamp: Date.now(),
                     likes: [],
+                    bookmarks: [],
                     comments: []
                 });
 
@@ -273,63 +327,87 @@
 
         function loadFeedPosts() {
             const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
-            const container = document.getElementById("feedListContainer");
 
             onSnapshot(q, (snapshot) => {
-                container.innerHTML = "";
-                if (snapshot.empty) {
-                    container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">এখনও কোনো পোস্ট করা হয়নি। প্রথম পোস্টটি আপনি করুন!</div>`;
-                    return;
-                }
-
+                cachedPosts = [];
                 snapshot.forEach(docSnap => {
-                    const post = docSnap.data();
-                    const postId = docSnap.id;
-                    const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
-                    const comments = post.comments || [];
+                    cachedPosts.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                renderPosts();
+            });
+        }
 
-                    const avatarHtml = post.userPhoto 
-                        ? `<img src="${post.userPhoto}" alt="User">` 
-                        : (post.userName ? post.userName.charAt(0).toUpperCase() : "U");
+        function renderPosts() {
+            const container = document.getElementById("feedListContainer");
+            container.innerHTML = "";
 
-                    const imageHtml = post.imageBase64 
-                        ? `<div class="feed-image-box"><img src="${post.imageBase64}" alt="Post Image"></div>` 
-                        : '';
+            let displayPosts = [...cachedPosts];
+            if (currentTab === "trending") {
+                displayPosts.sort((a, b) => (b.likes || []).length - (a.likes || []).length);
+            }
 
-                    const commentsHtml = comments.map(c => `
-                        <div class="comment-bubble"><b>${c.userName}:</b> ${escapeHtml(c.text)}</div>
-                    `).join('');
+            if (displayPosts.length === 0) {
+                container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 40px; font-size: 13px;">কোনো পোস্ট পাওয়া যায়নি।</div>`;
+                return;
+            }
 
-                    const card = document.createElement("div");
-                    card.className = "feed-card";
-                    card.innerHTML = `
-                        <div class="feed-header" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
+            displayPosts.forEach(post => {
+                const postId = post.id;
+                const isLiked = currentUser && post.likes && post.likes.includes(currentUser.email.toLowerCase());
+                const isBookmarked = currentUser && post.bookmarks && post.bookmarks.includes(currentUser.email.toLowerCase());
+                const isOwner = currentUser && currentUser.email.toLowerCase() === post.userId;
+                const comments = post.comments || [];
+
+                const avatarHtml = post.userPhoto 
+                    ? `<img src="${post.userPhoto}" alt="User">` 
+                    : (post.userName ? post.userName.charAt(0).toUpperCase() : "U");
+
+                const imageHtml = post.imageBase64 
+                    ? `<div class="feed-image-box"><img src="${post.imageBase64}" alt="Post Image"></div>` 
+                    : '';
+
+                const commentsHtml = comments.map(c => `
+                    <div class="comment-bubble"><b>${c.userName}:</b> ${escapeHtml(c.text)}</div>
+                `).join('');
+
+                const card = document.createElement("div");
+                card.className = "feed-card";
+                card.innerHTML = `
+                    <div class="feed-header">
+                        <div class="feed-user-box" onclick="window.location.href='profile.html?uid=${encodeURIComponent(post.userId)}'">
                             <div class="feed-avatar">${avatarHtml}</div>
                             <div class="feed-user-info">
-                                <h4>${post.userName}</h4>
+                                <h4>${post.userName} <span class="learner-badge">Student</span></h4>
                                 <p>${post.timestamp ? new Date(post.timestamp).toLocaleDateString('bn-BD', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'}) : ""}</p>
                             </div>
                         </div>
-                        <div class="feed-body">${escapeHtml(post.text)}</div>
-                        ${imageHtml}
-                        <div class="feed-footer">
+                        ${isOwner ? `<button class="post-options-btn" onclick="deletePost('${postId}')" title="পোস্ট ডিলিট করুন"><i class="fa-solid fa-trash-can" style="font-size: 13px; color: #ef4444;"></i></button>` : ''}
+                    </div>
+                    ${post.topic ? `<span class="topic-pill">#${post.topic}</span>` : ''}
+                    <div class="feed-body">${escapeHtml(post.text)}</div>
+                    ${imageHtml}
+                    <div class="feed-footer">
+                        <div class="action-cluster">
                             <button class="action-icon-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${postId}', ${JSON.stringify(post.likes || [])})">
                                 <i class="fa-solid fa-heart"></i> <span>${(post.likes || []).length}</span>
                             </button>
-                            <button class="action-icon-btn" onclick="toggleComments('${postId}')">
-                                <i class="fa-regular fa-comment"></i> <span>${comments.length} কমেন্ট</span>
+                            <button class="action-icon-btn ${isBookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark('${postId}', ${JSON.stringify(post.bookmarks || [])})">
+                                <i class="fa-solid fa-bookmark"></i> <span>সেভ</span>
                             </button>
                         </div>
-                        <div class="comments-section" id="commentSection_${postId}">
-                            <div class="comments-list">${commentsHtml || '<div style="font-size:11px; color:#94a3b8; text-align:center;">কোনো কমেন্ট নেই</div>'}</div>
-                            <div class="comment-input-row">
-                                <input type="text" class="comment-input" id="commentInput_${postId}" placeholder="কমেন্ট লিখুন...">
-                                <button class="comment-send-btn" onclick="sendComment('${postId}')">পাঠান</button>
-                            </div>
+                        <button class="action-icon-btn" onclick="toggleComments('${postId}')">
+                            <i class="fa-regular fa-comment"></i> <span>${comments.length}</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" id="commentSection_${postId}">
+                        <div class="comments-list">${commentsHtml || '<div style="font-size:11px; color:#94a3b8; text-align:center;">কোনো কমেন্ট নেই</div>'}</div>
+                        <div class="comment-input-row">
+                            <input type="text" class="comment-input" id="commentInput_${postId}" placeholder="কমেন্ট লিখুন...">
+                            <button class="comment-send-btn" onclick="sendComment('${postId}')">পাঠান</button>
                         </div>
-                    `;
-                    container.appendChild(card);
-                });
+                    </div>
+                `;
+                container.appendChild(card);
             });
         }
 
@@ -353,6 +431,40 @@
             try {
                 await setDoc(postRef, { likes: newLikes }, { merge: true });
             } catch(e) {}
+        };
+
+        window.toggleBookmark = async function(postId, currentBookmarks) {
+            if (!currentUser) {
+                alert("পোস্ট সেভ করতে হলে লগইন করুন!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const myEmail = currentUser.email.toLowerCase();
+            const postRef = doc(db, "posts", postId);
+
+            let newBookmarks = [...currentBookmarks];
+            if (newBookmarks.includes(myEmail)) {
+                newBookmarks = newBookmarks.filter(email => email !== myEmail);
+                alert("পোস্টটি বুকমার্ক থেকে সরিয়ে নেওয়া হয়েছে!");
+            } else {
+                newBookmarks.push(myEmail);
+                alert("পোস্টটি সফলভাবে সেভ করা হয়েছে!");
+            }
+
+            try {
+                await setDoc(postRef, { bookmarks: newBookmarks }, { merge: true });
+            } catch(e) {}
+        };
+
+        window.deletePost = async function(postId) {
+            if (confirm("আপনি কি নিশ্চিত এই পোস্টটি ডিলিট করতে চান?")) {
+                try {
+                    await deleteDoc(doc(db, "posts", postId));
+                } catch(e) {
+                    alert("ডিলিট করতে সমস্যা হয়েছে!");
+                }
+            }
         };
 
         window.toggleComments = function(postId) {

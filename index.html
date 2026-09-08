@@ -156,6 +156,18 @@
             box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
         }
 
+        /* গ্লোবাল অ্যালার্ট ব্যানার */
+        .global-alert-banner {
+            display: none;
+            background: #fef2f2;
+            border-bottom: 1px solid #fecaca;
+            color: #b91c1c;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
         .page-content {
             padding: 16px;
             max-width: 480px;
@@ -389,7 +401,7 @@
             padding: 40px 0;
         }
 
-        /* বটম নেভিগেশন বার এবং এনিমেশন */
+        /* বটম নেভিগেশন বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -449,12 +461,15 @@
 </head>
 <body>
 
+    <!-- গ্লোবাল ব্যানার অ্যালার্ট -->
+    <div id="homeGlobalAlert" class="global-alert-banner"></div>
+
     <!-- টপ বার -->
     <header class="top-nav">
         <div class="top-nav-spacer"></div>
         <div class="logo-container">
             <a href="index.html" class="brand-link">
-                <img src="logo.png" alt="KOTOBA Logo" class="app-logo-img">
+                <img id="mainAppLogo" src="logo.png" alt="KOTOBA Logo" class="app-logo-img" onerror="this.src='https://placehold.co/100x100/047857/ffffff?text=K'">
                 <span class="logo">KOTOBA</span>
             </a>
         </div>
@@ -621,7 +636,7 @@
 
     </main>
 
-    <!-- বটম বার (লিডারবোর্ড সহ) -->
+    <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -641,7 +656,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -662,6 +677,8 @@
         const closeNotifBtn = document.getElementById("closeNotifBtn");
         const notifBadge = document.getElementById("notifBadge");
         const notifList = document.getElementById("notifList");
+        const mainAppLogo = document.getElementById("mainAppLogo");
+        const homeGlobalAlert = document.getElementById("homeGlobalAlert");
 
         let currentUserEmail = null;
 
@@ -669,6 +686,50 @@
             currentUserEmail = user && user.email ? user.email.toLowerCase().trim() : null;
             loadNotifications();
         });
+
+        // অ্যাডমিন থেকে নির্ধারিত ডাইনামিক সেটিংস লোড
+        async function loadSiteDynamicConfigs() {
+            try {
+                // ১. ব্র্যান্ডিং / আইকন লোড
+                const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
+                if (brandSnap.exists() && brandSnap.data().appIconBase64) {
+                    mainAppLogo.src = brandSnap.data().appIconBase64;
+                }
+
+                // ২. গ্লোবাল নোটিশ ব্যানার
+                const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
+                if (alertSnap.exists()) {
+                    const ad = alertSnap.data();
+                    if (ad.bannerStatus === "enabled" && ad.bannerText) {
+                        homeGlobalAlert.style.display = "block";
+                        homeGlobalAlert.innerText = ad.bannerText;
+                    }
+                }
+
+                // ৩. Monetag Ads ডাইনামিক লোডার
+                const adSnap = await getDoc(doc(db, "site_settings", "monetag_ads"));
+                let isMonetagActive = true; 
+                let monetagScriptUrl = "https://5gvci.com/act/files/tag.min.js?z=11752722";
+
+                if (adSnap.exists()) {
+                    const d = adSnap.data();
+                    isMonetagActive = d.indexPageAds !== false;
+                    if (d.scriptUrl) monetagScriptUrl = d.scriptUrl;
+                }
+
+                if (isMonetagActive && monetagScriptUrl) {
+                    const s = document.createElement("script");
+                    s.src = monetagScriptUrl;
+                    s.setAttribute("data-cfasync", "false");
+                    s.async = true;
+                    document.head.appendChild(s);
+                }
+            } catch (err) {
+                console.warn("Dynamic config load skipped:", err);
+            }
+        }
+
+        loadSiteDynamicConfigs();
 
         openNotifBtn.onclick = () => notifModal.style.display = "flex";
         closeNotifBtn.onclick = () => notifModal.style.display = "none";
@@ -715,7 +776,6 @@
                     notifList.innerHTML = `<div class="no-notif">কোনো নোটিফিকেশন নেই।</div>`;
                 }
             } catch (err) {
-                console.error(err);
                 notifList.innerHTML = `<div class="no-notif" style="color:#ef4444;">নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</div>`;
             }
         }

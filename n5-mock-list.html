@@ -318,23 +318,62 @@
             section3: {
                 name: "聴解（Listening）- もんだい 1",
                 timeMinutes: 30,
-                // আপনার গুগল ড্রাইভের অডিও ফাইল লিংক
                 audioUrl: "https://docs.google.com/uc?export=download&id=1WZIsbMlikfAnqtDPsR8RjbA7SsLwaKZQ",
                 instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
                 questions: [
-                    { id: 1, image: "m1_q1.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
-                    { id: 2, image: "m1_q2.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
-                    { id: 3, image: "m1_q3.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
-                    { id: 4, image: "m1_q4.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 5, image: "m1_q5.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
-                    { id: 6, image: "m1_q6.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 7, image: "m1_q7.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                    { 
+                        id: 1, 
+                        image: "https://ibb.co/PZKKcj8b", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 0 
+                    },
+                    { 
+                        id: 2, 
+                        image: "", // ২ নম্বরে কোনো ছবি নেই
+                        options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], 
+                        answer: 1 
+                    },
+                    { 
+                        id: 3, 
+                        image: "https://ibb.co/DPVMHwpP", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 1 
+                    },
+                    { 
+                        id: 4, 
+                        image: "https://ibb.co/fV5Fb6c5", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 2 
+                    },
+                    { 
+                        id: 5, 
+                        image: "https://ibb.co/Kxgk6yD1", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 3 
+                    },
+                    { 
+                        id: 6, 
+                        image: "https://ibb.co/tMN43pqR", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 2 
+                    },
+                    { 
+                        id: 7, 
+                        image: "https://ibb.co/LzT7D603", 
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
+                        answer: 0 
+                    }
                 ]
             }
         };
 
+        // ImgBB এবং Google Drive লিংকের জন্য সরাসরি ইমেজ রূপান্তর ফাংশন
         function formatImageSrc(url) {
             if (!url) return '';
+            if (url.includes('ibb.co/')) {
+                const id = url.split('/').filter(Boolean).pop();
+                return `https://i.ibb.co/${id}/image.jpg`;
+            }
             if (url.includes('drive.google.com')) {
                 const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
                 if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
@@ -379,7 +418,14 @@
 
                 let passageHtml = q.passage ? `<div class="passage-box"><i class="fa-solid fa-thumbtack passage-tag"></i>${q.passage}</div>` : '';
                 let headingHtml = q.heading ? `<div style="font-size: 13.5px; font-weight: 700; color: #475569; margin: 18px 0 10px; line-height: 1.6;">${q.heading}</div>` : '';
-                let imageHtml = q.image ? `<div class="q-img-wrap"><img src="${formatImageSrc(q.image)}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Image+${q.id}';"></div>` : '';
+                
+                // ছবি থাকলে তা লোড করবে, না থাকলে ব্ল্যাঙ্ক থাকবে
+                let imageHtml = q.image ? `
+                    <div class="q-img-wrap">
+                        <img src="${formatImageSrc(q.image)}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Question+${q.id}';">
+                    </div>
+                ` : '';
+
                 let promptHtml = q.text ? q.text.replace(/\n/g, '<br>') : `${q.id}ばん`;
 
                 let cardHtml = `
@@ -526,7 +572,7 @@
             }
         });
 
-        // Exit / Back Controller -> সরাসরি mock-test.html-এ ফেরত নেওয়া
+        // Exit / Back Controller -> সরাসরি mock-test.html এ ফেরত নেওয়া
         function goToExamHub() {
             window.location.href = 'mock-test.html';
         }
@@ -544,6 +590,7 @@
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
+        // পরীক্ষা শুরু
         renderCurrentSection();
     </script>
 </body>

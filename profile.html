@@ -19,64 +19,69 @@
         }
 
         body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            padding-bottom: 85px;
+            background-color: #f6f8fb;
+            color: #1e293b;
+            padding-bottom: 40px;
         }
 
         .top-nav {
-            display: flex; align-items: center; padding: 14px 18px;
-            background: #ffffff; border-bottom: 1px solid #f1f5f9;
-            position: sticky; top: 0; z-index: 100; gap: 14px;
+            display: flex; align-items: center; padding: 16px 20px;
+            background: #ffffff; border-bottom: 1px solid #edf2f7;
+            position: sticky; top: 0; z-index: 100; gap: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
         .back-btn {
-            color: #334155; font-size: 15px; text-decoration: none;
+            color: #475569; font-size: 14px; text-decoration: none;
             background: #f8fafc; border: 1px solid #e2e8f0;
-            width: 36px; height: 36px; border-radius: 10px;
+            width: 38px; height: 38px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease;
         }
+        .back-btn:hover { background: #f1f5f9; color: #0f172a; }
 
-        .nav-title { font-weight: 700; font-size: 16.5px; color: #0f3e2e; }
-        .page-content { padding: 16px; max-width: 460px; margin: 0 auto; }
+        .nav-title { font-weight: 700; font-size: 17px; color: #0f2e23; }
+        .page-content { padding: 20px 16px; max-width: 440px; margin: 0 auto; }
 
         .profile-card {
-            background: #ffffff; border-radius: 20px; padding: 24px 16px 20px;
+            background: #ffffff; border-radius: 24px; padding: 28px 20px 22px;
             text-align: center; border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03); margin-bottom: 18px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            margin-bottom: 16px;
         }
 
         .avatar-wrap {
-            position: relative; width: 84px; height: 84px; margin: 0 auto 12px; cursor: pointer;
+            position: relative; width: 92px; height: 92px; margin: 0 auto 14px; cursor: pointer;
         }
 
         .avatar-circle {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #e6f4ea; color: #047857; border: 2.5px solid #a7f3d0;
+            background: #ecfdf5; color: #059669; border: 3px solid #a7f3d0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 30px; font-weight: 700; text-transform: uppercase;
-            overflow: hidden; box-shadow: 0 4px 12px rgba(4, 120, 87, 0.12);
+            font-size: 32px; font-weight: 700; text-transform: uppercase;
+            overflow: hidden; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.15);
         }
 
         .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
 
         .camera-badge {
             position: absolute; bottom: 0; right: 0;
-            width: 28px; height: 28px; background: #047857; color: #ffffff;
-            border: 2px solid #ffffff; border-radius: 50%;
+            width: 30px; height: 30px; background: #059669; color: #ffffff;
+            border: 2.5px solid #ffffff; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; font-size: 11px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
-        .user-name { font-size: 17.5px; font-weight: 700; color: #0f2e23; margin-bottom: 2px; }
-        .user-email { font-size: 12px; color: #64748b; margin-bottom: 14px; font-weight: 500; }
+        .user-name { font-size: 18.5px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+        .user-email { font-size: 12.5px; color: #64748b; margin-bottom: 18px; font-weight: 500; }
 
         /* ফলো বাটন */
-        .follow-btn-wrap { margin-bottom: 16px; }
+        .follow-btn-wrap { margin-bottom: 18px; }
         .btn-follow {
-            background: #047857; color: #ffffff; border: none;
-            padding: 8px 24px; border-radius: 20px; font-size: 13px; font-weight: 700;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-            box-shadow: 0 2px 8px rgba(4, 120, 87, 0.2); transition: all 0.2s;
+            background: #059669; color: #ffffff; border: none;
+            padding: 9px 28px; border-radius: 22px; font-size: 13.5px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25); transition: all 0.2s;
         }
         .btn-follow.following {
             background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1;
@@ -85,57 +90,62 @@
 
         /* ফলোয়ার্স ও ফলোয়িং গ্রিড */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-            padding-top: 14px; border-top: 1px solid #f1f5f9;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+            padding-top: 16px; border-top: 1px solid #f1f5f9;
         }
 
         .stat-item {
-            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 12px; padding: 10px 8px;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 10px;
         }
 
-        .stat-val { font-size: 16px; font-weight: 700; color: #047857; margin-bottom: 1px; }
-        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; }
+        .stat-val { font-size: 17px; font-weight: 700; color: #059669; margin-bottom: 2px; }
+        .stat-lbl { font-size: 11.5px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
 
         .menu-list {
-            background: #ffffff; border-radius: 18px; border: 1px solid #e2e8f0;
+            background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0;
             overflow: hidden; margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
         }
 
         .menu-item {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 16px; text-decoration: none; color: #334155;
-            font-size: 13.5px; font-weight: 600; border-bottom: 1px solid #f1f5f9;
-            cursor: pointer;
+            padding: 15px 18px; text-decoration: none; color: #334155;
+            font-size: 14px; font-weight: 600; border-bottom: 1px solid #f1f5f9;
+            cursor: pointer; transition: background 0.15s ease;
         }
-
+        .menu-item:hover { background: #f8fafc; }
         .menu-item:last-child { border-bottom: none; }
-        .menu-left { display: flex; align-items: center; gap: 12px; }
-        .menu-left i { font-size: 15px; color: #047857; width: 20px; text-align: center; }
+        .menu-left { display: flex; align-items: center; gap: 14px; }
+        .menu-left i { font-size: 16px; color: #059669; width: 22px; text-align: center; }
 
         .logout-btn {
             width: 100%; background: #ffffff; border: 1px solid #fecdd3;
-            color: #e11d48; padding: 12px; border-radius: 14px;
-            font-size: 13.5px; font-weight: 700; cursor: pointer;
+            color: #e11d48; padding: 13px; border-radius: 16px;
+            font-size: 14px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.05);
+            transition: background 0.2s ease;
         }
+        .logout-btn:hover { background: #fff1f2; }
 
         /* ক্রপার মডাল */
         .cropper-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px);
-            z-index: 10000; justify-content: center; align-items: center; padding: 14px;
+            z-index: 10000; justify-content: center; align-items: center; padding: 16px;
         }
 
         .cropper-box-card {
-            background: #ffffff; width: 100%; max-width: 380px; border-radius: 22px;
+            background: #ffffff; width: 100%; max-width: 380px; border-radius: 24px;
             overflow: hidden; display: flex; flex-direction: column;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
 
         .cropper-header {
-            padding: 14px 18px; background: #0f3e2e; color: #ffffff;
+            padding: 16px 20px; background: #0f2e23; color: #ffffff;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .cropper-header h4 { font-size: 15px; font-weight: 700; }
+        .cropper-header h4 { font-size: 15.5px; font-weight: 700; }
         .btn-crop-close { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
 
         .crop-container { width: 100%; height: 280px; background: #0f172a; position: relative; }
@@ -145,42 +155,32 @@
         .cropper-view-box { outline: 2px solid #10b981 !important; }
 
         .crop-toolbar {
-            background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0;
             display: flex; justify-content: center; gap: 14px;
         }
         .tool-btn {
-            background: #ffffff; border: 1px solid #cbd5e1; width: 34px; height: 34px;
-            border-radius: 8px; color: #334155; font-size: 13px; cursor: pointer;
+            background: #ffffff; border: 1px solid #cbd5e1; width: 36px; height: 36px;
+            border-radius: 10px; color: #334155; font-size: 13.5px; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
         }
+        .tool-btn:hover { background: #f1f5f9; }
 
         .cropper-actions {
-            padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;
         }
 
         .btn-crop-cancel {
-            background: #f1f5f9; border: none; padding: 9px 18px; border-radius: 10px;
-            font-size: 13px; font-weight: 600; cursor: pointer; color: #475569;
+            background: #f1f5f9; border: none; padding: 10px 20px; border-radius: 12px;
+            font-size: 13.5px; font-weight: 600; cursor: pointer; color: #475569;
         }
 
         .btn-crop-save {
-            background: #047857; border: none; padding: 9px 24px; border-radius: 10px;
-            font-size: 13px; font-weight: 700; cursor: pointer; color: #ffffff;
+            background: #059669; border: none; padding: 10px 26px; border-radius: 12px;
+            font-size: 13.5px; font-weight: 700; cursor: pointer; color: #ffffff;
             display: flex; align-items: center; gap: 6px;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
         }
-
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
-            background: #ffffff; border-top: 1px solid #eef2f5;
-            display: flex; justify-content: space-around; align-items: center; z-index: 1000;
-        }
-
-        .nav-item {
-            text-decoration: none; color: #8392a5; font-size: 11px;
-            display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600;
-        }
-        .nav-item.active { color: #0f3e2e; }
-        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -196,7 +196,7 @@
         <div class="profile-card">
             <div class="avatar-wrap" id="avatarTrigger">
                 <div class="avatar-circle" id="avatarContainer">
-                    <span id="avatarInitial"><i class="fa-regular fa-user" style="font-size: 24px;"></i></span>
+                    <span id="avatarInitial"><i class="fa-regular fa-user" style="font-size: 26px;"></i></span>
                 </div>
                 <div class="camera-badge" id="cameraBadge"><i class="fa-solid fa-camera"></i></div>
             </div>
@@ -226,7 +226,7 @@
         <div class="menu-list" id="ownProfileMenus">
             <a href="admin.html" class="menu-item" id="adminOption" style="display: none; background: #f0fdf4;">
                 <div class="menu-left">
-                    <i class="fa-solid fa-shield-halved" style="color: #047857;"></i>
+                    <i class="fa-solid fa-shield-halved" style="color: #059669;"></i>
                     <span style="color: #065f46; font-weight: 700;">অ্যাডমিন কন্ট্রোল প্যানেল</span>
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #10b981; font-size: 11px;"></i>
@@ -267,26 +267,6 @@
             </div>
         </div>
     </div>
-
-    <!-- বটম নেভিগেশন বার (কমিউনিটি সহ) -->
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
-        </a>
-        <a href="feed.html" class="nav-item">
-            <i class="fa-solid fa-comments"></i>
-            <span>কমিউনিটি</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span>লিডারবোর্ড</span>
-        </a>
-        <a href="profile.html" class="nav-item active">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
-        </a>
-    </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 

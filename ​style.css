@@ -23,98 +23,163 @@
             padding-bottom: 80px;
         }
 
-        /* ================= পেজ লোডার ওভারলে ================= */
+        /* ================= প্রিমিয়াম ৩ডি বই লোডার ওভারলে ================= */
         .loader-overlay {
             position: fixed;
             top: 0; 
             left: 0;
             width: 100vw; 
             height: 100vh;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(4px);
+            background: rgba(247, 250, 249, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
         .loader-overlay.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
 
-        .book-loader {
+        .book-wrapper {
             position: relative;
-            width: 64px;
-            height: 46px;
-            perspective: 200px;
-            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .book-loader .cover-left {
-            position: absolute;
-            left: 2px; 
-            top: 2px;
-            width: 30px; 
-            height: 42px;
-            border: 2.2px solid #047857;
-            border-right: none;
-            border-radius: 4px 0 0 4px;
-            background: #ffffff;
+        .book-3d {
+            position: relative;
+            width: 90px;
+            height: 64px;
+            perspective: 600px;
+            transform-style: preserve-3d;
         }
 
-        .book-loader .cover-right {
+        .book-base {
             position: absolute;
-            right: 2px; 
-            top: 2px;
-            width: 30px; 
-            height: 42px;
-            border: 2.2px solid #047857;
-            border-left: none;
-            border-radius: 0 4px 4px 0;
-            background: #ffffff;
-        }
-
-        .book-loader .spine {
-            position: absolute;
-            left: 31px; 
             top: 0;
-            width: 2px; 
-            height: 46px;
-            background: #047857;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
         }
 
-        .book-loader .page {
-            position: absolute;
-            width: 29px; 
-            height: 42px;
-            top: 2px; 
-            right: 3px;
+        .book-base .left-page {
+            width: 50%;
+            height: 100%;
+            background: #ffffff;
+            border: 2px solid #047857;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            box-shadow: inset 4px 0 8px rgba(4, 120, 87, 0.08), -2px 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .book-base .right-page {
+            width: 50%;
+            height: 100%;
+            background: #ffffff;
             border: 2px solid #047857;
             border-left: none;
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 5px 5px 0;
+            box-shadow: inset -4px 0 8px rgba(4, 120, 87, 0.08), 2px 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .book-spine {
+            position: absolute;
+            left: 50%;
+            top: -2px;
+            width: 4px;
+            height: 68px;
+            background: #0f3e2e;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            z-index: 10;
+        }
+
+        .turning-pages {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .flipping-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: #ffffff;
+            border: 2px solid #047857;
+            border-left: none;
+            border-radius: 0 5px 5px 0;
             transform-origin: left center;
-            animation: flipBook 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            animation: flipPage 1.6s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .book-loader .page:nth-child(1) { animation-delay: 0.15s; }
-        .book-loader .page:nth-child(2) { animation-delay: 0.35s; }
-        .book-loader .page:nth-child(3) { animation-delay: 0.55s; }
+        .flipping-page:nth-child(1) { animation-delay: 0.15s; }
+        .flipping-page:nth-child(2) { animation-delay: 0.45s; }
+        .flipping-page:nth-child(3) { animation-delay: 0.75s; }
 
-        @keyframes flipBook {
-            0% { transform: rotateY(0deg); }
-            50%, 100% { transform: rotateY(-180deg); }
+        @keyframes flipPage {
+            0% {
+                transform: rotateY(0deg);
+                background: #ffffff;
+            }
+            50% {
+                background: #f1f5f9;
+            }
+            100% {
+                transform: rotateY(-180deg);
+                background: #ffffff;
+            }
         }
 
-        .loading-text {
+        .book-shadow {
+            width: 100px;
+            height: 12px;
+            background: radial-gradient(ellipse at center, rgba(15, 62, 46, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+            margin-top: 14px;
+            border-radius: 50%;
+            animation: shadowPulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes shadowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(0.85); opacity: 0.3; }
+        }
+
+        .loading-text-box {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .loading-jp {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 15px;
+            font-weight: 700;
+            color: #0f3e2e;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .loading-bn {
+            font-size: 11.5px;
+            color: #64748b;
             font-weight: 600;
-            color: #1e293b;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
         }
 
         /* টপ বার */
@@ -237,7 +302,7 @@
             margin-bottom: 14px;
         }
 
-        /* কার্ড গ্রিড (মোবাইলে পাশাপাশি ২টি করে) */
+        /* কার্ড গ্রিড */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -280,7 +345,6 @@
         .red-bg { background: #fce8e6; color: #b91c1c; }
         .yellow-bg { background: #fef3c7; color: #d97706; }
 
-        /* কার্ড টেক্সট */
         .item-card h4 {
             font-size: 13.5px;
             font-weight: 700;
@@ -294,7 +358,6 @@
             line-height: 1.3;
         }
 
-        /* ছোট কামিং সুন ট্যাগ */
         .mini-tag {
             position: absolute;
             top: 6px;
@@ -419,7 +482,7 @@
             justify-content: center;
         }
 
-        /* বটম বার (হোম, লিডারবোর্ড, প্রোফাইল + এনিমেশন) */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -479,17 +542,27 @@
 </head>
 <body>
 
-    <!-- লোডার ওভারলে -->
+    <!-- ৩ডি বুক উল্টানো লোডার ওভারলে -->
     <div id="pageLoader" class="loader-overlay">
-        <div class="book-loader">
-            <div class="cover-left"></div>
-            <div class="cover-right"></div>
-            <div class="spine"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
+        <div class="book-wrapper">
+            <div class="book-3d">
+                <div class="book-base">
+                    <div class="left-page"></div>
+                    <div class="right-page"></div>
+                </div>
+                <div class="book-spine"></div>
+                <div class="turning-pages">
+                    <div class="flipping-page"></div>
+                    <div class="flipping-page"></div>
+                    <div class="flipping-page"></div>
+                </div>
+            </div>
+            <div class="book-shadow"></div>
+            <div class="loading-text-box">
+                <div class="loading-jp">読み込み中...</div>
+                <div class="loading-bn">অনুগ্রহ করে একটু অপেক্ষা করুন</div>
+            </div>
         </div>
-        <div class="loading-text">読み込み中...</div>
     </div>
 
     <!-- টপ বার -->
@@ -548,14 +621,13 @@
             <h3 class="section-heading">বিগিনার লেভেল</h3>
             <div class="card-grid">
                 
-                <!-- বর্ণমালা লিংক -->
                 <a href="alphabet.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
                     <h4>বর্ণমালা</h4>
                     <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
+                <a href="n5-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
@@ -567,7 +639,6 @@
                     <p>সহজ ভাষায় N5 গ্রামার</p>
                 </a>
 
-                <!-- কাঞ্জি লিংক -->
                 <a href="kanji.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
@@ -631,14 +702,12 @@
             <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
             <div class="card-grid">
                 
-                <!-- N4 শব্দকোষ লিংক -->
                 <a href="n4-vocab.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দকোষ</h4>
                     <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
                 </a>
 
-                <!-- N4 ব্যাকরণ লিংক -->
                 <a href="n4-grammar.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
                     <h4>ব্যাকরণ</h4>
@@ -678,7 +747,7 @@
         </div>
     </div>
 
-    <!-- বটম বার (হোম, লিডারবোর্ড, প্রোফাইল) -->
+    <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -694,25 +763,31 @@
         </a>
     </nav>
 
-    <!-- ট্রানজিশন লোডার স্ক্রিপ্ট -->
+    <!-- গ্লোবাল লোডার হ্যান্ডলার (সব পেজ ট্রানজিশনের জন্য) -->
     <script>
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                const loader = document.getElementById("pageLoader");
-                if (loader) loader.classList.add("hidden");
-            }, 350);
-        });
+        const pageLoader = document.getElementById("pageLoader");
 
+        // পেজ ও ফায়ারবেস ডেটা লোডের জন্য সময় দিয়ে লোডার হাইড করা
+        function hideLoader() {
+            if (pageLoader) {
+                setTimeout(() => {
+                    pageLoader.classList.add("hidden");
+                }, 500);
+            }
+        }
+
+        window.addEventListener("load", hideLoader);
+
+        // যেকোনো লিংকে ক্লিক করলে ব্লার লোডার অন করে পেজ ট্রানজিশন
         document.querySelectorAll("a").forEach(link => {
             const href = link.getAttribute("href");
             if (href && !href.startsWith("#") && !href.startsWith("javascript:") && !link.target) {
                 link.addEventListener("click", (e) => {
                     e.preventDefault();
-                    const loader = document.getElementById("pageLoader");
-                    if (loader) loader.classList.remove("hidden");
+                    if (pageLoader) pageLoader.classList.remove("hidden");
                     setTimeout(() => {
                         window.location.href = href;
-                    }, 220);
+                    }, 350);
                 });
             }
         });

@@ -95,7 +95,7 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* ছবি ফুল দেখানোর জন্য ফিক্সড সিএসএস */
+        /* ছবি ফুল এবং স্পষ্ট দেখানোর জন্য স্টাইল */
         .q-img-wrap {
             width: 100%;
             max-width: 100%;
@@ -136,16 +136,9 @@
         .option-label.selected { border-color: #047857; background: #f0fdf4; }
         .option-text { font-size: 14px; font-weight: 500; color: #1e293b; }
 
-        /* রিভিউ বা রেজাল্ট স্ক্রিনের জন্য স্টাইল */
         .result-card {
             background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
             padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-        .result-header {
-            font-size: 18px; font-weight: 900; color: #0f172a; margin-bottom: 6px; text-align: center;
-        }
-        .result-sub {
-            font-size: 13px; color: #64748b; text-align: center; margin-bottom: 18px; font-weight: 600;
         }
         .score-box-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;
@@ -264,9 +257,7 @@
 
     <!-- স্কোর ও ডিটেইলড রিভিউ স্ক্রিন -->
     <div class="screen-modal" id="scoreModal">
-        <div class="screen-modal-content" id="scoreModalBody">
-            <!-- এখানে ড্যাশবোর্ড ও রিভিউ ডাইনামিক লোড হবে -->
-        </div>
+        <div class="screen-modal-content" id="scoreModalBody"></div>
     </div>
 
     <script>
@@ -351,7 +342,7 @@
                     {
                         id: 20,
                         heading: "もんだい５ つぎの ぶんしょうを よんで、しつもんに こたえて ください。",
-                        passage: "青木山に のぼりました (ラン)\nきのう、はじめて 青木山に のぼりました。山の上の さくらが 見たかったからです。山の入り口から 山の上まで 2時間かかります。私は 15分ぐらい のぼって、すぐにつかれました。でも、山で 会った人たちが みんな、私に 元気な声で 「こんにちは。」と 言いました。ちょっと (1)うれしかったです。\n\n1時ごろ 山の上に着きました。さくらの木は ありましたが、花は ありませんでした。近くにいた 女の人に 「さくらの花は まだですか。」と 聞きました。女の人は 「山の上は 寒いですから、花は まだですよ。来月の はじめごろはきれいですよ。」と 言いました。ですから、(2)来月また 行きたいです。",
+                        passage: "青木山に のぼりました (ラン)\nきのう、はじめて 青木山に のぼりました。山の上の さくらが 見たかったからです。山の入り口から 山の上まで 2時間かかります。私は 15分ぐらい のぼって、すぐにつかれました。でも、山で 会った人たちが みんな、私に 元気な声で 「こんにちは。」と 言いました。ちょっと (1)うれしかったです。\n\n1時ごろ 山の上に着きました。さくらの木は ありましたが、花は ありませんでした。近くにいた 女の人に 「さくらの花は まだですか。」と 聞きました。女の人は 「山の上は 寒いですから、花は まだですよ。来月の はじめごろは きれいですよ。」と 言いました。ですから、(2)来月また 行きたいです。",
                         text: "どうして (1)うれしかったですか。",
                         options: ["1. はじめて 青木山に のぼったから。", "2. 山で ぜんぜん つかれなかったから。", "3. 山で 会った人たちと いっしょに 山に のぼったから。", "4. 山で 会った人たちが 「私」に 「こんにちは。」と 言ったから。"],
                         answer: 3
@@ -373,13 +364,13 @@
                 audioUrl: "audio-part1.mp3",
                 instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
                 questions: [
-                    { id: 1, image: "https://ibb.co/PZKKcj8b", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                    { id: 1, image: "https://ibb.co/WrXpRx1", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
                     { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
-                    { id: 3, image: "https://ibb.co/DPVMHwpP", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
-                    { id: 4, image: "https://ibb.co/fV5Fb6c5", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 5, image: "https://ibb.co/Kxgk6yD1", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
-                    { id: 6, image: "https://ibb.co/tMN43pqR", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 7, image: "https://ibb.co/LzT7D603", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                    { id: 3, image: "https://ibb.co/MHtgyYj", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                    { id: 4, image: "https://ibb.co/4wVxjfFS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 5, image: "https://ibb.co/Pzc0vHQW", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                    { id: 6, image: "https://ibb.co/WN0SRLLk", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 7, image: "https://ibb.co/S7JTV0BS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
                 ]
             }
         };
@@ -549,7 +540,6 @@
             };
         }
 
-        // আপনার দেওয়া স্ক্রিনশটের মতো সুন্দর ফলাফল ড্যাশবোর্ড ও রিভিউ তৈরি
         function finishExamAndCalculate() {
             const scoreModal = document.getElementById('scoreModal');
             const modalBody = document.getElementById('scoreModalBody');
@@ -571,7 +561,7 @@
                 if (userAnswers[`section3_q${q.id}`] === q.answer) { sec3Score++; totalCorrect++; }
             });
 
-            let isPassed = totalCorrect >= (totalQ * 0.5); // ৫০% পেলে পাস
+            let isPassed = totalCorrect >= (totalQ * 0.5);
 
             let html = `
                 <div class="result-card" style="background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%); color: #ffffff; text-align: center;">
@@ -606,7 +596,6 @@
                 <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 20px 0 12px;">📋 Detailed Review (কোথায় ভুল হয়েছে দেখুন)</h3>
             `;
 
-            // প্রতিটি সেকশন ও প্রশ্নের সঠিক-ভুল রিভিউ জেনারেট করা
             ['section1', 'section2', 'section3'].forEach(secKey => {
                 const sec = examData[secKey];
                 html += `<div style="font-size: 14px; font-weight: 800; color: #047857; margin: 16px 0 8px; border-bottom: 2px solid #047857; padding-bottom: 4px;">${sec.name}</div>`;

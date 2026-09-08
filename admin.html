@@ -250,7 +250,7 @@
                 <div>
                     <label style="font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; display: block;">প্রশ্ন নম্বর:</label>
                     <select id="questionSelect" class="select-styled">
-                        <!-- জাভাস্ক্রিপ্ট দিয়ে মোন্দাই অনুযায়ী অপশন বসবে -->
+                        <!-- অপশন ডাইনামিক লোড হবে -->
                     </select>
                 </div>
             </div>
@@ -261,11 +261,11 @@
             </div>
 
             <div class="input-group">
-                <label>অথবা লোকাল ডিভাইস থেকে ছবি আপলোড করুন:</label>
+                <label>অথবা ডিভাইস থেকে ছবি আপলোড করুন (স্বয়ংক্রিয়ভাবে কম্প্রেস হবে):</label>
                 <input type="file" id="listeningImgFileInput" accept="image/*" class="input-control" style="font-size: 12px; padding: 6px 10px;">
             </div>
 
-            <!-- লাইভ মোবাইল ভিউ ও ক্রপ প্রিভিউ -->
+            <!-- লাইভ মোবাইল ফ্রেম প্রিভিউ -->
             <div class="image-preview-terminal">
                 <div class="preview-header-bar">
                     <span><i class="fa-solid fa-mobile-screen"></i> লাইভ পরীক্ষার ফ্রেম রিভিউ</span>
@@ -375,8 +375,6 @@
         <div class="section-card">
             <h3><span><i class="fa-solid fa-paper-plane" style="color: #d97706; margin-right: 6px;"></i> নোটিফিকেশন পাঠান</span></h3>
             
-            <input type="hidden" id="editNotifId" value="">
-
             <div class="input-group">
                 <label>কাকে পাঠাতে চান?</label>
                 <select id="notifTargetType" class="input-control">
@@ -471,11 +469,10 @@
         });
 
         // ================= লিসেনিং ইমেজ ম্যানেজার হ্যান্ডলার =================
-        // মোন্দাই অনুযায়ী ইমেজ থাকা নির্দিষ্ট প্রশ্নগুলোর ম্যাপিং
         const mondaiQuestionMaps = {
-            m1: [1, 2, 3, 4, 5, 6, 7], // Mondai 1: সব প্রশ্ন
-            m2: [2, 4],                // Mondai 2: শুধু ২ ও ৪ নম্বরে ছবি
-            m3: [1, 2, 3, 4, 5]        // Mondai 3: সব প্রশ্ন (মোন্দাই ৪-এ কোনো ছবি নেই)
+            m1: [1, 2, 3, 4, 5, 6, 7],
+            m2: [2, 4],
+            m3: [1, 2, 3, 4, 5]
         };
 
         const mondaiSelect = document.getElementById("mondaiSelect");
@@ -541,16 +538,43 @@
             }
         });
 
+        // অটোমেটিক ইমেজ কম্প্রেসর (Firestore 1MB লিমিট রোধ করার জন্য)
         listeningImgFileInput.addEventListener("change", (e) => {
             const file = e.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
             reader.onload = (ev) => {
-                listeningImgUrlInput.value = ev.target.result;
-                livePreviewImg.src = ev.target.result;
-                livePreviewImg.style.display = "block";
-                noImgPreviewPrompt.style.display = "none";
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const maxDim = 800; // সর্বোচ্চ ৮০০ পিক্সেল
+                    let w = img.width;
+                    let h = img.height;
+
+                    if (w > maxDim || h > maxDim) {
+                        if (w > h) {
+                            h = Math.round((h * maxDim) / w);
+                            w = maxDim;
+                        } else {
+                            w = Math.round((w * maxDim) / h);
+                            h = maxDim;
+                        }
+                    }
+
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, w, h);
+
+                    // JPEG 75% কোয়ালিটিতে কম্প্রেস (১০০-২০০ কেবির নিচে নেমে আসবে)
+                    const compressedBase64 = canvas.toDataURL("image/jpeg", 0.75);
+                    listeningImgUrlInput.value = compressedBase64;
+                    livePreviewImg.src = compressedBase64;
+                    livePreviewImg.style.display = "block";
+                    noImgPreviewPrompt.style.display = "none";
+                };
+                img.src = ev.target.result;
             };
             reader.readAsDataURL(file);
         });
@@ -580,7 +604,8 @@
                 renderSavedAssetsList();
                 updatePreviewUI();
             } catch(e) {
-                alert("ইমেজ সংরক্ষণ করতে সমস্যা হয়েছে!");
+                console.error("Firestore save error:", e);
+                alert("ইমেজ সংরক্ষণ করতে সমস্যা হয়েছে! কনসোলে বিস্তারিত দেখুন।");
             } finally {
                 saveListeningAssetBtn.disabled = false;
                 saveListeningAssetBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> এই প্রশ্নের জন্য ইমেজ সেভ করুন`;

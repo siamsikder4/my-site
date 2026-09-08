@@ -193,10 +193,10 @@
             color: #64748b;
         }
 
-        /* ব্যানার অ্যাড বক্স স্টাইল */
+        /* ডাইনামিক ব্যানার অ্যাড বক্স */
         .ad-banner-box {
             width: 100%;
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             margin: 14px auto 22px;
@@ -513,19 +513,8 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- ব্যানার বিজ্ঞাপন (হিরো সেকশনের নিচে) -->
-        <div class="ad-banner-box">
-            <script>
-              atOptions = {
-                'key' : '8daacdc376c790c03bd8fe48f80c0b1c',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
-            </script>
-            <script src="https://www.highrevenueformat.com/8daacdc376c790c03bd8fe48f80c0b1c/invoke.js"></script>
-        </div>
+        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন (অ্যাডমিন প্যানেল কন্ট্রোলড) -->
+        <div class="ad-banner-box" id="homeAdContainer"></div>
 
         <!-- সেকশন ১: A1-A2 -->
         <section class="level-section">
@@ -704,6 +693,7 @@
         const notifList = document.getElementById("notifList");
         const mainAppLogo = document.getElementById("mainAppLogo");
         const homeGlobalAlert = document.getElementById("homeGlobalAlert");
+        const homeAdContainer = document.getElementById("homeAdContainer");
 
         let currentUserEmail = null;
 
@@ -712,7 +702,7 @@
             loadNotifications();
         });
 
-        // ডাইনামিক কনফিগ লোডার (ব্র্যান্ডিং ও সিস্টেম ব্যানার)
+        // ডাইনামিক বিজ্ঞাপন ও সেটিংস হ্যান্ডলার
         async function loadSiteDynamicConfigs() {
             try {
                 // ১. ব্র্যান্ডিং / আইকন লোড
@@ -730,8 +720,59 @@
                         homeGlobalAlert.innerText = ad.bannerText;
                     }
                 }
+
+                // ৩. বিজ্ঞাপন মাস্টার কন্ট্রোল
+                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
+                let isGlobalOn = true;
+                let isIndexOn = true;
+                let adKey = "8daacdc376c790c03bd8fe48f80c0b1c";
+
+                if (adSnap.exists()) {
+                    const adData = adSnap.data();
+                    isGlobalOn = adData.globalAdsEnabled !== false;
+                    isIndexOn = adData.indexAdsEnabled !== false;
+                    if (adData.adKey) adKey = adData.adKey;
+                }
+
+                if (isGlobalOn && isIndexOn) {
+                    homeAdContainer.style.display = "flex";
+                    
+                    const adIframe = document.createElement("iframe");
+                    adIframe.style.width = "320px";
+                    adIframe.style.height = "50px";
+                    adIframe.style.border = "none";
+                    adIframe.style.overflow = "hidden";
+                    adIframe.scrolling = "no";
+                    
+                    homeAdContainer.appendChild(adIframe);
+                    
+                    const iframeDoc = adIframe.contentWindow.document;
+                    iframeDoc.open();
+                    iframeDoc.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent;}</style></head>
+                        <body>
+                            <script type="text/javascript">
+                                atOptions = {
+                                    'key' : '${adKey}',
+                                    'format' : 'iframe',
+                                    'height' : 50,
+                                    'width' : 320,
+                                    'params' : {}
+                                };
+                            <\/script>
+                            <script type="text/javascript" src="https://www.highrevenueformat.com/${adKey}/invoke.js"><\/script>
+                        </body>
+                        </html>
+                    `);
+                    iframeDoc.close();
+                } else {
+                    homeAdContainer.style.display = "none";
+                    homeAdContainer.innerHTML = "";
+                }
             } catch (err) {
-                console.warn("Dynamic config load skipped:", err);
+                console.warn("Dynamic config load error:", err);
             }
         }
 

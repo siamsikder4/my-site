@@ -48,6 +48,10 @@
         .admin-banner h2 { font-size: 19px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
         .admin-banner p { font-size: 12px; color: #a7f3d0; }
 
+        .banner-firestore-btn {
+            background: #ffffff; color: #047857; padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
+
         /* মেট্রিক্স গ্রিড */
         .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 18px; }
         .stat-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
@@ -58,6 +62,48 @@
         .section-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 
+        /* সুইচ ও টগল কন্ট্রোল */
+        .switch-row {
+            display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px;
+        }
+        .switch-info h5 { font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+        .switch-info p { font-size: 11px; color: #64748b; }
+
+        .toggle-switch { position: relative; display: inline-block; width: 46px; height: 26px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1; transition: .3s; border-radius: 26px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
+            background-color: white; transition: .3s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #047857; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* লোগো ও অ্যাপ আইকন */
+        .icon-preview-box {
+            display: flex; align-items: center; gap: 16px; padding: 14px; background: #f8fafc;
+            border: 1px dashed #cbd5e1; border-radius: 14px; margin-bottom: 12px;
+        }
+        .icon-img-wrap {
+            width: 70px; height: 70px; border-radius: 16px; border: 2px solid #047857;
+            overflow: hidden; display: flex; align-items: center; justify-content: center; background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex-shrink: 0;
+        }
+        .icon-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .icon-upload-meta { flex: 1; }
+        .icon-upload-meta p { font-size: 11.5px; color: #64748b; line-height: 1.4; margin-bottom: 8px; }
+
+        /* অডিও কার্ড */
+        .audio-item-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 12px;
+        }
+        .audio-item-card h4 { font-size: 13.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+
+        /* ইমেজ ম্যানেজার */
         .grid-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .select-styled {
             width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px;
@@ -83,23 +129,38 @@
         .asset-row-item {
             display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #f1f5f9; font-size: 12px;
         }
-        .asset-tag-badge { background: #ecfdf5; color: #047857; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
+        .asset-tag-badge { background: #ecfdf5; color: #047857; font-weight: 800; padding: 4px 8px; border-radius: 6px; font-size: 11.5px; }
 
+        /* রিভিউ ডিরেক্টরি */
+        .review-card-item {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 10px;
+        }
+        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .review-user-name { font-size: 13px; font-weight: 700; color: #0f3e2e; }
+        .review-stars { color: #f59e0b; font-size: 12px; }
+        .review-text-content { font-size: 12px; color: #334155; line-height: 1.4; margin-bottom: 8px; }
+        .review-actions-bar { display: flex; justify-content: space-between; align-items: center; }
+        .review-btn-del { color: #dc2626; background: #fee2e2; border: none; padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+
+        /* ইনপুট ও বাটন */
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
         .input-control { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none; background: #f8fafc; }
         .input-control:focus { border-color: #047857; background: #ffffff; }
+        textarea.input-control { resize: vertical; min-height: 75px; }
 
         .btn-submit {
             width: 100%; padding: 11px; background: #047857; color: #ffffff; border: none; border-radius: 10px; font-weight: 700; font-size: 13.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;
         }
         .btn-submit:active { background: #065f46; }
 
-        /* অডিও কার্ড স্টাইল */
-        .audio-item-card {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 12px;
-        }
-        .audio-item-card h4 { font-size: 13.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        /* নোটিফিকেশন টেবিল */
+        .table-responsive { max-height: 350px; overflow-y: auto; border: 1px solid #f1f5f9; border-radius: 10px; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+        .data-table th { background: #f1f5f9; color: #475569; font-weight: 700; padding: 10px 8px; position: sticky; top: 0; z-index: 10; }
+        .data-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
+        .badge-target { background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
+        .badge-target.all { background: #dcfce7; color: #15803d; }
     </style>
 </head>
 <body>
@@ -126,27 +187,30 @@
             <div class="banner-flex">
                 <div>
                     <h2><i class="fa-solid fa-user-shield"></i> মাস্টার কন্ট্রোল প্যানেল</h2>
-                    <p>অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
+                    <p id="adminStatusText">অ্যাডমিন আইডি: qr.siamsikder@gmail.com</p>
                 </div>
+                <a href="firestore.html" class="banner-firestore-btn">
+                    <i class="fa-solid fa-database" style="color: #ff9100;"></i> Firestore ব্রাউজার
+                </a>
             </div>
         </div>
 
         <!-- মেট্রিক্স -->
         <div class="stat-grid">
             <div class="stat-box">
+                <i class="fa-solid fa-users"></i>
+                <div class="stat-num" id="totalUsersCount">০</div>
+                <div class="stat-label">মোট ইউজার</div>
+            </div>
+            <div class="stat-box">
                 <i class="fa-solid fa-images"></i>
                 <div class="stat-num" id="totalListeningImgsCount">০</div>
                 <div class="stat-label">লিসেনিং ছবি</div>
             </div>
             <div class="stat-box">
-                <i class="fa-solid fa-file-audio" style="color: #d97706;"></i>
-                <div class="stat-num" id="totalAudiosCount">৩</div>
-                <div class="stat-label">অডিও ট্র্যাক</div>
-            </div>
-            <div class="stat-box">
-                <i class="fa-solid fa-users"></i>
-                <div class="stat-num" id="totalUsersCount">০</div>
-                <div class="stat-label">মোট ইউজার</div>
+                <i class="fa-solid fa-star" style="color: #f59e0b;"></i>
+                <div class="stat-num" id="totalReviewsCount">০</div>
+                <div class="stat-label">ইউজার রিভিউ</div>
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
@@ -155,10 +219,10 @@
             </div>
         </div>
 
-        <!-- ================= লিসেনিং অডিও ম্যানেজার (Mondai 1, 2, 3) ================= -->
+        <!-- ================= ১. লিসেনিং অডিও আপলোডার (৪টি মোন্দাই) ================= -->
         <div class="section-card">
             <h3>
-                <span><i class="fa-solid fa-music" style="color: #d97706; margin-right: 6px;"></i> লিসেনিং অডিও আপলোডার / ম্যানেজার</span>
+                <span><i class="fa-solid fa-music" style="color: #d97706; margin-right: 6px;"></i> লিসেনিং অডিও আপলোডার ও ম্যানেজার (Mondai 1-4)</span>
                 <span style="font-size: 11px; font-weight: 700; color: #d97706; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">MP3 Audio Tracks</span>
             </h3>
 
@@ -200,9 +264,22 @@
                 </div>
                 <audio id="audioPlayM3" controls style="width: 100%; height: 32px; margin-top: 8px; display: none;"></audio>
             </div>
+
+            <!-- মোন্দাই ৪ অডিও -->
+            <div class="audio-item-card">
+                <h4><i class="fa-solid fa-volume-high"></i> もんだい 4 অডিও ট্র্যাক</h4>
+                <div class="input-group">
+                    <input type="text" id="audioUrlM4" class="input-control" placeholder="যেমন: https://.../audio-part4.mp3 অথবা audio-part4.mp3">
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <input type="file" id="audioFileM4" accept="audio/mp3,audio/*" style="font-size: 11.5px; flex: 1;">
+                    <button class="btn-submit" style="margin-top:0; padding: 8px 14px; width: auto;" onclick="saveAudioTrack('m4')">সেভ M4 অডিও</button>
+                </div>
+                <audio id="audioPlayM4" controls style="width: 100%; height: 32px; margin-top: 8px; display: none;"></audio>
+            </div>
         </div>
 
-        <!-- ================= লিসেনিং ইমেজ ম্যানেজার (১-৩ এর সব প্রশ্ন উন্মুক্ত) ================= -->
+        <!-- ================= ২. লিসেনিং ইমেজ ম্যানেজার (১, ২, ৩ এর সব প্রশ্ন উন্মুক্ত) ================= -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-images" style="color: #047857; margin-right: 6px;"></i> লিসেনিং ইমেজ ম্যানেজার (Mondai 1, 2, 3)</span>
@@ -230,10 +307,11 @@
             </div>
 
             <div class="input-group">
-                <label>অথবা ডিভাইস থেকে ছবি আপলোড করুন (Auto Compressed):</label>
+                <label>অথবা ডিভাইস থেকে ছবি আপলোড করুন (স্বয়ংক্রিয়ভাবে কম্প্রেস হবে):</label>
                 <input type="file" id="listeningImgFileInput" accept="image/*" class="input-control" style="font-size: 12px; padding: 6px 10px;">
             </div>
 
+            <!-- লাইভ মোবাইল ফ্রেম প্রিভিউ -->
             <div class="image-preview-terminal">
                 <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12px; font-weight:700;">
                     <span><i class="fa-solid fa-mobile-screen"></i> লাইভ ফ্রেম প্রিভিউ</span>
@@ -248,17 +326,144 @@
                         </div>
                     </div>
                 </div>
+                <p style="font-size: 11px; color: #64748b; margin-top: 8px;">
+                    ℹ️ শিক্ষার্থী তার মোবাইল স্ক্রিনে ছবিটি সম্পূর্ণ (Full & Uncropped) দেখতে পাবে কিনা তা এখানে ফুটে ওঠে।
+                </p>
             </div>
 
             <button class="btn-submit" id="saveListeningAssetBtn">
                 <i class="fa-solid fa-floppy-disk"></i> এই প্রশ্নের জন্য ইমেজ সেভ করুন
             </button>
 
+            <!-- সংরক্ষিত ইমেজ তালিকা -->
             <div class="assets-list-badge-table">
                 <div style="padding: 8px 12px; background: #f8fafc; font-size: 12px; font-weight: 800; border-bottom: 1px solid #e2e8f0;">
                     ডাটাবেসে সংরক্ষিত ইমেজ সমূহ
                 </div>
                 <div id="savedListeningAssetsList"></div>
+            </div>
+        </div>
+
+        <!-- ================= ৩. গ্লোবাল বিজ্ঞাপন মাস্টার কন্ট্রোল ================= -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-rectangle-ad" style="color: #0284c7; margin-right: 6px;"></i> বিজ্ঞাপন মাস্টার কন্ট্রোল</span></h3>
+            
+            <div class="switch-row" style="border-left: 4px solid #047857; background: #f0fdf4;">
+                <div class="switch-info">
+                    <h5 style="color: #065f46;">সব বিজ্ঞাপন চালু / বন্ধ (Master Switch)</h5>
+                    <p>এটি অফ করলে পুরো সাইট থেকে সব বিজ্ঞাপন সাথে সাথে মুছে যাবে</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleGlobalAds" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-row">
+                <div class="switch-info">
+                    <h5>হোমপেজ ব্যানার (index.html Ads)</h5>
+                    <p>শুধু হোমপেজের ব্যানার বিজ্ঞাপন চালু বা বন্ধ রাখুন</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleIndexAds" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="input-group" style="margin-top: 14px;">
+                <label>Adsterra Banner Ad Key (320x50):</label>
+                <input type="text" id="adsterraKeyInput" class="input-control" value="8daacdc376c790c03bd8fe48f80c0b1c" placeholder="যেমন: 8daacdc376c790c03bd8fe48f80c0b1c">
+            </div>
+
+            <button class="btn-submit" id="saveAdsConfigBtn">
+                <i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন
+            </button>
+        </div>
+
+        <!-- ================= ৪. অ্যাপ লোগো ও আইকন আপলোডার ================= -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-image" style="color: #047857; margin-right: 6px;"></i> অ্যাপ লোগো ও আইকন আপলোড</span></h3>
+            
+            <div class="icon-preview-box">
+                <div class="icon-img-wrap">
+                    <img id="currentAppIcon" src="logo.png" alt="App Icon" onerror="this.src='https://placehold.co/100x100/047857/ffffff?text=KOTOBA'">
+                </div>
+                <div class="icon-upload-meta">
+                    <h5 style="font-size: 13px; font-weight: 700; color: #0f3e2e;">বর্তমান সক্রিয় আইকন</h5>
+                    <p>বর্গাকার (PNG/WEBP) ফাইল নির্বাচন করুন। সাইজ অনূর্ধ্ব ৫০০ KB।</p>
+                    <input type="file" id="iconFileInput" accept="image/png, image/jpeg, image/webp" style="font-size: 11.5px; color: #64748b;">
+                </div>
+            </div>
+
+            <button class="btn-submit" id="saveIconBtn">
+                <i class="fa-solid fa-cloud-arrow-up"></i> আইকন ডাটাবেসে সেভ করুন
+            </button>
+        </div>
+
+        <!-- ================= ৫. ইউজার রিভিউ ও ফিডব্যাক ডিরেক্টরি ================= -->
+        <div class="section-card">
+            <h3>
+                <span><i class="fa-solid fa-star-half-stroke" style="color: #f59e0b; margin-right: 6px;"></i> ইউজার রিভিউ ও রেটিং ডিরেক্টরি</span>
+                <button id="refreshReviewsBtn" style="background:none; border:none; color:#047857; font-size:13px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i> রিফ্রেশ</button>
+            </h3>
+
+            <div id="reviewsListContainer" style="max-height: 320px; overflow-y: auto; padding-right: 4px;">
+                <div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">রিভিউ লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <!-- ================= ৬. নোটিফিকেশন পাঠান ================= -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-paper-plane" style="color: #d97706; margin-right: 6px;"></i> নোটিফিকেশন পাঠান</span></h3>
+            
+            <div class="input-group">
+                <label>কাকে পাঠাতে চান?</label>
+                <select id="notifTargetType" class="input-control">
+                    <option value="all">সবাইকে (All Users)</option>
+                    <option value="specific">নির্দিষ্ট একজনকে (Specific User)</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="emailInputGroup" style="display: none;">
+                <label>ইউজারের ইমেইল দিন:</label>
+                <input type="email" id="notifSpecificEmail" class="input-control" placeholder="user@gmail.com">
+            </div>
+
+            <div class="input-group">
+                <label>নোটিফিকেশন টাইটেল:</label>
+                <input type="text" id="notifTitle" class="input-control" placeholder="যেমন: নতুন লেসন আপডেট!">
+            </div>
+
+            <div class="input-group">
+                <label>বিস্তারিত বার্তা:</label>
+                <textarea id="notifMsg" class="input-control" placeholder="বার্তার বিস্তারিত লিখুন..."></textarea>
+            </div>
+
+            <button class="btn-submit" id="saveNotifBtn">
+                <i class="fa-solid fa-bell"></i> নোটিফিকেশন পাঠান
+            </button>
+        </div>
+
+        <!-- ================= ৭. নোটিফিকেশন তালিকা ================= -->
+        <div class="section-card">
+            <h3>
+                <span><i class="fa-solid fa-list-check" style="color: #047857; margin-right: 6px;"></i> পাঠানো নোটিফিকেশন সমূহ</span>
+                <button id="refreshNotifsBtn" style="background:none; border:none; color:#047857; font-size:13px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i> রিফ্রেশ</button>
+            </h3>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>টাইটেল ও বার্তা</th>
+                            <th style="text-align: center;">টার্গেট</th>
+                            <th style="text-align: right;">অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notifTableBody">
+                        <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -268,7 +473,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
@@ -287,6 +492,8 @@
         const storage = getStorage(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
+        let allNotifications = [];
+        let selectedIconBase64 = null;
         let activeListeningAssets = {};
         let activeAudioTracks = {};
 
@@ -295,24 +502,27 @@
                 document.getElementById("authCheckingScreen").style.display = "none";
                 document.getElementById("adminContent").style.display = "block";
                 
-                await fetchListeningAssets();
+                await loadAdminConfigs();
                 await fetchAudioTracks();
+                await fetchListeningAssets();
+                await fetchNotifications();
+                await fetchReviews();
             } else {
                 alert("অনুমতি নেই! শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
                 window.location.href = "profile.html";
             }
         });
 
-        // ================= অডিও আপলোডার ও সেভার লজিক =================
+        // ================= ১. অডিও আপলোডার ও সেভার লজিক (M1 - M4) =================
         async function fetchAudioTracks() {
             try {
                 const snap = await getDoc(doc(db, "site_settings", "listening_exam_audio"));
                 if (snap.exists()) {
                     activeAudioTracks = snap.data() || {};
-                    ['m1', 'm2', 'm3'].forEach(m => {
+                    ['m1', 'm2', 'm3', 'm4'].forEach(m => {
                         const input = document.getElementById(`audioUrl${m.toUpperCase()}`);
                         const player = document.getElementById(`audioPlay${m.toUpperCase()}`);
-                        if (activeAudioTracks[m]) {
+                        if (input && activeAudioTracks[m]) {
                             input.value = activeAudioTracks[m];
                             player.src = activeAudioTracks[m];
                             player.style.display = "block";
@@ -357,7 +567,7 @@
             }
         };
 
-        // ================= ইমেজ ম্যানেজার লজিক =================
+        // ================= ২. ইমেজ ম্যানেজার লজিক =================
         const mondaiQuestionCounts = { m1: 7, m2: 6, m3: 5 };
         const mondaiSelect = document.getElementById("mondaiSelect");
         const questionSelect = document.getElementById("questionSelect");
@@ -417,6 +627,7 @@
             }
         });
 
+        // অটোমেটিক ইমেজ কম্প্রেসর
         listeningImgFileInput.addEventListener("change", (e) => {
             const file = e.target.files[0];
             if (!file) return;
@@ -455,6 +666,7 @@
             saveListeningAssetBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
 
             try {
+                // সাব-কালেকশনে সংরক্ষিত হবে (1MB লিমিট ইস্যু থাকবে না)
                 await setDoc(doc(db, "site_settings", "listening_exam_assets", "items", key), {
                     url: urlVal,
                     updatedAt: Date.now()
@@ -535,6 +747,251 @@
         };
 
         populateQuestions();
+
+        // ================= ৩. অ্যাডস কন্ট্রোল হ্যান্ডলার =================
+        const toggleGlobalAds = document.getElementById("toggleGlobalAds");
+        const toggleIndexAds = document.getElementById("toggleIndexAds");
+        const adsterraKeyInput = document.getElementById("adsterraKeyInput");
+        const saveAdsConfigBtn = document.getElementById("saveAdsConfigBtn");
+
+        saveAdsConfigBtn.addEventListener("click", async () => {
+            saveAdsConfigBtn.disabled = true;
+            saveAdsConfigBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+
+            try {
+                await setDoc(doc(db, "site_settings", "ads_control"), {
+                    globalAdsEnabled: toggleGlobalAds.checked,
+                    indexAdsEnabled: toggleIndexAds.checked,
+                    adKey: adsterraKeyInput.value.trim() || "8daacdc376c790c03bd8fe48f80c0b1c",
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                alert("বিজ্ঞাপন সেটিংস সফলভাবে আপডেট হয়েছে!");
+            } catch (err) {
+                alert("সেটিংস সেভ করতে সমস্যা হয়েছে।");
+            } finally {
+                saveAdsConfigBtn.disabled = false;
+                saveAdsConfigBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন`;
+            }
+        });
+
+        // ================= ৪. ব্র্যান্ডিং ও আইকন হ্যান্ডলার =================
+        const iconFileInput = document.getElementById("iconFileInput");
+        const currentAppIcon = document.getElementById("currentAppIcon");
+        const saveIconBtn = document.getElementById("saveIconBtn");
+
+        iconFileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.size > 500 * 1024) {
+                alert("ফাইলের সাইজ ৫০০ KB এর নিচে হতে হবে!");
+                iconFileInput.value = "";
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                selectedIconBase64 = event.target.result;
+                currentAppIcon.src = selectedIconBase64;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        saveIconBtn.addEventListener("click", async () => {
+            if (!selectedIconBase64) return alert("প্রথমে একটি ছবি নির্বাচন করুন!");
+
+            saveIconBtn.disabled = true;
+            saveIconBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+
+            try {
+                await setDoc(doc(db, "site_settings", "branding"), {
+                    appIconBase64: selectedIconBase64,
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                alert("অ্যাপ আইকন ডাটাবেসে সফলভাবে আপডেট হয়েছে!");
+            } catch (err) {
+                alert("আইকন সেভ করতে সমস্যা হয়েছে!");
+            } finally {
+                saveIconBtn.disabled = false;
+                saveIconBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> আইকন ডাটাবেসে সেভ করুন`;
+            }
+        });
+
+        // ================= ৫. রিভিউ ডিরেক্টরি =================
+        async function fetchReviews() {
+            const listWrap = document.getElementById("reviewsListContainer");
+            listWrap.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">রিভিউ লোড হচ্ছে...</div>`;
+
+            try {
+                const snap = await getDocs(collection(db, "reviews"));
+                document.getElementById("totalReviewsCount").innerText = snap.size;
+
+                if (snap.empty) {
+                    listWrap.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">কোনো রিভিউ নেই।</div>`;
+                    return;
+                }
+
+                listWrap.innerHTML = "";
+                snap.forEach(docSnap => {
+                    const r = docSnap.data();
+                    const stars = "★".repeat(r.rating || 5) + "☆".repeat(5 - (r.rating || 5));
+                    
+                    const card = document.createElement("div");
+                    card.className = "review-card-item";
+                    card.innerHTML = `
+                        <div class="review-header">
+                            <span class="review-user-name">${r.userName || r.userEmail || 'নামহীন ইউজার'}</span>
+                            <span class="review-stars">${stars}</span>
+                        </div>
+                        <div class="review-text-content">${r.comment || 'কোনো মন্তব্য নেই'}</div>
+                        <div class="review-actions-bar">
+                            <span style="font-size: 10.5px; color: #64748b;">${r.date ? new Date(r.date).toLocaleDateString('bn-BD') : ''}</span>
+                            <button class="review-btn-del" onclick="deleteReviewItem('${docSnap.id}')">
+                                <i class="fa-solid fa-trash-can"></i> ডিলিট
+                            </button>
+                        </div>
+                    `;
+                    listWrap.appendChild(card);
+                });
+            } catch (err) {
+                listWrap.innerHTML = `<div style="text-align: center; color: #ef4444; padding: 15px; font-size: 12px;">রিভিউ লোড করা যায়নি।</div>`;
+            }
+        }
+
+        window.deleteReviewItem = async function(id) {
+            if (confirm("এই রিভিউটি মুছে ফেলতে চান?")) {
+                try {
+                    await deleteDoc(doc(db, "reviews", id));
+                    fetchReviews();
+                } catch(e) {
+                    alert("মুছে ফেলতে সমস্যা হয়েছে!");
+                }
+            }
+        };
+
+        document.getElementById("refreshReviewsBtn").addEventListener("click", fetchReviews);
+
+        // ================= কনফিগ লোডার =================
+        async function loadAdminConfigs() {
+            try {
+                const userSnap = await getDocs(collection(db, "users"));
+                document.getElementById("totalUsersCount").innerText = userSnap.size;
+
+                const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
+                if (brandSnap.exists() && brandSnap.data().appIconBase64) {
+                    currentAppIcon.src = brandSnap.data().appIconBase64;
+                }
+
+                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
+                if (adSnap.exists()) {
+                    const d = adSnap.data();
+                    toggleGlobalAds.checked = d.globalAdsEnabled !== false;
+                    toggleIndexAds.checked = d.indexAdsEnabled !== false;
+                    if (d.adKey) adsterraKeyInput.value = d.adKey;
+                }
+            } catch(e) {
+                console.error("Config load error:", e);
+            }
+        }
+
+        // ================= ৬. নোটিফিকেশন হ্যান্ডলার =================
+        document.getElementById("notifTargetType").addEventListener("change", (e) => {
+            const emailGroup = document.getElementById("emailInputGroup");
+            emailGroup.style.display = e.target.value === "specific" ? "block" : "none";
+            if (e.target.value !== "specific") document.getElementById("notifSpecificEmail").value = "";
+        });
+
+        async function fetchNotifications() {
+            const tbody = document.getElementById("notifTableBody");
+            tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:20px;">লোড হচ্ছে...</td></tr>`;
+            try {
+                const snap = await getDocs(collection(db, "notifications"));
+                allNotifications = [];
+                snap.forEach(docSnap => allNotifications.push({ id: docSnap.id, ...docSnap.data() }));
+
+                allNotifications.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+                document.getElementById("totalNotifsCount").innerText = allNotifications.length;
+                renderNotifsTable();
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; padding:20px;">লোড করতে ত্রুটি হয়েছে!</td></tr>`;
+            }
+        }
+
+        function renderNotifsTable() {
+            const tbody = document.getElementById("notifTableBody");
+            tbody.innerHTML = "";
+            if (allNotifications.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding:18px;">কোনো নোটিফিকেশন নেই।</td></tr>`;
+                return;
+            }
+
+            allNotifications.forEach(n => {
+                const tr = document.createElement("tr");
+                const targetText = n.target === "all" ? `<span class="badge-target all">All Users</span>` : `<span class="badge-target">${n.target}</span>`;
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 700; color: #0f3e2e; margin-bottom: 3px;">${n.title}</div>
+                        <div style="font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;">${n.message}</div>
+                    </td>
+                    <td style="text-align: center;">${targetText}</td>
+                    <td style="text-align: right;">
+                        <button onclick="deleteNotif('${n.id}')" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:6px; color:#dc2626; cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById("refreshNotifsBtn").addEventListener("click", fetchNotifications);
+
+        document.getElementById("saveNotifBtn").addEventListener("click", async () => {
+            const title = document.getElementById("notifTitle").value.trim();
+            const msg = document.getElementById("notifMsg").value.trim();
+            const type = document.getElementById("notifTargetType").value;
+            const specificEmail = document.getElementById("notifSpecificEmail").value.trim().toLowerCase();
+            const btn = document.getElementById("saveNotifBtn");
+
+            if (!title || !msg) return alert("টাইটেল ও বার্তা আবশ্যক!");
+            if (type === "specific" && !specificEmail) return alert("নির্দিষ্ট ইউজারের ইমেইল দিন!");
+
+            const targetVal = type === "all" ? "all" : specificEmail;
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> প্রসেসিং...`;
+
+            try {
+                await addDoc(collection(db, "notifications"), {
+                    title: title, message: msg, target: targetVal, timestamp: Date.now()
+                });
+                alert("নোটিফিকেশন সফলভাবে পাঠানো হয়েছে!");
+
+                document.getElementById("notifTitle").value = "";
+                document.getElementById("notifMsg").value = "";
+                document.getElementById("notifTargetType").value = "all";
+                document.getElementById("emailInputGroup").style.display = "none";
+                document.getElementById("notifSpecificEmail").value = "";
+
+                await fetchNotifications();
+            } catch(e) {
+                alert("নোটিফিকেশন পাঠাতে সমস্যা হয়েছে!");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-bell"></i> নোটিফিকেশন পাঠান`;
+            }
+        });
+
+        window.deleteNotif = async function(id) {
+            if (confirm("এই নোটিফিকেশনটি মুছে ফেলতে চান?")) {
+                try {
+                    await deleteDoc(doc(db, "notifications", id));
+                    await fetchNotifications();
+                } catch(e) {
+                    alert("ডিলিট করতে সমস্যা হয়েছে।");
+                }
+            }
+        };
     </script>
 </body>
 </html>

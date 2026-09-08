@@ -95,7 +95,7 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* ছবি যাতে ১০০% আনক্রপড ও পুরোটা দেখা যায় */
+        /* আনক্রপড ফুল ইমেজ কন্টেইনার */
         .q-img-wrap {
             width: 100%;
             border: 1px solid #e2e8f0;
@@ -359,7 +359,24 @@
         <div class="screen-modal-content" id="scoreModalBody"></div>
     </div>
 
-    <script>
+    <!-- Firebase SDK লোডার ও এক্সাম স্ক্রিপ্ট -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         const examData = {
             section1: {
                 name: "言語知識（文字・語彙）- Vocabulary",
@@ -474,6 +491,24 @@
             }
         };
 
+        // ফায়ারস্টোর থেকে ডায়নামিক ইমেজ লোড করার ফাংশন
+        async function syncListeningImagesFromFirestore() {
+            try {
+                const snap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
+                if (snap.exists() && snap.data().images) {
+                    const savedImages = snap.data().images;
+                    examData.section3.questions.forEach(q => {
+                        const key = `m1_q${q.id}`;
+                        if (savedImages[key]) {
+                            q.image = savedImages[key];
+                        }
+                    });
+                }
+            } catch(e) {
+                console.warn("Firestore listening images sync failed, using defaults:", e);
+            }
+        }
+
         let currentSectionKey = "section1";
         let userAnswers = {};
         let flaggedQuestions = new Set();
@@ -550,23 +585,23 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function selectAnswer(qKey, optIndex) {
+        window.selectAnswer = function(qKey, optIndex) {
             userAnswers[qKey] = optIndex;
             const card = document.getElementById(`card_${qKey}`);
             card.querySelectorAll('.option-label').forEach((lbl, idx) => {
                 if (idx === optIndex) lbl.classList.add('selected');
                 else lbl.classList.remove('selected');
             });
-        }
+        };
 
-        function toggleFlag(qKey) {
+        window.toggleFlag = function(qKey) {
             if (flaggedQuestions.has(qKey)) flaggedQuestions.delete(qKey);
             else flaggedQuestions.add(qKey);
             const card = document.getElementById(`card_${qKey}`);
             const btn = card.querySelector('.btn-flag');
             btn.classList.toggle('active');
             btn.innerHTML = `<i class="fa-${flaggedQuestions.has(qKey) ? 'solid' : 'regular'} fa-bookmark"></i>`;
-        }
+        };
 
         function startTimer(duration) {
             clearInterval(timerInterval);
@@ -627,7 +662,6 @@
             };
         }
 
-        /* স্ক্রিনশটের হুবহু মতো রেজাল্ট ড্যাশবোর্ড লজিক */
         function finishExamAndCalculate() {
             const scoreModal = document.getElementById('scoreModal');
             const modalBody = document.getElementById('scoreModalBody');
@@ -645,9 +679,6 @@
                 if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
             });
 
-            // JLPT N5 এর অফিশিয়াল স্কেল স্কোর হিসাব (মোট ১৮০ পয়েন্ট)
-            // Language Knowledge & Reading: 120 pts
-            // Listening: 60 pts
             const langReadTotalQ = examData.section1.questions.length + examData.section2.questions.length;
             const langReadCorrect = sec1Score + sec2Score;
             const langScaledScore = Math.round((langReadCorrect / langReadTotalQ) * 120);
@@ -656,11 +687,8 @@
             const listeningScaledScore = Math.round((sec3Score / listeningTotalQ) * 60);
 
             const totalScore = langScaledScore + listeningScaledScore;
-            
-            // পাশের শর্ত: মোট ৮০ বা তদূর্ধ্ব এবং প্রতিটি সেকশনে পাসিং কাটঅফ
             const isPassed = (totalScore >= 80) && (langScaledScore >= 38) && (listeningScaledScore >= 19);
 
-            // রেফারেন্স গ্রেড (A, B, C)
             function getGrade(score, max) {
                 const p = (score / max) * 100;
                 if (p >= 67) return { grade: 'A', color: '#059669' };
@@ -672,20 +700,17 @@
             const grammarGrade = getGrade(sec2Score, examData.section2.questions.length);
             const readingGrade = getGrade(sec2Score, examData.section2.questions.length);
 
-            // শতাংশ হিসাব
             const vocabPct = Math.round((sec1Score / examData.section1.questions.length) * 100);
             const grammarPct = Math.round((sec2Score / examData.section2.questions.length) * 100);
             const listeningPct = Math.round((sec3Score / examData.section3.questions.length) * 100);
 
             let html = `
                 <div class="dash-container">
-                    <!-- নীল হেডার -->
                     <div class="dash-blue-header">
                         <h2>🇯🇵 JLPT Results Dashboard</h2>
                         <p>JLPT N5 Korean Practice Test 1 – 2026</p>
                     </div>
 
-                    <!-- ট্যাব বার -->
                     <div class="dash-tabs-bar">
                         <button class="dash-tab-btn active" id="tabBtnOfficial" onclick="switchResultTab('official')">
                             <i class="fa-regular fa-clipboard"></i> Official Results
@@ -695,7 +720,6 @@
                         </button>
                     </div>
 
-                    <!-- ট্যাব ১: Official Results (হুবহু সার্টিফিকেট স্ক্রিনশট) -->
                     <div class="dash-tab-content" id="tabContentOfficial">
                         <div class="cert-subheading">日本語能力試験・認定・文法・語彙</div>
 
@@ -709,7 +733,6 @@
                             ${isPassed ? '合格 / Passed' : '不合格 / Failed'}
                         </div>
 
-                        <!-- অফিসিয়াল টেবিল -->
                         <table class="jlpt-score-table">
                             <thead>
                                 <tr>
@@ -748,7 +771,6 @@
                             </tbody>
                         </table>
 
-                        <!-- 参考情報 Reference Information -->
                         <div class="ref-info-title">参考情報<br><span style="font-size: 11px; color:#64748b; font-weight:600;">Reference Information</span></div>
                         <div class="ref-info-grid">
                             <div class="ref-card">
@@ -779,10 +801,7 @@
                         </button>
                     </div>
 
-                    <!-- ট্যাব ২: Sections Details (হুবহু স্ক্রিনশট ৩ ও ৪) -->
                     <div class="dash-tab-content" id="tabContentDetails" style="display: none;">
-                        
-                        <!-- Vocabulary -->
                         <div class="sec-detail-card">
                             <div class="sec-detail-head vocab">
                                 <div>
@@ -822,7 +841,6 @@
                             </div>
                         </div>
 
-                        <!-- Grammar -->
                         <div class="sec-detail-card">
                             <div class="sec-detail-head grammar">
                                 <div>
@@ -855,7 +873,6 @@
                             </div>
                         </div>
 
-                        <!-- Listening -->
                         <div class="sec-detail-card">
                             <div class="sec-detail-head listening">
                                 <div>
@@ -874,7 +891,6 @@
                             </div>
                         </div>
 
-                        <!-- প্রশ্নভিত্তিক পুঙ্খানুপুঙ্খ রিভিউ -->
                         <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin: 20px 0 10px;">
                             📝 Answer Breakdown (ভুল-সঠিক যাচাই)
                         </h3>
@@ -889,7 +905,6 @@
 
             modalBody.innerHTML = html;
 
-            // প্রশ্নের আইটেম লেভেল রিভিউ ইনসার্ট
             const reviewContainer = document.getElementById('itemLevelReview');
             let reviewHtml = "";
             ['section1', 'section2', 'section3'].forEach(secKey => {
@@ -917,7 +932,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ট্যাব সুইচ ফাংশন
         window.switchResultTab = function(tab) {
             const officialTab = document.getElementById('tabContentOfficial');
             const detailsTab = document.getElementById('tabContentDetails');
@@ -944,9 +958,9 @@
             }
         });
 
-        function goToExamHub() {
+        window.goToExamHub = function() {
             window.location.href = 'mock-test.html';
-        }
+        };
 
         const exitModal = document.getElementById('exitModal');
         const btnBackPrompt = document.getElementById('btnBackPrompt');
@@ -955,13 +969,16 @@
 
         btnBackPrompt.addEventListener('click', () => { exitModal.style.display = 'flex'; });
         btnCancelExit.addEventListener('click', () => { exitModal.style.display = 'none'; });
-        btnFinalConfirmExit.addEventListener('click', goToExamHub);
+        btnFinalConfirmExit.addEventListener('click', window.goToExamHub);
 
         window.addEventListener('click', (e) => {
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
-        renderCurrentSection();
+        // ফায়ারস্টোর থেকে ইমেজ লোড করে এক্সাম শুরু
+        syncListeningImagesFromFirestore().then(() => {
+            renderCurrentSection();
+        });
     </script>
 </body>
 </html>

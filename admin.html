@@ -98,7 +98,7 @@
         .icon-upload-meta { flex: 1; }
         .icon-upload-meta p { font-size: 11.5px; color: #64748b; line-height: 1.4; margin-bottom: 8px; }
 
-        /* ================= লিসেনিং ইমেজ ম্যানেজার স্টাইল ================= */
+        /* লিসেনিং ইমেজ ম্যানেজার */
         .grid-two-col {
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
         }
@@ -143,7 +143,7 @@
             background: #ecfdf5; color: #047857; font-weight: 700; padding: 3px 8px; border-radius: 6px; font-size: 11px;
         }
 
-        /* রিভিউ ডিরেক্টরি স্টাইল */
+        /* রিভিউ ডিরেক্টরি */
         .review-card-item {
             background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 10px;
         }
@@ -231,7 +231,7 @@
             </div>
         </div>
 
-        <!-- ================= লিসেনিং মোন্দাই ইমেজ ও রিসোর্স ম্যানেজার ================= -->
+        <!-- লিসেনিং ইমেজ ম্যানেজার (Mondai 1-3) -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-images" style="color: #047857; margin-right: 6px;"></i> লিসেনিং ইমেজ ম্যানেজার (Mondai 1-3)</span>
@@ -242,9 +242,9 @@
                 <div>
                     <label style="font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; display: block;">মোন্দাই নির্বাচন করুন:</label>
                     <select id="mondaiSelect" class="select-styled">
-                        <option value="m1">もんだい 1 (Task-based)</option>
-                        <option value="m2">もんだい 2 (Key Points)</option>
-                        <option value="m3">もんだい 3 (Verbal Expressions)</option>
+                        <option value="m1">もんだい 1 (Task-based - ৭টি প্রশ্ন)</option>
+                        <option value="m2">もんだい 2 (Key Points - ছবিযুক্ত প্রশ্ন)</option>
+                        <option value="m3">もんだい 3 (Verbal Expressions - ৫টি প্রশ্ন)</option>
                     </select>
                 </div>
                 <div>
@@ -261,7 +261,7 @@
             </div>
 
             <div class="input-group">
-                <label>অথবা লোকাল ডিভাইস থেকে ছবি সিলেক্ট করুন (Auto Convert to Web):</label>
+                <label>অথবা লোকাল ডিভাইস থেকে ছবি আপলোড করুন:</label>
                 <input type="file" id="listeningImgFileInput" accept="image/*" class="input-control" style="font-size: 12px; padding: 6px 10px;">
             </div>
 
@@ -273,7 +273,7 @@
                 </div>
                 <div class="preview-phone-frame">
                     <div style="font-size: 11px; color: #64748b; margin-bottom: 6px; text-align: left; font-weight: 700;">
-                        <span id="previewQPromptTitle">1ばん (Example Mock)</span>
+                        <span id="previewQPromptTitle">1ばん (Exam Frame)</span>
                     </div>
                     <div class="preview-exam-mock-card">
                         <img id="livePreviewImg" src="" alt="" style="display: none;">
@@ -284,7 +284,7 @@
                     </div>
                 </div>
                 <p style="font-size: 11px; color: #64748b; margin-top: 8px;">
-                    ℹ️ এই প্রিভিউটি দেখায় শিক্ষার্থী তার মোবাইল স্ক্রিনে ছবিটি সম্পূর্ণ (Full & Uncropped) দেখতে পাবে কিনা।
+                    ℹ️ শিক্ষার্থী তার মোবাইল স্ক্রিনে ছবিটি সম্পূর্ণ (Full & Uncropped) দেখতে পাবে কিনা তা এখানে ফুটে ওঠে।
                 </p>
             </div>
 
@@ -310,7 +310,7 @@
             <div class="switch-row" style="border-left: 4px solid #047857; background: #f0fdf4;">
                 <div class="switch-info">
                     <h5 style="color: #065f46;">সব বিজ্ঞাপন চালু / বন্ধ (Master Switch)</h5>
-                    <p>এটি অফ করলে পুরো সাইট (Home, Profile ইত্যাদি) থেকে সব বিজ্ঞাপন সাথে সাথে মুছে যাবে</p>
+                    <p>এটি অফ করলে পুরো সাইট থেকে সব বিজ্ঞাপন সাথে সাথে মুছে যাবে</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox" id="toggleGlobalAds" checked>
@@ -471,10 +471,11 @@
         });
 
         // ================= লিসেনিং ইমেজ ম্যানেজার হ্যান্ডলার =================
-        const mondaiCounts = {
-            m1: 7, // Mondai 1: 7 Questions
-            m2: 6, // Mondai 2: 6 Questions
-            m3: 5  // Mondai 3: 5 Questions
+        // মোন্দাই অনুযায়ী ইমেজ থাকা নির্দিষ্ট প্রশ্নগুলোর ম্যাপিং
+        const mondaiQuestionMaps = {
+            m1: [1, 2, 3, 4, 5, 6, 7], // Mondai 1: সব প্রশ্ন
+            m2: [2, 4],                // Mondai 2: শুধু ২ ও ৪ নম্বরে ছবি
+            m3: [1, 2, 3, 4, 5]        // Mondai 3: সব প্রশ্ন (মোন্দাই ৪-এ কোনো ছবি নেই)
         };
 
         const mondaiSelect = document.getElementById("mondaiSelect");
@@ -490,14 +491,14 @@
 
         function populateQuestions() {
             const m = mondaiSelect.value;
-            const count = mondaiCounts[m] || 7;
+            const qList = mondaiQuestionMaps[m] || [1, 2, 3, 4, 5, 6, 7];
             questionSelect.innerHTML = "";
-            for (let i = 1; i <= count; i++) {
+            qList.forEach(num => {
                 const opt = document.createElement("option");
-                opt.value = `q${i}`;
-                opt.innerText = `প্রশ্ন ${i} (Q${i})`;
+                opt.value = `q${num}`;
+                opt.innerText = `প্রশ্ন ${num} (Q${num})`;
                 questionSelect.appendChild(opt);
-            }
+            });
             updatePreviewUI();
         }
 
@@ -516,7 +517,6 @@
             previewAssetTagText.innerText = `${mText} - Q${qNum}`;
             previewQPromptTitle.innerText = `${qNum}ばん (Exam Frame)`;
 
-            // যদি বর্তমান ইনপুট বা ক্যাশে কোনো ছবি থাকে
             const existingUrl = listeningImgUrlInput.value.trim() || activeListeningAssets[key] || "";
 
             if (existingUrl) {
@@ -555,7 +555,6 @@
             reader.readAsDataURL(file);
         });
 
-        // ফায়ারস্টোরে লিসেনিং ইমেজ সংরক্ষণ
         saveListeningAssetBtn.addEventListener("click", async () => {
             const key = getSelectedKey();
             const urlVal = listeningImgUrlInput.value.trim();

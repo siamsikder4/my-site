@@ -95,7 +95,7 @@
         .modal-body { padding: 14px; overflow-y: auto; background: #f8fafc; flex: 1; }
         .close-modal-btn { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
 
-        /* বটম নেভিগেশন বার (৪টি বাটন: হোম, কমিউনিটি, র‍্যাঙ্কিং, প্রোফাইল) */
+        /* বটম নেভিগেশন বার */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
@@ -154,7 +154,6 @@
         </div>
     </main>
 
-    <!-- বটম নেভ বার (ইনবক্স বাটন রিমুভ করা) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -177,7 +176,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const db = getFirestore(initializeApp({ apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs", authDomain: "kotoba-b20b3.firebaseapp.com", projectId: "kotoba-b20b3" }));
         const auth = getAuth(app);
@@ -223,9 +222,11 @@
         };
 
         function loadFeedPosts() {
-            onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), (snap) => {
+            onSnapshot(collection(db, "posts"), (snap) => {
                 cachedPosts = [];
                 snap.forEach(d => cachedPosts.push({ id: d.id, ...d.data() }));
+                // লোকালি সময় অনুযায়ী সাজিয়ে নেওয়া হচ্ছে যাতে ইনডেক্স না লাগে
+                cachedPosts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
                 renderPosts();
             }, (error) => {
                 document.getElementById("feedListContainer").innerHTML = `<div style="text-align: center; color: #ef4444; padding: 30px; font-size: 13px;">ডেটা লোড করতে সমস্যা হয়েছে!</div>`;
@@ -291,7 +292,7 @@
         };
 
         function loadNotifications(myEmail) {
-            onSnapshot(query(collection(db, "notifications")), (snap) => {
+            onSnapshot(collection(db, "notifications"), (snap) => {
                 let count = 0;
                 snap.forEach(d => {
                     const n = d.data();

@@ -272,6 +272,7 @@
             white-space: nowrap;
         }
 
+        /* বটম নেভিগেশন বার এবং এনিমেশন */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -284,12 +285,13 @@
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .nav-item {
             text-decoration: none;
             color: #8392a5;
-            font-size: 11px;
+            font-size: 11.5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -298,14 +300,33 @@
             background: none;
             border: none;
             cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: #0f3e2e;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            padding: 8px 0;
         }
 
         .nav-item i {
-            font-size: 19px;
+            font-size: 18px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
+        }
+
+        .nav-item:active i {
+            transform: scale(1.25) translateY(-2px);
+        }
+
+        .nav-item.active {
+            color: #059669;
+        }
+
+        .nav-item.active i {
+            transform: scale(1.15);
+            animation: bounceActive 0.5s ease alternate;
+        }
+
+        @keyframes bounceActive {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1.15); }
         }
     </style>
 </head>
@@ -370,6 +391,7 @@
 
     </main>
 
+    <!-- বটম নেভিগেশন বার (হোম, লিডারবোর্ড, প্রোফাইল) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -379,13 +401,9 @@
             <i class="fa-solid fa-trophy"></i>
             <span>লিডারবোর্ড</span>
         </a>
-        <a href="ai-sensei.html" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
-        </a>
-        <a href="login.html" class="nav-item" id="bottomAuthBtn">
-            <i class="fa-solid fa-arrow-right-to-bracket" id="bottomAuthIcon"></i>
-            <span id="bottomAuthText">লগইন</span>
+        <a href="profile.html" class="nav-item" id="bottomAuthBtn">
+            <i class="fa-solid fa-circle-user" id="bottomAuthIcon"></i>
+            <span id="bottomAuthText">প্রোফাইল</span>
         </a>
     </nav>
 

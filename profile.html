@@ -182,7 +182,7 @@
             box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
         }
 
-        /* বটম নেভিগেশন বার (শুধু হোম, লিডারবোর্ড এবং প্রোফাইল) */
+        /* বটম নেভিগেশন বার এবং এনিমেশন */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
@@ -193,10 +193,34 @@
         .nav-item {
             text-decoration: none; color: #8392a5; font-size: 11.5px;
             display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600;
-            transition: color 0.2s;
+            background: none; border: none; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1; padding: 8px 0;
         }
-        .nav-item.active { color: #059669; }
-        .nav-item i { font-size: 18px; }
+
+        .nav-item i {
+            font-size: 18px;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
+        }
+
+        .nav-item:active i {
+            transform: scale(1.25) translateY(-2px);
+        }
+
+        .nav-item.active {
+            color: #059669;
+        }
+
+        .nav-item.active i {
+            transform: scale(1.15);
+            animation: bounceActive 0.5s ease alternate;
+        }
+
+        @keyframes bounceActive {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1.15); }
+        }
     </style>
 </head>
 <body>
@@ -284,7 +308,7 @@
         </div>
     </div>
 
-    <!-- বটম নেভিগেশন বার (হোম, লিডারবোর্ড, প্রোফাইল) -->
+    <!-- বটম নেভিগেশন বার (এনিমেশন সহ) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>

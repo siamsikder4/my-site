@@ -1,1 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam 1 - JLPT N5 Official Simulation</title>
+    <link rel="icon" type="image/png" href="logo.png">
 
+    <!-- Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding-bottom: 95px;
+        }
+
+        .exam-header {
+            position: sticky; top: 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 16px;
+            display: flex; align-items: center; justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .header-back-box {
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px 14px;
+            border-radius: 10px; color: #0f172a; font-size: 13px; font-weight: 700;
+        }
+        .header-back-box:active { background: #e2e8f0; }
+
+        .timer-badge {
+            display: flex; align-items: center; gap: 6px;
+            border: 1.5px solid #cbd5e1; border-radius: 8px;
+            padding: 5px 12px; font-size: 14px; font-weight: 700; color: #1e293b;
+        }
+
+        .exam-container {
+            max-width: 540px; margin: 0 auto; padding: 14px 12px;
+        }
+
+        .section-intro-card {
+            background: #ffffff; border-radius: 12px; padding: 16px;
+            margin-bottom: 14px; border: 1px solid #e2e8f0;
+        }
+        .section-intro-title {
+            font-size: 16.5px; font-weight: 800; color: #0f172a; margin-bottom: 4px;
+        }
+        .section-instruction {
+            font-size: 12.5px; color: #475569; line-height: 1.6; font-weight: 500;
+        }
+
+        .sticky-audio-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 12px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .audio-desc {
+            font-size: 11.5px; font-weight: 700; color: #047857; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .sticky-audio-card audio { width: 100%; height: 38px; outline: none; }
+
+        .q-card {
+            background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
+            padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .q-header-line {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 10px; gap: 8px;
+        }
+        .q-number { font-weight: 800; font-size: 14.5px; color: #0f172a; min-width: 24px; }
+        .q-prompt { flex: 1; font-size: 15px; font-weight: 700; color: #1e293b; line-height: 1.7; }
+        .q-underline { border-bottom: 2px solid #0f172a; padding-bottom: 1px; }
+
+        .btn-flag {
+            background: none; border: none; color: #94a3b8; font-size: 15px; cursor: pointer; padding: 4px;
+        }
+        .btn-flag.active { color: #f59e0b; }
+
+        .passage-box {
+            background: #fafafa; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 16px; margin-bottom: 14px; font-size: 14px; line-height: 1.8;
+            color: #1e293b; white-space: pre-line; position: relative;
+        }
+        .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
+
+        .q-img-wrap {
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 10px;
+            overflow: hidden; margin-bottom: 12px; background: #ffffff;
+            display: flex; align-items: center; justify-content: center; min-height: 120px;
+        }
+        .q-img-wrap img { width: 100%; height: auto; display: block; object-fit: contain; }
+
+        .options-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+        .option-label {
+            display: flex; align-items: center; gap: 12px; padding: 11px 14px;
+            border-radius: 10px; border: 1px solid #e2e8f0; background: #ffffff; cursor: pointer;
+        }
+        .option-label:hover { background: #f8fafc; border-color: #cbd5e1; }
+        .option-label input[type="radio"] {
+            appearance: none; -webkit-appearance: none; width: 18px; height: 18px; border: 2px solid #cbd5e1;
+            border-radius: 50%; outline: none; margin: 0; display: flex; align-items: center; justify-content: center;
+        }
+        .option-label input[type="radio"]:checked { border-color: #047857; }
+        .option-label input[type="radio"]:checked::after {
+            content: ""; width: 9px; height: 9px; background: #047857; border-radius: 50%;
+        }
+        .option-label.selected { border-color: #047857; background: #f0fdf4; }
+        .option-text { font-size: 14px; font-weight: 500; color: #1e293b; }
+
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #ffffff; border-top: 1px solid #e2e8f0;
+            padding: 12px 16px; display: flex; justify-content: center; z-index: 1000;
+        }
+        .btn-submit-section {
+            width: 100%; max-width: 520px; padding: 13px; background: #ffffff;
+            border: 1.5px solid #0f172a; color: #0f172a; border-radius: 10px;
+            font-weight: 800; font-size: 14.5px; cursor: pointer; text-align: center;
+        }
+        .btn-submit-section:active { background: #0f172a; color: #ffffff; }
+
+        /* পপ-আপ মডাল */
+        .exit-modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px);
+            z-index: 11000; align-items: center; justify-content: center; padding: 16px;
+        }
+        .exit-modal-card {
+            background: #ffffff; width: 100%; max-width: 380px; border-radius: 24px;
+            padding: 24px 20px 20px; text-align: center;
+        }
+        .exit-icon-circle {
+            width: 54px; height: 54px; background: #fee2e2; color: #dc2626;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin: 0 auto 14px;
+        }
+        .btn-confirm-exit {
+            width: 100%; background: #dc2626; color: #ffffff; border: none; padding: 13px;
+            border-radius: 12px; font-size: 14.5px; font-weight: 700; cursor: pointer; margin-bottom: 10px;
+        }
+        .btn-cancel-exit {
+            width: 100%; background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;
+            padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer;
+        }
+
+        .screen-modal {
+            display: none; position: fixed; inset: 0; background: #ffffff; z-index: 9999;
+            flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center;
+        }
+        .btn-next-sec {
+            background: #059669; color: #ffffff; border: none; padding: 13px 32px;
+            border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="exam-header">
+        <div class="header-back-box" id="btnBackPrompt">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Exit</span>
+        </div>
+        <div class="timer-badge">
+            <i class="fa-regular fa-clock"></i>
+            <span id="examTimer">20:00</span>
+        </div>
+    </header>
+
+    <main class="exam-container">
+        <div id="sectionContainer"></div>
+    </main>
+
+    <footer class="sticky-footer">
+        <button class="btn-submit-section" id="btnSubmitSection">Submit Section</button>
+    </footer>
+
+    <!-- কাস্টম এক্সিট পপ-আপ -->
+    <div class="exit-modal-overlay" id="exitModal">
+        <div class="exit-modal-card">
+            <div class="exit-icon-circle"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Leave Exam?</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 22px;">
+                Are you sure you want to exit? Your answers and timer progress for this session will be lost.
+            </p>
+            <button class="btn-confirm-exit" id="btnFinalConfirmExit">Yes, Exit Test</button>
+            <button class="btn-cancel-exit" id="btnCancelExit">Continue Test</button>
+        </div>
+    </div>
+
+    <!-- ব্রেক স্ক্রিন -->
+    <div class="screen-modal" id="breakModal">
+        <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
+        <h2 id="breakTitle">Take a Break</h2>
+        <p id="breakDesc">You can take a 5-minute break or proceed to the next section immediately.</p>
+        <div class="timer-badge" style="margin-bottom: 20px; font-size: 16px;" id="breakTimer">05:00</div>
+        <button class="btn-next-sec" id="btnProceedSection">Proceed to Next Section</button>
+    </div>
+
+    <!-- স্কোর স্ক্রিন -->
+    <div class="screen-modal" id="scoreModal">
+        <div style="font-size: 48px; color: #047857; margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i></div>
+        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Test Finished!</h2>
+        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 20px;">Your score overview for JLPT N5 (July 2024):</p>
+        <div id="sectionWiseScores" style="margin-bottom: 24px; font-size: 15px; font-weight: 700; text-align: left; width: 100%; max-width: 320px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0;"></div>
+        <button class="btn-next-sec" onclick="goToExamHub()">Back to Exam List</button>
+    </div>
+
+    <script>
+        const examData = {
+            section1: {
+                name: "言語知識（文字・語彙）- Vocabulary",
+                timeMinutes: 20,
+                instructions: "もんだい１ ___のことばは ひらがなで どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+                questions: [
+                    { id: 1, text: "いま <span class='q-underline'>店</span>の まえに います。", options: ["1. いえ", "2. えき", "3. みせ", "4. へや"], answer: 2 },
+                    { id: 2, text: "たなかさんは いま <span class='q-underline'>外国</span>に います。", options: ["1. がいしゃ", "2. かいしゃ", "3. かいこく", "4. がいこく"], answer: 3 },
+                    { id: 3, text: "さとうさんは <span class='q-underline'>話</span>が じょうずです。", options: ["1. うた", "2. はなし", "3. え", "4. じ"], answer: 1 },
+                    { id: 4, text: "はやしさんも <span class='q-underline'>読</span>んで ください。", options: ["1. あそんで", "2. ならんで", "3. よんで", "4. えらんで"], answer: 2 },
+                    { id: 5, text: "あたらしい こうえんは まちの <span class='q-underline'>北</span>がわに あります。", options: ["1. ひがしがわ", "2. みなみがわ", "3. にしがわ", "4. きたがわ"], answer: 3 },
+                    { id: 6, text: "わたしは <span class='q-underline'>九月</span>に けっこんします。", options: ["1. くがつ", "2. きゅうがつ", "3. くげつ", "4. きゅうげつ"], answer: 0 },
+                    { id: 7, text: "きのう <span class='q-underline'>来</span>なかった ひとは だれですか。", options: ["1. きなかった", "2. こなかった", "3. いなかった", "4. ねなかった"], answer: 1 },
+                    { id: 8, heading: "もんだい２ ___のことばを どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>てんき</span>が わるいですから、うちに いましょう。", options: ["1. 天汽", "2. 矢気", "3. 天気", "4. 矢汽"], answer: 2 },
+                    { id: 9, text: "あちらの <span class='q-underline'>そら</span>を みてください。", options: ["1. 犬", "2. 花", "3. 山", "4. 空"], answer: 3 },
+                    { id: 10, text: "さとうさんも <span class='q-underline'>た</span>って ください。", options: ["1. 食って", "2. 立って", "3. 位って", "4. 喰って"], answer: 1 },
+                    { id: 11, text: "<span class='q-underline'>がくせい</span>は なんにん いますか。", options: ["1. 先生", "2. 学生", "3. 学主", "4. 先主"], answer: 1 },
+                    { id: 12, text: "かいだんを <span class='q-underline'>お</span>りて ください。", options: ["1. 上りて", "2. 止りて", "3. 不りて", "4. 下りて"], answer: 3 },
+                    { id: 13, heading: "もんだい３ ( )に 何を 入れますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "えいがの ( ) を ２まい かいました。", options: ["1. ケーキ", "2. チケット", "3. ギター", "4. タクシー"], answer: 1 },
+                    { id: 14, text: "びょういんは うちから ( ) ですから、バスで いきます。", options: ["1. ながい", "2. おおい", "3. おそい", "4. とおい"], answer: 3 },
+                    { id: 15, text: "きょうは いもうとの １２ ( ) の たんじょうびです。", options: ["1. ねん", "2. さい", "3. だい", "4. えん"], answer: 1 },
+                    { id: 16, text: "( ) を わすれましたから、おかねを もっていません。", options: ["1. かぎ", "2. とけい", "3. さいふ", "4. かさ"], answer: 2 },
+                    { id: 17, text: "りょこうの ときは くろい くつを ( )。", options: ["1. はきます", "2. つけます", "3. かけます", "4. かぶります"], answer: 0 },
+                    { id: 18, text: "きょうは じゅぎょうの あと、すぐ いえに ( )。", options: ["1. かえります", "2. すみます", "3. あるきます", "4. でかけます"], answer: 0 },
+                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。"], answer: 2 },
+                    { id: 20, text: "<span class='q-underline'>この かんじは かんたんです。</span>", options: ["1. この かんじは やさしいです。", "2. この かんじは むずかしいです。", "3. この かんじは おもしろいです。", "4. この かんじは つまらないです。"], answer: 0 },
+                    { id: 21, text: "<span class='q-underline'>たなかさんは リーさんに さくぶんを おしえました。</span>", options: ["1. リーさんは たなかさんに さくぶんを わたしました。", "2. たなかさんは リーさんに さくぶんを ならいました。", "3. たなかさんは リーさんに さくぶんを わたしました。", "4. リーさんは たなかさんに さくぶんを ならいました。"], answer: 3 }
+                ]
+            },
+            section2: {
+                name: "文法・読解（Grammar & Reading）",
+                timeMinutes: 40,
+                questions: [
+                    { id: 1, heading: "もんだい１ ( )に 何を 入れますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "わたしは 一か月 ( ) ２回、ギターを 習っています。", options: ["1. も", "2. が", "3. を", "4. に"], answer: 3 },
+                    { id: 2, text: "日曜日に 買い物 ( ) さんぽを します。", options: ["1. は", "2. も", "3. や", "4. ぐらい"], answer: 2 },
+                    { id: 3, text: "私の母は 銀行 ( ) はたらいています。", options: ["1. に", "2. で", "3. へ", "4. と"], answer: 1 },
+                    { id: 4, text: "私は 新しいカメラ ( ) ほしいです。", options: ["1. で", "2. か", "3. に", "4. が"], answer: 3 },
+                    { id: 5, text: "きのう 私は デパートに 行きましたが、( ) 買いませんでした。", options: ["1. 何を", "2. 何も", "3. 何か", "4. 何に"], answer: 1 },
+                    { id: 6, text: "A食堂のラーメンは、大学の食堂のラーメンより ( ) おいしいです。", options: ["1. あまり", "2. すぐ", "3. ずっと", "4. いちばん"], answer: 2 },
+                    { id: 7, text: "A「このペンは ( ) ですか。」\nB「100円です。」", options: ["1. いくら", "2. いくつ", "3. どれ", "4. どうして"], answer: 0 },
+                    { id: 8, text: "きのうの夜、( ) 前に 本を 読みました。", options: ["1. ねる", "2. ねて", "3. ねた", "4. ねている"], answer: 0 },
+                    { id: 9, text: "リー「林さん、にもつが 多いですね。少し ( )。」\n林「あ、すみません。おねがいします。」", options: ["1. 持っていませんか", "2. 持たないでください", "3. もちましたね", "4. 持ちましょうか"], answer: 3 },
+                    { id: 10, heading: "もんだい２ つぎの文の ★ に入るものはどれですか。１・２・３・４から いちばん いいものを 一つえらんでください。", text: "私は たんじょうびに ___ ___ <span style='color:#f59e0b;'>★</span> ___ 使っています。", options: ["1. くれた", "2. 毎日", "3. カメラを", "4. そふが"], answer: 0 },
+                    { id: 11, text: "こうえん ___ ___ <span style='color:#f59e0b;'>★</span> ___ たくさん います。", options: ["1. 鳥", "2. に", "3. は", "4. が"], answer: 0 },
+                    { id: 12, text: "今年の夏 ___ ___ <span style='color:#f59e0b;'>★</span> ___ 山に 行きます。", options: ["1. 海", "2. では", "3. は", "4. なくて"], answer: 3 },
+                    { id: 13, text: "私は 毎朝 へやを ___ ___ <span style='color:#f59e0b;'>★</span> ___ 出ます。", options: ["1. を", "2. から", "3. 家", "4. そうじして"], answer: 1 },
+                    {
+                        id: 14,
+                        heading: "もんだい３ 14から17に 何を 入れますか。ぶんしょうの いみを かんがえて、１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
+                        passage: "りゅうがくせいの ブラウンさんと レーさんは さくぶんを 書いて、クラスのみんなの前で 読みました。\n\n(1) ブラウンさんの さくぶん\n先週の日曜日に 私は はじめて 日本の えいが館で えいがを 見ました。駅の近く [14] 新しい えいが館で 見ました。えいが館は 広くて、とても きれいでした。また [15]。",
+                        text: "[14] に 何を 入れますか。",
+                        options: ["1. に", "2. は", "3. の", "4. と"],
+                        answer: 2
+                    },
+                    { id: 15, text: "[15] に 何を 入れますか。", options: ["1. 行ってください", "2. 行きたいです", "3. 来てください", "4. 来たいです"], answer: 1 },
+                    {
+                        id: 16,
+                        passage: "(2) レーさんの さくぶん\n私は 先週の土曜日に うちで 友だちと りょうりを しました。私たちは 二つの りょうりを 作りました。はじめは、おにぎりを 作りました。[16]、やさいの みそしるを 作りました。おにぎりは 少し むずかしかったです。でも、みそしるは [17]。友だちと 作った おにぎりと みそしるは おいしかったです。",
+                        text: "[16] に 何を 入れますか。",
+                        options: ["1. いつも", "2. もう", "3. しかし", "4. それから"],
+                        answer: 3
+                    },
+                    { id: 17, text: "[17] に 何を 入れますか。", options: ["1. かんたんでした", "2. かんたんだったからです", "3. かんたんではありませんでした", "4. かんたんではなかったからです"], answer: 0 },
+                    { 
+                        id: 18, 
+                        heading: "もんだい４ つぎの ぶんしょうを よんで、しつもんに こたえて ください。",
+                        passage: "(会社で)\nムムさんは 同じ会社の 大友さんに メールを しました。\n\n大友さん\n机の上の おかしを ありがとう。旅行は どうでしたか。\n今、大友さんの ところに 行きましたが、いませんでしたから、メールを しました。おいしかったです。ごちそうさまでした。\nムム",
+                        text: "このメールで、ムムさんは 大友さんに 何が 言いたいですか。", 
+                        options: ["1. おかしを ありがとうございます。", "2. わたしも 旅行に 行きたいです。", "3. 今、大友さんは どこに いますか。", "4. わたしも おかしが 好きです。"], 
+                        answer: 0 
+                    },
+                    {
+                        id: 19,
+                        passage: "学生のころ、私は いつも 友だちと 話しながら 電車で 学校に 行っていました。今は 一人で 電車で 会社に 行きます。会社まで 1時間、本を 読みながら 行きます。今は 本が 私の 友だちです。",
+                        text: "「私」は 今、電車の中で 何を しますか。",
+                        options: ["1. 友だちと 話します。", "2. 友だちと 本を 読みます。", "3. 一人で 本を 読みます。", "4. 会社の人と 話します。"],
+                        answer: 2
+                    },
+                    {
+                        id: 20,
+                        heading: "もんだい５ つぎの ぶんしょうを よんで、しつもんに こたえて ください。",
+                        passage: "青木山に のぼりました (ラン)\nきのう、はじめて 青木山に のぼりました。山の上の さくらが 見たかったからです。山の入り口から 山の上まで 2時間かかります。私は 15分ぐらい のぼって、すぐにつかれました。でも、山で 会った人たちが みんな、私に 元気な声で 「こんにちは。」と 言いました。ちょっと (1)うれしかったです。\n\n1時ごろ 山の上に着きました。さくらの木は ありましたが、花は ありませんでした。近くにいた 女の人に 「さくらの花は まだですか。」と 聞きました。女の人は 「山の上は 寒いですから、花は まだですよ。来月の はじめごろは きれいですよ。」と 言いました。ですから、(2)来月また 行きたいです。",
+                        text: "どうして (1)うれしかったですか。",
+                        options: ["1. はじめて 青木山に のぼったから。", "2. 山で ぜんぜん つかれなかったから。", "3. 山で 会った人たちと いっしょに 山に のぼったから。", "4. 山で 会った人たちが 「私」に 「こんにちは。」と 言ったから。"],
+                        answer: 3
+                    },
+                    { id: 21, text: "どうして (2)来月また 行きたいですか。", options: ["1. さくらの花が 見たいから。", "2. さくらではない ほかの花も 見たいから。", "3. 山で 会った女の人に また 会いたいから。", "4. 山で もっとたくさんの人と 話したいから。"], answer: 0 },
+                    {
+                        id: 22,
+                        heading: "もんだい６ みぎの ページを 見て、下の しつもんに こたえて ください。",
+                        passage: "「なかいの町 今週の安い店 (12月13日(金)・14日(土)・15日(日))」\n\n① 六八くだもの: 13日 みかん 150円, 14日 バナナ 99円, 15日 いちご 300円\n② とりのたかだ: 13日 とり肉 198円, 14日 たまご 89円, 15日 とり肉 150円\n③ すずきスーパー: 13日 ジュース 50円, 14日 とうふ 48円, 15日 チョコレート 88円\n④ スーパーやまだ: 13日 りんご 50円, 14日 ぎゅうにゅう 120円, 15日 アイスクリーム 80円",
+                        text: "ダトさんは、たまご と りんごを 安い日に 買いたいです。いつ どの店へ 行きますか。",
+                        options: ["1. 13日に ④、14日に ②", "2. 13日に ④、15日に ①", "3. 14日に ②、15日に ①", "4. 14日に ②、15日に ④"],
+                        answer: 0
+                    }
+                ]
+            },
+            section3: {
+                name: "聴解（Listening）- もんだい 1",
+                timeMinutes: 30,
+                audioUrl: "https://docs.google.com/uc?export=download&id=1WZIsbMlikfAnqtDPsR8RjbA7SsLwaKZQ",
+                instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                questions: [
+                    { id: 1, image: "m1_q1.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                    { id: 2, image: "m1_q2.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                    { id: 3, image: "m1_q3.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                    { id: 4, image: "m1_q4.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 5, image: "m1_q5.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                    { id: 6, image: "m1_q6.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 7, image: "m1_q7.jpg", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                ]
+            }
+        };
+
+        function formatImageSrc(url) {
+            if (!url) return '';
+            if (url.includes('drive.google.com')) {
+                const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+            }
+            return url;
+        }
+
+        let currentSectionKey = "section1";
+        let userAnswers = {};
+        let flaggedQuestions = new Set();
+        let timerSeconds = 20 * 60;
+        let timerInterval = null;
+
+        function renderCurrentSection() {
+            const sec = examData[currentSectionKey];
+            const container = document.getElementById("sectionContainer");
+            
+            let audioPlayerHtml = "";
+            if (sec.audioUrl) {
+                audioPlayerHtml = `
+                    <div class="sticky-audio-card">
+                        <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Audio Track (もんだい 1)</div>
+                        <audio id="mainListeningAudio" controls controlsList="nodownload">
+                            <source src="${sec.audioUrl}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="section-intro-card">
+                    <div class="section-intro-title">${sec.name}</div>
+                    <div class="section-instruction">${sec.instructions || ''}</div>
+                </div>
+                ${audioPlayerHtml}
+            `;
+
+            sec.questions.forEach((q) => {
+                const qKey = `${currentSectionKey}_q${q.id}`;
+                const isFlagged = flaggedQuestions.has(qKey);
+
+                let passageHtml = q.passage ? `<div class="passage-box"><i class="fa-solid fa-thumbtack passage-tag"></i>${q.passage}</div>` : '';
+                let headingHtml = q.heading ? `<div style="font-size: 13.5px; font-weight: 700; color: #475569; margin: 18px 0 10px; line-height: 1.6;">${q.heading}</div>` : '';
+                let imageHtml = q.image ? `<div class="q-img-wrap"><img src="${formatImageSrc(q.image)}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Image+${q.id}';"></div>` : '';
+                let promptHtml = q.text ? q.text.replace(/\n/g, '<br>') : `${q.id}ばん`;
+
+                let cardHtml = `
+                    ${headingHtml}
+                    ${passageHtml}
+                    <div class="q-card" id="card_${qKey}">
+                        <div class="q-header-line">
+                            <div class="q-number">${q.id}.</div>
+                            <div class="q-prompt">${promptHtml}</div>
+                            <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag('${qKey}')">
+                                <i class="fa-${isFlagged ? 'solid' : 'regular'} fa-bookmark"></i>
+                            </button>
+                        </div>
+                        ${imageHtml}
+                        <div class="options-group">
+                            ${q.options.map((opt, optIndex) => `
+                                <label class="option-label ${userAnswers[qKey] === optIndex ? 'selected' : ''}">
+                                    <input type="radio" name="${qKey}" value="${optIndex}" ${userAnswers[qKey] === optIndex ? 'checked' : ''} onchange="selectAnswer('${qKey}', ${optIndex})">
+                                    <span class="option-text">${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            startTimer(sec.timeMinutes * 60);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectAnswer(qKey, optIndex) {
+            userAnswers[qKey] = optIndex;
+            const card = document.getElementById(`card_${qKey}`);
+            card.querySelectorAll('.option-label').forEach((lbl, idx) => {
+                if (idx === optIndex) lbl.classList.add('selected');
+                else lbl.classList.remove('selected');
+            });
+        }
+
+        function toggleFlag(qKey) {
+            if (flaggedQuestions.has(qKey)) flaggedQuestions.delete(qKey);
+            else flaggedQuestions.add(qKey);
+            const card = document.getElementById(`card_${qKey}`);
+            const btn = card.querySelector('.btn-flag');
+            btn.classList.toggle('active');
+            btn.innerHTML = `<i class="fa-${flaggedQuestions.has(qKey) ? 'solid' : 'regular'} fa-bookmark"></i>`;
+        }
+
+        function startTimer(duration) {
+            clearInterval(timerInterval);
+            timerSeconds = duration;
+            const display = document.getElementById('examTimer');
+
+            timerInterval = setInterval(() => {
+                let m = Math.floor(timerSeconds / 60);
+                let s = timerSeconds % 60;
+                display.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+
+                if (--timerSeconds < 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up for this section!');
+                    submitCurrentSection();
+                }
+            }, 1000);
+        }
+
+        function submitCurrentSection() {
+            clearInterval(timerInterval);
+
+            if (currentSectionKey === "section1") {
+                currentSectionKey = "section2";
+                showBreakModal("Take a Break", "Vocabulary section completed. Proceed to Grammar & Reading.");
+            } else if (currentSectionKey === "section2") {
+                currentSectionKey = "section3";
+                showBreakModal("Take a Break", "Grammar & Reading completed. Proceed to Listening section.");
+            } else {
+                finishExamAndCalculate();
+            }
+        }
+
+        function showBreakModal(title, desc) {
+            const breakModal = document.getElementById('breakModal');
+            document.getElementById('breakTitle').innerText = title;
+            document.getElementById('breakDesc').innerText = desc;
+            breakModal.style.display = 'flex';
+            
+            let breakSec = 5 * 60;
+            const bTimer = document.getElementById('breakTimer');
+
+            const bInterval = setInterval(() => {
+                let m = Math.floor(breakSec / 60);
+                let s = breakSec % 60;
+                bTimer.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+                if (--breakSec < 0) {
+                    clearInterval(bInterval);
+                    breakModal.style.display = 'none';
+                    renderCurrentSection();
+                }
+            }, 1000);
+
+            document.getElementById('btnProceedSection').onclick = () => {
+                clearInterval(bInterval);
+                breakModal.style.display = 'none';
+                renderCurrentSection();
+            };
+        }
+
+        function finishExamAndCalculate() {
+            const scoreModal = document.getElementById('scoreModal');
+            const detailBox = document.getElementById('sectionWiseScores');
+            scoreModal.style.display = 'flex';
+
+            let sec1Score = 0, sec2Score = 0, sec3Score = 0;
+
+            examData.section1.questions.forEach(q => {
+                if (userAnswers[`section1_q${q.id}`] === q.answer) sec1Score++;
+            });
+
+            examData.section2.questions.forEach(q => {
+                if (userAnswers[`section2_q${q.id}`] === q.answer) sec2Score++;
+            });
+
+            examData.section3.questions.forEach(q => {
+                if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
+            });
+
+            detailBox.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>Vocabulary:</span><span style="color: #047857;">${sec1Score} / ${examData.section1.questions.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>Grammar & Reading:</span><span style="color: #047857;">${sec2Score} / ${examData.section2.questions.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Listening (M1):</span><span style="color: #047857;">${sec3Score} / ${examData.section3.questions.length}</span>
+                </div>
+            `;
+        }
+
+        document.getElementById('btnSubmitSection').addEventListener('click', () => {
+            if (confirm('Are you sure you want to submit this section? You cannot return to it.')) {
+                submitCurrentSection();
+            }
+        });
+
+        // Exit / Back Controller -> সরাসরি jlpt-n5-exam.html এ ফেরত নেওয়া
+        function goToExamHub() {
+            window.location.href = 'jlpt-n5-exam.html';
+        }
+
+        const exitModal = document.getElementById('exitModal');
+        const btnBackPrompt = document.getElementById('btnBackPrompt');
+        const btnCancelExit = document.getElementById('btnCancelExit');
+        const btnFinalConfirmExit = document.getElementById('btnFinalConfirmExit');
+
+        btnBackPrompt.addEventListener('click', () => { exitModal.style.display = 'flex'; });
+        btnCancelExit.addEventListener('click', () => { exitModal.style.display = 'none'; });
+        btnFinalConfirmExit.addEventListener('click', goToExamHub);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === exitModal) exitModal.style.display = 'none';
+        });
+
+        renderCurrentSection();
+    </script>
+</body>
+</html>

@@ -95,9 +95,10 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* ছবি যাতে সম্পূর্ণ ও সুন্দরভাবে দেখা যায় (কাটবে না) */
+        /* ছবি ফুল দেখানোর জন্য ফিক্সড সিএসএস */
         .q-img-wrap {
             width: 100%;
+            max-width: 100%;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             overflow: hidden;
@@ -106,15 +107,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px;
+            padding: 10px;
         }
         
         .q-img-wrap img {
             width: 100%;
             height: auto;
-            max-height: 280px;
-            display: block;
+            max-height: 450px;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
         }
 
         .options-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
@@ -134,6 +136,39 @@
         .option-label.selected { border-color: #047857; background: #f0fdf4; }
         .option-text { font-size: 14px; font-weight: 500; color: #1e293b; }
 
+        /* রিভিউ বা রেজাল্ট স্ক্রিনের জন্য স্টাইল */
+        .result-card {
+            background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
+            padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .result-header {
+            font-size: 18px; font-weight: 900; color: #0f172a; margin-bottom: 6px; text-align: center;
+        }
+        .result-sub {
+            font-size: 13px; color: #64748b; text-align: center; margin-bottom: 18px; font-weight: 600;
+        }
+        .score-box-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;
+        }
+        .score-mini-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; text-align: center;
+        }
+        .score-mini-card .val { font-size: 20px; font-weight: 900; color: #047857; margin-top: 4px; }
+        .score-mini-card .lbl { font-size: 11.5px; font-weight: 700; color: #64748b; }
+
+        .review-q-card {
+            background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
+            padding: 16px; margin-bottom: 14px; position: relative;
+        }
+        .review-q-card.correct { border-left: 5px solid #059669; }
+        .review-q-card.incorrect { border-left: 5px solid #dc2626; }
+        
+        .ans-tag {
+            display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 6px; margin-bottom: 8px;
+        }
+        .ans-tag.correct { background: #d1fae5; color: #065f46; }
+        .ans-tag.incorrect { background: #fee2e2; color: #991b1b; }
+
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: #ffffff; border-top: 1px solid #e2e8f0;
@@ -146,7 +181,6 @@
         }
         .btn-submit-section:active { background: #0f172a; color: #ffffff; }
 
-        /* পপ-আপ মডাল */
         .exit-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px);
@@ -171,12 +205,15 @@
         }
 
         .screen-modal {
-            display: none; position: fixed; inset: 0; background: #ffffff; z-index: 9999;
-            flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center;
+            display: none; position: fixed; inset: 0; background: #f1f5f9; z-index: 9999;
+            overflow-y: auto; padding: 20px 12px;
+        }
+        .screen-modal-content {
+            max-width: 540px; margin: 0 auto;
         }
         .btn-next-sec {
             background: #059669; color: #ffffff; border: none; padding: 13px 32px;
-            border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+            border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%;
         }
     </style>
 </head>
@@ -215,21 +252,21 @@
     </div>
 
     <!-- ব্রেক স্ক্রিন -->
-    <div class="screen-modal" id="breakModal">
-        <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
-        <h2 id="breakTitle">Take a Break</h2>
-        <p id="breakDesc">You can take a 5-minute break or proceed to the next section immediately.</p>
-        <div class="timer-badge" style="margin-bottom: 20px; font-size: 16px;" id="breakTimer">05:00</div>
-        <button class="btn-next-sec" id="btnProceedSection">Proceed to Next Section</button>
+    <div class="screen-modal" id="breakModal" style="align-items: center; justify-content: center; text-align: center; background: #ffffff;">
+        <div>
+            <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
+            <h2 id="breakTitle" style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">Take a Break</h2>
+            <p id="breakDesc" style="font-size: 13px; color: #64748b; margin-bottom: 20px;">You can take a 5-minute break or proceed to the next section immediately.</p>
+            <div class="timer-badge" style="margin: 0 auto 20px; font-size: 16px; width: fit-content;" id="breakTimer">05:00</div>
+            <button class="btn-next-sec" id="btnProceedSection">Proceed to Next Section</button>
+        </div>
     </div>
 
-    <!-- স্কোর স্ক্রিন -->
+    <!-- স্কোর ও ডিটেইলড রিভিউ স্ক্রিন -->
     <div class="screen-modal" id="scoreModal">
-        <div style="font-size: 48px; color: #047857; margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i></div>
-        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Test Finished!</h2>
-        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 20px;">Your score overview for JLPT N5 (July 2024):</p>
-        <div id="sectionWiseScores" style="margin-bottom: 24px; font-size: 15px; font-weight: 700; text-align: left; width: 100%; max-width: 320px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0;"></div>
-        <button class="btn-next-sec" onclick="goToExamHub()">Back to Exam List</button>
+        <div class="screen-modal-content" id="scoreModalBody">
+            <!-- এখানে ড্যাশবোর্ড ও রিভিউ ডাইনামিক লোড হবে -->
+        </div>
     </div>
 
     <script>
@@ -314,7 +351,7 @@
                     {
                         id: 20,
                         heading: "もんだい５ つぎの ぶんしょうを よんで、しつもんに こたえて ください。",
-                        passage: "青木山に のぼりました (ラン)\nきのう、はじめて 青木山に のぼりました。山の上の さくらが 見たかったからです。山の入り口から 山の上まで 2時間かかります。私は 15分ぐらい のぼって、すぐにつかれました。でも、山で 会った人たちが みんな、私に 元気な声で 「こんにちは。」と 言いました。ちょっと (1)うれしかったです。\n\n1時ごろ 山の上に着きました。さくらの木は ありましたが、花は ありませんでした。近くにいた 女の人に 「さくらの花は まだですか。」と 聞きました。女の人は 「山の上は 寒いですから、花は まだですよ。来月の はじめごろは きれいですよ。」と 言いました。ですから、(2)来月また 行きたいです。",
+                        passage: "青木山に のぼりました (ラン)\nきのう、はじめて 青木山に のぼりました。山の上の さくらが 見たかったからです。山の入り口から 山の上まで 2時間かかります。私は 15分ぐらい のぼって、すぐにつかれました。でも、山で 会った人たちが みんな、私に 元気な声で 「こんにちは。」と 言いました。ちょっと (1)うれしかったです。\n\n1時ごろ 山の上に着きました。さくらの木は ありましたが、花は ありませんでした。近くにいた 女の人に 「さくらの花は まだですか。」と 聞きました。女の人は 「山の上は 寒いですから、花は まだですよ。来月の はじめごろはきれいですよ。」と 言いました。ですから、(2)来月また 行きたいです。",
                         text: "どうして (1)うれしかったですか。",
                         options: ["1. はじめて 青木山に のぼったから。", "2. 山で ぜんぜん つかれなかったから。", "3. 山で 会った人たちと いっしょに 山に のぼったから。", "4. 山で 会った人たちが 「私」に 「こんにちは。」と 言ったから。"],
                         answer: 3
@@ -512,36 +549,93 @@
             };
         }
 
+        // আপনার দেওয়া স্ক্রিনশটের মতো সুন্দর ফলাফল ড্যাশবোর্ড ও রিভিউ তৈরি
         function finishExamAndCalculate() {
             const scoreModal = document.getElementById('scoreModal');
-            const detailBox = document.getElementById('sectionWiseScores');
+            const modalBody = document.getElementById('scoreModalBody');
             scoreModal.style.display = 'flex';
 
             let sec1Score = 0, sec2Score = 0, sec3Score = 0;
+            let totalCorrect = 0, totalQ = 0;
 
             examData.section1.questions.forEach(q => {
-                if (userAnswers[`section1_q${q.id}`] === q.answer) sec1Score++;
+                totalQ++;
+                if (userAnswers[`section1_q${q.id}`] === q.answer) { sec1Score++; totalCorrect++; }
             });
-
             examData.section2.questions.forEach(q => {
-                if (userAnswers[`section2_q${q.id}`] === q.answer) sec2Score++;
+                totalQ++;
+                if (userAnswers[`section2_q${q.id}`] === q.answer) { sec2Score++; totalCorrect++; }
             });
-
             examData.section3.questions.forEach(q => {
-                if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
+                totalQ++;
+                if (userAnswers[`section3_q${q.id}`] === q.answer) { sec3Score++; totalCorrect++; }
             });
 
-            detailBox.innerHTML = `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span>Vocabulary:</span><span style="color: #047857;">${sec1Score} / ${examData.section1.questions.length}</span>
+            let isPassed = totalCorrect >= (totalQ * 0.5); // ৫০% পেলে পাস
+
+            let html = `
+                <div class="result-card" style="background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%); color: #ffffff; text-align: center;">
+                    <h2 style="font-size: 20px; font-weight: 900; margin-bottom: 4px;">🇯🇵 JLPT Results Dashboard</h2>
+                    <p style="font-size: 12.5px; opacity: 0.9;">JLPT N5 Practice Test 1 - 2026</p>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span>Grammar & Reading:</span><span style="color: #047857;">${sec2Score} / ${examData.section2.questions.length}</span>
+
+                <div class="result-card" style="text-align: center;">
+                    <div style="font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 4px;">レベル Level</div>
+                    <div style="font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 12px;">N5</div>
+                    <div style="font-size: 12px; font-weight: 700; color: #64748b;">試験結果 Result</div>
+                    <div style="font-size: 18px; font-weight: 900; color: ${isPassed ? '#059669' : '#dc2626'}; margin-top: 2px;">
+                        ${isPassed ? '合格 / Passed' : '不合格 / Failed'}
+                    </div>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Listening (M1):</span><span style="color: #047857;">${sec3Score} / ${examData.section3.questions.length}</span>
+
+                <div class="score-box-grid">
+                    <div class="score-mini-card">
+                        <div class="lbl">Vocabulary</div>
+                        <div class="val">${sec1Score} / ${examData.section1.questions.length}</div>
+                    </div>
+                    <div class="score-mini-card">
+                        <div class="lbl">Grammar & Reading</div>
+                        <div class="val">${sec2Score} / ${examData.section2.questions.length}</div>
+                    </div>
+                    <div class="score-mini-card" style="grid-column: span 2;">
+                        <div class="lbl">Listening (M1)</div>
+                        <div class="val">${sec3Score} / ${examData.section3.questions.length}</div>
+                    </div>
                 </div>
+
+                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 20px 0 12px;">📋 Detailed Review (কোথায় ভুল হয়েছে দেখুন)</h3>
             `;
+
+            // প্রতিটি সেকশন ও প্রশ্নের সঠিক-ভুল রিভিউ জেনারেট করা
+            ['section1', 'section2', 'section3'].forEach(secKey => {
+                const sec = examData[secKey];
+                html += `<div style="font-size: 14px; font-weight: 800; color: #047857; margin: 16px 0 8px; border-bottom: 2px solid #047857; padding-bottom: 4px;">${sec.name}</div>`;
+                
+                sec.questions.forEach(q => {
+                    const qKey = `${secKey}_q${q.id}`;
+                    const userAns = userAnswers[qKey];
+                    const isCorrect = userAns === q.answer;
+
+                    let imgH = q.image ? `<div class="q-img-wrap"><img src="${formatImageSrc(q.image)}" alt="Q Img"></div>` : '';
+                    let passageH = q.passage ? `<div class="passage-box">${q.passage}</div>` : '';
+
+                    html += `
+                        <div class="review-q-card ${isCorrect ? 'correct' : 'incorrect'}">
+                            <span class="ans-tag ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct (সঠিক)' : 'Incorrect (ভুল)'}</span>
+                            <div style="font-weight: 800; font-size: 14px; margin-bottom: 8px;">${q.id}. ${q.text || ''}</div>
+                            ${imgH}
+                            ${passageH}
+                            <div style="font-size: 12.5px; color: #334155; margin-top: 6px;">
+                                <div><b>আপনার উত্তর:</b> ${userAns !== undefined ? q.options[userAns] : 'উত্তর দেননি'}</div>
+                                <div><b>সঠিক উত্তর:</b> <span style="color: #059669; font-weight: 700;">${q.options[q.answer]}</span></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            html += `<button class="btn-next-sec" style="margin-top: 20px;" onclick="goToExamHub()">Back to Exam List</button>`;
+            modalBody.innerHTML = html;
         }
 
         document.getElementById('btnSubmitSection').addEventListener('click', () => {

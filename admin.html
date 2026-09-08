@@ -71,14 +71,14 @@
         .switch-info h5 { font-size: 13.5px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
         .switch-info p { font-size: 11px; color: #64748b; }
 
-        .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle-switch { position: relative; display: inline-block; width: 46px; height: 26px; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
         .slider {
             position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #cbd5e1; transition: .3s; border-radius: 24px;
+            background-color: #cbd5e1; transition: .3s; border-radius: 26px;
         }
         .slider:before {
-            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
             background-color: white; transition: .3s; border-radius: 50%;
         }
         input:checked + .slider { background-color: #047857; }
@@ -176,8 +176,8 @@
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-rectangle-ad" style="color: #0284c7;"></i>
-                <div class="stat-num" id="monetagStatusText">Active</div>
-                <div class="stat-label">Monetag Ads</div>
+                <div class="stat-num" id="adsterraStatusText">Active</div>
+                <div class="stat-label">Adsterra Ads</div>
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
@@ -186,38 +186,38 @@
             </div>
         </div>
 
-        <!-- Monetag বিজ্ঞাপন কনফিগারেশন -->
+        <!-- গ্লোবাল বিজ্ঞাপন মাস্টার কন্ট্রোল -->
         <div class="section-card">
-            <h3><span><i class="fa-solid fa-rectangle-ad" style="color: #0284c7; margin-right: 6px;"></i> Monetag বিজ্ঞাপন কন্ট্রোল</span></h3>
+            <h3><span><i class="fa-solid fa-rectangle-ad" style="color: #0284c7; margin-right: 6px;"></i> বিজ্ঞাপন মাস্টার কন্ট্রোল</span></h3>
             
-            <div class="switch-row">
+            <div class="switch-row" style="border-left: 4px solid #047857; background: #f0fdf4;">
                 <div class="switch-info">
-                    <h5>হোমপেজ বিজ্ঞাপন (index.html Ads)</h5>
-                    <p>হোমপেজে Monetag স্ক্রিপ্ট চালু বা বন্ধ রাখুন</p>
+                    <h5 style="color: #065f46;">সব বিজ্ঞাপন চালু / বন্ধ (Master Switch)</h5>
+                    <p>এটি অফ করলে পুরো সাইট (Home, Profile ইত্যাদি) থেকে সব বিজ্ঞাপন সাথে সাথে মুছে যাবে</p>
                 </div>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="toggleIndexMonetag" checked>
+                    <input type="checkbox" id="toggleGlobalAds" checked>
                     <span class="slider"></span>
                 </label>
             </div>
 
             <div class="switch-row">
                 <div class="switch-info">
-                    <h5>অন্যান্য পেজ বিজ্ঞাপন (All Other Pages)</h5>
-                    <p>ভোকাবুলারি, কাঞ্জি ও গ্রামার পেজে বিজ্ঞাপন নিয়ন্ত্রণ</p>
+                    <h5>হোমপেজ ব্যানার (index.html Ads)</h5>
+                    <p>শুধু হোমপেজের ব্যানার বিজ্ঞাপন চালু বা বন্ধ রাখুন</p>
                 </div>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="toggleOtherMonetag">
+                    <input type="checkbox" id="toggleIndexAds" checked>
                     <span class="slider"></span>
                 </label>
             </div>
 
-            <div class="input-group" style="margin-top: 10px;">
-                <label>Monetag Script Tag / Zone URL:</label>
-                <input type="text" id="monetagScriptUrl" class="input-control" value="https://5gvci.com/act/files/tag.min.js?z=11752722" placeholder="https://5gvci.com/act/files/tag.min.js?z=XXXXXX">
+            <div class="input-group" style="margin-top: 14px;">
+                <label>Adsterra Banner Ad Key (320x50):</label>
+                <input type="text" id="adsterraKeyInput" class="input-control" value="8daacdc376c790c03bd8fe48f80c0b1c" placeholder="যেমন: 8daacdc376c790c03bd8fe48f80c0b1c">
             </div>
 
-            <button class="btn-submit" id="saveMonetagConfigBtn">
+            <button class="btn-submit" id="saveAdsConfigBtn">
                 <i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন
             </button>
         </div>
@@ -317,7 +317,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -351,30 +351,34 @@
             }
         });
 
-        // ================= Monetag Ads হ্যান্ডলার =================
-        const toggleIndexMonetag = document.getElementById("toggleIndexMonetag");
-        const toggleOtherMonetag = document.getElementById("toggleOtherMonetag");
-        const monetagScriptUrl = document.getElementById("monetagScriptUrl");
-        const saveMonetagConfigBtn = document.getElementById("saveMonetagConfigBtn");
+        // ================= অ্যাডস কন্ট্রোল হ্যান্ডলার =================
+        const toggleGlobalAds = document.getElementById("toggleGlobalAds");
+        const toggleIndexAds = document.getElementById("toggleIndexAds");
+        const adsterraKeyInput = document.getElementById("adsterraKeyInput");
+        const saveAdsConfigBtn = document.getElementById("saveAdsConfigBtn");
+        const adsterraStatusText = document.getElementById("adsterraStatusText");
 
-        saveMonetagConfigBtn.addEventListener("click", async () => {
-            saveMonetagConfigBtn.disabled = true;
-            saveMonetagConfigBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+        saveAdsConfigBtn.addEventListener("click", async () => {
+            saveAdsConfigBtn.disabled = true;
+            saveAdsConfigBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
 
             try {
-                await setDoc(doc(db, "site_settings", "monetag_ads"), {
-                    indexPageAds: toggleIndexMonetag.checked,
-                    otherPagesAds: toggleOtherMonetag.checked,
-                    scriptUrl: monetagScriptUrl.value.trim(),
+                await setDoc(doc(db, "site_settings", "ads_control"), {
+                    globalAdsEnabled: toggleGlobalAds.checked,
+                    indexAdsEnabled: toggleIndexAds.checked,
+                    adKey: adsterraKeyInput.value.trim() || "8daacdc376c790c03bd8fe48f80c0b1c",
                     updatedAt: Date.now()
                 }, { merge: true });
 
-                alert("Monetag কনফিগারেশন সফলভাবে সংরক্ষিত হয়েছে!");
+                adsterraStatusText.innerText = toggleGlobalAds.checked ? "Active" : "Disabled";
+                adsterraStatusText.style.color = toggleGlobalAds.checked ? "#047857" : "#ef4444";
+
+                alert("বিজ্ঞাপন সেটিংস সফলভাবে আপডেট হয়েছে!");
             } catch (err) {
-                alert("অ্যাড কনফিগারেশন সেভ করতে সমস্যা হয়েছে।");
+                alert("সেটিংস সেভ করতে সমস্যা হয়েছে।");
             } finally {
-                saveMonetagConfigBtn.disabled = false;
-                saveMonetagConfigBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন`;
+                saveAdsConfigBtn.disabled = false;
+                saveAdsConfigBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন`;
             }
         });
 
@@ -479,23 +483,23 @@
         // ================= অ্যাডমিন কনফিগ লোড =================
         async function loadAdminConfigs() {
             try {
-                // ইউজার কাউন্ট
                 const userSnap = await getDocs(collection(db, "users"));
                 document.getElementById("totalUsersCount").innerText = userSnap.size;
 
-                // আইকন লোড
                 const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
                 if (brandSnap.exists() && brandSnap.data().appIconBase64) {
                     currentAppIcon.src = brandSnap.data().appIconBase64;
                 }
 
-                // Monetag লোড
-                const adSnap = await getDoc(doc(db, "site_settings", "monetag_ads"));
+                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
                 if (adSnap.exists()) {
                     const d = adSnap.data();
-                    toggleIndexMonetag.checked = d.indexPageAds !== false;
-                    toggleOtherMonetag.checked = !!d.otherPagesAds;
-                    if (d.scriptUrl) monetagScriptUrl.value = d.scriptUrl;
+                    toggleGlobalAds.checked = d.globalAdsEnabled !== false;
+                    toggleIndexAds.checked = d.indexAdsEnabled !== false;
+                    if (d.adKey) adsterraKeyInput.value = d.adKey;
+
+                    adsterraStatusText.innerText = d.globalAdsEnabled !== false ? "Active" : "Disabled";
+                    adsterraStatusText.style.color = d.globalAdsEnabled !== false ? "#047857" : "#ef4444";
                 }
             } catch(e) {
                 console.error("Config load error:", e);

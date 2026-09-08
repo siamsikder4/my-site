@@ -10,6 +10,9 @@
     <link rel="shortcut icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
 
+    <!-- Monetag Direct Ad Script -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="277799" async data-cfasync="false"></script>
+
     <!-- Google AdSense Verification Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988"
      crossorigin="anonymous"></script>
@@ -687,7 +690,7 @@
             loadNotifications();
         });
 
-        // অ্যাডমিন থেকে নির্ধারিত ডাইনামিক সেটিংস লোড
+        // ডাইনামিক কনফিগ লোডার (ব্র্যান্ডিং ও সিস্টেম ব্যানার)
         async function loadSiteDynamicConfigs() {
             try {
                 // ১. ব্র্যান্ডিং / আইকন লোড
@@ -704,25 +707,6 @@
                         homeGlobalAlert.style.display = "block";
                         homeGlobalAlert.innerText = ad.bannerText;
                     }
-                }
-
-                // ৩. Monetag Ads ডাইনামিক লোডার
-                const adSnap = await getDoc(doc(db, "site_settings", "monetag_ads"));
-                let isMonetagActive = true; 
-                let monetagScriptUrl = "https://5gvci.com/act/files/tag.min.js?z=11752722";
-
-                if (adSnap.exists()) {
-                    const d = adSnap.data();
-                    isMonetagActive = d.indexPageAds !== false;
-                    if (d.scriptUrl) monetagScriptUrl = d.scriptUrl;
-                }
-
-                if (isMonetagActive && monetagScriptUrl) {
-                    const s = document.createElement("script");
-                    s.src = monetagScriptUrl;
-                    s.setAttribute("data-cfasync", "false");
-                    s.async = true;
-                    document.head.appendChild(s);
                 }
             } catch (err) {
                 console.warn("Dynamic config load skipped:", err);

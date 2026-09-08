@@ -12,7 +12,9 @@
 
     <style>
         * {
-            margin: 0; padding: 0; box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
@@ -24,19 +26,39 @@
         }
 
         .top-nav {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 18px; background: #ffffff; border-bottom: 1px solid #eef2f5;
-            position: sticky; top: 0; z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #eef2f5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .nav-left { display: flex; align-items: center; gap: 12px; }
+
         .back-btn {
-            color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px;
-            border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; font-size: 14px; cursor: pointer; border: none;
+            color: #0f3e2e;
+            background: #f1f5f9;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
             transition: background 0.15s ease;
         }
         .back-btn:hover { background: #e2e8f0; }
-        .nav-title { font-weight: 800; font-size: 17px; color: #0f3e2e; }
+
+        .nav-title {
+            font-weight: 800;
+            font-size: 18px;
+            color: #0f3e2e;
+        }
 
         .container {
             max-width: 480px;
@@ -44,113 +66,472 @@
             padding: 16px;
         }
 
-        .page-header { margin-bottom: 20px; text-align: center; }
-        .page-header h2 { font-size: 21px; font-weight: 800; color: #0e3b2c; margin-bottom: 4px; }
-        .page-header p { font-size: 12px; color: #64748b; }
+        /* ---------------- ভিউ ১: টেস্ট তালিকা ---------------- */
+        #listView {
+            display: block;
+        }
 
-        /* কার্ড স্টাইল */
+        .page-header {
+            margin: 8px 0 20px;
+            text-align: center;
+        }
+
+        .page-header p {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
         .exam-card {
-            background: #ffffff; border-radius: 22px; border: 1px solid #e9edf3;
-            padding: 24px 20px 20px; margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 22px;
+            border: 1px solid #e9edf3;
+            padding: 22px 18px 18px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
-        .exam-card.premium-card { border: 1.5px solid #fed7aa; }
 
-        .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-        .badge { font-size: 10.5px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+        .exam-card.premium-card {
+            border: 1.5px solid #fed7aa;
+        }
+
+        .badge-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
         .badge-free { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
         .badge-premium { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
         .badge-popular { background: #fce7f3; color: #be185d; border: 1px solid #fbcfe8; }
 
-        .category-subtext { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 6px; }
-        .exam-title { font-size: 18px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+        .category-subtext {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .exam-title {
+            font-size: 17.5px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
         .exam-card.premium-card .exam-title { color: #c2410c; }
 
         .meta-info {
-            display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 600; color: #64748b; margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 16px;
         }
-        .meta-divider { width: 4px; height: 4px; border-radius: 50%; background: #cbd5e1; }
+        .meta-divider {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
 
         .section-breakdown-card {
-            background: #f8fafc; border: 1px solid #eef2f6; border-radius: 16px; padding: 16px 18px; margin-bottom: 18px;
+            background: #f8fafc;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
         }
+
         .section-item {
-            display: flex; align-items: center; justify-content: space-between; padding: 7px 0; font-size: 13.5px; font-weight: 600; color: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
         }
-        .section-item:not(:last-child) { border-bottom: 1px dashed #e2e8f0; }
+        .section-item i {
+            width: 18px;
+            color: #64748b;
+            margin-right: 6px;
+        }
+        .section-item:not(:last-child) {
+            border-bottom: 1px dashed #e2e8f0;
+        }
 
         .btn-view-test {
-            width: 100%; background: #18181b; color: #ffffff; border: none; padding: 14px;
-            border-radius: 14px; font-size: 13.5px; font-weight: 800; cursor: pointer; text-transform: uppercase;
-            transition: background 0.15s ease;
+            width: 100%;
+            background: #18181b;
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            transition: background 0.15s ease, transform 0.1s ease;
         }
-        .btn-view-test:hover { background: #27272a; }
+        .btn-view-test:active {
+            transform: scale(0.98);
+            background: #27272a;
+        }
+
+        /* ---------------- ভিউ ২: Exam Overview ---------------- */
+        #overviewView {
+            display: none;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ov-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+
+        .ov-meta-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .ov-points {
+            font-size: 14px;
+            font-weight: 700;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .ov-note-box {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 22px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        .ov-take-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 20px 18px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .ov-take-sub {
+            font-size: 11px;
+            font-weight: 800;
+            color: #94a3b8;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .ov-sim-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .ov-mode-tag {
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .ov-sim-desc {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .btn-start-exam-blue {
+            width: 100%;
+            background: #38bdf8;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+        .btn-start-exam-blue:active {
+            background: #0284c7;
+            transform: scale(0.98);
+        }
+
+        .mode-heading {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .mode-toggle-grid {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1.5px solid #38bdf8;
+            border-radius: 14px;
+            background: #ffffff;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .mode-tab-btn.inactive {
+            border-color: #e2e8f0;
+            color: #64748b;
+            background: #ffffff;
+        }
+
+        .strict-info-card {
+            background: #fffafa;
+            border: 1px solid #ffe4e6;
+            border-left: 4px solid #ef4444;
+            border-radius: 16px;
+            padding: 18px 16px;
+        }
+
+        .strict-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .strict-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .strict-list li::before {
+            content: "• ";
+            color: #94a3b8;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
+    <!-- হেডার -->
     <header class="top-nav">
-        <div class="nav-left">
-            <!-- হোম পেজে ফেরার বাটন -->
-            <a href="index.html" class="back-btn" title="Back to Home">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <span class="nav-title">মক টেস্ট তালিকা</span>
-        </div>
+        <button class="back-btn" id="navBackBtn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <span class="nav-title" id="navPageTitle">মক টেস্ট তালিকা</span>
     </header>
 
     <main class="container">
         
-        <div class="page-header">
-            <h2>JLPT N5 প্রশ্নব্যাংক</h2>
-            <p>আসল পরীক্ষার মতো সময় ও লিসেনিং দিয়ে প্রস্তুতি নিন</p>
+        <!-- ================= স্ক্রিন ১: তালিকা ভিউ ================= -->
+        <div id="listView">
+            <div class="page-header">
+                <p>আসল পরীক্ষার মতো সময় ও লিসেনিং দিয়ে প্রস্তুতি নিন</p>
+            </div>
+
+            <!-- কার্ড ১ -->
+            <div class="exam-card">
+                <div class="badge-row">
+                    <span class="badge badge-free">FREE</span>
+                </div>
+                <div class="category-subtext">JLPT PRACTICE EXAM</div>
+                <h3 class="exam-title">JLPT N5 Practice Test 1 – 2024</h3>
+                <div class="meta-info">
+                    <span><i class="fa-regular fa-clock"></i> 91 min</span>
+                    <span class="meta-divider"></span>
+                    <span>67 問題</span>
+                </div>
+                <div class="section-breakdown-card">
+                    <div class="section-item"><span><i class="fa-solid fa-tag"></i> Vocabulary</span><span>__ / 21</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-pen-nib"></i> Grammar</span><span>__ / 17</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-book-open"></i> Reading</span><span>__ / 5</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-microphone"></i> Listening</span><span>__ / 24</span></div>
+                </div>
+                <!-- ক্লিক করলে একই পেজে ওভারভিউ স্ক্রিন চালু হবে -->
+                <button class="btn-view-test" onclick="openOverview('JLPT N5 Practice Test 1 – 2024', 'July 2024', '91 minutes', '67 questions')">VIEW TEST</button>
+            </div>
+
+            <!-- কার্ড ২ -->
+            <div class="exam-card premium-card">
+                <div class="badge-row">
+                    <span class="badge badge-premium">★ PREMIUM</span>
+                    <span class="badge badge-popular">POPULAR</span>
+                </div>
+                <div class="category-subtext">JLPT MOCK EXAM</div>
+                <h3 class="exam-title">JLPT N5 Mock Test – December 2025</h3>
+                <div class="meta-info">
+                    <span><i class="fa-regular fa-clock"></i> 91 min</span>
+                    <span class="meta-divider"></span>
+                    <span>67 問題</span>
+                </div>
+                <div class="section-breakdown-card">
+                    <div class="section-item"><span><i class="fa-solid fa-tag"></i> Vocabulary</span><span>__ / 21</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-pen-nib"></i> Grammar</span><span>__ / 17</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-book-open"></i> Reading</span><span>__ / 5</span></div>
+                    <div class="section-item"><span><i class="fa-solid fa-microphone"></i> Listening</span><span>__ / 24</span></div>
+                </div>
+                <button class="btn-view-test" onclick="openOverview('JLPT N5 Mock Test – December 2025', 'Dec 2025', '91 minutes', '67 questions')">VIEW TEST</button>
+            </div>
         </div>
 
-        <!-- টেস্ট ১ (July 2024 Exam) -> VIEW TEST দিলে যাবে n5-mock-list.html এ -->
-        <div class="exam-card">
-            <div class="badge-row">
-                <span class="badge badge-free">FREE</span>
+        <!-- ================= স্ক্রিন ২: Exam Overview ভিউ ================= -->
+        <div id="overviewView">
+            <h1 class="ov-title" id="ovTitle">JLPT N5 Practice Test 1 – 2024</h1>
+            
+            <div class="ov-meta-wrap">
+                <span id="ovDate">📅 July 2024</span>
+                <span id="ovDuration">⏱️ 91 minutes</span>
+                <span id="ovTotalQ">📝 67 questions</span>
             </div>
-            <div class="category-subtext">JLPT PRACTICE EXAM</div>
-            <h3 class="exam-title">JLPT N5 Practice Test 1 – 2024</h3>
-            <div class="meta-info">
-                <span><i class="fa-regular fa-clock"></i> 91 min</span>
-                <span class="meta-divider"></span>
-                <span>67 問題</span>
+            
+            <div class="ov-points">
+                <i class="fa-solid fa-bullseye"></i> 180 points total
             </div>
-            <div class="section-breakdown-card">
-                <div class="section-item"><span><i class="fa-solid fa-tag"></i> Vocabulary</span><span>__ / 21</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-pen-nib"></i> Grammar</span><span>__ / 17</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-book-open"></i> Reading</span><span>__ / 5</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-microphone"></i> Listening</span><span>__ / 24</span></div>
-            </div>
-            <!-- লিঙ্ক সেট করা হলো n5-mock-list.html এ -->
-            <button class="btn-view-test" onclick="window.location.href='n5-mock-list.html'">VIEW TEST</button>
-        </div>
 
-        <!-- টেস্ট ২ -->
-        <div class="exam-card premium-card">
-            <div class="badge-row">
-                <span class="badge badge-premium">★ PREMIUM</span>
-                <span class="badge badge-popular">POPULAR</span>
+            <div class="ov-note-box">
+                📝 This is just a practice test. If you haven't finished all the mock tests, do those first — they'll help more for the exam. 😊 If you're already done with them, feel free to try this one for fun. Good luck on the exam! 🍀🍀
             </div>
-            <div class="category-subtext">JLPT MOCK EXAM</div>
-            <h3 class="exam-title">JLPT N5 Mock Test – December 2025</h3>
-            <div class="meta-info">
-                <span><i class="fa-regular fa-clock"></i> 91 min</span>
-                <span class="meta-divider"></span>
-                <span>67 問題</span>
+
+            <div class="ov-take-card">
+                <div class="ov-take-sub">YOU WILL TAKE:</div>
+                <div class="ov-sim-title">
+                    Complete exam simulation <span class="ov-mode-tag">EXAM MODE</span>
+                </div>
+                <div class="ov-sim-desc">
+                    67 questions • 91 minutes • 5-min breaks between sections
+                </div>
+                
+                <!-- Start Exam বাটনে চাপলে সরাসরি আসল পরীক্ষা n5-mock-list.html পেজে যাবে -->
+                <a href="n5-mock-list.html" class="btn-start-exam-blue">Start Exam</a>
             </div>
-            <div class="section-breakdown-card">
-                <div class="section-item"><span><i class="fa-solid fa-tag"></i> Vocabulary</span><span>__ / 21</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-pen-nib"></i> Grammar</span><span>__ / 17</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-book-open"></i> Reading</span><span>__ / 5</span></div>
-                <div class="section-item"><span><i class="fa-solid fa-microphone"></i> Listening</span><span>__ / 24</span></div>
+
+            <h3 class="mode-heading">Choose Your Practice Mode</h3>
+            <div class="mode-toggle-grid">
+                <button class="mode-tab-btn" id="tabExamMode">Exam Mode</button>
+                <button class="mode-tab-btn inactive" id="tabPracticeMode">Practice Mode</button>
             </div>
-            <button class="btn-view-test" onclick="window.location.href='n5-mock-list.html'">VIEW TEST</button>
+
+            <div class="strict-info-card">
+                <div class="strict-header">
+                    <span><i class="fa-regular fa-clock"></i> Exam Mode</span>
+                    <span style="background: #fee2e2; color: #e11d48; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;">STRICT</span>
+                </div>
+                <ul class="strict-list">
+                    <li>Full test, section-by-section — strictly timed</li>
+                    <li>Cannot pause or skip sections once started</li>
+                    <li>Listening audio plays automatically and cannot be rewound</li>
+                </ul>
+            </div>
         </div>
 
     </main>
 
+    <script>
+        const listView = document.getElementById('listView');
+        const overviewView = document.getElementById('overviewView');
+        const navBackBtn = document.getElementById('navBackBtn');
+        const navPageTitle = document.getElementById('navPageTitle');
+
+        // কার্ডে চাপ দিলে ওভারভিউ খোলা
+        function openOverview(title, date, duration, totalQ) {
+            document.getElementById('ovTitle').innerText = title;
+            document.getElementById('ovDate').innerText = '📅 ' + date;
+            document.getElementById('ovDuration').innerText = '⏱️ ' + duration;
+            document.getElementById('ovTotalQ').innerText = '📝 ' + totalQ;
+
+            listView.style.display = 'none';
+            overviewView.style.display = 'block';
+            navPageTitle.innerText = "Exam Overview";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ব্যাকে চাপলে ভিউ পরিবর্তন বা হোমপেজে ফেরা
+        navBackBtn.addEventListener('click', () => {
+            if (overviewView.style.display === 'block') {
+                overviewView.style.display = 'none';
+                listView.style.display = 'block';
+                navPageTitle.innerText = "মক টেস্ট তালিকা";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // মোড টগল লজিক
+        const tabExamMode = document.getElementById('tabExamMode');
+        const tabPracticeMode = document.getElementById('tabPracticeMode');
+
+        tabExamMode.addEventListener('click', () => {
+            tabExamMode.classList.remove('inactive');
+            tabPracticeMode.classList.add('inactive');
+        });
+
+        tabPracticeMode.addEventListener('click', () => {
+            tabPracticeMode.classList.remove('inactive');
+            tabExamMode.classList.add('inactive');
+        });
+    </script>
 </body>
 </html>

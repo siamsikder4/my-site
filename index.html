@@ -607,7 +607,7 @@
 
     </main>
 
-    <!-- বটম বার (ফ্লিকার মুক্ত ও এনিমেশন সহ) -->
+    <!-- বটম বার (হোম পেজের জন্য সবসময় প্রোফাইল ফিক্সড) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -617,9 +617,9 @@
             <i class="fa-solid fa-trophy"></i>
             <span>র‍্যাঙ্কিং</span>
         </a>
-        <a href="login.html" class="nav-item" id="bottomAuthBtn">
-            <i class="" id="bottomAuthIcon"></i>
-            <span id="bottomAuthText"></span>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
         </a>
     </nav>
 
@@ -643,10 +643,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const bottomAuthBtn = document.getElementById("bottomAuthBtn");
-        const bottomAuthIcon = document.getElementById("bottomAuthIcon");
-        const bottomAuthText = document.getElementById("bottomAuthText");
-
         const notifModal = document.getElementById("notifModal");
         const openNotifBtn = document.getElementById("openNotifBtn");
         const closeNotifBtn = document.getElementById("closeNotifBtn");
@@ -656,17 +652,7 @@
         let currentUserEmail = null;
 
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUserEmail = user.email ? user.email.toLowerCase().trim() : null;
-                bottomAuthBtn.href = "profile.html";
-                bottomAuthIcon.className = "fa-solid fa-circle-user";
-                bottomAuthText.innerText = "প্রোফাইল";
-            } else {
-                currentUserEmail = null;
-                bottomAuthBtn.href = "login.html";
-                bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
-                bottomAuthText.innerText = "লগইন";
-            }
+            currentUserEmail = user && user.email ? user.email.toLowerCase().trim() : null;
             loadNotifications();
         });
 

@@ -60,6 +60,11 @@
             font-size: 12.5px; color: #475569; line-height: 1.6; font-weight: 500;
         }
 
+        .mondai-title-banner {
+            font-size: 14.5px; font-weight: 800; color: #047857; background: #ecfdf5;
+            padding: 11px 14px; border-radius: 10px; margin: 24px 0 10px; border-left: 4px solid #059669;
+        }
+
         .sticky-audio-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
             padding: 12px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
@@ -69,11 +74,6 @@
             display: flex; align-items: center; gap: 6px;
         }
         .sticky-audio-card audio { width: 100%; height: 38px; outline: none; }
-
-        .mondai-title-banner {
-            font-size: 14.5px; font-weight: 800; color: #047857; background: #ecfdf5;
-            padding: 10px 14px; border-radius: 10px; margin: 24px 0 10px; border-left: 4px solid #059669;
-        }
 
         .q-card {
             background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
@@ -100,7 +100,6 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* আনক্রপড ইমেজ কন্টেইনার */
         .q-img-wrap {
             width: 100%;
             border: 1px solid #e2e8f0;
@@ -180,7 +179,6 @@
         }
         .screen-modal-content { max-width: 480px; margin: 0 auto; }
 
-        /* ড্যাশবোর্ড UI */
         .dash-container {
             background: #ffffff; border-radius: 20px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
@@ -329,7 +327,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -445,6 +443,7 @@
                 name: "聴解（Listening）- 全問題",
                 timeMinutes: 30,
                 instructions: "放送を 聞いて、１から４の なかから いちばん いい ものを ひとつ えらんで ください。",
+                // ১, ২, ৩ ও ৪ নম্বর মোন্দাই-এর নিখুঁত ডাটা
                 mondais: [
                     {
                         id: "m1",
@@ -491,7 +490,7 @@
                     {
                         id: "m4",
                         title: "もんだい 4 (Quick Response)",
-                        // প্রশ্নপত্রে কোনো টেক্সট বা ছবি থাকবে না, শুধু ৩টি অপশন
+                        audio: "audio-part4.mp3",
                         instruction: "もんだい４では、えなどが ありません。ぶんを きいて、１から３の なかから、いちばん いい ものを ひとつ えらんで ください。",
                         questions: [
                             { id: 1, options: ["1. 1", "2. 2", "3. 3"], answer: 0 },
@@ -506,22 +505,43 @@
             }
         };
 
-        async function syncListeningImagesFromFirestore() {
+        // ফায়ারস্টোর থেকে মোন্দাই ১, ২, ৩ এর প্রতিটি ছবি এবং ৪টি অডিও সিঙ্ক
+        async function syncListeningAssetsFromFirestore() {
             try {
-                const snap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
-                if (snap.exists()) {
-                    const savedImages = snap.data().images || {};
-                    examData.section3.mondais.forEach(m => {
-                        m.questions.forEach(q => {
-                            const key = `${m.id}_q${q.id}`;
-                            if (savedImages[key] && savedImages[key].trim() !== "") {
-                                q.image = savedImages[key].trim();
-                            }
-                        });
+                const savedImages = {};
+                // ১. সাব-কালেকশন থেকে ছবি আনা
+                const subSnap = await getDocs(collection(db, "site_settings", "listening_exam_assets", "items"));
+                subSnap.forEach(d => {
+                    if (d.data().url) savedImages[d.id] = d.data().url;
+                });
+
+                // মূল ডকুমেন্ট ব্যাকআপ চেক
+                const mainSnap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
+                if (mainSnap.exists() && mainSnap.data().images) {
+                    Object.assign(savedImages, mainSnap.data().images);
+                }
+
+                // মোন্দাই ১, ২ ও ৩ এর প্রতিটি প্রশ্নে ছবি বসানো
+                examData.section3.mondais.forEach(m => {
+                    m.questions.forEach(q => {
+                        const key = `${m.id}_q${q.id}`;
+                        if (savedImages[key] && savedImages[key].trim() !== "") {
+                            q.image = savedImages[key].trim();
+                        }
                     });
+                });
+
+                // ২. অ্যাডমিন প্যানেল থেকে সংরক্ষিত ৪টি অডিও ট্র্যাক লোড
+                const audioSnap = await getDoc(doc(db, "site_settings", "listening_exam_audio"));
+                if (audioSnap.exists()) {
+                    const audioData = audioSnap.data() || {};
+                    if (audioData.m1) examData.section3.mondais[0].audio = audioData.m1;
+                    if (audioData.m2) examData.section3.mondais[1].audio = audioData.m2;
+                    if (audioData.m3) examData.section3.mondais[2].audio = audioData.m3;
+                    if (audioData.m4) examData.section3.mondais[3].audio = audioData.m4;
                 }
             } catch(e) {
-                console.warn("Firestore listening images sync failed:", e);
+                console.warn("Firestore assets sync error:", e);
             }
         }
 
@@ -576,6 +596,7 @@
                     container.insertAdjacentHTML('beforeend', cardHtml);
                 });
             } else {
+                // লিসেনিং সেকশনের ৪টি মোন্দাই এবং ৪টি অডিও প্লেয়ার
                 container.innerHTML = `
                     <div class="section-intro-card">
                         <div class="section-intro-title">${sec.name}</div>
@@ -610,11 +631,10 @@
 
                         let imgHtml = (q.image && q.image.trim() !== "") ? `
                             <div class="q-img-wrap">
-                                <img src="${q.image}" alt="${m.id} Q${q.id}">
+                                <img src="${q.image}" alt="${m.id} Q${q.id}" onerror="this.onerror=null; this.parentElement.style.display='none';">
                             </div>
                         ` : '';
 
-                        // মোন্দাই ৪-এ কোনো টেক্সট বা ছবি থাকবে না, শুধু প্রশ্ন নম্বর
                         let promptHtml = (m.id === 'm4') ? `${q.id}ばん` : (q.text ? q.text : `${q.id}ばん`);
 
                         let cardHtml = `
@@ -946,7 +966,7 @@
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
-        syncListeningImagesFromFirestore().finally(() => {
+        syncListeningAssetsFromFirestore().finally(() => {
             renderCurrentSection();
         });
     </script>

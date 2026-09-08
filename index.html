@@ -513,7 +513,7 @@
             <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
         </section>
 
-        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন (অ্যাডমিন প্যানেল কন্ট্রোলড) -->
+        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন -->
         <div class="ad-banner-box" id="homeAdContainer"></div>
 
         <!-- সেকশন ১: A1-A2 -->
@@ -595,7 +595,8 @@
                     <p>N5 লিসেনিং প্র্যাকটিস</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
+                <!-- লিসেনিং টেস্ট সরাসরি মক টেস্ট তালিকার সাথে যুক্ত -->
+                <a href="mock-test.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
                     <h4>Listening Test</h4>
                     <p>N5 লিসেনিং পরীক্ষা</p>
@@ -607,7 +608,7 @@
                     <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
                 </a>
 
-                <!-- পূর্বের প্রশ্নাবলী ও মক টেস্ট লিঙ্ক -->
+                <!-- পূর্বের প্রশ্নাবলী ও মক টেস্ট লিঙ্ক (mock-test.html এ রিডাইরেক্ট) -->
                 <a href="mock-test.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-file-signature"></i></div>
                     <h4>পূর্বের প্রশ্নাবলী</h4>
@@ -702,7 +703,6 @@
             loadNotifications();
         });
 
-        // ডাইনামিক বিজ্ঞাপন ও সেটিংস হ্যান্ডলার
         async function loadSiteDynamicConfigs() {
             try {
                 // ১. ব্র্যান্ডিং / আইকন লোড

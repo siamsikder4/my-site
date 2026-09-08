@@ -95,7 +95,7 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* ছবি ফুল এবং স্পষ্ট দেখানোর জন্য স্টাইল */
+        /* ছবি যাতে ১০০% ফুল এবং স্পষ্ট দেখা যায় (কোনো জুম বা কাটবে না) */
         .q-img-wrap {
             width: 100%;
             max-width: 100%;
@@ -107,13 +107,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 12px;
         }
         
         .q-img-wrap img {
             width: 100%;
             height: auto;
-            max-height: 450px;
+            max-height: 480px;
             object-fit: contain;
             display: block;
             margin: 0 auto;
@@ -368,9 +368,9 @@
                     { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
                     { id: 3, image: "https://ibb.co/MHtgyYj", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
                     { id: 4, image: "https://ibb.co/4wVxjfFS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 5, image: "https://ibb.co/Pzc0vHQW", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
-                    { id: 6, image: "https://ibb.co/WN0SRLLk", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 7, image: "https://ibb.co/S7JTV0BS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                    { id: 5, image: "https://ibb.co/WN0SRLLk", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 }, // ৫ নম্বর প্রশ্ন
+                    { id: 6, image: "https://ibb.co/S7JTV0BS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 }, // ৬ নম্বর প্রশ্ন
+                    { id: 7, image: "https://ibb.co/Pzc0vHQW", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }  // ৭ নম্বর প্রশ্ন
                 ]
             }
         };

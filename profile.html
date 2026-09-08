@@ -21,7 +21,7 @@
         body {
             background-color: #f6f8fb;
             color: #1e293b;
-            padding-bottom: 40px;
+            padding-bottom: 85px;
         }
 
         .top-nav {
@@ -181,6 +181,22 @@
             display: flex; align-items: center; gap: 6px;
             box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
         }
+
+        /* বটম নেভিগেশন বার (শুধু হোম, লিডারবোর্ড এবং প্রোফাইল) */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
+            background: #ffffff; border-top: 1px solid #eef2f5;
+            display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-item {
+            text-decoration: none; color: #8392a5; font-size: 11.5px;
+            display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600;
+            transition: color 0.2s;
+        }
+        .nav-item.active { color: #059669; }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -267,6 +283,22 @@
             </div>
         </div>
     </div>
+
+    <!-- বটম নেভিগেশন বার (হোম, লিডারবোর্ড, প্রোফাইল) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 

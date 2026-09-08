@@ -98,6 +98,51 @@
         .icon-upload-meta { flex: 1; }
         .icon-upload-meta p { font-size: 11.5px; color: #64748b; line-height: 1.4; margin-bottom: 8px; }
 
+        /* ================= লিসেনিং ইমেজ ম্যানেজার স্টাইল ================= */
+        .grid-two-col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
+        }
+        .select-styled {
+            width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 10px;
+            font-size: 13px; font-weight: 600; outline: none; background: #f8fafc; color: #1e293b;
+        }
+        .select-styled:focus { border-color: #047857; background: #ffffff; }
+
+        .image-preview-terminal {
+            background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 16px; padding: 14px;
+            margin-top: 14px; text-align: center; position: relative;
+        }
+        .preview-header-bar {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+            font-size: 12px; font-weight: 700; color: #334155;
+        }
+        .preview-phone-frame {
+            max-width: 360px; margin: 0 auto; background: #ffffff; border: 1.5px solid #cbd5e1;
+            border-radius: 14px; padding: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+        }
+        .preview-exam-mock-card {
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px;
+            background: #ffffff; min-height: 120px; display: flex; align-items: center; justify-content: center;
+        }
+        .preview-exam-mock-card img {
+            width: 100%; height: auto; max-height: 380px; object-fit: contain; display: block;
+        }
+        .no-img-placeholder {
+            color: #94a3b8; font-size: 12px; font-weight: 600; display: flex; flex-direction: column; gap: 6px; align-items: center;
+        }
+
+        .assets-list-badge-table {
+            max-height: 220px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 10px; margin-top: 14px;
+        }
+        .asset-row-item {
+            display: flex; align-items: center; justify-content: space-between; padding: 8px 12px;
+            border-bottom: 1px solid #f1f5f9; font-size: 12px;
+        }
+        .asset-row-item:last-child { border-bottom: none; }
+        .asset-tag-badge {
+            background: #ecfdf5; color: #047857; font-weight: 700; padding: 3px 8px; border-radius: 6px; font-size: 11px;
+        }
+
         /* রিভিউ ডিরেক্টরি স্টাইল */
         .review-card-item {
             background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; margin-bottom: 10px;
@@ -170,19 +215,91 @@
                 <div class="stat-label">মোট ইউজার</div>
             </div>
             <div class="stat-box">
+                <i class="fa-solid fa-headphones" style="color: #0284c7;"></i>
+                <div class="stat-num" id="totalListeningImgsCount">০</div>
+                <div class="stat-label">লিসেনিং ছবি</div>
+            </div>
+            <div class="stat-box">
                 <i class="fa-solid fa-star" style="color: #f59e0b;"></i>
                 <div class="stat-num" id="totalReviewsCount">০</div>
                 <div class="stat-label">ইউজার রিভিউ</div>
             </div>
             <div class="stat-box">
-                <i class="fa-solid fa-rectangle-ad" style="color: #0284c7;"></i>
-                <div class="stat-num" id="adsterraStatusText">Active</div>
-                <div class="stat-label">Adsterra Ads</div>
-            </div>
-            <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
                 <div class="stat-num" id="totalNotifsCount">০</div>
                 <div class="stat-label">নোটিফিকেশন</div>
+            </div>
+        </div>
+
+        <!-- ================= লিসেনিং মোন্দাই ইমেজ ও রিসোর্স ম্যানেজার ================= -->
+        <div class="section-card">
+            <h3>
+                <span><i class="fa-solid fa-images" style="color: #047857; margin-right: 6px;"></i> লিসেনিং ইমেজ ম্যানেজার (Mondai 1-3)</span>
+                <span style="font-size: 11px; font-weight: 600; color: #047857; background: #ecfdf5; padding: 2px 8px; border-radius: 6px;">JLPT N5 Simulation</span>
+            </h3>
+
+            <div class="grid-two-col">
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; display: block;">মোন্দাই নির্বাচন করুন:</label>
+                    <select id="mondaiSelect" class="select-styled">
+                        <option value="m1">もんだい 1 (Task-based)</option>
+                        <option value="m2">もんだい 2 (Key Points)</option>
+                        <option value="m3">もんだい 3 (Verbal Expressions)</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; display: block;">প্রশ্ন নম্বর:</label>
+                    <select id="questionSelect" class="select-styled">
+                        <!-- জাভাস্ক্রিপ্ট দিয়ে মোন্দাই অনুযায়ী অপশন বসবে -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>ইমেজ লিংক দিন (ImgBB / Direct Image URL):</label>
+                <input type="text" id="listeningImgUrlInput" class="input-control" placeholder="যেমন: https://i.ibb.co.com/WrXpRx1/image.png">
+            </div>
+
+            <div class="input-group">
+                <label>অথবা লোকাল ডিভাইস থেকে ছবি সিলেক্ট করুন (Auto Convert to Web):</label>
+                <input type="file" id="listeningImgFileInput" accept="image/*" class="input-control" style="font-size: 12px; padding: 6px 10px;">
+            </div>
+
+            <!-- লাইভ মোবাইল ভিউ ও ক্রপ প্রিভিউ -->
+            <div class="image-preview-terminal">
+                <div class="preview-header-bar">
+                    <span><i class="fa-solid fa-mobile-screen"></i> লাইভ পরীক্ষার ফ্রেম রিভিউ</span>
+                    <span id="previewAssetTagText" style="color: #047857; font-weight: 800;">Mondai 1 - Q1</span>
+                </div>
+                <div class="preview-phone-frame">
+                    <div style="font-size: 11px; color: #64748b; margin-bottom: 6px; text-align: left; font-weight: 700;">
+                        <span id="previewQPromptTitle">1ばん (Example Mock)</span>
+                    </div>
+                    <div class="preview-exam-mock-card">
+                        <img id="livePreviewImg" src="" alt="" style="display: none;">
+                        <div id="noImgPreviewPrompt" class="no-img-placeholder">
+                            <i class="fa-regular fa-image" style="font-size: 26px;"></i>
+                            <span>কোনো ছবি সিলেক্ট করা নেই</span>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size: 11px; color: #64748b; margin-top: 8px;">
+                    ℹ️ এই প্রিভিউটি দেখায় শিক্ষার্থী তার মোবাইল স্ক্রিনে ছবিটি সম্পূর্ণ (Full & Uncropped) দেখতে পাবে কিনা।
+                </p>
+            </div>
+
+            <button class="btn-submit" id="saveListeningAssetBtn">
+                <i class="fa-solid fa-floppy-disk"></i> এই প্রশ্নের জন্য ইমেজ সেভ করুন
+            </button>
+
+            <!-- সংরক্ষিত ইমেজ তালিকা -->
+            <div class="assets-list-badge-table">
+                <div style="padding: 8px 12px; background: #f8fafc; font-size: 12px; font-weight: 800; border-bottom: 1px solid #e2e8f0;">
+                    ডাটাবেসে সংরক্ষিত ইমেজ সমূহ
+                </div>
+                <div id="savedListeningAssetsList">
+                    <div style="text-align: center; color: #94a3b8; padding: 15px; font-size: 11.5px;">লোড হচ্ছে...</div>
+                </div>
             </div>
         </div>
 
@@ -336,6 +453,7 @@
 
         let allNotifications = [];
         let selectedIconBase64 = null;
+        let activeListeningAssets = {};
 
         onAuthStateChanged(auth, async (user) => {
             if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
@@ -343,6 +461,7 @@
                 document.getElementById("adminContent").style.display = "block";
                 
                 await loadAdminConfigs();
+                await fetchListeningAssets();
                 await fetchNotifications();
                 await fetchReviews();
             } else {
@@ -351,12 +470,196 @@
             }
         });
 
+        // ================= লিসেনিং ইমেজ ম্যানেজার হ্যান্ডলার =================
+        const mondaiCounts = {
+            m1: 7, // Mondai 1: 7 Questions
+            m2: 6, // Mondai 2: 6 Questions
+            m3: 5  // Mondai 3: 5 Questions
+        };
+
+        const mondaiSelect = document.getElementById("mondaiSelect");
+        const questionSelect = document.getElementById("questionSelect");
+        const listeningImgUrlInput = document.getElementById("listeningImgUrlInput");
+        const listeningImgFileInput = document.getElementById("listeningImgFileInput");
+        const livePreviewImg = document.getElementById("livePreviewImg");
+        const noImgPreviewPrompt = document.getElementById("noImgPreviewPrompt");
+        const previewAssetTagText = document.getElementById("previewAssetTagText");
+        const previewQPromptTitle = document.getElementById("previewQPromptTitle");
+        const saveListeningAssetBtn = document.getElementById("saveListeningAssetBtn");
+        const savedListeningAssetsList = document.getElementById("savedListeningAssetsList");
+
+        function populateQuestions() {
+            const m = mondaiSelect.value;
+            const count = mondaiCounts[m] || 7;
+            questionSelect.innerHTML = "";
+            for (let i = 1; i <= count; i++) {
+                const opt = document.createElement("option");
+                opt.value = `q${i}`;
+                opt.innerText = `প্রশ্ন ${i} (Q${i})`;
+                questionSelect.appendChild(opt);
+            }
+            updatePreviewUI();
+        }
+
+        mondaiSelect.addEventListener("change", populateQuestions);
+        questionSelect.addEventListener("change", updatePreviewUI);
+
+        function getSelectedKey() {
+            return `${mondaiSelect.value}_${questionSelect.value}`;
+        }
+
+        function updatePreviewUI() {
+            const key = getSelectedKey();
+            const mText = mondaiSelect.options[mondaiSelect.selectedIndex].text.split(" ")[0];
+            const qNum = questionSelect.value.replace("q", "");
+
+            previewAssetTagText.innerText = `${mText} - Q${qNum}`;
+            previewQPromptTitle.innerText = `${qNum}ばん (Exam Frame)`;
+
+            // যদি বর্তমান ইনপুট বা ক্যাশে কোনো ছবি থাকে
+            const existingUrl = listeningImgUrlInput.value.trim() || activeListeningAssets[key] || "";
+
+            if (existingUrl) {
+                livePreviewImg.src = existingUrl;
+                livePreviewImg.style.display = "block";
+                noImgPreviewPrompt.style.display = "none";
+            } else {
+                livePreviewImg.src = "";
+                livePreviewImg.style.display = "none";
+                noImgPreviewPrompt.style.display = "flex";
+            }
+        }
+
+        listeningImgUrlInput.addEventListener("input", (e) => {
+            const url = e.target.value.trim();
+            if (url) {
+                livePreviewImg.src = url;
+                livePreviewImg.style.display = "block";
+                noImgPreviewPrompt.style.display = "none";
+            } else {
+                updatePreviewUI();
+            }
+        });
+
+        listeningImgFileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                listeningImgUrlInput.value = ev.target.result;
+                livePreviewImg.src = ev.target.result;
+                livePreviewImg.style.display = "block";
+                noImgPreviewPrompt.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ফায়ারস্টোরে লিসেনিং ইমেজ সংরক্ষণ
+        saveListeningAssetBtn.addEventListener("click", async () => {
+            const key = getSelectedKey();
+            const urlVal = listeningImgUrlInput.value.trim();
+
+            if (!urlVal) {
+                return alert("দয়া করে ছবির একটি লিংক দিন অথবা ফাইল নির্বাচন করুন!");
+            }
+
+            saveListeningAssetBtn.disabled = true;
+            saveListeningAssetBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+
+            try {
+                activeListeningAssets[key] = urlVal;
+
+                await setDoc(doc(db, "site_settings", "listening_exam_assets"), {
+                    images: activeListeningAssets,
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                alert(`সফলভাবে ${key.toUpperCase()}-এর জন্য ছবি সেভ করা হয়েছে!`);
+                listeningImgUrlInput.value = "";
+                listeningImgFileInput.value = "";
+                renderSavedAssetsList();
+                updatePreviewUI();
+            } catch(e) {
+                alert("ইমেজ সংরক্ষণ করতে সমস্যা হয়েছে!");
+            } finally {
+                saveListeningAssetBtn.disabled = false;
+                saveListeningAssetBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> এই প্রশ্নের জন্য ইমেজ সেভ করুন`;
+            }
+        });
+
+        async function fetchListeningAssets() {
+            try {
+                const snap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
+                if (snap.exists() && snap.data().images) {
+                    activeListeningAssets = snap.data().images;
+                } else {
+                    activeListeningAssets = {};
+                }
+                document.getElementById("totalListeningImgsCount").innerText = Object.keys(activeListeningAssets).length;
+                renderSavedAssetsList();
+                updatePreviewUI();
+            } catch(e) {
+                console.warn("Error fetching listening assets:", e);
+            }
+        }
+
+        function renderSavedAssetsList() {
+            const container = document.getElementById("savedListeningAssetsList");
+            const keys = Object.keys(activeListeningAssets);
+            document.getElementById("totalListeningImgsCount").innerText = keys.length;
+
+            if (keys.length === 0) {
+                container.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:15px; font-size:11.5px;">এখনও কোনো ছবি সংরক্ষণ করা হয়নি।</div>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            keys.sort().forEach(k => {
+                const parts = k.split("_");
+                const mLabel = parts[0].toUpperCase();
+                const qLabel = parts[1].toUpperCase();
+
+                const row = document.createElement("div");
+                row.className = "asset-row-item";
+                row.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="asset-tag-badge">${mLabel} - ${qLabel}</span>
+                        <a href="${activeListeningAssets[k]}" target="_blank" style="font-size:11px; color:#0284c7; text-decoration:none; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:inline-block;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> ভিউ ইমেজ
+                        </a>
+                    </div>
+                    <button onclick="removeListeningAsset('${k}')" style="background:#fee2e2; color:#dc2626; border:none; padding:3px 7px; border-radius:6px; cursor:pointer; font-size:11px;">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        window.removeListeningAsset = async function(k) {
+            if (confirm(`আপনি কি নিশ্চিত যে ${k.toUpperCase()}-এর ইমেজ ডিলিট করবেন?`)) {
+                delete activeListeningAssets[k];
+                try {
+                    await setDoc(doc(db, "site_settings", "listening_exam_assets"), {
+                        images: activeListeningAssets,
+                        updatedAt: Date.now()
+                    });
+                    renderSavedAssetsList();
+                    updatePreviewUI();
+                } catch(e) {
+                    alert("ডিলিট করতে সমস্যা হয়েছে!");
+                }
+            }
+        };
+
+        populateQuestions();
+
         // ================= অ্যাডস কন্ট্রোল হ্যান্ডলার =================
         const toggleGlobalAds = document.getElementById("toggleGlobalAds");
         const toggleIndexAds = document.getElementById("toggleIndexAds");
         const adsterraKeyInput = document.getElementById("adsterraKeyInput");
         const saveAdsConfigBtn = document.getElementById("saveAdsConfigBtn");
-        const adsterraStatusText = document.getElementById("adsterraStatusText");
 
         saveAdsConfigBtn.addEventListener("click", async () => {
             saveAdsConfigBtn.disabled = true;
@@ -369,9 +672,6 @@
                     adKey: adsterraKeyInput.value.trim() || "8daacdc376c790c03bd8fe48f80c0b1c",
                     updatedAt: Date.now()
                 }, { merge: true });
-
-                adsterraStatusText.innerText = toggleGlobalAds.checked ? "Active" : "Disabled";
-                adsterraStatusText.style.color = toggleGlobalAds.checked ? "#047857" : "#ef4444";
 
                 alert("বিজ্ঞাপন সেটিংস সফলভাবে আপডেট হয়েছে!");
             } catch (err) {
@@ -497,9 +797,6 @@
                     toggleGlobalAds.checked = d.globalAdsEnabled !== false;
                     toggleIndexAds.checked = d.indexAdsEnabled !== false;
                     if (d.adKey) adsterraKeyInput.value = d.adKey;
-
-                    adsterraStatusText.innerText = d.globalAdsEnabled !== false ? "Active" : "Disabled";
-                    adsterraStatusText.style.color = d.globalAdsEnabled !== false ? "#047857" : "#ef4444";
                 }
             } catch(e) {
                 console.error("Config load error:", e);

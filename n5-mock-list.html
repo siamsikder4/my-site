@@ -70,6 +70,11 @@
         }
         .sticky-audio-card audio { width: 100%; height: 38px; outline: none; }
 
+        .mondai-title-banner {
+            font-size: 14.5px; font-weight: 800; color: #047857; background: #ecfdf5;
+            padding: 10px 14px; border-radius: 10px; margin: 24px 0 10px; border-left: 4px solid #059669;
+        }
+
         .q-card {
             background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
             padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
@@ -95,7 +100,7 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* আনক্রপড ফুল ইমেজ কন্টেইনার */
+        /* আনক্রপড ইমেজ কন্টেইনার */
         .q-img-wrap {
             width: 100%;
             border: 1px solid #e2e8f0;
@@ -106,7 +111,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6px;
+            padding: 8px;
         }
         
         .q-img-wrap img {
@@ -173,9 +178,7 @@
             display: none; position: fixed; inset: 0; background: #f1f5f9; z-index: 9999;
             overflow-y: auto; padding: 16px 10px;
         }
-        .screen-modal-content {
-            max-width: 480px; margin: 0 auto;
-        }
+        .screen-modal-content { max-width: 480px; margin: 0 auto; }
 
         /* ড্যাশবোর্ড UI */
         .dash-container {
@@ -189,33 +192,22 @@
         .dash-blue-header h2 {
             font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .dash-blue-header p {
-            font-size: 11.5px; opacity: 0.85; margin-top: 3px;
-        }
+        .dash-blue-header p { font-size: 11.5px; opacity: 0.85; margin-top: 3px; }
 
         .dash-tabs-bar {
-            display: grid; grid-template-columns: 1fr 1fr;
-            background: #ffffff; border-bottom: 1px solid #e2e8f0;
+            display: grid; grid-template-columns: 1fr 1fr; background: #ffffff; border-bottom: 1px solid #e2e8f0;
         }
         .dash-tab-btn {
             padding: 12px; background: none; border: none; font-size: 13px; font-weight: 700;
             color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
             border-bottom: 2.5px solid transparent;
         }
-        .dash-tab-btn.active {
-            color: #2563eb; border-bottom-color: #2563eb;
-        }
+        .dash-tab-btn.active { color: #2563eb; border-bottom-color: #2563eb; }
 
-        .dash-tab-content {
-            padding: 18px 16px;
-        }
+        .dash-tab-content { padding: 18px 16px; }
 
-        .cert-subheading {
-            text-align: center; font-size: 12px; color: #64748b; margin-bottom: 16px; font-weight: 600;
-        }
-        .cert-level-box {
-            border: 1.5px solid #0f172a; padding: 14px; text-align: center; margin-bottom: 14px;
-        }
+        .cert-subheading { text-align: center; font-size: 12px; color: #64748b; margin-bottom: 16px; font-weight: 600; }
+        .cert-level-box { border: 1.5px solid #0f172a; padding: 14px; text-align: center; margin-bottom: 14px; }
         .cert-level-label { font-size: 12px; font-weight: 700; color: #334155; }
         .cert-level-name { font-size: 26px; font-weight: 900; color: #0f172a; margin-top: 2px; }
 
@@ -233,28 +225,18 @@
         .jlpt-score-table th { background: #f8fafc; font-weight: 700; color: #334155; }
         .jlpt-score-table .cell-name { text-align: center; font-weight: 600; color: #1e293b; line-height: 1.4; }
 
-        .ref-info-title {
-            text-align: center; font-size: 12px; color: #334155; font-weight: 700; margin-bottom: 10px;
-        }
-        .ref-info-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;
-        }
-        .ref-card {
-            border: 1px solid #e2e8f0; padding: 10px 4px; text-align: center; border-radius: 4px;
-        }
+        .ref-info-title { text-align: center; font-size: 12px; color: #334155; font-weight: 700; margin-bottom: 10px; }
+        .ref-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .ref-card { border: 1px solid #e2e8f0; padding: 10px 4px; text-align: center; border-radius: 4px; }
         .ref-card-jp { font-size: 10px; color: #64748b; }
         .ref-card-en { font-size: 11px; font-weight: 700; color: #334155; margin-bottom: 6px; }
         .ref-card-grade { font-size: 18px; font-weight: 900; }
 
-        .powered-by-text {
-            text-align: center; font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 16px;
-        }
-
+        .powered-by-text { text-align: center; font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 16px; }
         .disclaimer-box {
             background: #fffbeb; border: 1px solid #fef3c7; border-radius: 10px;
             padding: 12px; font-size: 11px; line-height: 1.5; color: #92400e; margin-bottom: 16px;
         }
-
         .btn-more-details-outline {
             display: flex; align-items: center; justify-content: center; gap: 6px;
             width: 100%; border: 1.5px solid #2563eb; background: #ffffff; color: #2563eb;
@@ -268,17 +250,10 @@
         .sec-detail-head {
             padding: 12px 14px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between;
         }
-        .sec-detail-head.vocab { border-top: 3.5px solid #10b981; }
-        .sec-detail-head.grammar { border-top: 3.5px solid #f59e0b; }
-        .sec-detail-head.reading { border-top: 3.5px solid #f97316; }
         .sec-detail-head.listening { border-top: 3.5px solid #06b6d4; }
 
-        .sec-detail-title-wrap {
-            display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 800; color: #0f172a;
-        }
-        .sec-detail-meta {
-            font-size: 11px; color: #64748b; font-weight: 600; margin-top: 2px;
-        }
+        .sec-detail-title-wrap { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 800; color: #0f172a; }
+        .sec-detail-meta { font-size: 11px; color: #64748b; font-weight: 600; margin-top: 2px; }
 
         .sec-breakdown-row {
             display: flex; align-items: center; justify-content: space-between;
@@ -393,7 +368,7 @@
                     { id: 16, text: "( ) を わすれましたから、おかねを もっていません。", options: ["1. かぎ", "2. とけい", "3. さいふ", "4. かさ"], answer: 2 },
                     { id: 17, text: "りょこうの ときは くろい くつを ( )。", options: ["1. はきます", "2. つけます", "3. かけます", "4. かぶります"], answer: 0 },
                     { id: 18, text: "きょうは じゅぎょうの あと、すぐ いえに ( )。", options: ["1. かえります", "2. すみます", "3. あるきます", "4. でかけます"], answer: 0 },
-                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。",], answer: 2 },
+                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。"], answer: 2 },
                     { id: 20, text: "<span class='q-underline'>この かんじは かんたんです。</span>", options: ["1. この かんじは やさしいです。", "2. この かんじは むずかしいです。", "3. この かんじは おもしろいです。", "4. この かんじは つまらないです。"], answer: 0 },
                     { id: 21, text: "<span class='q-underline'>たなかさんは リーさんに さくぶんを おしえました。</span>", options: ["1. リーさんは たなかさんに さくぶんを わたしました。", "2. たなかさんは リーさんに さくぶんを ならいました。", "3. たなかさんは リーさんに さくぶんを わたしました。", "4. リーさんは たなかさんに さくぶんを ならいました。"], answer: 3 }
                 ]
@@ -467,39 +442,86 @@
                 ]
             },
             section3: {
-                name: "聴解（Listening）- もんだい 1",
+                name: "聴解（Listening）- 全問題",
                 timeMinutes: 30,
-                audioUrl: "audio-part1.mp3",
-                instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
-                questions: [
-                    { id: 1, image: "https://i.ibb.co.com/WrXpRx1/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
-                    { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
-                    { id: 3, image: "https://i.ibb.co.com/MHtgyYj/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
-                    { id: 4, image: "https://i.ibb.co.com/4wVxjfFS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 5, image: "https://i.ibb.co.com/WN0SRLLk/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
-                    { id: 6, image: "https://i.ibb.co.com/S7JTV0BS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 7, image: "https://i.ibb.co.com/Pzc0vHQW/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                instructions: "放送を 聞いて、１から４の なかから いちばん いい ものを ひとつ えらんで ください。",
+                mondais: [
+                    {
+                        id: "m1",
+                        title: "もんだい 1 (Task-based)",
+                        audio: "audio-part1.mp3",
+                        instruction: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                        questions: [
+                            { id: 1, image: "https://i.ibb.co.com/WrXpRx1/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                            { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
+                            { id: 3, image: "https://i.ibb.co.com/MHtgyYj/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                            { id: 4, image: "https://i.ibb.co.com/4wVxjfFS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                            { id: 5, image: "https://i.ibb.co.com/WN0SRLLk/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                            { id: 6, image: "https://i.ibb.co.com/S7JTV0BS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                            { id: 7, image: "https://i.ibb.co.com/Pzc0vHQW/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                        ]
+                    },
+                    {
+                        id: "m2",
+                        title: "もんだい 2 (Key Points)",
+                        audio: "audio-part2.mp3",
+                        instruction: "もんだい２では、はじめに しつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                        questions: [
+                            { id: 1, text: "", options: ["1. くろい えんぴつ", "2. あかい えんぴつ", "3. くろい ボールペン", "4. あかい ボールペン"], answer: 2 },
+                            { id: 2, image: "", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                            { id: 3, text: "", options: ["1. １じかん", "2. ２じかん", "3. ３じかん", "4. ４じかん"], answer: 1 },
+                            { id: 4, image: "", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                            { id: 5, text: "", options: ["1. がっこう", "2. しんじゅく", "3. デパート", "4. うち"], answer: 2 },
+                            { id: 6, text: "", options: ["1. いもうと", "2. 母", "3. 父", "4. 友だち"], answer: 1 }
+                        ]
+                    },
+                    {
+                        id: "m3",
+                        title: "もんだい 3 (Verbal Expressions)",
+                        audio: "audio-part3.mp3",
+                        instruction: "もんだい３では、えを みながら しつもんを きいて ください。やじるし（➡）の ひとは なんと いいますか。１から３の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                        questions: [
+                            { id: 1, image: "", options: ["1. 1", "2. 2", "3. 3"], answer: 0 },
+                            { id: 2, image: "", options: ["1. 1", "2. 2", "3. 3"], answer: 1 },
+                            { id: 3, image: "", options: ["1. 1", "2. 2", "3. 3"], answer: 2 },
+                            { id: 4, image: "", options: ["1. 1", "2. 2", "3. 3"], answer: 0 },
+                            { id: 5, image: "", options: ["1. 1", "2. 2", "3. 3"], answer: 1 }
+                        ]
+                    },
+                    {
+                        id: "m4",
+                        title: "もんだい 4 (Quick Response)",
+                        // প্রশ্নপত্রে কোনো টেক্সট বা ছবি থাকবে না, শুধু ৩টি অপশন
+                        instruction: "もんだい４では、えなどが ありません。ぶんを きいて、１から３の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                        questions: [
+                            { id: 1, options: ["1. 1", "2. 2", "3. 3"], answer: 0 },
+                            { id: 2, options: ["1. 1", "2. 2", "3. 3"], answer: 1 },
+                            { id: 3, options: ["1. 1", "2. 2", "3. 3"], answer: 2 },
+                            { id: 4, options: ["1. 1", "2. 2", "3. 3"], answer: 1 },
+                            { id: 5, options: ["1. 1", "2. 2", "3. 3"], answer: 0 },
+                            { id: 6, options: ["1. 1", "2. 2", "3. 3"], answer: 2 }
+                        ]
+                    }
                 ]
             }
         };
 
-        // ফায়ারস্টোর থেকে সরাসরি ইমেজ সিঙ্ক করার শক্তিশালী মেথড
         async function syncListeningImagesFromFirestore() {
             try {
                 const snap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
                 if (snap.exists()) {
-                    const data = snap.data();
-                    const savedImages = data.images || {};
-
-                    examData.section3.questions.forEach(q => {
-                        const key = `m1_q${q.id}`;
-                        if (savedImages[key] && savedImages[key].trim() !== "") {
-                            q.image = savedImages[key].trim();
-                        }
+                    const savedImages = snap.data().images || {};
+                    examData.section3.mondais.forEach(m => {
+                        m.questions.forEach(q => {
+                            const key = `${m.id}_q${q.id}`;
+                            if (savedImages[key] && savedImages[key].trim() !== "") {
+                                q.image = savedImages[key].trim();
+                            }
+                        });
                     });
                 }
             } catch(e) {
-                console.warn("Firestore listening images sync failed, fallback to defaults:", e);
+                console.warn("Firestore listening images sync failed:", e);
             }
         }
 
@@ -512,68 +534,113 @@
         function renderCurrentSection() {
             const sec = examData[currentSectionKey];
             const container = document.getElementById("sectionContainer");
-            
-            let audioPlayerHtml = "";
-            if (sec.audioUrl) {
-                audioPlayerHtml = `
-                    <div class="sticky-audio-card">
-                        <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Audio Track (もんだい 1)</div>
-                        <audio id="mainListeningAudio" controls preload="auto">
-                            <source src="${sec.audioUrl}" type="audio/mpeg">
-                            <source src="./${sec.audioUrl}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+            container.innerHTML = "";
+
+            if (currentSectionKey !== "section3") {
+                container.innerHTML = `
+                    <div class="section-intro-card">
+                        <div class="section-intro-title">${sec.name}</div>
+                        <div class="section-instruction">${sec.instructions || ''}</div>
                     </div>
                 `;
+
+                sec.questions.forEach((q) => {
+                    const qKey = `${currentSectionKey}_q${q.id}`;
+                    const isFlagged = flaggedQuestions.has(qKey);
+
+                    let passageHtml = q.passage ? `<div class="passage-box"><i class="fa-solid fa-thumbtack passage-tag"></i>${q.passage}</div>` : '';
+                    let headingHtml = q.heading ? `<div style="font-size: 13.5px; font-weight: 700; color: #475569; margin: 18px 0 10px; line-height: 1.6;">${q.heading}</div>` : '';
+                    let promptHtml = q.text ? q.text.replace(/\n/g, '<br>') : `${q.id}ばん`;
+
+                    let cardHtml = `
+                        ${headingHtml}
+                        ${passageHtml}
+                        <div class="q-card" id="card_${qKey}">
+                            <div class="q-header-line">
+                                <div class="q-number">${q.id}.</div>
+                                <div class="q-prompt">${promptHtml}</div>
+                                <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag('${qKey}')">
+                                    <i class="fa-${isFlagged ? 'solid' : 'regular'} fa-bookmark"></i>
+                                </button>
+                            </div>
+                            <div class="options-group">
+                                ${q.options.map((opt, optIndex) => `
+                                    <label class="option-label ${userAnswers[qKey] === optIndex ? 'selected' : ''}">
+                                        <input type="radio" name="${qKey}" value="${optIndex}" ${userAnswers[qKey] === optIndex ? 'checked' : ''} onchange="selectAnswer('${qKey}', ${optIndex})">
+                                        <span class="option-text">${opt}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            } else {
+                container.innerHTML = `
+                    <div class="section-intro-card">
+                        <div class="section-intro-title">${sec.name}</div>
+                        <div class="section-instruction">${sec.instructions}</div>
+                    </div>
+                `;
+
+                sec.mondais.forEach(m => {
+                    let audioHtml = "";
+                    if (m.audio) {
+                        audioHtml = `
+                            <div class="sticky-audio-card" style="margin-top: 10px;">
+                                <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Track: ${m.title}</div>
+                                <audio controls preload="none">
+                                    <source src="${m.audio}" type="audio/mpeg">
+                                    <source src="./${m.audio}" type="audio/mpeg">
+                                </audio>
+                            </div>
+                        `;
+                    }
+
+                    let mondaiBlockHtml = `
+                        <div class="mondai-title-banner">${m.title}</div>
+                        <p style="font-size: 12px; color: #475569; line-height: 1.6; margin-bottom: 10px;">${m.instruction}</p>
+                        ${audioHtml}
+                    `;
+                    container.insertAdjacentHTML('beforeend', mondaiBlockHtml);
+
+                    m.questions.forEach(q => {
+                        const qKey = `section3_${m.id}_q${q.id}`;
+                        const isFlagged = flaggedQuestions.has(qKey);
+
+                        let imgHtml = (q.image && q.image.trim() !== "") ? `
+                            <div class="q-img-wrap">
+                                <img src="${q.image}" alt="${m.id} Q${q.id}">
+                            </div>
+                        ` : '';
+
+                        // মোন্দাই ৪-এ কোনো টেক্সট বা ছবি থাকবে না, শুধু প্রশ্ন নম্বর
+                        let promptHtml = (m.id === 'm4') ? `${q.id}ばん` : (q.text ? q.text : `${q.id}ばん`);
+
+                        let cardHtml = `
+                            <div class="q-card" id="card_${qKey}">
+                                <div class="q-header-line">
+                                    <div class="q-number">${q.id}.</div>
+                                    <div class="q-prompt">${promptHtml}</div>
+                                    <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag('${qKey}')">
+                                        <i class="fa-${isFlagged ? 'solid' : 'regular'} fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                ${imgHtml}
+                                <div class="options-group">
+                                    ${q.options.map((opt, optIndex) => `
+                                        <label class="option-label ${userAnswers[qKey] === optIndex ? 'selected' : ''}">
+                                            <input type="radio" name="${qKey}" value="${optIndex}" ${userAnswers[qKey] === optIndex ? 'checked' : ''} onchange="selectAnswer('${qKey}', ${optIndex})">
+                                            <span class="option-text">${opt}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend', cardHtml);
+                    });
+                });
             }
-
-            container.innerHTML = `
-                <div class="section-intro-card">
-                    <div class="section-intro-title">${sec.name}</div>
-                    <div class="section-instruction">${sec.instructions || ''}</div>
-                </div>
-                ${audioPlayerHtml}
-            `;
-
-            sec.questions.forEach((q) => {
-                const qKey = `${currentSectionKey}_q${q.id}`;
-                const isFlagged = flaggedQuestions.has(qKey);
-
-                let passageHtml = q.passage ? `<div class="passage-box"><i class="fa-solid fa-thumbtack passage-tag"></i>${q.passage}</div>` : '';
-                let headingHtml = q.heading ? `<div style="font-size: 13.5px; font-weight: 700; color: #475569; margin: 18px 0 10px; line-height: 1.6;">${q.heading}</div>` : '';
-                
-                let imageHtml = q.image ? `
-                    <div class="q-img-wrap">
-                        <img src="${q.image}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Question+${q.id}';">
-                    </div>
-                ` : '';
-
-                let promptHtml = q.text ? q.text.replace(/\n/g, '<br>') : `${q.id}ばん`;
-
-                let cardHtml = `
-                    ${headingHtml}
-                    ${passageHtml}
-                    <div class="q-card" id="card_${qKey}">
-                        <div class="q-header-line">
-                            <div class="q-number">${q.id}.</div>
-                            <div class="q-prompt">${promptHtml}</div>
-                            <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag('${qKey}')">
-                                <i class="fa-${isFlagged ? 'solid' : 'regular'} fa-bookmark"></i>
-                            </button>
-                        </div>
-                        ${imageHtml}
-                        <div class="options-group">
-                            ${q.options.map((opt, optIndex) => `
-                                <label class="option-label ${userAnswers[qKey] === optIndex ? 'selected' : ''}">
-                                    <input type="radio" name="${qKey}" value="${optIndex}" ${userAnswers[qKey] === optIndex ? 'checked' : ''} onchange="selectAnswer('${qKey}', ${optIndex})">
-                                    <span class="option-text">${opt}</span>
-                                </label>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', cardHtml);
-            });
 
             startTimer(sec.timeMinutes * 60);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -661,7 +728,8 @@
             const modalBody = document.getElementById('scoreModalBody');
             scoreModal.style.display = 'block';
 
-            let sec1Score = 0, sec2Score = 0, sec3Score = 0;
+            let sec1Score = 0, sec2Score = 0;
+            let m1Score = 0, m2Score = 0, m3Score = 0, m4Score = 0;
 
             examData.section1.questions.forEach(q => {
                 if (userAnswers[`section1_q${q.id}`] === q.answer) sec1Score++;
@@ -669,16 +737,18 @@
             examData.section2.questions.forEach(q => {
                 if (userAnswers[`section2_q${q.id}`] === q.answer) sec2Score++;
             });
-            examData.section3.questions.forEach(q => {
-                if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
-            });
+
+            examData.section3.mondais[0].questions.forEach(q => { if (userAnswers[`section3_m1_q${q.id}`] === q.answer) m1Score++; });
+            examData.section3.mondais[1].questions.forEach(q => { if (userAnswers[`section3_m2_q${q.id}`] === q.answer) m2Score++; });
+            examData.section3.mondais[2].questions.forEach(q => { if (userAnswers[`section3_m3_q${q.id}`] === q.answer) m3Score++; });
+            examData.section3.mondais[3].questions.forEach(q => { if (userAnswers[`section3_m4_q${q.id}`] === q.answer) m4Score++; });
+
+            const totalListeningCorrect = m1Score + m2Score + m3Score + m4Score;
+            const totalListeningQ = 24;
 
             const langReadTotalQ = examData.section1.questions.length + examData.section2.questions.length;
-            const langReadCorrect = sec1Score + sec2Score;
-            const langScaledScore = Math.round((langReadCorrect / langReadTotalQ) * 120);
-
-            const listeningTotalQ = examData.section3.questions.length;
-            const listeningScaledScore = Math.round((sec3Score / listeningTotalQ) * 60);
+            const langScaledScore = Math.round(((sec1Score + sec2Score) / langReadTotalQ) * 120);
+            const listeningScaledScore = Math.round((totalListeningCorrect / totalListeningQ) * 60);
 
             const totalScore = langScaledScore + listeningScaledScore;
             const isPassed = (totalScore >= 80) && (langScaledScore >= 38) && (listeningScaledScore >= 19);
@@ -692,11 +762,7 @@
 
             const vocabGrade = getGrade(sec1Score, examData.section1.questions.length);
             const grammarGrade = getGrade(sec2Score, examData.section2.questions.length);
-            const readingGrade = getGrade(sec2Score, examData.section2.questions.length);
-
-            const vocabPct = Math.round((sec1Score / examData.section1.questions.length) * 100);
-            const grammarPct = Math.round((sec2Score / examData.section2.questions.length) * 100);
-            const listeningPct = Math.round((sec3Score / examData.section3.questions.length) * 100);
+            const listeningPct = Math.round((totalListeningCorrect / totalListeningQ) * 100);
 
             let html = `
                 <div class="dash-container">
@@ -736,32 +802,15 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="cell-name">
-                                        言語知識（文字・語彙・文法）・読解<br>
-                                        Language Knowledge<br>(Vocabulary/Grammar) & Reading
-                                    </td>
-                                    <td rowspan="2" style="font-size: 18px; font-weight: 900; vertical-align: middle;">
-                                        ${totalScore} / 180
-                                    </td>
+                                    <td class="cell-name">言語知識（文字・語彙・文法）・読解<br>Language Knowledge & Reading</td>
+                                    <td rowspan="2" style="font-size: 18px; font-weight: 900; vertical-align: middle;">${totalScore} / 180</td>
                                 </tr>
+                                <tr><td style="font-size: 14px; font-weight: 700; color: #1e293b;">${langScaledScore} / 120</td></tr>
                                 <tr>
-                                    <td style="font-size: 14px; font-weight: 700; color: #1e293b;">
-                                        ${langScaledScore} / 120
-                                    </td>
+                                    <td class="cell-name">聴解<br>Listening</td>
+                                    <td rowspan="2" style="font-size: 11px; color: #64748b; vertical-align: middle;">Pass standard: 80/180</td>
                                 </tr>
-                                <tr>
-                                    <td class="cell-name">
-                                        聴解<br>Listening
-                                    </td>
-                                    <td rowspan="2" style="font-size: 11px; color: #64748b; vertical-align: middle;">
-                                        Pass standard: 80/180
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 14px; font-weight: 700; color: #1e293b;">
-                                        ${listeningScaledScore} / 60
-                                    </td>
-                                </tr>
+                                <tr><td style="font-size: 14px; font-weight: 700; color: #1e293b;">${listeningScaledScore} / 60</td></tr>
                             </tbody>
                         </table>
 
@@ -773,121 +822,50 @@
                                 <div class="ref-card-grade" style="color: ${vocabGrade.color};">${vocabGrade.grade}</div>
                             </div>
                             <div class="ref-card">
-                                <div class="ref-card-jp">文法</div>
+                                <div class="ref-card-jp">文法・読解</div>
                                 <div class="ref-card-en">Grammar</div>
                                 <div class="ref-card-grade" style="color: ${grammarGrade.color};">${grammarGrade.grade}</div>
                             </div>
                             <div class="ref-card">
-                                <div class="ref-card-jp">読解</div>
-                                <div class="ref-card-en">Reading</div>
-                                <div class="ref-card-grade" style="color: ${readingGrade.color};">${readingGrade.grade}</div>
+                                <div class="ref-card-jp">聴解</div>
+                                <div class="ref-card-en">Listening</div>
+                                <div class="ref-card-grade" style="color: ${listeningPct >= 50 ? '#059669' : '#dc2626'};">${listeningPct >= 50 ? 'A' : 'C'}</div>
                             </div>
                         </div>
 
                         <div class="powered-by-text">Powered by KOTOBA</div>
-
-                        <div class="disclaimer-box">
-                            ⚠️ <b>Disclaimer:</b> Point weights shown are estimated based on our analysis and industry knowledge. The official JLPT does not publicly disclose individual question point values, so these breakdowns are subjective interpretations for educational purposes only.
-                        </div>
-
-                        <button class="btn-more-details-outline" onclick="switchResultTab('details')">
-                            ← More Details
-                        </button>
+                        <button class="btn-more-details-outline" onclick="switchResultTab('details')">← More Details</button>
                     </div>
 
                     <div class="dash-tab-content" id="tabContentDetails" style="display: none;">
-                        <div class="sec-detail-card">
-                            <div class="sec-detail-head vocab">
-                                <div>
-                                    <div class="sec-detail-title-wrap">
-                                        <i class="fa-solid fa-book" style="color: #ef4444;"></i> Vocabulary
-                                    </div>
-                                    <div class="sec-detail-meta">${sec1Score}/${examData.section1.questions.length} correct • ${vocabPct}% overall</div>
-                                </div>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Kanji Reading</div>
-                                    <div class="sec-breakdown-score">${Math.min(sec1Score, 7)}/7 questions</div>
-                                </div>
-                                <span class="sec-badge-percent ${vocabPct >= 50 ? 'good' : ''}">${vocabPct}%</span>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Orthography</div>
-                                    <div class="sec-breakdown-score">${Math.max(0, Math.min(sec1Score - 7, 5))}/5 questions</div>
-                                </div>
-                                <span class="sec-badge-percent ${vocabPct >= 50 ? 'good' : ''}">${vocabPct}%</span>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Contextually-defined Expressions</div>
-                                    <div class="sec-breakdown-score">0/6 questions</div>
-                                </div>
-                                <span class="sec-badge-percent">0%</span>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Paraphrases</div>
-                                    <div class="sec-breakdown-score">0/3 questions</div>
-                                </div>
-                                <span class="sec-badge-percent">0%</span>
-                            </div>
-                        </div>
-
-                        <div class="sec-detail-card">
-                            <div class="sec-detail-head grammar">
-                                <div>
-                                    <div class="sec-detail-title-wrap">
-                                        <i class="fa-solid fa-pencil" style="color: #f59e0b;"></i> Grammar
-                                    </div>
-                                    <div class="sec-detail-meta">${sec2Score}/${examData.section2.questions.length} correct • ${grammarPct}% overall</div>
-                                </div>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Sentential Grammar 1 (Selecting form)</div>
-                                    <div class="sec-breakdown-score">0/9 questions</div>
-                                </div>
-                                <span class="sec-badge-percent ${grammarPct >= 50 ? 'good' : ''}">${grammarPct}%</span>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Sentential Grammar 2 (Composition)</div>
-                                    <div class="sec-breakdown-score">0/4 questions</div>
-                                </div>
-                                <span class="sec-badge-percent ${grammarPct >= 50 ? 'good' : ''}">${grammarPct}%</span>
-                            </div>
-                            <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Text Grammar</div>
-                                    <div class="sec-breakdown-score">0/4 questions</div>
-                                </div>
-                                <span class="sec-badge-percent">0%</span>
-                            </div>
-                        </div>
-
                         <div class="sec-detail-card">
                             <div class="sec-detail-head listening">
                                 <div>
                                     <div class="sec-detail-title-wrap">
                                         <i class="fa-solid fa-headphones" style="color: #06b6d4;"></i> Listening
                                     </div>
-                                    <div class="sec-detail-meta">${sec3Score}/${examData.section3.questions.length} correct • ${listeningPct}% overall</div>
+                                    <div class="sec-detail-meta">${totalListeningCorrect}/24 correct • ${listeningPct}% overall</div>
                                 </div>
                             </div>
                             <div class="sec-breakdown-row">
-                                <div>
-                                    <div class="sec-breakdown-label">Task-based Comprehension</div>
-                                    <div class="sec-breakdown-score">${sec3Score}/7 questions</div>
-                                </div>
-                                <span class="sec-badge-percent ${listeningPct >= 50 ? 'good' : ''}">${listeningPct}%</span>
+                                <div><div class="sec-breakdown-label">Task-based Comprehension (もんだい 1)</div><div class="sec-breakdown-score">${m1Score}/7 questions</div></div>
+                                <span class="sec-badge-percent">${Math.round((m1Score/7)*100)}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div><div class="sec-breakdown-label">Comprehension of Key Points (もんだい 2)</div><div class="sec-breakdown-score">${m2Score}/6 questions</div></div>
+                                <span class="sec-badge-percent">${Math.round((m2Score/6)*100)}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div><div class="sec-breakdown-label">Verbal Expressions (もんだい 3)</div><div class="sec-breakdown-score">${m3Score}/5 questions</div></div>
+                                <span class="sec-badge-percent">${Math.round((m3Score/5)*100)}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div><div class="sec-breakdown-label">Quick Response (もんだい 4)</div><div class="sec-breakdown-score">${m4Score}/6 questions</div></div>
+                                <span class="sec-badge-percent">${Math.round((m4Score/6)*100)}%</span>
                             </div>
                         </div>
 
-                        <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin: 20px 0 10px;">
-                            📝 Answer Breakdown (ভুল-সঠিক যাচাই)
-                        </h3>
+                        <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin: 20px 0 10px;">📝 Answer Breakdown</h3>
                         <div id="itemLevelReview"></div>
 
                         <button class="btn-more-details-outline" style="margin-top: 14px; background: #0f172a; color: #ffffff; border: none;" onclick="goToExamHub()">
@@ -901,27 +879,26 @@
 
             const reviewContainer = document.getElementById('itemLevelReview');
             let reviewHtml = "";
-            ['section1', 'section2', 'section3'].forEach(secKey => {
-                const sec = examData[secKey];
-                reviewHtml += `<div style="font-size: 13px; font-weight: 800; color: #059669; margin: 12px 0 6px;">${sec.name}</div>`;
-                
-                sec.questions.forEach(q => {
-                    const qKey = `${secKey}_q${q.id}`;
+
+            examData.section3.mondais.forEach(m => {
+                reviewHtml += `<div style="font-size: 13px; font-weight: 800; color: #0284c7; margin: 14px 0 6px;">${m.title}</div>`;
+                m.questions.forEach(q => {
+                    const qKey = `section3_${m.id}_q${q.id}`;
                     const userAns = userAnswers[qKey];
                     const isCorrect = userAns === q.answer;
-
                     reviewHtml += `
                         <div class="review-q-card ${isCorrect ? 'correct' : 'incorrect'}">
-                            <span class="ans-tag ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct (সঠিক)' : 'Incorrect (ভুল)'}</span>
-                            <div style="font-weight: 700; margin-bottom: 4px;">${q.id}. ${q.text || ''}</div>
+                            <span class="ans-tag ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>
+                            <div style="font-weight: 700; margin-bottom: 4px;">${q.id}ばん</div>
                             <div style="font-size: 12px; color: #475569;">
-                                <div>আপনার উত্তর: ${userAns !== undefined ? q.options[userAns] : '<i>উত্তর দেননি</i>'}</div>
+                                <div>আপনার উত্তর: ${userAns !== undefined ? q.options[userAns] : 'উত্তর দেননি'}</div>
                                 <div>সঠিক উত্তর: <b style="color: #059669;">${q.options[q.answer]}</b></div>
                             </div>
                         </div>
                     `;
                 });
             });
+
             reviewContainer.innerHTML = reviewHtml;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -969,7 +946,6 @@
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
-        // ফায়ারস্টোর থেকে নতুন ছবি লোড করে এক্সাম শুরু
         syncListeningImagesFromFirestore().finally(() => {
             renderCurrentSection();
         });

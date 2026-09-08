@@ -18,6 +18,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
+    <!-- OneSignal Push Notification SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      window.OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
+
     <style>
         * {
             margin: 0;

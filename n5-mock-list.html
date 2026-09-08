@@ -146,7 +146,6 @@
         }
         .btn-submit-section:active { background: #0f172a; color: #ffffff; }
 
-        /* পপ-আপ মডাল */
         .exit-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px);
@@ -178,7 +177,7 @@
             max-width: 480px; margin: 0 auto;
         }
 
-        /* ------------------ রেজাল্ট ড্যাশবোর্ড হুবহু UI ------------------ */
+        /* ড্যাশবোর্ড UI */
         .dash-container {
             background: #ffffff; border-radius: 20px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
@@ -211,7 +210,6 @@
             padding: 18px 16px;
         }
 
-        /* অফিসিয়াল রেজাল্ট টেবিল */
         .cert-subheading {
             text-align: center; font-size: 12px; color: #64748b; margin-bottom: 16px; font-weight: 600;
         }
@@ -263,7 +261,6 @@
             padding: 11px; border-radius: 12px; font-size: 13.5px; font-weight: 700; cursor: pointer;
         }
 
-        /* সেকশন ডিটেইলস কার্ডস */
         .sec-detail-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
             overflow: hidden; margin-bottom: 14px;
@@ -295,7 +292,6 @@
         }
         .sec-badge-percent.good { background: #10b981; }
 
-        /* রিভিউ কার্ড */
         .review-q-card {
             background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;
             padding: 14px; margin-bottom: 12px; font-size: 13px;
@@ -330,7 +326,6 @@
         <button class="btn-submit-section" id="btnSubmitSection">Submit Section</button>
     </footer>
 
-    <!-- এক্সিট পপ-আপ -->
     <div class="exit-modal-overlay" id="exitModal">
         <div class="exit-modal-card">
             <div class="exit-icon-circle"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -343,7 +338,6 @@
         </div>
     </div>
 
-    <!-- ব্রেক স্ক্রিন -->
     <div class="screen-modal" id="breakModal" style="align-items: center; justify-content: center; text-align: center; background: #ffffff;">
         <div style="max-width: 360px; margin: 80px auto 0;">
             <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
@@ -354,12 +348,10 @@
         </div>
     </div>
 
-    <!-- স্কোর ও হুবহু ড্যাশবোর্ড স্ক্রিন -->
     <div class="screen-modal" id="scoreModal">
         <div class="screen-modal-content" id="scoreModalBody"></div>
     </div>
 
-    <!-- Firebase SDK লোডার ও এক্সাম স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -401,7 +393,7 @@
                     { id: 16, text: "( ) を わすれましたから、おかねを もっていません。", options: ["1. かぎ", "2. とけい", "3. さいふ", "4. かさ"], answer: 2 },
                     { id: 17, text: "りょこうの ときは くろい くつを ( )。", options: ["1. はきます", "2. つけます", "3. かけます", "4. かぶります"], answer: 0 },
                     { id: 18, text: "きょうは じゅぎょうの あと、すぐ いえに ( )。", options: ["1. かえります", "2. すみます", "3. あるきます", "4. でかけます"], answer: 0 },
-                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。"], answer: 2 },
+                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。",], answer: 2 },
                     { id: 20, text: "<span class='q-underline'>この かんじは かんたんです。</span>", options: ["1. この かんじは やさしいです。", "2. この かんじは むずかしいです。", "3. この かんじは おもしろいです。", "4. この かんじは つまらないです。"], answer: 0 },
                     { id: 21, text: "<span class='q-underline'>たなかさんは リーさんに さくぶんを おしえました。</span>", options: ["1. リーさんは たなかさんに さくぶんを わたしました。", "2. たなかさんは リーさんに さくぶんを ならいました。", "3. たなかさんは リーさんに さくぶんを わたしました。", "4. リーさんは たなかさんに さくぶんを ならいました。"], answer: 3 }
                 ]
@@ -491,21 +483,23 @@
             }
         };
 
-        // ফায়ারস্টোর থেকে ডায়নামিক ইমেজ লোড করার ফাংশন
+        // ফায়ারস্টোর থেকে সরাসরি ইমেজ সিঙ্ক করার শক্তিশালী মেথড
         async function syncListeningImagesFromFirestore() {
             try {
                 const snap = await getDoc(doc(db, "site_settings", "listening_exam_assets"));
-                if (snap.exists() && snap.data().images) {
-                    const savedImages = snap.data().images;
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const savedImages = data.images || {};
+
                     examData.section3.questions.forEach(q => {
                         const key = `m1_q${q.id}`;
-                        if (savedImages[key]) {
-                            q.image = savedImages[key];
+                        if (savedImages[key] && savedImages[key].trim() !== "") {
+                            q.image = savedImages[key].trim();
                         }
                     });
                 }
             } catch(e) {
-                console.warn("Firestore listening images sync failed, using defaults:", e);
+                console.warn("Firestore listening images sync failed, fallback to defaults:", e);
             }
         }
 
@@ -975,8 +969,8 @@
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
-        // ফায়ারস্টোর থেকে ইমেজ লোড করে এক্সাম শুরু
-        syncListeningImagesFromFirestore().then(() => {
+        // ফায়ারস্টোর থেকে নতুন ছবি লোড করে এক্সাম শুরু
+        syncListeningImagesFromFirestore().finally(() => {
             renderCurrentSection();
         });
     </script>

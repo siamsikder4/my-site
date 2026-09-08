@@ -436,31 +436,6 @@
             line-height: 1.5;
         }
 
-        /* সরাসরি ইমেজ প্রিভিউ কার্ড */
-        .field-img-preview-box {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-top: 6px;
-        }
-        .field-img-preview-box img {
-            width: 72px;
-            height: 72px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 2px solid #059669;
-            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.15);
-        }
-        .img-info-text {
-            font-size: 12px;
-            color: #64748b;
-            line-height: 1.4;
-        }
-
         .empty-placeholder {
             text-align: center;
             color: #94a3b8;
@@ -537,9 +512,6 @@
             <div class="col-list" id="colList">
                 <div class="item-row active" onclick="selectCollection('users')">
                     <span><i class="fa-regular fa-folder-open" style="color:#ec4899; margin-right:8px;"></i>users</span>
-                </div>
-                <div class="item-row" onclick="selectCollection('posts')">
-                    <span><i class="fa-regular fa-folder" style="color:#3b82f6; margin-right:8px;"></i>posts</span>
                 </div>
                 <div class="item-row" onclick="selectCollection('user_highlights')">
                     <span><i class="fa-regular fa-folder" style="color:#f59e0b; margin-right:8px;"></i>user_highlights</span>
@@ -683,7 +655,6 @@
             });
         }
 
-        // ডকুমেন্ট সার্চ ফিল্টার
         document.getElementById("docSearchInput").addEventListener("input", (e) => {
             const query = e.target.value.toLowerCase().trim();
             const filtered = allDocsCache.filter(d => d.id.toLowerCase().includes(query));
@@ -734,12 +705,11 @@
 
                 let displayElement = '';
 
-                // ছবি বা পোস্টের ইমেজ প্রিভিউ শনাক্তকরণ
                 if (typeof val === 'string' && (val.startsWith('data:image/') || val.includes('http') && val.match(/\.(jpeg|jpg|gif|png)(\?.*)?$/i))) {
                     displayElement = `
-                        <div class="field-img-preview-box">
-                            <img src="${val}" alt="Image Preview">
-                            <div class="img-info-text">
+                        <div class="field-img-preview-box" style="display:flex; align-items:center; gap:16px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; margin-top:6px;">
+                            <img src="${val}" alt="Image Preview" style="width:72px; height:72px; border-radius:8px; object-fit:cover; border:2px solid #059669;">
+                            <div class="img-info-text" style="font-size:12px; color:#64748b;">
                                 <b style="color:#0f172a;">মিডিয়া / ইমেজ প্রিভিউ</b><br>
                                 <span style="font-size:10.5px; font-family:'JetBrains Mono', monospace;">ফাইল ফরম্যাট: Base64/Image</span>
                             </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLPT N5 বিগত প্রশ্ন ও মক টেস্ট - KOTOBA</title>
+    <title>JLPT N5 Practice Exams - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- ফন্ট ও আইকন -->
@@ -13,458 +13,332 @@
     <style>
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f6f9f8;
+            background-color: #f7f9fb;
             color: #1e293b;
-            padding-bottom: 90px;
+            padding-bottom: 85px;
         }
 
-        /* টপ নেভিগেশন বার ও টাইমার */
-        .exam-nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
+        /* টপ বার */
+        .top-nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; background: #ffffff; border-bottom: 1px solid #eef2f5;
+            position: sticky; top: 0; z-index: 100;
         }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .nav-left { display: flex; align-items: center; gap: 12px; }
         .back-btn {
-            background: #f1f5f9;
-            color: #0f3e2e;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 14px;
+            color: #0f3e2e; background: #f1f5f9; width: 36px; height: 36px;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 14px;
         }
+        .nav-title { font-weight: 800; font-size: 17px; color: #0f3e2e; }
 
-        .exam-title-text {
-            font-size: 15px;
-            font-weight: 800;
-            color: #0f3e2e;
-        }
-
-        .timer-box {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #fef2f2;
-            color: #dc2626;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 13.5px;
-            border: 1px solid #fecaca;
-        }
-
-        .main-content {
-            max-width: 520px;
+        .container {
+            max-width: 480px;
             margin: 0 auto;
             padding: 16px;
         }
 
-        /* সেকশন সুইচ ট্যাব */
-        .section-tabs {
-            display: flex;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 4px;
-            margin-bottom: 16px;
-            gap: 4px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 9px 4px;
-            background: none;
-            border: none;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.2s;
+        .page-header {
+            margin-bottom: 20px;
             text-align: center;
         }
-
-        .tab-btn.active {
-            background: #047857;
-            color: #ffffff;
-            box-shadow: 0 2px 6px rgba(4, 120, 87, 0.2);
+        .page-header h2 {
+            font-size: 21px;
+            font-weight: 800;
+            color: #0e3b2c;
+            margin-bottom: 4px;
         }
-
-        /* প্রোগ্রেস বার */
-        .exam-progress-wrap {
-            margin-bottom: 18px;
-        }
-
-        .progress-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11.5px;
-            font-weight: 700;
+        .page-header p {
+            font-size: 12px;
             color: #64748b;
-            margin-bottom: 6px;
         }
 
-        .progress-track {
-            width: 100%;
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 35%;
-            background: #047857;
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-
-        /* প্রশ্ন কার্ড */
-        .question-card {
+        /* মক টেস্ট কার্ড (স্ক্রিনশটের অনুকরণে) */
+        .exam-card {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 18px;
-            padding: 20px 16px;
-            margin-bottom: 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            border-radius: 22px;
+            border: 1px solid #e9edf3;
+            padding: 24px 20px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             position: relative;
         }
 
-        .q-badge {
-            display: inline-block;
-            background: #ecfdf5;
-            color: #047857;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 800;
-            margin-bottom: 10px;
+        /* প্রিমিয়াম বা স্পেশাল বর্ডার হাইলাইট */
+        .exam-card.premium-card {
+            border: 1.5px solid #fed7aa;
+            box-shadow: 0 6px 18px rgba(251, 146, 60, 0.06);
         }
 
-        .q-text {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1e293b;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .q-text-jp {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f3e2e;
-            display: block;
-            margin-top: 4px;
-        }
-
-        /* লিসেনিং অডিও বক্স */
-        .audio-player-card {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 14px;
-            padding: 12px;
+        .badge-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
-        .audio-play-btn {
-            background: #047857;
-            color: #ffffff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(4, 120, 87, 0.25);
-            flex-shrink: 0;
-        }
-
-        .audio-info {
-            flex: 1;
-        }
-
-        .audio-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #0f3e2e;
-            margin-bottom: 2px;
-        }
-
-        .audio-limit {
+        .badge {
             font-size: 10.5px;
-            color: #64748b;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        /* অপশন তালিকা */
-        .options-grid {
+        .badge-free {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .badge-premium {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        .badge-popular {
+            background: #fce7f3;
+            color: #be185d;
+            border: 1px solid #fbcfe8;
+        }
+
+        .category-subtext {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .exam-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.35;
+            margin-bottom: 8px;
+        }
+
+        .exam-card.premium-card .exam-title {
+            color: #c2410c;
+        }
+
+        .meta-info {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        .meta-info i {
+            font-size: 13px;
+        }
+
+        .meta-divider {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        /* ভেতরের সেকশন স্কোরবোর্ড বক্স */
+        .section-breakdown-card {
+            background: #f8fafc;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+        }
+
+        .section-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .section-item:not(:last-child) {
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .section-name {
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        .option-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 14px;
-            background: #f8fafc;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .section-name i {
+            width: 16px;
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
         }
 
-        .option-item:hover {
-            border-color: #cbd5e1;
-            background: #f1f5f9;
-        }
-
-        .option-item.selected {
-            background: #ecfdf5;
-            border-color: #047857;
-        }
-
-        .option-num {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 1.5px solid #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 800;
-            color: #475569;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .option-item.selected .option-num {
-            background: #047857;
-            color: #ffffff;
-            border-color: #047857;
-        }
-
-        .option-text {
-            font-size: 14.5px;
-            font-weight: 600;
-            color: #334155;
-            font-family: 'Noto Sans JP', -apple-system, sans-serif;
-        }
-
-        /* নেভিগেশন ও সাবমিট বার */
-        .action-bar {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .btn-nav-action {
-            flex: 1;
-            padding: 12px;
-            border-radius: 12px;
+        .section-score {
+            font-size: 13px;
             font-weight: 700;
-            font-size: 13.5px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            color: #94a3b8;
         }
 
-        .btn-prev {
-            background: #ffffff;
-            border: 1.5px solid #e2e8f0;
-            color: #475569;
-        }
-
-        .btn-next {
-            background: #047857;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(4, 120, 87, 0.2);
-        }
-
-        .btn-submit-exam {
+        /* ভিউ টেস্ট বাটন */
+        .btn-view-test {
             width: 100%;
-            background: #dc2626;
+            background: #18181b;
             color: #ffffff;
+            border: none;
             padding: 14px;
             border-radius: 14px;
+            font-size: 13.5px;
             font-weight: 800;
-            font-size: 15px;
-            border: none;
+            letter-spacing: 0.8px;
             cursor: pointer;
-            margin-top: 24px;
-            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            text-transform: uppercase;
+            transition: background 0.2s ease, transform 0.15s ease;
+            display: block;
+            text-align: center;
+            text-decoration: none;
         }
+
+        .btn-view-test:active {
+            transform: scale(0.98);
+            background: #27272a;
+        }
+
+        /* বটম বার */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
+            background: #ffffff; border-top: 1px solid #eef2f5;
+            display: flex; justify-content: space-around; align-items: center; z-index: 1000;
+        }
+        .nav-item {
+            text-decoration: none; color: #8392a5; font-size: 11px;
+            display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600;
+        }
+        .nav-item.active { color: #047857; }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
 
-    <!-- টপ নেভিগেশন ও কাউন্টডাউন টাইমার -->
-    <header class="exam-nav">
+    <header class="top-nav">
         <div class="nav-left">
             <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-            <span class="exam-title-text">JLPT N5 মক টেস্ট</span>
-        </div>
-        <div class="timer-box" id="examTimer">
-            <i class="fa-regular fa-clock"></i>
-            <span>২৫:০০</span>
+            <span class="nav-title">মক টেস্ট ও বিগত প্রশ্ন</span>
         </div>
     </header>
 
-    <main class="main-content">
-
-        <!-- সেকশন ট্যাব সিলেক্টর -->
-        <div class="section-tabs">
-            <button class="tab-btn active">১. কাঞ্জি ও ভোকাব</button>
-            <button class="tab-btn">২. গ্রামার ও রিডিং</button>
-            <button class="tab-btn">৩. লিসেনিং (聴解)</button>
+    <main class="container">
+        
+        <div class="page-header">
+            <h2>JLPT N5 প্রশ্নব্যাংক</h2>
+            <p>আসল পরীক্ষার মতো সময় ও লিসেনিং টেস্ট দিয়ে নিজেকে যাচাই করুন</p>
         </div>
 
-        <!-- প্রোগ্রেস বার -->
-        <div class="exam-progress-wrap">
-            <div class="progress-meta">
-                <span>প্রশ্ন: ০৪ / ২৫</span>
-                <span>১৬% সম্পন্ন</span>
+        <!-- কার্ড ১: ফ্রি টেস্ট (স্ক্রিনশট ১ অনুযায়ী) -->
+        <div class="exam-card">
+            <div class="badge-row">
+                <span class="badge badge-free">FREE</span>
             </div>
-            <div class="progress-track">
-                <div class="progress-fill"></div>
+            <div class="category-subtext">JLPT PRACTICE EXAM</div>
+            <h3 class="exam-title">JLPT N5 Practice Test 1 – 2026</h3>
+            <div class="meta-info">
+                <span><i class="fa-regular fa-clock"></i> 91 min</span>
+                <span class="meta-divider"></span>
+                <span>67 問題</span>
             </div>
+
+            <!-- স্কোরবোর্ড -->
+            <div class="section-breakdown-card">
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-tag"></i> <span>Vocabulary</span></div>
+                    <div class="section-score">__ / 21</div>
+                </div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-pen-nib"></i> <span>Grammar</span></div>
+                    <div class="section-score">__ / 17</div>
+                </div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-book-open"></i> <span>Reading</span></div>
+                    <div class="section-score">__ / 5</div>
+                </div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-microphone"></i> <span>Listening</span></div>
+                    <div class="section-score">__ / 24</div>
+                </div>
+            </div>
+
+            <a href="#" class="btn-view-test" onclick="alert('শীঘ্রই এই পরীক্ষার প্রশ্নপত্র লোড হবে!')">VIEW TEST</a>
         </div>
 
-        <!-- সাধারণ প্রশ্ন (কাঞ্জি/গ্রামার উদাহরণ) -->
-        <div class="question-card">
-            <span class="q-badge">প্রশ্ন নং ৪</span>
-            <div class="q-text">
-                নিচের বাক্যে দাগ দেওয়া কাঞ্জিটির সঠিক হিরাগানা রিডিং নির্বাচন করুন:
-                <span class="q-text-jp">きのう、友だちと 図書館へ 行きました。</span>
+        <!-- কার্ড ২: প্রিমিয়াম ও পপুলার টেস্ট (স্ক্রিনশট ২ অনুযায়ী) -->
+        <div class="exam-card premium-card">
+            <div class="badge-row">
+                <span class="badge badge-premium">★ PREMIUM</span>
+                <span class="badge badge-popular">POPULAR</span>
+            </div>
+            <div class="category-subtext">JLPT MOCK EXAM</div>
+            <h3 class="exam-title">JLPT N5 Mock Test – December 2025</h3>
+            <div class="meta-info">
+                <span><i class="fa-regular fa-clock"></i> 91 min</span>
+                <span class="meta-divider"></span>
+                <span>67 問題</span>
             </div>
 
-            <div class="options-grid">
-                <div class="option-item">
-                    <div class="option-num">১</div>
-                    <div class="option-text">としょかん</div>
+            <!-- স্কোরবোর্ড -->
+            <div class="section-breakdown-card">
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-tag"></i> <span>Vocabulary</span></div>
+                    <div class="section-score">__ / 21</div>
                 </div>
-                <div class="option-item selected">
-                    <div class="option-num">২</div>
-                    <div class="option-text">とうしょかん</div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-pen-nib"></i> <span>Grammar</span></div>
+                    <div class="section-score">__ / 17</div>
                 </div>
-                <div class="option-item">
-                    <div class="option-num">৩</div>
-                    <div class="option-text">ずしょかん</div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-book-open"></i> <span>Reading</span></div>
+                    <div class="section-score">__ / 5</div>
                 </div>
-                <div class="option-item">
-                    <div class="option-num">৪</div>
-                    <div class="option-text">としょけん</div>
+                <div class="section-item">
+                    <div class="section-name"><i class="fa-solid fa-microphone"></i> <span>Listening</span></div>
+                    <div class="section-score">__ / 24</div>
                 </div>
             </div>
+
+            <a href="#" class="btn-view-test" onclick="alert('শীঘ্রই এই পরীক্ষার প্রশ্নপত্র লোড হবে!')">VIEW TEST</a>
         </div>
-
-        <!-- লিসেনিং প্রশ্ন (অডিও প্লেয়ার সহ উদাহরণ) -->
-        <div class="question-card">
-            <span class="q-badge" style="background:#eff6ff; color:#2563eb;">লিসেনিং প্রশ্ন ১</span>
-            <div class="q-text">
-                অডিও ক্লিপটি প্লে করে শুনুন এবং মহিলার উত্তর অনুযায়ী সঠিক ছবিটি নির্বাচন করুন:
-            </div>
-
-            <!-- অডিও প্লেয়ার বার -->
-            <div class="audio-player-card">
-                <button class="audio-play-btn" id="demoPlayBtn">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <div class="audio-info">
-                    <div class="audio-title">Choukai_N5_Track_01.mp3</div>
-                    <div class="audio-limit"><i class="fa-solid fa-rotate-right"></i> সর্বোচ্চ ২ বার শুনতে পারবেন</div>
-                </div>
-            </div>
-
-            <div class="options-grid">
-                <div class="option-item">
-                    <div class="option-num">১</div>
-                    <div class="option-text">駅の前で 待ちます (স্টেশনের সামনে অপেক্ষা করবে)</div>
-                </div>
-                <div class="option-item">
-                    <div class="option-num">২</div>
-                    <div class="option-text">喫茶店で 待ちます (কফি শপে অপেক্ষা করবে)</div>
-                </div>
-                <div class="option-item">
-                    <div class="option-num">৩</div>
-                    <div class="option-text">デパートの前で 待ちます (ডিপার্টমেন্ট স্টোরের সামনে)</div>
-                </div>
-                <div class="option-item">
-                    <div class="option-num">৪</div>
-                    <div class="option-text">会社で 待ちます (অফিসে অপেক্ষা করবে)</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- নেভিগেশন অ্যাকশন বাটন -->
-        <div class="action-bar">
-            <button class="btn-nav-action btn-prev"><i class="fa-solid fa-chevron-left"></i> পূর্ববর্তী</button>
-            <button class="btn-nav-action btn-next">পরবর্তী <i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-
-        <!-- পরীক্ষা সাবমিট বাটন -->
-        <button class="btn-submit-exam" onclick="alert('মক টেস্ট জমা দেওয়া হয়েছে! পরবর্তীতে এখানে পূর্ণাঙ্গ রেজাল্ট কার্ড প্রদর্শিত হবে।')">
-            <i class="fa-solid fa-paper-plane"></i> পরীক্ষা শেষ করুন ও সাবমিট দিন
-        </button>
 
     </main>
 
-    <script>
-        // ডেমো প্লে বাটন টগল
-        const playBtn = document.getElementById('demoPlayBtn');
-        let isPlaying = false;
-        playBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            playBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
-        });
+    <!-- বটম নেভিগেশন বার -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
 
-        // ডেমো অপশন সিলেকশন
-        document.querySelectorAll('.option-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const parent = this.closest('.options-grid');
-                parent.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-    </script>
 </body>
 </html>

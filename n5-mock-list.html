@@ -95,12 +95,27 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
+        /* ছবি যাতে সম্পূর্ণ ও সুন্দরভাবে দেখা যায় (কাটবে না) */
         .q-img-wrap {
-            width: 100%; border: 1px solid #e2e8f0; border-radius: 10px;
-            overflow: hidden; margin-bottom: 12px; background: #ffffff;
-            display: flex; align-items: center; justify-content: center; min-height: 120px;
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
         }
-        .q-img-wrap img { width: 100%; height: auto; display: block; object-fit: contain; }
+        
+        .q-img-wrap img {
+            width: 100%;
+            height: auto;
+            max-height: 280px;
+            display: block;
+            object-fit: contain;
+        }
 
         .options-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
         .option-label {
@@ -186,7 +201,7 @@
         <button class="btn-submit-section" id="btnSubmitSection">Submit Section</button>
     </footer>
 
-    <!-- কাস্টম এক্সিট পপ-আপ -->
+    <!-- এক্সিট পপ-আপ -->
     <div class="exit-modal-overlay" id="exitModal">
         <div class="exit-modal-card">
             <div class="exit-icon-circle"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -318,56 +333,20 @@
             section3: {
                 name: "聴解（Listening）- もんだい 1",
                 timeMinutes: 30,
-                audioUrl: "https://docs.google.com/uc?export=download&id=1WZIsbMlikfAnqtDPsR8RjbA7SsLwaKZQ",
+                audioUrl: "audio-part1.mp3",
                 instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
                 questions: [
-                    { 
-                        id: 1, 
-                        image: "https://ibb.co/PZKKcj8b", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 0 
-                    },
-                    { 
-                        id: 2, 
-                        image: "", // ২ নম্বরে কোনো ছবি নেই
-                        options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], 
-                        answer: 1 
-                    },
-                    { 
-                        id: 3, 
-                        image: "https://ibb.co/DPVMHwpP", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 1 
-                    },
-                    { 
-                        id: 4, 
-                        image: "https://ibb.co/fV5Fb6c5", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 2 
-                    },
-                    { 
-                        id: 5, 
-                        image: "https://ibb.co/Kxgk6yD1", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 3 
-                    },
-                    { 
-                        id: 6, 
-                        image: "https://ibb.co/tMN43pqR", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 2 
-                    },
-                    { 
-                        id: 7, 
-                        image: "https://ibb.co/LzT7D603", 
-                        options: ["1. 1", "2. 2", "3. 3", "4. 4"], 
-                        answer: 0 
-                    }
+                    { id: 1, image: "https://ibb.co/PZKKcj8b", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                    { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
+                    { id: 3, image: "https://ibb.co/DPVMHwpP", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                    { id: 4, image: "https://ibb.co/fV5Fb6c5", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 5, image: "https://ibb.co/Kxgk6yD1", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                    { id: 6, image: "https://ibb.co/tMN43pqR", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 7, image: "https://ibb.co/LzT7D603", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
                 ]
             }
         };
 
-        // ImgBB এবং Google Drive লিংকের জন্য সরাসরি ইমেজ রূপান্তর ফাংশন
         function formatImageSrc(url) {
             if (!url) return '';
             if (url.includes('ibb.co/')) {
@@ -419,7 +398,6 @@
                 let passageHtml = q.passage ? `<div class="passage-box"><i class="fa-solid fa-thumbtack passage-tag"></i>${q.passage}</div>` : '';
                 let headingHtml = q.heading ? `<div style="font-size: 13.5px; font-weight: 700; color: #475569; margin: 18px 0 10px; line-height: 1.6;">${q.heading}</div>` : '';
                 
-                // ছবি থাকলে তা লোড করবে, না থাকলে ব্ল্যাঙ্ক থাকবে
                 let imageHtml = q.image ? `
                     <div class="q-img-wrap">
                         <img src="${formatImageSrc(q.image)}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Question+${q.id}';">
@@ -572,7 +550,6 @@
             }
         });
 
-        // Exit / Back Controller -> সরাসরি mock-test.html এ ফেরত নেওয়া
         function goToExamHub() {
             window.location.href = 'mock-test.html';
         }
@@ -590,7 +567,6 @@
             if (e.target === exitModal) exitModal.style.display = 'none';
         });
 
-        // পরীক্ষা শুরু
         renderCurrentSection();
     </script>
 </body>

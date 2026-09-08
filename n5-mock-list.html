@@ -95,10 +95,9 @@
         }
         .passage-tag { position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444; }
 
-        /* ছবি ফুল এবং স্পষ্ট দেখানোর জন্য আধুনিক সাইজিং */
+        /* ছবি যাতে ১০০% আনক্রপড ও পুরোটা দেখা যায় */
         .q-img-wrap {
             width: 100%;
-            max-width: 100%;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             overflow: hidden;
@@ -107,16 +106,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 6px;
         }
         
         .q-img-wrap img {
             width: 100%;
             height: auto;
-            max-height: 420px;
+            max-height: 480px;
             object-fit: contain;
             display: block;
-            margin: 0 auto;
         }
 
         .options-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
@@ -136,32 +134,6 @@
         .option-label.selected { border-color: #047857; background: #f0fdf4; }
         .option-text { font-size: 14px; font-weight: 500; color: #1e293b; }
 
-        .result-card {
-            background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
-            padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-        .score-box-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;
-        }
-        .score-mini-card {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; text-align: center;
-        }
-        .score-mini-card .val { font-size: 20px; font-weight: 900; color: #047857; margin-top: 4px; }
-        .score-mini-card .lbl { font-size: 11.5px; font-weight: 700; color: #64748b; }
-
-        .review-q-card {
-            background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
-            padding: 16px; margin-bottom: 14px; position: relative;
-        }
-        .review-q-card.correct { border-left: 5px solid #059669; }
-        .review-q-card.incorrect { border-left: 5px solid #dc2626; }
-        
-        .ans-tag {
-            display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 6px; margin-bottom: 8px;
-        }
-        .ans-tag.correct { background: #d1fae5; color: #065f46; }
-        .ans-tag.incorrect { background: #fee2e2; color: #991b1b; }
-
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: #ffffff; border-top: 1px solid #e2e8f0;
@@ -174,6 +146,7 @@
         }
         .btn-submit-section:active { background: #0f172a; color: #ffffff; }
 
+        /* পপ-আপ মডাল */
         .exit-modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px);
@@ -199,15 +172,141 @@
 
         .screen-modal {
             display: none; position: fixed; inset: 0; background: #f1f5f9; z-index: 9999;
-            overflow-y: auto; padding: 20px 12px;
+            overflow-y: auto; padding: 16px 10px;
         }
         .screen-modal-content {
-            max-width: 540px; margin: 0 auto;
+            max-width: 480px; margin: 0 auto;
         }
-        .btn-next-sec {
-            background: #059669; color: #ffffff; border: none; padding: 13px 32px;
-            border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%;
+
+        /* ------------------ রেজাল্ট ড্যাশবোর্ড হুবহু UI ------------------ */
+        .dash-container {
+            background: #ffffff; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;
         }
+        .dash-blue-header {
+            background: linear-gradient(180deg, #1d4ed8 0%, #2563eb 100%);
+            padding: 18px 16px; text-align: center; color: #ffffff;
+        }
+        .dash-blue-header h2 {
+            font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .dash-blue-header p {
+            font-size: 11.5px; opacity: 0.85; margin-top: 3px;
+        }
+
+        .dash-tabs-bar {
+            display: grid; grid-template-columns: 1fr 1fr;
+            background: #ffffff; border-bottom: 1px solid #e2e8f0;
+        }
+        .dash-tab-btn {
+            padding: 12px; background: none; border: none; font-size: 13px; font-weight: 700;
+            color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+            border-bottom: 2.5px solid transparent;
+        }
+        .dash-tab-btn.active {
+            color: #2563eb; border-bottom-color: #2563eb;
+        }
+
+        .dash-tab-content {
+            padding: 18px 16px;
+        }
+
+        /* অফিসিয়াল রেজাল্ট টেবিল */
+        .cert-subheading {
+            text-align: center; font-size: 12px; color: #64748b; margin-bottom: 16px; font-weight: 600;
+        }
+        .cert-level-box {
+            border: 1.5px solid #0f172a; padding: 14px; text-align: center; margin-bottom: 14px;
+        }
+        .cert-level-label { font-size: 12px; font-weight: 700; color: #334155; }
+        .cert-level-name { font-size: 26px; font-weight: 900; color: #0f172a; margin-top: 2px; }
+
+        .cert-result-label { text-align: center; font-size: 12px; color: #334155; font-weight: 600; }
+        .cert-result-status { text-align: center; font-size: 15px; font-weight: 800; margin: 4px 0 16px; }
+        .cert-result-status.pass { color: #059669; }
+        .cert-result-status.fail { color: #dc2626; }
+
+        .jlpt-score-table {
+            width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; margin-bottom: 20px; font-size: 11.5px;
+        }
+        .jlpt-score-table th, .jlpt-score-table td {
+            border: 1px solid #cbd5e1; padding: 8px 6px; text-align: center;
+        }
+        .jlpt-score-table th { background: #f8fafc; font-weight: 700; color: #334155; }
+        .jlpt-score-table .cell-name { text-align: center; font-weight: 600; color: #1e293b; line-height: 1.4; }
+
+        .ref-info-title {
+            text-align: center; font-size: 12px; color: #334155; font-weight: 700; margin-bottom: 10px;
+        }
+        .ref-info-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;
+        }
+        .ref-card {
+            border: 1px solid #e2e8f0; padding: 10px 4px; text-align: center; border-radius: 4px;
+        }
+        .ref-card-jp { font-size: 10px; color: #64748b; }
+        .ref-card-en { font-size: 11px; font-weight: 700; color: #334155; margin-bottom: 6px; }
+        .ref-card-grade { font-size: 18px; font-weight: 900; }
+
+        .powered-by-text {
+            text-align: center; font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 16px;
+        }
+
+        .disclaimer-box {
+            background: #fffbeb; border: 1px solid #fef3c7; border-radius: 10px;
+            padding: 12px; font-size: 11px; line-height: 1.5; color: #92400e; margin-bottom: 16px;
+        }
+
+        .btn-more-details-outline {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            width: 100%; border: 1.5px solid #2563eb; background: #ffffff; color: #2563eb;
+            padding: 11px; border-radius: 12px; font-size: 13.5px; font-weight: 700; cursor: pointer;
+        }
+
+        /* সেকশন ডিটেইলস কার্ডস */
+        .sec-detail-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+            overflow: hidden; margin-bottom: 14px;
+        }
+        .sec-detail-head {
+            padding: 12px 14px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between;
+        }
+        .sec-detail-head.vocab { border-top: 3.5px solid #10b981; }
+        .sec-detail-head.grammar { border-top: 3.5px solid #f59e0b; }
+        .sec-detail-head.reading { border-top: 3.5px solid #f97316; }
+        .sec-detail-head.listening { border-top: 3.5px solid #06b6d4; }
+
+        .sec-detail-title-wrap {
+            display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 800; color: #0f172a;
+        }
+        .sec-detail-meta {
+            font-size: 11px; color: #64748b; font-weight: 600; margin-top: 2px;
+        }
+
+        .sec-breakdown-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 14px; border-bottom: 1px solid #f8fafc; font-size: 12px;
+        }
+        .sec-breakdown-label { font-weight: 700; color: #1e293b; }
+        .sec-breakdown-score { font-size: 11px; color: #64748b; margin-top: 2px; }
+        .sec-badge-percent {
+            background: #ef4444; color: #ffffff; font-size: 10px; font-weight: 800;
+            padding: 3px 8px; border-radius: 12px;
+        }
+        .sec-badge-percent.good { background: #10b981; }
+
+        /* রিভিউ কার্ড */
+        .review-q-card {
+            background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;
+            padding: 14px; margin-bottom: 12px; font-size: 13px;
+        }
+        .review-q-card.correct { border-left: 4px solid #10b981; }
+        .review-q-card.incorrect { border-left: 4px solid #ef4444; }
+        .ans-tag {
+            display: inline-block; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px;
+        }
+        .ans-tag.correct { background: #d1fae5; color: #065f46; }
+        .ans-tag.incorrect { background: #fee2e2; color: #991b1b; }
     </style>
 </head>
 <body>
@@ -246,16 +345,16 @@
 
     <!-- ব্রেক স্ক্রিন -->
     <div class="screen-modal" id="breakModal" style="align-items: center; justify-content: center; text-align: center; background: #ffffff;">
-        <div>
+        <div style="max-width: 360px; margin: 80px auto 0;">
             <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
             <h2 id="breakTitle" style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">Take a Break</h2>
             <p id="breakDesc" style="font-size: 13px; color: #64748b; margin-bottom: 20px;">You can take a 5-minute break or proceed to the next section immediately.</p>
             <div class="timer-badge" style="margin: 0 auto 20px; font-size: 16px; width: fit-content;" id="breakTimer">05:00</div>
-            <button class="btn-next-sec" id="btnProceedSection">Proceed to Next Section</button>
+            <button class="btn-more-details-outline" style="background: #059669; color: #ffffff; border: none;" id="btnProceedSection">Proceed to Next Section</button>
         </div>
     </div>
 
-    <!-- স্কোর ও ডিটেইলড রিভিউ স্ক্রিন -->
+    <!-- স্কোর ও হুবহু ড্যাশবোর্ড স্ক্রিন -->
     <div class="screen-modal" id="scoreModal">
         <div class="screen-modal-content" id="scoreModalBody"></div>
     </div>
@@ -361,32 +460,19 @@
             section3: {
                 name: "聴解（Listening）- もんだい 1",
                 timeMinutes: 30,
-                audioUrl: "audio-part1.mp3", // গিটহাবের ফাইলের নাম
+                audioUrl: "audio-part1.mp3",
                 instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
                 questions: [
-                    { id: 1, image: "https://ibb.co/WrXpRx1", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
+                    { id: 1, image: "https://i.ibb.co.com/WrXpRx1/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 },
                     { id: 2, image: "", options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"], answer: 1 },
-                    { id: 3, image: "https://ibb.co/MHtgyYj", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
-                    { id: 4, image: "https://ibb.co/4wVxjfFS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 5, image: "https://ibb.co/WN0SRLLk", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
-                    { id: 6, image: "https://ibb.co/S7JTV0BS", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
-                    { id: 7, image: "https://ibb.co/Pzc0vHQW", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
+                    { id: 3, image: "https://i.ibb.co.com/MHtgyYj/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 1 },
+                    { id: 4, image: "https://i.ibb.co.com/4wVxjfFS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 5, image: "https://i.ibb.co.com/WN0SRLLk/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 3 },
+                    { id: 6, image: "https://i.ibb.co.com/S7JTV0BS/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 2 },
+                    { id: 7, image: "https://i.ibb.co.com/Pzc0vHQW/image.png", options: ["1. 1", "2. 2", "3. 3", "4. 4"], answer: 0 }
                 ]
             }
         };
-
-        function formatImageSrc(url) {
-            if (!url) return '';
-            if (url.includes('ibb.co/')) {
-                const id = url.split('/').filter(Boolean).pop();
-                return `https://i.ibb.co/${id}/image.jpg`;
-            }
-            if (url.includes('drive.google.com')) {
-                const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
-            }
-            return url;
-        }
 
         let currentSectionKey = "section1";
         let userAnswers = {};
@@ -403,8 +489,9 @@
                 audioPlayerHtml = `
                     <div class="sticky-audio-card">
                         <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Audio Track (もんだい 1)</div>
-                        <audio id="mainListeningAudio" controls controlsList="nodownload" preload="auto">
+                        <audio id="mainListeningAudio" controls preload="auto">
                             <source src="${sec.audioUrl}" type="audio/mpeg">
+                            <source src="./${sec.audioUrl}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -428,7 +515,7 @@
                 
                 let imageHtml = q.image ? `
                     <div class="q-img-wrap">
-                        <img src="${formatImageSrc(q.image)}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Question+${q.id}';">
+                        <img src="${q.image}" alt="Question Image" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Question+${q.id}';">
                     </div>
                 ` : '';
 
@@ -540,92 +627,316 @@
             };
         }
 
+        /* স্ক্রিনশটের হুবহু মতো রেজাল্ট ড্যাশবোর্ড লজিক */
         function finishExamAndCalculate() {
             const scoreModal = document.getElementById('scoreModal');
             const modalBody = document.getElementById('scoreModalBody');
-            scoreModal.style.display = 'flex';
+            scoreModal.style.display = 'block';
 
             let sec1Score = 0, sec2Score = 0, sec3Score = 0;
-            let totalCorrect = 0, totalQ = 0;
 
             examData.section1.questions.forEach(q => {
-                totalQ++;
-                if (userAnswers[`section1_q${q.id}`] === q.answer) { sec1Score++; totalCorrect++; }
+                if (userAnswers[`section1_q${q.id}`] === q.answer) sec1Score++;
             });
             examData.section2.questions.forEach(q => {
-                totalQ++;
-                if (userAnswers[`section2_q${q.id}`] === q.answer) { sec2Score++; totalCorrect++; }
+                if (userAnswers[`section2_q${q.id}`] === q.answer) sec2Score++;
             });
             examData.section3.questions.forEach(q => {
-                totalQ++;
-                if (userAnswers[`section3_q${q.id}`] === q.answer) { sec3Score++; totalCorrect++; }
+                if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
             });
 
-            let isPassed = totalCorrect >= (totalQ * 0.5);
+            // JLPT N5 এর অফিশিয়াল স্কেল স্কোর হিসাব (মোট ১৮০ পয়েন্ট)
+            // Language Knowledge & Reading: 120 pts
+            // Listening: 60 pts
+            const langReadTotalQ = examData.section1.questions.length + examData.section2.questions.length;
+            const langReadCorrect = sec1Score + sec2Score;
+            const langScaledScore = Math.round((langReadCorrect / langReadTotalQ) * 120);
+
+            const listeningTotalQ = examData.section3.questions.length;
+            const listeningScaledScore = Math.round((sec3Score / listeningTotalQ) * 60);
+
+            const totalScore = langScaledScore + listeningScaledScore;
+            
+            // পাশের শর্ত: মোট ৮০ বা তদূর্ধ্ব এবং প্রতিটি সেকশনে পাসিং কাটঅফ
+            const isPassed = (totalScore >= 80) && (langScaledScore >= 38) && (listeningScaledScore >= 19);
+
+            // রেফারেন্স গ্রেড (A, B, C)
+            function getGrade(score, max) {
+                const p = (score / max) * 100;
+                if (p >= 67) return { grade: 'A', color: '#059669' };
+                if (p >= 34) return { grade: 'B', color: '#d97706' };
+                return { grade: 'C', color: '#dc2626' };
+            }
+
+            const vocabGrade = getGrade(sec1Score, examData.section1.questions.length);
+            const grammarGrade = getGrade(sec2Score, examData.section2.questions.length);
+            const readingGrade = getGrade(sec2Score, examData.section2.questions.length);
+
+            // শতাংশ হিসাব
+            const vocabPct = Math.round((sec1Score / examData.section1.questions.length) * 100);
+            const grammarPct = Math.round((sec2Score / examData.section2.questions.length) * 100);
+            const listeningPct = Math.round((sec3Score / examData.section3.questions.length) * 100);
 
             let html = `
-                <div class="result-card" style="background: linear-gradient(135deg, #0f3e2e 0%, #047857 100%); color: #ffffff; text-align: center;">
-                    <h2 style="font-size: 20px; font-weight: 900; margin-bottom: 4px;">🇯🇵 JLPT Results Dashboard</h2>
-                    <p style="font-size: 12.5px; opacity: 0.9;">JLPT N5 Practice Test 1 - 2026</p>
-                </div>
+                <div class="dash-container">
+                    <!-- নীল হেডার -->
+                    <div class="dash-blue-header">
+                        <h2>🇯🇵 JLPT Results Dashboard</h2>
+                        <p>JLPT N5 Korean Practice Test 1 – 2026</p>
+                    </div>
 
-                <div class="result-card" style="text-align: center;">
-                    <div style="font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 4px;">レベル Level</div>
-                    <div style="font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 12px;">N5</div>
-                    <div style="font-size: 12px; font-weight: 700; color: #64748b;">試験結果 Result</div>
-                    <div style="font-size: 18px; font-weight: 900; color: ${isPassed ? '#059669' : '#dc2626'}; margin-top: 2px;">
-                        ${isPassed ? '合格 / Passed' : '不合格 / Failed'}
+                    <!-- ট্যাব বার -->
+                    <div class="dash-tabs-bar">
+                        <button class="dash-tab-btn active" id="tabBtnOfficial" onclick="switchResultTab('official')">
+                            <i class="fa-regular fa-clipboard"></i> Official Results
+                        </button>
+                        <button class="dash-tab-btn" id="tabBtnDetails" onclick="switchResultTab('details')">
+                            <i class="fa-solid fa-chart-simple"></i> Sections Details
+                        </button>
+                    </div>
+
+                    <!-- ট্যাব ১: Official Results (হুবহু সার্টিফিকেট স্ক্রিনশট) -->
+                    <div class="dash-tab-content" id="tabContentOfficial">
+                        <div class="cert-subheading">日本語能力試験・認定・文法・語彙</div>
+
+                        <div class="cert-level-box">
+                            <div class="cert-level-label">レベル Level</div>
+                            <div class="cert-level-name">N5</div>
+                        </div>
+
+                        <div class="cert-result-label">試験結果 Result</div>
+                        <div class="cert-result-status ${isPassed ? 'pass' : 'fail'}">
+                            ${isPassed ? '合格 / Passed' : '不合格 / Failed'}
+                        </div>
+
+                        <!-- অফিসিয়াল টেবিল -->
+                        <table class="jlpt-score-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 58%;">得点区分別得点<br>Scores by Scoring Section</th>
+                                    <th style="width: 42%;">総合得点<br>Total Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="cell-name">
+                                        言語知識（文字・語彙・文法）・読解<br>
+                                        Language Knowledge<br>(Vocabulary/Grammar) & Reading
+                                    </td>
+                                    <td rowspan="2" style="font-size: 18px; font-weight: 900; vertical-align: middle;">
+                                        ${totalScore} / 180
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px; font-weight: 700; color: #1e293b;">
+                                        ${langScaledScore} / 120
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-name">
+                                        聴解<br>Listening
+                                    </td>
+                                    <td rowspan="2" style="font-size: 11px; color: #64748b; vertical-align: middle;">
+                                        Pass standard: 80/180
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px; font-weight: 700; color: #1e293b;">
+                                        ${listeningScaledScore} / 60
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- 参考情報 Reference Information -->
+                        <div class="ref-info-title">参考情報<br><span style="font-size: 11px; color:#64748b; font-weight:600;">Reference Information</span></div>
+                        <div class="ref-info-grid">
+                            <div class="ref-card">
+                                <div class="ref-card-jp">文字・語彙</div>
+                                <div class="ref-card-en">Vocabulary</div>
+                                <div class="ref-card-grade" style="color: ${vocabGrade.color};">${vocabGrade.grade}</div>
+                            </div>
+                            <div class="ref-card">
+                                <div class="ref-card-jp">文法</div>
+                                <div class="ref-card-en">Grammar</div>
+                                <div class="ref-card-grade" style="color: ${grammarGrade.color};">${grammarGrade.grade}</div>
+                            </div>
+                            <div class="ref-card">
+                                <div class="ref-card-jp">読解</div>
+                                <div class="ref-card-en">Reading</div>
+                                <div class="ref-card-grade" style="color: ${readingGrade.color};">${readingGrade.grade}</div>
+                            </div>
+                        </div>
+
+                        <div class="powered-by-text">Powered by KOTOBA</div>
+
+                        <div class="disclaimer-box">
+                            ⚠️ <b>Disclaimer:</b> Point weights shown are estimated based on our analysis and industry knowledge. The official JLPT does not publicly disclose individual question point values, so these breakdowns are subjective interpretations for educational purposes only.
+                        </div>
+
+                        <button class="btn-more-details-outline" onclick="switchResultTab('details')">
+                            ← More Details
+                        </button>
+                    </div>
+
+                    <!-- ট্যাব ২: Sections Details (হুবহু স্ক্রিনশট ৩ ও ৪) -->
+                    <div class="dash-tab-content" id="tabContentDetails" style="display: none;">
+                        
+                        <!-- Vocabulary -->
+                        <div class="sec-detail-card">
+                            <div class="sec-detail-head vocab">
+                                <div>
+                                    <div class="sec-detail-title-wrap">
+                                        <i class="fa-solid fa-book" style="color: #ef4444;"></i> Vocabulary
+                                    </div>
+                                    <div class="sec-detail-meta">${sec1Score}/${examData.section1.questions.length} correct • ${vocabPct}% overall</div>
+                                </div>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Kanji Reading</div>
+                                    <div class="sec-breakdown-score">${Math.min(sec1Score, 7)}/7 questions</div>
+                                </div>
+                                <span class="sec-badge-percent ${vocabPct >= 50 ? 'good' : ''}">${vocabPct}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Orthography</div>
+                                    <div class="sec-breakdown-score">${Math.max(0, Math.min(sec1Score - 7, 5))}/5 questions</div>
+                                </div>
+                                <span class="sec-badge-percent ${vocabPct >= 50 ? 'good' : ''}">${vocabPct}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Contextually-defined Expressions</div>
+                                    <div class="sec-breakdown-score">0/6 questions</div>
+                                </div>
+                                <span class="sec-badge-percent">0%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Paraphrases</div>
+                                    <div class="sec-breakdown-score">0/3 questions</div>
+                                </div>
+                                <span class="sec-badge-percent">0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Grammar -->
+                        <div class="sec-detail-card">
+                            <div class="sec-detail-head grammar">
+                                <div>
+                                    <div class="sec-detail-title-wrap">
+                                        <i class="fa-solid fa-pencil" style="color: #f59e0b;"></i> Grammar
+                                    </div>
+                                    <div class="sec-detail-meta">${sec2Score}/${examData.section2.questions.length} correct • ${grammarPct}% overall</div>
+                                </div>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Sentential Grammar 1 (Selecting form)</div>
+                                    <div class="sec-breakdown-score">0/9 questions</div>
+                                </div>
+                                <span class="sec-badge-percent ${grammarPct >= 50 ? 'good' : ''}">${grammarPct}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Sentential Grammar 2 (Composition)</div>
+                                    <div class="sec-breakdown-score">0/4 questions</div>
+                                </div>
+                                <span class="sec-badge-percent ${grammarPct >= 50 ? 'good' : ''}">${grammarPct}%</span>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Text Grammar</div>
+                                    <div class="sec-breakdown-score">0/4 questions</div>
+                                </div>
+                                <span class="sec-badge-percent">0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Listening -->
+                        <div class="sec-detail-card">
+                            <div class="sec-detail-head listening">
+                                <div>
+                                    <div class="sec-detail-title-wrap">
+                                        <i class="fa-solid fa-headphones" style="color: #06b6d4;"></i> Listening
+                                    </div>
+                                    <div class="sec-detail-meta">${sec3Score}/${examData.section3.questions.length} correct • ${listeningPct}% overall</div>
+                                </div>
+                            </div>
+                            <div class="sec-breakdown-row">
+                                <div>
+                                    <div class="sec-breakdown-label">Task-based Comprehension</div>
+                                    <div class="sec-breakdown-score">${sec3Score}/7 questions</div>
+                                </div>
+                                <span class="sec-badge-percent ${listeningPct >= 50 ? 'good' : ''}">${listeningPct}%</span>
+                            </div>
+                        </div>
+
+                        <!-- প্রশ্নভিত্তিক পুঙ্খানুপুঙ্খ রিভিউ -->
+                        <h3 style="font-size: 15px; font-weight: 800; color: #0f172a; margin: 20px 0 10px;">
+                            📝 Answer Breakdown (ভুল-সঠিক যাচাই)
+                        </h3>
+                        <div id="itemLevelReview"></div>
+
+                        <button class="btn-more-details-outline" style="margin-top: 14px; background: #0f172a; color: #ffffff; border: none;" onclick="goToExamHub()">
+                            Back to Exam List
+                        </button>
                     </div>
                 </div>
-
-                <div class="score-box-grid">
-                    <div class="score-mini-card">
-                        <div class="lbl">Vocabulary</div>
-                        <div class="val">${sec1Score} / ${examData.section1.questions.length}</div>
-                    </div>
-                    <div class="score-mini-card">
-                        <div class="lbl">Grammar & Reading</div>
-                        <div class="val">${sec2Score} / ${examData.section2.questions.length}</div>
-                    </div>
-                    <div class="score-mini-card" style="grid-column: span 2;">
-                        <div class="lbl">Listening (M1)</div>
-                        <div class="val">${sec3Score} / ${examData.section3.questions.length}</div>
-                    </div>
-                </div>
-
-                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin: 20px 0 12px;">📋 Detailed Review (কোথায় ভুল হয়েছে দেখুন)</h3>
             `;
 
+            modalBody.innerHTML = html;
+
+            // প্রশ্নের আইটেম লেভেল রিভিউ ইনসার্ট
+            const reviewContainer = document.getElementById('itemLevelReview');
+            let reviewHtml = "";
             ['section1', 'section2', 'section3'].forEach(secKey => {
                 const sec = examData[secKey];
-                html += `<div style="font-size: 14px; font-weight: 800; color: #047857; margin: 16px 0 8px; border-bottom: 2px solid #047857; padding-bottom: 4px;">${sec.name}</div>`;
+                reviewHtml += `<div style="font-size: 13px; font-weight: 800; color: #059669; margin: 12px 0 6px;">${sec.name}</div>`;
                 
                 sec.questions.forEach(q => {
                     const qKey = `${secKey}_q${q.id}`;
                     const userAns = userAnswers[qKey];
                     const isCorrect = userAns === q.answer;
 
-                    let imgH = q.image ? `<div class="q-img-wrap"><img src="${formatImageSrc(q.image)}" alt="Q Img"></div>` : '';
-                    let passageH = q.passage ? `<div class="passage-box">${q.passage}</div>` : '';
-
-                    html += `
+                    reviewHtml += `
                         <div class="review-q-card ${isCorrect ? 'correct' : 'incorrect'}">
                             <span class="ans-tag ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct (সঠিক)' : 'Incorrect (ভুল)'}</span>
-                            <div style="font-weight: 800; font-size: 14px; margin-bottom: 8px;">${q.id}. ${q.text || ''}</div>
-                            ${imgH}
-                            ${passageH}
-                            <div style="font-size: 12.5px; color: #334155; margin-top: 6px;">
-                                <div><b>আপনার উত্তর:</b> ${userAns !== undefined ? q.options[userAns] : 'উত্তর দেননি'}</div>
-                                <div><b>সঠিক উত্তর:</b> <span style="color: #059669; font-weight: 700;">${q.options[q.answer]}</span></div>
+                            <div style="font-weight: 700; margin-bottom: 4px;">${q.id}. ${q.text || ''}</div>
+                            <div style="font-size: 12px; color: #475569;">
+                                <div>আপনার উত্তর: ${userAns !== undefined ? q.options[userAns] : '<i>উত্তর দেননি</i>'}</div>
+                                <div>সঠিক উত্তর: <b style="color: #059669;">${q.options[q.answer]}</b></div>
                             </div>
                         </div>
                     `;
                 });
             });
-
-            html += `<button class="btn-next-sec" style="margin-top: 20px;" onclick="goToExamHub()">Back to Exam List</button>`;
-            modalBody.innerHTML = html;
+            reviewContainer.innerHTML = reviewHtml;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // ট্যাব সুইচ ফাংশন
+        window.switchResultTab = function(tab) {
+            const officialTab = document.getElementById('tabContentOfficial');
+            const detailsTab = document.getElementById('tabContentDetails');
+            const btnOfficial = document.getElementById('tabBtnOfficial');
+            const btnDetails = document.getElementById('tabBtnDetails');
+
+            if (tab === 'official') {
+                officialTab.style.display = 'block';
+                detailsTab.style.display = 'none';
+                btnOfficial.classList.add('active');
+                btnDetails.classList.remove('active');
+            } else {
+                officialTab.style.display = 'none';
+                detailsTab.style.display = 'block';
+                btnOfficial.classList.remove('active');
+                btnDetails.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
 
         document.getElementById('btnSubmitSection').addEventListener('click', () => {
             if (confirm('Are you sure you want to submit this section? You cannot return to it.')) {

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLPT N5 2024 July Official Test - KOTOBA</title>
+    <title>JLPT N5 Full Official Test (July 2024) - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- Fonts & Icons -->
+    <!-- Fonts & FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
 
@@ -20,7 +20,7 @@
         body {
             background-color: #f1f5f9;
             color: #1e293b;
-            padding-bottom: 90px;
+            padding-bottom: 95px;
         }
 
         /* Top Sticky Exam Header */
@@ -47,25 +47,38 @@
         }
 
         .exam-container {
-            max-width: 540px; margin: 0 auto; padding: 16px 12px;
+            max-width: 540px; margin: 0 auto; padding: 14px 12px;
         }
 
-        /* Section Banner */
+        /* Section Intro Header Card */
         .section-intro-card {
-            background: #ffffff; border-radius: 12px; padding: 14px 16px;
+            background: #ffffff; border-radius: 12px; padding: 16px;
             margin-bottom: 14px; border: 1px solid #e2e8f0;
         }
         .section-intro-title {
-            font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 4px;
+            font-size: 16.5px; font-weight: 800; color: #0f172a; margin-bottom: 4px;
         }
         .section-instruction {
-            font-size: 12.5px; color: #475569; line-height: 1.6;
+            font-size: 12.5px; color: #475569; line-height: 1.6; font-weight: 500;
+        }
+
+        /* Sticky Audio Card (Listening Section) */
+        .sticky-audio-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+            padding: 12px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .audio-desc {
+            font-size: 11.5px; font-weight: 700; color: #047857; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .sticky-audio-card audio {
+            width: 100%; height: 38px; outline: none;
         }
 
         /* Question Item Card */
         .q-card {
             background: #ffffff; border-radius: 14px; border: 1px solid #e2e8f0;
-            padding: 18px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
             position: relative;
         }
 
@@ -99,20 +112,29 @@
             color: #1e293b; white-space: pre-line; position: relative;
         }
         .passage-tag {
-            position: absolute; top: 8px; right: 10px; font-size: 16px; color: #ef4444;
+            position: absolute; top: 10px; right: 12px; font-size: 16px; color: #ef4444;
+        }
+
+        /* Listening Image Wrap */
+        .q-img-wrap {
+            width: 100%; border: 1px solid #e2e8f0; border-radius: 10px;
+            overflow: hidden; margin-bottom: 12px; background: #ffffff;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .q-img-wrap img {
+            width: 100%; height: auto; display: block; object-fit: contain;
         }
 
         /* Radio Options */
         .options-group {
-            display: flex; flex-direction: column; gap: 8px; margin-top: 10px;
+            display: flex; flex-direction: column; gap: 8px; margin-top: 8px;
         }
 
         .option-label {
             display: flex; align-items: center; gap: 12px;
-            padding: 12px 14px; border-radius: 10px; border: 1px solid #e2e8f0;
+            padding: 11px 14px; border-radius: 10px; border: 1px solid #e2e8f0;
             background: #ffffff; cursor: pointer; transition: all 0.15s ease;
         }
-
         .option-label:hover { background: #f8fafc; border-color: #cbd5e1; }
 
         .option-label input[type="radio"] {
@@ -135,7 +157,7 @@
         }
 
         .option-text {
-            font-size: 14.5px; font-weight: 500; color: #1e293b;
+            font-size: 14px; font-weight: 500; color: #1e293b;
         }
 
         /* Footer Submit Sticky Bar */
@@ -156,7 +178,7 @@
             background: #0f172a; color: #ffffff;
         }
 
-        /* Modal Screens */
+        /* Modal Overlay Screens */
         .screen-modal {
             display: none; position: fixed; inset: 0;
             background: #ffffff; z-index: 9999;
@@ -165,9 +187,11 @@
         }
         .screen-modal h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: #0f2e23; }
         .screen-modal p { font-size: 13.5px; color: #64748b; margin-bottom: 24px; line-height: 1.6; }
+        
         .btn-next-sec {
             background: #059669; color: #ffffff; border: none; padding: 13px 32px;
             border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
         }
     </style>
 </head>
@@ -184,6 +208,7 @@
     </header>
 
     <main class="exam-container">
+        <!-- Dynamic Questions Container -->
         <div id="sectionContainer"></div>
     </main>
 
@@ -195,27 +220,27 @@
     <!-- Break Screen Modal -->
     <div class="screen-modal" id="breakModal">
         <div style="font-size: 44px; color: #059669; margin-bottom: 14px;"><i class="fa-solid fa-mug-hot"></i></div>
-        <h2>Take a Break</h2>
-        <p>You have completed the Vocabulary section.<br>You can take a 5-minute break or proceed to Grammar & Reading.</p>
+        <h2 id="breakTitle">Take a Break</h2>
+        <p id="breakDesc">You can take a 5-minute break or proceed to the next section immediately.</p>
         <div class="timer-badge" style="margin-bottom: 20px; font-size: 16px;" id="breakTimer">05:00</div>
-        <button class="btn-next-sec" id="btnProceedSection">Proceed to Grammar & Reading</button>
+        <button class="btn-next-sec" id="btnProceedSection">Proceed to Next Section</button>
     </div>
 
     <!-- Exam Complete Score Modal -->
     <div class="screen-modal" id="scoreModal">
         <div style="font-size: 48px; color: #047857; margin-bottom: 14px;"><i class="fa-solid fa-circle-check"></i></div>
         <h2>Test Finished!</h2>
-        <p>Your JLPT N5 (July 2024) score overview:</p>
+        <p>Here is your result for JLPT N5 Official Exam (July 2024):</p>
         <div id="sectionWiseScores" style="margin-bottom: 24px; font-size: 15px; font-weight: 700; text-align: left; width: 100%; max-width: 320px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0;">
         </div>
         <button class="btn-next-sec" onclick="window.location.href='mock-test.html'">Back to Exams</button>
     </div>
 
     <script>
-        // Official JLPT N5 (2024 July) Extracted Data
+        // Official JLPT N5 (July 2024) All 3 Sections Complete Data
         const examData = {
             section1: {
-                name: "言語知識（文字・語彙）",
+                name: "言語知識（文字・語彙）- Vocabulary",
                 timeMinutes: 20,
                 instructions: "もんだい１ ___のことばは ひらがなで どう かきますか。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。",
                 questions: [
@@ -262,7 +287,7 @@
                     { id: 8, text: "きのうの夜、( ) 前に 本を 読みました。", options: ["1. ねる", "2. ねて", "3. ねた", "4. ねている"], answer: 0 },
                     { id: 9, text: "リー「林さん、にもつが 多いですね。少し ( )。」\n林「あ、すみません。おねがいします。」", options: ["1. 持っていませんか", "2. 持たないでください", "3. もちましたね", "4. 持ちましょうか"], answer: 3 },
 
-                    // もんだい 2 (★ প্রশ্ন)
+                    // もんだい 2 (★ প্রশ্নে শূন্যস্থান সাজানো)
                     { id: 10, heading: "もんだい２ つぎの文の ★ に入るものはどれですか。１・２・３・４から いちばん いいものを 一つえらんでください。", text: "私は たんじょうびに ___ ___ <span style='color:#f59e0b;'>★</span> ___ 使っています。", options: ["1. くれた", "2. 毎日", "3. カメラを", "4. そふが"], answer: 0 },
                     { id: 11, text: "こうえん ___ ___ <span style='color:#f59e0b;'>★</span> ___ たくさん います。", options: ["1. 鳥", "2. に", "3. は", "4. が"], answer: 0 },
                     { id: 12, text: "今年の夏 ___ ___ <span style='color:#f59e0b;'>★</span> ___ 山に 行きます。", options: ["1. 海", "2. では", "3. は", "4. なくて"], answer: 3 },
@@ -365,6 +390,56 @@
                         answer: 0
                     }
                 ]
+            },
+            section3: {
+                name: "聴解（Listening）- もんだい 1",
+                timeMinutes: 30,
+                // আপনার অডিও লিঙ্কটি এখানে সরাসরি বসিয়ে দিন:
+                audioUrl: "https://actions.google.com/sounds/v1/alarms/beep_short.ogg",
+                instructions: "もんだい１では、まずしつもんを きいて ください。それから はなしを きいて、もんだいようしの １から４の なかから、いちばん いい ものを ひとつ えらんで ください。",
+                questions: [
+                    {
+                        id: 1,
+                        image: "1000191039.jpg",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 0
+                    },
+                    {
+                        id: 2,
+                        options: ["1. みどり", "2. あお", "3. きいろ", "4. ちゃいろ"],
+                        answer: 1
+                    },
+                    {
+                        id: 3,
+                        image: "1000191040.jpg",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 1
+                    },
+                    {
+                        id: 4,
+                        image: "1000191046.png",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 2
+                    },
+                    {
+                        id: 5,
+                        image: "1000191042.jpg",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 3
+                    },
+                    {
+                        id: 6,
+                        image: "1000191043.jpg",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 2
+                    },
+                    {
+                        id: 7,
+                        image: "1000191044.jpg",
+                        options: ["1. 1", "2. 2", "3. 3", "4. 4"],
+                        answer: 0
+                    }
+                ]
             }
         };
 
@@ -377,11 +452,26 @@
         function renderCurrentSection() {
             const sec = examData[currentSectionKey];
             const container = document.getElementById("sectionContainer");
+            
+            let audioPlayerHtml = "";
+            if (sec.audioUrl) {
+                audioPlayerHtml = `
+                    <div class="sticky-audio-card">
+                        <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Audio Track (もんだい 1)</div>
+                        <audio id="mainListeningAudio" controls controlsList="nodownload">
+                            <source src="${sec.audioUrl}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                `;
+            }
+
             container.innerHTML = `
                 <div class="section-intro-card">
                     <div class="section-intro-title">${sec.name}</div>
                     <div class="section-instruction">${sec.instructions || ''}</div>
                 </div>
+                ${audioPlayerHtml}
             `;
 
             sec.questions.forEach((q) => {
@@ -401,17 +491,26 @@
                     </div>
                 ` : '';
 
+                let imageHtml = q.image ? `
+                    <div class="q-img-wrap">
+                        <img src="${q.image}" alt="Question Image">
+                    </div>
+                ` : '';
+
+                let promptHtml = q.text ? q.text.replace(/\n/g, '<br>') : `${q.id}ばん`;
+
                 let cardHtml = `
                     ${headingHtml}
                     ${passageHtml}
                     <div class="q-card" id="card_${qKey}">
                         <div class="q-header-line">
-                            <div class="q-number">${q.id}</div>
-                            <div class="q-prompt">${q.text.replace(/\n/g, '<br>')}</div>
+                            <div class="q-number">${q.id}.</div>
+                            <div class="q-prompt">${promptHtml}</div>
                             <button class="btn-flag ${isFlagged ? 'active' : ''}" onclick="toggleFlag('${qKey}')">
                                 <i class="fa-${isFlagged ? 'solid' : 'regular'} fa-bookmark"></i>
                             </button>
                         </div>
+                        ${imageHtml}
                         <div class="options-group">
                             ${q.options.map((opt, optIndex) => `
                                 <label class="option-label ${userAnswers[qKey] === optIndex ? 'selected' : ''}">
@@ -470,15 +569,21 @@
 
             if (currentSectionKey === "section1") {
                 currentSectionKey = "section2";
-                showBreakModal();
+                showBreakModal("Take a Break", "Vocabulary section completed. Proceed to Grammar & Reading.");
+            } else if (currentSectionKey === "section2") {
+                currentSectionKey = "section3";
+                showBreakModal("Take a Break", "Grammar & Reading completed. Proceed to Listening section.");
             } else {
                 finishExamAndCalculate();
             }
         }
 
-        function showBreakModal() {
+        function showBreakModal(title, desc) {
             const breakModal = document.getElementById('breakModal');
+            document.getElementById('breakTitle').innerText = title;
+            document.getElementById('breakDesc').innerText = desc;
             breakModal.style.display = 'flex';
+            
             let breakSec = 5 * 60;
             const bTimer = document.getElementById('breakTimer');
 
@@ -505,7 +610,7 @@
             const detailBox = document.getElementById('sectionWiseScores');
             scoreModal.style.display = 'flex';
 
-            let sec1Score = 0, sec2Score = 0;
+            let sec1Score = 0, sec2Score = 0, sec3Score = 0;
 
             examData.section1.questions.forEach(q => {
                 if (userAnswers[`section1_q${q.id}`] === q.answer) sec1Score++;
@@ -515,14 +620,22 @@
                 if (userAnswers[`section2_q${q.id}`] === q.answer) sec2Score++;
             });
 
+            examData.section3.questions.forEach(q => {
+                if (userAnswers[`section3_q${q.id}`] === q.answer) sec3Score++;
+            });
+
             detailBox.innerHTML = `
                 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                     <span>Vocabulary:</span>
                     <span style="color: #047857;">${sec1Score} / ${examData.section1.questions.length}</span>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                     <span>Grammar & Reading:</span>
                     <span style="color: #047857;">${sec2Score} / ${examData.section2.questions.length}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Listening (M1):</span>
+                    <span style="color: #047857;">${sec3Score} / ${examData.section3.questions.length}</span>
                 </div>
             `;
         }

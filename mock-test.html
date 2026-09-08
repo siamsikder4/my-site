@@ -308,7 +308,7 @@
         <p>Your preliminary result for JLPT N5 Official Exam (July 2024):</p>
         <div id="sectionWiseScores" style="margin-bottom: 24px; font-size: 15px; font-weight: 700; text-align: left; width: 100%; max-width: 320px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0;">
         </div>
-        <button class="btn-next-sec" onclick="window.location.href='mock-test.html'">Back to Exams</button>
+        <button class="btn-next-sec" onclick="handleExitRedirect()">Back to Exams</button>
     </div>
 
     <script>
@@ -336,7 +336,7 @@
                     { id: 16, text: "( ) を わすれましたから、おかねを もっていません。", options: ["1. かぎ", "2. とけい", "3. さいふ", "4. かさ"], answer: 2 },
                     { id: 17, text: "りょこうの ときは くろい くつを ( )。", options: ["1. はきます", "2. つけます", "3. かけます", "4. かぶります"], answer: 0 },
                     { id: 18, text: "きょうは じゅぎょうの あと、すぐ いえに ( )。", options: ["1. かえります", "2. すみます", "3. あるきます", "4. でかけます"], answer: 0 },
-                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。"], answer: 2 },
+                    { id: 19, heading: "もんだい４ ___のぶんと だいたい おなじ いみの ぶんが あります。１・２・３・４から いちばん いい ものを ひとつ えらんで ください。", text: "<span class='q-underline'>けさ、はやしさんに あいました。</span>", options: ["1. きのうの あさ、はやしさんに あいました。", "2. きょうの ひる、はやしさんに あいました。", "3. きょうの あさ、はやしさんに あいました。", "4. きのうの ひる、はやしさんに あいました。",], answer: 2 },
                     { id: 20, text: "<span class='q-underline'>この かんじは かんたんです。</span>", options: ["1. この かんじは やさしいです。", "2. この かんじは むずかしいです。", "3. この かんじは おもしろいです。", "4. この かんじは つまらないです。"], answer: 0 },
                     { id: 21, text: "<span class='q-underline'>たなかさんは リーさんに さくぶんを おしえました。</span>", options: ["1. リーさんは たなかさんに さくぶんを わたしました。", "2. たなかさんは リーさんに さくぶんを ならいました。", "3. たなかさんは リーさんに さくぶんを わたしました。", "4. リーさんは たなかさんに さくぶんを ならいました。"], answer: 3 }
                 ]
@@ -640,25 +640,41 @@
             }
         });
 
-        // কাস্টম এক্সিট পপ-আপ ওপেন এবং ক্লোজ কন্ট্রোল
+        // ------------------ শক্তিশালী এক্সিট ও ব্যাক কন্ট্রোল ------------------
+        function handleExitRedirect() {
+            // ১. ব্রাউজারে হিস্ট্রি থাকলে ব্যাকে যাবে
+            if (window.history.length > 1) {
+                window.history.back();
+            }
+            // ২. ফলব্যাক হিসেবে মক টেস্টের মূল তালিকায় রিডাইরেক্ট করবে
+            setTimeout(() => {
+                window.location.href = 'mock-test.html';
+            }, 100);
+        }
+
         const exitModal = document.getElementById('exitModal');
         const btnBackPrompt = document.getElementById('btnBackPrompt');
         const btnCancelExit = document.getElementById('btnCancelExit');
         const btnFinalConfirmExit = document.getElementById('btnFinalConfirmExit');
 
-        btnBackPrompt.addEventListener('click', () => {
-            exitModal.style.display = 'flex';
-        });
+        if (btnBackPrompt) {
+            btnBackPrompt.addEventListener('click', () => {
+                exitModal.style.display = 'flex';
+            });
+        }
 
-        btnCancelExit.addEventListener('click', () => {
-            exitModal.style.display = 'none';
-        });
+        if (btnCancelExit) {
+            btnCancelExit.addEventListener('click', () => {
+                exitModal.style.display = 'none';
+            });
+        }
 
-        btnFinalConfirmExit.addEventListener('click', () => {
-            window.location.href = 'mock-test.html';
-        });
+        if (btnFinalConfirmExit) {
+            btnFinalConfirmExit.addEventListener('click', () => {
+                handleExitRedirect();
+            });
+        }
 
-        // বাইরে ক্লিক করলে এক্সিট মোডাল বন্ধ করা
         window.addEventListener('click', (e) => {
             if (e.target === exitModal) {
                 exitModal.style.display = 'none';

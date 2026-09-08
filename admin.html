@@ -63,28 +63,6 @@
         .section-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 16px; margin-bottom: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .section-card h3 { font-size: 15.5px; font-weight: 700; color: #0f3e2e; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 
-        /* সাপোর্ট ডেস্ক চ্যাট স্টাইল */
-        .support-inbox-grid { display: flex; flex-direction: column; gap: 12px; }
-        .support-threads-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-        .thread-chip {
-            padding: 8px 12px; border-radius: 12px; background: #f8fafc; border: 1.5px solid #e2e8f0;
-            font-size: 12px; font-weight: 700; color: #334155; cursor: pointer; white-space: nowrap;
-            display: flex; align-items: center; gap: 6px; transition: all 0.2s;
-        }
-        .thread-chip.active { background: #e6f4ea; border-color: #047857; color: #0f3e2e; }
-        .thread-chip .badge-unread { width: 7px; height: 7px; background: #ef4444; border-radius: 50%; }
-
-        .admin-chat-viewer { border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff; }
-        .chat-viewer-header { background: #f8fafc; padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 12.5px; font-weight: 700; color: #0f3e2e; display: flex; justify-content: space-between; }
-        .admin-messages-box { height: 260px; overflow-y: auto; padding: 14px; background: #f8fafc; display: flex; flex-direction: column; gap: 8px; }
-        .admin-msg-bubble { max-width: 80%; padding: 8px 12px; border-radius: 12px; font-size: 12.5px; line-height: 1.4; word-break: break-word; }
-        .admin-msg-bubble.user { align-self: flex-start; background: #ffffff; border: 1px solid #e2e8f0; color: #1e293b; }
-        .admin-msg-bubble.admin { align-self: flex-end; background: #047857; color: #ffffff; }
-        .admin-reply-box { display: flex; gap: 8px; padding: 10px 12px; background: #ffffff; border-top: 1px solid #e2e8f0; }
-        .admin-reply-input { flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; outline: none; }
-        .admin-reply-input:focus { border-color: #047857; }
-        .admin-reply-btn { background: #047857; color: #ffffff; border: none; padding: 0 16px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; }
-
         /* সুইচ ও টগল কন্ট্রোল */
         .switch-row {
             display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
@@ -131,53 +109,6 @@
         .review-actions-bar { display: flex; justify-content: space-between; align-items: center; }
         .review-btn-del { color: #dc2626; background: #fee2e2; border: none; padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; }
 
-        /* ইউজার কন্ট্রোল */
-        .user-mgmt-header { display: flex; gap: 8px; align-items: center; }
-        .search-wrapper { position: relative; margin-bottom: 12px; }
-        .search-box-custom {
-            display: flex; align-items: center; background: #f8fafc; border: 1.5px solid #e2e8f0;
-            border-radius: 12px; padding: 10px 14px; gap: 10px; transition: all 0.2s;
-        }
-        .search-box-custom:focus-within {
-            border-color: #047857; background: #ffffff; box-shadow: 0 2px 8px rgba(4, 120, 87, 0.08);
-        }
-        .search-box-custom input { border: none; background: transparent; outline: none; width: 100%; font-size: 13.5px; color: #1e293b; }
-
-        .user-cards-container { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 2px; }
-        .user-entry-card {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 14px;
-            display: flex; align-items: center; justify-content: space-between; gap: 12px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-        .user-entry-card:hover { box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04); }
-        .user-entry-card.banned { background: #fffafa; border-color: #fecdd3; border-left: 4px solid #e11d48; }
-        .user-main-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
-        .user-avatar-tag {
-            width: 40px; height: 40px; border-radius: 12px;
-            background: linear-gradient(135deg, #e6f4ea 0%, #cbf0dd 100%);
-            color: #047857; font-weight: 800; font-size: 16px;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-transform: uppercase;
-        }
-        .user-entry-card.banned .user-avatar-tag { background: #fee2e2; color: #b91c1c; }
-        .user-details { display: flex; flex-direction: column; min-width: 0; }
-        .user-name-line { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
-        .user-display-name { font-size: 14px; font-weight: 800; color: #0f3e2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #10b981; flex-shrink: 0; }
-        .status-dot.banned { background: #ef4444; }
-        .user-email-text { font-size: 11.5px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        .user-actions-cluster { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-        .user-circle-action {
-            width: 32px; height: 32px; border-radius: 10px; border: none; display: flex; align-items: center; justify-content: center;
-            font-size: 13px; cursor: pointer; transition: transform 0.15s;
-        }
-        .user-circle-action:active { transform: scale(0.92); }
-        .btn-act-msg { background: #e0f2fe; color: #0284c7; }
-        .btn-act-ban { background: #fef3c7; color: #b45309; }
-        .btn-act-unban { background: #dcfce7; color: #15803d; }
-        .btn-act-edit { background: #f1f5f9; color: #475569; }
-        .btn-act-del { background: #fee2e2; color: #dc2626; }
-
         /* ফর্ম ইনপুট */
         .input-group { margin-bottom: 12px; }
         .input-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 5px; }
@@ -197,22 +128,6 @@
         .data-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; vertical-align: middle; }
         .badge-target { background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; }
         .badge-target.all { background: #dcfce7; color: #15803d; }
-
-        /* মোডাল */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center; padding: 16px;
-        }
-        .modal-card {
-            background: #ffffff; width: 100%; max-width: 420px; border-radius: 18px;
-            overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        .modal-header {
-            background: #0f3e2e; color: #ffffff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .modal-header h4 { font-size: 15px; font-weight: 700; }
-        .modal-close { background: none; border: none; color: #ffffff; font-size: 20px; cursor: pointer; }
-        .modal-body { padding: 18px 16px; }
     </style>
 </head>
 <body>
@@ -260,9 +175,9 @@
                 <div class="stat-label">ইউজার রিভিউ</div>
             </div>
             <div class="stat-box">
-                <i class="fa-solid fa-comments"></i>
-                <div class="stat-num" id="totalChatsCount">০</div>
-                <div class="stat-label">সাপোর্ট চ্যাট</div>
+                <i class="fa-solid fa-rectangle-ad" style="color: #0284c7;"></i>
+                <div class="stat-num" id="monetagStatusText">Active</div>
+                <div class="stat-label">Monetag Ads</div>
             </div>
             <div class="stat-box">
                 <i class="fa-solid fa-bell"></i>
@@ -271,7 +186,43 @@
             </div>
         </div>
 
-        <!-- অ্যাপ লোগো ও আইকন ম্যানেজার -->
+        <!-- Monetag বিজ্ঞাপন কনফিগারেশন -->
+        <div class="section-card">
+            <h3><span><i class="fa-solid fa-rectangle-ad" style="color: #0284c7; margin-right: 6px;"></i> Monetag বিজ্ঞাপন কন্ট্রোল</span></h3>
+            
+            <div class="switch-row">
+                <div class="switch-info">
+                    <h5>হোমপেজ বিজ্ঞাপন (index.html Ads)</h5>
+                    <p>হোমপেজে Monetag স্ক্রিপ্ট চালু বা বন্ধ রাখুন</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleIndexMonetag" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="switch-row">
+                <div class="switch-info">
+                    <h5>অন্যান্য পেজ বিজ্ঞাপন (All Other Pages)</h5>
+                    <p>ভোকাবুলারি, কাঞ্জি ও গ্রামার পেজে বিজ্ঞাপন নিয়ন্ত্রণ</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleOtherMonetag">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="input-group" style="margin-top: 10px;">
+                <label>Monetag Script Tag / Zone URL:</label>
+                <input type="text" id="monetagScriptUrl" class="input-control" value="https://5gvci.com/act/files/tag.min.js?z=11752722" placeholder="https://5gvci.com/act/files/tag.min.js?z=XXXXXX">
+            </div>
+
+            <button class="btn-submit" id="saveMonetagConfigBtn">
+                <i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন
+            </button>
+        </div>
+
+        <!-- অ্যাপ লোগো ও আইকন আপলোডার -->
         <div class="section-card">
             <h3><span><i class="fa-solid fa-image" style="color: #047857; margin-right: 6px;"></i> অ্যাপ লোগো ও আইকন আপলোড</span></h3>
             
@@ -281,7 +232,7 @@
                 </div>
                 <div class="icon-upload-meta">
                     <h5 style="font-size: 13px; font-weight: 700; color: #0f3e2e;">বর্তমান সক্রিয় আইকন</h5>
-                    <p>সাইট ও PWA এর জন্য বর্গাকার (PNG/WEBP) ফাইল নির্বাচন করুন। সাইজ সর্বোচ্চ ৫০০ KB।</p>
+                    <p>বর্গাকার (PNG/WEBP) ফাইল নির্বাচন করুন। সাইজ অনূর্ধ্ব ৫০০ KB।</p>
                     <input type="file" id="iconFileInput" accept="image/png, image/jpeg, image/webp" style="font-size: 11.5px; color: #64748b;">
                 </div>
             </div>
@@ -291,7 +242,7 @@
             </button>
         </div>
 
-        <!-- ইউজার রিভিউ ও ফিডব্যাক ম্যানেজমেন্ট -->
+        <!-- ইউজার রিভিউ ও ফিডব্যাক ডিরেক্টরি -->
         <div class="section-card">
             <h3>
                 <span><i class="fa-solid fa-star-half-stroke" style="color: #f59e0b; margin-right: 6px;"></i> ইউজার রিভিউ ও রেটিং ডিরেক্টরি</span>
@@ -303,116 +254,7 @@
             </div>
         </div>
 
-        <!-- সিস্টেম গ্লোবাল ব্যানার অ্যালার্ট ও আপডেট সেটিংস -->
-        <div class="section-card">
-            <h3><span><i class="fa-solid fa-bullhorn" style="color: #dc2626; margin-right: 6px;"></i> গ্লোবাল ব্যানার ও সিস্টেম ঘোষণা</span></h3>
-            
-            <div class="input-group">
-                <label>ঘোষণা বার্তার স্ট্যাটাস:</label>
-                <select id="bannerAlertStatus" class="input-control">
-                    <option value="disabled">বন্ধ রাখুন (Hidden)</option>
-                    <option value="enabled">চালু রাখুন (Show on Home)</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>ব্যানার টেক্সট (হোমপেজের উপরে ভাসবে):</label>
-                <input type="text" id="bannerAlertText" class="input-control" placeholder="যেমন: আগামী শুক্রবার সার্ভার মেইনটেন্যান্স চলবে।">
-            </div>
-
-            <div class="input-group">
-                <label>লেটেস্ট অ্যাপ ভার্সন (যেমন: v1.0.5):</label>
-                <input type="text" id="latestAppVersion" class="input-control" placeholder="1.0.0">
-            </div>
-
-            <div class="input-group">
-                <label>নতুন APK ডাউনলোড লিংক:</label>
-                <input type="url" id="appApkDownloadUrl" class="input-control" placeholder="https://mmsfile.top/app.apk">
-            </div>
-
-            <button class="btn-submit" id="saveSystemAlertsBtn">
-                <i class="fa-solid fa-check-double"></i> সিস্টেম নোটিশ ও ভার্সন আপডেট করুন
-            </button>
-        </div>
-
-        <!-- সাপোর্ট চ্যাট ও হেল্পডেস্ক সেকশন (লাইভ রিপ্লাই) -->
-        <div class="section-card">
-            <h3><span><i class="fa-solid fa-headset" style="color: #0d9488; margin-right: 6px;"></i> ইউজার সাপোর্ট চ্যাট ও রিপ্লাই</span></h3>
-            
-            <div class="support-inbox-grid">
-                <div class="support-threads-list" id="chatThreadsList">
-                    <span style="font-size: 12px; color: #94a3b8;">লোড হচ্ছে...</span>
-                </div>
-
-                <div class="admin-chat-viewer" id="adminChatViewer" style="display: none;">
-                    <div class="chat-viewer-header">
-                        <span id="activeChatTargetText">ইউজারের সাথে চ্যাট</span>
-                        <span id="activeChatTargetEmail" style="font-size: 11px; color: #64748b;"></span>
-                    </div>
-
-                    <div class="admin-messages-box" id="adminMessagesBox"></div>
-
-                    <div class="admin-reply-box">
-                        <input type="text" id="adminReplyInput" class="admin-reply-input" placeholder="অ্যাডমিন হিসেবে রিপ্লাই লিখুন...">
-                        <button class="admin-reply-btn" id="adminSendReplyBtn"><i class="fa-solid fa-paper-plane"></i> পাঠান</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- সাইট মেইনটেন্যান্স ও অ্যাডসেন্স সুইচ -->
-        <div class="section-card">
-            <h3><span><i class="fa-solid fa-sliders" style="color: #047857; margin-right: 6px;"></i> সাইট ও সিস্টেম কন্ট্রোল</span></h3>
-            
-            <div class="switch-row">
-                <div class="switch-info">
-                    <h5>মেইনটেন্যান্স মোড (Maintenance Mode)</h5>
-                    <p>চালু থাকলে সাধারণ ইউজাররা নোটিশ দেখতে পাবে</p>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="toggleMaintenance">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="switch-row">
-                <div class="switch-info">
-                    <h5>গুগল অ্যাডসেন্স / অ্যাড নেটওয়ার্ক (Ads Switch)</h5>
-                    <p>পুরো সাইটে বিজ্ঞাপন দেখানোর মূল সুইচ</p>
-                </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="toggleAdSense">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <!-- ইউজার কন্ট্রোল ও অ্যাক্টিভিটি -->
-        <div class="section-card">
-            <h3>
-                <span><i class="fa-solid fa-users-gear" style="color: #047857; margin-right: 6px;"></i> ইউজার কন্ট্রোল ও ফলোয়ার্স</span>
-                <div class="user-mgmt-header">
-                    <button id="openAddUserBtn" style="background:#e6f4ea; border:none; color:#047857; padding:5px 11px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-user-plus"></i> নতুন ইউজার</button>
-                    <button id="refreshUsersBtn" style="background:none; border:none; color:#047857; font-size:14px; cursor:pointer;"><i class="fa-solid fa-rotate-right"></i></button>
-                </div>
-            </h3>
-
-            <div class="search-wrapper">
-                <div class="search-box-custom">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i>
-                    <input type="text" id="userSearchInput" placeholder="নাম বা ইমেইল দিয়ে ইউজার ফিল্টার করুন...">
-                </div>
-            </div>
-
-            <div class="user-cards-container" id="userCardsContainer">
-                <div style="text-align:center; color:#94a3b8; padding:30px;">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
-                    <p style="font-size:12px; margin-top:6px;">ইউজার ডেটা লোড হচ্ছে...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- নোটিফিকেশন ফর্ম -->
+        <!-- নোটিফিকেশন পাঠান -->
         <div class="section-card">
             <h3><span><i class="fa-solid fa-paper-plane" style="color: #d97706; margin-right: 6px;"></i> নোটিফিকেশন পাঠান</span></h3>
             
@@ -471,35 +313,11 @@
 
     </main>
 
-    <!-- ইউজার এডিট / অ্যাড মডাল -->
-    <div class="modal-overlay" id="userModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h4 id="userModalTitle"><i class="fa-solid fa-user-pen"></i> ইউজার এডিট</h4>
-                <button class="modal-close" id="closeUserModalBtn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="modalDocId" value="">
-                <div class="input-group">
-                    <label>ইউজারের নাম:</label>
-                    <input type="text" id="modalUserName" class="input-control" placeholder="নাম লিখুন">
-                </div>
-                <div class="input-group">
-                    <label>ইউজারের ইমেইল (ID):</label>
-                    <input type="email" id="modalUserEmail" class="input-control" placeholder="email@example.com">
-                </div>
-                <button class="btn-submit" id="saveUserBtn">
-                    <i class="fa-solid fa-floppy-disk"></i> সংরক্ষণ করুন
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, deleteDoc, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -516,10 +334,7 @@
         const db = getFirestore(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        let allUserData = [];
         let allNotifications = [];
-        let selectedChatUserEmail = null;
-        let unsubscribeActiveChat = null;
         let selectedIconBase64 = null;
 
         onAuthStateChanged(auth, async (user) => {
@@ -527,18 +342,43 @@
                 document.getElementById("authCheckingScreen").style.display = "none";
                 document.getElementById("adminContent").style.display = "block";
                 
-                await loadSiteSettings();
-                await fetchAllUsers();
+                await loadAdminConfigs();
                 await fetchNotifications();
                 await fetchReviews();
-                initSupportChatList();
             } else {
-                alert("অনুমতি নেই! এই পেজে শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
+                alert("অনুমতি নেই! শুধুমাত্র অ্যাডমিন প্রবেশ করতে পারবেন।");
                 window.location.href = "profile.html";
             }
         });
 
-        // ================= আইকন আপলোডার ও প্রিভিউ হ্যান্ডলার =================
+        // ================= Monetag Ads হ্যান্ডলার =================
+        const toggleIndexMonetag = document.getElementById("toggleIndexMonetag");
+        const toggleOtherMonetag = document.getElementById("toggleOtherMonetag");
+        const monetagScriptUrl = document.getElementById("monetagScriptUrl");
+        const saveMonetagConfigBtn = document.getElementById("saveMonetagConfigBtn");
+
+        saveMonetagConfigBtn.addEventListener("click", async () => {
+            saveMonetagConfigBtn.disabled = true;
+            saveMonetagConfigBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
+
+            try {
+                await setDoc(doc(db, "site_settings", "monetag_ads"), {
+                    indexPageAds: toggleIndexMonetag.checked,
+                    otherPagesAds: toggleOtherMonetag.checked,
+                    scriptUrl: monetagScriptUrl.value.trim(),
+                    updatedAt: Date.now()
+                }, { merge: true });
+
+                alert("Monetag কনফিগারেশন সফলভাবে সংরক্ষিত হয়েছে!");
+            } catch (err) {
+                alert("অ্যাড কনফিগারেশন সেভ করতে সমস্যা হয়েছে।");
+            } finally {
+                saveMonetagConfigBtn.disabled = false;
+                saveMonetagConfigBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> বিজ্ঞাপন কনফিগারেশন সংরক্ষণ করুন`;
+            }
+        });
+
+        // ================= ব্র্যান্ডিং ও আইকন হ্যান্ডলার =================
         const iconFileInput = document.getElementById("iconFileInput");
         const currentAppIcon = document.getElementById("currentAppIcon");
         const saveIconBtn = document.getElementById("saveIconBtn");
@@ -547,8 +387,8 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            if (file.size > 600 * 1024) {
-                alert("ফাইলের সাইজ অনেক বড়! দয়া করে ৬০০ KB এর নিচের ছবি আপলোড করুন।");
+            if (file.size > 500 * 1024) {
+                alert("ফাইলের সাইজ ৫০০ KB এর নিচে হতে হবে!");
                 iconFileInput.value = "";
                 return;
             }
@@ -562,7 +402,7 @@
         });
 
         saveIconBtn.addEventListener("click", async () => {
-            if (!selectedIconBase64) return alert("প্রথমে একটি নতুন ছবি নির্বাচন করুন!");
+            if (!selectedIconBase64) return alert("প্রথমে একটি ছবি নির্বাচন করুন!");
 
             saveIconBtn.disabled = true;
             saveIconBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
@@ -582,7 +422,7 @@
             }
         });
 
-        // ================= রিভিউ ও রেটিং ডিরেক্টরি =================
+        // ================= রিভিউ ডিরেক্টরি =================
         async function fetchReviews() {
             const listWrap = document.getElementById("reviewsListContainer");
             listWrap.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">রিভিউ লোড হচ্ছে...</div>`;
@@ -592,7 +432,7 @@
                 document.getElementById("totalReviewsCount").innerText = snap.size;
 
                 if (snap.empty) {
-                    listWrap.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">কোনো ইউজার রিভিউ পাওয়া যায়নি।</div>`;
+                    listWrap.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 12px;">কোনো রিভিউ নেই।</div>`;
                     return;
                 }
 
@@ -610,7 +450,7 @@
                         </div>
                         <div class="review-text-content">${r.comment || 'কোনো মন্তব্য নেই'}</div>
                         <div class="review-actions-bar">
-                            <span style="font-size: 10.5px; color: #64748b;">${r.date ? new Date(r.date).toLocaleDateString('bn-BD') : 'তারিখ নেই'}</span>
+                            <span style="font-size: 10.5px; color: #64748b;">${r.date ? new Date(r.date).toLocaleDateString('bn-BD') : ''}</span>
                             <button class="review-btn-del" onclick="deleteReviewItem('${docSnap.id}')">
                                 <i class="fa-solid fa-trash-can"></i> ডিলিট
                             </button>
@@ -619,7 +459,7 @@
                     listWrap.appendChild(card);
                 });
             } catch (err) {
-                listWrap.innerHTML = `<div style="text-align: center; color: #ef4444; padding: 15px; font-size: 12px;">রিভিউ লোড করতে ত্রুটি!</div>`;
+                listWrap.innerHTML = `<div style="text-align: center; color: #ef4444; padding: 15px; font-size: 12px;">রিভিউ লোড করা যায়নি।</div>`;
             }
         }
 
@@ -636,343 +476,31 @@
 
         document.getElementById("refreshReviewsBtn").addEventListener("click", fetchReviews);
 
-        // ================= সিস্টেম অ্যালার্ট ও ভার্সন সেটিংস =================
-        const bannerAlertStatus = document.getElementById("bannerAlertStatus");
-        const bannerAlertText = document.getElementById("bannerAlertText");
-        const latestAppVersion = document.getElementById("latestAppVersion");
-        const appApkDownloadUrl = document.getElementById("appApkDownloadUrl");
-        const saveSystemAlertsBtn = document.getElementById("saveSystemAlertsBtn");
-
-        saveSystemAlertsBtn.addEventListener("click", async () => {
-            saveSystemAlertsBtn.disabled = true;
-            saveSystemAlertsBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
-
+        // ================= অ্যাডমিন কনফিগ লোড =================
+        async function loadAdminConfigs() {
             try {
-                await setDoc(doc(db, "site_settings", "system_alerts"), {
-                    bannerStatus: bannerAlertStatus.value,
-                    bannerText: bannerAlertText.value.trim(),
-                    appVersion: latestAppVersion.value.trim(),
-                    apkUrl: appApkDownloadUrl.value.trim(),
-                    updatedAt: Date.now()
-                }, { merge: true });
+                // ইউজার কাউন্ট
+                const userSnap = await getDocs(collection(db, "users"));
+                document.getElementById("totalUsersCount").innerText = userSnap.size;
 
-                alert("সিস্টেম নোটিশ ও ভার্সন সফলভাবে সেভ হয়েছে!");
-            } catch (err) {
-                alert("সেটিংস সেভ করতে সমস্যা হয়েছে!");
-            } finally {
-                saveSystemAlertsBtn.disabled = false;
-                saveSystemAlertsBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> সিস্টেম নোটিশ ও ভার্সন আপডেট করুন`;
-            }
-        });
-
-        // ================= সাপোর্ট চ্যাট ও রিপ্লাই সিস্টেম =================
-        function initSupportChatList() {
-            const chatThreadsList = document.getElementById("chatThreadsList");
-            const chatsColRef = collection(db, "support_chats");
-
-            onSnapshot(chatsColRef, (snapshot) => {
-                chatThreadsList.innerHTML = "";
-                document.getElementById("totalChatsCount").innerText = snapshot.size;
-
-                if (snapshot.empty) {
-                    chatThreadsList.innerHTML = `<span style="font-size: 12px; color: #94a3b8; padding: 4px;">কোনো সাপোর্ট বার্তা নেই</span>`;
-                    return;
-                }
-
-                snapshot.forEach(docSnap => {
-                    const data = docSnap.data();
-                    const chip = document.createElement("div");
-                    chip.className = `thread-chip ${selectedChatUserEmail === data.userEmail ? 'active' : ''}`;
-                    chip.innerHTML = `
-                        ${data.unreadByAdmin ? '<span class="badge-unread"></span>' : ''}
-                        <span>${data.userName || data.userEmail}</span>
-                    `;
-                    chip.onclick = () => openUserChat(data.userEmail, data.userName || data.userEmail);
-                    chatThreadsList.appendChild(chip);
-                });
-            });
-        }
-
-        function openUserChat(userEmail, userName) {
-            selectedChatUserEmail = userEmail;
-            document.querySelectorAll(".thread-chip").forEach(el => el.classList.remove("active"));
-            
-            const viewer = document.getElementById("adminChatViewer");
-            viewer.style.display = "block";
-            document.getElementById("activeChatTargetText").innerText = `${userName} এর মেসেজ`;
-            document.getElementById("activeChatTargetEmail").innerText = userEmail;
-
-            setDoc(doc(db, "support_chats", userEmail), { unreadByAdmin: false }, { merge: true });
-
-            if (unsubscribeActiveChat) unsubscribeActiveChat();
-
-            const messagesRef = collection(db, "support_chats", userEmail, "messages");
-            const q = query(messagesRef, orderBy("timestamp", "asc"));
-            const box = document.getElementById("adminMessagesBox");
-
-            unsubscribeActiveChat = onSnapshot(q, (snapshot) => {
-                box.innerHTML = "";
-                snapshot.forEach(docSnap => {
-                    const data = docSnap.data();
-                    const div = document.createElement("div");
-                    div.className = `admin-msg-bubble ${data.sender === 'admin' ? 'admin' : 'user'}`;
-                    div.innerText = data.text;
-                    box.appendChild(div);
-                });
-                box.scrollTop = box.scrollHeight;
-            });
-        }
-
-        async function sendAdminReply() {
-            const input = document.getElementById("adminReplyInput");
-            const text = input.value.trim();
-            if (!text || !selectedChatUserEmail) return;
-
-            input.value = "";
-            try {
-                await addDoc(collection(db, "support_chats", selectedChatUserEmail, "messages"), {
-                    sender: "admin",
-                    text: text,
-                    timestamp: Date.now()
-                });
-
-                await setDoc(doc(db, "support_chats", selectedChatUserEmail), {
-                    lastMessage: text,
-                    lastUpdated: Date.now()
-                }, { merge: true });
-            } catch(e) {
-                alert("রিপ্লাই পাঠাতে ব্যর্থ হয়েছে!");
-            }
-        }
-
-        document.getElementById("adminSendReplyBtn").addEventListener("click", sendAdminReply);
-        document.getElementById("adminReplyInput").addEventListener("keypress", (e) => {
-            if (e.key === "Enter") sendAdminReply();
-        });
-
-        // ================= সাইট সেটিংস ও কন্ট্রোল =================
-        const toggleMaintenance = document.getElementById("toggleMaintenance");
-        const toggleAdSense = document.getElementById("toggleAdSense");
-
-        async function loadSiteSettings() {
-            try {
-                // কন্ট্রোল লোড
-                const docRef = doc(db, "site_settings", "controls");
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    toggleMaintenance.checked = !!data.maintenanceMode;
-                    toggleAdSense.checked = data.adsEnabled !== false;
-                } else {
-                    await setDoc(docRef, { maintenanceMode: false, adsEnabled: true });
-                }
-
-                // ব্র্যান্ডিং লোড (আইকন)
+                // আইকন লোড
                 const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
                 if (brandSnap.exists() && brandSnap.data().appIconBase64) {
                     currentAppIcon.src = brandSnap.data().appIconBase64;
                 }
 
-                // সিস্টেম নোটিশ লোড
-                const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
-                if (alertSnap.exists()) {
-                    const ad = alertSnap.data();
-                    bannerAlertStatus.value = ad.bannerStatus || "disabled";
-                    bannerAlertText.value = ad.bannerText || "";
-                    latestAppVersion.value = ad.appVersion || "";
-                    appApkDownloadUrl.value = ad.apkUrl || "";
+                // Monetag লোড
+                const adSnap = await getDoc(doc(db, "site_settings", "monetag_ads"));
+                if (adSnap.exists()) {
+                    const d = adSnap.data();
+                    toggleIndexMonetag.checked = d.indexPageAds !== false;
+                    toggleOtherMonetag.checked = !!d.otherPagesAds;
+                    if (d.scriptUrl) monetagScriptUrl.value = d.scriptUrl;
                 }
-            } catch(e) { console.error("Settings load error:", e); }
-        }
-
-        toggleMaintenance.addEventListener("change", async () => {
-            try {
-                await setDoc(doc(db, "site_settings", "controls"), {
-                    maintenanceMode: toggleMaintenance.checked
-                }, { merge: true });
-                alert(`মেইনটেন্যান্স মোড ${toggleMaintenance.checked ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
-            } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
-        });
-
-        toggleAdSense.addEventListener("change", async () => {
-            try {
-                await setDoc(doc(db, "site_settings", "controls"), {
-                    adsEnabled: toggleAdSense.checked
-                }, { merge: true });
-                alert(`বিজ্ঞাপন প্রদর্শন ${toggleAdSense.checked ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
-            } catch(e) { alert("সেটিংস সেভ করতে ব্যর্থ!"); }
-        });
-
-        // ================= ইউজার কন্ট্রোল ও ফলোয়ার্স ডেটা =================
-        async function fetchAllUsers() {
-            const container = document.getElementById("userCardsContainer");
-            container.innerHTML = `
-                <div style="text-align:center; color:#94a3b8; padding:30px;">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size:20px; color:#047857;"></i>
-                    <p style="font-size:12px; margin-top:6px;">ইউজার ডেটা লোড হচ্ছে...</p>
-                </div>`;
-            try {
-                const snap = await getDocs(collection(db, "users"));
-                allUserData = [];
-
-                snap.forEach(docSnap => {
-                    const data = docSnap.data();
-                    const isBanned = !!data.isBanned;
-
-                    const finalEmail = data.email || docSnap.id;
-                    const finalName = data.userName || data.name || (finalEmail ? finalEmail.split('@')[0] : "অজানা");
-                    const followers = data.followersCount || 0;
-                    const following = data.followingCount || 0;
-
-                    allUserData.push({
-                        docId: docSnap.id,
-                        email: finalEmail,
-                        name: finalName,
-                        isBanned: isBanned,
-                        followers: followers,
-                        following: following,
-                        initial: finalName.trim().charAt(0).toUpperCase()
-                    });
-                });
-
-                document.getElementById("totalUsersCount").innerText = allUserData.length;
-                renderUserCards(allUserData);
             } catch(e) {
-                container.innerHTML = `<div style="text-align:center; color:#ef4444; padding:20px; font-size:13px; font-weight:700;">ইউজার ডেটা লোড করতে ব্যর্থ!</div>`;
+                console.error("Config load error:", e);
             }
         }
-
-        function renderUserCards(list) {
-            const container = document.getElementById("userCardsContainer");
-            container.innerHTML = "";
-            if (list.length === 0) {
-                container.innerHTML = `<div style="text-align:center; color:#94a3b8; padding:30px; font-size:13px; font-weight:600;">কোনো ইউজার পাওয়া যায়নি।</div>`;
-                return;
-            }
-
-            list.forEach(u => {
-                const card = document.createElement("div");
-                card.className = `user-entry-card ${u.isBanned ? 'banned' : ''}`;
-                
-                card.innerHTML = `
-                    <div class="user-main-info">
-                        <div class="user-avatar-tag">${u.initial}</div>
-                        <div class="user-details">
-                            <div class="user-name-line">
-                                <span class="status-dot ${u.isBanned ? 'banned' : ''}" title="${u.isBanned ? 'Banned' : 'Active'}"></span>
-                                <span class="user-display-name">${u.name}</span>
-                            </div>
-                            <span class="user-email-text">${u.email} &bull; <b style="color:#047857;">${u.followers}</b> Followers</span>
-                        </div>
-                    </div>
-                    <div class="user-actions-cluster">
-                        <button class="user-circle-action btn-act-msg" title="নোটিফিকেশন পাঠান" onclick="selectUserForNotif('${u.email}')">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                        <button class="user-circle-action ${u.isBanned ? 'btn-act-unban' : 'btn-act-ban'}" title="${u.isBanned ? 'আনব্যান করুন' : 'ব্যান করুন'}" onclick="toggleUserBan('${u.docId}', ${u.isBanned})">
-                            <i class="fa-solid ${u.isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
-                        </button>
-                        <button class="user-circle-action btn-act-edit" title="এডিট করুন" onclick="openEditUserModal('${u.docId}', '${u.name}', '${u.email}')">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="user-circle-action btn-act-del" title="মুছে ফেলুন" onclick="deleteUserRecord('${u.docId}')">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        window.toggleUserBan = async function(docId, currentBanned) {
-            const actionText = currentBanned ? "আনব্যান" : "ব্যান";
-            if (confirm(`আপনি কি এই ইউজারকে ${actionText} করতে চান?`)) {
-                try {
-                    await setDoc(doc(db, "users", docId), {
-                        isBanned: !currentBanned
-                    }, { merge: true });
-                    await fetchAllUsers();
-                } catch(e) {
-                    alert("স্ট্যাটাস আপডেট করতে সমস্যা হয়েছে!");
-                }
-            }
-        };
-
-        document.getElementById("userSearchInput").addEventListener("input", (e) => {
-            const q = e.target.value.toLowerCase().trim();
-            const filtered = allUserData.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
-            renderUserCards(filtered);
-        });
-
-        document.getElementById("refreshUsersBtn").addEventListener("click", fetchAllUsers);
-
-        const userModal = document.getElementById("userModal");
-        document.getElementById("closeUserModalBtn").onclick = () => userModal.style.display = "none";
-
-        document.getElementById("openAddUserBtn").onclick = () => {
-            document.getElementById("userModalTitle").innerHTML = `<i class="fa-solid fa-user-plus"></i> নতুন ইউজার যোগ করুন`;
-            document.getElementById("modalDocId").value = "";
-            document.getElementById("modalUserName").value = "";
-            document.getElementById("modalUserEmail").value = "";
-            document.getElementById("modalUserEmail").disabled = false;
-            userModal.style.display = "flex";
-        };
-
-        window.openEditUserModal = function(docId, name, email) {
-            document.getElementById("userModalTitle").innerHTML = `<i class="fa-solid fa-user-pen"></i> ইউজার এডিট করুন`;
-            document.getElementById("modalDocId").value = docId;
-            document.getElementById("modalUserName").value = name;
-            document.getElementById("modalUserEmail").value = email;
-            document.getElementById("modalUserEmail").disabled = false;
-            userModal.style.display = "flex";
-        };
-
-        document.getElementById("saveUserBtn").addEventListener("click", async () => {
-            const docId = document.getElementById("modalDocId").value;
-            const name = document.getElementById("modalUserName").value.trim();
-            const email = document.getElementById("modalUserEmail").value.trim().toLowerCase();
-            const btn = document.getElementById("saveUserBtn");
-
-            if (!email) return alert("ইমেইল আবশ্যক!");
-
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...`;
-
-            try {
-                const targetDocId = docId || email;
-                await setDoc(doc(db, "users", targetDocId), {
-                    userName: name || email.split("@")[0],
-                    email: email
-                }, { merge: true });
-
-                alert("ইউজার তথ্য সফলভাবে আপডেট হয়েছে!");
-                userModal.style.display = "none";
-                await fetchAllUsers();
-            } catch(e) {
-                alert("ইউজার ডেটা আপডেট করতে সমস্যা হয়েছে।");
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> সংরক্ষণ করুন`;
-            }
-        });
-
-        window.deleteUserRecord = async function(docId) {
-            if (confirm("আপনি কি নিশ্চিত এই ইউজারের রেকর্ডটি মুছে ফেলতে চান?")) {
-                try {
-                    await deleteDoc(doc(db, "users", docId));
-                    await fetchAllUsers();
-                } catch(e) {
-                    alert("মুছে ফেলতে সমস্যা হয়েছে।");
-                }
-            }
-        };
-
-        window.selectUserForNotif = function(email) {
-            document.getElementById("notifTargetType").value = "specific";
-            document.getElementById("emailInputGroup").style.display = "block";
-            document.getElementById("notifSpecificEmail").value = email;
-            window.scrollTo({ top: 1250, behavior: "smooth" });
-        };
 
         // ================= নোটিফিকেশন হ্যান্ডলার =================
         document.getElementById("notifTargetType").addEventListener("change", (e) => {
@@ -1015,10 +543,7 @@
                     </td>
                     <td style="text-align: center;">${targetText}</td>
                     <td style="text-align: right;">
-                        <div class="action-btns" style="justify-content: flex-end; display: flex; gap: 4px;">
-                            <button class="act-btn edit-btn" onclick="editNotif('${n.id}')" style="background:#f1f5f9; border:none; padding:4px 8px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
-                            <button class="act-btn del-btn" onclick="deleteNotif('${n.id}')" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:6px; color:#dc2626; cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
+                        <button onclick="deleteNotif('${n.id}')" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:6px; color:#dc2626; cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1032,7 +557,6 @@
             const msg = document.getElementById("notifMsg").value.trim();
             const type = document.getElementById("notifTargetType").value;
             const specificEmail = document.getElementById("notifSpecificEmail").value.trim().toLowerCase();
-            const editId = document.getElementById("editNotifId").value;
             const btn = document.getElementById("saveNotifBtn");
 
             if (!title || !msg) return alert("টাইটেল ও বার্তা আবশ্যক!");
@@ -1044,57 +568,28 @@
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> প্রসেসিং...`;
 
             try {
-                if (editId) {
-                    await updateDoc(doc(db, "notifications", editId), {
-                        title: title, message: msg, target: targetVal
-                    });
-                    alert("নোটিফিকেশন সফলভাবে আপডেট করা হয়েছে!");
-                } else {
-                    await addDoc(collection(db, "notifications"), {
-                        title: title, message: msg, target: targetVal, timestamp: Date.now()
-                    });
-                    alert("নোটিফিকেশন সফলভাবে পাঠানো হয়েছে!");
-                }
+                await addDoc(collection(db, "notifications"), {
+                    title: title, message: msg, target: targetVal, timestamp: Date.now()
+                });
+                alert("নোটিফিকেশন সফলভাবে পাঠানো হয়েছে!");
 
                 document.getElementById("notifTitle").value = "";
                 document.getElementById("notifMsg").value = "";
-                document.getElementById("editNotifId").value = "";
                 document.getElementById("notifTargetType").value = "all";
                 document.getElementById("emailInputGroup").style.display = "none";
                 document.getElementById("notifSpecificEmail").value = "";
-                btn.innerHTML = `<i class="fa-solid fa-bell"></i> নোটিফিকেশন পাঠান`;
 
                 await fetchNotifications();
             } catch(e) {
-                alert("নোটিফিকেশন সংরক্ষণে সমস্যা হয়েছে!");
+                alert("নোটিফিকেশন পাঠাতে সমস্যা হয়েছে!");
             } finally {
                 btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-bell"></i> নোটিফিকেশন পাঠান`;
             }
         });
 
-        window.editNotif = function(id) {
-            const notif = allNotifications.find(n => n.id === id);
-            if (notif) {
-                document.getElementById("editNotifId").value = notif.id;
-                document.getElementById("notifTitle").value = notif.title;
-                document.getElementById("notifMsg").value = notif.message;
-                
-                if (notif.target === "all") {
-                    document.getElementById("notifTargetType").value = "all";
-                    document.getElementById("emailInputGroup").style.display = "none";
-                } else {
-                    document.getElementById("notifTargetType").value = "specific";
-                    document.getElementById("emailInputGroup").style.display = "block";
-                    document.getElementById("notifSpecificEmail").value = notif.target;
-                }
-                
-                document.getElementById("saveNotifBtn").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> আপডেট সংরক্ষণ করুন`;
-                window.scrollTo({ top: 1250, behavior: "smooth" });
-            }
-        };
-
         window.deleteNotif = async function(id) {
-            if (confirm("আপনি কি নিশ্চিত এই নোটিফিকেশনটি মুছে ফেলতে চান?")) {
+            if (confirm("এই নোটিফিকেশনটি মুছে ফেলতে চান?")) {
                 try {
                     await deleteDoc(doc(db, "notifications", id));
                     await fetchNotifications();

@@ -125,8 +125,20 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
             box-shadow: 0 4px 12px rgba(225, 29, 72, 0.05);
             transition: background 0.2s ease;
+            margin-bottom: 20px;
         }
         .logout-btn:hover { background: #fff1f2; }
+
+        /* বটম ব্যানার অ্যাড বক্স */
+        .bottom-ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px auto 25px;
+            min-height: 50px;
+            overflow: hidden;
+        }
 
         /* ক্রপার মডাল */
         .cropper-modal-overlay {
@@ -283,6 +295,21 @@
         <button class="logout-btn" id="logoutBtn">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> লগআউট করুন
         </button>
+
+        <!-- বটম ব্যানার অ্যাড (320x50 Adsterra Banner) -->
+        <div class="bottom-ad-container">
+            <script>
+              atOptions = {
+                'key' : '8daacdc376c790c03bd8fe48f80c0b1c',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highrevenueformat.com/8daacdc376c790c03bd8fe48f80c0b1c/invoke.js"></script>
+        </div>
+
     </main>
 
     <!-- ক্রপার মডাল -->
@@ -308,7 +335,7 @@
         </div>
     </div>
 
-    <!-- বটম নেভিগেশন বার (এনিমেশন সহ) -->
+    <!-- বটম নেভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>

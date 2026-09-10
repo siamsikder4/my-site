@@ -117,7 +117,7 @@
             display: block;
         }
 
-        /* গ্লাস পোডিয়াম সেকশন */
+        /* পোডিয়াম সেকশন */
         .podium-section {
             background: linear-gradient(145deg, #064e3b 0%, #022c22 100%);
             border-radius: 24px;
@@ -151,6 +151,11 @@
             width: 32%;
             position: relative;
             z-index: 2;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .podium-col:active {
+            transform: scale(0.96);
         }
 
         .podium-avatar {
@@ -253,7 +258,7 @@
         .step-2 { height: 58px; background: linear-gradient(180deg, rgba(203, 213, 225, 0.3) 0%, rgba(203, 213, 225, 0.08) 100%); color: #f1f5f9; border-top: 3px solid #cbd5e1; }
         .step-3 { height: 44px; background: linear-gradient(180deg, rgba(251, 146, 60, 0.3) 0%, rgba(251, 146, 60, 0.08) 100%); color: #fdba74; border-top: 3px solid #fb923c; }
 
-        /* ব্যাজ ডিজাইন */
+        /* ব্যাজ */
         .verified-badge {
             color: #0284c7;
             font-size: 12.5px;
@@ -298,11 +303,18 @@
             margin-bottom: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
         .leader-card:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .leader-card:active {
+            transform: scale(0.98);
         }
 
         .leader-card.current-user-card {
@@ -457,7 +469,7 @@
             <!-- পোডিয়াম -->
             <div class="podium-section">
                 <!-- ২য় স্থান -->
-                <div class="podium-col">
+                <div class="podium-col" id="podiumCol2">
                     <div class="podium-avatar second" id="rank2AvatarContainer">
                         <span id="rank2Avatar">২</span>
                     </div>
@@ -470,7 +482,7 @@
                 </div>
 
                 <!-- ১ম স্থান -->
-                <div class="podium-col">
+                <div class="podium-col" id="podiumCol1">
                     <div class="podium-avatar first" id="rank1AvatarContainer">
                         <i class="fa-solid fa-crown crown-icon"></i>
                         <span id="rank1Avatar">১</span>
@@ -484,7 +496,7 @@
                 </div>
 
                 <!-- ৩য় স্থান -->
-                <div class="podium-col">
+                <div class="podium-col" id="podiumCol3">
                     <div class="podium-avatar third" id="rank3AvatarContainer">
                         <span id="rank3Avatar">৩</span>
                     </div>
@@ -586,6 +598,20 @@
 
         const usersCol = collection(db, "users");
 
+        // প্রোফাইল ওপেন করার হেল্পার ফাংশন
+        window.openUserProfile = function(user) {
+            if (!user) return;
+            // নিজের প্রোফাইল হলে সরাসরি profile.html এ যাবে
+            const isCurrent = (user.id === currentUserId || (currentUserEmail && user.email === currentUserEmail));
+            if (isCurrent) {
+                window.location.href = "profile.html";
+                return;
+            }
+            // অন্যের প্রোফাইল দেখতে query param হিসেবে uid অথবা email পাস হবে
+            const param = user.email ? `email=${encodeURIComponent(user.email)}` : `uid=${encodeURIComponent(user.id)}`;
+            window.location.href = `profile.html?${param}`;
+        };
+
         onSnapshot(usersCol, (snapshot) => {
             let users = [];
             snapshot.forEach((doc) => {
@@ -631,7 +657,6 @@
             return "বিগিনার শিক্ষার্থী";
         }
 
-        // ব্যাজ তৈরি করার ফাংশন
         function getBadgeHtml(isAdmin, isSmall = false) {
             if (!isAdmin) return '';
             const adminText = isSmall ? '' : '<span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> ADMIN</span>';
@@ -652,26 +677,30 @@
         }
 
         function renderPodium(users) {
-            // ১ম স্থান
             const u1 = users[0];
+            const u2 = users[1];
+            const u3 = users[2];
+
+            // ১ম স্থান
             document.getElementById("rank1Name").innerText = u1 ? u1.name : "খালি";
             document.getElementById("rank1XP").innerText = u1 ? `${u1.xp} XP` : "০ XP";
             document.getElementById("rank1Badges").innerHTML = u1 ? getBadgeHtml(u1.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank1AvatarContainer"), u1, true);
+            document.getElementById("podiumCol1").onclick = () => openUserProfile(u1);
 
             // ২য় স্থান
-            const u2 = users[1];
             document.getElementById("rank2Name").innerText = u2 ? u2.name : "খালি";
             document.getElementById("rank2XP").innerText = u2 ? `${u2.xp} XP` : "০ XP";
             document.getElementById("rank2Badges").innerHTML = u2 ? getBadgeHtml(u2.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank2AvatarContainer"), u2, false);
+            document.getElementById("podiumCol2").onclick = () => openUserProfile(u2);
 
             // ৩য় স্থান
-            const u3 = users[2];
             document.getElementById("rank3Name").innerText = u3 ? u3.name : "খালি";
             document.getElementById("rank3XP").innerText = u3 ? `${u3.xp} XP` : "০ XP";
             document.getElementById("rank3Badges").innerHTML = u3 ? getBadgeHtml(u3.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank3AvatarContainer"), u3, false);
+            document.getElementById("podiumCol3").onclick = () => openUserProfile(u3);
         }
 
         function renderList(users) {
@@ -697,6 +726,8 @@
 
                 const card = document.createElement("div");
                 card.className = `leader-card ${isCurrent ? 'current-user-card' : ''} ${user.isAdmin ? 'admin-card' : ''}`;
+                card.onclick = () => openUserProfile(user);
+
                 card.innerHTML = `
                     <span class="rank-number">${i + 1}</span>
                     <div class="user-icon-circle" style="${user.isAdmin ? 'border-color: #fde68a;' : ''}">${avatarHtml}</div>

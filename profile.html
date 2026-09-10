@@ -48,6 +48,7 @@
             text-align: center; border: 1px solid #e2e8f0;
             box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
             margin-bottom: 16px;
+            position: relative;
         }
 
         .avatar-wrap {
@@ -72,8 +73,38 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
-        .user-name { font-size: 18.5px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
-        .user-email { font-size: 12.5px; color: #64748b; margin-bottom: 18px; font-weight: 500; }
+        .user-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 3px;
+        }
+
+        .user-name { font-size: 19px; font-weight: 800; color: #0f172a; }
+        
+        .verified-badge {
+            color: #0284c7;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #ffffff;
+            font-size: 9.5px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 1px 4px rgba(217, 119, 6, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .user-email { font-size: 12.5px; color: #64748b; margin-bottom: 16px; font-weight: 500; }
 
         /* ফলো বাটন */
         .follow-btn-wrap { margin-bottom: 18px; }
@@ -88,18 +119,19 @@
             box-shadow: none;
         }
 
-        /* ফলোয়ার্স ও ফলোয়িং গ্রিড */
+        /* স্ট্যাটাস কাউন্টার (XP, Followers, Following) */
         .stats-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
             padding-top: 16px; border-top: 1px solid #f1f5f9;
         }
 
         .stat-item {
-            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 10px;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 10px 6px;
+            text-align: center;
         }
 
-        .stat-val { font-size: 17px; font-weight: 700; color: #059669; margin-bottom: 2px; }
-        .stat-lbl { font-size: 11.5px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .stat-val { font-size: 16px; font-weight: 800; color: #059669; margin-bottom: 2px; }
+        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
 
         .menu-list {
             background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0;
@@ -128,17 +160,6 @@
             margin-bottom: 20px;
         }
         .logout-btn:hover { background: #fff1f2; }
-
-        /* বটম ব্যানার অ্যাড বক্স */
-        .bottom-ad-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px auto 25px;
-            min-height: 50px;
-            overflow: hidden;
-        }
 
         /* ক্রপার মডাল */
         .cropper-modal-overlay {
@@ -194,7 +215,7 @@
             box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
         }
 
-        /* বটম নেভিগেশন বার এবং এনিমেশন */
+        /* বটম নেভিগেশন বার */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 62px;
             background: #ffffff; border-top: 1px solid #eef2f5;
@@ -252,7 +273,12 @@
                 </div>
                 <div class="camera-badge" id="cameraBadge"><i class="fa-solid fa-camera"></i></div>
             </div>
-            <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+
+            <div class="user-name-row">
+                <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+                <span id="adminBadgeContainer"></span>
+            </div>
+
             <p class="user-email" id="displayUserEmail">---</p>
 
             <!-- ফলো বাটন (অন্যের প্রোফাইল হলে প্রদর্শিত হবে) -->
@@ -264,6 +290,10 @@
 
             <!-- স্ট্যাটাস কাউন্টার -->
             <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-val" id="userXpCount">০</div>
+                    <div class="stat-lbl">Points (XP)</div>
+                </div>
                 <div class="stat-item">
                     <div class="stat-val" id="followersCount">০</div>
                     <div class="stat-lbl">Followers</div>
@@ -295,21 +325,6 @@
         <button class="logout-btn" id="logoutBtn">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> লগআউট করুন
         </button>
-
-        <!-- বটম ব্যানার অ্যাড (320x50 Adsterra Banner) -->
-        <div class="bottom-ad-container">
-            <script>
-              atOptions = {
-                'key' : '8daacdc376c790c03bd8fe48f80c0b1c',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
-            </script>
-            <script src="https://www.highrevenueformat.com/8daacdc376c790c03bd8fe48f80c0b1c/invoke.js"></script>
-        </div>
-
     </main>
 
     <!-- ক্রপার মডাল -->
@@ -373,13 +388,15 @@
         const db = getFirestore(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
+        // ইউআরএল থেকে প্যারামিটার পড়া (uid অথবা email)
         const urlParams = new URLSearchParams(window.location.search);
-        const targetUserId = urlParams.get("uid");
+        const queryUser = urlParams.get("email") || urlParams.get("uid");
 
         let currentUser = null;
         let isOwnProfile = true;
         let isFollowing = false;
         let cropper = null;
+        let targetDocId = null;
 
         const avatarTrigger = document.getElementById("avatarTrigger");
         const avatarContainer = document.getElementById("avatarContainer");
@@ -391,50 +408,92 @@
         const logoutBtn = document.getElementById("logoutBtn");
 
         onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                const myId = user.email.toLowerCase();
+            currentUser = user;
+            const myEmail = user && user.email ? user.email.toLowerCase() : null;
+            const myUid = user ? user.uid : null;
 
-                isOwnProfile = !targetUserId || targetUserId.toLowerCase() === myId;
-                const viewingId = isOwnProfile ? myId : targetUserId.toLowerCase();
-
-                if (!isOwnProfile) {
-                    document.getElementById("navPageTitle").innerText = "শিক্ষার্থী প্রোফাইল";
-                    cameraBadge.style.display = "none";
-                    avatarTrigger.style.cursor = "default";
-                    ownProfileMenus.style.display = "none";
-                    logoutBtn.style.display = "none";
-                    followBtnWrap.style.display = "block";
-                    checkFollowStatus(myId, viewingId);
-                } else {
-                    if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                        document.getElementById("adminOption").style.display = "flex";
-                    }
+            // প্রোফাইল চেক: ইউআরএলে কোনো আইডি না থাকলে অথবা নিজের আইডি হলে এটা নিজের প্রোফাইল
+            if (!queryUser) {
+                if (!user) {
+                    window.location.href = "login.html";
+                    return;
                 }
-
-                loadProfileData(viewingId);
+                isOwnProfile = true;
+                targetDocId = myEmail || myUid;
             } else {
-                window.location.href = "login.html";
+                const qLower = queryUser.toLowerCase();
+                isOwnProfile = (user && (qLower === myEmail || qLower === myUid));
+                targetDocId = qLower;
             }
+
+            if (!isOwnProfile) {
+                document.getElementById("navPageTitle").innerText = "শিক্ষার্থী প্রোফাইল";
+                cameraBadge.style.display = "none";
+                avatarTrigger.style.cursor = "default";
+                ownProfileMenus.style.display = "none";
+                logoutBtn.style.display = "none";
+                
+                // শুধুমাত্র লগইন করা ইউজার অন্যের প্রোফাইলে ফলো বাটন দেখতে পাবে
+                if (currentUser) {
+                    followBtnWrap.style.display = "block";
+                    checkFollowStatus(myEmail, targetDocId);
+                }
+            } else {
+                document.getElementById("navPageTitle").innerText = "আমার প্রোফাইল";
+                cameraBadge.style.display = "flex";
+                avatarTrigger.style.cursor = "pointer";
+                ownProfileMenus.style.display = "block";
+                logoutBtn.style.display = "flex";
+                followBtnWrap.style.display = "none";
+
+                if (myEmail === ADMIN_EMAIL.toLowerCase()) {
+                    document.getElementById("adminOption").style.display = "flex";
+                }
+            }
+
+            loadProfileData(targetDocId);
         });
 
-        async function loadProfileData(userId) {
+        async function loadProfileData(docId) {
             try {
-                const userDoc = await getDoc(doc(db, "users", userId));
+                let userDoc = await getDoc(doc(db, "users", docId));
+                
+                // যদি ইমেইল দিয়ে না পাওয়া যায়, ডিরেক্ট আইডি দিয়ে চেক করা
+                if (!userDoc.exists() && docId.includes("@")) {
+                    userDoc = await getDoc(doc(db, "users", docId.toLowerCase()));
+                }
+
                 if (userDoc.exists()) {
                     const data = userDoc.data();
-                    const name = data.userName || data.name || userId.split("@")[0];
-                    document.getElementById("displayUserName").innerText = name;
-                    document.getElementById("displayUserEmail").innerText = data.email || userId;
+                    const name = data.userName || data.name || (data.email ? data.email.split("@")[0] : "শিক্ষার্থী");
+                    const email = data.email || docId;
+                    const isAdmin = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
 
+                    document.getElementById("displayUserName").innerText = name;
+                    document.getElementById("displayUserEmail").innerText = email;
+                    document.getElementById("userXpCount").innerText = (typeof data.xp === "number") ? data.xp : 0;
                     document.getElementById("followersCount").innerText = data.followersCount || 0;
                     document.getElementById("followingCount").innerText = data.followingCount || 0;
 
-                    if (data.photoBase64) {
-                        avatarContainer.innerHTML = `<img src="${data.photoBase64}" alt="Avatar">`;
+                    // অ্যাডমিন ও ভেরিফাইড ব্যাজ সেট করা
+                    const badgeContainer = document.getElementById("adminBadgeContainer");
+                    if (isAdmin) {
+                        badgeContainer.innerHTML = `
+                            <i class="fa-solid fa-circle-check verified-badge" title="অফিশিয়াল ভেরিফাইড"></i>
+                            <span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> ADMIN</span>
+                        `;
+                    } else {
+                        badgeContainer.innerHTML = "";
+                    }
+
+                    if (data.photoBase64 || data.photoURL) {
+                        avatarContainer.innerHTML = `<img src="${data.photoBase64 || data.photoURL}" alt="Avatar">`;
                     } else {
                         avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
                     }
+                } else {
+                    document.getElementById("displayUserName").innerText = "ব্যবহারকারী পাওয়া যায়নি";
+                    document.getElementById("displayUserEmail").innerText = "---";
                 }
             } catch(e) {
                 console.error("Profile loading error:", e);
@@ -460,10 +519,15 @@
         }
 
         followActionBtn.addEventListener("click", async () => {
-            if (!currentUser || isOwnProfile) return;
+            if (!currentUser) {
+                alert("ফলো করতে অনুগ্রহ করে প্রথমে লগইন করুন।");
+                window.location.href = "login.html";
+                return;
+            }
+            if (isOwnProfile) return;
 
             const myId = currentUser.email.toLowerCase();
-            const targetId = targetUserId.toLowerCase();
+            const targetId = targetDocId;
 
             followActionBtn.disabled = true;
 

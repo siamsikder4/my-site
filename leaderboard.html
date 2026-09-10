@@ -8,7 +8,7 @@
 
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -20,40 +20,82 @@
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
-            padding-bottom: 80px;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding-bottom: 90px;
         }
 
+        /* হেডার */
         .top-nav {
             display: flex;
             align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
             position: sticky;
             top: 0;
             z-index: 100;
-            gap: 14px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .back-btn {
-            color: #0f3e2e;
-            font-size: 16px;
+            color: #0f172a;
+            font-size: 15px;
             text-decoration: none;
             background: #f1f5f9;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s ease;
+        }
+        .back-btn:active {
+            transform: scale(0.92);
+            background: #e2e8f0;
         }
 
         .nav-title {
             font-weight: 800;
-            font-size: 17px;
-            color: #0f3e2e;
+            font-size: 18px;
+            color: #064e3b;
+            letter-spacing: -0.3px;
+        }
+
+        .live-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #059669;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse 1.6s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         .page-content {
@@ -64,29 +106,42 @@
 
         .loading-state {
             text-align: center;
-            padding: 50px 16px;
+            padding: 60px 16px;
             color: #64748b;
             font-size: 14px;
         }
-
         .loading-state i {
-            font-size: 26px;
-            color: #047857;
-            margin-bottom: 10px;
+            font-size: 32px;
+            color: #059669;
+            margin-bottom: 12px;
             display: block;
         }
 
+        /* গ্লাস পোডিয়াম সেকশন */
         .podium-section {
-            background: linear-gradient(135deg, #0f3e2e 0%, #144336 100%);
-            border-radius: 20px;
-            padding: 22px 12px 18px;
+            background: linear-gradient(145deg, #064e3b 0%, #022c22 100%);
+            border-radius: 24px;
+            padding: 24px 12px 14px;
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: flex-end;
             gap: 10px;
             margin-bottom: 24px;
-            box-shadow: 0 6px 16px rgba(15, 62, 46, 0.15);
+            box-shadow: 0 16px 30px -8px rgba(6, 78, 59, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podium-section::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.18) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
         }
 
         .podium-col {
@@ -94,23 +149,25 @@
             flex-direction: column;
             align-items: center;
             width: 32%;
+            position: relative;
+            z-index: 2;
         }
 
         .podium-avatar {
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
             color: #ffffff;
-            border: 2px solid transparent;
-            margin-bottom: 6px;
+            border: 2.5px solid transparent;
+            margin-bottom: 8px;
             position: relative;
-            overflow: hidden;
-            background: #1e3a34;
+            background: #0f3e2e;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
         }
 
         .podium-avatar img {
@@ -121,118 +178,166 @@
         }
 
         .podium-avatar.first {
-            width: 60px;
-            height: 60px;
-            font-size: 20px;
+            width: 66px;
+            height: 66px;
+            font-size: 22px;
             border-color: #facc15;
             background: #047857;
-            overflow: visible;
-        }
-
-        .podium-avatar.first img {
-            border-radius: 50%;
-            border: 2px solid #facc15;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.45);
         }
 
         .podium-avatar.second {
             border-color: #cbd5e1;
-            background: #1e3a34;
         }
 
         .podium-avatar.third {
-            border-color: #f97316;
-            background: #1e3a34;
+            border-color: #fb923c;
         }
 
         .crown-icon {
             position: absolute;
-            top: -14px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
             color: #facc15;
-            font-size: 17px;
-            z-index: 2;
+            font-size: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            animation: crownBounce 2s infinite ease-in-out;
+        }
+
+        @keyframes crownBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-3px); }
+        }
+
+        .podium-name-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            max-width: 95px;
+            margin-bottom: 2px;
         }
 
         .podium-name {
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 700;
-            max-width: 85px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-align: center;
+            color: #ffffff;
         }
 
         .podium-xp {
-            font-size: 10px;
-            color: #93c5fd;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 10.5px;
+            color: #6ee7b7;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1px 8px;
+            border-radius: 10px;
         }
 
         .podium-step {
             width: 100%;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 4px 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 14px;
+            font-weight: 900;
+            font-size: 16px;
+            box-shadow: inset 0 2px 8px rgba(255,255,255,0.1);
         }
 
-        .step-1 { height: 75px; background: rgba(250, 204, 21, 0.25); color: #facc15; border-top: 3px solid #facc15; }
-        .step-2 { height: 55px; background: rgba(203, 213, 225, 0.2); color: #cbd5e1; border-top: 3px solid #cbd5e1; }
-        .step-3 { height: 42px; background: rgba(249, 115, 22, 0.2); color: #f97316; border-top: 3px solid #f97316; }
+        .step-1 { height: 80px; background: linear-gradient(180deg, rgba(250, 204, 21, 0.35) 0%, rgba(250, 204, 21, 0.1) 100%); color: #fde047; border-top: 3px solid #facc15; }
+        .step-2 { height: 58px; background: linear-gradient(180deg, rgba(203, 213, 225, 0.3) 0%, rgba(203, 213, 225, 0.08) 100%); color: #f1f5f9; border-top: 3px solid #cbd5e1; }
+        .step-3 { height: 44px; background: linear-gradient(180deg, rgba(251, 146, 60, 0.3) 0%, rgba(251, 146, 60, 0.08) 100%); color: #fdba74; border-top: 3px solid #fb923c; }
 
+        /* ব্যাজ ডিজাইন */
+        .verified-badge {
+            color: #0284c7;
+            font-size: 12.5px;
+            filter: drop-shadow(0 1px 1px rgba(2, 132, 199, 0.25));
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .admin-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #ffffff;
+            font-size: 9.5px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 1px 4px rgba(217, 119, 6, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* লিস্ট সেকশন */
         .list-section-title {
             font-size: 15px;
-            font-weight: 700;
-            color: #0e3b2c;
+            font-weight: 800;
+            color: #0f172a;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 4px;
         }
 
         .leader-card {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
+            border: 1px solid #edf2f7;
+            border-radius: 16px;
             padding: 12px 14px;
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
         }
 
         .leader-card.current-user-card {
-            border-color: #047857;
-            background: #f0fdf4;
+            border: 1.5px solid #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+
+        .leader-card.admin-card {
+            border: 1.5px solid #fef3c7;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
         }
 
         .rank-number {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 800;
-            width: 26px;
-            color: #64748b;
+            width: 28px;
+            color: #94a3b8;
+            flex-shrink: 0;
         }
 
         .user-icon-circle {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: #e6f4ea;
-            color: #047857;
+            background: #ecfdf5;
+            color: #059669;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 15px;
+            font-weight: 800;
             margin-right: 12px;
             flex-shrink: 0;
             overflow: hidden;
-            border: 1.5px solid #a7f3d0;
+            border: 2px solid #d1fae5;
         }
 
         .user-icon-circle img {
@@ -246,144 +351,155 @@
             overflow: hidden;
         }
 
-        .user-meta h4 {
-            font-size: 13.5px;
+        .user-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 3px;
+        }
+
+        .user-title-row h4 {
+            font-size: 14px;
             font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 2px;
+            color: #1e293b;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .user-meta p {
-            font-size: 10.5px;
+            font-size: 11px;
             color: #64748b;
+            font-weight: 500;
         }
 
         .xp-score {
-            font-size: 12.5px;
+            font-size: 13px;
             font-weight: 800;
-            color: #047857;
-            background: #ffffff;
-            padding: 4px 10px;
+            color: #059669;
+            background: #f0fdf4;
+            padding: 5px 12px;
             border-radius: 12px;
             border: 1px solid #bbf7d0;
             white-space: nowrap;
+            margin-left: 8px;
         }
 
-        /* বটম নেভিগেশন বার এবং এনিমেশন */
+        /* বটম নেভ */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid #e2e8f0;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.03);
         }
 
         .nav-item {
             text-decoration: none;
-            color: #8392a5;
+            color: #94a3b8;
             font-size: 11.5px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             flex: 1;
             padding: 8px 0;
+            transition: all 0.25s ease;
         }
 
         .nav-item i {
-            font-size: 18px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
-        }
-
-        .nav-item:active i {
-            transform: scale(1.25) translateY(-2px);
+            font-size: 19px;
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
         .nav-item.active {
             color: #059669;
+            font-weight: 700;
         }
 
         .nav-item.active i {
             transform: scale(1.15);
-            animation: bounceActive 0.5s ease alternate;
-        }
-
-        @keyframes bounceActive {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-            100% { transform: scale(1.15); }
         }
     </style>
 </head>
 <body>
 
     <header class="top-nav">
-        <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        <span class="nav-title">শিক্ষার্থী লিডারবোর্ড</span>
+        <div class="nav-left">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <span class="nav-title">শিক্ষার্থী লিডারবোর্ড</span>
+        </div>
+        <div class="live-tag">
+            <span class="pulse-dot"></span>
+            <span>লাইভ</span>
+        </div>
     </header>
 
     <main class="page-content">
 
         <div id="loadingBox" class="loading-state">
-            <i class="fa-solid fa-spinner fa-spin"></i>
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
             <span>র‍্যাঙ্কিং লোড হচ্ছে...</span>
         </div>
 
         <div id="leaderboardContent" style="display: none;">
             <!-- পোডিয়াম -->
             <div class="podium-section">
-                <!-- ২য় -->
+                <!-- ২য় স্থান -->
                 <div class="podium-col">
                     <div class="podium-avatar second" id="rank2AvatarContainer">
                         <span id="rank2Avatar">২</span>
                     </div>
-                    <span class="podium-name" id="rank2Name">---</span>
+                    <div class="podium-name-box">
+                        <span class="podium-name" id="rank2Name">---</span>
+                        <span id="rank2Badges"></span>
+                    </div>
                     <span class="podium-xp" id="rank2XP">0 XP</span>
                     <div class="podium-step step-2">২</div>
                 </div>
 
-                <!-- ১ম -->
+                <!-- ১ম স্থান -->
                 <div class="podium-col">
                     <div class="podium-avatar first" id="rank1AvatarContainer">
                         <i class="fa-solid fa-crown crown-icon"></i>
                         <span id="rank1Avatar">১</span>
                     </div>
-                    <span class="podium-name" id="rank1Name">---</span>
+                    <div class="podium-name-box">
+                        <span class="podium-name" id="rank1Name">---</span>
+                        <span id="rank1Badges"></span>
+                    </div>
                     <span class="podium-xp" id="rank1XP">0 XP</span>
                     <div class="podium-step step-1">১</div>
                 </div>
 
-                <!-- ৩য় -->
+                <!-- ৩য় স্থান -->
                 <div class="podium-col">
                     <div class="podium-avatar third" id="rank3AvatarContainer">
                         <span id="rank3Avatar">৩</span>
                     </div>
-                    <span class="podium-name" id="rank3Name">---</span>
+                    <div class="podium-name-box">
+                        <span class="podium-name" id="rank3Name">---</span>
+                        <span id="rank3Badges"></span>
+                    </div>
                     <span class="podium-xp" id="rank3XP">0 XP</span>
                     <div class="podium-step step-3">৩</div>
                 </div>
             </div>
 
             <div class="list-section-title">
-                <span>শীর্ষ এক্টিভ শিক্ষার্থী</span>
-                <span style="font-size: 11px; color: #047857;"><i class="fa-solid fa-bolt"></i> লাইভ পয়েন্ট</span>
+                <span>র‍্যাঙ্কিং তালিকা</span>
+                <span style="font-size: 11.5px; color: #059669; font-weight: 700;"><i class="fa-solid fa-bolt"></i> অর্জিত পয়েন্ট</span>
             </div>
 
             <div id="leaderboardList"></div>
@@ -391,7 +507,7 @@
 
     </main>
 
-    <!-- বটম নেভিগেশন বার (হোম, লিডারবোর্ড, প্রোফাইল) -->
+    <!-- বটম নেভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -425,6 +541,9 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        // অ্যাডমিন ইমেইল কনফিগারেশন
+        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
         let currentUserId = null;
         let currentUserEmail = null;
@@ -471,16 +590,20 @@
             let users = [];
             snapshot.forEach((doc) => {
                 const data = doc.data();
+                const userEmail = (data.email || (doc.id.includes("@") ? doc.id : "")).toLowerCase();
+                const isAdmin = (userEmail === ADMIN_EMAIL.toLowerCase());
+
                 users.push({
                     id: doc.id,
-                    email: data.email ? data.email.toLowerCase() : "",
-                    name: data.userName || data.name || (data.email ? data.email.split('@')[0] : "শিক্ষার্থী"),
+                    email: userEmail,
+                    name: data.userName || data.name || (userEmail ? userEmail.split('@')[0] : "শিক্ষার্থী"),
                     xp: typeof data.xp === "number" ? data.xp : 0,
-                    photo: data.photoBase64 || data.photoURL || null
+                    photo: data.photoBase64 || data.photoURL || null,
+                    isAdmin: isAdmin
                 });
             });
 
-            // এক্সপি পয়েন্ট অনুযায়ী বড় থেকে ছোট ক্রমানুসারে সাজানো
+            // এক্সপি পয়েন্ট অনুযায়ী বড় থেকে ছোট সাজানো
             users.sort((a, b) => b.xp - a.xp);
 
             loadingBox.style.display = "none";
@@ -491,7 +614,7 @@
         }, (error) => {
             console.error("Firestore Snapshot Error:", error);
             loadingBox.innerHTML = `
-                <span style="color: #ef4444; font-weight: 600;">ডাটাবেস এক্সেস করা যায়নি!</span>
+                <span style="color: #ef4444; font-weight: 700;">ডাটাবেস এক্সেস করা যায়নি!</span>
                 <p style="font-size: 11px; color: #64748b; margin-top: 5px;">Firestore Rules-এ রিড পারমিশন চালু আছে কি না পরীক্ষা করুন।</p>
             `;
         });
@@ -500,11 +623,22 @@
             return name ? name.trim().charAt(0).toUpperCase() : "U";
         }
 
-        function getUserLevel(xp) {
+        function getUserLevel(xp, isAdmin) {
+            if (isAdmin) return "সিস্টেম অ্যাডমিনিস্ট্রেটর";
             if (xp >= 1000) return "মাস্টার লার্নার (N4)";
             if (xp >= 500) return "অ্যাডভান্সড শিক্ষার্থী";
             if (xp >= 200) return "এক্টিভ লার্নার";
             return "বিগিনার শিক্ষার্থী";
+        }
+
+        // ব্যাজ তৈরি করার ফাংশন
+        function getBadgeHtml(isAdmin, isSmall = false) {
+            if (!isAdmin) return '';
+            const adminText = isSmall ? '' : '<span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> ADMIN</span>';
+            return `
+                <i class="fa-solid fa-circle-check verified-badge" title="অফিশিয়াল ভেরিফাইড"></i>
+                ${adminText}
+            `;
         }
 
         function setAvatarElement(container, user, isFirst = false) {
@@ -522,18 +656,21 @@
             const u1 = users[0];
             document.getElementById("rank1Name").innerText = u1 ? u1.name : "খালি";
             document.getElementById("rank1XP").innerText = u1 ? `${u1.xp} XP` : "০ XP";
+            document.getElementById("rank1Badges").innerHTML = u1 ? getBadgeHtml(u1.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank1AvatarContainer"), u1, true);
 
             // ২য় স্থান
             const u2 = users[1];
             document.getElementById("rank2Name").innerText = u2 ? u2.name : "খালি";
             document.getElementById("rank2XP").innerText = u2 ? `${u2.xp} XP` : "০ XP";
+            document.getElementById("rank2Badges").innerHTML = u2 ? getBadgeHtml(u2.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank2AvatarContainer"), u2, false);
 
             // ৩য় স্থান
             const u3 = users[2];
             document.getElementById("rank3Name").innerText = u3 ? u3.name : "খালি";
             document.getElementById("rank3XP").innerText = u3 ? `${u3.xp} XP` : "০ XP";
+            document.getElementById("rank3Badges").innerHTML = u3 ? getBadgeHtml(u3.isAdmin, true) : "";
             setAvatarElement(document.getElementById("rank3AvatarContainer"), u3, false);
         }
 
@@ -546,7 +683,7 @@
             }
 
             if (users.length <= 3) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">শীর্ষ ৩ জন ছাড়া তালিকায় আর কোনো শিক্ষার্থী নেই।</div>`;
+                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#94a3b8; font-size:13px;">শীর্ষ ৩ জন পোডিয়ামে প্রদর্শিত হচ্ছে।</div>`;
                 return;
             }
 
@@ -559,13 +696,17 @@
                     : getFirstLetter(user.name);
 
                 const card = document.createElement("div");
-                card.className = `leader-card ${isCurrent ? 'current-user-card' : ''}`;
+                card.className = `leader-card ${isCurrent ? 'current-user-card' : ''} ${user.isAdmin ? 'admin-card' : ''}`;
                 card.innerHTML = `
                     <span class="rank-number">${i + 1}</span>
-                    <div class="user-icon-circle">${avatarHtml}</div>
+                    <div class="user-icon-circle" style="${user.isAdmin ? 'border-color: #fde68a;' : ''}">${avatarHtml}</div>
                     <div class="user-meta">
-                        <h4>${user.name} ${isCurrent ? '<span style="font-size:10px; color:#047857; font-weight:700;">(আপনি)</span>' : ''}</h4>
-                        <p>${getUserLevel(user.xp)}</p>
+                        <div class="user-title-row">
+                            <h4>${user.name}</h4>
+                            ${getBadgeHtml(user.isAdmin, false)}
+                            ${isCurrent ? '<span style="font-size:10px; color:#059669; font-weight:800;">(আপনি)</span>' : ''}
+                        </div>
+                        <p>${getUserLevel(user.xp, user.isAdmin)}</p>
                     </div>
                     <span class="xp-score">${user.xp} XP</span>
                 `;

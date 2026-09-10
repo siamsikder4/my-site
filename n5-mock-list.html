@@ -443,7 +443,6 @@
                 name: "聴解（Listening）- 全問題",
                 timeMinutes: 30,
                 instructions: "放送を 聞いて、１から４の なかから いちばん いい ものを ひとつ えらんで ください。",
-                // ১, ২, ৩ ও ৪ নম্বর মোন্দাই-এর নিখুঁত ডাটা
                 mondais: [
                     {
                         id: "m1",
@@ -607,10 +606,14 @@
                 sec.mondais.forEach(m => {
                     let audioHtml = "";
                     if (m.audio) {
+                        // মোন্দাই ১ এর জন্য আলাদা ID এবং preload দেওয়া হয়েছে
+                        const audioId = (m.id === 'm1') ? 'id="audioPlayer_m1"' : '';
+                        const preloadAttr = (m.id === 'm1') ? 'preload="auto"' : 'preload="none"';
+
                         audioHtml = `
                             <div class="sticky-audio-card" style="margin-top: 10px;">
                                 <div class="audio-desc"><i class="fa-solid fa-volume-high"></i> Listening Track: ${m.title}</div>
-                                <audio controls preload="none">
+                                <audio ${audioId} controls ${preloadAttr}>
                                     <source src="${m.audio}" type="audio/mpeg">
                                     <source src="./${m.audio}" type="audio/mpeg">
                                 </audio>
@@ -664,6 +667,21 @@
 
             startTimer(sec.timeMinutes * 60);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // লিসেনিং পেজে প্রবেশ করার সাথে সাথে প্রথম অডিও ট্র্যাক স্বয়ংক্রিয়ভাবে চালু হবে
+            if (currentSectionKey === "section3") {
+                setTimeout(() => {
+                    const firstAudio = document.getElementById("audioPlayer_m1");
+                    if (firstAudio) {
+                        const playPromise = firstAudio.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(err => {
+                                console.log("Autoplay was prevented by browser policy:", err);
+                            });
+                        }
+                    }
+                }, 400);
+            }
         }
 
         window.selectAnswer = function(qKey, optIndex) {
@@ -704,6 +722,10 @@
 
         function submitCurrentSection() {
             clearInterval(timerInterval);
+
+            // সেকশন পরিবর্তন হলে আগের কোনো অডিও চলতে থাকলে তা থামিয়ে দেওয়া
+            const allAudios = document.querySelectorAll('audio');
+            allAudios.forEach(a => a.pause());
 
             if (currentSectionKey === "section1") {
                 currentSectionKey = "section2";

@@ -68,39 +68,55 @@
             display: flex; align-items: center; justify-content: center; font-size: 10px;
         }
 
+        /* পরিচ্ছন্ন নাম ও ভেরিফাইড আইকন */
         .user-name-row {
             display: flex; align-items: center; justify-content: center;
-            gap: 6px; margin-bottom: 2px;
+            gap: 6px; margin-bottom: 6px;
         }
 
-        .user-name { font-size: 18px; font-weight: 800; color: #0f172a; }
+        .user-name { font-size: 19px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px; }
+
+        .verified-icon {
+            color: #0284c7;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+        }
 
         .btn-edit-trigger {
-            background: none; border: none; color: #64748b;
-            cursor: pointer; font-size: 13.5px; padding: 3px 6px;
-            border-radius: 6px; transition: background 0.15s;
+            background: none; border: none; color: #94a3b8;
+            cursor: pointer; font-size: 13px; padding: 2px 4px;
+            border-radius: 6px; transition: color 0.15s;
         }
-        .btn-edit-trigger:hover { background: #f1f5f9; color: #0f172a; }
+        .btn-edit-trigger:hover { color: #0f172a; }
+
+        /* নামের নিচের ব্যাজ রো */
+        .user-badges-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; margin-bottom: 10px; min-height: 22px;
+        }
 
         .badge-founder {
             background: #0f172a; color: #38bdf8;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px; font-weight: 800; padding: 2px 7px;
-            border-radius: 6px; letter-spacing: 0.5px;
+            font-size: 10px; font-weight: 800; padding: 2.5px 9px;
+            border-radius: 20px; letter-spacing: 0.5px;
             display: inline-flex; align-items: center; gap: 4px;
-            border: 1px solid #1e293b;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
         }
 
         .badge-pro {
-            background: #fefce8; color: #ca8a04;
+            background: #fefce8; color: #b45309;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px; font-weight: 800; padding: 2px 7px;
-            border-radius: 6px; border: 1px solid #fef08a;
-            display: inline-flex; align-items: center; gap: 3px;
+            font-size: 10px; font-weight: 800; padding: 2px 9px;
+            border-radius: 20px; border: 1px solid #fef08a;
+            display: inline-flex; align-items: center; gap: 4px;
         }
 
+        .user-email { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+
         .user-bio {
-            font-size: 12px; color: #475569; margin-bottom: 6px;
+            font-size: 12px; color: #475569; margin-bottom: 8px;
             line-height: 1.4; padding: 0 10px;
         }
 
@@ -296,17 +312,24 @@
                 <div class="camera-badge" id="cameraBadge"><i class="fa-solid fa-camera"></i></div>
             </div>
 
+            <!-- নাম ও ভেরিফাইড আইকন -->
             <div class="user-name-row">
                 <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+                <span class="verified-icon" id="verifiedBadgeContainer"></span>
                 <button class="btn-edit-trigger" id="openEditProfileBtn" title="প্রোফাইল এডিট">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
+            </div>
+
+            <!-- ব্যাজ সারি (FOUNDER ও PRO নিচে থাকবে) -->
+            <div class="user-badges-row" id="userBadgesRow">
                 <span id="founderBadgeContainer"></span>
                 <span id="proBadgeContainer"></span>
             </div>
 
-            <!-- বায়ো ও মেটা-ট্যাগ -->
+            <p class="user-email" id="displayUserEmail">---</p>
             <p class="user-bio" id="displayUserBio">কোনো বায়ো যোগ করা হয়নি।</p>
+            
             <div class="user-meta-tags" id="userMetaTags">
                 <span class="meta-pill" id="displayUserLevel">লেভেল: N5</span>
                 <span class="meta-pill" id="displayUserAge">বয়স: --</span>
@@ -553,7 +576,6 @@
         const closePolicyBtn = document.getElementById("closePolicyBtn");
         const closePolicyBottomBtn = document.getElementById("closePolicyBottomBtn");
 
-        // এডিট প্রোফাইল এলিমেন্টস
         const editProfileModal = document.getElementById("editProfileModal");
         const openEditProfileBtn = document.getElementById("openEditProfileBtn");
         const closeEditProfileBtn = document.getElementById("closeEditProfileBtn");
@@ -617,6 +639,7 @@
                     const isPremium = data.isPremium === true || isOwner;
 
                     document.getElementById("displayUserName").innerText = name;
+                    document.getElementById("displayUserEmail").innerText = email;
                     document.getElementById("displayUserBio").innerText = data.bio || "কোনো বায়ো যোগ করা হয়নি।";
                     document.getElementById("displayUserLevel").innerText = `লেভেল: ${data.targetLevel || "N5"}`;
                     document.getElementById("displayUserAge").innerText = `বয়স: ${data.age || "--"}`;
@@ -625,16 +648,22 @@
                     document.getElementById("followersCount").innerText = data.followersCount || 0;
                     document.getElementById("followingCount").innerText = data.followingCount || 0;
 
-                    // ইনপুট ফিল্ডগুলোতে ডাটা সেট
                     document.getElementById("editName").value = name;
                     document.getElementById("editBio").value = data.bio || "";
                     document.getElementById("editLevel").value = data.targetLevel || "N5";
                     document.getElementById("editAge").value = data.age || "";
 
+                    const verifiedContainer = document.getElementById("verifiedBadgeContainer");
                     const founderContainer = document.getElementById("founderBadgeContainer");
                     const proContainer = document.getElementById("proBadgeContainer");
 
-                    founderContainer.innerHTML = isOwner ? `<span class="badge-founder"><i class="fa-solid fa-circle-check"></i> FOUNDER</span>` : "";
+                    // নামের পাশে শুধু ব্লু ভেরিফাইড আইকন
+                    verifiedContainer.innerHTML = isOwner ? `<i class="fa-solid fa-circle-check"></i>` : "";
+
+                    // নামের নিচে ব্যালেন্সড FOUNDER ব্যাজ
+                    founderContainer.innerHTML = isOwner ? `<span class="badge-founder"><i class="fa-solid fa-shield-halved"></i> FOUNDER</span>` : "";
+                    
+                    // নামের নিচে PRO ব্যাজ
                     proContainer.innerHTML = isPremium ? `<span class="badge-pro"><i class="fa-solid fa-crown"></i> PRO</span>` : "";
 
                     if (isOwnProfile) {
@@ -658,7 +687,6 @@
             }
         }
 
-        // প্রোফাইল এডিট ইভেন্ট
         openEditProfileBtn.onclick = () => editProfileModal.style.display = "flex";
         closeEditProfileBtn.onclick = () => editProfileModal.style.display = "none";
 
@@ -690,7 +718,6 @@
             }
         });
 
-        // পলিসি ও পেমেন্ট মডাল
         openPolicyBtn.onclick = () => policyModal.style.display = "flex";
         closePolicyBtn.onclick = () => policyModal.style.display = "none";
         closePolicyBottomBtn.onclick = () => policyModal.style.display = "none";

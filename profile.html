@@ -41,7 +41,7 @@
 
         .page-content { padding: 16px; max-width: 440px; margin: 0 auto; }
 
-        /* সিম্পল প্রোফাইল কার্ড */
+        /* প্রোফাইল কার্ড */
         .profile-card {
             background: #ffffff; border-radius: 20px; padding: 24px 18px 20px;
             text-align: center; border: 1px solid #e2e8f0;
@@ -75,7 +75,6 @@
 
         .user-name { font-size: 18px; font-weight: 800; color: #0f172a; }
 
-        /* FOUNDER ও PRO সুন্দর ব্যাজ */
         .badge-founder {
             background: #0f172a; color: #38bdf8;
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -95,7 +94,6 @@
 
         .user-email { font-size: 12px; color: #64748b; margin-bottom: 16px; }
 
-        /* স্ট্যাটাস গ্রিড */
         .stats-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
             padding-top: 14px; border-top: 1px solid #f1f5f9;
@@ -109,7 +107,7 @@
         .stat-val { font-size: 15px; font-weight: 800; color: #047857; margin-bottom: 2px; }
         .stat-lbl { font-size: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; }
 
-        /* প্রিমিয়াম ব্যানার কার্ড */
+        /* প্রিমিয়াম কার্ড */
         .premium-card {
             background: #ffffff; border: 1px solid #fed7aa;
             border-radius: 18px; padding: 16px; margin-bottom: 14px;
@@ -144,17 +142,13 @@
         }
         .prem-btn:active { opacity: 0.9; }
 
-        /* প্রো অ্যাক্টিভ বক্স */
         .pro-active-card {
             background: #f0fdf4; border: 1px solid #bbf7d0;
             border-radius: 16px; padding: 14px; margin-bottom: 14px;
             display: none; align-items: center; gap: 12px;
         }
 
-        .pro-active-card i {
-            font-size: 20px; color: #16a34a;
-        }
-
+        .pro-active-card i { font-size: 20px; color: #16a34a; }
         .pro-active-card h4 { font-size: 13.5px; color: #166534; font-weight: 700; }
         .pro-active-card p { font-size: 11px; color: #4b5563; }
 
@@ -168,6 +162,8 @@
             display: flex; align-items: center; justify-content: space-between;
             padding: 13px 16px; text-decoration: none; color: #334155;
             font-size: 13.5px; font-weight: 600; border-bottom: 1px solid #f8fafc;
+            cursor: pointer; background: transparent; border-left: none; border-right: none; border-top: none;
+            width: 100%; text-align: left;
         }
         .menu-item:last-child { border-bottom: none; }
         .menu-left { display: flex; align-items: center; gap: 12px; }
@@ -180,7 +176,7 @@
             display: flex; align-items: center; justify-content: center; gap: 6px;
         }
 
-        /* পেমেন্ট মডাল */
+        /* কমন মডাল স্টাইল */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
@@ -188,7 +184,7 @@
         }
 
         .modal-card {
-            background: #ffffff; width: 100%; max-width: 360px;
+            background: #ffffff; width: 100%; max-width: 380px;
             border-radius: 20px; overflow: hidden;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
@@ -201,6 +197,25 @@
         .close-btn { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
 
         .modal-body { padding: 18px; }
+
+        /* পলিসি বডি স্ক্রোলবার স্টাইল */
+        .policy-content {
+            max-height: 65vh;
+            overflow-y: auto;
+            font-size: 12.5px;
+            color: #475569;
+            line-height: 1.65;
+            padding-right: 4px;
+        }
+
+        .policy-content h4 {
+            font-size: 13.5px;
+            color: #0f172a;
+            font-weight: 700;
+            margin: 12px 0 4px;
+        }
+
+        .policy-content h4:first-child { margin-top: 0; }
 
         .pay-box {
             background: #f8fafc; border: 1px dashed #cbd5e1;
@@ -297,7 +312,7 @@
             </div>
         </div>
 
-        <!-- সিম্পল প্রিমিয়াম কার্ড -->
+        <!-- প্রিমিয়াম কার্ড -->
         <div class="premium-card" id="premiumPromoCard" style="display: none;">
             <div class="prem-top">
                 <div class="prem-title"><i class="fa-solid fa-crown"></i> KOTOBA PRO</div>
@@ -326,6 +341,7 @@
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
+
             <a href="leaderboard.html" class="menu-item">
                 <div class="menu-left">
                     <i class="fa-solid fa-trophy"></i>
@@ -333,12 +349,47 @@
                 </div>
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
+
+            <!-- প্রাইভেসি পলিসি বাটন -->
+            <button class="menu-item" id="openPolicyBtn" type="button">
+                <div class="menu-left">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>গোপনীয়তা নীতি (Privacy Policy)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+            </button>
         </div>
 
         <button class="logout-btn" id="logoutBtn">
             <i class="fa-solid fa-power-off"></i> লগআউট
         </button>
     </main>
+
+    <!-- প্রাইভেসি পলিসি মডাল -->
+    <div class="modal-overlay" id="policyModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>গোপনীয়তা নীতি</h3>
+                <button class="close-btn" id="closePolicyBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-content">
+                    <h4>১. তথ্য সংগ্রহ ও ব্যবহার</h4>
+                    <p>KOTOBA প্ল্যাটফর্মে অ্যাকাউন্ট তৈরির সময় আপনার নাম, ইমেইল ঠিকানা ও প্রোফাইল ছবি সংগ্রহ করা হয়। এই তথ্যগুলো শুধুমাত্র আপনার পড়াশোনার অগ্রগতি (XP), লিডারবোর্ড র‍্যাঙ্কিং ও প্রোফাইল পরিচালনার কাজে ব্যবহৃত হয়।</p>
+
+                    <h4>২. কুকিজ ও অ্যাডসেন্স</h4>
+                    <p>আমরা সাইটের কার্যকারিতা বজায় রাখতে এবং প্রাসঙ্গিক বিজ্ঞাপন প্রদর্শন করতে Google AdSense ব্যবহার করি। গুগল第三方 হিসেবে ভিজিট ট্র্যাক করতে কুকিজ ব্যবহার করতে পারে।</p>
+
+                    <h4>৩. তথ্য নিরাপত্তা</h4>
+                    <p>আপনার সমস্ত ব্যক্তিগত ডেটা নিরাপদ ক্লাউড ডাটাবেসে (Firebase) সংরক্ষিত থাকে। আমরা কোনো অবস্থাতেই আপনার ব্যক্তিগত তথ্য তৃতীয় পক্ষের কাছে বিক্রি বা শেয়ার করি না।</p>
+
+                    <h4>৪. পরিবর্তন ও যোগাযোগ</h4>
+                    <p>প্রয়োজনে যেকোনো সময় এই নীতিমালায় পরিবর্তন আনা হতে পারে। যেকোনো প্রশ্ন বা অ্যাকাউন্টের ডেটা ডিলিট করতে আমাদের সাপোর্ট ইমেইলে যোগাযোগ করতে পারেন।</p>
+                </div>
+                <button class="btn-submit" id="closePolicyBottomBtn" style="margin-top: 14px;">বুঝেছি</button>
+            </div>
+        </div>
+    </div>
 
     <!-- পেমেন্ট মডাল -->
     <div class="modal-overlay" id="paymentModal">
@@ -445,6 +496,12 @@
         const premiumForm = document.getElementById("premiumForm");
         const copyWalletBtn = document.getElementById("copyWalletBtn");
 
+        // প্রাইভেসি পলিসি এলিমেন্টস
+        const policyModal = document.getElementById("policyModal");
+        const openPolicyBtn = document.getElementById("openPolicyBtn");
+        const closePolicyBtn = document.getElementById("closePolicyBtn");
+        const closePolicyBottomBtn = document.getElementById("closePolicyBottomBtn");
+
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             const myEmail = user && user.email ? user.email.toLowerCase() : null;
@@ -506,7 +563,6 @@
                     document.getElementById("followersCount").innerText = data.followersCount || 0;
                     document.getElementById("followingCount").innerText = data.followingCount || 0;
 
-                    // ব্যাজ সেট করা (FOUNDER ও PRO)
                     const founderContainer = document.getElementById("founderBadgeContainer");
                     const proContainer = document.getElementById("proBadgeContainer");
 
@@ -543,8 +599,20 @@
             }
         }
 
+        // পলিসি মডাল ওপেন/ক্লোজ
+        openPolicyBtn.addEventListener("click", () => policyModal.style.display = "flex");
+        closePolicyBtn.addEventListener("click", () => policyModal.style.display = "none");
+        closePolicyBottomBtn.addEventListener("click", () => policyModal.style.display = "none");
+
+        // পেমেন্ট মডাল ওপেন/ক্লোজ
         openPaymentModalBtn.addEventListener("click", () => paymentModal.style.display = "flex");
         closePaymentModalBtn.addEventListener("click", () => paymentModal.style.display = "none");
+
+        // মডালের বাইরে ক্লিক করলে বন্ধ করা
+        window.addEventListener("click", (e) => {
+            if (e.target === policyModal) policyModal.style.display = "none";
+            if (e.target === paymentModal) paymentModal.style.display = "none";
+        });
 
         copyWalletBtn.addEventListener("click", () => {
             navigator.clipboard.writeText(document.getElementById("walletNum").innerText);

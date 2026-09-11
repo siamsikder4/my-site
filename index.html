@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOTOBA - জাপানিজ ভাষা শিখুন</title>
 
-    <!-- ফেভিকন ও মোবাইল অ্যাপ আইকন -->
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="shortcut icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
 
     <!-- Google AdSense Verification Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
 
     <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- OneSignal Push Notification SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -25,9 +23,7 @@
       window.OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
-          notifyButton: {
-            enable: true,
-          },
+          notifyButton: { enable: true },
         });
       });
     </script>
@@ -37,45 +33,33 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f6f9f8;
-            color: #1a202c;
-            padding-bottom: 85px;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding-bottom: 80px;
         }
 
-        /* ৩-কলাম টপ বার */
+        /* ক্লিন টপ বার */
         .top-nav {
-            display: grid;
-            grid-template-columns: 40px 1fr 40px;
+            display: flex;
             align-items: center;
-            padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #eef2f5;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid #f1f5f9;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-        }
-
-        .top-nav-spacer {
-            width: 38px;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .brand-link {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
         }
 
@@ -84,84 +68,59 @@
             height: 32px;
             border-radius: 8px;
             object-fit: cover;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .logo {
-            font-family: 'Noto Sans JP', -apple-system, sans-serif;
-            font-weight: 900;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
             font-size: 19px;
-            letter-spacing: 1.5px;
-            background: linear-gradient(135deg, #0a2e22 0%, #047857 45%, #10b981 70%, #047857 100%);
-            background-size: 250% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: logoShimmer 4s ease-in-out infinite, logoPulse 3s ease-in-out infinite alternate;
-            display: inline-block;
-        }
-
-        @keyframes logoShimmer {
-            0% { background-position: 0% center; }
-            50% { background-position: 100% center; }
-            100% { background-position: 0% center; }
-        }
-
-        @keyframes logoPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
-        }
-
-        .top-nav-right {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
+            letter-spacing: 0.5px;
+            color: #047857;
         }
 
         .notif-bell-btn {
             position: relative;
-            background: #f1f5f9;
-            color: #0f3e2e;
-            border: none;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background 0.15s ease;
         }
 
         .notif-bell-btn:active {
-            transform: scale(0.92);
-            background: #e2e8f0;
+            background: #f1f5f9;
         }
 
         .notif-badge {
             position: absolute;
-            top: -2px;
-            right: -2px;
+            top: -3px;
+            right: -3px;
             background: #ef4444;
             color: #ffffff;
-            font-size: 9.5px;
+            font-size: 9px;
             font-weight: 700;
-            min-width: 17px;
-            height: 17px;
+            min-width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
             border: 2px solid #ffffff;
-            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
         }
 
-        /* গ্লোবাল অ্যালার্ট ব্যানার */
+        /* গ্লোবাল ব্যানার */
         .global-alert-banner {
             display: none;
-            background: #fef2f2;
-            border-bottom: 1px solid #fecaca;
-            color: #b91c1c;
+            background: #fff7ed;
+            border-bottom: 1px solid #ffedd5;
+            color: #c2410c;
             padding: 8px 14px;
             font-size: 12px;
             font-weight: 600;
@@ -170,148 +129,148 @@
 
         .page-content {
             padding: 16px;
-            max-width: 480px;
+            max-width: 440px;
             margin: 0 auto;
         }
 
-        .hero-text {
+        /* মিনিমাল হিরো ব্যানার */
+        .hero-banner {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 20px 16px;
             text-align: center;
-            margin: 10px 0 16px;
+            margin-bottom: 20px;
         }
 
-        .hero-text h2 {
-            font-size: 20px;
+        .hero-banner h2 {
+            font-size: 17px;
             font-weight: 800;
-            color: #0e3b2c;
+            color: #0f172a;
             margin-bottom: 4px;
-            line-height: 1.35;
         }
 
-        .hero-text p {
-            font-size: 11.5px;
-            line-height: 1.5;
+        .hero-banner p {
+            font-size: 12px;
             color: #64748b;
+            line-height: 1.5;
         }
 
-        /* ডাইনামিক ব্যানার অ্যাড বক্স */
+        /* বিজ্ঞাপন বক্স */
         .ad-banner-box {
             width: 100%;
             display: none;
             justify-content: center;
             align-items: center;
-            margin: 14px auto 22px;
+            margin-bottom: 20px;
             min-height: 50px;
             overflow: hidden;
         }
 
-        .level-section {
-            margin-bottom: 30px;
+        /* সেকশন হেডার */
+        .section-wrap {
+            margin-bottom: 22px;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 3.5px 12px;
-            border-radius: 12px;
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 0 2px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .section-pill {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 10.5px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: 0.3px;
+            padding: 2px 8px;
+            border-radius: 6px;
         }
 
-        .red-badge { background: #b91c1c; }
-        .green-badge { background: #047857; }
-        .dark-badge { background: #1e3a34; }
+        .pill-red { background: #fef2f2; color: #dc2626; }
+        .pill-green { background: #f0fdf4; color: #16a34a; }
+        .pill-slate { background: #f1f5f9; color: #475569; }
 
-        .section-heading {
-            font-size: 17px;
-            font-weight: 800;
-            color: #0e3b2c;
-            margin-bottom: 14px;
-        }
-
+        /* কার্ড গ্রিড */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 13px;
+            gap: 10px;
         }
 
         .item-card {
             background: #ffffff;
-            border: 1px solid #e8eef3;
+            border: 1px solid #e2e8f0;
             border-radius: 16px;
-            padding: 18px 10px 15px;
-            text-align: center;
+            padding: 16px 12px;
             text-decoration: none;
             position: relative;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.035), 0 1px 3px rgba(15, 23, 42, 0.02);
-            display: block;
-            transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .item-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.03);
-            border-color: #dbe4ec;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: border-color 0.15s ease, transform 0.1s ease;
         }
 
         .item-card:active {
-            transform: scale(0.975);
-            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+            transform: scale(0.98);
+            border-color: #cbd5e1;
         }
 
-        .red-top { border-top: 3.5px solid #b91c1c; }
-        .green-top { border-top: 3.5px solid #059669; }
-
-        .icon-circle {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
+        .icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+            font-size: 15px;
+            margin-bottom: 10px;
         }
 
-        .green-bg { background: #ecfdf5; color: #047857; }
-        .red-bg { background: #fff1f2; color: #b91c1c; }
-        .yellow-bg { background: #fefce8; color: #d97706; }
+        .icon-green { background: #f0fdf4; color: #047857; }
+        .icon-red { background: #fef2f2; color: #dc2626; }
+        .icon-amber { background: #fefce8; color: #d97706; }
 
         .item-card h4 {
             font-size: 13.5px;
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 4px;
+            color: #0f172a;
+            margin-bottom: 2px;
         }
 
         .item-card p {
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
             line-height: 1.35;
         }
 
-        .mini-tag {
+        .mini-badge {
             position: absolute;
-            top: 7px;
-            right: 7px;
-            background: #fef3c7;
-            color: #92400e;
+            top: 10px;
+            right: 10px;
+            background: #f1f5f9;
+            color: #64748b;
             font-size: 8.5px;
             font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 8px;
-            border: 1px solid #fde68a;
+            padding: 1px 6px;
+            border-radius: 4px;
         }
 
+        /* নোটিফিকেশন মডাল */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(15, 23, 42, 0.5);
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(3px);
-            z-index: 9999;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 16px;
@@ -320,45 +279,34 @@
         .notif-modal-card {
             background: #ffffff;
             width: 100%;
-            max-width: 400px;
-            border-radius: 20px;
+            max-width: 380px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
             display: flex;
             flex-direction: column;
             max-height: 80vh;
-            animation: popUp 0.22s ease-out;
-        }
-
-        @keyframes popUp {
-            from { transform: scale(0.94); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-header {
-            background: #0f3e2e;
+            background: #0f172a;
             color: #ffffff;
-            padding: 15px 18px;
+            padding: 14px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .modal-header h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .close-btn {
             background: none;
             border: none;
-            color: #ffffff;
-            font-size: 24px;
+            color: #94a3b8;
+            font-size: 20px;
             cursor: pointer;
-            line-height: 1;
         }
 
         .notif-list {
@@ -372,44 +320,35 @@
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 10px;
-            border-left: 4px solid #047857;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-        }
-
-        .notif-item.targeted {
-            border-left-color: #d97706;
-            background: #fffdfa;
+            padding: 12px;
+            margin-bottom: 8px;
         }
 
         .notif-item h4 {
-            font-size: 14px;
-            color: #0f3e2e;
+            font-size: 13.5px;
+            color: #0f172a;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .notif-item p {
-            font-size: 12.5px;
+            font-size: 12px;
             color: #475569;
-            line-height: 1.5;
-            margin-bottom: 8px;
+            line-height: 1.4;
+            margin-bottom: 6px;
         }
 
         .notif-item .date {
             font-size: 10px;
             color: #94a3b8;
-            font-weight: 600;
             text-align: right;
         }
 
         .no-notif {
             text-align: center;
             color: #94a3b8;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 40px 0;
+            font-size: 12.5px;
+            padding: 30px 0;
         }
 
         /* বটম নেভিগেশন বার */
@@ -418,56 +357,28 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 62px;
+            height: 60px;
             background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            border-top: 1px solid #f1f5f9;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            z-index: 1000;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+            z-index: 100;
         }
 
         .nav-item {
             text-decoration: none;
-            color: #8392a5;
-            font-size: 11.5px;
+            color: #94a3b8;
+            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            flex: 1;
-            padding: 8px 0;
         }
 
-        .nav-item i {
-            font-size: 18px;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
-        }
-
-        .nav-item:active i {
-            transform: scale(1.25) translateY(-2px);
-        }
-
-        .nav-item.active {
-            color: #059669;
-        }
-
-        .nav-item.active i {
-            transform: scale(1.15);
-            animation: bounceActive 0.5s ease alternate;
-        }
-
-        @keyframes bounceActive {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-            100% { transform: scale(1.15); }
-        }
+        .nav-item i { font-size: 18px; }
+        .nav-item.active { color: #047857; }
     </style>
 </head>
 <body>
@@ -477,26 +388,21 @@
 
     <!-- টপ বার -->
     <header class="top-nav">
-        <div class="top-nav-spacer"></div>
-        <div class="logo-container">
-            <a href="index.html" class="brand-link">
-                <img id="mainAppLogo" src="logo.png" alt="KOTOBA Logo" class="app-logo-img" onerror="this.src='https://placehold.co/100x100/047857/ffffff?text=K'">
-                <span class="logo">KOTOBA</span>
-            </a>
-        </div>
-        <div class="top-nav-right">
-            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
-                <i class="fa-solid fa-bell"></i>
-                <span class="notif-badge" id="notifBadge">0</span>
-            </button>
-        </div>
+        <a href="index.html" class="brand-link">
+            <img id="mainAppLogo" src="logo.png" alt="KOTOBA" class="app-logo-img" onerror="this.src='https://placehold.co/100x100/047857/ffffff?text=K'">
+            <span class="logo">KOTOBA</span>
+        </a>
+        <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notif-badge" id="notifBadge">0</span>
+        </button>
     </header>
 
     <!-- নোটিফিকেশন মডাল -->
     <div class="modal-overlay" id="notifModal">
         <div class="notif-modal-card">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-bell"></i> নোটিফিকেশন</h3>
+                <h3>নোটিফিকেশন</h3>
                 <button class="close-btn" id="closeNotifBtn">&times;</button>
             </div>
             <div class="notif-list" id="notifList">
@@ -507,150 +413,141 @@
 
     <main class="page-content">
 
-        <!-- হিরো টেক্সট -->
-        <section class="hero-text">
-            <h2>“জাপানিজ ভাষা শেখা আর কঠিন নয়”</h2>
-            <p>— শুরু থেকে শুরু করে জাপানিজ ভাষায় দক্ষতা অর্জন করা সম্ভব।<br>আমরা আছি আপনার সাথে —</p>
+        <!-- সিম্পল হিরো ব্যানার -->
+        <section class="hero-banner">
+            <h2>জাপানিজ ভাষা শেখা হোক সহজ</h2>
+            <p>প্রতিদিনের পাঠ ও অনুশীলনের মাধ্যমে ধাপে ধাপে নিজেকে প্রস্তুত করুন।</p>
         </section>
 
-        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন -->
+        <!-- ব্যানার বিজ্ঞাপন -->
         <div class="ad-banner-box" id="homeAdContainer"></div>
 
         <!-- সেকশন ১: A1-A2 -->
-        <section class="level-section">
-            <span class="badge red-badge">A1-A2 - JFT</span>
-            <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
+        <section class="section-wrap">
+            <div class="section-header">
+                <h3 class="section-title">এলিমেন্টারি ও কথোপকথন</h3>
+                <span class="section-pill pill-red">A1-A2</span>
+            </div>
             <div class="card-grid">
-                <a href="#" class="item-card red-top">
-                    <div class="icon-circle red-bg"><i class="fa-solid fa-comments"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-red"><i class="fa-solid fa-comments"></i></div>
                     <h4>Conversation</h4>
                     <p>কথোপকথন গাইড</p>
                 </a>
-                <a href="#" class="item-card red-top">
-                    <span class="mini-tag">শীঘ্রই আসছে</span>
-                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-book-open-reader"></i></div>
+                <a href="#" class="item-card">
+                    <span class="mini-badge">শীঘ্রই</span>
+                    <div class="icon-box icon-amber"><i class="fa-solid fa-book-open-reader"></i></div>
                     <h4>Grammar</h4>
-                    <p>ব্যাকরণ পাঠ</p>
+                    <p>মৌলিক ব্যাকরণ</p>
                 </a>
             </div>
         </section>
 
         <!-- সেকশন ২: N5 লেভেল -->
-        <section class="level-section">
-            <span class="badge green-badge">N5 - JLPT / NAT / JLCT</span>
-            <h3 class="section-heading">বিগিনার লেভেল</h3>
+        <section class="section-wrap">
+            <div class="section-header">
+                <h3 class="section-title">বিগিনার লেভেল</h3>
+                <span class="section-pill pill-green">N5</span>
+            </div>
             <div class="card-grid">
-                
-                <a href="alphabet.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
+                <a href="alphabet.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-shapes"></i></div>
                     <h4>বর্ণমালা</h4>
-                    <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
+                    <p>হিরাগানা ও কাতাকানা</p>
                 </a>
 
-                <a href="n5-vocab.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                <a href="n5-vocab.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দভাণ্ডার</h4>
-                    <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
+                    <p>প্রয়োজনীয় শব্দকোষ</p>
                 </a>
 
-                <a href="n5-grammar.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                <a href="n5-grammar.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-layer-group"></i></div>
                     <h4>ব্যাকরণ</h4>
-                    <p>সহজ ভাষায় N5 গ্রামার</p>
+                    <p>সহজ ব্যাখ্যাসহ রুলস</p>
                 </a>
 
-                <a href="kanji.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                <a href="kanji.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
-                    <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
+                    <p>অ্যানিমেশন ও স্ট্রোক</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-bolt"></i></div>
                     <h4>ক্রিয়াপদ</h4>
-                    <p>Conjugation of Verbs</p>
+                    <p>Verb Conjugation</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-list-check"></i></div>
                     <h4>লেসন প্র্যাকটিস</h4>
                     <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
                 </a>
 
-                <a href="appendices.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
+                <a href="appendices.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-folder-open"></i></div>
                     <h4>Appendices</h4>
-                    <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
+                    <p>চার্ট ও প্রয়োজনীয় তালিকা</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-book-open"></i></div>
                     <h4>Reading</h4>
-                    <p>N5 রিডিং প্র্যাকটিস</p>
+                    <p>রিডিং পড়ার অনুশীলন</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-headphones"></i></div>
                     <h4>Listening</h4>
-                    <p>N5 লিসেনিং প্র্যাকটিস</p>
+                    <p>লিসেনিং প্র্যাকটিস</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
-                    <h4>Listening Test</h4>
-                    <p>N5 লিসেনিং পরীক্ষা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
-                    <h4>Skype/Zoom</h4>
-                    <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
-                </a>
-
-                <a href="mock-test.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>পূর্বের প্রশ্নাবলী</h4>
-                    <p>NAT / JLPT বিগত প্রশ্ন</p>
+                <a href="mock-test.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-file-lines"></i></div>
+                    <h4>পূর্বের প্রশ্ন</h4>
+                    <p>NAT ও JLPT প্রশ্নব্যাংক</p>
                 </a>
             </div>
         </section>
 
         <!-- সেকশন ৩: N4 লেভেল -->
-        <section class="level-section">
-            <span class="badge dark-badge">N4 - JLPT / NAT / JLCT</span>
-            <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
+        <section class="section-wrap">
+            <div class="section-header">
+                <h3 class="section-title">ইন্টারমিডিয়েট লেভেল</h3>
+                <span class="section-pill pill-slate">N4</span>
+            </div>
             <div class="card-grid">
-                
-                <a href="n4-vocab.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
+                <a href="n4-vocab.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h4>শব্দভাণ্ডার</h4>
-                    <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
+                    <p>লেসন ২৬-৫০ শব্দকোষ</p>
                 </a>
 
-                <a href="n4-grammar.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
+                <a href="n4-grammar.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-layer-group"></i></div>
                     <h4>ব্যাকরণ</h4>
-                    <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
+                    <p>লেসন ২৬-৪৬ রুলস</p>
                 </a>
 
-                <!-- N4 কাঞ্জি লিঙ্ক (n4kanji.html) -->
-                <a href="n4kanji.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
+                <a href="n4kanji.html" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
-                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
+                    <p>N4 কাঞ্জি ও কুইজ</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
+                <a href="#" class="item-card">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-book-open"></i></div>
                     <h4>Reading</h4>
-                    <p>N4 রিডিং প্র্যাকটিস</p>
+                    <p>রিডিং প্র্যাকটিস</p>
                 </a>
             </div>
         </section>
 
     </main>
 
-    <!-- বটম বার -->
+    <!-- বটম নেভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -666,7 +563,7 @@
         </a>
     </nav>
 
-    <!-- Firebase Scripts -->
+    <!-- Firebase স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -732,14 +629,12 @@
 
                 if (isGlobalOn && isIndexOn) {
                     homeAdContainer.style.display = "flex";
-                    
                     const adIframe = document.createElement("iframe");
                     adIframe.style.width = "320px";
                     adIframe.style.height = "50px";
                     adIframe.style.border = "none";
                     adIframe.style.overflow = "hidden";
                     adIframe.scrolling = "no";
-                    
                     homeAdContainer.appendChild(adIframe);
                     
                     const iframeDoc = adIframe.contentWindow.document;
@@ -768,7 +663,7 @@
                     homeAdContainer.innerHTML = "";
                 }
             } catch (err) {
-                console.warn("Dynamic config load error:", err);
+                console.warn(err);
             }
         }
 
@@ -806,9 +701,9 @@
                         }) : "";
 
                         const itemDiv = document.createElement("div");
-                        itemDiv.className = `notif-item ${n.isTargeted ? 'targeted' : ''}`;
+                        itemDiv.className = `notif-item`;
                         itemDiv.innerHTML = `
-                            <h4>${n.title} ${n.isTargeted ? '<span style="font-size:10px; color:#d97706; background:#fef3c7; padding:1px 6px; border-radius:4px; margin-left:4px;">ব্যক্তিগত</span>' : ''}</h4>
+                            <h4>${n.title} ${n.isTargeted ? '<span style="font-size:10px; color:#d97706; background:#fef3c7; padding:1px 5px; border-radius:4px; margin-left:4px;">ব্যক্তিগত</span>' : ''}</h4>
                             <p>${n.message}</p>
                             <div class="date">${dateStr}</div>
                         `;
@@ -819,7 +714,7 @@
                     notifList.innerHTML = `<div class="no-notif">কোনো নোটিফিকেশন নেই।</div>`;
                 }
             } catch (err) {
-                notifList.innerHTML = `<div class="no-notif" style="color:#ef4444;">নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</div>`;
+                notifList.innerHTML = `<div class="no-notif" style="color:#ef4444;">নোটিফিকেশন লোড করা যায়নি।</div>`;
             }
         }
     </script>

@@ -70,10 +70,17 @@
 
         .user-name-row {
             display: flex; align-items: center; justify-content: center;
-            gap: 6px; margin-bottom: 3px;
+            gap: 6px; margin-bottom: 2px;
         }
 
         .user-name { font-size: 18px; font-weight: 800; color: #0f172a; }
+
+        .btn-edit-trigger {
+            background: none; border: none; color: #64748b;
+            cursor: pointer; font-size: 13.5px; padding: 3px 6px;
+            border-radius: 6px; transition: background 0.15s;
+        }
+        .btn-edit-trigger:hover { background: #f1f5f9; color: #0f172a; }
 
         .badge-founder {
             background: #0f172a; color: #38bdf8;
@@ -92,7 +99,19 @@
             display: inline-flex; align-items: center; gap: 3px;
         }
 
-        .user-email { font-size: 12px; color: #64748b; margin-bottom: 16px; }
+        .user-bio {
+            font-size: 12px; color: #475569; margin-bottom: 6px;
+            line-height: 1.4; padding: 0 10px;
+        }
+
+        .user-meta-tags {
+            display: flex; justify-content: center; gap: 6px; margin-bottom: 14px;
+        }
+
+        .meta-pill {
+            background: #f1f5f9; color: #475569; font-size: 10.5px;
+            font-weight: 700; padding: 2px 8px; border-radius: 6px;
+        }
 
         .stats-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
@@ -176,7 +195,7 @@
             display: flex; align-items: center; justify-content: center; gap: 6px;
         }
 
-        /* কমন মডাল স্টাইল */
+        /* মডাল ব্যাকড্রপ */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
@@ -198,23 +217,11 @@
 
         .modal-body { padding: 18px; }
 
-        /* পলিসি বডি স্ক্রোলবার স্টাইল */
         .policy-content {
-            max-height: 65vh;
-            overflow-y: auto;
-            font-size: 12.5px;
-            color: #475569;
-            line-height: 1.65;
-            padding-right: 4px;
+            max-height: 65vh; overflow-y: auto; font-size: 12.5px;
+            color: #475569; line-height: 1.65; padding-right: 4px;
         }
-
-        .policy-content h4 {
-            font-size: 13.5px;
-            color: #0f172a;
-            font-weight: 700;
-            margin: 12px 0 4px;
-        }
-
+        .policy-content h4 { font-size: 13.5px; color: #0f172a; font-weight: 700; margin: 12px 0 4px; }
         .policy-content h4:first-child { margin-top: 0; }
 
         .pay-box {
@@ -233,6 +240,7 @@
             width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1;
             border-radius: 10px; font-size: 13px; outline: none;
         }
+        .form-input:focus, .form-select:focus { border-color: #047857; }
 
         .btn-submit {
             width: 100%; background: #047857; color: #ffffff; border: none;
@@ -290,11 +298,19 @@
 
             <div class="user-name-row">
                 <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+                <button class="btn-edit-trigger" id="openEditProfileBtn" title="প্রোফাইল এডিট">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
                 <span id="founderBadgeContainer"></span>
                 <span id="proBadgeContainer"></span>
             </div>
 
-            <p class="user-email" id="displayUserEmail">---</p>
+            <!-- বায়ো ও মেটা-ট্যাগ -->
+            <p class="user-bio" id="displayUserBio">কোনো বায়ো যোগ করা হয়নি।</p>
+            <div class="user-meta-tags" id="userMetaTags">
+                <span class="meta-pill" id="displayUserLevel">লেভেল: N5</span>
+                <span class="meta-pill" id="displayUserAge">বয়স: --</span>
+            </div>
 
             <div class="stats-grid">
                 <div class="stat-item">
@@ -350,7 +366,6 @@
                 <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
             </a>
 
-            <!-- প্রাইভেসি পলিসি বাটন -->
             <button class="menu-item" id="openPolicyBtn" type="button">
                 <div class="menu-left">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -365,6 +380,46 @@
         </button>
     </main>
 
+    <!-- প্রোফাইল এডিট মডাল -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>প্রোফাইল তথ্য পরিবর্তন</h3>
+                <button class="close-btn" id="closeEditProfileBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label>নাম</label>
+                        <input type="text" class="form-input" id="editName" required placeholder="আপনার নাম">
+                    </div>
+
+                    <div class="form-group">
+                        <label>বায়ো (Bio)</label>
+                        <input type="text" class="form-input" id="editBio" maxlength="80" placeholder="যেমন: JLPT N5 পরীক্ষার্থী">
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>টার্গেট লেভেল</label>
+                            <select class="form-select" id="editLevel">
+                                <option value="N5">N5</option>
+                                <option value="N4">N4</option>
+                                <option value="N3">N3</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>বয়স</label>
+                            <input type="number" class="form-input" id="editAge" min="5" max="99" placeholder="যেমন: 20">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="saveProfileBtn">সংরক্ষণ করুন</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- প্রাইভেসি পলিসি মডাল -->
     <div class="modal-overlay" id="policyModal">
         <div class="modal-card">
@@ -375,16 +430,13 @@
             <div class="modal-body">
                 <div class="policy-content">
                     <h4>১. তথ্য সংগ্রহ ও ব্যবহার</h4>
-                    <p>KOTOBA প্ল্যাটফর্মে অ্যাকাউন্ট তৈরির সময় আপনার নাম, ইমেইল ঠিকানা ও প্রোফাইল ছবি সংগ্রহ করা হয়। এই তথ্যগুলো শুধুমাত্র আপনার পড়াশোনার অগ্রগতি (XP), লিডারবোর্ড র‍্যাঙ্কিং ও প্রোফাইল পরিচালনার কাজে ব্যবহৃত হয়।</p>
+                    <p>KOTOBA প্ল্যাটফর্মে অ্যাকাউন্ট তৈরির সময় আপনার নাম, ইমেইল ঠিকানা ও প্রোফাইল ছবি সংগ্রহ করা হয়। এই তথ্যগুলো আপনার পড়াশোনার অগ্রগতি (XP), লিডারবোর্ড র‍্যাঙ্কিং ও প্রোফাইল পরিচালনার কাজে ব্যবহৃত হয়।</p>
 
                     <h4>২. কুকিজ ও অ্যাডসেন্স</h4>
-                    <p>আমরা সাইটের কার্যকারিতা বজায় রাখতে এবং প্রাসঙ্গিক বিজ্ঞাপন প্রদর্শন করতে Google AdSense ব্যবহার করি। গুগল第三方 হিসেবে ভিজিট ট্র্যাক করতে কুকিজ ব্যবহার করতে পারে।</p>
+                    <p>আমরা সাইটের কার্যকারিতা বজায় রাখতে এবং প্রাসঙ্গিক বিজ্ঞাপন প্রদর্শন করতে Google AdSense ব্যবহার করি। গুগল ভিজিট ট্র্যাক করতে কুকিজ ব্যবহার করতে পারে।</p>
 
                     <h4>৩. তথ্য নিরাপত্তা</h4>
-                    <p>আপনার সমস্ত ব্যক্তিগত ডেটা নিরাপদ ক্লাউড ডাটাবেসে (Firebase) সংরক্ষিত থাকে। আমরা কোনো অবস্থাতেই আপনার ব্যক্তিগত তথ্য তৃতীয় পক্ষের কাছে বিক্রি বা শেয়ার করি না।</p>
-
-                    <h4>৪. পরিবর্তন ও যোগাযোগ</h4>
-                    <p>প্রয়োজনে যেকোনো সময় এই নীতিমালায় পরিবর্তন আনা হতে পারে। যেকোনো প্রশ্ন বা অ্যাকাউন্টের ডেটা ডিলিট করতে আমাদের সাপোর্ট ইমেইলে যোগাযোগ করতে পারেন।</p>
+                    <p>আপনার সমস্ত ডেটা ক্লাউড ডাটাবেসে (Firebase) সংরক্ষিত থাকে। কোনো অবস্থাতেই তথ্য তৃতীয় পক্ষের কাছে বিক্রি করা হয় না।</p>
                 </div>
                 <button class="btn-submit" id="closePolicyBottomBtn" style="margin-top: 14px;">বুঝেছি</button>
             </div>
@@ -496,11 +548,16 @@
         const premiumForm = document.getElementById("premiumForm");
         const copyWalletBtn = document.getElementById("copyWalletBtn");
 
-        // প্রাইভেসি পলিসি এলিমেন্টস
         const policyModal = document.getElementById("policyModal");
         const openPolicyBtn = document.getElementById("openPolicyBtn");
         const closePolicyBtn = document.getElementById("closePolicyBtn");
         const closePolicyBottomBtn = document.getElementById("closePolicyBottomBtn");
+
+        // এডিট প্রোফাইল এলিমেন্টস
+        const editProfileModal = document.getElementById("editProfileModal");
+        const openEditProfileBtn = document.getElementById("openEditProfileBtn");
+        const closeEditProfileBtn = document.getElementById("closeEditProfileBtn");
+        const editProfileForm = document.getElementById("editProfileForm");
 
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
@@ -524,6 +581,7 @@
                 document.getElementById("navPageTitle").innerText = "প্রোফাইল";
                 cameraBadge.style.display = "none";
                 avatarTrigger.style.cursor = "default";
+                openEditProfileBtn.style.display = "none";
                 ownProfileMenus.style.display = "none";
                 logoutBtn.style.display = "none";
                 premiumPromoCard.style.display = "none";
@@ -532,6 +590,7 @@
                 document.getElementById("navPageTitle").innerText = "আমার প্রোফাইল";
                 cameraBadge.style.display = "flex";
                 avatarTrigger.style.cursor = "pointer";
+                openEditProfileBtn.style.display = "inline-flex";
                 ownProfileMenus.style.display = "block";
                 logoutBtn.style.display = "flex";
 
@@ -558,25 +617,25 @@
                     const isPremium = data.isPremium === true || isOwner;
 
                     document.getElementById("displayUserName").innerText = name;
-                    document.getElementById("displayUserEmail").innerText = email;
+                    document.getElementById("displayUserBio").innerText = data.bio || "কোনো বায়ো যোগ করা হয়নি।";
+                    document.getElementById("displayUserLevel").innerText = `লেভেল: ${data.targetLevel || "N5"}`;
+                    document.getElementById("displayUserAge").innerText = `বয়স: ${data.age || "--"}`;
+
                     document.getElementById("userXpCount").innerText = (typeof data.xp === "number") ? data.xp : 0;
                     document.getElementById("followersCount").innerText = data.followersCount || 0;
                     document.getElementById("followingCount").innerText = data.followingCount || 0;
 
+                    // ইনপুট ফিল্ডগুলোতে ডাটা সেট
+                    document.getElementById("editName").value = name;
+                    document.getElementById("editBio").value = data.bio || "";
+                    document.getElementById("editLevel").value = data.targetLevel || "N5";
+                    document.getElementById("editAge").value = data.age || "";
+
                     const founderContainer = document.getElementById("founderBadgeContainer");
                     const proContainer = document.getElementById("proBadgeContainer");
 
-                    if (isOwner) {
-                        founderContainer.innerHTML = `<span class="badge-founder"><i class="fa-solid fa-circle-check"></i> FOUNDER</span>`;
-                    } else {
-                        founderContainer.innerHTML = "";
-                    }
-
-                    if (isPremium) {
-                        proContainer.innerHTML = `<span class="badge-pro"><i class="fa-solid fa-crown"></i> PRO</span>`;
-                    } else {
-                        proContainer.innerHTML = "";
-                    }
+                    founderContainer.innerHTML = isOwner ? `<span class="badge-founder"><i class="fa-solid fa-circle-check"></i> FOUNDER</span>` : "";
+                    proContainer.innerHTML = isPremium ? `<span class="badge-pro"><i class="fa-solid fa-crown"></i> PRO</span>` : "";
 
                     if (isOwnProfile) {
                         if (isPremium) {
@@ -599,26 +658,57 @@
             }
         }
 
-        // পলিসি মডাল ওপেন/ক্লোজ
-        openPolicyBtn.addEventListener("click", () => policyModal.style.display = "flex");
-        closePolicyBtn.addEventListener("click", () => policyModal.style.display = "none");
-        closePolicyBottomBtn.addEventListener("click", () => policyModal.style.display = "none");
+        // প্রোফাইল এডিট ইভেন্ট
+        openEditProfileBtn.onclick = () => editProfileModal.style.display = "flex";
+        closeEditProfileBtn.onclick = () => editProfileModal.style.display = "none";
 
-        // পেমেন্ট মডাল ওপেন/ক্লোজ
-        openPaymentModalBtn.addEventListener("click", () => paymentModal.style.display = "flex");
-        closePaymentModalBtn.addEventListener("click", () => paymentModal.style.display = "none");
+        editProfileForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
 
-        // মডালের বাইরে ক্লিক করলে বন্ধ করা
-        window.addEventListener("click", (e) => {
+            const btn = document.getElementById("saveProfileBtn");
+            btn.innerText = "সংরক্ষণ হচ্ছে...";
+            btn.disabled = true;
+
+            const updatedData = {
+                userName: document.getElementById("editName").value.trim(),
+                bio: document.getElementById("editBio").value.trim(),
+                targetLevel: document.getElementById("editLevel").value,
+                age: document.getElementById("editAge").value.trim() || null,
+                updatedAt: Date.now()
+            };
+
+            try {
+                await setDoc(doc(db, "users", currentUser.email.toLowerCase()), updatedData, { merge: true });
+                editProfileModal.style.display = "none";
+                loadProfileData(currentUser.email.toLowerCase());
+            } catch (err) {
+                alert("তথ্য আপডেট করতে সমস্যা হয়েছে!");
+            } finally {
+                btn.innerText = "সংরক্ষণ করুন";
+                btn.disabled = false;
+            }
+        });
+
+        // পলিসি ও পেমেন্ট মডাল
+        openPolicyBtn.onclick = () => policyModal.style.display = "flex";
+        closePolicyBtn.onclick = () => policyModal.style.display = "none";
+        closePolicyBottomBtn.onclick = () => policyModal.style.display = "none";
+
+        openPaymentModalBtn.onclick = () => paymentModal.style.display = "flex";
+        closePaymentModalBtn.onclick = () => paymentModal.style.display = "none";
+
+        window.onclick = (e) => {
             if (e.target === policyModal) policyModal.style.display = "none";
             if (e.target === paymentModal) paymentModal.style.display = "none";
-        });
+            if (e.target === editProfileModal) editProfileModal.style.display = "none";
+        };
 
-        copyWalletBtn.addEventListener("click", () => {
+        copyWalletBtn.onclick = () => {
             navigator.clipboard.writeText(document.getElementById("walletNum").innerText);
             copyWalletBtn.innerText = "কপি হয়েছে";
-            setTimeout(() => copyWalletBtn.innerText = "কপি করুন", 2000);
-        });
+            setTimeout(() => copyWalletBtn.innerText = "কপি", 2000);
+        };
 
         premiumForm.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -652,11 +742,11 @@
             }
         });
 
-        avatarTrigger.addEventListener("click", () => {
+        avatarTrigger.onclick = () => {
             if (isOwnProfile) imageInput.click();
-        });
+        };
 
-        imageInput.addEventListener("change", (e) => {
+        imageInput.onchange = (e) => {
             const files = e.target.files;
             if (files && files.length > 0) {
                 const reader = new FileReader();
@@ -673,14 +763,14 @@
                 };
                 reader.readAsDataURL(files[0]);
             }
-        });
+        };
 
         document.getElementById("btnCancelCrop").onclick = () => {
             document.getElementById("cropperModal").style.display = "none";
             if (cropper) cropper.destroy();
         };
 
-        document.getElementById("btnSaveCrop").addEventListener("click", async () => {
+        document.getElementById("btnSaveCrop").onclick = async () => {
             if (!cropper || !currentUser) return;
             const btn = document.getElementById("btnSaveCrop");
             btn.innerText = "...";
@@ -703,14 +793,14 @@
                 btn.innerText = "সেভ";
                 btn.disabled = false;
             }
-        });
+        };
 
-        logoutBtn.addEventListener("click", async () => {
+        logoutBtn.onclick = async () => {
             if (confirm("লগআউট করতে চান?")) {
                 await signOut(auth);
                 window.location.href = "login.html";
             }
-        });
+        };
     </script>
 </body>
 </html>

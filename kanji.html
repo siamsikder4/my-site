@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>N5 কাঞ্জি লেসন ও টেস্ট - KOTOBA</title>
-    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +34,6 @@
             padding-bottom: 85px;
         }
 
-        /* হেডার */
         .top-nav {
             display: flex;
             align-items: center;
@@ -93,7 +91,6 @@
             margin: 0 auto;
         }
 
-        /* লেসন গ্রিড ভিউ */
         .subtitle-bar {
             text-align: center;
             font-size: 13px;
@@ -163,7 +160,6 @@
             font-size: 12px;
         }
 
-        /* কাঞ্জি একর্ডিয়ন ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
@@ -230,7 +226,6 @@
             display: block;
         }
 
-        /* সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স (স্ক্রিনশটের মতো পারফেক্ট গ্রিড) */
         .kanji-anim-stage {
             width: 180px;
             height: 180px;
@@ -285,7 +280,6 @@
             display: block;
         }
 
-        /* অ্যাকশন বাটনসমূহ */
         .action-btns {
             display: flex;
             justify-content: center;
@@ -367,7 +361,6 @@
             color: #1e293b;
         }
 
-        /* ব্লাইন্ড টেস্ট ও প্র্যাকটিস মডাল UI */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -494,7 +487,6 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #f1f5f9; color: #475569; }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -524,7 +516,6 @@
 </head>
 <body>
 
-    <!-- টপ বার -->
     <header class="top-nav">
         <div class="nav-left">
             <button class="back-btn" onclick="handleBack()"><i class="fa-solid fa-arrow-left"></i></button>
@@ -532,73 +523,103 @@
                 KOTOBA <span class="level-pill">N5 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">অ্যানিমেটেড কাঞ্জি</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">১–১২০ কাঞ্জি</div>
     </header>
 
     <main class="container">
-
-        <!-- ১. লেসন গ্রিড ভিউ -->
+        <!-- ১. লেসন গ্রিড ভিউ (১২টি লেসন) -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">কাঞ্জি শিখুন • স্ট্রোক অর্ডার অ্যানিমেশন ও টেস্ট</div>
+            <div class="subtitle-bar">কাঞ্জি সিলেক্ট করুন • স্ট্রোক অর্ডার অ্যানিমেশন ও টেস্ট</div>
             <div class="lesson-grid">
-                
                 <div class="lesson-card" onclick="openLesson(1)">
-                    <div class="card-top">
-                        <span class="kl-badge">KL-01</span>
-                        <span class="kanji-watermark">漢字</span>
-                    </div>
+                    <div class="card-top"><span class="kl-badge">KL-01</span><span class="kanji-watermark">一〜十</span></div>
                     <div class="card-lesson-title">কাঞ্জি লেসন ১</div>
                     <div class="card-lesson-desc">সংখ্যা ও মানুষ (১–১০)</div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
-
                 <div class="lesson-card" onclick="openLesson(2)">
-                    <div class="card-top">
-                        <span class="kl-badge">KL-02</span>
-                        <span class="kanji-watermark">漢字</span>
-                    </div>
+                    <div class="card-top"><span class="kl-badge">KL-02</span><span class="kanji-watermark">日〜千</span></div>
                     <div class="card-lesson-title">কাঞ্জি লেসন ২</div>
-                    <div class="card-lesson-desc">দিন, বার ও প্রকৃতি (১১–২০)</div>
+                    <div class="card-lesson-desc">বার ও সংখ্যা (১১–২০)</div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
-
                 <div class="lesson-card" onclick="openLesson(3)">
-                    <div class="card-top">
-                        <span class="kl-badge">KL-03</span>
-                        <span class="kanji-watermark">漢字</span>
-                    </div>
+                    <div class="card-top"><span class="kl-badge">KL-03</span><span class="kanji-watermark">万〜小</span></div>
                     <div class="card-lesson-title">কাঞ্জি লেসন ৩</div>
-                    <div class="card-lesson-desc">দিক ও অবস্থান (২১–৩০)</div>
+                    <div class="card-lesson-desc">মৌলিক ক্রিয়া ও আকার (২১–৩০)</div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
-
                 <div class="lesson-card" onclick="openLesson(4)">
-                    <div class="card-top">
-                        <span class="kl-badge">KL-04</span>
-                        <span class="kanji-watermark">漢字</span>
-                    </div>
+                    <div class="card-top"><span class="kl-badge">KL-04</span><span class="kanji-watermark">上〜男</span></div>
                     <div class="card-lesson-title">কাঞ্জি লেসন ৪</div>
-                    <div class="card-lesson-desc">সময় ও পরিমাপ (৩১–৪০)</div>
+                    <div class="card-lesson-desc">অবস্থান ও প্রকৃতি (৩১–৪০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(5)">
+                    <div class="card-top"><span class="kl-badge">KL-05</span><span class="kanji-watermark">女〜時</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ৫</div>
+                    <div class="card-lesson-desc">পরিবার ও সময় (৪১–৫০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(6)">
+                    <div class="card-top"><span class="kl-badge">KL-06</span><span class="kanji-watermark">間〜車</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ৬</div>
+                    <div class="card-lesson-desc">সময় ও পরিমাপ (৫১–৬০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(7)">
+                    <div class="card-top"><span class="kl-badge">KL-07</span><span class="kanji-watermark">天〜外</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ৭</div>
+                    <div class="card-lesson-desc">প্রকৃতি ও ক্রিয়াপদ (৬১–৭০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(8)">
+                    <div class="card-top"><span class="kl-badge">KL-08</span><span class="kanji-watermark">語〜北</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ৮</div>
+                    <div class="card-lesson-desc">দিক ও ভাষা (৭১–৮০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(9)">
+                    <div class="card-top"><span class="kl-badge">KL-09</span><span class="kanji-watermark">長〜買</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ৯</div>
+                    <div class="card-lesson-desc">শরীর ও বিশেষণ (৮১–৯০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(10)">
+                    <div class="card-top"><span class="kl-badge">KL-10</span><span class="kanji-watermark">朝〜飲</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ১০</div>
+                    <div class="card-lesson-desc">দৈনন্দিন কাজ ও সময় (৯১–১০০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(11)">
+                    <div class="card-top"><span class="kl-badge">KL-11</span><span class="kanji-watermark">多〜走</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ১১</div>
+                    <div class="card-lesson-desc">অবস্থা ও গতি (১০১–১১০)</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="lesson-card" onclick="openLesson(12)">
+                    <div class="card-top"><span class="kl-badge">KL-12</span><span class="kanji-watermark">歩〜駅</span></div>
+                    <div class="card-lesson-title">কাঞ্জি লেসন ১২</div>
+                    <div class="card-lesson-desc">স্থান ও ভ্রমণ (১১১–১২০)</div>
                     <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </div>
         </div>
 
-        <!-- ২. কাঞ্জি লিস্ট ও একর্ডিয়ন ভিউ -->
+        <!-- ২. কাঞ্জি লিস্ট ভিউ -->
         <div id="kanjiDetailView" class="kanji-view">
             <div class="view-header">
-                <h3 id="lessonHeaderTitle">কাঞ্জিগুলো নিম্নরূপ</h3>
+                <h3 id="lessonHeaderTitle">কাঞ্জি তালিকা</h3>
             </div>
             <div id="kanjiListContainer"></div>
         </div>
-
     </main>
 
-    <!-- ৩. ব্লাইন্ড টেস্ট পপ-আপ মডাল -->
+    <!-- ৩. ড্রয়িং / ব্লাইন্ড টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
-            <h4 class="blind-title" id="blindModalTitle">Blind Test (না দেখে লিখুন)</h4>
+            <h4 class="blind-title" id="blindModalTitle">Blind Test</h4>
 
             <div class="blind-canvas-box">
                 <div class="blind-hint-holder" id="blindSvgHolder"></div>
@@ -616,145 +637,156 @@
 
     <!-- বটম বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
-        </a>
-        <a href="ai-sensei.html" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
-        </a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="ai-sensei.html" class="nav-item"><i class="fa-solid fa-robot"></i><span>AI সেনসেই</span></a>
+        <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
 
     <script>
         const kanjiData = {
             1: [
-                {
-                    id: "01",
-                    char: "人",
-                    code: "04eba",
-                    kun: "ひと (hito)",
-                    on: "ジン・ニン (jin / nin)",
-                    meaning: "মানুষ / ব্যক্তি",
-                    vocab: [
-                        { w: "あの人 (あのひと / ano hito)", m: "ঐ ব্যক্তি" },
-                        { w: "日本人 (にほんじん / nihonjin)", m: "জাপানি ব্যক্তি" },
-                        { w: "三人 (さんにん / sannin)", m: "তিনজন ব্যক্তি" }
-                    ]
-                },
-                {
-                    id: "02",
-                    char: "日",
-                    code: "065e5",
-                    kun: "ひ・か (hi / ka)",
-                    on: "ニチ・ジツ (nichi / jitsu)",
-                    meaning: "দিন / সূর্য",
-                    vocab: [
-                        { w: "日 (ひ / hi)", m: "দিন, সূর্য" },
-                        { w: "日曜日 (にちようび / nichiyoubi)", m: "রবিবার" },
-                        { w: "日本 (にほん / nihon)", m: "জাপান" }
-                    ]
-                },
-                {
-                    id: "03",
-                    char: "一",
-                    code: "04e00",
-                    kun: "ひと (hito)",
-                    on: "イチ (ichi)",
-                    meaning: "এক / One",
-                    vocab: [
-                        { w: "一つ (ひとつ / hitotsu)", m: "একটি" },
-                        { w: "一日 (ついたち / tsuitachi)", m: "১ তারিখ" }
-                    ]
-                },
-                {
-                    id: "04",
-                    char: "二",
-                    code: "04e8c",
-                    kun: "ふた (futa)",
-                    on: "ニ (ni)",
-                    meaning: "দুই / Two",
-                    vocab: [
-                        { w: "二つ (ふたつ / futatsu)", m: "দুটি" },
-                        { w: "二月 (にがつ / nigatsu)", m: "ফেব্রুয়ারি" }
-                    ]
-                },
-                {
-                    id: "05",
-                    char: "三",
-                    code: "04e09",
-                    kun: "み (mi)",
-                    on: "サン (san)",
-                    meaning: "তিন / Three",
-                    vocab: [
-                        { w: "三つ (みっつ / mittsu)", m: "তিনটি" },
-                        { w: "三日 (みっか / mikka)", m: "৩ তারিখ" }
-                    ]
-                },
-                {
-                    id: "06",
-                    char: "四",
-                    code: "056db",
-                    kun: "よん・よ (yon / yo)",
-                    on: "シ (shi)",
-                    meaning: "চার / Four",
-                    vocab: [
-                        { w: "四つ (よっつ / yottsu)", m: "চারটি" },
-                        { w: "四月 (しがつ / shigatsu)", m: "এপ্রিল" }
-                    ]
-                },
-                {
-                    id: "07",
-                    char: "五",
-                    code: "04e94",
-                    kun: "いつ (itsu)",
-                    on: "ゴ (go)",
-                    meaning: "পাঁচ / Five",
-                    vocab: [
-                        { w: "五つ (いつつ / itsutsu)", m: "পাঁচটি" },
-                        { w: "五日 (いつか / itsuka)", m: "পাঁচ দিন / মাসের ৫ তারিখ" }
-                    ]
-                },
-                {
-                    id: "08",
-                    char: "六",
-                    code: "0516d",
-                    kun: "む (mu)",
-                    on: "ロク (roku)",
-                    meaning: "ছয় / Six",
-                    vocab: [
-                        { w: "六つ (むっつ / muttsu)", m: "ছয়টি" },
-                        { w: "六月 (ろくがつ / rokugatsu)", m: "জুন মাস" }
-                    ]
-                },
-                {
-                    id: "09",
-                    char: "七",
-                    code: "04e03",
-                    kun: "なな (nana)",
-                    on: "シチ (shichi)",
-                    meaning: "সাত / Seven",
-                    vocab: [
-                        { w: "七つ (nanatsu)", m: "সাতটি" },
-                        { w: "七月 (shichigatsu)", m: "জুলাই মাস" }
-                    ]
-                },
-                {
-                    id: "10",
-                    char: "八",
-                    code: "0516b",
-                    kun: "や (ya)",
-                    on: "ハチ (hachi)",
-                    meaning: "আট / Eight",
-                    vocab: [
-                        { w: "八つ (yattsu)", m: "আটটি" },
-                        { w: "八月 (hachigatsu)", m: "আগস্ট মাস" }
-                    ]
-                }
+                { id: "01", char: "人", code: "04eba", kun: "ひと (hito)", on: "ジン・ニン (jin / nin)", meaning: "মানুষ / ব্যক্তি", vocab: [{ w: "あの人 (あのひと)", m: "ঐ ব্যক্তি" }, { w: "日本人 (にほんじん)", m: "জাপানি ব্যক্তি" }, { w: "三人 (さんにん)", m: "তিনজন ব্যক্তি" }] },
+                { id: "02", char: "日", code: "065e5", kun: "ひ・か (hi / ka)", on: "ニチ・ジツ (nichi / jitsu)", meaning: "দিন / সূর্য", vocab: [{ w: "日 (ひ)", m: "দিন, সূর্য" }, { w: "日曜日 (にちようび)", m: "রবিবার" }, { w: "日本 (にほん)", m: "জাপান" }] },
+                { id: "03", char: "一", code: "04e00", kun: "ひと (hito)", on: "イチ (ichi)", meaning: "এক", vocab: [{ w: "一つ (ひとつ)", m: "একটি" }, { w: "一日 (ついたち)", m: "১ তারিখ" }] },
+                { id: "04", char: "二", code: "04e8c", kun: "ふた (futa)", on: "ニ (ni)", meaning: "দুই", vocab: [{ w: "二つ (ふたつ)", m: "দুটি" }, { w: "二月 (にがつ)", m: "ফেব্রুয়ারি" }] },
+                { id: "05", char: "三", code: "04e09", kun: "み (mi)", on: "サン (san)", meaning: "তিন", vocab: [{ w: "三つ (みっつ)", m: "তিনটি" }, { w: "三日 (みっか)", m: "৩ তারিখ" }] },
+                { id: "06", char: "四", code: "056db", kun: "よん・よ (yon / yo)", on: "シ (shi)", meaning: "চার", vocab: [{ w: "四つ (よっつ)", m: "চারটি" }, { w: "四月 (しがつ)", m: "এপ্রিল" }] },
+                { id: "07", char: "五", code: "04e94", kun: "いつ (itsu)", on: "ゴ (go)", meaning: "পাঁচ", vocab: [{ w: "五つ (いつつ)", m: "পাঁচটি" }, { w: "五日 (いつか)", m: "৫ তারিখ" }] },
+                { id: "08", char: "六", code: "0516d", kun: "む (mu)", on: "ロク (roku)", meaning: "ছয়", vocab: [{ w: "六つ (むっつ)", m: "ছয়টি" }, { w: "六月 (ろくがつ)", m: "জুন" }] },
+                { id: "09", char: "七", code: "04e03", kun: "なな (nana)", on: "シチ (shichi)", meaning: "সাত", vocab: [{ w: "七つ (ななつ)", m: "সাতটি" }, { w: "七月 (しちがつ)", m: "জুলাই" }] },
+                { id: "10", char: "八", code: "0516b", kun: "や (ya)", on: "ハチ (hachi)", meaning: "আট", vocab: [{ w: "八つ (やっつ)", m: "আটটি" }, { w: "八月 (はちがつ)", m: "আগস্ট" }] }
+            ],
+            2: [
+                { id: "11", char: "九", code: "04e5d", kun: "ここの (kokono)", on: "キュウ・ク (kyuu / ku)", meaning: "নয়", vocab: [{ w: "九つ (ここのつ)", m: "নয়টি" }, { w: "九月 (くがつ)", m: "সেপ্টেম্বর" }] },
+                { id: "12", char: "十", code: "05341", kun: "とお (too)", on: "ジュウ (juu)", meaning: "দশ", vocab: [{ w: "十 (とお)", m: "দশটি" }, { w: "十日 (とおか)", m: "১০ তারিখ" }, { w: "十人 (じゅうにん)", m: "দশ জন" }] },
+                { id: "13", char: "月", code: "06708", kun: "つき (tsuki)", on: "ゲツ・ガツ (getsu / gatsu)", meaning: "চাঁদ / মাস", vocab: [{ w: "月 (つき)", m: "চাঁদ" }, { w: "月曜日 (げつようび)", m: "সোমবার" }, { w: "一月 (いちがつ)", m: "জানুয়ারি" }] },
+                { id: "14", char: "火", code: "0706b", kun: "ひ (hi)", on: "カ (ka)", meaning: "আগুন", vocab: [{ w: "火 (ひ)", m: "আগুন" }, { w: "火曜日 (かようび)", m: "মঙ্গলবার" }] },
+                { id: "15", char: "水", code: "06c34", kun: "みず (mizu)", on: "スイ (sui)", meaning: "পানি", vocab: [{ w: "水 (みず)", m: "পানি" }, { w: "水曜日 (すいようび)", m: "বুধবার" }] },
+                { id: "16", char: "木", code: "06728", kun: "き (ki)", on: "モク・ボク (moku / boku)", meaning: "গাছ / কাঠ", vocab: [{ w: "木 (き)", m: "গাছ" }, { w: "木曜日 (もくようび)", m: "বৃহস্পতিবার" }] },
+                { id: "17", char: "金", code: "09111", kun: "かね (kane)", on: "キン (kin)", meaning: "স্বর্ণ / টাকা", vocab: [{ w: "お金 (おかね)", m: "টাকা" }, { w: "金曜日 (きんようび)", m: "শুক্রবার" }] },
+                { id: "18", char: "土", code: "0571f", kun: "つち (tsuchi)", on: "ド・ト (do / to)", meaning: "মাটি", vocab: [{ w: "土 (つち)", m: "মাটি" }, { w: "土曜日 (どようび)", m: "শনিবার" }] },
+                { id: "19", char: "百", code: "0767e", kun: "もも (momo)", on: "ヒャク (hyaku)", meaning: "শত / একশত", vocab: [{ w: "百円 (ひゃくえん)", m: "একশ ইয়েন" }, { w: "三百 (さんびゃく)", m: "তিনশ" }] },
+                { id: "20", char: "千", code: "05343", kun: "ち (chi)", on: "セン (sen)", meaning: "হাজার", vocab: [{ w: "千円 (せんえん)", m: "এক হাজার ইয়েন" }, { w: "三千 (さんぜん)", m: "তিন হাজার" }] }
+            ],
+            3: [
+                { id: "21", char: "万", code: "04e07", kun: "よろず (yorozu)", on: "マン・バン (man / ban)", meaning: "দশ হাজার", vocab: [{ w: "一万円 (いちまんえん)", m: "১০ হাজার ইয়েন" }, { w: "万国 (ばんこく)", m: "সকল দেশ" }] },
+                { id: "22", char: "円", code: "05186", kun: "まる (maru)", on: "エン (en)", meaning: "ইয়েন / গোল", vocab: [{ w: "百円 (ひゃくえん)", m: "১০০ ইয়েন" }, { w: "円い (まるい)", m: "গোলাকার" }] },
+                { id: "23", char: "行", code: "0884c", kun: "い(く)・ゆ(く) (i-ku)", on: "コウ・ギョウ (kou / gyou)", meaning: "যাওয়া", vocab: [{ w: "行きます (いきます)", m: "যাওয়া" }, { w: "旅行 (りょこう)", m: "ভ্রমণ" }, { w: "銀行 (ぎんこう)", m: "ব্যাংক" }] },
+                { id: "24", char: "来", code: "06765", kun: "く(る)・き(ます) (ku-ru)", on: "ライ (rai)", meaning: "আসা", vocab: [{ w: "来ます (きます)", m: "আসা" }, { w: "来月 (らいげつ)", m: "পরের মাস" }, { w: "来年 (らいねん)", m: "পরের বছর" }] },
+                { id: "25", char: "休", code: "04f11", kun: "やす(む) (yasu-mu)", on: "キュウ (kyuu)", meaning: "বিশ্রাম / ছুটি", vocab: [{ w: "休みます (やすみます)", m: "বিশ্রাম নেওয়া" }, { w: "休み (やすみ)", m: "ছুটি" }] },
+                { id: "26", char: "見", code: "0898b", kun: "み(る) (mi-ru)", on: "ケン (ken)", meaning: "দেখা", vocab: [{ w: "見ます (みます)", m: "দেখা" }, { w: "見せます (みせます)", m: "দেখানো" }, { w: "意見 (いけん)", m: "মতামত" }] },
+                { id: "27", char: "今", code: "04eca", kun: "いま (ima)", on: "コン (kon)", meaning: "এখন", vocab: [{ w: "今 (いま)", m: "এখন" }, { w: "今日 (きょう)", m: "আজকে" }, { w: "今月 (こんげつ)", m: "চলতি মাস" }] },
+                { id: "28", char: "大", code: "05927", kun: "おお(きい) (oo-kii)", on: "ダイ・タイ (dai / tai)", meaning: "বড়", vocab: [{ w: "大きい (おおきい)", m: "বড়" }, { w: "大学 (だいがく)", m: "বিশ্ববিদ্যালয়" }, { w: "大人 (おとな)", m: "প্রাপ্তবয়স্ক" }] },
+                { id: "29", char: "小", code: "05c0f", kun: "ちい(さい) (chii-sai)", on: "ショウ (shou)", meaning: "ছোট", vocab: [{ w: "小さい (ちいさい)", m: "ছোট" }, { w: "小学校 (しょうがっこう)", m: "প্রাথমিক বিদ্যালয়" }] },
+                { id: "30", char: "上", code: "04e0a", kun: "うえ・あ(がる) (ue / a-garu)", on: "ジョウ (jou)", meaning: "উপরে", vocab: [{ w: "上 (うえ)", m: "উপরে" }, { w: "上手 (じょうず)", m: "দক্ষ" }, { w: "上がります (あがります)", m: "উপরে ওঠা" }] }
+            ],
+            4: [
+                { id: "31", char: "下", code: "04e0b", kun: "した・さ(がる) (shita / sa-garu)", on: "カ・ゲ (ka / ge)", meaning: "নিচে", vocab: [{ w: "下 (した)", m: "নিচে" }, { w: "下手 (へた)", m: "অদক্ষ" }, { w: "地下鉄 (ちかてつ)", m: "পাতাল রেল" }] },
+                { id: "32", char: "中", code: "04e2d", kun: "なか (naka)", on: "チュウ (chuu)", meaning: "ভিতরে / মধ্যবর্তী", vocab: [{ w: "中 (なか)", m: "ভিতরে" }, { w: "中国 (ちゅうごく)", m: "চীন" }, { w: "一日中 (いちにちじゅう)", m: "সারাদিন" }] },
+                { id: "33", char: "右", code: "053f3", kun: "みぎ (migi)", on: "ウ・ユウ (u / yuu)", meaning: "ডান", vocab: [{ w: "右 (みぎ)", m: "ডান" }, { w: "右手 (みぎて)", m: "ডান হাত" }] },
+                { id: "34", char: "左", code: "05de6", kun: "ひだり (hidari)", on: "サ (sa)", meaning: "বাম", vocab: [{ w: "左 (ひだり)", m: "বাম" }, { w: "左手 (ひだりて)", m: "বাম হাত" }] },
+                { id: "35", char: "山", code: "05c71", kun: "やま (yama)", on: "サン (san)", meaning: "পাহাড় / পর্বত", vocab: [{ w: "山 (やま)", m: "পাহাড়" }, { w: "富士山 (ふじさん)", m: "ফুজি পর্বত" }] },
+                { id: "36", char: "川", code: "05ddd", kun: "かわ (kawa)", on: "セン (sen)", meaning: "নদী", vocab: [{ w: "川 (かわ)", m: "নদী" }, { w: "ナイル川 (ナイルがわ)", m: "নীলনদ" }] },
+                { id: "37", char: "白", code: "0767d", kun: "しろ(い) (shiro-i)", on: "ハク (haku)", meaning: "সাদা", vocab: [{ w: "白い (しろい)", m: "সাদা (বিশেষণ)" }, { w: "白 (しろ)", m: "সাদা রঙ" }] },
+                { id: "38", char: "本", code: "0672c", kun: "もと (moto)", on: "ホン (hon)", meaning: "বই / মূল", vocab: [{ w: "本 (ほん)", m: "বই" }, { w: "日本 (にほん)", m: "জাপান" }, { w: "本当 (ほんとう)", m: "সত্যি" }] },
+                { id: "39", char: "子", code: "05b50", kun: "こ (ko)", on: "シ・ス (shi / su)", meaning: "শিশু / সন্তান", vocab: [{ w: "子ども (こども)", m: "বাচ্চা" }, { w: "女の子 (おんなのこ)", m: "মেয়ে শিশু" }] },
+                { id: "40", char: "男", code: "07537", kun: "おとこ (otoko)", on: "ダン・ナン (dan / nan)", meaning: "পুরুষ", vocab: [{ w: "男 (おとこ)", m: "পুরুষ ব্যক্তি" }, { w: "男の子 (おとこのこ)", m: "ছেলে শিশু" }] }
+            ],
+            5: [
+                { id: "41", char: "女", code: "05973", kun: "おんな (onna)", on: "ジョ (jo)", meaning: "মহিলা / নারী", vocab: [{ w: "女 (おんな)", m: "মহিলা" }, { w: "女性 (じょせい)", m: "নারী" }] },
+                { id: "42", char: "父", code: "07236", kun: "ちち (chichi)", on: "フ (fu)", meaning: "বাবা", vocab: [{ w: "父 (ちち)", m: "নিজের বাবা" }, { w: "お父さん (おとうさん)", m: "অন্যের বাবা" }] },
+                { id: "43", char: "母", code: "06bcd", kun: "はは (haha)", on: "ボ (bo)", meaning: "মা", vocab: [{ w: "母 (はは)", m: "নিজের মা" }, { w: "お母さん (おかあさん)", m: "অন্যের মা" }] },
+                { id: "44", char: "友", code: "053cb", kun: "とも (tomo)", on: "ユウ (yuu)", meaning: "বন্ধু", vocab: [{ w: "友だち (ともだち)", m: "বন্ধু" }, { w: "友人 (ゆうじん)", m: "বন্ধু (ফরমাল)" }] },
+                { id: "45", char: "先", code: "05148", kun: "さき (saki)", on: "セン (sen)", meaning: "আগে / পূর্ববর্তী", vocab: [{ w: "先生 (せんせい)", m: "শিক্ষক" }, { w: "先月 (せんげつ)", m: "গত মাস" }] },
+                { id: "46", char: "生", code: "0751f", kun: "う(まれる)・い(きる) (u-mareru)", on: "セイ・ショウ (sei / shou)", meaning: "জীবন / জন্ম", vocab: [{ w: "先生 (せんせい)", m: "শিক্ষক" }, { w: "学生 (がくせい)", m: "ছাত্র" }, { w: "生まれます (うまれます)", m: "জন্মগ্রহণ করা" }] },
+                { id: "47", char: "学", code: "05b66", kun: "まな(ぶ) (mana-bu)", on: "ガク (gaku)", meaning: "অধ্যয়ন / শিক্ষা", vocab: [{ w: "学校 (がっこう)", m: "বিদ্যালয়" }, { w: "学生 (がくせい)", m: "ছাত্র" }, { w: "大学 (だいがく)", m: "বিশ্ববিদ্যালয়" }] },
+                { id: "48", char: "校", code: "06821", kun: "-", on: "コウ (kou)", meaning: "বিদ্যালয়", vocab: [{ w: "学校 (がっこう)", m: "স্কুল" }, { w: "高校 (こうこう)", m: "উচ্চ মাধ্যমিক" }] },
+                { id: "49", char: "何", code: "04f55", kun: "なに・なん (nani / nan)", on: "カ (ka)", meaning: "কী / What", vocab: [{ w: "何 (なに)", m: "কী" }, { w: "何人 (なんにん)", m: "কতজন" }, { w: "何時 (なんじ)", m: "কয়টা বাজে" }] },
+                { id: "50", char: "時", code: "06642", kun: "とき (toki)", on: "ジ (ji)", meaning: "সময় / ঘন্টা", vocab: [{ w: "時 (とき)", m: "সময়" }, { w: "一時 (いちじ)", m: "১ টা বাজে" }, { w: "時間 (じかん)", m: "সময় (Time)" }] }
+            ],
+            6: [
+                { id: "51", char: "間", code: "09593", kun: "あいだ・ま (aida / ma)", on: "カン・ケン (kan / ken)", meaning: "ব্যবধান / মাঝে", vocab: [{ w: "間 (あいだ)", m: "মাঝখানে" }, { w: "時間 (じかん)", m: "সময়" }, { w: "二時間 (にじかん)", m: "দুই ঘণ্টা" }] },
+                { id: "52", char: "分", code: "05206", kun: "わ(ける) (wa-keru)", on: "フン・ブン (fun / bun)", meaning: "মিনিট / ভাগ করা", vocab: [{ w: "五分 (ごふん)", m: "৫ মিনিট" }, { w: "十分 (じゅっぷん)", m: "১০ মিনিট" }, { w: "分けます (わけます)", m: "ভাগ করা" }] },
+                { id: "53", char: "半", code: "0534a", kun: "なか(ば) (naka-ba)", on: "ハン (han)", meaning: "অর্ধেক / Half", vocab: [{ w: "半 (はん)", m: "অর্ধেক" }, { w: "八時半 (はちじはん)", m: "সাড়ে আটটা" }, { w: "半分 (はんぶん)", m: "অর্ধেক অংশ" }] },
+                { id: "54", char: "毎", code: "06bce", kun: "ごと (goto)", on: "マイ (mai)", meaning: "প্রতি / Every", vocab: [{ w: "毎日 (まいにち)", m: "প্রতিদিন" }, { w: "毎月 (まいつき)", m: "প্রতি মাসে" }, { w: "毎週 (まいしゅう)", m: "প্রতি সপ্তাহে" }] },
+                { id: "55", char: "年", code: "05e74", kun: "とし (toshi)", on: "ネン (nen)", meaning: "বছর", vocab: [{ w: "年 (とし)", m: "বছর / বয়স" }, { w: "今年 (ことし)", m: "এই বছর" }, { w: "来年 (らいねん)", m: "আগামী বছর" }] },
+                { id: "56", char: "前", code: "0524d", kun: "まえ (mae)", on: "ゼン (zen)", meaning: "সামনে / আগে", vocab: [{ w: "前 (まえ)", m: "সামনে" }, { w: "午前 (ごぜん)", m: "সকাল (AM)" }, { w: "三年前 (さんねんまえ)", m: "তিন বছর আগে" }] },
+                { id: "57", char: "後", code: "05f8c", kun: "うし(ろ)・あと (ushi-ro / ato)", on: "ゴ・コウ (go / kou)", meaning: "পিছনে / পরে", vocab: [{ w: "後ろ (うしろ)", m: "পেছনে" }, { w: "後で (あとで)", m: "পরে" }, { w: "午後 (ごご)", m: "বিকাল (PM)" }] },
+                { id: "58", char: "午", code: "05348", kun: "-", on: "ゴ (go)", meaning: "দুপুর / Noon", vocab: [{ w: "午前 (ごぜん)", m: "সকাল (AM)" }, { w: "午後 (ごご)", m: "বিকাল (PM)" }] },
+                { id: "59", char: "名", code: "0540d", kun: "な (na)", on: "メイ・ミョウ (mei / myou)", meaning: "নাম", vocab: [{ w: "名前 (なまえ)", m: "নাম" }, { w: "有名 (ゆうめい)", m: "বিখ্যাত" }] },
+                { id: "60", char: "車", code: "08eca", kun: "くるま (kuruma)", on: "シャ (sha)", meaning: "গাড়ি", vocab: [{ w: "車 (くるま)", m: "গাড়ি" }, { w: "電車 (でんしゃ)", m: "ট্রেন" }, { w: "自転車 (じてんしゃ)", m: "বাইসাইকেল" }] }
+            ],
+            7: [
+                { id: "61", char: "天", code: "05929", kun: "あめ・あま (ame / ama)", on: "テン (ten)", meaning: "আকাশ / স্বর্গ", vocab: [{ w: "天気 (てんき)", m: "আবহাওয়া" }, { w: "天国 (てんごく)", m: "স্বর্গ" }] },
+                { id: "62", char: "気", code: "06c17", kun: "いき (iki)", on: "キ (ki)", meaning: "মনভাব / শক্তি / বাতাস", vocab: [{ w: "元気 (げんき)", m: "সুস্থ" }, { w: "天気 (てんき)", m: "আবহাওয়া" }, { w: "気をつけて (きをつけて)", m: "সাবধানে থাকা" }] },
+                { id: "63", char: "電", code: "096fb", kun: "-", on: "デン (den)", meaning: "বিদ্যুৎ", vocab: [{ w: "電気 (でんき)", m: "বিদ্যুৎ / লাইট" }, { w: "電話 (でんわ)", m: "টেলিফোন" }, { w: "電車 (でんしゃ)", m: "ট্রেন" }] },
+                { id: "64", char: "話", code: "08a71", kun: "はな(す)・はなし (hana-su)", on: "ワ (wa)", meaning: "কথা বলা / গল্প", vocab: [{ w: "話します (はなします)", m: "কথা বলা" }, { w: "話 (はなし)", m: "গল্প / কথা" }, { w: "電話 (でんわ)", m: "ফোন" }] },
+                { id: "65", char: "食", code: "098df", kun: "た(べる) (ta-beru)", on: "ショク (shoku)", meaning: "খাওয়া / খাদ্য", vocab: [{ w: "食べます (たべます)", m: "খাওয়া" }, { w: "食堂 (しょくどう)", m: "ক্যান্টিন" }, { w: "食べ物 (たべもの)", m: "খাবার" }] },
+                { id: "66", char: "聞", code: "0805e", kun: "き(く) (ki-ku)", on: "ブン・モン (bun / mon)", meaning: "শোনা / জিজ্ঞাসা করা", vocab: [{ w: "聞きます (ききます)", m: "শোনা" }, { w: "新聞 (しんぶん)", m: "সংবাদপত্র" }] },
+                { id: "67", char: "書", code: "066f8", kun: "か(く) (ka-ku)", on: "ショ (sho)", meaning: "লেখা", vocab: [{ w: "書きます (かきます)", m: "লেখা" }, { w: "図書館 (としょかん)", m: "গ্রন্থাগার" }] },
+                { id: "68", char: "読", code: "08aad", kun: "よ(む) (yo-mu)", on: "ドク (doku)", meaning: "পড়া", vocab: [{ w: "読みます (よみます)", m: "পড়া" }, { w: "読書 (どくしょ)", m: "বই পড়া" }] },
+                { id: "69", char: "国", code: "056fd", kun: "くに (kuni)", on: "コク (koku)", meaning: "দেশ", vocab: [{ w: "国 (くに)", m: "দেশ" }, { w: "外国 (がいこく)", m: "বিদেশ" }, { w: "中国 (ちゅうごく)", m: "চীন" }] },
+                { id: "70", char: "外", code: "05916", kun: "そと・はず(す) (soto)", on: "ガイ・ゲ (gai / ge)", meaning: "বাইরে", vocab: [{ w: "外 (そと)", m: "বাইরে" }, { w: "外国 (がいこく)", m: "বিদেশ" }, { w: "外国人 (がいこくじん)", m: "বিদেশি ব্যক্তি" }] }
+            ],
+            8: [
+                { id: "71", char: "語", code: "08a9e", kun: "かた(る) (kata-ru)", on: "ゴ (go)", meaning: "ভাষা / শব্দ", vocab: [{ w: "日本語 (にほんご)", m: "জাপানি ভাষা" }, { w: "英語 (えいご)", m: "ইংরেজি ভাষা" }] },
+                { id: "72", char: "入", code: "05165", kun: "はい(る)・い(れる) (hai-ru)", on: "ニュウ (nyuu)", meaning: "প্রবেশ করা / রাখা", vocab: [{ w: "入ります (はいります)", m: "প্রবেশ করা" }, { w: "入れます (いれます)", m: "ভিতরে রাখা" }] },
+                { id: "73", char: "出", code: "051fa", kun: "で(る)・だ(す) (de-ru / da-su)", on: "シュツ (shutsu)", meaning: "বের হওয়া / পাঠানো", vocab: [{ w: "出ます (でます)", m: "বের হওয়া" }, { w: "出します (だします)", m: "জমা দেওয়া / বের করা" }, { w: "出口 (でぐち)", m: "প্রস্থান" }] },
+                { id: "74", char: "雨", code: "096e8", kun: "あめ (ame)", on: "ウ (u)", meaning: "বৃষ্টি", vocab: [{ w: "雨 (あめ)", m: "বৃষ্টি" }, { w: "大雨 (おおあめ)", m: "ভারী বৃষ্টি" }] },
+                { id: "75", char: "東", code: "06771", kun: "ひがし (higashi)", on: "トウ (tou)", meaning: "পূর্ব দিক", vocab: [{ w: "東 (ひがし)", m: "পূর্ব" }, { w: "東京 (とうきょう)", m: "টোকিও" }] },
+                { id: "76", char: "西", code: "0897f", kun: "にし (nishi)", on: "セイ・サイ (sei / sai)", meaning: "পশ্চিম দিক", vocab: [{ w: "西 (にし)", m: "পশ্চিম" }, { w: "西洋 (せいよう)", m: "পাশ্চাত্য" }] },
+                { id: "77", char: "南", code: "05357", kun: "みなみ (minami)", on: "ナン (nan)", meaning: "দক্ষিণ দিক", vocab: [{ w: "南 (みなみ)", m: "দক্ষিণ" }, { w: "東南アジア (とうなんアジア)", m: "দক্ষিণ-পূর্ব এশিয়া" }] },
+                { id: "78", char: "北", code: "05317", kun: "きた (kita)", on: "ホク (hoku)", meaning: "উত্তর দিক", vocab: [{ w: "北 (きた)", m: "উত্তর" }, { w: "東北 (とうほく)", m: "তোহুকু অঞ্চল" }] },
+                { id: "79", char: "長", code: "09577", kun: "なが(い) (naga-i)", on: "チョウ (chou)", meaning: "লম্বা / প্রধান", vocab: [{ w: "長い (ながい)", m: "লম্বা" }, { w: "校長 (こうちょう)", m: "প্রধান শিক্ষক" }] },
+                { id: "80", char: "高", code: "09ad8", kun: "たか(い) (taka-i)", on: "コウ (kou)", meaning: "উঁচু / দামি", vocab: [{ w: "高い (たかい)", m: "উঁচু / দামি" }, { w: "高校 (こうこう)", m: "হাই স্কুল" }] }
+            ],
+            9: [
+                { id: "81", char: "口", code: "053e3", kun: "くち (kuchi)", on: "コウ (kou)", meaning: "মুখ / প্রবেশদ্বার", vocab: [{ w: "口 (くち)", m: "মুখ" }, { w: "入口 (いりぐち)", m: "প্রবেশদ্বার" }, { w: "出口 (でぐち)", m: "বহির্গমন" }] },
+                { id: "82", char: "目", code: "076ee", kun: "め (me)", on: "モク (moku)", meaning: "চোখ", vocab: [{ w: "目 (め)", m: "চোখ" }, { w: "目薬 (めぐすり)", m: "আই ড্রপ" }] },
+                { id: "83", char: "手", code: "0624b", kun: "て (te)", on: "シュ (shu)", meaning: "হাত", vocab: [{ w: "手 (て)", m: "হাত" }, { w: "上手 (じょうず)", m: "দক্ষ" }, { w: "お手洗い (おてあらい)", m: "টয়লেট" }] },
+                { id: "84", char: "足", code: "08db3", kun: "あし・た(りる) (ashi)", on: "ソク (soku)", meaning: "পা / পর্যাপ্ত হওয়া", vocab: [{ w: "足 (あし)", m: "পা" }, { w: "足ります (たります)", m: "পর্যাপ্ত হওয়া" }] },
+                { id: "85", char: "近", code: "08fd1", kun: "ちか(い) (chika-i)", on: "キン (kin)", meaning: "কাছে / নিকটবর্তী", vocab: [{ w: "近い (ちかい)", m: "কাছে" }, { w: "近く (ちかく)", m: "কাছাকাছি" }, { w: "近所 (きんじょ)", m: "আশপাশ" }] },
+                { id: "86", char: "有", code: "06709", kun: "あ(る) (a-ru)", on: "ユウ・ウ (yuu / u)", meaning: "থাকা / বিদ্যমান", vocab: [{ w: "有ります (あります)", m: "থাকা" }, { w: "有名 (ゆうめい)", m: "বিখ্যাত" }] },
+                { id: "87", char: "花", code: "082b1", kun: "はな (hana)", on: "カ (ka)", meaning: "ফুল", vocab: [{ w: "花 (はな)", m: "ফুল" }, { w: "花火 (はなび)", m: "আতশবাজি" }, { w: "花屋 (はなや)", m: "ফুলের দোকান" }] },
+                { id: "88", char: "赤", code: "08d64", kun: "あか(い) (aka-i)", on: "セキ (seki)", meaning: "লাল", vocab: [{ w: "赤い (あかい)", m: "লাল (বিশেষণ)" }, { w: "赤ちゃん (あかちゃん)", m: "ছোট শিশু" }] },
+                { id: "89", char: "紙", code: "07d19", kun: "かみ (kami)", on: "シ (shi)", meaning: "কাগজ", vocab: [{ w: "紙 (かみ)", m: "কাগজ" }, { w: "手紙 (てがみ)", m: "চিঠি" }] },
+                { id: "90", char: "買", code: "08cb7", kun: "か(う) (ka-u)", on: "バイ (bai)", meaning: "কেনা", vocab: [{ w: "買います (かいます)", m: "কেনা" }, { w: "買い物 (かいもの)", m: "কেনাকাটা" }] }
+            ],
+            10: [
+                { id: "91", char: "朝", code: "0671d", kun: "あさ (asa)", on: "チョウ (chou)", meaning: "সকাল", vocab: [{ w: "朝 (あさ)", m: "সকাল" }, { w: "毎朝 (まいあさ)", m: "প্রতিদিন সকাল" }, { w: "今朝 (けさ)", m: "আজ সকালে" }] },
+                { id: "92", char: "昼", code: "066昼", code: "0663c", kun: "ひる (hiru)", on: "チュウ (chuu)", meaning: "দুপুর", vocab: [{ w: "昼 (ひる)", m: "দুপুর" }, { w: "昼ごはん (ひるごはん)", m: "দুপুরের খাবার" }] },
+                { id: "93", char: "夕", code: "05915", kun: "ゆう (yuu)", on: "セキ (seki)", meaning: "সন্ধ্যা", vocab: [{ w: "夕方 (ゆうがた)", m: "সন্ধ্যাবেলা" }, { w: "夕飯 (ゆうはん)", m: "রাতের খাবার" }] },
+                { id: "94", char: "夜", code: "0591c", kun: "よる・よ (yoru)", on: "ヤ (ya)", meaning: "রাত", vocab: [{ w: "夜 (よる)", m: "রাত" }, { w: "今夜 (こんや)", m: "আজ রাত" }] },
+                { id: "95", char: "私", code: "079c1", kun: "わたし・わたくし (watashi)", on: "シ (shi)", meaning: "আমি", vocab: [{ w: "私 (わたし)", m: "আমি" }] },
+                { id: "96", char: "家", code: "05bb6", kun: "いえ・や (ie / ya)", on: "カ・ケ (ka / ke)", meaning: "বাড়ি / পরিবার", vocab: [{ w: "家 (いえ)", m: "বাড়ি" }, { w: "家族 (かぞく)", m: "পরিবার" }] },
+                { id: "97", char: "会", code: "04f1a", kun: "あ(う) (a-u)", on: "カイ (kai)", meaning: "দেখা করা / সভা", vocab: [{ w: "会います (あいます)", m: "দেখা করা" }, { w: "会社 (かいしゃ)", m: "কোম্পানি" }, { w: "会話 (かいわ)", m: "কথোপকথন" }] },
+                { id: "98", char: "社", code: "0793e", kun: "やしろ (yashiro)", on: "シャ (sha)", meaning: "কোম্পানি / সমাজ", vocab: [{ w: "会社 (かいしゃ)", m: "কোম্পানি" }, { w: "社会 (しゃかい)", m: "সমাজ" }, { w: "社長 (しゃちょう)", m: "প্রেসিডেন্ট" }] },
+                { id: "99", char: "店", code: "05e97", kun: "みせ (mise)", on: "テン (ten)", meaning: "দোকান", vocab: [{ w: "店 (みせ)", m: "দোকান" }, { w: "店員 (てんいん)", m: "দোকান কর্মচারী" }] },
+                { id: "100", char: "飲", code: "098f2", kun: "の(む) (no-mu)", on: "イン (in)", meaning: "পান করা", vocab: [{ w: "飲みます (のみます)", m: "পান করা" }, { w: "飲み物 (のみもの)", m: "পানীয়" }] }
+            ],
+            11: [
+                { id: "101", char: "多", code: "0591a", kun: "おお(い) (oo-i)", on: "タ (ta)", meaning: "অনেক / প্রচুর", vocab: [{ w: "多い (おおい)", m: "অনেক বেশি" }, { w: "多分 (たぶん)", m: "সম্ভবত" }] },
+                { id: "102", char: "少", code: "05c11", kun: "すく(ない)・すこ(し) (suku-nai / suko-shi)", on: "ショウ (shou)", meaning: "কম / সামান্য", vocab: [{ w: "少し (すこし)", m: "সামান্য / একটু" }, { w: "少ない (すくない)", m: "সংখ্যায় কম" }] },
+                { id: "103", char: "古", code: "053e4", kun: "ふる(い) (furu-i)", on: "コ (ko)", meaning: "পুরাতন", vocab: [{ w: "古い (ふるい)", m: "পুরাতন" }, { w: "中古 (ちゅうこ)", m: "ব্যবহৃত (সেকেন্ড হ্যান্ড)" }] },
+                { id: "104", char: "新", code: "065b0", kun: "あたら(しい) (atara-shii)", on: "シン (shin)", meaning: "নতুন", vocab: [{ w: "新しい (あたらしい)", m: "নতুন" }, { w: "新聞 (しんぶん)", m: "সংবাদপত্র" }] },
+                { id: "105", char: "広", code: "05e83", kun: "ひろ(い) (hiro-i)", on: "コウ (kou)", meaning: "প্রশস্ত / চওড়া", vocab: [{ w: "広い (ひろい)", m: "প্রশস্ত / বড়" }, { w: "広島 (ひろしま)", m: "হিরোশিমা" }] },
+                { id: "106", char: "安", code: "05b89", kun: "やす(い) (yasu-i)", on: "アン (an)", meaning: "সস্তা / শান্তিময়", vocab: [{ w: "安い (やすい)", m: "সস্তা" }, { w: "安心 (あんしん)", m: "স্বস্তি" }, { w: "安全 (あんぜん)", m: "নিরাপদ" }] },
+                { id: "107", char: "立", code: "07acb", kun: "た(つ) (ta-tsu)", on: "リツ (ritsu)", meaning: "দাঁড়ানো", vocab: [{ w: "立ちます (たちます)", m: "দাঁড়ানো" }, { w: "国立 (こくりつ)", m: "জাতীয়" }] },
+                { id: "108", char: "知", code: "077e5", kun: "し(る) (shi-ru)", on: "チ (chi)", meaning: "জানা / চেনা", vocab: [{ w: "知ります (しります)", m: "জানা" }, { w: "知り合い (しりあい)", m: "পরিচিত ব্যক্তি" }] },
+                { id: "109", char: "言", code: "08a00", kun: "い(う)・こと (i-u / koto)", on: "ゲン・ゴン (gen / gon)", meaning: "বলা / শব্দ", vocab: [{ w: "言います (いいます)", m: "বলা" }, { w: "言葉 (ことば)", m: "ভাষা / শব্দ" }, { w: "伝言 (でんごん)", m: "বার্তা" }] },
+                { id: "110", char: "思", code: "0601d", kun: "おも(う) (omo-u)", on: "シ (shi)", meaning: "চিন্তা করা / মনে করা", vocab: [{ w: "思います (おもいます)", m: "মনে করা / ভাবা" }, { w: "思い出す (おもいだす)", m: "স্মরণ করা" }] }
+            ],
+            12: [
+                { id: "111", char: "歩", code: "06b69", kun: "ある(く) (aru-ku)", on: "ホ (ho)", meaning: "হাঁটা", vocab: [{ w: "歩きます (あるきます)", m: "হাঁটা" }, { w: "散歩 (さんぽ)", m: "হাঁটাহাটি / প্রাতঃভ্রমণ" }] },
+                { id: "112", char: "走", code: "08d70", kun: "はし(る) (hashi-ru)", on: "ソウ (sou)", meaning: "দৌড়ানো", vocab: [{ w: "走ります (はしります)", m: "দৌড়ানো" }] },
+                { id: "113", char: "住", code: "04f4f", kun: "す(む) (su-mu)", on: "ジュウ (juu)", meaning: "বসবাস করা", vocab: [{ w: "住みます (すみます)", m: "বাস করা" }, { w: "住所 (じゅうしょ)", m: "ঠিকানা" }] },
+                { id: "114", char: "空", code: "07a7a", kun: "そら・あ(く) (sora / a-ku)", on: "クウ (kuu)", meaning: "আকাশ / খালি", vocab: [{ w: "空 (そら)", m: "আকাশ" }, { w: "空港 (くうこう)", m: "বিমানবন্দর" }, { w: "空気 (くうき)", m: "বাতাস" }] },
+                { id: "115", char: "週", code: "09031", kun: "-", on: "シュウ (shuu)", meaning: "সপ্তাহ", vocab: [{ w: "今週 (こんしゅう)", m: "এই সপ্তাহ" }, { w: "来週 (らいしゅう)", m: "আগামী সপ্তাহ" }, { w: "毎週 (まいしゅう)", m: "প্রতি সপ্তাহ" }] },
+                { id: "116", char: "魚", code: "09b5a", kun: "さかな・うお (sakana)", on: "ギョ (gyo)", meaning: "মাছ", vocab: [{ w: "魚 (さかな)", m: "মাছ" }, { w: "魚屋 (さかなや)", m: "মাছের দোকান" }, { w: "金魚 (きんぎょ)", m: "গোল্ডফিশ" }] },
+                { id: "117", char: "耳", code: "08033", kun: "みみ (mimi)", on: "ジ (ji)", meaning: "কান", vocab: [{ w: "耳 (みみ)", m: "কান" }] },
+                { id: "118", char: "銀", code: "09280", kun: "しろがね (shirogane)", on: "ギン (gin)", meaning: "রুপা", vocab: [{ w: "銀 (ぎん)", m: "রুপা" }, { w: "銀行 (ぎんこう)", m: "ব্যাংক" }] },
+                { id: "119", char: "道", code: "09053", kun: "みち (michi)", on: "ドウ (dou)", meaning: "রাস্তা / পথ", vocab: [{ w: "道 (みち)", m: "রাস্তা" }, { w: "水道 (すいどう)", m: "পানির লাইন" }] },
+                { id: "120", char: "駅", code: "099c5", kun: "-", on: "エキ (eki)", meaning: "স্টেশন", vocab: [{ w: "駅 (えき)", m: "স্টেশন" }, { w: "駅員 (えきいん)", m: "স্টেশন কর্মী" }] }
             ]
         };
 
@@ -774,7 +806,6 @@
             }
         }
 
-        // শুরুতেই কাঞ্জি ভেক্টর (Static State) রেন্ডার করা
         async function renderStaticSvg(holderId, hexCode) {
             const holder = document.getElementById(holderId);
             if (!holder) return;
@@ -786,11 +817,9 @@
                 svg.style.width = "100%";
                 svg.style.height = "100%";
 
-                // নম্বরগুলো শুরুতেই লুকিয়ে রাখা
                 const numbers = svg.querySelectorAll("text");
                 numbers.forEach(t => t.style.display = "none");
 
-                // প্রতিটি স্ট্রোক অ্যানিমেশনের মতো নিখুঁত ডার্ক-গ্রিন কালারে সেন্টারে থাকবে
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
                     p.style.stroke = "#143d32";
@@ -806,14 +835,14 @@
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
             document.getElementById("kanjiDetailView").style.display = "block";
-            document.getElementById("lessonHeaderTitle").innerText = `কাঞ্জিগুলো নিম্নরূপ`;
+            document.getElementById("lessonHeaderTitle").innerText = `কাঞ্জি লেসন ${lessonNo} (কাঞ্জি ${items[0].id}–${items[items.length - 1].id})`;
 
             const container = document.getElementById("kanjiListContainer");
             container.innerHTML = "";
 
             items.forEach((k, index) => {
                 const itemDiv = document.createElement("div");
-                itemDiv.className = `kanji-item ${k.id === "07" ? 'open' : ''}`;
+                itemDiv.className = `kanji-item ${index === 0 ? 'open' : ''}`;
                 itemDiv.id = `kanjiItem_${index}`;
 
                 let vocabHtml = k.vocab.map(v => `<li><span class="jp-word">${v.w}</span> — ${v.m}</li>`).join('');
@@ -827,11 +856,8 @@
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                     <div class="kanji-body">
-                        <!-- সেন্ট্রাল কাঞ্জি ডিসপ্লে বক্স -->
                         <div class="kanji-anim-stage">
-                            <div class="kanji-svg-wrap" id="svgHolder_${index}">
-                                <!-- প্রথম থেকেই অ্যানিমেশন পরবর্তী সঠিক SVG লোড হবে -->
-                            </div>
+                            <div class="kanji-svg-wrap" id="svgHolder_${index}"></div>
                         </div>
 
                         <div class="action-btns">
@@ -855,8 +881,6 @@
                     </div>
                 `;
                 container.appendChild(itemDiv);
-
-                // শুরুতেই অ্যানিমেশন পরবর্তী আসল ভেক্টর রেন্ডার করা
                 renderStaticSvg(`svgHolder_${index}`, k.code);
             });
 
@@ -878,7 +902,6 @@
             }
         }
 
-        // প্লে বাটনে চাপ দিলে লাইভ স্ট্রোক অ্যানিমেশন
         async function playKanjiStroke(char, hexCode, index) {
             const holder = document.getElementById(`svgHolder_${index}`);
 
@@ -932,7 +955,6 @@
             });
         }
 
-        // ================= ব্লাইন্ড টেস্ট ও প্র্যাকটিস মোড =================
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
         const blindSvgHolder = document.getElementById("blindSvgHolder");
@@ -985,7 +1007,7 @@
             if (isDrawing) {
                 isDrawing = false;
                 ctx.beginPath();
-                if (strokeCount > 12) {
+                if (strokeCount > 10) {
                     statusText.innerText = "সঠিক!";
                 }
             }
@@ -1016,10 +1038,6 @@
         canvas.addEventListener("touchstart", startPosition);
         canvas.addEventListener("touchend", endPosition);
         canvas.addEventListener("touchmove", draw);
-
-        window.addEventListener("DOMContentLoaded", () => {
-            openLesson(1);
-        });
     </script>
 </body>
 </html>

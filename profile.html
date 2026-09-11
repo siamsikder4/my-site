@@ -9,7 +9,7 @@
     <!-- Cropper.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -104,6 +104,20 @@
             gap: 4px;
         }
 
+        .premium-user-badge {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+            box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .user-email { font-size: 12.5px; color: #64748b; margin-bottom: 16px; font-weight: 500; }
 
         /* ফলো বাটন */
@@ -133,6 +147,134 @@
         .stat-val { font-size: 16px; font-weight: 800; color: #059669; margin-bottom: 2px; }
         .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
 
+        /* প্রিমিয়াম ব্যানার কার্ড */
+        .premium-banner-card {
+            background: linear-gradient(135deg, #092c20 0%, #0f4a36 60%, #17654a 100%);
+            border-radius: 22px;
+            padding: 20px 18px;
+            color: #ffffff;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #34d399;
+            box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3);
+        }
+
+        .premium-banner-card::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 130px; height: 130px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .prem-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .prem-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+            color: #fef08a;
+        }
+
+        .prem-price-badge {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fde047;
+            border: 1px solid rgba(253, 224, 71, 0.4);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .prem-features {
+            list-style: none;
+            margin-bottom: 16px;
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .prem-features li {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .prem-features li i {
+            color: #34d399;
+            font-size: 11px;
+        }
+
+        .prem-upgrade-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #0f2e23;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+            transition: transform 0.15s ease;
+        }
+
+        .prem-upgrade-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* প্রিমিয়াম একটিভ বক্স */
+        .premium-active-box {
+            background: #ffffff;
+            border: 1.5px solid #fde047;
+            border-radius: 20px;
+            padding: 16px;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+        }
+
+        .prem-crown-icon {
+            width: 44px;
+            height: 44px;
+            background: #fefce8;
+            color: #d97706;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 1px solid #fef08a;
+        }
+
+        .prem-active-info h4 {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .prem-active-info p {
+            font-size: 11.5px;
+            color: #64748b;
+        }
+
         .menu-list {
             background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0;
             overflow: hidden; margin-bottom: 16px;
@@ -160,6 +302,138 @@
             margin-bottom: 20px;
         }
         .logout-btn:hover { background: #fff1f2; }
+
+        /* পেমেন্ট / প্রিমিয়াম মডাল */
+        .payment-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .payment-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+            animation: popIn 0.2s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .payment-header {
+            background: linear-gradient(135deg, #092c20 0%, #064e3b 100%);
+            padding: 18px 20px;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-header h3 {
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fef08a;
+        }
+
+        .payment-body {
+            padding: 20px;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+        .payment-method-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .payment-num-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 6px 0;
+        }
+
+        .wallet-number {
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #0f172a;
+        }
+
+        .copy-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #334155;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 13.5px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: #059669;
+        }
+
+        .submit-payment-btn {
+            width: 100%;
+            background: #059669;
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 14px;
+            font-size: 14.5px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+            margin-top: 10px;
+        }
 
         /* ক্রপার মডাল */
         .cropper-modal-overlay {
@@ -277,6 +551,7 @@
             <div class="user-name-row">
                 <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
                 <span id="adminBadgeContainer"></span>
+                <span id="premiumBadgeContainer"></span>
             </div>
 
             <p class="user-email" id="displayUserEmail">---</p>
@@ -305,6 +580,34 @@
             </div>
         </div>
 
+        <!-- প্রিমিয়াম আপগ্রেড ব্যানার (যদি ফ্রি ইউজার হয়) -->
+        <div class="premium-banner-card" id="premiumPromoCard" style="display: none;">
+            <div class="prem-card-header">
+                <div class="prem-title"><i class="fa-solid fa-crown"></i> KOTOBA PRO</div>
+                <span class="prem-price-badge">৳ ১৯৯ / আজীবন</span>
+            </div>
+            <ul class="prem-features">
+                <li><i class="fa-solid fa-check"></i> সকল বিজ্ঞাপন সম্পূর্ণ মুক্ত ব্রাউজিং</li>
+                <li><i class="fa-solid fa-check"></i> আনলিমিটেড AI সেনসেই চ্যাট সুবিধা</li>
+                <li><i class="fa-solid fa-check"></i> সকল লেসন টেস্ট ও আনলকড কাঞ্জি কুইজ</li>
+                <li><i class="fa-solid fa-check"></i> গোল্ডেন প্রিমিয়াম প্রোফাইল ব্যাজ</li>
+            </ul>
+            <button class="prem-upgrade-btn" id="openPaymentModalBtn">
+                <i class="fa-solid fa-bolt"></i> প্রিমিয়ামে আপগ্রেড করুন
+            </button>
+        </div>
+
+        <!-- প্রিমিয়াম একটিভ বক্স (যদি ইউজার প্রিমিয়াম হয়) -->
+        <div class="premium-active-box" id="premiumActiveBox">
+            <div class="prem-crown-icon">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div class="prem-active-info">
+                <h4>KOTOBA PRO সক্রিয় আছে</h4>
+                <p>আপনি সমস্ত প্রিমিয়াম সুবিধা উপভোগ করছেন।</p>
+            </div>
+        </div>
+
         <div class="menu-list" id="ownProfileMenus">
             <a href="admin.html" class="menu-item" id="adminOption" style="display: none; background: #f0fdf4;">
                 <div class="menu-left">
@@ -326,6 +629,50 @@
             <i class="fa-solid fa-arrow-right-from-bracket"></i> লগআউট করুন
         </button>
     </main>
+
+    <!-- প্রিমিয়াম পেমেন্ট মডাল -->
+    <div class="payment-modal-overlay" id="paymentModal">
+        <div class="payment-card">
+            <div class="payment-header">
+                <h3><i class="fa-solid fa-crown"></i> KOTOBA PRO আপগ্রেড</h3>
+                <button class="btn-crop-close" id="closePaymentModalBtn">&times;</button>
+            </div>
+            <div class="payment-body">
+                <div class="payment-method-box">
+                    <p style="font-size: 12px; color: #64748b; font-weight: 600;">বিকাশ / নগদ (Send Money)</p>
+                    <div class="payment-num-row">
+                        <span class="wallet-number" id="walletNum">01886861214</span>
+                        <button class="copy-btn" id="copyWalletBtn"><i class="fa-regular fa-copy"></i> কপি</button>
+                    </div>
+                    <p style="font-size: 11.5px; color: #059669; font-weight: 700;">ফি: ১৯৯ টাকা (Send Money)</p>
+                </div>
+
+                <form id="premiumForm">
+                    <div class="form-group">
+                        <label>পেমেন্ট মাধ্যম</label>
+                        <select class="form-select" id="payMethod" required>
+                            <option value="bkash">বিকাশ (bKash)</option>
+                            <option value="nagad">নগদ (Nagad)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>যে নম্বর থেকে টাকা পাঠিয়েছেন</label>
+                        <input type="tel" class="form-input" id="senderNumber" placeholder="017xxxxxxxx" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ট্রানজেকশন আইডি (TrxID)</label>
+                        <input type="text" class="form-input" id="trxId" placeholder="যেমন: 9J87AKL89" required>
+                    </div>
+
+                    <button type="submit" class="submit-payment-btn" id="submitTrxBtn">
+                        <i class="fa-solid fa-paper-plane"></i> সাবমিট করুন
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- ক্রপার মডাল -->
     <div class="cropper-modal-overlay" id="cropperModal">
@@ -371,7 +718,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, deleteDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, deleteDoc, increment, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -388,7 +735,6 @@
         const db = getFirestore(app);
         const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
 
-        // ইউআরএল থেকে প্যারামিটার পড়া (uid অথবা email)
         const urlParams = new URLSearchParams(window.location.search);
         const queryUser = urlParams.get("email") || urlParams.get("uid");
 
@@ -407,12 +753,19 @@
         const ownProfileMenus = document.getElementById("ownProfileMenus");
         const logoutBtn = document.getElementById("logoutBtn");
 
+        const premiumPromoCard = document.getElementById("premiumPromoCard");
+        const premiumActiveBox = document.getElementById("premiumActiveBox");
+        const openPaymentModalBtn = document.getElementById("openPaymentModalBtn");
+        const closePaymentModalBtn = document.getElementById("closePaymentModalBtn");
+        const paymentModal = document.getElementById("paymentModal");
+        const premiumForm = document.getElementById("premiumForm");
+        const copyWalletBtn = document.getElementById("copyWalletBtn");
+
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             const myEmail = user && user.email ? user.email.toLowerCase() : null;
             const myUid = user ? user.uid : null;
 
-            // প্রোফাইল চেক: ইউআরএলে কোনো আইডি না থাকলে অথবা নিজের আইডি হলে এটা নিজের প্রোফাইল
             if (!queryUser) {
                 if (!user) {
                     window.location.href = "login.html";
@@ -432,8 +785,9 @@
                 avatarTrigger.style.cursor = "default";
                 ownProfileMenus.style.display = "none";
                 logoutBtn.style.display = "none";
+                premiumPromoCard.style.display = "none";
+                premiumActiveBox.style.display = "none";
                 
-                // শুধুমাত্র লগইন করা ইউজার অন্যের প্রোফাইলে ফলো বাটন দেখতে পাবে
                 if (currentUser) {
                     followBtnWrap.style.display = "block";
                     checkFollowStatus(myEmail, targetDocId);
@@ -457,8 +811,6 @@
         async function loadProfileData(docId) {
             try {
                 let userDoc = await getDoc(doc(db, "users", docId));
-                
-                // যদি ইমেইল দিয়ে না পাওয়া যায়, ডিরেক্ট আইডি দিয়ে চেক করা
                 if (!userDoc.exists() && docId.includes("@")) {
                     userDoc = await getDoc(doc(db, "users", docId.toLowerCase()));
                 }
@@ -468,6 +820,7 @@
                     const name = data.userName || data.name || (data.email ? data.email.split("@")[0] : "শিক্ষার্থী");
                     const email = data.email || docId;
                     const isAdmin = (email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
+                    const isPremium = data.isPremium === true || isAdmin;
 
                     document.getElementById("displayUserName").innerText = name;
                     document.getElementById("displayUserEmail").innerText = email;
@@ -475,8 +828,10 @@
                     document.getElementById("followersCount").innerText = data.followersCount || 0;
                     document.getElementById("followingCount").innerText = data.followingCount || 0;
 
-                    // অ্যাডমিন ও ভেরিফাইড ব্যাজ সেট করা
+                    // অ্যাডমিন ও প্রিমিয়াম ব্যাজ
                     const badgeContainer = document.getElementById("adminBadgeContainer");
+                    const premBadgeContainer = document.getElementById("premiumBadgeContainer");
+
                     if (isAdmin) {
                         badgeContainer.innerHTML = `
                             <i class="fa-solid fa-circle-check verified-badge" title="অফিশিয়াল ভেরিফাইড"></i>
@@ -484,6 +839,23 @@
                         `;
                     } else {
                         badgeContainer.innerHTML = "";
+                    }
+
+                    if (isPremium) {
+                        premBadgeContainer.innerHTML = `<span class="premium-user-badge"><i class="fa-solid fa-crown"></i> PRO</span>`;
+                    } else {
+                        premBadgeContainer.innerHTML = "";
+                    }
+
+                    // নিজের প্রোফাইলে প্রিমিয়াম স্ট্যাটাস বক্স শো করা
+                    if (isOwnProfile) {
+                        if (isPremium) {
+                            premiumActiveBox.style.display = "flex";
+                            premiumPromoCard.style.display = "none";
+                        } else {
+                            premiumActiveBox.style.display = "none";
+                            premiumPromoCard.style.display = "block";
+                        }
                     }
 
                     if (data.photoBase64 || data.photoURL) {
@@ -499,6 +871,59 @@
                 console.error("Profile loading error:", e);
             }
         }
+
+        // পেমেন্ট মডাল কন্ট্রোল
+        openPaymentModalBtn.addEventListener("click", () => {
+            paymentModal.style.display = "flex";
+        });
+
+        closePaymentModalBtn.addEventListener("click", () => {
+            paymentModal.style.display = "none";
+        });
+
+        copyWalletBtn.addEventListener("click", () => {
+            const num = document.getElementById("walletNum").innerText;
+            navigator.clipboard.writeText(num);
+            copyWalletBtn.innerHTML = `<i class="fa-solid fa-check"></i> কপিড`;
+            setTimeout(() => copyWalletBtn.innerHTML = `<i class="fa-regular fa-copy"></i> কপি`, 2000);
+        });
+
+        // পেমেন্ট সাবমিশন
+        premiumForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const btn = document.getElementById("submitTrxBtn");
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> সাবমিট হচ্ছে...`;
+            btn.disabled = true;
+
+            const payMethod = document.getElementById("payMethod").value;
+            const senderNumber = document.getElementById("senderNumber").value.trim();
+            const trxId = document.getElementById("trxId").value.trim();
+
+            try {
+                await addDoc(collection(db, "premium_requests"), {
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email.toLowerCase(),
+                    userName: document.getElementById("displayUserName").innerText,
+                    payMethod: payMethod,
+                    senderNumber: senderNumber,
+                    trxId: trxId,
+                    amount: 199,
+                    status: "pending",
+                    createdAt: Date.now()
+                });
+
+                paymentModal.style.display = "none";
+                premiumForm.reset();
+                alert("আপনার রিকোয়েস্ট জমা হয়েছে! ভেরিফাই সম্পন্ন হলে কিছুক্ষণের মধ্যে আপনার প্রোফাইল প্রিমিয়ামে আপগ্রেড হয়ে যাবে।");
+            } catch (err) {
+                alert("রিকোয়েস্ট পাঠাতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+            } finally {
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> সাবমিট করুন`;
+                btn.disabled = false;
+            }
+        });
 
         async function checkFollowStatus(myId, targetId) {
             try {

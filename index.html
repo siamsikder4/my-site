@@ -589,14 +589,12 @@
                     <p>N5 রিডিং প্র্যাকটিস</p>
                 </a>
 
-                <!-- আপনার আগের মতোই অক্ষত রাখা হয়েছে -->
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
                     <h4>Listening</h4>
                     <p>N5 লিসেনিং প্র্যাকটিস</p>
                 </a>
 
-                <!-- আপনার আগের মতোই অক্ষত রাখা হয়েছে -->
                 <a href="#" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
                     <h4>Listening Test</h4>
@@ -609,7 +607,6 @@
                     <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
                 </a>
 
-                <!-- শুধুমাত্র এই লিংকটি mock-test.html এ নিয়ে যাবে -->
                 <a href="mock-test.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-file-signature"></i></div>
                     <h4>পূর্বের প্রশ্নাবলী</h4>
@@ -636,7 +633,8 @@
                     <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
                 </a>
 
-                <a href="#" class="item-card green-top">
+                <!-- কাঞ্জি লিঙ্কে kanji-n4.html যুক্ত করা হয়েছে -->
+                <a href="kanji-n4.html" class="item-card green-top">
                     <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4>কাঞ্জি</h4>
                     <p>N4 প্রয়োজনীয় কাঞ্জি</p>
@@ -706,13 +704,11 @@
 
         async function loadSiteDynamicConfigs() {
             try {
-                // ১. ব্র্যান্ডিং / আইকন লোড
                 const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
                 if (brandSnap.exists() && brandSnap.data().appIconBase64) {
                     mainAppLogo.src = brandSnap.data().appIconBase64;
                 }
 
-                // ২. গ্লোবাল নোটিশ ব্যানার
                 const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
                 if (alertSnap.exists()) {
                     const ad = alertSnap.data();
@@ -722,7 +718,6 @@
                     }
                 }
 
-                // ৩. বিজ্ঞাপন মাস্টার কন্ট্রোল
                 const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
                 let isGlobalOn = true;
                 let isIndexOn = true;

@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-dark: #12372a;
-            --primary-card: #143d32;
-            --primary-green: #047857;
-            --bg-page: #f8fafc;
-            --border-color: #e2e8f0;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
+            /* Index পেজের কালার প্যালেট */
+            --paper: #fbf7ef;
+            --ink: #182620;
+            --pine: #0B4A38;
+            --jade: #147A57;
+            --clay: #B6472E;
+            --gold: #A9781F;
+            --mist: #7C8A82;
+            --line: #E9E2D3;
+            --card-bg: #ffffff;
         }
 
         * {
@@ -30,18 +33,20 @@
         }
 
         body {
-            background-color: var(--bg-page);
-            color: var(--text-dark);
-            padding-bottom: 85px;
+            background-color: var(--paper);
+            color: var(--ink);
+            padding-bottom: 90px;
         }
 
+        /* স্টিকি টপ বার */
         .top-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(251, 247, 239, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -55,30 +60,35 @@
 
         .back-btn {
             text-decoration: none;
-            color: var(--primary-dark);
-            background: #f1f5f9;
+            color: var(--pine);
+            background: #F0EAD9;
             width: 36px;
             height: 36px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: none;
+            border: 1px solid var(--line);
             cursor: pointer;
             font-size: 15px;
+            transition: transform 0.15s;
         }
 
+        .back-btn:active { transform: scale(0.92); }
+
         .logo-text {
-            font-weight: 800;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 900;
             font-size: 17px;
-            color: var(--primary-dark);
+            color: var(--pine);
             display: flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: 0.5px;
         }
 
         .level-pill {
-            background: var(--primary-green);
+            background: var(--pine);
             color: #ffffff;
             font-size: 10px;
             font-weight: 700;
@@ -94,30 +104,35 @@
 
         .subtitle-bar {
             text-align: center;
-            font-size: 13px;
-            color: var(--text-muted);
+            font-size: 12.5px;
+            color: var(--mist);
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+            background: #F0EAD9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
         }
 
+        /* লেসন গ্রিড */
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 11px;
         }
 
         .lesson-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-dark);
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--jade);
             border-radius: 14px;
-            padding: 16px 12px;
+            padding: 15px 12px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            transition: transform 0.15s;
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
-        .lesson-card:active { transform: scale(0.98); }
+        .lesson-card:active { transform: scale(0.97); }
 
         .card-top {
             display: flex;
@@ -127,40 +142,42 @@
         }
 
         .kl-badge {
-            background: #f1f5f9;
-            color: #475569;
+            background: #E6F3EC;
+            color: var(--jade);
             font-size: 10px;
             font-weight: 700;
-            padding: 2px 6px;
+            padding: 2px 7px;
             border-radius: 6px;
         }
 
         .kanji-watermark {
-            font-size: 15px;
-            color: #94a3b8;
+            font-family: 'Klee One', sans-serif;
+            font-size: 14px;
+            color: var(--mist);
             font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--ink);
             margin-bottom: 2px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--mist);
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 8px;
+            margin-top: 6px;
             color: #cbd5e1;
-            font-size: 12px;
+            font-size: 11px;
         }
 
+        /* কাঞ্জি ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
@@ -169,22 +186,22 @@
         }
 
         .view-header h3 {
-            font-size: 18px;
+            font-size: 17.5px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--pine);
         }
 
         .kanji-item {
-            margin-bottom: 10px;
-            border-radius: 12px;
+            margin-bottom: 11px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            border: 1px solid var(--border-color);
-            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
+            border: 1px solid var(--line);
+            background: var(--card-bg);
         }
 
         .kanji-header {
-            background: var(--primary-card);
+            background: var(--pine);
             color: #ffffff;
             padding: 13px 16px;
             display: flex;
@@ -192,7 +209,7 @@
             align-items: center;
             cursor: pointer;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14.5px;
         }
 
         .kanji-header .left-info {
@@ -202,9 +219,9 @@
         }
 
         .kanji-header .left-info .icon-box {
-            background: rgba(255, 255, 255, 0.14);
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 2px 7px;
+            border-radius: 6px;
             font-size: 12px;
         }
 
@@ -219,7 +236,7 @@
 
         .kanji-body {
             background: #ffffff;
-            padding: 20px 16px;
+            padding: 18px 16px;
             display: none;
         }
 
@@ -228,13 +245,13 @@
         }
 
         .kanji-anim-stage {
-            width: 180px;
-            height: 180px;
+            width: 170px;
+            height: 170px;
             margin: 0 auto 16px;
             position: relative;
-            background: #ffffff;
-            border: 1.5px dashed #cbd5e1;
-            border-radius: 20px;
+            background: #FAF7F0;
+            border: 1.5px dashed #D2DDD6;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -244,11 +261,9 @@
         .kanji-anim-stage::before {
             content: "";
             position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
+            left: 50%; top: 0; bottom: 0;
             width: 1px;
-            border-left: 1px dashed #e2e8f0;
+            border-left: 1px dashed var(--line);
             pointer-events: none;
             z-index: 1;
         }
@@ -256,18 +271,16 @@
         .kanji-anim-stage::after {
             content: "";
             position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
+            top: 50%; left: 0; right: 0;
             height: 1px;
-            border-top: 1px dashed #e2e8f0;
+            border-top: 1px dashed var(--line);
             pointer-events: none;
             z-index: 1;
         }
 
         .kanji-svg-wrap {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -284,16 +297,16 @@
         .action-btns {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .action-btn {
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--line);
             background: #ffffff;
-            padding: 7px 18px;
-            border-radius: 25px;
-            font-size: 13px;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -303,33 +316,33 @@
         }
 
         .action-btn:active { transform: scale(0.95); }
-        .action-btn.play { color: #0284c7; border-color: #bae6fd; background: #f0f9ff; }
-        .action-btn.practice { color: #334155; border-color: #cbd5e1; background: #f8fafc; }
-        .action-btn.test { color: #dc2626; border-color: #fecdd3; background: #fff1f2; }
+        .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
+        .action-btn.practice { color: var(--ink); border-color: var(--line); background: #FAF7F0; }
+        .action-btn.test { color: var(--clay); border-color: #F5C9BF; background: #FBEAE6; }
 
         .readings-box {
             text-align: center;
-            font-size: 14px;
-            line-height: 1.9;
-            margin-bottom: 16px;
-            color: #334155;
-            background: #f8fafc;
+            font-size: 13.5px;
+            line-height: 1.85;
+            margin-bottom: 14px;
+            color: var(--ink);
+            background: #FAF7F0;
             padding: 12px;
             border-radius: 12px;
-            border: 1px solid #eef2f6;
+            border: 1px solid var(--line);
         }
 
         .readings-box span.jp-font {
             font-family: 'Klee One', sans-serif;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: 700;
+            color: var(--pine);
         }
 
         .detail-sub-title {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 700;
-            color: var(--primary-dark);
-            margin: 14px 0 8px;
+            color: var(--pine);
+            margin: 12px 0 8px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -337,9 +350,9 @@
 
         .vocab-list {
             list-style: none;
-            font-size: 13.5px;
-            line-height: 1.8;
-            color: #334155;
+            font-size: 13px;
+            line-height: 1.75;
+            color: #4B5A52;
         }
 
         .vocab-list li {
@@ -352,25 +365,24 @@
             content: "•";
             position: absolute;
             left: 2px;
-            color: var(--primary-green);
+            color: var(--jade);
             font-weight: bold;
         }
 
         .vocab-list span.jp-word {
             font-family: 'Klee One', sans-serif;
-            font-weight: 600;
-            color: #1e293b;
+            font-weight: 700;
+            color: var(--ink);
         }
 
-        /* ৩. ভিডিওর মতো হুবহু ব্লাইন্ড টেস্ট পপ-আপ */
+        /* ব্লাইন্ড টেস্ট পপ-আপ */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(11, 30, 22, 0.6);
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -385,7 +397,7 @@
             padding: 24px 20px 22px;
             text-align: center;
             position: relative;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
             animation: popUp 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -401,15 +413,15 @@
             background: none;
             border: none;
             font-size: 22px;
-            color: #94a3b8;
+            color: var(--mist);
             cursor: pointer;
             line-height: 1;
         }
 
         .blind-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--pine);
             line-height: 1.35;
             margin-bottom: 16px;
         }
@@ -465,7 +477,7 @@
         }
 
         .status-correct {
-            color: #16a34a !important;
+            color: var(--jade) !important;
         }
 
         .status-completed {
@@ -493,15 +505,16 @@
 
         .blind-btn:active { transform: scale(0.95); }
         .btn-hint { background: #fef08a; color: #854d0e; }
-        .btn-retry { background: #f1f5f9; color: #475569; }
+        .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
         /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            height: 60px;
-            background: #ffffff;
-            border-top: 1px solid var(--border-color);
+            height: 64px;
+            background: rgba(251, 247, 239, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -510,16 +523,16 @@
 
         .nav-item {
             text-decoration: none;
-            color: #94a3b8;
+            color: var(--mist);
             font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             font-weight: 600;
         }
 
-        .nav-item.active { color: var(--primary-dark); }
+        .nav-item.active { color: var(--jade); }
         .nav-item i { font-size: 18px; }
     </style>
 </head>
@@ -532,7 +545,7 @@
                 KOTOBA <span class="level-pill">N5 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">১–১২০ কাঞ্জি</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--jade);">১–১২০ কাঞ্জি</div>
     </header>
 
     <main class="container">
@@ -624,7 +637,7 @@
         </div>
     </main>
 
-    <!-- ৩. ভিডিওর মতো নিখুঁত ব্লাইন্ড টেস্ট পপ-আপ -->
+    <!-- ৩. ব্লাইন্ড টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
@@ -757,7 +770,7 @@
                 { id: "85", char: "近", code: "08fd1", kun: "ちか(い) (chika-i)", on: "キン (kin)", meaning: "কাছে / নিকটবর্তী", vocab: [{ w: "近い (ちかい)", m: "কাছে" }, { w: "近く (ちかく)", m: "কাছাকাছি" }, { w: "近所 (きんじょ)", m: "আশপাশ" }] },
                 { id: "86", char: "有", code: "06709", kun: "あ(る) (a-ru)", on: "ユウ・ウ (yuu / u)", meaning: "থাকা / বিদ্যমান", vocab: [{ w: "有ります (あります)", m: "থাকা" }, { w: "有名 (ゆうめい)", m: "বিখ্যাত" }] },
                 { id: "87", char: "花", code: "082b1", kun: "はな (hana)", on: "カ (ka)", meaning: "ফুল", vocab: [{ w: "花 (はな)", m: "ফুল" }, { w: "花火 (はなび)", m: "আতশবাজি" }, { w: "花屋 (はなや)", m: "ফুলের দোকান" }] },
-                { id: "88", char: "赤", code: "08d64", kun: "あか(ই) (aka-i)", on: "セキ (seki)", meaning: "লাল", vocab: [{ w: "赤い (あかい)", m: "লাল (বিশেষণ)" }, { w: "赤ちゃん (あかちゃん)", m: "ছোট শিশু" }] },
+                { id: "88", char: "赤", code: "08d64", kun: "あか(い) (aka-i)", on: "セキ (seki)", meaning: "লাল", vocab: [{ w: "赤い (あかい)", m: "লাল (বিশেষণ)" }, { w: "赤ちゃん (あかちゃん)", m: "ছোট শিশু" }] },
                 { id: "89", char: "紙", code: "07d19", kun: "かみ (kami)", on: "シ (shi)", meaning: "কাগজ", vocab: [{ w: "紙 (かみ)", m: "কাগজ" }, { w: "手紙 (てがみ)", m: "চিঠি" }] },
                 { id: "90", char: "買", code: "08cb7", kun: "か(う) (ka-u)", on: "バイ (bai)", meaning: "কেনা", vocab: [{ w: "買います (かいます)", m: "কেনা" }, { w: "買い物 (かいもの)", m: "কেনাকাটা" }] }
             ],
@@ -791,7 +804,7 @@
                 { id: "113", char: "住", code: "04f4f", kun: "す(む) (su-mu)", on: "ジュウ (juu)", meaning: "বসবাস করা", vocab: [{ w: "住みます (すみます)", m: "বাস করা" }, { w: "住所 (じゅうしょ)", m: "ঠিকানা" }] },
                 { id: "114", char: "空", code: "07a7a", kun: "そら・あ(く) (sora / a-ku)", on: "クウ (kuu)", meaning: "আকাশ / খালি", vocab: [{ w: "空 (そら)", m: "আকাশ" }, { w: "空港 (くうこう)", m: "বিমানবন্দর" }, { w: "空気 (くうき)", m: "বাতাস" }] },
                 { id: "115", char: "週", code: "09031", kun: "-", on: "シュウ (shuu)", meaning: "সপ্তাহ", vocab: [{ w: "今週 (こんしゅう)", m: "এই সপ্তাহ" }, { w: "来週 (らいしゅう)", m: "আগামী সপ্তাহ" }, { w: "毎週 (まいしゅう)", m: "প্রতি সপ্তাহ" }] },
-                { id: "116", char: "魚", code: "09b5a", kun: "さかな・うお (sakana)", on: "ギョ (gyo)", meaning: "মাছ", vocab: [{ w: "魚 (さかな)", m: "মাছ" }, { w: "魚屋 (さかなや)", m: "মাছের দোকান" }, { w: "金魚 (きんぎょ)", m: "গোল্ডফিশ" }] },
+                { id: "116", char: "魚", code: "09b5a", kun: "さかな・うお (sakana)", on: "ギョ (gyo)", meaning: "মাছ", vocab: [{ w: "鱼 (さかな)", m: "মাছ" }, { w: "魚屋 (さかなや)", m: "মাছের দোকান" }, { w: "金魚 (きんぎょ)", m: "গোল্ডফিশ" }] },
                 { id: "117", char: "耳", code: "08033", kun: "みみ (mimi)", on: "ジ (ji)", meaning: "কান", vocab: [{ w: "耳 (みみ)", m: "কান" }] },
                 { id: "118", char: "銀", code: "09280", kun: "しろがね (shirogane)", on: "ギン (gin)", meaning: "রুপা", vocab: [{ w: "銀 (ぎん)", m: "রুপা" }, { w: "銀行 (ぎんこう)", m: "ব্যাংক" }] },
                 { id: "119", char: "道", code: "09053", kun: "みち (michi)", on: "ドウ (dou)", meaning: "রাস্তা / পথ", vocab: [{ w: "道 (みち)", m: "রাস্তা" }, { w: "水道 (すいどう)", m: "পানির লাইন" }] },
@@ -801,7 +814,7 @@
 
         const svgCache = {};
 
-        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ মুছে ফেলা যাতে ']' বা '>' স্ক্রিনে না আসে
+        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ ক্লিন করা যাতে স্ক্রিনে ']' বা '>' না আসে
         function cleanSvg(svgStr) {
             if (!svgStr) return "";
             const start = svgStr.indexOf("<svg");
@@ -844,7 +857,7 @@
 
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
-                    p.style.stroke = "#143d32";
+                    p.style.stroke = "#0B4A38";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -853,7 +866,7 @@
             }
         }
 
-        // লেসনে প্রবেশের পর সব কাঞ্জি বন্ধ অবস্থায় থাকবে
+        // লেসন ওপেন (ফিক্স: কোনো কাঞ্জি প্রথমে নিজে থেকে খোলা থাকবে না)
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
@@ -865,7 +878,6 @@
 
             items.forEach((k, index) => {
                 const itemDiv = document.createElement("div");
-                // কোনো কাঞ্জি প্রথমে খোলা থাকবে না
                 itemDiv.className = `kanji-item`;
                 itemDiv.id = `kanjiItem_${index}`;
 
@@ -900,7 +912,7 @@
                             <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--primary-green);"></i> Vocabulary</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -911,7 +923,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি ওপেন করলে বাকিগুলো বন্ধ হয়ে যাবে
+        // একটি কাঞ্জি খুললে অন্যগুলো বন্ধ হয়ে যাবে (Accordion Mode)
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -964,7 +976,7 @@
 
             paths.forEach((path, i) => {
                 const len = path.getTotalLength();
-                path.style.stroke = "#143d32";
+                path.style.stroke = "#147A57";
                 path.style.strokeWidth = "4.5";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
@@ -983,7 +995,7 @@
         }
 
         /* -------------------------------------------------------------
-           ভিডিওর মতো হুবহু অটো-স্ন্যাপ কাঞ্জি টেস্ট ইঞ্জিন
+           ভিডিওর মতো হুবহু অটো-স্ন্যাপ ব্লাইন্ড টেস্ট ইঞ্জিন
         ------------------------------------------------------------- */
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
@@ -997,11 +1009,10 @@
         let strokePathsData = [];
         let currentStrokeIdx = 0;
         let isDrawing = false;
-        let showHint = true; // ভিডিওর মতো বাই-ডিফল্ট হিন্ট অন থাকবে
+        let showHint = true;
         let activeCheckpoints = [];
         let checkpointProgress = 0;
 
-        // অডিও সিন্থেসাইজার (স্ন্যাপ সাউন্ড ও সাকসেস ফ্যানফেয়ার)
         let audioCtx = null;
         function playAudioTone(freq, type, duration) {
             try {
@@ -1089,19 +1100,16 @@
                 p.style.fill = "none";
 
                 if (index < currentStrokeIdx) {
-                    // ইতিমধ্যে সফলভাবে ড্র করা স্ট্রোক (ভিডিওর মতো সলিড কালো)
                     p.style.display = "block";
-                    p.style.stroke = "#1e293b";
+                    p.style.stroke = "#182620";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = "1";
                 } else if (index === currentStrokeIdx) {
-                    // বর্তমান স্ট্রোক (ভিডিওর মতো হালকা ধূসর গাইড)
                     p.style.display = "block";
                     p.style.stroke = "#cbd5e1";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = showHint ? "1" : "0";
                 } else {
-                    // পরবর্তী স্ট্রোকগুলো
                     p.style.display = "block";
                     p.style.stroke = "#cbd5e1";
                     p.style.strokeWidth = "6.5";
@@ -1112,7 +1120,6 @@
 
         function setupActiveStroke() {
             if (currentStrokeIdx >= strokePathsData.length) {
-                // ভিডিওর মতো হুবহু সফলতার বার্তা
                 statusText.className = "blind-status-text status-completed";
                 statusText.innerText = "অভিনন্দন! আপনি সঠিকভাবে লিখতে পেরেছেন।";
                 playSuccessFanfare();
@@ -1137,11 +1144,10 @@
             ctx.beginPath();
         }
 
-        // ক্যানভাস ড্রয়িং সেটিংস
         ctx.lineWidth = 14;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        ctx.strokeStyle = "#1e293b";
+        ctx.strokeStyle = "#182620";
 
         function getCanvasCoords(e) {
             const rect = canvas.getBoundingClientRect();
@@ -1184,7 +1190,6 @@
             const target = activeCheckpoints[checkpointProgress];
             const dist = Math.hypot(x - target.x, y - target.y);
 
-            // আঙুল দাগের কাছাকাছি থাকলে চেকপয়েন্ট সম্পন্ন
             if (dist < 36) {
                 checkpointProgress++;
 
@@ -1200,7 +1205,6 @@
             clearScratchpad();
             updateSvgDisplayState();
 
-            // ভিডিওর মতো স্ট্রোক শেষে "সঠিক!" দেখানো
             statusText.className = "blind-status-text status-correct";
             statusText.innerText = "সঠিক!";
 

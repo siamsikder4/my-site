@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>N4 কাঞ্জি লেসন ও টেস্ট - KOTOBA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>N4 কাঞ্জি (১২১–৩২০) - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-dark: #1e293b;
-            --primary-card: #0f172a;
-            --primary-blue: #2563eb;
-            --bg-page: #f8fafc;
-            --border-color: #e2e8f0;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
+            /* Index পেজের কালার প্যালেট */
+            --paper: #fbf7ef;
+            --ink: #182620;
+            --pine: #0B4A38;
+            --jade: #147A57;
+            --clay: #B6472E;
+            --gold: #A9781F;
+            --mist: #7C8A82;
+            --line: #E9E2D3;
+            --card-bg: #ffffff;
         }
 
         * {
@@ -29,18 +33,20 @@
         }
 
         body {
-            background-color: var(--bg-page);
-            color: var(--text-dark);
-            padding-bottom: 85px;
+            background-color: var(--paper);
+            color: var(--ink);
+            padding-bottom: 90px;
         }
 
+        /* স্টিকি টপ বার */
         .top-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(251, 247, 239, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -54,30 +60,35 @@
 
         .back-btn {
             text-decoration: none;
-            color: var(--primary-dark);
-            background: #f1f5f9;
+            color: var(--pine);
+            background: #F0EAD9;
             width: 36px;
             height: 36px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: none;
+            border: 1px solid var(--line);
             cursor: pointer;
             font-size: 15px;
+            transition: transform 0.15s;
         }
 
+        .back-btn:active { transform: scale(0.92); }
+
         .logo-text {
-            font-weight: 800;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 900;
             font-size: 17px;
-            color: var(--primary-dark);
+            color: var(--pine);
             display: flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: 0.5px;
         }
 
         .level-pill {
-            background: var(--primary-blue);
+            background: var(--pine);
             color: #ffffff;
             font-size: 10px;
             font-weight: 700;
@@ -93,30 +104,35 @@
 
         .subtitle-bar {
             text-align: center;
-            font-size: 13px;
-            color: var(--text-muted);
+            font-size: 12.5px;
+            color: var(--mist);
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+            background: #F0EAD9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
         }
 
+        /* লেসন গ্রিড */
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 11px;
         }
 
         .lesson-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-blue);
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--jade);
             border-radius: 14px;
-            padding: 16px 12px;
+            padding: 15px 12px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            transition: transform 0.15s;
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
-        .lesson-card:active { transform: scale(0.98); }
+        .lesson-card:active { transform: scale(0.97); }
 
         .card-top {
             display: flex;
@@ -126,40 +142,42 @@
         }
 
         .kl-badge {
-            background: #eff6ff;
-            color: var(--primary-blue);
+            background: #E6F3EC;
+            color: var(--jade);
             font-size: 10px;
             font-weight: 700;
-            padding: 2px 6px;
+            padding: 2px 7px;
             border-radius: 6px;
         }
 
         .kanji-watermark {
-            font-size: 15px;
-            color: #94a3b8;
+            font-family: 'Klee One', sans-serif;
+            font-size: 14px;
+            color: var(--mist);
             font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--ink);
             margin-bottom: 2px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--mist);
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 8px;
+            margin-top: 6px;
             color: #cbd5e1;
-            font-size: 12px;
+            font-size: 11px;
         }
 
+        /* কাঞ্জি ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
@@ -168,22 +186,22 @@
         }
 
         .view-header h3 {
-            font-size: 18px;
+            font-size: 17.5px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--pine);
         }
 
         .kanji-item {
-            margin-bottom: 10px;
-            border-radius: 12px;
+            margin-bottom: 11px;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            border: 1px solid var(--border-color);
-            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
+            border: 1px solid var(--line);
+            background: var(--card-bg);
         }
 
         .kanji-header {
-            background: var(--primary-card);
+            background: var(--pine);
             color: #ffffff;
             padding: 13px 16px;
             display: flex;
@@ -191,7 +209,7 @@
             align-items: center;
             cursor: pointer;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14.5px;
         }
 
         .kanji-header .left-info {
@@ -201,9 +219,9 @@
         }
 
         .kanji-header .left-info .icon-box {
-            background: rgba(255, 255, 255, 0.14);
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.18);
+            padding: 2px 7px;
+            border-radius: 6px;
             font-size: 12px;
         }
 
@@ -218,7 +236,7 @@
 
         .kanji-body {
             background: #ffffff;
-            padding: 20px 16px;
+            padding: 18px 16px;
             display: none;
         }
 
@@ -227,13 +245,13 @@
         }
 
         .kanji-anim-stage {
-            width: 180px;
-            height: 180px;
+            width: 170px;
+            height: 170px;
             margin: 0 auto 16px;
             position: relative;
-            background: #ffffff;
-            border: 1.5px dashed #cbd5e1;
-            border-radius: 20px;
+            background: #FAF7F0;
+            border: 1.5px dashed #D2DDD6;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -243,11 +261,9 @@
         .kanji-anim-stage::before {
             content: "";
             position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
+            left: 50%; top: 0; bottom: 0;
             width: 1px;
-            border-left: 1px dashed #e2e8f0;
+            border-left: 1px dashed var(--line);
             pointer-events: none;
             z-index: 1;
         }
@@ -255,18 +271,16 @@
         .kanji-anim-stage::after {
             content: "";
             position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
+            top: 50%; left: 0; right: 0;
             height: 1px;
-            border-top: 1px dashed #e2e8f0;
+            border-top: 1px dashed var(--line);
             pointer-events: none;
             z-index: 1;
         }
 
         .kanji-svg-wrap {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -283,16 +297,16 @@
         .action-btns {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .action-btn {
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--line);
             background: #ffffff;
-            padding: 7px 18px;
-            border-radius: 25px;
-            font-size: 13px;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -302,33 +316,33 @@
         }
 
         .action-btn:active { transform: scale(0.95); }
-        .action-btn.play { color: #0284c7; border-color: #bae6fd; background: #f0f9ff; }
-        .action-btn.practice { color: #334155; border-color: #cbd5e1; background: #f8fafc; }
-        .action-btn.test { color: #dc2626; border-color: #fecdd3; background: #fff1f2; }
+        .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
+        .action-btn.practice { color: var(--ink); border-color: var(--line); background: #FAF7F0; }
+        .action-btn.test { color: var(--clay); border-color: #F5C9BF; background: #FBEAE6; }
 
         .readings-box {
             text-align: center;
-            font-size: 14px;
-            line-height: 1.9;
-            margin-bottom: 16px;
-            color: #334155;
-            background: #f8fafc;
+            font-size: 13.5px;
+            line-height: 1.85;
+            margin-bottom: 14px;
+            color: var(--ink);
+            background: #FAF7F0;
             padding: 12px;
             border-radius: 12px;
-            border: 1px solid #eef2f6;
+            border: 1px solid var(--line);
         }
 
         .readings-box span.jp-font {
             font-family: 'Klee One', sans-serif;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: 700;
+            color: var(--pine);
         }
 
         .detail-sub-title {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 700;
-            color: var(--primary-dark);
-            margin: 14px 0 8px;
+            color: var(--pine);
+            margin: 12px 0 8px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -336,9 +350,9 @@
 
         .vocab-list {
             list-style: none;
-            font-size: 13.5px;
-            line-height: 1.8;
-            color: #334155;
+            font-size: 13px;
+            line-height: 1.75;
+            color: #4B5A52;
         }
 
         .vocab-list li {
@@ -351,25 +365,24 @@
             content: "•";
             position: absolute;
             left: 2px;
-            color: var(--primary-blue);
+            color: var(--jade);
             font-weight: bold;
         }
 
         .vocab-list span.jp-word {
             font-family: 'Klee One', sans-serif;
-            font-weight: 600;
-            color: #1e293b;
+            font-weight: 700;
+            color: var(--ink);
         }
 
-        /* ভিডিওর মতো হুবহু ব্লাইন্ড টেস্ট পপ-আপ */
+        /* ব্লাইন্ড টেস্ট পপ-আপ (ভিডিওর মতো হুবহু) */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(11, 30, 22, 0.6);
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -384,7 +397,7 @@
             padding: 24px 20px 22px;
             text-align: center;
             position: relative;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
             animation: popUp 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -400,15 +413,15 @@
             background: none;
             border: none;
             font-size: 22px;
-            color: #94a3b8;
+            color: var(--mist);
             cursor: pointer;
             line-height: 1;
         }
 
         .blind-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--pine);
             line-height: 1.35;
             margin-bottom: 16px;
         }
@@ -464,7 +477,7 @@
         }
 
         .status-correct {
-            color: #16a34a !important;
+            color: var(--jade) !important;
         }
 
         .status-completed {
@@ -492,15 +505,16 @@
 
         .blind-btn:active { transform: scale(0.95); }
         .btn-hint { background: #fef08a; color: #854d0e; }
-        .btn-retry { background: #f1f5f9; color: #475569; }
+        .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
-        /* আগের ফিক্সড বটম ন্যাভবার */
+        /* বটম বার (Index এর মতই) */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            height: 60px;
-            background: #ffffff;
-            border-top: 1px solid var(--border-color);
+            height: 64px;
+            background: rgba(251, 247, 239, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -509,16 +523,16 @@
 
         .nav-item {
             text-decoration: none;
-            color: #94a3b8;
+            color: var(--mist);
             font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             font-weight: 600;
         }
 
-        .nav-item.active { color: var(--primary-blue); }
+        .nav-item.active { color: var(--jade); }
         .nav-item i { font-size: 18px; }
     </style>
 </head>
@@ -531,13 +545,13 @@
                 KOTOBA <span class="level-pill">N4 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--primary-blue);">N4 কাঞ্জি ১–১২০+</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--jade);">১২১–৩২০ কাঞ্জি</div>
     </header>
 
     <main class="container">
-        <!-- লেসন গ্রিড -->
+        <!-- লেসন গ্রিড (১২১ থেকে ৩২০ পর্যন্ত ২০টি লেসন) -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • ১ থেকে শুরু করা N4 কাঞ্জি তালিকা</div>
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • MLC ১২১ থেকে ৩২০ সম্পূর্ণ N4 কাঞ্জি</div>
             <div class="lesson-grid" id="lessonsContainer"></div>
         </div>
 
@@ -550,7 +564,7 @@
         </div>
     </main>
 
-    <!-- ব্লাইন্ড টেস্ট পপ-আপ -->
+    <!-- ভিডিওর মতো নিখুঁত ব্লাইন্ড টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
@@ -573,12 +587,14 @@
     <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
-        <a href="ai-sensei.html" class="nav-item"><i class="fa-solid fa-robot"></i><span>AI সেনসেই</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
         <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
 
     <script>
+        // ১২১ থেকে ৩২০ পর্যন্ত সম্পূর্ণ ২০০টি N4 কাঞ্জি ডাটাবেস
         const rawN4Kanji = [
+            // লেসন ০১ (১২১-১৩০)
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
             { char: "作", kun: "つく(る)", on: "サク・サ", meaning: "তৈরি করা", vocab: [{w: "作ります (つくります)", m: "তৈরি করা"}, {w: "作文 (さくぶん)", m: "রচনা"}] },
             { char: "使", kun: "つか(う)", on: "シ", meaning: "ব্যবহার করা", vocab: [{w: "使います (つかいます)", m: "ব্যবহার করা"}, {w: "大使館 (たいしかん)", m: "দূতাবাস"}] },
@@ -589,6 +605,7 @@
             { char: "文", kun: "ふみ", on: "ブン・モン", meaning: "বাক্য / সাহিত্য", vocab: [{w: "文 (ぶん)", m: "বাক্য"}, {w: "文学 (ぶんがく)", m: "সাহিত্য"}, {w: "文法 (ぶんぽう)", m: "ব্যাকরণ"}] },
             { char: "元", kun: "もと", on: "ゲン・ガン", meaning: "মূল / সুস্থতা", vocab: [{w: "元気 (げんき)", m: "সুস্থ / উদ্যমী"}] },
             { char: "音", kun: "おと・ね", on: "オン・イン", meaning: "শব্দ / সুর", vocab: [{w: "音 (おと)", m: "শব্দ"}, {w: "発音 (はつおん)", m: "উচ্চারণ"}, {w: "音楽 (おんがく)", m: "গান"}] },
+            // লেসন ০২ (১৩১-১৪০)
             { char: "楽", kun: "たの(しい)", on: "ガク・ラク", meaning: "আনন্দদায়ক / আরাম", vocab: [{w: "楽しい (たのしい)", m: "আনন্দদায়ক"}, {w: "音楽 (おんがく)", m: "সঙ্গীত"}, {w: "楽 (らく)", m: "সহজ / স্বস্তিকর"}] },
             { char: "持", kun: "も(つ)", on: "ジ", meaning: "ধারণ করা / থাকা", vocab: [{w: "持ちます (もちます)", m: "হাতে নেওয়া / থাকা"}, {w: "お金持ち (おかねもち)", m: "ধনী ব্যক্তি"}] },
             { char: "映", kun: "うつ(る)", on: "エイ", meaning: "প্রতিফলিত হওয়া", vocab: [{w: "映画 (えいが)", m: "সিনেমা"}] },
@@ -599,6 +616,7 @@
             { char: "台", kun: "-", on: "ダイ・タイ", meaning: "মেশিন গণনার একক", vocab: [{w: "台所 (だいどころ)", m: "রান্নাঘর"}, {w: "台風 (たいふう)", m: "ঘূর্ণিঝড়"}, {w: "一台 (いちだい)", m: "একটি মেশিন"}] },
             { char: "字", kun: "あざ", on: "ジ", meaning: "অক্ষর / লিপি", vocab: [{w: "字 (じ)", m: "অক্ষর"}, {w: "漢字 (かんじ)", m: "কাঞ্জি"}] },
             { char: "主", kun: "ぬし・おも", on: "シュ", meaning: "প্রধান / মালিক", vocab: [{w: "主人 (しゅじん)", m: "স্বামী / মালিক"}, {w: "主に (おもに)", m: "প্রধানত"}] },
+            // লেসন ০৩ (১৪১-১৫০)
             { char: "以", kun: "-", on: "イ", meaning: "তুলনায় / চেয়ে", vocab: [{w: "以上 (いじょう)", m: "এর বেশি"}, {w: "以下 (いか)", m: "এর কম"}, {w: "以外 (いがい)", m: "ব্যতীত"}] },
             { char: "去", kun: "さ(る)", on: "キョ・コ", meaning: "চলে যাওয়া / অতীত", vocab: [{w: "去年 (きょねん)", m: "গত বছর"}, {w: "過去 (かこ)", m: "অতীত"}] },
             { char: "正", kun: "ただ(しい)", on: "セイ・ショウ", meaning: "সঠিক", vocab: [{w: "正しい (ただしい)", m: "সঠিক"}, {w: "正月 (しょうがつ)", m: "নববর্ষ"}] },
@@ -609,6 +627,7 @@
             { char: "牛", kun: "うし", on: "ギュウ", meaning: "গরু", vocab: [{w: "牛 (うし)", m: "গরু"}, {w: "牛肉 (ぎゅうにく)", m: "গরুর মাংস"}, {w: "牛乳 (ぎゅうにゅう)", m: "দুধ"}] },
             { char: "肉", kun: "-", on: "ニク", meaning: "মাংস", vocab: [{w: "肉 (にく)", m: "মাংস"}, {w: "鳥肉 (とりにく)", m: "মুরগির মাংস"}] },
             { char: "世", kun: "よ", on: "セイ・セ", meaning: "বিশ্ব / যুগ", vocab: [{w: "世界 (せかい)", m: "বিশ্ব / পৃথিবী"}, {w: "世話 (せわ)", m: "যত্ন নেওয়া"}] },
+            // লেসন ০৪ (১৫১-১৬০)
             { char: "界", kun: "-", on: "カイ", meaning: "জগৎ / সীমানা", vocab: [{w: "世界 (せかい)", m: "বিশ্ব / পৃথিবী"}] },
             { char: "仕", kun: "つか(える)", on: "シ", meaning: "সেবা / কাজ", vocab: [{w: "仕事 (しごと)", m: "কাজ"}, {w: "仕方 (しかた)", m: "উপায়"}] },
             { char: "事", kun: "こと", on: "ジ", meaning: "বিষয় / ঘটনা", vocab: [{w: "仕事 (しごと)", m: "কাজ"}, {w: "食事 (しょくじ)", m: "খাবার খাওয়া"}, {w: "大事 (だいじ)", m: "গুরুত্বপূর্ণ"}] },
@@ -619,6 +638,7 @@
             { char: "動", kun: "うご(く)", on: "ドウ", meaning: "নড়াচড়া করা", vocab: [{w: "動きます (うごきます)", m: "চলাচল করা"}, {w: "動物 (どうぶつ)", m: "প্রাণী"}, {w: "自動車 (じどうしゃ)", m: "গাড়ি"}] },
             { char: "勉", kun: "-", on: "ベン", meaning: "চেষ্টা / পরিশ্রম", vocab: [{w: "勉強 (べんきょう)", m: "পড়াশোনা"}] },
             { char: "強", kun: "つよ(い)", on: "キョウ・ゴウ", meaning: "শক্তিশালী", vocab: [{w: "強い (つよい)", m: "শক্তিশালী"}, {w: "勉強 (べんきょう)", m: "পড়াশোনা"}] },
+            // লেসন ০৫ (১৬১-১৭০)
             { char: "考", kun: "かんが(える)", on: "コウ", meaning: "চিন্তা করা", vocab: [{w: "考えます (かんがえます)", m: "চিন্তা করা / ভাবা"}] },
             { char: "送", kun: "おく(る)", on: "ソウ", meaning: "পাঠানো", vocab: [{w: "送ります (おくります)", m: "পাঠানো"}, {w: "見送る (みおくる)", m: "বিদায় জানানো"}] },
             { char: "売", kun: "う(る)", on: "バイ", meaning: "বিক্রি করা", vocab: [{w: "売ります (うります)", m: "বিক্রি করা"}, {w: "売り場 (うりば)", m: "বিক্রয় কাউন্টার"}] },
@@ -629,6 +649,7 @@
             { char: "弟", kun: "おとうと", on: "ダイ・テイ", meaning: "ছোট ভাই", vocab: [{w: "弟 (おとうと)", m: "ছোট ভাই"}, {w: "兄弟 (きょうだい)", m: "ভাইবোন"}] },
             { char: "姉", kun: "あね", on: "シ", meaning: "বড় বোন", vocab: [{w: "姉 (あね)", m: "নিজের বড় বোন"}, {w: "お姉さん (おねえさん)", m: "অন্যের বড় বোন"}] },
             { char: "妹", kun: "いもうと", on: "マイ", meaning: "ছোট বোন", vocab: [{w: "妹 (いもうと)", m: "ছোট বোন"}, {w: "姉妹 (しまい)", m: "বোনদ্বয়"}] },
+            // লেসন ০৬ (১৭১-১৮০)
             { char: "代", kun: "か(わる)", on: "ダイ・タイ", meaning: "যুগ / পরিবর্তন / ফি", vocab: [{w: "代わりに (かわりに)", m: "পরিবর্তে"}, {w: "時代 (じだい)", m: "যুগ"}, {w: "電気代 (でんきだい)", m: "বিদ্যুৎ বিল"}] },
             { char: "用", kun: "もち(いる)", on: "ヨウ", meaning: "কাজে লাগা / কাজ", vocab: [{w: "用事 (ようじ)", m: "জরুরি কাজ"}, {w: "利用 (りよう)", m: "ব্যবহার"}] },
             { char: "自", kun: "みずか(ら)", on: "ジ・シ", meaning: "নিজে", vocab: [{w: "自分 (じぶん)", m: "নিজে"}, {w: "自転車 (じてんしゃ)", m: "সাইকেল"}, {w: "自動車 (じどうしゃ)", m: "অটোমোবাইল"}] },
@@ -639,6 +660,7 @@
             { char: "鉄", kun: "くろがね", on: "テツ", meaning: "লোহা", vocab: [{w: "地下鉄 (ちかてつ)", m: "পাতাল রেল"}, {w: "鉄道 (てつどう)", m: "রেলপথ"}] },
             { char: "町", kun: "まち", on: "チョウ", meaning: "শহর / জনপদ", vocab: [{w: "町 (まち)", m: "ছোট শহর"}] },
             { char: "京", kun: "みやこ", on: "キョウ・ケイ", meaning: "রাজধানী", vocab: [{w: "東京 (とうきょう)", m: "টোকিও"}, {w: "京都 (きょうと)", m: "কিয়োটো"}] },
+            // লেসন ০৭ (১৮১-১৯০)
             { char: "味", kun: "あじ", on: "ミ", meaning: "স্বাদ", vocab: [{w: "味 (あじ)", m: "স্বাদ"}, {w: "意味 (いみ)", m: "অর্থ"}, {w: "趣味 (しゅみ)", m: "শখ"}] },
             { char: "度", kun: "たび", on: "ド・ト", meaning: "ডিগ্রি / বার", vocab: [{w: "一度 (いちど)", m: "একবার"}, {w: "今度 (こんど)", m: "পরের বার"}, {w: "何度 (なんど)", m: "কত ডিগ্রি / কতবার"}] },
             { char: "風", kun: "かぜ", on: "フウ・フ", meaning: "বাতাস", vocab: [{w: "風 (かぜ)", m: "বাতাস"}, {w: "台風 (たいふう)", m: "ঘূর্ণিঝড়"}] },
@@ -649,6 +671,7 @@
             { char: "室", kun: "むろ", on: "シツ", meaning: "কক্ষ / রুম", vocab: [{w: "教室 (きょうしつ)", m: "শ্রেণিকক্ষ"}, {w: "会議室 (かいぎしつ)", m: "মিটিং রুম"}] },
             { char: "色", kun: "いろ", on: "ショク・シキ", meaning: "রঙ", vocab: [{w: "色 (いろ)", m: "রঙ"}, {w: "色々 (いろいろ)", m: "নানা রকম"}] },
             { char: "青", kun: "あお(い)", on: "セイ・ショウ", meaning: "নীল", vocab: [{w: "青い (あおい)", m: "নীল (বিশেষণ)"}, {w: "青年 (せいねん)", m: "যুবক"}] },
+            // লেসন ০৮ (১৯১-২০০)
             { char: "黒", kun: "くろ(い)", on: "コク", meaning: "কালো", vocab: [{w: "黒い (くろい)", m: "কালো (বিশেষণ)"}, {w: "黒板 (こくばん)", m: "ব্ল্যাকবোর্ড"}] },
             { char: "品", kun: "しな", on: "ヒン", meaning: "পণ্য / বস্তু", vocab: [{w: "品物 (しなもの)", m: "পণ্যসামগ্রী"}, {w: "食料品 (しょくりょうひん)", m: "খাদ্যদ্রব্য"}] },
             { char: "物", kun: "もの", on: "ブツ・モツ", meaning: "জিনিস / বস্তু", vocab: [{w: "食べ物 (たべもの)", m: "খাবার"}, {w: "買い物 (かいもの)", m: "শপিং"}, {w: "荷物 (にもつ)", m: "লাগেজ"}] },
@@ -657,11 +680,12 @@
             { char: "医", kun: "-", on: "イ", meaning: "চিকিৎসা", vocab: [{w: "医者 (いしゃ)", m: "ডাক্তার"}, {w: "医学 (いがく)", m: "চিকিৎসাবিজ্ঞান"}] },
             { char: "者", kun: "もの", on: "シャ", meaning: "ব্যক্তি / পেশাজীবী", vocab: [{w: "医者 (いしゃ)", m: "ডাক্তার"}, {w: "学者 (がくしゃ)", m: "পণ্ডিত"}] },
             { char: "病", kun: "や(む)", on: "ビョウ・ヘイ", meaning: "অসুখ / রোগ", vocab: [{w: "病気 (びょうき)", m: "অসুস্থতা"}, {w: "病院 (びょういん)", m: "হাসপাতাল"}] },
-            { char: "院", kun: "-", on: "イン", meaning: "প্রতিষ্ঠান", vocab: [{w: "病院 (びょういん)", m: "হাসপাতাল"}, {w: "大学院 (だいがくいん)", m: "পোস্টগ্রাজুয়েট ইনস্টিটিউট"}] },
+            { char: "院", kun: "-", on: "イン", meaning: "প্রতিষ্ঠান", vocab: [{w: "病院 (びょういん)", m: "হাসপাতাল"}, {w: "大学院 (だいがくいん)", m: "পোস্টগ্রাজুয়েট"}] },
             { char: "急", kun: "いそ(ぐ)", on: "キュウ", meaning: "তাড়াতাড়ি / দ্রুত", vocab: [{w: "急ぎます (いそぎます)", m: "তাড়াহুড়ো করা"}, {w: "急行 (きゅうこう)", m: "এক্সপ্রেস ট্রেন"}] },
+            // লেসন ০৯ (২০১-২১০)
             { char: "春", kun: "はる", on: "シュン", meaning: "বসন্তকাল", vocab: [{w: "春 (はる)", m: "বসন্তকাল"}, {w: "春休み (はるやすみ)", m: "বসন্তের ছুটি"}] },
             { char: "夏", kun: "なつ", on: "カ・ゲ", meaning: "গ্রীষ্মকাল", vocab: [{w: "夏 (なつ)", m: "গ্রীষ্মকাল"}, {w: "夏休み (なつやすみ)", m: "গ্রীষ্মের ছুটি"}] },
-            { char: "秋", kun: "あき", on: "シュウ", meaning: "শরৎকাল / হেমন্ত", vocab: [{w: "秋 (あき)", m: "শরৎকাল"}] },
+            { char: "秋", kun: "あき", on: "シュウ", meaning: "শরৎকাল", vocab: [{w: "秋 (あき)", m: "শরৎকাল"}] },
             { char: "冬", kun: "ふゆ", on: "トウ", meaning: "শীতকাল", vocab: [{w: "冬 (ふゆ)", m: "শীতকাল"}, {w: "冬休み (ふゆやすみ)", m: "শীতকালীন ছুটি"}] },
             { char: "親", kun: "おや・した(しい)", on: "シン", meaning: "পিতামাতা / ঘনিষ্ঠ", vocab: [{w: "親 (おや)", m: "বাবা-মা"}, {w: "親切 (しんせつ)", m: "দয়ালু / অমায়িক"}] },
             { char: "切", kun: "き(る)", on: "セツ・サイ", meaning: "কাটা / জরুরি", vocab: [{w: "切ります (きります)", m: "কাটা"}, {w: "切手 (きって)", m: "ডাকটিকিট"}, {w: "大切 (たいせつ)", m: "মূল্যবান"}] },
@@ -669,6 +693,7 @@
             { char: "別", kun: "わか(れる)", on: "ベツ", meaning: "আলাদা / ভিন্ন", vocab: [{w: "別に (べつに)", m: "আলাদাভাবে"}, {w: "別れます (わかれます)", m: "বিদায় নেওয়া"}] },
             { char: "写", kun: "うつ(す)", on: "シャ", meaning: "ছবি তোলা / নকল", vocab: [{w: "写真 (しゃしん)", m: "ছবি"}, {w: "写します (うつします)", m: "ছবি তোলা"}] },
             { char: "真", kun: "ま", on: "シン", meaning: "সত্য / খাঁটি", vocab: [{w: "写真 (しゃしん)", m: "ছবি"}, {w: "真ん中 (まんなか)", m: "ঠিক মাঝে"}] },
+            // লেসন ১০ (২১১-২২০)
             { char: "運", kun: "はこ(ぶ)", on: "ウン", meaning: "বহন করা / ভাগ্য", vocab: [{w: "運動 (うんどう)", m: "ব্যায়াম"}, {w: "運転 (うんてん)", m: "ড্রাইভিং"}, {w: "運びます (はこびます)", m: "বহন করা"}] },
             { char: "転", kun: "ころ(ぶ)", on: "テン", meaning: "ঘোরা / পড়ে যাওয়া", vocab: [{w: "自転車 (じてんしゃ)", m: "সাইকেল"}, {w: "運転 (うんてん)", m: "গাড়ি চালানো"}] },
             { char: "質", kun: "-", on: "シツ・シチ", meaning: "মান / প্রশ্ন", vocab: [{w: "質問 (しつもん)", m: "প্রশ্ন"}] },
@@ -679,6 +704,7 @@
             { char: "習", kun: "なら(う)", on: "シュウ", meaning: "শেখা / অনুশীলন", vocab: [{w: "習います (ならいます)", m: "শেখা"}, {w: "練習 (れんしゅう)", m: "অনুশীলন"}] },
             { char: "起", kun: "お(きる)", on: "キ", meaning: "ঘুম থেকে ওঠা", vocab: [{w: "起きます (おきます)", m: "ঘুম থেকে ওঠা"}] },
             { char: "死", kun: "し(ぬ)", on: "シ", meaning: "মারা যাওয়া", vocab: [{w: "死にます (しにます)", m: "মারা যাওয়া"}] },
+            // লেসন ১১ (২২১-২৩০)
             { char: "悪", kun: "わる(い)", on: "アク", meaning: "খারাপ", vocab: [{w: "悪い (わるい)", m: "খারাপ"}] },
             { char: "重", kun: "おも(い)・かさ(なる)", on: "ジュウ・チョウ", meaning: "ভারী", vocab: [{w: "重い (おもい)", m: "ভারী"}, {w: "体重 (たいじゅう)", m: "শরীরের ওজন"}] },
             { char: "発", kun: "-", on: "ハツ・ホツ", meaning: "যাত্রা / প্রকাশ", vocab: [{w: "出発 (しゅっぱつ)", m: "প্রস্থান / রওনা"}, {w: "発音 (はつおん)", m: "উচ্চারণ"}] },
@@ -689,6 +715,7 @@
             { char: "歌", kun: "うた・うた(う)", on: "カ", meaning: "গান / গান গাওয়া", vocab: [{w: "歌 (うた)", m: "গান"}, {w: "歌います (うたいます)", m: "গান গাওয়া"}, {w: "歌手 (かしゅ)", m: "গায়ক"}] },
             { char: "着", kun: "き(る)・つ(く)", on: "チャク", meaning: "পরিধান করা / পৌঁছানো", vocab: [{w: "着ます (きます)", m: "পোশাক পরা"}, {w: "着きます (つきます)", m: "পৌঁছানো"}, {w: "着物 (きもの)", m: "কিমোনো"}] },
             { char: "貸", kun: "か(す)", on: "タイ", meaning: "ধার দেওয়া", vocab: [{w: "貸します (かします)", m: "ধার দেওয়া"}] },
+            // লেসন ১২ (২৩১-২৪০)
             { char: "借", kun: "か(りる)", on: "シャク", meaning: "ধার নেওয়া", vocab: [{w: "借ります (かります)", m: "ধার নেওয়া"}] },
             { char: "犬", kun: "いぬ", on: "ケン", meaning: "কুকুর", vocab: [{w: "犬 (いぬ)", m: "কুকুর"}] },
             { char: "服", kun: "-", on: "フク", meaning: "পোশাক", vocab: [{w: "服 (ふく)", m: "জামাকাপড়"}, {w: "洋服 (ようふく)", m: "পশ্চিমা পোশাক"}] },
@@ -698,7 +725,95 @@
             { char: "族", kun: "-", on: "ゾク", meaning: "পরিবার / গোত্র", vocab: [{w: "家族 (かぞく)", m: "পরিবার"}] },
             { char: "飯", kun: "めし", on: "ハン", meaning: "ভাত / খাবার", vocab: [{w: "ご飯 (ごはん)", m: "ভাত / খাবার"}, {w: "朝ご飯 (あさごはん)", m: "সকালের নাশতা"}] },
             { char: "野", kun: "の", on: "ヤ", meaning: "মাঠ / প্রান্তর", vocab: [{w: "野菜 (やさい)", m: "সবজি"}, {w: "野原 (のはら)", m: "খোলা মাঠ"}] },
-            { char: "菜", kun: "-", on: "サイ", meaning: "শাকসবজি", vocab: [{w: "野菜 (やさい)", m: "শাকসবজি"}] }
+            { char: "菜", kun: "-", on: "サイ", meaning: "শাকসবজি", vocab: [{w: "野菜 (やさい)", m: "শাকসবজি"}] },
+            // লেসন ১৩ (২৪১-২৫০)
+            { char: "止", kun: "と(まる)・と(める)", on: "シ", meaning: "থামা / থামানো", vocab: [{w: "止まります (とまります)", m: "থামা"}, {w: "中止 (ちゅうし)", m: "বাতিল"}] },
+            { char: "漢", kun: "-", on: "カン", meaning: "চীন / কাঞ্জি", vocab: [{w: "漢字 (かんじ)", m: "কাঞ্জি"}] },
+            { char: "研", kun: "と(ぐ)", on: "ケン", meaning: "গবেষণা / ধার দেওয়া", vocab: [{w: "研究 (けんきゅう)", m: "গবেষণা"}, {w: "研修 (けんしゅう)", m: "প্রশিক্ষণ"}] },
+            { char: "究", kun: "きわ(める)", on: "キュウ", meaning: "গভীরভাবে জানা", vocab: [{w: "研究 (けんきゅう)", m: "গবেষণা"}, {w: "研究者 (けんきゅうしゃ)", m: "গবেষক"}] },
+            { char: "試", kun: "ため(す)・こころ(みる)", on: "シ", meaning: "চেষ্টা করা / পরীক্ষা", vocab: [{w: "試合 (しあい)", m: "ম্যাচ/খেলা"}, {w: "試験 (しけん)", m: "পরীক্ষা"}] },
+            { char: "験", kun: "-", on: "ゲン・ケン", meaning: "পরীক্ষা / অভিজ্ঞতা", vocab: [{w: "試験 (しけん)", m: "পরীক্ষা"}, {w: "経験 (けいけん)", m: "অভিজ্ঞতা"}] },
+            { char: "内", kun: "うち", on: "ナイ", meaning: "ভেতরে / অভ্যন্তরীণ", vocab: [{w: "案内 (あんない)", m: "গাইড করা"}, {w: "国内 (こくない)", m: "দেশের ভেতরে"}] },
+            { char: "体", kun: "からだ", on: "タイ", meaning: "শরীর", vocab: [{w: "体 (からだ)", m: "শরীর"}, {w: "体重 (たいじゅう)", m: "শরীরের ওজন"}] },
+            { char: "全", kun: "まった(く)", on: "ゼン", meaning: "সব / সম্পূর্ণ", vocab: [{w: "全部 (ぜんぶ)", m: "সব কিছু"}, {w: "安全 (あんぜん)", m: "নিরাপদ"}] },
+            { char: "回", kun: "まわ(る)", on: "カイ", meaning: "ঘোরা / বার (count)", vocab: [{w: "回ります (まわります)", m: "ঘোরা"}, {w: "一回 (いっかい)", m: "একবার"}] },
+            // লেসন ১৪ (২৫১-২৬০)
+            { char: "所", kun: "ところ", on: "ショ", meaning: "স্থান / জায়গা", vocab: [{w: "場所 (ばしょ)", m: "স্থান"}, {w: "住所 (じゅうしょ)", m: "ঠিকানা"}, {w: "台所 (だいどころ)", m: "রান্নাঘর"}] },
+            { char: "公", kun: "おおやけ", on: "コウ", meaning: "পাবলিক / সার্বজনীন", vocab: [{w: "公園 (こうえん)", m: "পার্ক"}] },
+            { char: "園", kun: "その", on: "エン", meaning: "বাগান / পার্ক", vocab: [{w: "公園 (こうえん)", m: "পার্ক"}, {w: "動物園 (どうぶつえん)", m: "চিড়িয়াখানা"}] },
+            { char: "利", kun: "き(く)", on: "リ", meaning: "সুবিধা / লাভ", vocab: [{w: "便利 (べんり)", m: "সুবিধাজনক"}, {w: "利用 (りよう)", m: "ব্যবহার"}] },
+            { char: "便", kun: "たよ(り)", on: "ベン・ビン", meaning: "সুবিধা / চিঠি", vocab: [{w: "便利 (べんり)", m: "সুবিধাজনক"}, {w: "郵便局 (ゆうびんきょく)", m: "ডাকঘর"}] },
+            { char: "頭", kun: "あたま", on: "トウ・ズ", meaning: "মাথা", vocab: [{w: "頭 (あたま)", m: "মাথা"}, {w: "頭痛 (ずつう)", m: "মাথাব্যথা"}] },
+            { char: "部", kun: "-", on: "ブ", meaning: "অংশ / বিভাগ", vocab: [{w: "部屋 (へや)", m: "রুম"}, {w: "全部 (ぜんぶ)", m: "সব"}, {w: "部長 (ぶちょう)", m: "বিভাগীয় প্রধান"}] },
+            { char: "祖", kun: "-", on: "ソ", meaning: "পূর্বপুরুষ", vocab: [{w: "祖父 (そふ)", m: "নিজের দাদা/নানা"}, {w: "祖母 (そぼ)", m: "নিজের দাদি/নানি"}] },
+            { char: "業", kun: "わざ", on: "ギョウ", meaning: "কাজ / শিল্প", vocab: [{w: "授業 (じゅぎょう)", m: "ক্লাস/পাঠদান"}, {w: "産業 (さんぎょう)", m: "শিল্প"}] },
+            { char: "太", kun: "ふと(い)", on: "タイ・タ", meaning: "মোটা / স্থূল", vocab: [{w: "太い (ふとい)", m: "মোটা"}, {w: "太ります (ふとります)", m: "মোটা হওয়া"}] },
+            // লেসন ১৫ (২৬১-২৭০)
+            { char: "低", kun: "ひく(い)", on: "テイ", meaning: "নিচু / কম", vocab: [{w: "低い (ひくい)", m: "নিচু"}, {w: "最低 (さいてい)", m: "সর্বনিম্ন"}] },
+            { char: "短", kun: "みじか(い)", on: "タン", meaning: "খাটো / ছোট", vocab: [{w: "短い (みじかい)", m: "খাটো"}, {w: "短所 (たんしょ)", m: "দুর্বলতা"}] },
+            { char: "好", kun: "す(き)・この(む)", on: "コウ", meaning: "পছন্দ করা", vocab: [{w: "好き (すき)", m: "পছন্দ"}, {w: "大好き (だいすき)", m: "খুব প্রিয়"}] },
+            { char: "若", kun: "わか(い)", on: "ジャク", meaning: "তরুণ / কমবয়সী", vocab: [{w: "若い (わかい)", m: "তরুণ"}, {w: "若者 (わかもの)", m: "যুবসমাজ"}] },
+            { char: "弱", kun: "よわ(い)", on: "ジャク", meaning: "দুর্বল", vocab: [{w: "弱い (よわい)", m: "দুর্বল"}, {w: "弱点 (じゃくてん)", m: "দুর্বলতা"}] },
+            { char: "軽", kun: "かる(い)", on: "ケイ", meaning: "হালকা", vocab: [{w: "軽い (かるい)", m: "হালকা"}] },
+            { char: "違", kun: "ちが(う)", on: "イ", meaning: "ভুল / ভিন্ন হওয়া", vocab: [{w: "違います (ちがいます)", m: "ভুল/আলাদা"}, {w: "間違い (まちがい)", m: "ভুল"}] },
+            { char: "暑", kun: "あつ(い)", on: "ショ", meaning: "গরম (আবহাওয়া)", vocab: [{w: "暑い (あつい)", m: "গরম"}] },
+            { char: "寒", kun: "さむ(い)", on: "カン", meaning: "ঠান্ডা (আবহাওয়া)", vocab: [{w: "寒い (さむい)", m: "ঠান্ডা"}] },
+            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まにあいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
+            // লেসন ১৬ (২৭১-২৮০)
+            { char: "伝", kun: "つた(える)", on: "デン", meaning: "জানানো / পৌঁছে দেওয়া", vocab: [{w: "伝えます (つたえます)", m: "জানানো"}, {w: "手伝います (てつだいます)", m: "সাহায্য করা"}] },
+            { char: "決", kun: "き(める)", on: "ケツ", meaning: "সিদ্ধান্ত নেওয়া", vocab: [{w: "決めます (きめます)", m: "সিদ্ধান্ত নেওয়া"}, {w: "決して (けっして)", m: "কখনোই নয়"}] },
+            { char: "困", kun: "こま(る)", on: "コン", meaning: "সমস্যায় পড়া", vocab: [{w: "困ります (こまります)", m: "অসুবিধায় পড়া"}] },
+            { char: "返", kun: "かえ(す)", on: "ヘン", meaning: "ফেরত দেওয়া", vocab: [{w: "返します (かえします)", m: "ফেরত দেওয়া"}, {w: "返事 (へんじ)", m: "উত্তর"}] },
+            { char: "泳", kun: "およ(ぐ)", on: "エイ", meaning: "সাঁতার কাটা", vocab: [{w: "泳ぎます (およぎます)", m: "সাঁতার কাটা"}, {w: "水泳 (すいえい)", m: "সাঁতার"}] },
+            { char: "消", kun: "き(える)・け(す)", on: "ショウ", meaning: "নেভানো / বন্ধ করা", vocab: [{w: "消します (けします)", m: "বন্ধ করা/নেভানো"}, {w: "消しゴム (けしごむ)", m: "ইরেজার"}] },
+            { char: "忘", kun: "わす(れる)", on: "ボウ", meaning: "ভুলে যাওয়া", vocab: [{w: "忘れます (わすれます)", m: "ভুলে যাওয়া"}, {w: "忘れ物 (わすれもの)", m: "ফেলে যাওয়া জিনিস"}] },
+            { char: "呼", kun: "よ(ぶ)", on: "コ", meaning: "ডাকা", vocab: [{w: "呼びます (よびます)", m: "ডাকা"}] },
+            { char: "閉", kun: "し(める)・と(じる)", on: "ヘイ", meaning: "বন্ধ করা", vocab: [{w: "閉めます (しめます)", m: "বন্ধ করা"}, {w: "閉まります (しまります)", m: "বন্ধ হওয়া"}] },
+            { char: "引", kun: "ひ(く)", on: "イン", meaning: "টানা / বিয়োগ", vocab: [{w: "引きます (ひきます)", m: "টানা"}, {w: "引き出し (ひきだし)", m: "ড্রয়ার"}] },
+            // লেসন ১৭ (২৮১-২৯০)
+            { char: "押", kun: "お(す)", on: "オウ", meaning: "ধাক্কা দেওয়া / চাপ দেওয়া", vocab: [{w: "押します (おします)", m: "চাপ দেওয়া/টিপ দেওয়া"}] },
+            { char: "拾", kun: "ひろ(う)", on: "シュウ", meaning: "কুড়িয়ে নেওয়া", vocab: [{w: "拾います (ひろいます)", m: "কুড়ানো"}] },
+            { char: "捨", kun: "す(てる)", on: "シャ", meaning: "ফেলে দেওয়া", vocab: [{w: "捨てます (すてます)", m: "ফেলে দেওয়া"}] },
+            { char: "説", kun: "と(く)", on: "セツ", meaning: "ব্যাখ্যা / মতবাদ", vocab: [{w: "説明 (せつめい)", m: "ব্যাখ্যা"}, {w: "小説 (しょうせつ)", m: "উপন্যাস"}] },
+            { char: "受", kun: "う(ける)", on: "ジュ", meaning: "গ্রহণ করা / পরীক্ষা দেওয়া", vocab: [{w: "受けます (うけます)", m: "পরীক্ষা দেওয়া/গ্রহণ করা"}, {w: "受付 (うけつけ)", m: "রিসেপশন"}] },
+            { char: "取", kun: "と(る)", on: "シュ", meaning: "নেওয়া / ধরা", vocab: [{w: "取ります (とります)", m: "নেওয়া"}] },
+            { char: "席", kun: "-", on: "セキ", meaning: "আসন / সিট", vocab: [{w: "席 (せき)", m: "আসন"}, {w: "出席 (しゅっせき)", m: "উপস্থিতি"}] },
+            { char: "連", kun: "つ(れる)", on: "レン", meaning: "সাথে নেওয়া / যুক্ত", vocab: [{w: "連れて行きます (つれていきます)", m: "সাথে নিয়ে যাওয়া"}, {w: "連絡 (れんらく)", m: "যোগাযোগ"}] },
+            { char: "座", kun: "すわ(る)", on: "ザ", meaning: "বসা", vocab: [{w: "座ります (すわります)", m: "বসা"}, {w: "口座 (こうざ)", m: "ব্যাংক অ্যাকাউন্ট"}] },
+            { char: "変", kun: "か(わる)・か(える)", on: "ヘン", meaning: "পরিবর্তন / অদ্ভুত", vocab: [{w: "変えます (かえます)", m: "পরিবর্তন করা"}, {w: "大変 (たいへん)", m: "মারাত্মক/কঠিন"}] },
+            // লেসন ১৮ (২৯১-৩০০)
+            { char: "乗", kun: "の(る)", on: "ジョウ", meaning: "চড়া / ওঠা", vocab: [{w: "乗ります (のります)", m: "গাড়িতে ওঠা"}, {w: "乗り物 (のりもの)", m: "যানবাহন"}] },
+            { char: "降", kun: "お(りる)・ふ(る)", on: "コウ", meaning: "নামা / বৃষ্টি পড়া", vocab: [{w: "降ります (おります)", m: "গাড়ি থেকে নামা"}, {w: "降ります (ふります)", m: "বৃষ্টি পড়া"}] },
+            { char: "働", kun: "はたら(く)", on: "ドウ", meaning: "কাজ করা", vocab: [{w: "働きます (はたらきます)", m: "কাজ করা"}] },
+            { char: "残", kun: "のこ(る)", on: "ザン", meaning: "বাকি থাকা", vocab: [{w: "残ります (のこります)", m: "বাকি থাকা"}, {w: "残業 (ざんぎょう)", m: "ওভারটাইম"}] },
+            { char: "調", kun: "しら(べる)", on: "チョウ", meaning: "তদন্ত করা / খোঁজ নেওয়া", vocab: [{w: "調べます (しらべます)", m: "খোঁজা/তদন্ত করা"}, {w: "調子 (ちょうし)", m: "অবস্থা"}] },
+            { char: "続", kun: "つづ(く)・つづ(ける)", on: "ゾク", meaning: "চালিয়ে যাওয়া", vocab: [{w: "続けます (つづけます)", m: "চালিয়ে যাওয়া"}, {w: "続きます (つづきます)", m: "অব্যাহত থাকা"}] },
+            { char: "練", kun: "ね(る)", on: "レン", meaning: "অনুশীলন", vocab: [{w: "練習 (れんしゅう)", m: "অনুশীলন"}] },
+            { char: "落", kun: "お(ちる)・お(とす)", on: "ラク", meaning: "পড়ে যাওয়া / ফেলা", vocab: [{w: "落ちます (おちます)", m: "পড়ে যাওয়া"}, {w: "落とします (おとします)", m: "ফেলে দেওয়া"}] },
+            { char: "寝", kun: "ね(る)", on: "シン", meaning: "ঘুমানো", vocab: [{w: "寝ます (ねます)", m: "ঘুমানো"}, {w: "昼寝 (ひるね)", m: "দুপুরের ঘুম"}] },
+            { char: "遅", kun: "おそ(い)・おく(れる)", on: "チ", meaning: "দেরি হওয়া / ধীর", vocab: [{w: "遅い (おそい)", m: "দেরি/ধীর"}, {w: "遅れます (おくれます)", m: "দেরি হওয়া"}] },
+            // লেসন ১৯ (৩০১-৩১০)
+            { char: "顔", kun: "かお", on: "ガン", meaning: "মুখমণ্ডল", vocab: [{w: "顔 (かお)", m: "মুখ"}, {w: "洗顔 (せんがん)", m: "মুখ ধোয়া"}] },
+            { char: "首", kun: "くび", on: "シュ", meaning: "গলা / ঘাড়", vocab: [{w: "首 (くび)", m: "গলা/ঘাড়"}, {w: "首相 (しゅしょう)", m: "প্রধানমন্ত্রী"}] },
+            { char: "声", kun: "こえ", on: "セイ", meaning: "কণ্ঠস্বর / আওয়াজ", vocab: [{w: "声 (こえ)", m: "গলার আওয়াজ"}] },
+            { char: "都", kun: "みやこ", on: "ト・ツ", meaning: "রাজধানী / মহানগর", vocab: [{w: "京都 (きょうと)", m: "কিয়োটো"}, {w: "都合 (つごう)", m: "সুবিধা"}] },
+            { char: "県", kun: "-", on: "ケン", meaning: "প্রদেশ / প্রিফেকচার", vocab: [{w: "県 (けん)", m: "প্রিফেকচার"}] },
+            { char: "区", kun: "-", on: "ク", meaning: "ওয়ার্ড / অঞ্চল", vocab: [{w: "区 (く)", m: "ওয়ার্ড/অঞ্চল"}, {w: "区役所 (くやくしょ)", m: "ওয়ার্ড অফিস"}] },
+            { char: "市", kun: "いち", on: "シ", meaning: "শহর / বাজার", vocab: [{w: "市 (し)", m: "সিটি/শহর"}, {w: "市役所 (しやくしょ)", m: "সিটি হল"}] },
+            { char: "村", kun: "むら", on: "ソン", meaning: "গ্রাম", vocab: [{w: "村 (むら)", m: "গ্রাম"}] },
+            { char: "民", kun: "たみ", on: "ミン", meaning: "নাগরিক / জনগণ", vocab: [{w: "市民 (しみん)", m: "নাগরিক"}, {w: "国民 (こくみん)", m: "দেশবাসী"}] },
+            { char: "産", kun: "う(む)", on: "サン", meaning: "উৎপাদন / জন্ম", vocab: [{w: "生産 (せいさん)", m: "উৎপাদন"}, {w: "お土産 (おみやげ)", m: "স্মারক উপহার"}] },
+            // লেসন ২০ (৩১১-৩২০)
+            { char: "林", kun: "はやし", on: "リン", meaning: "ছোট বন / কুঞ্জ", vocab: [{w: "林 (はやし)", m: "ছোট বন"}] },
+            { char: "森", kun: "もり", on: "シン", meaning: "গভীর জঙ্গল / বন", vocab: [{w: "森 (もり)", m: "জঙ্গল/বন"}, {w: "森林 (しんりん)", m: "বনভূমি"}] },
+            { char: "池", kun: "いけ", on: "チ", meaning: "পুকুর", vocab: [{w: "池 (いけ)", m: "পুকুর"}, {w: "電池 (でんち)", m: "ব্যাটারি"}] },
+            { char: "門", kun: "かど", on: "モン", meaning: "ফটক / গেট", vocab: [{w: "門 (もん)", m: "ফটক/গেট"}, {w: "専門 (せんもん)", m: "বিশেষত্ব"}] },
+            { char: "葉", kun: "は", on: "ヨウ", meaning: "পাতা", vocab: [{w: "言葉 (ことば)", m: "শব্দ/ভাষা"}, {w: "葉 (は)", m: "গাছের পাতা"}] },
+            { char: "洗", kun: "あら(う)", on: "セン", meaning: "ধোয়া", vocab: [{w: "洗います (あらいます)", m: "ধোয়া"}, {w: "洗濯 (せんたく)", m: "কাপড় ধোয়া"}] },
+            { char: "進", kun: "すす(む)", on: "シン", meaning: "এগিয়ে যাওয়া", vocab: [{w: "進みます (すすみます)", m: "এগিয়ে যাওয়া"}, {w: "進学 (しんがく)", m: "উচ্চশিক্ষা"}] },
+            { char: "暗", kun: "くら(い)", on: "アン", meaning: "অন্ধকার", vocab: [{w: "暗い (くらい)", m: "অন্ধকার"}] },
+            { char: "光", kun: "ひか(る)・ひかり", on: "コウ", meaning: "আলো / দীপ্তি", vocab: [{w: "光 (ひかり)", m: "আলো"}, {w: "光ります (ひかります)", m: "উজ্জ্বল হওয়া"}] },
+            { char: "線", kun: "-", on: "セン", meaning: "রেখা / লাইন", vocab: [{w: "線 (せん)", m: "রেখা"}, {w: "新幹線 (しんかんせん)", m: "বুলেট ট্রেন"}] }
         ];
 
         function toHexCode(char) {
@@ -713,9 +828,9 @@
             const lessonNumber = i + 1;
             const slice = rawN4Kanji.slice(i * itemsPerLesson, (i + 1) * itemsPerLesson);
             kanjiData[lessonNumber] = slice.map((item, idx) => {
-                const serialNum = (i * itemsPerLesson) + idx + 1;
+                const serialNum = 120 + (i * itemsPerLesson) + idx + 1;
                 return {
-                    id: serialNum < 10 ? `0${serialNum}` : `${serialNum}`,
+                    id: `${serialNum}`,
                     char: item.char,
                     code: toHexCode(item.char),
                     kun: item.kun,
@@ -755,7 +870,7 @@
 
         const svgCache = {};
 
-        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ মুছে ফেলা যাতে ']' বা '>' স্ক্রিনে না আসে
+        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ ক্লিন করা যাতে স্ক্রিনে ']' বা '>' না আসে
         function cleanSvg(svgStr) {
             if (!svgStr) return "";
             const start = svgStr.indexOf("<svg");
@@ -798,7 +913,7 @@
 
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
-                    p.style.stroke = "#1e293b";
+                    p.style.stroke = "#0B4A38";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -853,7 +968,7 @@
                             <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--primary-blue);"></i> Vocabulary</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -864,7 +979,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি ওপেন করলে বাকিগুলো বন্ধ হয়ে যাবে
+        // একটি কাঞ্জি খুললে অন্যগুলো বন্ধ হয়ে যাবে (Accordion Mode)
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -917,8 +1032,8 @@
 
             paths.forEach((path, i) => {
                 const len = path.getTotalLength();
-                path.style.stroke = "#2563eb";
-                path.style.strokeWidth = "4.2";
+                path.style.stroke = "#147A57";
+                path.style.strokeWidth = "4.5";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
                 path.style.fill = "none";
@@ -927,16 +1042,16 @@
                 path.style.transition = "none";
 
                 setTimeout(() => {
-                    path.style.transition = "stroke-dashoffset 0.65s cubic-bezier(0.4, 0, 0.2, 1)";
+                    path.style.transition = "stroke-dashoffset 0.55s cubic-bezier(0.4, 0, 0.2, 1)";
                     path.style.strokeDashoffset = "0";
                 }, delay);
 
-                delay += 600;
+                delay += 550;
             });
         }
 
         /* -------------------------------------------------------------
-           ভিডিওর মতো হুবহু অটো-স্ন্যাপ কাঞ্জি টেস্ট ইঞ্জিন
+           ভিডিওর মতো হুবহু অটো-স্ন্যাপ ব্লাইন্ড টেস্ট ইঞ্জিন
         ------------------------------------------------------------- */
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
@@ -1042,7 +1157,7 @@
 
                 if (index < currentStrokeIdx) {
                     p.style.display = "block";
-                    p.style.stroke = "#1e293b";
+                    p.style.stroke = "#182620";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = "1";
                 } else if (index === currentStrokeIdx) {
@@ -1088,7 +1203,7 @@
         ctx.lineWidth = 14;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        ctx.strokeStyle = "#1e293b";
+        ctx.strokeStyle = "#182620";
 
         function getCanvasCoords(e) {
             const rect = canvas.getBoundingClientRect();

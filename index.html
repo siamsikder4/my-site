@@ -63,7 +63,7 @@
             grid-template-columns: 40px 1fr 40px;
             align-items: center;
             padding: 11px 18px;
-            background: rgba(250, 247, 240, 0.92);
+            background: rgba(250, 247, 240, 0.94);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--line);
             position: sticky;
@@ -86,12 +86,13 @@
             text-decoration: none;
         }
 
+        /* সিম্পল লোগো (কোনো শ্যাডো ছাড়া) */
         .app-logo-img {
             width: 32px;
             height: 32px;
-            border-radius: 9px;
+            border-radius: 8px;
             object-fit: cover;
-            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.18);
+            box-shadow: none !important; /* সম্পূর্ণ শ্যাডো মুক্ত */
         }
 
         .logo {
@@ -108,42 +109,51 @@
             align-items: center;
         }
 
+        /* আধুনিক নোটিফিকেশন বেল বাটন */
         .notif-bell-btn {
             position: relative;
-            background: #F0EAD9;
+            background: #ffffff;
             color: var(--pine);
-            border: none;
+            border: 1px solid var(--line);
             width: 38px;
             height: 38px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.15s ease, background 0.15s;
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .notif-bell-btn:active {
             transform: scale(0.92);
-            background: #E7DFC9;
+            background: #F0EAD9;
         }
 
         .notif-badge {
             position: absolute;
-            top: -3px;
-            right: -3px;
+            top: -4px;
+            right: -4px;
             background: var(--clay);
             color: #ffffff;
-            font-size: 9.5px;
-            font-weight: 700;
-            min-width: 17px;
-            height: 17px;
-            border-radius: 50%;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 10px;
             display: none;
             align-items: center;
             justify-content: center;
             border: 2px solid var(--paper);
+            padding: 0 4px;
+            animation: pulseBadge 2s infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
         }
 
         .global-alert-banner {
@@ -310,13 +320,14 @@
             border: 1px solid #F0DFB6;
         }
 
-        /* মডাল */
+        /* দৃষ্টিনন্দন ও আধুনিক নোটিফিকেশন মডাল */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(20, 30, 25, 0.5);
-            backdrop-filter: blur(3px);
+            background: rgba(15, 34, 27, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -324,99 +335,207 @@
         }
 
         .notif-modal-card {
-            background: var(--paper);
+            background: #ffffff;
             width: 100%;
-            max-width: 380px;
-            border-radius: 18px;
+            max-width: 400px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 20px 44px rgba(11, 30, 22, 0.25);
+            box-shadow: 0 16px 40px rgba(11, 74, 56, 0.2);
+            border: 1px solid var(--line);
             display: flex;
             flex-direction: column;
-            max-height: 80vh;
-            animation: popUp 0.18s ease-out;
+            max-height: 82vh;
+            animation: modalPopUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes popUp {
-            from { transform: scale(0.96); opacity: 0; }
+        @keyframes modalPopUp {
+            from { transform: scale(0.95); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .modal-header {
-            background: var(--pine);
-            color: #ffffff;
-            padding: 15px 18px;
+            background: #ffffff;
+            color: var(--ink);
+            padding: 16px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-header-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: #E6F3EC;
+            color: var(--jade);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         }
 
         .modal-header h3 {
-            font-size: 14.5px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--pine);
+            margin: 0;
         }
 
         .close-btn {
-            background: none;
+            background: #F0EAD9;
             border: none;
-            color: #ffffff;
-            font-size: 22px;
+            color: var(--mist);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
             cursor: pointer;
-            line-height: 1;
-            opacity: 0.85;
+            transition: all 0.15s ease;
+        }
+
+        .close-btn:active {
+            background: #E7DFC9;
+            color: var(--ink);
         }
 
         .notif-list {
             padding: 14px;
             overflow-y: auto;
             flex: 1;
+            background: #FAF7F0;
         }
 
+        /* প্রতিটি নোটিফিকেশন আইটেম কার্ড */
         .notif-item {
             background: #ffffff;
             border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 12px 13px;
+            border-radius: 14px;
+            padding: 13px 14px;
             margin-bottom: 10px;
-            border-left: 3px solid var(--jade);
+            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
+            transition: transform 0.15s ease;
+        }
+
+        .notif-item:last-child {
+            margin-bottom: 0;
         }
 
         .notif-item.targeted {
-            border-left-color: var(--gold);
+            border-color: #EEDBB7;
+            background: #FFFCF7;
+        }
+
+        .notif-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            gap: 8px;
+        }
+
+        .notif-item-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .notif-item-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 7px;
+            background: #E6F3EC;
+            color: var(--jade);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .notif-item-icon.targeted {
+            background: #FAF0DC;
+            color: var(--gold);
         }
 
         .notif-item h4 {
             font-size: 13.5px;
             color: var(--pine);
             font-weight: 700;
-            margin-bottom: 4px;
+            line-height: 1.35;
         }
 
-        .notif-item p {
+        .notif-pill {
+            font-size: 9.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .notif-pill.global {
+            background: #E6F3EC;
+            color: var(--jade);
+        }
+
+        .notif-pill.personal {
+            background: #FAF0DC;
+            color: var(--gold);
+            border: 1px solid #F0DFB6;
+        }
+
+        .notif-message {
             font-size: 12px;
             color: #4B5A52;
-            line-height: 1.45;
-            margin-bottom: 6px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            padding-left: 2px;
         }
 
-        .notif-item .date {
+        .notif-time {
             font-size: 10px;
             color: var(--mist);
             font-weight: 600;
             text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
         }
 
+        /* এম্পটি স্টেট */
         .no-notif {
             text-align: center;
             color: var(--mist);
-            font-size: 13px;
-            font-weight: 600;
-            padding: 30px 0;
+            padding: 38px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* প্রোফাইল পেজের মতো ফ্লোটিং আইল্যান্ড বটম ন্যাভিগেশন বার */
+        .no-notif .empty-icon {
+            font-size: 32px;
+            color: #C8D1CC;
+            margin-bottom: 4px;
+        }
+
+        .no-notif p {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ফ্লোটিং আইল্যান্ড বটম ন্যাভিগেশন বার */
         .bottom-nav {
             position: fixed;
             bottom: 12px;
@@ -488,22 +607,28 @@
             </a>
         </div>
         <div class="top-nav-right">
-            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
-                <i class="fa-solid fa-bell"></i>
+            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন" aria-label="নোটিফিকেশন">
+                <i class="fa-regular fa-bell"></i>
                 <span class="notif-badge" id="notifBadge">0</span>
             </button>
         </div>
     </header>
 
-    <!-- নোটিফিকেশন মডাল -->
+    <!-- সুন্দর ও আধুনিক নোটিফিকেশন মডাল -->
     <div class="modal-overlay" id="notifModal">
         <div class="notif-modal-card">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-bell"></i> নোটিফিকেশন</h3>
-                <button class="close-btn" id="closeNotifBtn">&times;</button>
+                <div class="modal-header-left">
+                    <div class="modal-header-icon"><i class="fa-solid fa-bell"></i></div>
+                    <h3>নোটিফিকেশন</h3>
+                </div>
+                <button class="close-btn" id="closeNotifBtn" aria-label="বন্ধ করুন">&times;</button>
             </div>
             <div class="notif-list" id="notifList">
-                <div class="no-notif"><i class="fa-solid fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+                <div class="no-notif">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px; color: var(--jade);"></i>
+                    <p style="margin-top: 6px;">লোড হচ্ছে...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -811,18 +936,36 @@
                         const itemDiv = document.createElement("div");
                         itemDiv.className = `notif-item ${n.isTargeted ? 'targeted' : ''}`;
                         itemDiv.innerHTML = `
-                            <h4>${n.title} ${n.isTargeted ? '<span style="font-size:10px; color:#A9781F; background:#FAF0DC; padding:1px 6px; border-radius:4px; margin-left:4px;">ব্যক্তিগত</span>' : ''}</h4>
-                            <p>${n.message}</p>
-                            <div class="date">${dateStr}</div>
+                            <div class="notif-item-top">
+                                <div class="notif-item-title-wrap">
+                                    <span class="notif-item-icon ${n.isTargeted ? 'targeted' : ''}">
+                                        <i class="fa-solid ${n.isTargeted ? 'fa-user-tag' : 'fa-bullhorn'}"></i>
+                                    </span>
+                                    <h4>${n.title}</h4>
+                                </div>
+                                ${n.isTargeted ? '<span class="notif-pill personal">ব্যক্তিগত</span>' : '<span class="notif-pill global">ঘোষণা</span>'}
+                            </div>
+                            <p class="notif-message">${n.message}</p>
+                            <div class="notif-time"><i class="fa-regular fa-clock"></i> ${dateStr}</div>
                         `;
                         notifList.appendChild(itemDiv);
                     });
                 } else {
                     notifBadge.style.display = "none";
-                    notifList.innerHTML = `<div class="no-notif">কোনো নোটিফিকেশন নেই।</div>`;
+                    notifList.innerHTML = `
+                        <div class="no-notif">
+                            <div class="empty-icon"><i class="fa-regular fa-bell-slash"></i></div>
+                            <p>নতুন কোনো নোটিফিকেশন নেই</p>
+                        </div>
+                    `;
                 }
             } catch (err) {
-                notifList.innerHTML = `<div class="no-notif" style="color:#B6472E;">নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</div>`;
+                notifList.innerHTML = `
+                    <div class="no-notif" style="color:var(--clay);">
+                        <div class="empty-icon" style="color:var(--clay);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <p>নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</p>
+                    </div>
+                `;
             }
         }
     </script>

@@ -8,67 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-canvas: #F8F9F6;
-            --surface-card: #FFFFFF;
-            --surface-muted: #F0F2EB;
-
-            --brand-primary: #0F3E31;
-            --brand-primary-light: #E7F3ED;
-            --brand-accent: #15805D;
-            --brand-vermilion: #C83E2B;
-            --brand-vermilion-soft: #FDF1EE;
-            --brand-ochre: #B88326;
-            --brand-ochre-soft: #FAF2E2;
-
-            --text-main: #13221C;
-            --text-sub: #5E6E66;
-            --text-tertiary: #92A099;
-
-            --border-soft: #E5E9E2;
-            --border-highlight: #D2DDD6;
-
-            --shadow-sm: 0 2px 6px rgba(15, 62, 49, 0.04);
-            --shadow-card: 0 4px 16px rgba(15, 62, 49, 0.05);
-            --shadow-float: 0 10px 28px rgba(15, 62, 49, 0.12);
-
-            --radius-md: 14px;
-            --radius-lg: 18px;
-            --radius-pill: 999px;
+            --primary-dark: #12372a;
+            --primary-card: #143d32;
+            --primary-green: #047857;
+            --bg-page: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-canvas);
-            color: var(--text-main);
-            padding-bottom: 96px;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            padding-bottom: 85px;
         }
 
-        /* স্টিকি টপ বার */
         .top-nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(248, 249, 246, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border-soft);
-            padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 12px 18px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .nav-left {
@@ -79,90 +55,69 @@
 
         .back-btn {
             text-decoration: none;
-            color: var(--brand-primary);
-            background: var(--surface-card);
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
+            color: var(--primary-dark);
+            background: #f1f5f9;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border-soft);
+            border: none;
             cursor: pointer;
             font-size: 15px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .back-btn:active {
-            transform: scale(0.92);
-            background: var(--surface-muted);
         }
 
         .logo-text {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
+            font-weight: 800;
             font-size: 17px;
-            color: var(--brand-primary);
+            color: var(--primary-dark);
             display: flex;
             align-items: center;
-            gap: 7px;
-            letter-spacing: 0.5px;
+            gap: 6px;
         }
 
         .level-pill {
-            background: var(--brand-primary-light);
-            color: var(--brand-accent);
-            border: 1px solid #CCE7DC;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--primary-green);
+            color: #ffffff;
             font-size: 10px;
-            font-weight: 800;
-            padding: 2px 8px;
+            font-weight: 700;
+            padding: 2px 7px;
             border-radius: 6px;
         }
 
         .container {
-            padding: 18px 16px;
+            padding: 14px 16px;
             max-width: 480px;
             margin: 0 auto;
         }
 
         .subtitle-bar {
             text-align: center;
-            font-size: 12.5px;
-            color: var(--text-sub);
+            font-size: 13px;
+            color: var(--text-muted);
             font-weight: 600;
-            margin-bottom: 16px;
-            background: var(--surface-muted);
-            padding: 6px 12px;
-            border-radius: var(--radius-pill);
+            margin-bottom: 14px;
         }
 
-        /* লেসন গ্রিড */
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 11px;
+            gap: 12px;
         }
 
         .lesson-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-md);
-            padding: 15px 13px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-dark);
+            border-radius: 14px;
+            padding: 16px 12px;
             cursor: pointer;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.18s ease, border-color 0.18s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 106px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s;
         }
 
-        .lesson-card:active {
-            transform: scale(0.97);
-            border-color: var(--border-highlight);
-        }
+        .lesson-card:active { transform: scale(0.98); }
 
         .card-top {
             display: flex;
@@ -172,88 +127,72 @@
         }
 
         .kl-badge {
-            background: var(--brand-primary-light);
-            color: var(--brand-accent);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f1f5f9;
+            color: #475569;
             font-size: 10px;
-            font-weight: 800;
-            padding: 2.5px 7px;
+            font-weight: 700;
+            padding: 2px 6px;
             border-radius: 6px;
-            border: 1px solid #CCE7DC;
         }
 
         .kanji-watermark {
-            font-family: 'Klee One', sans-serif;
-            font-size: 14px;
-            color: var(--text-tertiary);
+            font-size: 15px;
+            color: #94a3b8;
             font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 14.5px;
+            font-size: 15px;
             font-weight: 700;
-            color: var(--brand-primary);
+            color: var(--primary-dark);
             margin-bottom: 2px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: var(--text-sub);
+            color: var(--text-muted);
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 6px;
-            color: var(--text-tertiary);
-            font-size: 11px;
+            margin-top: 8px;
+            color: #cbd5e1;
+            font-size: 12px;
         }
 
-        /* কাঞ্জি লিস্ট ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .view-header h3 {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 800;
-            color: var(--brand-primary);
+            color: var(--primary-dark);
         }
 
         .kanji-item {
-            margin-bottom: 12px;
-            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: var(--shadow-card);
-            border: 1px solid var(--border-soft);
-            background: var(--surface-card);
-            transition: border-color 0.2s;
-        }
-
-        .kanji-item.open {
-            border-color: var(--brand-accent);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            background: #ffffff;
         }
 
         .kanji-header {
-            background: var(--surface-card);
-            color: var(--brand-primary);
-            padding: 14px 16px;
+            background: var(--primary-card);
+            color: #ffffff;
+            padding: 13px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 15px;
-            border-bottom: 1px solid transparent;
-            transition: background 0.15s;
-        }
-
-        .kanji-item.open .kanji-header {
-            background: var(--brand-primary-light);
-            border-bottom-color: #CCE7DC;
         }
 
         .kanji-header .left-info {
@@ -262,60 +201,40 @@
             gap: 10px;
         }
 
-        .kanji-header .icon-box {
-            background: var(--surface-muted);
-            color: var(--brand-accent);
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border: 1px solid var(--border-soft);
-        }
-
-        .kanji-item.open .icon-box {
-            background: var(--surface-card);
-            color: var(--brand-primary);
+        .kanji-header .left-info .icon-box {
+            background: rgba(255, 255, 255, 0.14);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
         }
 
         .kanji-header .arrow-icon {
-            font-size: 12px;
-            color: var(--text-tertiary);
+            font-size: 13px;
             transition: transform 0.25s ease;
         }
 
         .kanji-item.open .arrow-icon {
             transform: rotate(90deg);
-            color: var(--brand-accent);
         }
 
         .kanji-body {
-            background: var(--surface-card);
-            padding: 18px 16px;
+            background: #ffffff;
+            padding: 20px 16px;
             display: none;
         }
 
         .kanji-item.open .kanji-body {
             display: block;
-            animation: fadeIn 0.2s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* কাঞ্জি স্টেজ */
         .kanji-anim-stage {
-            width: 170px;
-            height: 170px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 16px;
             position: relative;
-            background: #FAFAF7;
-            border: 1.5px dashed #D2DDD6;
-            border-radius: 18px;
+            background: #ffffff;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -326,9 +245,10 @@
             content: "";
             position: absolute;
             left: 50%;
-            top: 0; bottom: 0;
+            top: 0;
+            bottom: 0;
             width: 1px;
-            border-left: 1px dashed #E5E9E2;
+            border-left: 1px dashed #e2e8f0;
             pointer-events: none;
             z-index: 1;
         }
@@ -337,16 +257,17 @@
             content: "";
             position: absolute;
             top: 50%;
-            left: 0; right: 0;
+            left: 0;
+            right: 0;
             height: 1px;
-            border-top: 1px dashed #E5E9E2;
+            border-top: 1px dashed #e2e8f0;
             pointer-events: none;
             z-index: 1;
         }
 
         .kanji-svg-wrap {
-            width: 140px;
-            height: 140px;
+            width: 150px;
+            height: 150px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -363,52 +284,51 @@
         .action-btns {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 18px;
         }
 
         .action-btn {
-            border: 1px solid var(--border-soft);
-            background: var(--surface-card);
-            padding: 8px 16px;
-            border-radius: var(--radius-pill);
-            font-size: 12.5px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            padding: 7px 18px;
+            border-radius: 25px;
+            font-size: 13px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.15s ease;
+            transition: all 0.15s;
         }
 
         .action-btn:active { transform: scale(0.95); }
-        .action-btn.play { color: var(--brand-accent); background: var(--brand-primary-light); border-color: #CCE7DC; }
-        .action-btn.practice { color: var(--text-main); background: var(--surface-muted); }
-        .action-btn.test { color: var(--brand-vermilion); background: var(--brand-vermilion-soft); border-color: #F5C9BF; }
+        .action-btn.play { color: #0284c7; border-color: #bae6fd; background: #f0f9ff; }
+        .action-btn.practice { color: #334155; border-color: #cbd5e1; background: #f8fafc; }
+        .action-btn.test { color: #dc2626; border-color: #fecdd3; background: #fff1f2; }
 
         .readings-box {
             text-align: center;
-            font-size: 13.5px;
-            line-height: 1.85;
+            font-size: 14px;
+            line-height: 1.9;
             margin-bottom: 16px;
-            color: var(--text-main);
-            background: var(--bg-canvas);
+            color: #334155;
+            background: #f8fafc;
             padding: 12px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            border: 1px solid #eef2f6;
         }
 
         .readings-box span.jp-font {
             font-family: 'Klee One', sans-serif;
-            font-weight: 700;
-            color: var(--brand-primary);
+            font-weight: 600;
+            color: #0f172a;
         }
 
         .detail-sub-title {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
-            color: var(--brand-primary);
+            color: var(--primary-dark);
             margin: 14px 0 8px;
             display: flex;
             align-items: center;
@@ -417,9 +337,9 @@
 
         .vocab-list {
             list-style: none;
-            font-size: 13px;
+            font-size: 13.5px;
             line-height: 1.8;
-            color: var(--text-sub);
+            color: #334155;
         }
 
         .vocab-list li {
@@ -432,25 +352,25 @@
             content: "•";
             position: absolute;
             left: 2px;
-            color: var(--brand-accent);
+            color: var(--primary-green);
             font-weight: bold;
         }
 
         .vocab-list span.jp-word {
             font-family: 'Klee One', sans-serif;
-            font-weight: 700;
-            color: var(--brand-primary);
+            font-weight: 600;
+            color: #1e293b;
         }
 
-        /* ইন্টেলিজেন্ট অটো-স্ন্যাপ টেস্ট মডাল */
+        /* ৩. ভিডিওর মতো হুবহু ব্লাইন্ড টেস্ট পপ-আপ */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(15, 34, 27, 0.6);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
@@ -458,151 +378,111 @@
         }
 
         .blind-test-card {
-            background: var(--surface-card);
+            background: #ffffff;
             width: 100%;
-            max-width: 360px;
+            max-width: 340px;
             border-radius: 24px;
-            padding: 22px 18px 20px;
+            padding: 24px 20px 22px;
             text-align: center;
             position: relative;
-            box-shadow: var(--shadow-float);
-            animation: popUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+            animation: popUp 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes popUp {
-            from { transform: scale(0.94); opacity: 0; }
+            from { transform: scale(0.92); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .modal-close-icon {
             position: absolute;
             top: 14px;
-            right: 16px;
-            background: var(--surface-muted);
+            right: 18px;
+            background: none;
             border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            color: var(--text-sub);
+            font-size: 22px;
+            color: #94a3b8;
             cursor: pointer;
-        }
-
-        .blind-header {
-            margin-bottom: 12px;
+            line-height: 1;
         }
 
         .blind-title {
-            font-size: 17px;
+            font-size: 20px;
             font-weight: 800;
-            color: var(--brand-primary);
-            margin-bottom: 4px;
+            color: var(--primary-dark);
+            line-height: 1.35;
+            margin-bottom: 16px;
         }
 
-        .stroke-progress-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            background: var(--brand-primary-light);
-            color: var(--brand-accent);
-            padding: 3px 10px;
-            border-radius: var(--radius-pill);
-            border: 1px solid #CCE7DC;
-        }
-
-        .canvas-grid-stage {
+        .blind-canvas-box {
             position: relative;
-            width: 260px;
-            height: 260px;
-            margin: 0 auto 12px;
-            border: 2px dashed #D2DDD6;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 14px;
+            border: 2px dashed #cbd5e1;
             border-radius: 20px;
-            background: #FCFDFB;
+            background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
 
-        .canvas-grid-stage::before {
-            content: "";
+        .blind-svg-layer {
             position: absolute;
-            left: 50%;
-            top: 0; bottom: 0;
-            width: 1px;
-            border-left: 1px dashed #E5E9E2;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .canvas-grid-stage::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0; right: 0;
-            height: 1px;
-            border-top: 1px dashed #E5E9E2;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .svg-layer-holder {
-            position: absolute;
-            width: 260px;
-            height: 260px;
             top: 0; left: 0;
+            width: 250px;
+            height: 250px;
             pointer-events: none;
-            z-index: 2;
+            z-index: 1;
         }
 
-        .svg-layer-holder svg {
+        .blind-svg-layer svg {
             width: 100%;
             height: 100%;
             display: block;
         }
 
-        #scratchCanvas {
+        #drawCanvas {
             position: absolute;
             top: 0; left: 0;
-            width: 260px;
-            height: 260px;
+            width: 250px;
+            height: 250px;
             cursor: crosshair;
             touch-action: none;
-            z-index: 3;
+            z-index: 2;
         }
 
         .blind-status-text {
-            font-size: 13.5px;
+            font-size: 15px;
             font-weight: 700;
             min-height: 24px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            line-height: 1.4;
         }
 
-        .status-idle { color: var(--text-sub); }
-        .status-success { color: var(--brand-accent); }
-        .status-warning { color: var(--brand-ochre); }
+        .status-correct {
+            color: #16a34a !important;
+        }
+
+        .status-completed {
+            color: #0284c7 !important;
+        }
 
         .blind-btn-group {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .blind-btn {
-            border: 1px solid var(--border-soft);
-            padding: 8px 18px;
-            border-radius: var(--radius-pill);
-            font-size: 13px;
+            border: none;
+            padding: 9px 24px;
+            border-radius: 24px;
+            font-size: 13.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -612,49 +492,35 @@
         }
 
         .blind-btn:active { transform: scale(0.95); }
-        .btn-hint { background: var(--brand-ochre-soft); color: var(--brand-ochre); border-color: #EEDBB7; }
-        .btn-retry { background: var(--surface-muted); color: var(--text-main); }
+        .btn-hint { background: #fef08a; color: #854d0e; }
+        .btn-retry { background: #f1f5f9; color: #475569; }
 
-        /* বটম ন্যাভবার */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 440px;
-            height: 62px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(229, 233, 226, 0.85);
-            border-radius: var(--radius-pill);
+            bottom: 0; left: 0; right: 0;
+            height: 60px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            box-shadow: var(--shadow-float);
-            padding: 0 8px;
         }
 
         .nav-item {
             text-decoration: none;
-            color: var(--text-sub);
+            color: #94a3b8;
             font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
             font-weight: 600;
-            flex: 1;
-            padding: 8px 0;
-            border-radius: var(--radius-pill);
-            transition: all 0.2s ease;
         }
 
-        .nav-item i { font-size: 18px; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .nav-item.active { color: var(--brand-primary); font-weight: 700; }
-        .nav-item.active i { transform: translateY(-1px) scale(1.1); color: var(--brand-accent); }
+        .nav-item.active { color: var(--primary-dark); }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -666,7 +532,7 @@
                 KOTOBA <span class="level-pill">N5 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--brand-accent);">১–১২০ কাঞ্জি</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--primary-green);">১–১২০ কাঞ্জি</div>
     </header>
 
     <main class="container">
@@ -758,31 +624,22 @@
         </div>
     </main>
 
-    <!-- ৩. অটো-স্ন্যাপ ড্রয়িং / টেস্ট পপ-আপ -->
+    <!-- ৩. ভিডিওর মতো নিখুঁত ব্লাইন্ড টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
-            <div class="blind-header">
-                <h4 class="blind-title" id="blindModalTitle">কাঞ্জি টেস্ট</h4>
-                <div class="stroke-progress-pill" id="strokeProgressPill">
-                    <i class="fa-solid fa-pen-nib"></i> <span id="strokeCountText">স্ট্রোক ১/১</span>
-                </div>
+            <h4 class="blind-title" id="blindModalTitle">Blind Test (না দেখে লিখুন)</h4>
+
+            <div class="blind-canvas-box">
+                <div class="blind-svg-layer" id="testSvgLayer"></div>
+                <canvas id="drawCanvas" width="250" height="250"></canvas>
             </div>
 
-            <div class="canvas-grid-stage">
-                <!-- SVG লেয়ার (স্ন্যাপ হওয়া স্ট্রোক এবং হিন্ট) -->
-                <div class="svg-layer-holder" id="testSvgLayer"></div>
-                <!-- ইউজার ড্রয়িং স্ক্র্যাচ ক্যানভাস -->
-                <canvas id="scratchCanvas" width="260" height="260"></canvas>
-            </div>
-
-            <div class="blind-status-text status-idle" id="blindStatus">
-                দাগ বরাবর টানুন, সঠিক হলে অটো বসে যাবে
-            </div>
+            <div class="blind-status-text" id="blindStatus"></div>
 
             <div class="blind-btn-group">
                 <button class="blind-btn btn-hint" id="hintBtn" onclick="toggleHint()"><i class="fa-regular fa-lightbulb"></i> Hint</button>
-                <button class="blind-btn btn-retry" onclick="restartTest()"><i class="fa-solid fa-arrow-rotate-right"></i> Restart</button>
+                <button class="blind-btn btn-retry" onclick="restartTest()"><i class="fa-solid fa-arrow-rotate-right"></i> Retry</button>
             </div>
         </div>
     </div>
@@ -872,7 +729,7 @@
                 { id: "61", char: "天", code: "05929", kun: "あめ・あま (ame / ama)", on: "テン (ten)", meaning: "আকাশ / স্বর্গ", vocab: [{ w: "天気 (てんき)", m: "আবহাওয়া" }, { w: "天国 (てんごく)", m: "স্বর্গ" }] },
                 { id: "62", char: "気", code: "06c17", kun: "いき (iki)", on: "キ (ki)", meaning: "মনভাব / শক্তি / বাতাস", vocab: [{ w: "元気 (げんき)", m: "সুস্থ" }, { w: "天気 (てんき)", m: "আবহাওয়া" }, { w: "気をつけて (きをつけて)", m: "সাবধানে থাকা" }] },
                 { id: "63", char: "電", code: "096fb", kun: "-", on: "デン (den)", meaning: "বিদ্যুৎ", vocab: [{ w: "電気 (でんき)", m: "বিদ্যুৎ / লাইট" }, { w: "電話 (でんわ)", m: "টেলিফোন" }, { w: "電車 (でんしゃ)", m: "ট্রেন" }] },
-                { id: "64", char: "話", code: "08a71", kun: "はな(す)・はなし (hana-su)", on: "ワ (wa)", meaning: "কথা বলা / গল্প", vocab: [{ w: "話します (はなします)", m: "কথা বলা" }, { w: "話 (はなし)", m: "গল্প / কথা" }, { w: "電話 (деんわ)", m: "ফোন" }] },
+                { id: "64", char: "話", code: "08a71", kun: "はな(す)・はなし (hana-su)", on: "ワ (wa)", meaning: "কথা বলা / গল্প", vocab: [{ w: "話します (はなします)", m: "কথা বলা" }, { w: "話 (はなし)", m: "গল্প / কথা" }, { w: "電話 (でんわ)", m: "ফোন" }] },
                 { id: "65", char: "食", code: "098df", kun: "た(べる) (ta-beru)", on: "ショク (shoku)", meaning: "খাওয়া / খাদ্য", vocab: [{ w: "食べます (たべます)", m: "খাওয়া" }, { w: "食堂 (しょくどう)", m: "ক্যান্টিন" }, { w: "食べ物 (たべもの)", m: "খাবার" }] },
                 { id: "66", char: "聞", code: "0805e", kun: "き(く) (ki-ku)", on: "ブン・モン (bun / mon)", meaning: "শোনা / জিজ্ঞাসা করা", vocab: [{ w: "聞きます (ききます)", m: "শোনা" }, { w: "新聞 (しんぶん)", m: "সংবাদপত্র" }] },
                 { id: "67", char: "書", code: "066f8", kun: "か(く) (ka-ku)", on: "ショ (sho)", meaning: "লেখা", vocab: [{ w: "書きます (かきます)", m: "লেখা" }, { w: "図書館 (としょかん)", m: "গ্রন্থাগার" }] },
@@ -900,7 +757,7 @@
                 { id: "85", char: "近", code: "08fd1", kun: "ちか(い) (chika-i)", on: "キン (kin)", meaning: "কাছে / নিকটবর্তী", vocab: [{ w: "近い (ちかい)", m: "কাছে" }, { w: "近く (ちかく)", m: "কাছাকাছি" }, { w: "近所 (きんじょ)", m: "আশপাশ" }] },
                 { id: "86", char: "有", code: "06709", kun: "あ(る) (a-ru)", on: "ユウ・ウ (yuu / u)", meaning: "থাকা / বিদ্যমান", vocab: [{ w: "有ります (あります)", m: "থাকা" }, { w: "有名 (ゆうめい)", m: "বিখ্যাত" }] },
                 { id: "87", char: "花", code: "082b1", kun: "はな (hana)", on: "カ (ka)", meaning: "ফুল", vocab: [{ w: "花 (はな)", m: "ফুল" }, { w: "花火 (はなび)", m: "আতশবাজি" }, { w: "花屋 (はなや)", m: "ফুলের দোকান" }] },
-                { id: "88", char: "赤", code: "08d64", kun: "あか(い) (aka-i)", on: "セキ (seki)", meaning: "লাল", vocab: [{ w: "赤い (あかい)", m: "লাল (বিশেষণ)" }, { w: "赤ちゃん (あかちゃん)", m: "ছোট শিশু" }] },
+                { id: "88", char: "赤", code: "08d64", kun: "あか(ই) (aka-i)", on: "セキ (seki)", meaning: "লাল", vocab: [{ w: "赤い (あかい)", m: "লাল (বিশেষণ)" }, { w: "赤ちゃん (あかちゃん)", m: "ছোট শিশু" }] },
                 { id: "89", char: "紙", code: "07d19", kun: "かみ (kami)", on: "シ (shi)", meaning: "কাগজ", vocab: [{ w: "紙 (かみ)", m: "কাগজ" }, { w: "手紙 (てがみ)", m: "চিঠি" }] },
                 { id: "90", char: "買", code: "08cb7", kun: "か(う) (ka-u)", on: "バイ (bai)", meaning: "কেনা", vocab: [{ w: "買います (かいます)", m: "কেনা" }, { w: "買い物 (かいもの)", m: "কেনাকাটা" }] }
             ],
@@ -944,6 +801,17 @@
 
         const svgCache = {};
 
+        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ মুছে ফেলা যাতে ']' বা '>' স্ক্রিনে না আসে
+        function cleanSvg(svgStr) {
+            if (!svgStr) return "";
+            const start = svgStr.indexOf("<svg");
+            const end = svgStr.indexOf("</svg>");
+            if (start !== -1 && end !== -1) {
+                return svgStr.substring(start, end + 6);
+            }
+            return svgStr;
+        }
+
         async function fetchKanjiSvg(hexCode) {
             if (svgCache[hexCode]) return svgCache[hexCode];
             try {
@@ -951,8 +819,9 @@
                 const res = await fetch(url);
                 if (!res.ok) throw new Error();
                 const text = await res.text();
-                svgCache[hexCode] = text;
-                return text;
+                const cleaned = cleanSvg(text);
+                svgCache[hexCode] = cleaned;
+                return cleaned;
             } catch (e) {
                 return null;
             }
@@ -965,6 +834,7 @@
             if (svgText) {
                 holder.innerHTML = svgText;
                 const svg = holder.querySelector('svg');
+                if (!svg) return;
                 svg.setAttribute("viewBox", "0 0 109 109");
                 svg.style.width = "100%";
                 svg.style.height = "100%";
@@ -974,7 +844,7 @@
 
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
-                    p.style.stroke = "#0F3E31";
+                    p.style.stroke = "#143d32";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -983,7 +853,7 @@
             }
         }
 
-        // লেসন ওপেন (সব কাঞ্জি প্রথমে বন্ধ থাকবে)
+        // লেসনে প্রবেশের পর সব কাঞ্জি বন্ধ অবস্থায় থাকবে
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
@@ -995,7 +865,7 @@
 
             items.forEach((k, index) => {
                 const itemDiv = document.createElement("div");
-                // ফিক্স: কোনো কাঞ্জি প্রথমে 'open' থাকবে না
+                // কোনো কাঞ্জি প্রথমে খোলা থাকবে না
                 itemDiv.className = `kanji-item`;
                 itemDiv.id = `kanjiItem_${index}`;
 
@@ -1030,7 +900,7 @@
                             <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--brand-accent);"></i> Vocabulary</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--primary-green);"></i> Vocabulary</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -1041,7 +911,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি ওপেন করলে বাকিগুলো স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে (Accordion Mode)
+        // একটি কাঞ্জি ওপেন করলে বাকিগুলো বন্ধ হয়ে যাবে
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -1081,6 +951,7 @@
 
             holder.innerHTML = svgText;
             const svgEl = holder.querySelector('svg');
+            if (!svgEl) return;
             svgEl.setAttribute("viewBox", "0 0 109 109");
             svgEl.style.width = "100%";
             svgEl.style.height = "100%";
@@ -1093,7 +964,7 @@
 
             paths.forEach((path, i) => {
                 const len = path.getTotalLength();
-                path.style.stroke = "#15805D";
+                path.style.stroke = "#143d32";
                 path.style.strokeWidth = "4.5";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
@@ -1112,23 +983,21 @@
         }
 
         /* -------------------------------------------------------------
-           ইন্টেলিজেন্ট অটো-স্ন্যাপ কাঞ্জি টেস্ট ইঞ্জিন
+           ভিডিওর মতো হুবহু অটো-স্ন্যাপ কাঞ্জি টেস্ট ইঞ্জিন
         ------------------------------------------------------------- */
-        const canvas = document.getElementById("scratchCanvas");
+        const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
         const testSvgLayer = document.getElementById("testSvgLayer");
         const statusText = document.getElementById("blindStatus");
         const modalTitle = document.getElementById("blindModalTitle");
-        const strokeCountText = document.getElementById("strokeCountText");
 
-        const BOX_SIZE = 260; // ক্যানভাস সাইজ (পিক্সেল)
-        const SVG_SCALE = BOX_SIZE / 109; // KanjiVG ভিউবক্স ১০৯x১০৯
+        const BOX_SIZE = 250;
+        const SVG_SCALE = BOX_SIZE / 109;
 
         let strokePathsData = [];
         let currentStrokeIdx = 0;
         let isDrawing = false;
-        let currentMode = "test"; // 'test' অথবা 'practice'
-        let showHint = false;
+        let showHint = true; // ভিডিওর মতো বাই-ডিফল্ট হিন্ট অন থাকবে
         let activeCheckpoints = [];
         let checkpointProgress = 0;
 
@@ -1142,7 +1011,7 @@
                 const gain = audioCtx.createGain();
                 osc.type = type;
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
@@ -1152,7 +1021,7 @@
         }
 
         function playSnapSound() {
-            playAudioTone(720, 'sine', 0.14);
+            playAudioTone(720, 'sine', 0.12);
         }
 
         function playSuccessFanfare() {
@@ -1162,11 +1031,13 @@
         }
 
         async function openCanvasModal(char, hexCode, mode) {
-            currentMode = mode;
-            showHint = (mode === 'practice');
+            showHint = true;
             currentStrokeIdx = 0;
 
-            modalTitle.innerText = mode === "test" ? `Test: ${char} (না দেখে লিখুন)` : `Practice: ${char} (অনুশীলন)`;
+            modalTitle.innerText = "Blind Test (না দেখে লিখুন)";
+            statusText.className = "blind-status-text";
+            statusText.innerText = "";
+
             document.getElementById("blindTestModal").style.display = "flex";
 
             const svgText = await fetchKanjiSvg(hexCode);
@@ -1180,7 +1051,6 @@
             const paths = Array.from(svgEl.querySelectorAll("path"));
             strokePathsData = paths.map(path => {
                 const len = path.getTotalLength();
-                // স্ট্রোকের শুরু, মাঝ এবং শেষ পয়েন্ট স্যাম্পল করা
                 const cpCount = 5;
                 const checkpoints = [];
                 for (let i = 0; i < cpCount; i++) {
@@ -1219,54 +1089,44 @@
                 p.style.fill = "none";
 
                 if (index < currentStrokeIdx) {
-                    // ইতিমধ্যে সফলভাবে আঁকা স্ট্রোক
+                    // ইতিমধ্যে সফলভাবে ড্র করা স্ট্রোক (ভিডিওর মতো সলিড কালো)
                     p.style.display = "block";
-                    p.style.stroke = "#15805D";
-                    p.style.strokeWidth = "5.5";
+                    p.style.stroke = "#1e293b";
+                    p.style.strokeWidth = "6.5";
                     p.style.opacity = "1";
                 } else if (index === currentStrokeIdx) {
-                    // বর্তমান স্ট্রোক
+                    // বর্তমান স্ট্রোক (ভিডিওর মতো হালকা ধূসর গাইড)
                     p.style.display = "block";
-                    if (showHint || currentMode === 'practice') {
-                        p.style.stroke = "#B88326";
-                        p.style.strokeWidth = "4.5";
-                        p.style.opacity = "0.45";
-                    } else {
-                        p.style.opacity = "0"; // টেস্ট মোডে হিডেন
-                    }
+                    p.style.stroke = "#cbd5e1";
+                    p.style.strokeWidth = "6.5";
+                    p.style.opacity = showHint ? "1" : "0";
                 } else {
-                    // ভবিষ্যতের স্ট্রোক
-                    if (showHint || currentMode === 'practice') {
-                        p.style.display = "block";
-                        p.style.stroke = "#CBD5E1";
-                        p.style.strokeWidth = "4";
-                        p.style.opacity = "0.35";
-                    } else {
-                        p.style.display = "none";
-                    }
+                    // পরবর্তী স্ট্রোকগুলো
+                    p.style.display = "block";
+                    p.style.stroke = "#cbd5e1";
+                    p.style.strokeWidth = "6.5";
+                    p.style.opacity = showHint ? "0.6" : "0";
                 }
             });
         }
 
         function setupActiveStroke() {
             if (currentStrokeIdx >= strokePathsData.length) {
-                // সমস্ত স্ট্রোক সম্পন্ন
-                strokeCountText.innerText = "সম্পূর্ণ!";
-                statusText.className = "blind-status-text status-success";
-                statusText.innerHTML = `<i class="fa-solid fa-circle-check"></i> চমৎকার! কাঞ্জিটি সফলভাবে সম্পন্ন হয়েছে 🎉`;
+                // ভিডিওর মতো হুবহু সফলতার বার্তা
+                statusText.className = "blind-status-text status-completed";
+                statusText.innerText = "অভিনন্দন! আপনি সঠিকভাবে লিখতে পেরেছেন।";
                 playSuccessFanfare();
                 return;
             }
 
             activeCheckpoints = strokePathsData[currentStrokeIdx].checkpoints;
             checkpointProgress = 0;
-            strokeCountText.innerText = `স্ট্রোক ${currentStrokeIdx + 1}/${strokePathsData.length}`;
-            statusText.className = "blind-status-text status-idle";
-            statusText.innerText = `দাগ বরাবর স্ট্রোক ${currentStrokeIdx + 1} টানুন`;
         }
 
         function restartTest() {
             currentStrokeIdx = 0;
+            statusText.className = "blind-status-text";
+            statusText.innerText = "";
             clearScratchpad();
             updateSvgDisplayState();
             setupActiveStroke();
@@ -1277,11 +1137,11 @@
             ctx.beginPath();
         }
 
-        // টাচ ও মাউস ড্রয়িং ইভেন্ট
-        ctx.lineWidth = 9;
+        // ক্যানভাস ড্রয়িং সেটিংস
+        ctx.lineWidth = 14;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        ctx.strokeStyle = "rgba(21, 128, 93, 0.4)";
+        ctx.strokeStyle = "#1e293b";
 
         function getCanvasCoords(e) {
             const rect = canvas.getBoundingClientRect();
@@ -1315,21 +1175,19 @@
             if (!isDrawing) return;
             isDrawing = false;
             clearScratchpad();
-            checkpointProgress = 0; // স্ট্রোক কমপ্লিট না করে আঙুল তুললে রিসেট
+            checkpointProgress = 0;
         }
 
-        // অটো-স্ন্যাপ লজিক: চেকপয়েন্ট ভেরিফিকেশন
         function verifyCheckpoint(x, y) {
             if (!activeCheckpoints || checkpointProgress >= activeCheckpoints.length) return;
 
             const target = activeCheckpoints[checkpointProgress];
             const dist = Math.hypot(x - target.x, y - target.y);
 
-            // দাগের ৩২ পিক্সেল সীমার মধ্যে থাকলে চেকপয়েন্ট সত্য
-            if (dist < 32) {
+            // আঙুল দাগের কাছাকাছি থাকলে চেকপয়েন্ট সম্পন্ন
+            if (dist < 36) {
                 checkpointProgress++;
 
-                // যদি দাগের সমস্ত চেকপয়েন্ট ক্রমানুসারে স্পর্শ করে
                 if (checkpointProgress >= activeCheckpoints.length) {
                     onStrokeAutoSnapped();
                 }
@@ -1341,6 +1199,11 @@
             currentStrokeIdx++;
             clearScratchpad();
             updateSvgDisplayState();
+
+            // ভিডিওর মতো স্ট্রোক শেষে "সঠিক!" দেখানো
+            statusText.className = "blind-status-text status-correct";
+            statusText.innerText = "সঠিক!";
+
             setupActiveStroke();
         }
 

@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>N4 কাঞ্জি লেসন ও টেস্ট - KOTOBA</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -362,7 +361,7 @@
             color: #1e293b;
         }
 
-        /* ব্লাইন্ড টেস্ট মডাল (ভিডিওর মতো হুবহু) */
+        /* ভিডিওর মতো হুবহু ব্লাইন্ড টেস্ট পপ-আপ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -495,6 +494,7 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #f1f5f9; color: #475569; }
 
+        /* আগের ফিক্সড বটম ন্যাভবার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -550,7 +550,7 @@
         </div>
     </main>
 
-    <!-- ভিডিওর মতো নিখুঁত ব্লাইন্ড টেস্ট পপ-আপ -->
+    <!-- ব্লাইন্ড টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
@@ -573,12 +573,11 @@
     <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
-        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+        <a href="ai-sensei.html" class="nav-item"><i class="fa-solid fa-robot"></i><span>AI সেনসেই</span></a>
         <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
 
     <script>
-        // N4 কাঞ্জি ডাটাবেস
         const rawN4Kanji = [
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
             { char: "作", kun: "つく(る)", on: "サク・サ", meaning: "তৈরি করা", vocab: [{w: "作ります (つくります)", m: "তৈরি করা"}, {w: "作文 (さくぶん)", m: "রচনা"}] },
@@ -680,7 +679,7 @@
             { char: "習", kun: "なら(う)", on: "シュウ", meaning: "শেখা / অনুশীলন", vocab: [{w: "習います (ならいます)", m: "শেখা"}, {w: "練習 (れんしゅう)", m: "অনুশীলন"}] },
             { char: "起", kun: "お(きる)", on: "キ", meaning: "ঘুম থেকে ওঠা", vocab: [{w: "起きます (おきます)", m: "ঘুম থেকে ওঠা"}] },
             { char: "死", kun: "し(ぬ)", on: "シ", meaning: "মারা যাওয়া", vocab: [{w: "死にます (しにます)", m: "মারা যাওয়া"}] },
-            { char: "悪", kun: "わる(ই)", on: "アク", meaning: "খারাপ", vocab: [{w: "悪い (わるい)", m: "খারাপ"}] },
+            { char: "悪", kun: "わる(い)", on: "アク", meaning: "খারাপ", vocab: [{w: "悪い (わるい)", m: "খারাপ"}] },
             { char: "重", kun: "おも(い)・かさ(なる)", on: "ジュウ・チョウ", meaning: "ভারী", vocab: [{w: "重い (おもい)", m: "ভারী"}, {w: "体重 (たいじゅう)", m: "শরীরের ওজন"}] },
             { char: "発", kun: "-", on: "ハツ・ホツ", meaning: "যাত্রা / প্রকাশ", vocab: [{w: "出発 (しゅっぱつ)", m: "প্রস্থান / রওনা"}, {w: "発音 (はつおん)", m: "উচ্চারণ"}] },
             { char: "帰", kun: "かえ(る)", on: "キ", meaning: "ফিরে আসা", vocab: [{w: "帰ります (かえります)", m: "ফিরে যাওয়া"}] },
@@ -799,7 +798,7 @@
 
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
-                    p.style.stroke = "#0f172a";
+                    p.style.stroke = "#1e293b";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -808,7 +807,7 @@
             }
         }
 
-        // লেসনে প্রবেশের পর সব কাঞ্জি বন্ধ অবস্থায় থাকবে
+        // লেসন ওপেন (ফিক্স: কোনো কাঞ্জি প্রথমে নিজে থেকে খোলা থাকবে না)
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
@@ -820,7 +819,6 @@
 
             items.forEach((k, index) => {
                 const itemDiv = document.createElement("div");
-                // ফিক্স: কোনো কাঞ্জি প্রথমে খোলা থাকবে না
                 itemDiv.className = `kanji-item`;
                 itemDiv.id = `kanjiItem_${index}`;
 
@@ -866,7 +864,7 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি ওপেন করলে বাকিগুলো স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে (Accordion Mode)
+        // একটি কাঞ্জি ওপেন করলে বাকিগুলো বন্ধ হয়ে যাবে
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -920,7 +918,7 @@
             paths.forEach((path, i) => {
                 const len = path.getTotalLength();
                 path.style.stroke = "#2563eb";
-                path.style.strokeWidth = "4.5";
+                path.style.strokeWidth = "4.2";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
                 path.style.fill = "none";
@@ -929,11 +927,11 @@
                 path.style.transition = "none";
 
                 setTimeout(() => {
-                    path.style.transition = "stroke-dashoffset 0.55s cubic-bezier(0.4, 0, 0.2, 1)";
+                    path.style.transition = "stroke-dashoffset 0.65s cubic-bezier(0.4, 0, 0.2, 1)";
                     path.style.strokeDashoffset = "0";
                 }, delay);
 
-                delay += 550;
+                delay += 600;
             });
         }
 

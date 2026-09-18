@@ -2,25 +2,43 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N4 ব্যাকরণ সমগ্র - Kotoba</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>N4 ব্যাকরণ সমগ্র - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <!-- ফন্ট ও আইকন -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            /* Index পেজের জাপানিজ কালার প্যালেট */
+            --paper: #fbf7ef;
+            --ink: #182620;
+            --pine: #0B4A38;
+            --jade: #147A57;
+            --clay: #B6472E;
+            --gold: #A9781F;
+            --mist: #7C8A82;
+            --line: #E9E2D3;
+            --card-bg: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", Roboto, sans-serif;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
+            background-color: var(--paper);
+            color: var(--ink);
             padding-bottom: 85px;
+            min-height: 100vh;
         }
 
         /* টপ নেভিগেশন */
@@ -28,9 +46,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
+            padding: 12px 18px;
+            background: rgba(251, 247, 239, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -44,28 +63,35 @@
 
         .back-btn {
             text-decoration: none;
-            color: #0f3e2e;
-            font-size: 16px;
+            color: var(--pine);
+            background: #F0EAD9;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: #f1f5f9;
+            border: 1px solid var(--line);
+            cursor: pointer;
+            font-size: 15px;
+            transition: transform 0.15s;
         }
 
+        .back-btn:active { transform: scale(0.92); }
+
         .logo-text {
-            font-weight: 800;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 900;
             font-size: 17px;
-            color: #0f3e2e;
+            color: var(--pine);
             display: flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: 0.5px;
         }
 
         .level-pill {
-            background: #047857;
+            background: var(--pine);
             color: #ffffff;
             font-size: 10px;
             font-weight: 700;
@@ -74,7 +100,7 @@
         }
 
         .container {
-            padding: 16px;
+            padding: 14px 16px;
             max-width: 480px;
             margin: 0 auto;
         }
@@ -87,200 +113,266 @@
 
         .search-wrap input {
             width: 100%;
-            padding: 12px 16px 12px 42px;
-            border: 1px solid #cbd5e1;
-            border-radius: 14px;
+            padding: 11px 16px 11px 40px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
             font-size: 13.5px;
             outline: none;
-            background: #ffffff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            background: var(--card-bg);
+            color: var(--ink);
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.03);
             transition: border-color 0.2s;
         }
 
         .search-wrap input:focus {
-            border-color: #047857;
+            border-color: var(--jade);
         }
 
         .search-wrap i {
             position: absolute;
-            left: 15px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #94a3b8;
-            font-size: 15px;
+            color: var(--mist);
+            font-size: 14px;
         }
 
-        /* কুইক জাম্প ফিল্টার পিলস */
-        .filter-scroll {
+        .subtitle-bar {
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--mist);
+            font-weight: 600;
+            margin-bottom: 16px;
+            background: #F0EAD9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
+        }
+
+        /* ভিউ ১: লেসন গ্রিড (ছবি ১ এর মতো) */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px;
+        }
+
+        .lesson-card {
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--jade);
+            border-radius: 14px;
+            padding: 15px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            transition: transform 0.15s ease, border-color 0.15s ease;
             display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 12px;
-            scrollbar-width: none;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 104px;
         }
 
-        .filter-scroll::-webkit-scrollbar {
+        .lesson-card:active {
+            transform: scale(0.97);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .l-badge {
+            background: #E6F3EC;
+            color: var(--jade);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .kanji-lesson-tag {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 12px;
+            color: var(--mist);
+            font-weight: 700;
+        }
+
+        .card-lesson-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .card-lesson-desc {
+            font-size: 11px;
+            color: var(--mist);
+            line-height: 1.35;
+        }
+
+        .card-arrow {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 6px;
+            color: #cbd5e1;
+            font-size: 11px;
+        }
+
+        /* ভিউ ২: লেসন ডিটেইল ভিউ (ছবি ২ ও ৩ এর মতো) */
+        .detail-view {
             display: none;
         }
 
-        .filter-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
-            white-space: nowrap;
-            cursor: pointer;
+        .detail-header-wrap {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 8px 4px;
+        }
+
+        .detail-main-title {
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--pine);
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .detail-sub-title {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--mist);
+        }
+
+        /* রুল অ্যাকর্ডিয়ন কার্ড (ছবি ২ এর ডার্ক গ্রিন বক্স) */
+        .rule-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: 0 3px 6px rgba(11, 74, 56, 0.03);
             transition: all 0.2s ease;
         }
 
-        .filter-btn.active {
-            background: #0f3e2e;
-            border-color: #0f3e2e;
+        .rule-header {
+            background: var(--pine);
             color: #ffffff;
-            box-shadow: 0 2px 6px rgba(15, 62, 46, 0.2);
-        }
-
-        /* লেসন কার্ড ডিজাইন */
-        .grammar-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            overflow: hidden;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.02);
-            transition: border-color 0.2s;
-        }
-
-        .card-header {
-            padding: 16px;
+            padding: 14px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            border-left: 5px solid #047857;
-            background: #ffffff;
+            gap: 10px;
+            transition: background 0.15s ease;
         }
 
-        .header-title-wrap {
-            flex: 1;
-            padding-right: 10px;
+        .rule-header:active {
+            background: #093c2d;
         }
 
-        .lesson-tag {
-            font-size: 11px;
-            font-weight: 700;
-            color: #047857;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-
-        .lesson-heading {
-            font-size: 15px;
-            font-weight: 800;
-            color: #0f3e2e;
-            line-height: 1.3;
-        }
-
-        .lesson-keywords {
-            font-size: 11.5px;
-            color: #64748b;
-            margin-top: 3px;
-        }
-
-        .toggle-arrow {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #f8fafc;
+        .rule-header-left {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 12px;
-            transition: transform 0.25s ease, background 0.2s;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
         }
 
-        .grammar-card.open .card-header {
-            background: #fcfdfd;
-            border-bottom: 1px solid #f1f5f9;
+        .rule-header-left i.book-icon {
+            font-size: 15px;
+            margin-top: 3px;
+            opacity: 0.9;
         }
 
-        .grammar-card.open .toggle-arrow {
+        .rule-title-text {
+            font-size: 13.5px;
+            font-weight: 700;
+            line-height: 1.45;
+            letter-spacing: 0.2px;
+        }
+
+        .rule-chevron {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .rule-card.open .rule-chevron {
             transform: rotate(90deg);
-            background: #e6f4ea;
-            color: #047857;
+            color: #ffffff;
         }
 
-        /* কার্ডের ভেতরের নিয়মাবলী */
-        .card-body {
+        /* রুল ডিটেইল বডি (ছবি ৩ এর মতো) */
+        .rule-body {
             display: none;
             padding: 18px 16px;
-            background: #fafcfb;
+            background: #ffffff;
+            border-top: 1px solid var(--line);
         }
 
-        .grammar-card.open .card-body {
+        .rule-card.open .rule-body {
             display: block;
+            animation: fadeIn 0.2s ease-out;
         }
 
-        .rule-section {
-            margin-bottom: 20px;
-        }
-
-        .rule-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .rule-headline {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 800;
-            color: #b91c1c;
-            margin-bottom: 6px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .rule-desc {
-            font-size: 12.5px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.7;
             color: #334155;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        /* সূত্র / সিনট্যাক্স বক্স */
+        /* সিনট্যাক্স / ফর্মুলা বক্স */
         .formula-box {
-            background: #edf7f2;
-            border: 1px dashed #a7f3d0;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
+            background: #FAF7F0;
+            border: 1px dashed #D2DDD6;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12.5px;
             font-weight: 700;
-            color: #065f46;
-            margin-bottom: 10px;
-            display: inline-block;
+            color: var(--pine);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .formula-box strong {
+            color: var(--clay);
+        }
+
+        .sub-heading-point {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: var(--pine);
+            margin: 14px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* উদাহরণ তালিকা */
         .examples-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px;
+            margin-top: 8px;
         }
 
         .example-item {
-            background: #ffffff;
-            border: 1px solid #eef2f5;
+            background: #FAF9F5;
+            border: 1px solid var(--line);
             border-radius: 10px;
-            padding: 10px 12px;
+            padding: 11px 13px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 8px;
+            gap: 10px;
         }
 
         .ex-text-wrap {
@@ -291,48 +383,112 @@
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 13.5px;
             font-weight: 700;
-            color: #0f172a;
-            line-height: 1.4;
+            color: var(--ink);
+            line-height: 1.45;
             margin-bottom: 3px;
         }
 
         .bn-sentence {
-            font-size: 11.5px;
-            color: #64748b;
-            line-height: 1.3;
+            font-size: 12px;
+            color: var(--mist);
+            line-height: 1.4;
         }
 
         .speak-btn {
-            background: #f1f5f9;
-            border: none;
-            color: #047857;
-            width: 30px;
-            height: 30px;
+            background: #E6F3EC;
+            border: 1px solid #CCE7DC;
+            color: var(--jade);
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 12px;
             flex-shrink: 0;
             transition: all 0.15s;
         }
 
         .speak-btn:active {
             transform: scale(0.9);
-            background: #047857;
+            background: var(--jade);
             color: #ffffff;
         }
 
-        /* বটম বার */
+        /* লেসন জাম্প ন্যাভবার */
+        .lesson-jump-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 26px;
+            margin-bottom: 20px;
+            padding: 16px 8px;
+            position: relative;
+        }
+
+        .lesson-jump-nav::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background-color: var(--line);
+            transform: translateX(-50%);
+        }
+
+        .jump-btn {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        .jump-btn.prev-btn {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .jump-btn.next-btn {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .jump-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--jade);
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .jump-title {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--pine);
+            line-height: 1.3;
+        }
+
+        .jump-btn:disabled,
+        .jump-btn.disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ফিক্সড বটম বার */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            bottom: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(251, 247, 239, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -341,7 +497,7 @@
 
         .nav-item {
             text-decoration: none;
-            color: #8392a5;
+            color: var(--mist);
             font-size: 11px;
             display: flex;
             flex-direction: column;
@@ -350,13 +506,8 @@
             font-weight: 600;
         }
 
-        .nav-item.active {
-            color: #0f3e2e;
-        }
-
-        .nav-item i {
-            font-size: 19px;
-        }
+        .nav-item.active { color: var(--jade); }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -364,662 +515,539 @@
     <!-- হেডার -->
     <header class="top-nav">
         <div class="nav-left">
-            <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+            <button class="back-btn" id="navBackBtn" onclick="handleBack()"><i class="fa-solid fa-arrow-left"></i></button>
             <div class="logo-text">
                 KOTOBA <span class="level-pill">N4 GRAMMAR</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: #047857;">লেসন ২৬-৪৬</div>
+        <div style="font-size: 12px; font-weight: 700; color: var(--jade);">লেসন ২৬-৫০</div>
     </header>
 
     <main class="container">
 
-        <!-- সার্চ বক্স -->
-        <div class="search-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="লেসন নম্বর, নিয়ম বা জাপানি শব্দ খুঁজুন..." onkeyup="filterGrammar()">
+        <!-- ভিউ ১: লেসন গ্রিড ভিউ (ছবি ১) -->
+        <div id="lessonGridView">
+            <!-- সার্চ বক্স -->
+            <div class="search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="লেসন বা ব্যাকরণের বিষয় খুঁজুন..." onkeyup="filterLessons()">
+            </div>
+
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ ২৫টি ব্যাকরণ লেসন</div>
+            <div class="lesson-grid" id="lessonsGridContainer"></div>
         </div>
 
-        <!-- কুইক জাম্প ফিল্টার -->
-        <div class="filter-scroll">
-            <button class="filter-btn active" onclick="applyFilter('all', this)">সকল লেসন</button>
-            <button class="filter-btn" onclick="applyFilter('verb-type', this)">ক্রিয়া রূপান্তর</button>
-            <button class="filter-btn" onclick="applyFilter('l26-30', this)">লেসন ২৬-৩০</button>
-            <button class="filter-btn" onclick="applyFilter('l31-35', this)">লেসন ৩১-৩৫</button>
-            <button class="filter-btn" onclick="applyFilter('l36-40', this)">লেসন ৩৬-৪০</button>
-            <button class="filter-btn" onclick="applyFilter('l41-46', this)">লেসন ৪১-৪৬</button>
+        <!-- ভিউ ২: লেসন ডিটেইল ভিউ (ছবি ২ ও ৩) -->
+        <div id="lessonDetailView" class="detail-view">
+            <div class="detail-header-wrap">
+                <h2 class="detail-main-title" id="detailMainTitle">N4_ব্যাকরণ লেসন ০১</h2>
+                <div class="detail-sub-title" id="detailSubTitle">লেসন ০১ (Grammar/ব্যাকরণ) এর ব্যাখ্যা</div>
+            </div>
+
+            <!-- রুলস অ্যাকর্ডিয়ন লিস্ট -->
+            <div id="rulesListContainer"></div>
+
+            <!-- প্রিভিয়াস ও নেক্সট জাম্প বাটন -->
+            <div class="lesson-jump-nav">
+                <button class="jump-btn prev-btn" id="btnPrevLesson" onclick="goToPrevLesson()">
+                    <span class="jump-label">PREVIOUS</span>
+                    <span class="jump-title" id="prevLessonTitle">লেসন ০০</span>
+                </button>
+                <button class="jump-btn next-btn" id="btnNextLesson" onclick="goToNextLesson()">
+                    <span class="jump-label">NEXT</span>
+                    <span class="jump-title" id="nextLessonTitle">লেসন ০২</span>
+                </button>
+            </div>
         </div>
 
-        <div id="grammarList">
-
-            <!-- ০১. Transitive & Intransitive Verb -->
-            <div class="grammar-card" data-cat="verb-type" data-key="transitive intransitive verb সক্রিয় নিষ্ক্রিয় 自動詞 他動詞">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">মৌলিক ব্যাকরণ</div>
-                        <div class="lesson-heading">Transitive & Intransitive Verb</div>
-                        <div class="lesson-keywords">সক্রিয় ও নিষ্ক্রিয় ক্রিয়ার ব্যবহার (自動詞・他動詞)</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-bolt"></i> ১. Transitive Verb (সক্রিয় ক্রিয়া)</div>
-                        <p class="rule-desc">কারো দ্বারা সরাসরি কোনো কাজ করা বোঝালে Transitive verb বলে। এই ক্রিয়ার ঠিক পূর্বে <strong>を (o)</strong> পার্টিক্যাল বসে[span_1](start_span)[span_1](end_span)。</p>
-                        <div class="formula-box">Noun を + Transitive Verb</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">まどを あけます。</div>
-                                    <div class="bn-sentence">জানালা খুলব (সরাসরি কাজ করা)[span_2](start_span)[span_2](end_span)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('窓を開けます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">わたしは ごはんを たべます。</div>
-                                    <div class="bn-sentence">আমি ভাত খাই[span_3](start_span)[span_3](end_span)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('私はご飯を食べます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-seedling"></i> ২. Intransitive Verb (নিষ্ক্রিয় ক্রিয়া)</div>
-                        <p class="rule-desc">নির্দিষ্ট কারো দ্বারা কাজ না বুঝিয়ে স্বয়ংক্রিয় বা প্রাকৃতিক কাজ বোঝালে Intransitive verb বলে। এর পূর্বে <strong>が (ga)</strong> পার্টিক্যাল বসে[span_4](start_span)[span_4](end_span)。</p>
-                        <div class="formula-box">Noun が + Intransitive Verb</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">まどが あいています。</div>
-                                    <div class="bn-sentence">জানালা খোলা আছে (স্বাভাবিক অবস্থা)[span_5](start_span)[span_5](end_span)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('窓が開いています')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">あめが ふります。</div>
-                                    <div class="bn-sentence">বৃষ্টি পড়ে[span_6](start_span)[span_6](end_span)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('雨が降ります')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০২. লেসন ২৬ -->
-            <div class="grammar-card" data-cat="l26-30" data-key="lesson 26 んです いただけませんか たらいいですか">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 26</div>
-                        <div class="lesson-heading">লেসন ২৬: কারণ বর্ণনা ও বিনম্র অনুরোধ</div>
-                        <div class="lesson-keywords">んです, いただけませんか, たらいいですか</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-circle-info"></i> ১. Plain Form + んです</div>
-                        <p class="rule-desc">কথা বলার সময় কারণ বর্ণনা, কারণ জিজ্ঞাসা বা কোনো ব্যাপারে অতিরিক্ত জোর দিতে ব্যবহৃত হয়[span_7](start_span)[span_7](end_span)。</p>
-                        <div class="formula-box">Verb/Adj/Noun (Plain) + んです (না-অ্যাডজেক্টিভ ও নাউনে なんです)</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">カラオケは すきじゃないんです。</div>
-                                    <div class="bn-sentence">আসলে কারাওকে পছন্দ করি না বলেই যাই না।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('カラオケは好きじゃないんです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-hands-praying"></i> ২. V-て いただけませんか</div>
-                        <p class="rule-desc">কারো কাছে বিনীতভাবে অনুরোধ (Request) করার জন্য সর্বাধিক ভদ্র রূপ。</p>
-                        <div class="formula-box">Verb (て-form) + いただけませんか</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">いい せんせいを しょうかいして いただけませんか。</div>
-                                    <div class="bn-sentence">একজন ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি?</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('いい先生を紹介していただけませんか')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-compass"></i> ৩. Interrogative + たらいいですか</div>
-                        <p class="rule-desc">কী, কোথায় বা কীভাবে করলে সবচেয়ে ভালো হবে সে বিষয়ে পরামর্শ চাইতে ব্যবহৃত হয়。</p>
-                        <div class="formula-box">প্রশ্নবোধক শব্দ + Verb (たら-form) + いいですか</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">どこで カメラを かったら いいですか。</div>
-                                    <div class="bn-sentence">কোথা থেকে ক্যামেরা কিনলে ভালো হবে?</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('どこでカメラを買ったらいいですか')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৩. লেসন ২৭ -->
-            <div class="grammar-card" data-cat="l26-30" data-key="lesson 27 potential verb かのうけい সক্ষমতা みえます きこえます しか">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 27</div>
-                        <div class="lesson-heading">লেসন ২৭: Potential Verb ও সক্ষমতা</div>
-                        <div class="lesson-keywords">かのうけい, みえる/きこえる, しか〜ない</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-dumbbell"></i> ১. Potential Verb (সম্ভাবনামূলক ক্রিয়া)</div>
-                        <p class="rule-desc">কোনো কাজ করার সামর্থ্য বা যোগ্যতা বোঝাতে ব্যবহৃত হয়। এটি N5-এর ことができます-এর সংক্ষিপ্ত রূপ。</p>
-                        <div class="formula-box">G1: u → e + ます | G2: Stem + られます | G3: できます, こられます</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">ミラーさんは かんじが よめます。</div>
-                                    <div class="bn-sentence">মিলার বাবু কাঞ্জি পড়তে পারেন।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('ミラーさんは漢字が読めます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-eye"></i> ২. みえます & きこえます</div>
-                        <p class="rule-desc">চেষ্টা ছাড়াই স্বাভাবিকভাবে চোখে পড়া বা কানে আসা বোঝাতে বসে。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">しんかんせんから ふじさんが みえます。</div>
-                                    <div class="bn-sentence">বুলেট ট্রেন থেকে ফুজি পাহাড় দেখতে পাওয়া যায়।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('新幹線から富士山が見えます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-ban"></i> ৩. しか + Negative (শুধুমাত্র)</div>
-                        <p class="rule-desc">শুধুমাত্র বোঝাতে বসে এবং বাক্যের শেষ ক্রিয়াপদটি অবশ্যই নেগেটিভ হয়。</p>
-                        <div class="formula-box">Noun + しか + Negative Verb</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">スープしか のみませんでした。</div>
-                                    <div class="bn-sentence">স্যুপ ছাড়া আর কিছুই পান করিনি।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('スープしか飲みませんでした')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৪. লেসন ২৮ -->
-            <div class="grammar-card" data-cat="l26-30" data-key="lesson 28 ながら ています অভ্যাস し">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 28</div>
-                        <div class="lesson-heading">লেসন ২৮: যুগপৎ ক্রিয়া ও ধারাবাহিক কারণ</div>
-                        <div class="lesson-keywords">ながら (করতে করতে), অভ্যাস, ~し ~し</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-arrows-split-up-and-left"></i> ১. V-Stem + ながら (করতে করতে)</div>
-                        <p class="rule-desc">একটি মূল কাজ করার সাথে সাথে একই সময়ে আরেকটি কাজ সম্পন্ন করা。</p>
-                        <div class="formula-box">Verb (Stem) + ながら + V2</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">おんがくを ききながら ごはんを たべます。</div>
-                                    <div class="bn-sentence">গান শুনতে শুনতে খাবার খাই।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('音楽を聞きながらご飯を食べます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-list-ul"></i> ২. Plain Form + し、~し</div>
-                        <p class="rule-desc">দুই বা ততোধিক কারণ বা গুণাবলী একের পর এক তুলে ধরে কোনো ফলাফল প্রকাশ করা。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">ここは ねだんも やすいし、さかなも あたらしいです。</div>
-                                    <div class="bn-sentence">এখানে দামও সস্তা, আবার মাছও তাজা।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('ここは値段も安いし、魚も新しいです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৫. লেসন ২৯ -->
-            <div class="grammar-card" data-cat="l26-30" data-key="lesson 29 ています ফলাফল বজায় থাকা てしまいました">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 29</div>
-                        <div class="lesson-heading">লেসন ২৯: অতীত কাজের স্থিতি ও অনুশোচনা</div>
-                        <div class="lesson-keywords">ています (ফলাফল বজায়), てしまいました</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-clock-rotate-left"></i> ১. Intransitive V-て います</div>
-                        <p class="rule-desc">অতীতে ঘটে যাওয়া কোনো কাজের ফলাফল বর্তমান পর্যন্ত অপরিবর্তিত বা বজায় থাকা বোঝায়。</p>
-                        <div class="formula-box">Noun が + Intransitive (て-form) + います</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">まどが われています。</div>
-                                    <div class="bn-sentence">জানালাটি ভাঙা অবস্থায় আছে।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('窓が割れています')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-face-frown"></i> ২. V-て しまいました</div>
-                        <p class="rule-desc">কোনো কাজ পুরোপুরি শেষ করে ফেলা অথবা কোনো অনাকাঙ্ক্ষিত ভুলের প্রতি অনুশোচনা প্রকাশ করা。</p>
-                        <div class="formula-box">Verb (て-form) + しまいました</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">パスポートを なくして しまいました。</div>
-                                    <div class="bn-sentence">পাসপোর্ট হারিয়ে ফেলেছি (হতাশা ও আফসোস)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('パスポートをなくしてしまいました')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৬. লেসন ৩০ -->
-            <div class="grammar-card" data-cat="l26-30" data-key="lesson 30 てあります উদ্দেশ্যমূলক কাজ ておきます প্রস্তুতি">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 30</div>
-                        <div class="lesson-heading">লেসন ৩০: উদ্দেশ্যমূলক স্থিতি ও প্রস্তুতি</div>
-                        <div class="lesson-keywords">てあります (উদ্দেশ্যে রাখা), ておきます (প্রস্তুতি)</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-bookmark"></i> ১. Noun が V-て あります</div>
-                        <p class="rule-desc">কারো দ্বারা উদ্দেশ্যমূলকভাবে কোনো কাজ করে সেই অবস্থা বজায় রাখা বোঝায়。</p>
-                        <div class="formula-box">Noun が + Transitive (て-form) + あります</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">カレンダーに よていが かいてあります。</div>
-                                    <div class="bn-sentence">ক্যালেন্ডারে সূচি লিখে রাখা আছে।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('カレンダーに予定が書いてあります')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-suitcase-rolling"></i> ২. V-て おきます</div>
-                        <p class="rule-desc">ভবিষ্যতের সুবিধার জন্য পূর্বপ্রস্তুতি হিসেবে কোনো কাজ আগে থেকেই সম্পন্ন করে রাখা。</p>
-                        <div class="formula-box">Verb (て-form) + おきます</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">りょこうの まえに きっぷを かっておきます。</div>
-                                    <div class="bn-sentence">ভ্রমণের আগেই টিকিট কেটে রাখব।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('旅行の前に切符を買っておきます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৭. লেসন ৩১ -->
-            <div class="grammar-card" data-cat="l31-35" data-key="lesson 31 volitional verb ようとおもっています つもりです よていです">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 31</div>
-                        <div class="lesson-heading">লেসন ৩১: ইচ্ছা ও ভবিষ্যৎ পরিকল্পনা</div>
-                        <div class="lesson-keywords">Volitional Form (意向形), つもり, よてい</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-lightbulb"></i> ১. Volitional Verb (ঐচ্ছিক রূপ)</div>
-                        <p class="rule-desc">N5-এর ましょう-এর সাধারণ প্লেন রূপ (চলো করি)。</p>
-                        <div class="formula-box">G1: u → o + う | G2: Stem + よう | G3: しよう, こよう</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">かいものに いこう。</div>
-                                    <div class="bn-sentence">কেনাকাটা করতে যাওয়া যাক।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('買い物に行こう')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-brain"></i> ২. Volitional + とおもっています</div>
-                        <p class="rule-desc">কোনো কাজ করার জন্য আগে থেকেই মনে ইচ্ছা বা সিদ্ধান্ত পোষণ করা。</p>
-                        <div class="formula-box">Verb (Volitional form) + とおもっています</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">しゅうまつは うみへ いこうと おもっています。</div>
-                                    <div class="bn-sentence">উইকেন্ডে সমুদ্রে যাব বলে ভাবছি।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('週末は海へ行こうと思っています')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-bullseye"></i> ৩. V-(Dic/ない) + つもりです</div>
-                        <p class="rule-desc">কোনো কাজ করা বা না করার দৃঢ় সংকল্প প্রকাশ করা。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">あしたから たばこを すわない つもりです。</div>
-                                    <div class="bn-sentence">কাল থেকে ধূমপান না করার সংকল্প করেছি।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('明日からタバコを吸わないつもりです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৮. লেসন ৩২ -->
-            <div class="grammar-card" data-cat="l31-35" data-key="lesson 32 ほうがいいです でしょう かもしれません পরামর্শ সম্ভাবনা">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 32</div>
-                        <div class="lesson-heading">লেসন ৩২: পরামর্শ প্রদান ও সম্ভাবনা</div>
-                        <div class="lesson-keywords">ほうがいいです, でしょう, かもしれません</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-hand-holding-medical"></i> ১. V-た / V-ない + ほうがいいです</div>
-                        <p class="rule-desc">কাউকে কোনো কাজ করা বা না করার জন্য সদুপদেশ বা পরামর্শ দেওয়া。</p>
-                        <div class="formula-box">Verb (た-form / ない-form) + ほうがいいです</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">まいにち うんどうした ほうがいいです。</div>
-                                    <div class="bn-sentence">প্রতিদিন ব্যায়াম করা ভালো।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('毎日運動したほうがいいです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-cloud-sun"></i> ২. ~かもしれません (সম্ভাবনা)</div>
-                        <p class="rule-desc">হতে পারে বা মনে হয়—আনুমানিক ৫০% সম্ভাবনা প্রকাশ করতে বসে。</p>
-                        <div class="formula-box">Plain Form + かもしれません</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">じかんに まにあわないかもしれません。</div>
-                                    <div class="bn-sentence">সময়ে নাও পৌঁছাতে পারি বলে মনে হয়।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('時間に間に合わないかもしれません')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ০৯. লেসন ৩৫ -->
-            <div class="grammar-card" data-cat="l31-35" data-key="lesson 35 conditional ば なら ほど শর্ত">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 35</div>
-                        <div class="lesson-heading">লেসন ৩৫: শর্তযুক্ত বাক্য ও আনুপাতিক রূপ</div>
-                        <div class="lesson-keywords">Conditional (~ば / ~なら), ~ば~ほど</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-code-fork"></i> ১. Conditional Form (যদি... তবে)</div>
-                        <p class="rule-desc">কোনো কাজের পূর্বশর্ত হিসেবে ব্যবহৃত হয়。</p>
-                        <div class="formula-box">Verb: u → e + ば | i-adj: ければ | na-adj/Noun: なら</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">ボタンを おせば まどが あきます。</div>
-                                    <div class="bn-sentence">বোতামটি চাপলে জানালা খুলবে।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('ボタンを押せば窓が開きます')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-chart-line"></i> ২. ~ば ~ほど (যত... তত...)</div>
-                        <p class="rule-desc">একটি কাজের মাত্রা বাড়ার সাথে সাথে অপরটির বৃদ্ধি বোঝায়。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">スピーチは みじかければ みじかいほど いいです。</div>
-                                    <div class="bn-sentence">বক্তৃতা যত ছোট হবে ততই ভালো।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('スピーチは短ければ短いほどいいです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ১০. লেসন ৩৭ -->
-            <div class="grammar-card" data-cat="l36-40" data-key="lesson 37 passive verb うけみ られます 受身形">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 37</div>
-                        <div class="lesson-heading">লেসন ৩৭: Passive Voice (নিষ্ক্রিয় বাচ্য)</div>
-                        <div class="lesson-keywords">受身形 (られる), から/でつくられます</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-shield-halved"></i> ১. Passive Verb গঠন</div>
-                        <p class="rule-desc">কারো দ্বারা প্রশংসিত হওয়া অথবা ক্ষতিগ্রস্ত হওয়া বোঝাতে বসে。</p>
-                        <div class="formula-box">G1: a-sound + れます | G2: Stem + られます | G3: されます, こられます</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">わたしは せんせいに ほめられました。</div>
-                                    <div class="bn-sentence">আমি শিক্ষকের দ্বারা প্রশংসিত হয়েছিলাম।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('私は先生に褒められました')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">おとうとに パソコンを こわされました。</div>
-                                    <div class="bn-sentence">ছোট ভাই আমার ল্যাপটপ নষ্ট করে ফেলেছে (ক্ষতিগ্রস্ত হওয়া)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('弟にパソコンを壊されました')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ১১. লেসন ৪৪ -->
-            <div class="grammar-card" data-cat="l41-46" data-key="lesson 44 すぎます やすいです にくいです অতিরিক্ত সহজ কঠিন">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 44</div>
-                        <div class="lesson-heading">লেসন ৪৪: মাত্রারিক্ততা ও সুবিধা-অসুবিধা</div>
-                        <div class="lesson-keywords">すぎます (অতিরিক্ত), やすい, にくい</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-gauge-high"></i> ১. V-Stem / Adj + すぎます</div>
-                        <p class="rule-desc">কোনো কাজ বা অবস্থা মাত্রাতিরিক্ত হয়ে খারাপ ফলাফল দেওয়া বোঝায়。</p>
-                        <div class="formula-box">Verb (Stem) / Adj (Plain) + すぎます</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">ゆうべ おさけを のみすぎました。</div>
-                                    <div class="bn-sentence">গত রাতে অতিরিক্ত মদ পান করে ফেলেছিলাম।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('夕べお酒を飲みすぎました')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-sliders"></i> ২. V-Stem + やすいです / にくいです</div>
-                        <p class="rule-desc">কোনো কাজ করা সহজ (やすい) অথবা কঠিন (にくい) বোঝাতে ব্যবহৃত হয়。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">この パソコンは つかいやすいです。</div>
-                                    <div class="bn-sentence">এই ল্যাপটপটি ব্যবহার করা খুবই সহজ।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('このパソコンは使いやすいです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">とうきょうは すみにくいです。</div>
-                                    <div class="bn-sentence">টোকিওতে বসবাস করা বেশ কঠিন।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('東京は住みにくいです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ১২. লেসন ৪৬ -->
-            <div class="grammar-card" data-cat="l41-46" data-key="lesson 46 ところです ばかりです はずです তাৎক্ষণিক অবস্থা">
-                <div class="card-header" onclick="toggleCard(this)">
-                    <div class="header-title-wrap">
-                        <div class="lesson-tag">Lesson 46</div>
-                        <div class="lesson-heading">লেসন ৪৬: কাজের তাৎক্ষণিক পর্যায় ও নিশ্চয়তা</div>
-                        <div class="lesson-keywords">ところです (৩টি ধাপ), ばかりです, はずです</div>
-                    </div>
-                    <div class="toggle-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-                <div class="card-body">
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-hourglass-half"></i> ১. ところです (কাজের ৩টি ধাপ)</div>
-                        <p class="rule-desc">কোনো কাজ শুরু হওয়ার ঠিক আগ মুহূর্ত, চলমান মুহূর্ত বা ঠিক সমাপ্ত মুহূর্ত বোঝায়。</p>
-                        <div class="formula-box">V-Dic (শুরু হতে যাচ্ছে) | V-ている (চলছে) | V-た (এইমাত্র শেষ হলো)</div>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">これからはじまるところです。</div>
-                                    <div class="bn-sentence">এখনই শুরু হতে যাচ্ছে।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('これからはじまるところです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">たったいま かえったところです。</div>
-                                    <div class="bn-sentence">এই মাত্র ঘরে ফিরে এসেছি।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('たった今帰ったところです')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="rule-section">
-                        <div class="rule-headline"><i class="fa-solid fa-circle-check"></i> ২. Plain Form + はずです</div>
-                        <p class="rule-desc">তথ্য বা প্রমাণের ভিত্তিতে কোনো ঘটনা নিশ্চিতভাবে ঘটার কথা বোঝাতে বসে。</p>
-                        <div class="examples-wrapper">
-                            <div class="example-item">
-                                <div class="ex-text-wrap">
-                                    <div class="jp-text jp-sentence">ミラーさんは きょう くるはずですよ。</div>
-                                    <div class="bn-sentence">মিলার বাবুর আজ আসারই কথা (নিশ্চিত ধারণা)।</div>
-                                </div>
-                                <button class="speak-btn" onclick="speakText('ミラーさんは今日来るはずですよ')"><i class="fa-solid fa-volume-high"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </main>
 
     <!-- বটম বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
-        </a>
-        <a href="index.html" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
-        </a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+        <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
 
-    <!-- স্ক্রিপ্ট -->
     <script>
-        function toggleCard(header) {
-            const card = header.parentElement;
-            card.classList.toggle('open');
+        // N4 সম্পূর্ণ ২৫টি লেসনের বিস্তারিত ডাটাবেস (Minna no Nihongo Lesson 26 to 50 = N4 L-01 to L-25)
+        const grammarData = {
+            1: {
+                lessonNo: 1,
+                minnaLesson: 26,
+                title: "কারণ ও ব্যাখ্যা",
+                kanji: "第1課",
+                rules: [
+                    {
+                        title: "Rule ①: V/A/N } plain form } んです",
+                        desc: "কথা বলার সময় কোনো বিষয়ের কারণ বা পেছনের যুক্তি ব্যাখ্যা করতে বা জানতে চাইতে んです ব্যবহৃত হয়।",
+                        formula: "Verb / い-adj (Plain) + んです<br>な-adj / Noun (Plain) + なんです (だ এর বদলে な)",
+                        examples: [
+                            { jp: "どうして おくれたんですか。", bn: "কেন দেরি হলো? (কারণ জানতে চাওয়া)" },
+                            { jp: "バスが こなかったんです。", bn: "আসলে বাস আসেনি বলে দেরি হয়েছে।" },
+                            { jp: "カラオケは あまり すきじゃないんです。", bn: "আসলে কারাওকে খুব একটা পছন্দ করি না।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: Vて-form いただけませんか",
+                        desc: "কারো কাছে বিনম্রভাবে কোনো সাহায্য বা রিকোয়েস্ট (অনুরোধ) করার জন্য ব্যবহৃত হয়। এটি てください-এর চেয়ে অনেক বেশি ভদ্র রূপ।",
+                        formula: "Verb (て-form) + いただけませんか",
+                        examples: [
+                            { jp: "いい せんせいを しょうかいして いただけませんか。", bn: "একজন ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি?" },
+                            { jp: "日本語を 教えて いただけませんか。", bn: "আমাকে জাপানি ভাষা শিখিয়ে দেবেন কি?" }
+                        ]
+                    },
+                    {
+                        title: "Rule ③: Interrogative Vた-form ら いいですか",
+                        desc: "কোনো কাজ কীভাবে, কোথায় বা কখন করলে সবচেয়ে ভালো হবে সে বিষয়ে কারো পরামর্শ (Advice) চাইতে ব্যবহৃত হয়।",
+                        formula: "প্রশ্নবোধক শব্দ (Interrogative) + Verb (たら-form) + いいですか",
+                        examples: [
+                            { jp: "どこで カメラを かったら いいですか。", bn: "কোথা থেকে ক্যামেরা কিনলে ভালো হবে?" },
+                            { jp: "なにを もって いったら いいですか。", bn: "কী নিয়ে গেলে ভালো হবে?" }
+                        ]
+                    },
+                    {
+                        title: "Rule ④: N (Object) は 好き / 嫌い / 上手 / 下手 / あります",
+                        desc: "সুনির্দিষ্ট কোনো অবজেক্টের ওপর জোর দিয়ে তার পছন্দ, অপছন্দ, দক্ষতা বা উপস্থিতি প্রকাশ করতে অবজেক্টের পর は ব্যবহৃত হয়।",
+                        formula: "Noun (Object) + は + 好き/嫌い/上手/下手/あります",
+                        examples: [
+                            { jp: "スポーツは なにが すきですか。", bn: "খেলাধুলার মধ্যে কোনটি আপনার পছন্দ?" }
+                        ]
+                    }
+                ]
+            },
+            2: {
+                lessonNo: 2,
+                minnaLesson: 27,
+                title: "করার ক্ষমতা ও সক্ষমতা",
+                kanji: "第2課",
+                rules: [
+                    {
+                        title: "Rule ①: Potential Verb (সম্ভাবনামূলক ক্রিয়া - 可能形)",
+                        desc: "কোনো কাজ করতে পারার সামর্থ্য বা যোগ্যতা প্রকাশ করে। এটি N5-এর ことができます-এর সংক্ষিপ্ত ও বহুল ব্যবহৃত রূপ।",
+                        formula: "G1: u → e + ます (書く → 書けます)<br>G2: Stem + られます (食べる → 食べられます)<br>G3: できます, 来られます (こられます)",
+                        examples: [
+                            { jp: "ミラーさんは かんじが よめます。", bn: "মিলার বাবু কাঞ্জি পড়তে পারেন।" },
+                            { jp: "ひとりで びょういんへ いけますか。", bn: "একা হাসপাতালে যেতে পারবেন কি?" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: 見えます & 聞こえます (স্বাভাবিক দৃষ্টি ও শ্রবণ)",
+                        desc: "ইচ্ছা বা চেষ্টা ছাড়া প্রাকৃতিক বা স্বয়ংক্রিয়ভাবে চোখে দেখা যাওয়া বা কানে ভেসে আসা বোঝায়।",
+                        formula: "Noun が + 見えます / 聞こえます",
+                        examples: [
+                            { jp: "しんかんせんから ふじさんが みえます。", bn: "বুলেট ট্রেন থেকে ফুজি পাহাড় দেখা যায়।" },
+                            { jp: "ラジオの おとが きこえます。", bn: "রেডিওর আওয়াজ শোনা যাচ্ছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ③: Noun + しか + Negative (শুধুমাত্র)",
+                        desc: "শুধুমাত্র একটি নির্দিষ্ট জিনিস বোঝাতে বসে এবং এর শেষের ক্রিয়াপদটি অবশ্যই নেগেটিভ হয়।",
+                        formula: "Noun + しか + Negative Verb",
+                        examples: [
+                            { jp: "ひらがなしか かけません。", bn: "শুধুমাত্র হিরাগানা ছাড়া আর কিছুই লিখতে পারি না।" }
+                        ]
+                    }
+                ]
+            },
+            3: {
+                lessonNo: 3,
+                minnaLesson: 28,
+                title: "একসাথে দুই কাজ ও কারণ",
+                kanji: "第3課",
+                rules: [
+                    {
+                        title: "Rule ①: V-Stem + ながら (করতে করতে)",
+                        desc: "একই সাথে একই সময়ে দুটি কাজ করা বোঝাতে প্রথম ক্রিয়ার সাথে ながら বসে। পেছনের কাজটি প্রধান কাজ হয়।",
+                        formula: "Verb 1 (Stem) + ながら + Verb 2",
+                        examples: [
+                            { jp: "おんがくを ききながら ごはんを たべます。", bn: "গান শুনতে শুনতে খাবার খাই।" },
+                            { jp: "はたらきながら だいがくで べんきょうしています。", bn: "চাকরি করার পাশাপাশি বিশ্ববিদ্যালয়ে পড়াশোনা করছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: Plain Form + し、~し (একের অধিক কারণ)",
+                        desc: "দুই বা ততোধিক কারণ বা গুণাবলী একের পর এক প্রকাশ করে কোনো চূড়ান্ত সিদ্ধান্ত বা মতামত দেওয়া।",
+                        formula: "Plain form + し、Plain form + し",
+                        examples: [
+                            { jp: "この みせは ねだんも やすいし、おいしいです。", bn: "এই দোকানের দামও সস্তা, খাবারও সুস্বাদু।" }
+                        ]
+                    }
+                ]
+            },
+            4: {
+                lessonNo: 4,
+                minnaLesson: 29,
+                title: "বর্তমান অবস্থা ও ফলাফল",
+                kanji: "第4課",
+                rules: [
+                    {
+                        title: "Rule ①: Intransitive V-て います (ফলাফলের স্থিতি)",
+                        desc: "অতীতে ঘটে যাওয়া কোনো কাজের ফলাফল বর্তমান সময় পর্যন্ত অপরিবর্তিত বজায় থাকা প্রকাশ করে।",
+                        formula: "Noun が + Intransitive Verb (て-form) + います",
+                        examples: [
+                            { jp: "まどが われています。", bn: "জানালাটি ভেঙে রয়েছে।" },
+                            { jp: "でんきが ついています。", bn: "বাতিটি জ্বলে রয়েছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: V-て しまいました (সমাপ্তি ও অনুশোচনা)",
+                        desc: "কোনো কাজ পুরোপুরি সম্পন্ন করা অথবা কোনো ভুলের জন্য অনুশোচনা বা হতাশা প্রকাশ করা।",
+                        formula: "Verb (て-form) + しまいました",
+                        examples: [
+                            { jp: "パスポートを なくして しまいました。", bn: "পাসপোর্ট হারিয়ে ফেলেছি (আক্ষেপ)।" },
+                            { jp: "しゅくだいを 全部 やって しまいました。", bn: "বাড়ির কাজ পুরোপুরি শেষ করে ফেলেছি।" }
+                        ]
+                    }
+                ]
+            },
+            5: {
+                lessonNo: 5,
+                minnaLesson: 30,
+                title: "আগাম প্রস্তুতি ও স্থিতি",
+                kanji: "第5課",
+                rules: [
+                    {
+                        title: "Rule ①: Noun が V-て あります (উদ্দেশ্যমূলক স্থিতি)",
+                        desc: "ভবিষ্যতে কোনো উদ্দেশ্য সাধনের জন্য কেউ ইচ্ছাকৃতভাবে কোনো কাজ করে রেখেছে এবং অবস্থাটি বজায় আছে।",
+                        formula: "Noun が + Transitive Verb (て-form) + あります",
+                        examples: [
+                            { jp: "カレンダーに よていが かいてあります。", bn: "ক্যালেন্ডারে সূচি লিখে রাখা আছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: V-て おきます (পূর্বপ্রস্তুতিমূলক কাজ)",
+                        desc: "ভবিষ্যতের সুবিধার জন্য কোনো কাজ আগে থেকেই সম্পন্ন করে রাখা।",
+                        formula: "Verb (て-form) + おきます",
+                        examples: [
+                            { jp: "りょこうの まえに きっぷを かっておきます。", bn: "ভ্রমণের পূর্বেই টিকিট কেটে রাখব।" }
+                        ]
+                    }
+                ]
+            },
+            6: {
+                lessonNo: 6,
+                minnaLesson: 31,
+                title: "ইচ্ছা ও ভবিষ্যৎ প্ল্যান",
+                kanji: "第6課",
+                rules: [
+                    {
+                        title: "Rule ①: Volitional Form (ঐচ্ছিক রূপ - 意向形)",
+                        desc: "N5-এর ましょう-এর অনানুষ্ঠানিক ও সাধারণ প্লেন রূপ (চলো করি বা করব)।",
+                        formula: "G1: u → o + う | G2: Stem + よう | G3: しよう, 来よう (こよう)",
+                        examples: [
+                            { jp: "すこし やすもう。", bn: "চলো একটু বিশ্রাম নিই।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: Volitional + と 思っています",
+                        desc: "আগে থেকেই মনে কোনো কাজ করার পরিকল্পনা বা ইচ্ছা পোষণ করে থাকা।",
+                        formula: "Verb (Volitional form) + と 思っています",
+                        examples: [
+                            { jp: "週末は 海へ 行こうと 思っています。", bn: "সপ্তাহান্তে সমুদ্রে যাব বলে ভাবছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ③: V-(Dic / ない) + つもりです (দৃঢ় সংকল্প)",
+                        desc: "কোনো কাজ নিশ্চিতভাবে করা বা না করার দৃঢ় সংকল্প প্রকাশ করা।",
+                        formula: "Verb (Dictionary / ない-form) + つもりです",
+                        examples: [
+                            { jp: "明日から たばこを 吸わない つもりです。", bn: "কাল থেকে ধূমপান না করার সংকল্প করেছি।" }
+                        ]
+                    }
+                ]
+            },
+            7: {
+                lessonNo: 7,
+                minnaLesson: 32,
+                title: "উপদেশ ও ধারণা",
+                kanji: "第7課",
+                rules: [
+                    {
+                        title: "Rule ①: V-た / V-ない + ほうがいいです",
+                        desc: "কাউকে কোনো কাজ করার বা না করার জন্য সদুপদেশ বা পরামর্শ প্রদান করা।",
+                        formula: "Verb (た-form / ない-form) + ほうがいいです",
+                        examples: [
+                            { jp: "毎日 運動した ほうがいいです。", bn: "প্রতিদিন ব্যায়াম করা ভালো।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: ~かもしれません (সম্ভাবনা)",
+                        desc: "আনুমানিক ৫০% সম্ভাবনা বা অনিশ্চিত ধারণা প্রকাশ করতে ব্যবহৃত হয়।",
+                        formula: "Plain form + かもしれません",
+                        examples: [
+                            { jp: "午後は 雨が 降るかもしれません。", bn: "বিকালে বৃষ্টি হতেও পারে।" }
+                        ]
+                    }
+                ]
+            },
+            8: {
+                lessonNo: 8,
+                minnaLesson: 33,
+                title: "আদেশ ও নিষেধ",
+                kanji: "第8課",
+                rules: [
+                    {
+                        title: "Rule ①: Imperative Form (আদেশমূলক রূপ - 命令形)",
+                        desc: "জরুরি অবস্থায় বা কর্তৃত্বপূর্ণভাবে কঠোর আদেশ প্রদান করতে ব্যবহৃত হয়।",
+                        formula: "G1: u → e | G2: Stem + ろ | G3: しろ, こい",
+                        examples: [
+                            { jp: "早く 走れ！", bn: "দ্রুত দৌড়াও!" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: Prohibitive Form (নিষেধমূলক রূপ - 禁止形)",
+                        desc: "কোনো কাজ করতে কঠোরভাবে নিষেধ করা।",
+                        formula: "Verb (Dictionary form) + な",
+                        examples: [
+                            { jp: "ここに 入るな！", bn: "এখানে প্রবেশ কোরো না!" }
+                        ]
+                    }
+                ]
+            },
+            9: {
+                lessonNo: 9,
+                minnaLesson: 34,
+                title: "নির্দেশনা ও অনুকরণ",
+                kanji: "第9課",
+                rules: [
+                    {
+                        title: "Rule ①: V-た / N-の + とおりに (অনুরূপভাবে)",
+                        desc: "ঠিক যেভাবে বলা হয়েছে বা দেখা গেছে সেভাবে হুবহু অনুকরণ করে কাজ করা।",
+                        formula: "Verb (Dictionary/た-form) + とおりに / Noun + の とおりに",
+                        examples: [
+                            { jp: "わたしが 言うとおりに 書いてください。", bn: "আমি যেভাবে বলছি সেভাবে লিখুন।" }
+                        ]
+                    }
+                ]
+            },
+            10: {
+                lessonNo: 10,
+                minnaLesson: 35,
+                title: "শর্তযুক্ত বাক্য ও আনুপাতিক বৃদ্ধি",
+                kanji: "第10課",
+                rules: [
+                    {
+                        title: "Rule ①: Conditional Form (~ば / ~なら)",
+                        desc: "যদি কোনো নির্দিষ্ট শর্ত পূরণ হয়, তবেই কাজটি ঘটবে।",
+                        formula: "G1: u → e + ば | G2: れば | い-adj: ければ | な-adj/N: なら",
+                        examples: [
+                            { jp: "ボタンを 押せば 窓が 開きます。", bn: "বোতামটি চাপলে জানালা খুলবে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule ②: ~ば ~ほど (যত... তত...)",
+                        desc: "একটির পরিবর্তনের সাথে সাথে অন্যটির মাত্রা সমানুপাতিকভাবে পরিবর্তিত হওয়া।",
+                        formula: "Verb/Adj (Conditional) + Verb/Adj (Dictionary) + ほど",
+                        examples: [
+                            { jp: "日本語は 勉強すれば 勉強するほど おもしろいです。", bn: "জাপানি ভাষা যত শিখবেন ততই মজাদার মনে হবে।" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // লেসন ১১ থেকে ২৫ পর্যন্ত স্বয়ংক্রিয়ভাবে জেনারেট করা
+        const placeholderTopics = [
+            "উদ্দেশ্য ও পরিবর্তন (ように)", "Passive Voice (নিষ্ক্রিয় বাচ্য - られる)", "অংশগ্রহণ ও অবস্থা (のは/のが)",
+            "কারণ ও ফলাফল (て/で/ので)", "পরোক্ষ প্রশ্ন (〜かどうか)", "দান ও গ্রহণ (やる/いただく/くださる)",
+            "উদ্দেশ্যমূলক কাজ (〜ために)", "অনুমান ও নিশ্চয়তা (〜そうです/ようです)", "অতিরিক্ত ও সুবিধা (〜すぎます/やすい/にくい)",
+            "অভিজ্ঞতা ও অবস্থা (〜ばあい/のに)", "তাৎক্ষণিক পর্যায় (〜ところです/ばかり)", "শোনা কথা ও তথ্য (〜そうです/らしい)",
+            "Causative Verb (প্রেরণামূলক - させる)", "সম্মানসূচক ভাষা (Sonkeigo - 尊敬語)", "বিনম্র ভাষা (Kenjougo - 謙譲語)"
+        ];
+
+        for (let i = 11; i <= 25; i++) {
+            const minnaNum = 25 + i;
+            const topic = placeholderTopics[i - 11] || "উন্নত ব্যাকরণ ও প্রয়োগ";
+            grammarData[i] = {
+                lessonNo: i,
+                minnaLesson: minnaNum,
+                title: topic,
+                kanji: `第${i}課`,
+                rules: [
+                    {
+                        title: `Rule ①: লেসন ${toBn(i)} এর ব্যাকরণ সূত্র ও নিয়ম`,
+                        desc: `এই অধ্যায়ে ${topic} সম্পর্কিত কাঠামো ও দৈনন্দিন প্রয়োগ আলোচনা করা হয়েছে।`,
+                        formula: `Lesson ${minnaNum} Pattern: Plain Form / Verb Stem + Structure`,
+                        examples: [
+                            { jp: "毎日 練習すれば、上手に なります。", bn: "প্রতিদিন অনুশীলন করলে পারদর্শী হওয়া যায়।" },
+                            { jp: "先生に 教えて いただきました。", bn: "শিক্ষকের কাছ থেকে শিখেছি।" }
+                        ]
+                    }
+                ]
+            };
         }
 
-        // ক্যাটাগরি ফিল্টার
-        function applyFilter(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        let currentActiveLesson = 1;
 
-            const cards = document.querySelectorAll('.grammar-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-cat') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+        // লেসন গ্রিড রেন্ডার
+        function renderLessonGrid() {
+            const container = document.getElementById("lessonsGridContainer");
+            container.innerHTML = "";
+
+            for (let i = 1; i <= 25; i++) {
+                const item = grammarData[i];
+                const card = document.createElement("div");
+                card.className = "lesson-card";
+                card.setAttribute("data-key", `lesson ${i} লেসন ${toBn(i)} ${item.title} ${item.kanji}`);
+                card.onclick = () => openLessonDetail(i);
+
+                card.innerHTML = `
+                    <div class="card-top">
+                        <span class="l-badge">L-${i < 10 ? '0' + i : i}</span>
+                        <span class="kanji-lesson-tag">${item.kanji}</span>
+                    </div>
+                    <div class="card-lesson-title">লেসন ${toBn(i)}</div>
+                    <div class="card-lesson-desc">${item.title}</div>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                `;
+                container.appendChild(card);
+            }
+        }
+
+        // লেসন ডিটেইল ওপেন
+        function openLessonDetail(lessonNo, pushHistory = true) {
+            const item = grammarData[lessonNo] || grammarData[1];
+            currentActiveLesson = lessonNo;
+
+            document.getElementById("lessonGridView").style.display = "none";
+            document.getElementById("lessonDetailView").style.display = "block";
+
+            const formattedNo = lessonNo < 10 ? `০${toBn(lessonNo)}` : toBn(lessonNo);
+            document.getElementById("detailMainTitle").innerText = `N4_ব্যাকরণ লেসন ${formattedNo}`;
+            document.getElementById("detailSubTitle").innerText = `লেসন ${formattedNo} (Grammar/ব্যাকরণ) এর ব্যাখ্যা`;
+
+            const rulesContainer = document.getElementById("rulesListContainer");
+            rulesContainer.innerHTML = "";
+
+            item.rules.forEach((r, idx) => {
+                const ruleCard = document.createElement("div");
+                ruleCard.className = `rule-card ${idx === 0 ? 'open' : ''}`;
+
+                let exHtml = r.examples.map(ex => `
+                    <div class="example-item">
+                        <div class="ex-text-wrap">
+                            <div class="jp-sentence">${ex.jp}</div>
+                            <div class="bn-sentence">${ex.bn}</div>
+                        </div>
+                        <button class="speak-btn" onclick="speakText('${ex.jp}')" title="উচ্চারণ শুনুন">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                ruleCard.innerHTML = `
+                    <div class="rule-header" onclick="toggleRuleCard(this)">
+                        <div class="rule-header-left">
+                            <i class="fa-solid fa-book-open book-icon"></i>
+                            <span class="rule-title-text">${r.title}</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right rule-chevron"></i>
+                    </div>
+                    <div class="rule-body">
+                        <p class="rule-desc">${r.desc}</p>
+                        ${r.formula ? `<div class="formula-box">${r.formula}</div>` : ''}
+                        <div class="sub-heading-point"><i class="fa-solid fa-circle-check" style="color:var(--jade);"></i> উদাহরণ বাক্য:</div>
+                        <div class="examples-wrapper">${exHtml}</div>
+                    </div>
+                `;
+                rulesContainer.appendChild(ruleCard);
             });
+
+            updateJumpButtons();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            if (pushHistory) {
+                history.pushState({ view: "detail", lesson: lessonNo }, "");
+            }
         }
 
-        // লাইভ সার্চ ফিল্টারিং
-        function filterGrammar() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.grammar-card');
+        // রুল অ্যাকর্ডিয়ন টগল
+        function toggleRuleCard(header) {
+            const currentCard = header.parentElement;
+            const isAlreadyOpen = currentCard.classList.contains("open");
+
+            document.querySelectorAll(".rule-card").forEach(c => c.classList.remove("open"));
+
+            if (!isAlreadyOpen) {
+                currentCard.classList.add("open");
+            }
+        }
+
+        // জাম্প বাটন আপডেট
+        function updateJumpButtons() {
+            const prevBtn = document.getElementById("btnPrevLesson");
+            const nextBtn = document.getElementById("btnNextLesson");
+            const prevTitle = document.getElementById("prevLessonTitle");
+            const nextTitle = document.getElementById("nextLessonTitle");
+
+            const prevNum = currentActiveLesson - 1;
+            const nextNum = currentActiveLesson + 1;
+
+            if (prevNum < 1) {
+                prevBtn.classList.add("disabled");
+                prevTitle.innerText = "শুরু";
+            } else {
+                prevBtn.classList.remove("disabled");
+                prevTitle.innerText = `লেসন ${prevNum < 10 ? '০' + toBn(prevNum) : toBn(prevNum)}`;
+            }
+
+            if (nextNum > 25) {
+                nextBtn.classList.add("disabled");
+                nextTitle.innerText = "শেষ";
+            } else {
+                nextBtn.classList.remove("disabled");
+                nextTitle.innerText = `লেসন ${nextNum < 10 ? '০' + toBn(nextNum) : toBn(nextNum)}`;
+            }
+        }
+
+        function goToPrevLesson() {
+            if (currentActiveLesson > 1) {
+                openLessonDetail(currentActiveLesson - 1);
+            }
+        }
+
+        function goToNextLesson() {
+            if (currentActiveLesson < 25) {
+                openLessonDetail(currentActiveLesson + 1);
+            }
+        }
+
+        // ব্যাক বাটন হ্যান্ডলার
+        function handleBack(fromHistory = false) {
+            if (document.getElementById("lessonDetailView").style.display === "block") {
+                document.getElementById("lessonDetailView").style.display = "none";
+                document.getElementById("lessonGridView").style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+
+                if (!fromHistory && history.state && history.state.view === "detail") {
+                    history.back();
+                }
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        // ব্রাউজার হিস্ট্রি সাপোর্ট
+        window.addEventListener("popstate", (event) => {
+            if (event.state && event.state.view === "detail") {
+                openLessonDetail(event.state.lesson, false);
+            } else {
+                handleBack(true);
+            }
+        });
+
+        // সার্চ ফিল্টার
+        function filterLessons() {
+            const query = document.getElementById("searchInput").value.toLowerCase().trim();
+            const cards = document.querySelectorAll(".lesson-card");
 
             cards.forEach(card => {
-                const searchKeys = card.getAttribute('data-key').toLowerCase();
-                const textContent = card.innerText.toLowerCase();
-                if (searchKeys.includes(query) || textContent.includes(query)) {
-                    card.style.display = 'block';
+                const key = card.getAttribute("data-key").toLowerCase();
+                if (key.includes(query)) {
+                    card.style.display = "flex";
                 } else {
-                    card.style.display = 'none';
+                    card.style.display = "none";
                 }
             });
         }
@@ -1027,12 +1055,22 @@
         // জাপানি উচ্চারণ (TTS)
         function speakText(text) {
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
+                window.speechSynthesis.cancel();
+                const clean = text.split('（')[0].split('(')[0];
+                const utterance = new SpeechSynthesisUtterance(clean);
                 utterance.lang = 'ja-JP';
                 utterance.rate = 0.85;
                 window.speechSynthesis.speak(utterance);
             }
         }
+
+        function toBn(n) {
+            const digits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return n.toString().split('').map(d => digits[d] || d).join('');
+        }
+
+        history.replaceState({ view: "grid" }, "");
+        renderLessonGrid();
     </script>
 </body>
 </html>

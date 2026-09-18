@@ -2,911 +2,530 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KOTOBA - জাপানিজ ভাষা শিখুন</title>
-
-    <!-- ফেভিকন ও মোবাইল অ্যাপ আইকন -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রোফাইল - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="shortcut icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
 
-    <!-- Google AdSense Verification Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
-
-    <!-- ফন্ট ও আইকন -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
-
-    <!-- OneSignal Push Notification SDK -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      window.OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
-          notifyButton: { enable: true },
-        });
-      });
-    </script>
-
+    <!-- Cropper.js CSS & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            /* মডার্ন জাপানিজ এস্থেটিক কালার প্যালেট */
-            --bg-canvas: #F8F9F6;
-            --surface-card: #FFFFFF;
-            --surface-muted: #F0F2EB;
-            
-            --brand-primary: #0F3E31;
-            --brand-primary-light: #E7F3ED;
-            --brand-accent: #15805D;
-            --brand-vermilion: #C83E2B;
-            --brand-vermilion-soft: #FDF1EE;
-            --brand-ochre: #B88326;
-            --brand-ochre-soft: #FAF2E2;
-
-            --text-main: #13221C;
-            --text-sub: #5E6E66;
-            --text-tertiary: #92A099;
-
-            --border-soft: #E5E9E2;
-            --border-highlight: #D2DDD6;
-
-            --shadow-sm: 0 2px 6px rgba(15, 62, 49, 0.04);
-            --shadow-card: 0 4px 16px rgba(15, 62, 49, 0.05);
-            --shadow-float: 0 10px 28px rgba(15, 62, 49, 0.09);
-
-            --radius-md: 14px;
-            --radius-lg: 18px;
-            --radius-pill: 999px;
-        }
-
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-canvas);
-            color: var(--text-main);
-            padding-bottom: 96px;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding-bottom: 80px;
         }
 
-        /* গ্লোবাল অ্যালার্ট ব্যানার */
-        .global-alert-banner {
-            display: none;
-            background: linear-gradient(90deg, #FBEBE8 0%, #FEEFEC 100%);
-            border-bottom: 1px solid #F5C9BF;
-            color: var(--brand-vermilion);
-            padding: 9px 16px;
-            font-size: 12.5px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* টপ ন্যাভিগেশন বার */
         .top-nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(248, 249, 246, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border-soft);
-            padding: 10px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; background: #ffffff;
+            border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 100;
         }
 
-        .brand-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
+        .back-btn {
+            color: #334155; text-decoration: none; background: #f8fafc;
+            width: 36px; height: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid #e2e8f0; font-size: 14px;
         }
 
-        .app-logo-img {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 2px 8px rgba(15, 62, 49, 0.15);
+        .nav-title { font-weight: 700; font-size: 16px; color: #0f172a; }
+
+        .page-content { padding: 16px; max-width: 440px; margin: 0 auto; }
+
+        /* প্রোফাইল কার্ড */
+        .profile-card {
+            background: #ffffff; border-radius: 20px; padding: 24px 18px 20px;
+            text-align: center; border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); margin-bottom: 14px;
         }
 
-        .logo-text-group {
-            display: flex;
-            flex-direction: column;
+        .avatar-wrap {
+            position: relative; width: 84px; height: 84px; margin: 0 auto 12px; cursor: pointer;
         }
 
-        .logo-title {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 17px;
-            letter-spacing: 1.2px;
-            color: var(--brand-primary);
-            line-height: 1.1;
+        .avatar-circle {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: #f1f5f9; color: #047857; border: 2.5px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px; font-weight: 700; overflow: hidden;
         }
 
-        .logo-subtitle {
-            font-size: 9px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            letter-spacing: 0.5px;
+        .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+        .camera-badge {
+            position: absolute; bottom: -2px; right: -2px;
+            width: 26px; height: 26px; background: #047857; color: #ffffff;
+            border: 2px solid #ffffff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 10px;
         }
 
-        .notif-bell-btn {
-            position: relative;
-            background: var(--surface-card);
-            color: var(--brand-primary);
-            border: 1px solid var(--border-soft);
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* পরিচ্ছন্ন নাম ও ভেরিফাইড আইকন */
+        .user-name-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; margin-bottom: 6px;
+        }
+
+        .user-name { font-size: 19px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px; }
+
+        .verified-icon {
+            color: #0284c7;
             font-size: 16px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .notif-bell-btn:active {
-            transform: scale(0.92);
-            background: var(--surface-muted);
-        }
-
-        .notif-badge {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            background: var(--brand-vermilion);
-            color: #FFFFFF;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            font-weight: 800;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--bg-canvas);
-            padding: 0 3px;
-        }
-
-        /* পেজ কনটেইনার */
-        .page-content {
-            padding: 18px 16px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* হিরো ওয়েলকাম কার্ড */
-        .hero-banner {
-            position: relative;
-            background: linear-gradient(135deg, #0F3E31 0%, #155543 100%);
-            border-radius: var(--radius-lg);
-            padding: 24px 20px;
-            margin-bottom: 22px;
-            overflow: hidden;
-            color: #FFFFFF;
-            box-shadow: 0 8px 24px rgba(15, 62, 49, 0.16);
-        }
-
-        .hero-kanji-bg {
-            position: absolute;
-            right: -8px;
-            bottom: -22px;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 124px;
-            color: rgba(255, 255, 255, 0.07);
-            line-height: 1;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .hero-pill {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.14);
-            backdrop-filter: blur(8px);
-            padding: 4px 11px;
-            border-radius: var(--radius-pill);
-            font-size: 11px;
-            font-weight: 600;
-            color: #D3F2E3;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .hero-banner h2 {
-            font-size: 21px;
-            font-weight: 700;
-            line-height: 1.35;
-            margin-bottom: 6px;
-            position: relative;
-            z-index: 1;
+        .btn-edit-trigger {
+            background: none; border: none; color: #94a3b8;
+            cursor: pointer; font-size: 13px; padding: 2px 4px;
+            border-radius: 6px; transition: color 0.15s;
+        }
+        .btn-edit-trigger:hover { color: #0f172a; }
+
+        /* নামের নিচের ব্যাজ রো */
+        .user-badges-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; margin-bottom: 10px; min-height: 22px;
         }
 
-        .hero-banner p {
-            font-size: 12.5px;
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.82);
-            max-width: 320px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* অ্যাড স্পেস */
-        .ad-banner-box {
-            width: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-            min-height: 50px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-
-        /* সেকশন হেডার */
-        .level-section {
-            margin-bottom: 26px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding: 0 2px;
-        }
-
-        .section-title-wrap {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-tag {
+        .badge-founder {
+            background: #0f172a; color: #38bdf8;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10.5px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            padding: 3px 9px;
-            border-radius: 7px;
-            text-transform: uppercase;
+            font-size: 10px; font-weight: 800; padding: 2.5px 9px;
+            border-radius: 20px; letter-spacing: 0.5px;
+            display: inline-flex; align-items: center; gap: 4px;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
         }
 
-        .tag-vermilion { background: var(--brand-vermilion-soft); color: var(--brand-vermilion); border: 1px solid #F5C9BF; }
-        .tag-emerald { background: var(--brand-primary-light); color: var(--brand-accent); border: 1px solid #CCE7DC; }
-        .tag-ochre { background: var(--brand-ochre-soft); color: var(--brand-ochre); border: 1px solid #EEDBB7; }
-
-        .section-heading {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
+        .badge-pro {
+            background: #fefce8; color: #b45309;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px; font-weight: 800; padding: 2px 9px;
+            border-radius: 20px; border: 1px solid #fef08a;
+            display: inline-flex; align-items: center; gap: 4px;
         }
 
-        .section-jp-sub {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-tertiary);
+        .user-email { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+
+        .user-bio {
+            font-size: 12px; color: #475569; margin-bottom: 8px;
+            line-height: 1.4; padding: 0 10px;
         }
 
-        /* কার্ড গ্রিড */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .user-meta-tags {
+            display: flex; justify-content: center; gap: 6px; margin-bottom: 14px;
         }
 
-        /* প্রিমিয়াম ইন্টারঅ্যাক্টিভ কার্ড */
-        .item-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-md);
-            padding: 14px 13px;
-            text-align: left;
-            text-decoration: none;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 104px;
-            box-shadow: var(--shadow-card);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        .meta-pill {
+            background: #f1f5f9; color: #475569; font-size: 10.5px;
+            font-weight: 700; padding: 2px 8px; border-radius: 6px;
         }
 
-        .item-card:active {
-            transform: scale(0.97);
-            background: #FCFCFA;
-            border-color: var(--border-highlight);
+        /* পয়েন্ট বক্স */
+        .single-stat-wrap {
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
         }
 
-        .card-top-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
+        .stat-item {
+            background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 12px;
+            padding: 10px; text-align: center; max-width: 140px; margin: 0 auto;
         }
 
-        .icon-circle {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            transition: transform 0.2s ease;
+        .stat-val { font-size: 18px; font-weight: 800; color: #047857; margin-bottom: 2px; }
+        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+
+        /* প্রিমিয়াম কার্ড */
+        .premium-card {
+            background: #ffffff; border: 1px solid #fed7aa;
+            border-radius: 18px; padding: 16px; margin-bottom: 14px;
+            position: relative; overflow: hidden;
         }
 
-        .item-card:hover .icon-circle {
-            transform: scale(1.05);
+        .premium-card::after {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 4px; height: 100%; background: #f97316;
         }
 
-        .icon-emerald { background: #EAF4EE; color: var(--brand-accent); }
-        .icon-vermilion { background: #FCEEEC; color: var(--brand-vermilion); }
-        .icon-ochre { background: #FAF2E3; color: var(--brand-ochre); }
-
-        .card-arrow {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            opacity: 0.7;
-            transition: transform 0.15s ease, opacity 0.15s ease;
+        .prem-top {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 8px;
         }
 
-        .item-card:active .card-arrow {
-            transform: translateX(2px);
-            opacity: 1;
-            color: var(--brand-accent);
+        .prem-title {
+            font-size: 15px; font-weight: 800; color: #c2410c;
+            display: flex; align-items: center; gap: 6px;
         }
 
-        .item-card h4 {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 2px;
-            line-height: 1.3;
+        .prem-desc {
+            font-size: 12px; color: #475569; line-height: 1.4; margin-bottom: 12px;
         }
 
-        .item-card p {
-            font-size: 10.5px;
-            color: var(--text-sub);
-            line-height: 1.35;
+        .prem-btn {
+            background: #f97316; color: #ffffff; border: none;
+            width: 100%; padding: 10px; border-radius: 10px;
+            font-size: 13.5px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .prem-btn:active { opacity: 0.9; }
+
+        .pro-active-card {
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            border-radius: 16px; padding: 14px; margin-bottom: 14px;
+            display: none; align-items: center; gap: 12px;
         }
 
-        .mini-tag {
-            position: absolute;
-            top: 9px;
-            right: 9px;
-            background: var(--brand-ochre-soft);
-            color: var(--brand-ochre);
-            font-size: 8.5px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
-            border: 1px solid #EEDBB7;
+        .pro-active-card i { font-size: 20px; color: #16a34a; }
+        .pro-active-card h4 { font-size: 13.5px; color: #166534; font-weight: 700; }
+        .pro-active-card p { font-size: 11px; color: #4b5563; }
+
+        /* মেনু লিস্ট */
+        .menu-list {
+            background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
+            overflow: hidden; margin-bottom: 14px;
         }
 
-        /* নোটিফিকেশন মডাল / বটম-শিট */
+        .menu-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 13px 16px; text-decoration: none; color: #334155;
+            font-size: 13.5px; font-weight: 600; border-bottom: 1px solid #f8fafc;
+            cursor: pointer; background: transparent; border-left: none; border-right: none; border-top: none;
+            width: 100%; text-align: left;
+        }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-left { display: flex; align-items: center; gap: 12px; }
+        .menu-left i { font-size: 15px; color: #047857; width: 20px; text-align: center; }
+
+        .logout-btn {
+            width: 100%; background: #ffffff; border: 1px solid #fee2e2;
+            color: #ef4444; padding: 12px; border-radius: 14px;
+            font-size: 13.5px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+
+        /* মডাল ব্যাকড্রপ */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(15, 34, 27, 0.45);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: flex-end;
-            padding: 0;
+            display: none; position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
+            z-index: 1000; justify-content: center; align-items: center; padding: 16px;
         }
 
-        @media (min-width: 520px) {
-            .modal-overlay {
-                align-items: center;
-                padding: 16px;
-            }
+        .modal-card {
+            background: #ffffff; width: 100%; max-width: 380px;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .notif-modal-card {
-            background: var(--bg-canvas);
-            width: 100%;
-            max-width: 440px;
-            border-radius: 24px 24px 0 0;
+        .modal-head {
+            background: #0f172a; color: #ffffff; padding: 14px 18px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-head h3 { font-size: 15px; font-weight: 700; }
+        .close-btn { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
+
+        .modal-body { padding: 18px; }
+
+        .policy-content {
+            max-height: 65vh; overflow-y: auto; font-size: 12.5px;
+            color: #475569; line-height: 1.65; padding-right: 4px;
+        }
+        .policy-content h4 { font-size: 13.5px; color: #0f172a; font-weight: 700; margin: 12px 0 4px; }
+        .policy-content h4:first-child { margin-top: 0; }
+
+        .pay-box {
+            background: #f8fafc; border: 1px dashed #cbd5e1;
+            border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 14px;
+        }
+        .pay-num { font-size: 16px; font-weight: 800; color: #0f172a; margin: 4px 0; }
+        .btn-copy {
+            background: #e2e8f0; border: none; padding: 3px 8px;
+            border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600;
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; }
+        .form-input, .form-select {
+            width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1;
+            border-radius: 10px; font-size: 13px; outline: none;
+        }
+        .form-input:focus, .form-select:focus { border-color: #047857; }
+
+        .btn-submit {
+            width: 100%; background: #047857; color: #ffffff; border: none;
+            padding: 11px; border-radius: 10px; font-size: 13.5px; font-weight: 700;
+            cursor: pointer; margin-top: 6px;
+        }
+
+        /* ক্রপার মডাল */
+        .cropper-modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.75); z-index: 2000;
+            justify-content: center; align-items: center; padding: 16px;
+        }
+        .cropper-box {
+            background: #ffffff; width: 100%; max-width: 340px; border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            max-height: 82vh;
-            animation: sheetSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .crop-container { width: 100%; height: 260px; background: #000; }
+        .crop-container img { max-width: 100%; }
+        .crop-actions { display: flex; justify-content: space-between; padding: 12px 16px; }
 
-        @media (min-width: 520px) {
-            .notif-modal-card {
-                border-radius: 20px;
-                box-shadow: var(--shadow-float);
-                animation: popUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-        }
-
-        @keyframes sheetSlideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        @keyframes popUp {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-header {
-            background: var(--surface-card);
-            color: var(--text-main);
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-soft);
-        }
-
-        .modal-header h3 {
-            font-size: 15px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            color: var(--brand-primary);
-        }
-
-        .close-btn {
-            background: var(--surface-muted);
-            border: none;
-            color: var(--text-sub);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-
-        .close-btn:active {
-            background: var(--border-soft);
-        }
-
-        .notif-list {
-            padding: 16px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .notif-item {
-            background: var(--surface-card);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-md);
-            padding: 13px 14px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--brand-accent);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .notif-item.targeted {
-            border-left-color: var(--brand-ochre);
-        }
-
-        .notif-item h4 {
-            font-size: 13.5px;
-            color: var(--brand-primary);
-            font-weight: 700;
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .notif-item p {
-            font-size: 12px;
-            color: var(--text-sub);
-            line-height: 1.45;
-            margin-bottom: 6px;
-        }
-
-        .notif-item .date {
-            font-size: 10.5px;
-            color: var(--text-tertiary);
-            font-weight: 500;
-            text-align: right;
-        }
-
-        .no-notif {
-            text-align: center;
-            color: var(--text-sub);
-            font-size: 13px;
-            font-weight: 600;
-            padding: 36px 0;
-        }
-
-        /* ডক-স্টাইল ফ্লোটিং বটম ন্যাভিগেশন বার */
+        /* বটম নেভিগেশন বার */
         .bottom-nav {
-            position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 440px;
-            height: 62px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(229, 233, 226, 0.85);
-            border-radius: var(--radius-pill);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-float);
-            padding: 0 8px;
+            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+            background: #ffffff; border-top: 1px solid #f1f5f9;
+            display: flex; justify-content: space-around; align-items: center; z-index: 100;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: var(--text-sub);
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            font-weight: 600;
-            flex: 1;
-            padding: 8px 0;
-            border-radius: var(--radius-pill);
-            transition: all 0.2s ease;
+            text-decoration: none; color: #94a3b8; font-size: 11px;
+            display: flex; flex-direction: column; align-items: center; gap: 3px; font-weight: 600;
         }
-
-        .nav-item i {
-            font-size: 18px;
-            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .nav-item.active {
-            color: var(--brand-primary);
-            font-weight: 700;
-        }
-
-        .nav-item.active i {
-            transform: translateY(-1px) scale(1.1);
-            color: var(--brand-accent);
-        }
-
-        .nav-item:active i {
-            transform: scale(0.9);
-        }
+        .nav-item i { font-size: 18px; }
+        .nav-item.active { color: #047857; }
     </style>
 </head>
 <body>
 
-    <!-- গ্লোবাল ব্যানার অ্যালার্ট -->
-    <div id="homeGlobalAlert" class="global-alert-banner"></div>
-
-    <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="brand-link">
-            <img id="mainAppLogo" src="logo.png" alt="KOTOBA Logo" class="app-logo-img" onerror="this.src='https://placehold.co/100x100/0F3E31/ffffff?text=K'">
-            <div class="logo-text-group">
-                <span class="logo-title">KOTOBA</span>
-                <span class="logo-subtitle">日本語を学ぼう</span>
-            </div>
-        </a>
-        <div class="top-nav-right">
-            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন" aria-label="নোটিফিকেশন">
-                <i class="fa-regular fa-bell"></i>
-                <span class="notif-badge" id="notifBadge">0</span>
-            </button>
-        </div>
+        <a href="leaderboard.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title" id="navPageTitle">আমার প্রোফাইল</span>
+        <div style="width: 36px;"></div>
     </header>
 
-    <!-- নোটিফিকেশন মডাল / বটম শিট -->
-    <div class="modal-overlay" id="notifModal">
-        <div class="notif-modal-card">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-bell" style="color: var(--brand-accent);"></i> নোটিফিকেশন</h3>
-                <button class="close-btn" id="closeNotifBtn" aria-label="বন্ধ করুন">&times;</button>
+    <main class="page-content">
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+
+        <div class="profile-card">
+            <div class="avatar-wrap" id="avatarTrigger">
+                <div class="avatar-circle" id="avatarContainer">
+                    <span id="avatarInitial"><i class="fa-regular fa-user"></i></span>
+                </div>
+                <div class="camera-badge" id="cameraBadge"><i class="fa-solid fa-camera"></i></div>
             </div>
-            <div class="notif-list" id="notifList">
-                <div class="no-notif"><i class="fa-solid fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+
+            <!-- নাম ও ভেরিফাইড আইকন -->
+            <div class="user-name-row">
+                <h2 class="user-name" id="displayUserName">লোড হচ্ছে...</h2>
+                <span class="verified-icon" id="verifiedBadgeContainer"></span>
+                <button class="btn-edit-trigger" id="openEditProfileBtn" title="প্রোফাইল এডিট">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </div>
+
+            <!-- ব্যাজ সারি (FOUNDER ও PRO নিচে থাকবে) -->
+            <div class="user-badges-row" id="userBadgesRow">
+                <span id="founderBadgeContainer"></span>
+                <span id="proBadgeContainer"></span>
+            </div>
+
+            <p class="user-email" id="displayUserEmail">---</p>
+            <p class="user-bio" id="displayUserBio">কোনো বায়ো যোগ করা হয়নি।</p>
+            
+            <div class="user-meta-tags" id="userMetaTags">
+                <span class="meta-pill" id="displayUserLevel">লেভেল: N5</span>
+                <span class="meta-pill" id="displayUserAge">বয়স: --</span>
+            </div>
+
+            <!-- শুধুমাত্র পয়েন্ট বক্স -->
+            <div class="single-stat-wrap">
+                <div class="stat-item">
+                    <div class="stat-val" id="userXpCount">০</div>
+                    <div class="stat-lbl">XP পয়েন্ট</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- প্রিমিয়াম কার্ড -->
+        <div class="premium-card" id="premiumPromoCard" style="display: none;">
+            <div class="prem-top">
+                <div class="prem-title"><i class="fa-solid fa-crown"></i> KOTOBA PRO</div>
+                <span style="font-size: 11px; font-weight: 700; color: #ea580c;">৳ ১৯৯ / লাইফটাইম</span>
+            </div>
+            <p class="prem-desc">বিজ্ঞাপনমুক্ত ব্রাউজিং, সম্পূর্ণ কাঞ্জি কুইজ এবং আনলিমিটেড AI সহায়ক পান।</p>
+            <button class="prem-btn" id="openPaymentModalBtn">
+                <i class="fa-solid fa-sparkles"></i> আপগ্রেড করুন
+            </button>
+        </div>
+
+        <!-- প্রিমিয়াম একটিভ নোটিশ -->
+        <div class="pro-active-card" id="proActiveCard">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+                <h4>KOTOBA PRO সক্রিয়</h4>
+                <p>আপনি সমস্ত প্রো ফিচার ব্যবহার করছেন।</p>
+            </div>
+        </div>
+
+        <div class="menu-list" id="ownProfileMenus">
+            <a href="admin.html" class="menu-item" id="adminOption" style="display: none;">
+                <div class="menu-left">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>কন্ট্রোল প্যানেল</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+            </a>
+
+            <a href="leaderboard.html" class="menu-item">
+                <div class="menu-left">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>র‍্যাঙ্কিং ও লিডারবোর্ড</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+            </a>
+
+            <button class="menu-item" id="openPolicyBtn" type="button">
+                <div class="menu-left">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>গোপনীয়তা নীতি (Privacy Policy)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+            </button>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fa-solid fa-power-off"></i> লগআউট
+        </button>
+    </main>
+
+    <!-- প্রোফাইল এডিট মডাল -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>প্রোফাইল তথ্য পরিবর্তন</h3>
+                <button class="close-btn" id="closeEditProfileBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label>নাম</label>
+                        <input type="text" class="form-input" id="editName" required placeholder="আপনার নাম">
+                    </div>
+
+                    <div class="form-group">
+                        <label>বায়ো (Bio)</label>
+                        <input type="text" class="form-input" id="editBio" maxlength="80" placeholder="যেমন: JLPT N5 পরীক্ষার্থী">
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>টার্গেট লেভেল</label>
+                            <select class="form-select" id="editLevel">
+                                <option value="N5">N5</option>
+                                <option value="N4">N4</option>
+                                <option value="N3">N3</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>বয়স</label>
+                            <input type="number" class="form-input" id="editAge" min="5" max="99" placeholder="যেমন: 20">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="saveProfileBtn">সংরক্ষণ করুন</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <main class="page-content">
+    <!-- প্রাইভেসি পলিসি মডাল -->
+    <div class="modal-overlay" id="policyModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>গোপনীয়তা নীতি</h3>
+                <button class="close-btn" id="closePolicyBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-content">
+                    <h4>১. তথ্য সংগ্রহ ও ব্যবহার</h4>
+                    <p>KOTOBA প্ল্যাটফর্মে অ্যাকাউন্ট তৈরির সময় আপনার নাম, ইমেইল ঠিকানা ও প্রোফাইল ছবি সংগ্রহ করা হয়। এই তথ্যগুলো আপনার পড়াশোনার অগ্রগতি (XP), লিডারবোর্ড র‍্যাঙ্কিং ও প্রোফাইল পরিচালনার কাজে ব্যবহৃত হয়।</p>
 
-        <!-- হিরো কার্ড -->
-        <section class="hero-banner">
-            <span class="hero-kanji-bg">語</span>
-            <div class="hero-pill"><i class="fa-solid fa-sparkles"></i> সহজ জাপানিজ শিক্ষা</div>
-            <h2>জাপানিজ ভাষা শেখা<br>এখন আরো সহজ</h2>
-            <p>বেসিক হিরাগানা থেকে শুরু করে JLPT ও NAT প্রস্তুতির প্রতিটি পদক্ষেপে আপনার সাথে।</p>
-        </section>
+                    <h4>২. কুকিজ ও অ্যাডসেন্স</h4>
+                    <p>আমরা সাইটের কার্যকারিতা বজায় রাখতে এবং প্রাসঙ্গিক বিজ্ঞাপন প্রদর্শন করতে Google AdSense ব্যবহার করি। গুগল ভিজিট ট্র্যাক করতে কুকিজ ব্যবহার করতে পারে।</p>
 
-        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন -->
-        <div class="ad-banner-box" id="homeAdContainer"></div>
-
-        <!-- সেকশন ১: A1-A2 (JFT) -->
-        <section class="level-section">
-            <div class="section-header">
-                <div class="section-title-wrap">
-                    <span class="section-tag tag-vermilion">A1-A2</span>
-                    <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
+                    <h4>৩. তথ্য নিরাপত্তা</h4>
+                    <p>আপনার সমস্ত ডেটা ক্লাউড ডাটাবেসে (Firebase) সংরক্ষিত থাকে। কোনো অবস্থাতেই তথ্য তৃতীয় পক্ষের কাছে বিক্রি করা হয় না।</p>
                 </div>
-                <span class="section-jp-sub">JFT</span>
+                <button class="btn-submit" id="closePolicyBottomBtn" style="margin-top: 14px;">বুঝেছি</button>
             </div>
-            <div class="card-grid">
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-vermilion"><i class="fa-solid fa-comments"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Conversation</h4>
-                        <p>কথোপকথন গাইড</p>
-                    </div>
-                </a>
-                <a href="#" class="item-card">
-                    <span class="mini-tag">শীঘ্রই</span>
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-ochre"><i class="fa-solid fa-book-open-reader"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Grammar</h4>
-                        <p>ব্যাকরণ পাঠ</p>
-                    </div>
-                </a>
-            </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- সেকশন ২: N5 লেভেল -->
-        <section class="level-section">
-            <div class="section-header">
-                <div class="section-title-wrap">
-                    <span class="section-tag tag-emerald">N5</span>
-                    <h3 class="section-heading">বিগিনার লেভেল</h3>
+    <!-- পেমেন্ট মডাল -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>KOTOBA PRO আপগ্রেড</h3>
+                <button class="close-btn" id="closePaymentModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="pay-box">
+                    <div style="font-size: 11.5px; color: #64748b;">বিকাশ / নগদ (Send Money)</div>
+                    <div class="pay-num" id="walletNum">01886861214</div>
+                    <button class="btn-copy" id="copyWalletBtn">কপি করুন</button>
+                    <div style="font-size: 11px; color: #047857; margin-top: 4px; font-weight: 700;">ফি: ১৯৯ টাকা</div>
                 </div>
-                <span class="section-jp-sub">初級</span>
+
+                <form id="premiumForm">
+                    <div class="form-group">
+                        <label>মাধ্যম</label>
+                        <select class="form-select" id="payMethod" required>
+                            <option value="bKash">বিকাশ (bKash)</option>
+                            <option value="Nagad">নগদ (Nagad)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>প্রেরক নম্বর</label>
+                        <input type="tel" class="form-input" id="senderNumber" placeholder="017xxxxxxxx" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ট্রানজেকশন আইডি (TrxID)</label>
+                        <input type="text" class="form-input" id="trxId" placeholder="TrxID দিন" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitTrxBtn">সাবমিট করুন</button>
+                </form>
             </div>
-            <div class="card-grid">
-                
-                <a href="alphabet.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-rocket"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>বর্ণমালা</h4>
-                        <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
-                    </div>
-                </a>
+        </div>
+    </div>
 
-                <a href="n5-vocab.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>শব্দভাণ্ডার</h4>
-                        <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
-                    </div>
-                </a>
-
-                <a href="n5-grammar.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-shapes"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>ব্যাকরণ</h4>
-                        <p>সহজ ভাষায় N5 গ্রামার</p>
-                    </div>
-                </a>
-
-                <a href="kanji.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-pen-nib"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>কাঞ্জি</h4>
-                        <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-layer-group"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>ক্রিয়াপদ</h4>
-                        <p>Conjugation of Verbs</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-list-check"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>লেসন প্র্যাকটিস</h4>
-                        <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
-                    </div>
-                </a>
-
-                <a href="appendices.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-folder-open"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Appendices</h4>
-                        <p>প্রয়োজনীয় চার্ট ও তালিকা</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-book-open"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Reading</h4>
-                        <p>N5 রিডিং প্র্যাকটিস</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-bullhorn"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Listening</h4>
-                        <p>N5 লিসেনিং প্র্যাকটিস</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-headphones"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Listening Test</h4>
-                        <p>N5 লিসেনিং পরীক্ষা</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-video"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Skype / Zoom</h4>
-                        <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
-                    </div>
-                </a>
-
-                <a href="mock-test.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-emerald"><i class="fa-solid fa-file-signature"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>পূর্বের প্রশ্নাবলী</h4>
-                        <p>NAT / JLPT বিগত প্রশ্ন</p>
-                    </div>
-                </a>
+    <!-- ক্রপার মডাল -->
+    <div class="cropper-modal-overlay" id="cropperModal">
+        <div class="cropper-box">
+            <div class="crop-container">
+                <img id="imageToCrop" src="" alt="Crop">
             </div>
-        </section>
-
-        <!-- সেকশন ৩: N4 লেভেল -->
-        <section class="level-section">
-            <div class="section-header">
-                <div class="section-title-wrap">
-                    <span class="section-tag tag-ochre">N4</span>
-                    <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
-                </div>
-                <span class="section-jp-sub">中初級</span>
+            <div class="crop-actions">
+                <button style="background: none; border: none; color: #64748b; font-weight: 600;" id="btnCancelCrop">বাতিল</button>
+                <button style="background: #047857; color: #fff; border: none; padding: 6px 16px; border-radius: 8px; font-weight: 600;" id="btnSaveCrop">সেভ</button>
             </div>
-            <div class="card-grid">
-                
-                <a href="n4-vocab.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-ochre"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>শব্দভাণ্ডার</h4>
-                        <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
-                    </div>
-                </a>
+        </div>
+    </div>
 
-                <a href="n4-grammar.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-ochre"><i class="fa-solid fa-shapes"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>ব্যাকরণ</h4>
-                        <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
-                    </div>
-                </a>
-
-                <a href="n4kanji.html" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-ochre"><i class="fa-solid fa-pen-nib"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>কাঞ্জি</h4>
-                        <p>N4 প্রয়োজনীয় কাঞ্জি</p>
-                    </div>
-                </a>
-
-                <a href="#" class="item-card">
-                    <div class="card-top-row">
-                        <div class="icon-circle icon-ochre"><i class="fa-solid fa-book-open"></i></div>
-                        <i class="fa-solid fa-chevron-right card-arrow"></i>
-                    </div>
-                    <div>
-                        <h4>Reading</h4>
-                        <p>N4 রিডিং প্র্যাকটিস</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ফ্লোটিং বটম বার -->
+    <!-- বটম নেভিগেশন বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span>লিডারবোর্ড</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
-        </a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+        <a href="profile.html" class="nav-item active"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
 
-    <!-- Firebase Scripts (সব লজিক অপরিবর্তিত রাখা হয়েছে) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -921,146 +540,286 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const OWNER_EMAIL = "qr.siamsikder@gmail.com";
 
-        const notifModal = document.getElementById("notifModal");
-        const openNotifBtn = document.getElementById("openNotifBtn");
-        const closeNotifBtn = document.getElementById("closeNotifBtn");
-        const notifBadge = document.getElementById("notifBadge");
-        const notifList = document.getElementById("notifList");
-        const mainAppLogo = document.getElementById("mainAppLogo");
-        const homeGlobalAlert = document.getElementById("homeGlobalAlert");
-        const homeAdContainer = document.getElementById("homeAdContainer");
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryUser = urlParams.get("email") || urlParams.get("uid");
 
-        let currentUserEmail = null;
+        let currentUser = null;
+        let isOwnProfile = true;
+        let cropper = null;
+        let targetDocId = null;
 
-        onAuthStateChanged(auth, (user) => {
-            currentUserEmail = user && user.email ? user.email.toLowerCase().trim() : null;
-            loadNotifications();
+        const avatarTrigger = document.getElementById("avatarTrigger");
+        const avatarContainer = document.getElementById("avatarContainer");
+        const cameraBadge = document.getElementById("cameraBadge");
+        const imageInput = document.getElementById("imageInput");
+        const ownProfileMenus = document.getElementById("ownProfileMenus");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        const premiumPromoCard = document.getElementById("premiumPromoCard");
+        const proActiveCard = document.getElementById("proActiveCard");
+        const openPaymentModalBtn = document.getElementById("openPaymentModalBtn");
+        const closePaymentModalBtn = document.getElementById("closePaymentModalBtn");
+        const paymentModal = document.getElementById("paymentModal");
+        const premiumForm = document.getElementById("premiumForm");
+        const copyWalletBtn = document.getElementById("copyWalletBtn");
+
+        const policyModal = document.getElementById("policyModal");
+        const openPolicyBtn = document.getElementById("openPolicyBtn");
+        const closePolicyBtn = document.getElementById("closePolicyBtn");
+        const closePolicyBottomBtn = document.getElementById("closePolicyBottomBtn");
+
+        const editProfileModal = document.getElementById("editProfileModal");
+        const openEditProfileBtn = document.getElementById("openEditProfileBtn");
+        const closeEditProfileBtn = document.getElementById("closeEditProfileBtn");
+        const editProfileForm = document.getElementById("editProfileForm");
+
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            const myEmail = user && user.email ? user.email.toLowerCase() : null;
+            const myUid = user ? user.uid : null;
+
+            if (!queryUser) {
+                if (!user) {
+                    window.location.href = "login.html";
+                    return;
+                }
+                isOwnProfile = true;
+                targetDocId = myEmail || myUid;
+            } else {
+                const qLower = queryUser.toLowerCase();
+                isOwnProfile = (user && (qLower === myEmail || qLower === myUid));
+                targetDocId = qLower;
+            }
+
+            if (!isOwnProfile) {
+                document.getElementById("navPageTitle").innerText = "প্রোফাইল";
+                cameraBadge.style.display = "none";
+                avatarTrigger.style.cursor = "default";
+                openEditProfileBtn.style.display = "none";
+                ownProfileMenus.style.display = "none";
+                logoutBtn.style.display = "none";
+                premiumPromoCard.style.display = "none";
+                proActiveCard.style.display = "none";
+            } else {
+                document.getElementById("navPageTitle").innerText = "আমার প্রোফাইল";
+                cameraBadge.style.display = "flex";
+                avatarTrigger.style.cursor = "pointer";
+                openEditProfileBtn.style.display = "inline-flex";
+                ownProfileMenus.style.display = "block";
+                logoutBtn.style.display = "flex";
+
+                if (myEmail === OWNER_EMAIL.toLowerCase()) {
+                    document.getElementById("adminOption").style.display = "flex";
+                }
+            }
+
+            loadProfileData(targetDocId);
         });
 
-        async function loadSiteDynamicConfigs() {
+        async function loadProfileData(docId) {
             try {
-                const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
-                if (brandSnap.exists() && brandSnap.data().appIconBase64) {
-                    mainAppLogo.src = brandSnap.data().appIconBase64;
+                let userDoc = await getDoc(doc(db, "users", docId));
+                if (!userDoc.exists() && docId.includes("@")) {
+                    userDoc = await getDoc(doc(db, "users", docId.toLowerCase()));
                 }
 
-                const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
-                if (alertSnap.exists()) {
-                    const ad = alertSnap.data();
-                    if (ad.bannerStatus === "enabled" && ad.bannerText) {
-                        homeGlobalAlert.style.display = "block";
-                        homeGlobalAlert.innerText = ad.bannerText;
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    const name = data.userName || data.name || (data.email ? data.email.split("@")[0] : "শিক্ষার্থী");
+                    const email = data.email || docId;
+                    const isOwner = (email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+                    const isPremium = data.isPremium === true || isOwner;
+
+                    document.getElementById("displayUserName").innerText = name;
+                    document.getElementById("displayUserEmail").innerText = email;
+                    document.getElementById("displayUserBio").innerText = data.bio || "কোনো বায়ো যোগ করা হয়নি।";
+                    document.getElementById("displayUserLevel").innerText = `লেভেল: ${data.targetLevel || "N5"}`;
+                    document.getElementById("displayUserAge").innerText = `বয়স: ${data.age || "--"}`;
+
+                    document.getElementById("userXpCount").innerText = (typeof data.xp === "number") ? data.xp : 0;
+
+                    document.getElementById("editName").value = name;
+                    document.getElementById("editBio").value = data.bio || "";
+                    document.getElementById("editLevel").value = data.targetLevel || "N5";
+                    document.getElementById("editAge").value = data.age || "";
+
+                    const verifiedContainer = document.getElementById("verifiedBadgeContainer");
+                    const founderContainer = document.getElementById("founderBadgeContainer");
+                    const proContainer = document.getElementById("proBadgeContainer");
+
+                    // নামের পাশে শুধু ব্লু ভেরিফাইড আইকন
+                    verifiedContainer.innerHTML = isOwner ? `<i class="fa-solid fa-circle-check"></i>` : "";
+
+                    // নামের নিচে ব্যালেন্সড FOUNDER ব্যাজ
+                    founderContainer.innerHTML = isOwner ? `<span class="badge-founder"><i class="fa-solid fa-shield-halved"></i> FOUNDER</span>` : "";
+                    
+                    // নামের নিচে PRO ব্যাজ
+                    proContainer.innerHTML = isPremium ? `<span class="badge-pro"><i class="fa-solid fa-crown"></i> PRO</span>` : "";
+
+                    if (isOwnProfile) {
+                        if (isPremium) {
+                            proActiveCard.style.display = "flex";
+                            premiumPromoCard.style.display = "none";
+                        } else {
+                            proActiveCard.style.display = "none";
+                            premiumPromoCard.style.display = "block";
+                        }
+                    }
+
+                    if (data.photoBase64 || data.photoURL) {
+                        avatarContainer.innerHTML = `<img src="${data.photoBase64 || data.photoURL}" alt="Avatar">`;
+                    } else {
+                        avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
                     }
                 }
-
-                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
-                let isGlobalOn = true;
-                let isIndexOn = true;
-                let adKey = "8daacdc376c790c03bd8fe48f80c0b1c";
-
-                if (adSnap.exists()) {
-                    const adData = adSnap.data();
-                    isGlobalOn = adData.globalAdsEnabled !== false;
-                    isIndexOn = adData.indexAdsEnabled !== false;
-                    if (adData.adKey) adKey = adData.adKey;
-                }
-
-                if (isGlobalOn && isIndexOn) {
-                    homeAdContainer.style.display = "flex";
-                    
-                    const adIframe = document.createElement("iframe");
-                    adIframe.style.width = "320px";
-                    adIframe.style.height = "50px";
-                    adIframe.style.border = "none";
-                    adIframe.style.overflow = "hidden";
-                    adIframe.scrolling = "no";
-                    
-                    homeAdContainer.appendChild(adIframe);
-                    
-                    const iframeDoc = adIframe.contentWindow.document;
-                    iframeDoc.open();
-                    iframeDoc.write(`
-                        <!DOCTYPE html>
-                        <html>
-                        <head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent;}</style></head>
-                        <body>
-                            <script type="text/javascript">
-                                atOptions = {
-                                    'key' : '${adKey}',
-                                    'format' : 'iframe',
-                                    'height' : 50,
-                                    'width' : 320,
-                                    'params' : {}
-                                };
-                            <\/script>
-                            <script type="text/javascript" src="https://www.highrevenueformat.com/${adKey}/invoke.js"><\/script>
-                        </body>
-                        </html>
-                    `);
-                    iframeDoc.close();
-                } else {
-                    homeAdContainer.style.display = "none";
-                    homeAdContainer.innerHTML = "";
-                }
-            } catch (err) {
-                console.warn("Dynamic config load error:", err);
+            } catch(e) {
+                console.error(e);
             }
         }
 
-        loadSiteDynamicConfigs();
+        openEditProfileBtn.onclick = () => editProfileModal.style.display = "flex";
+        closeEditProfileBtn.onclick = () => editProfileModal.style.display = "none";
 
-        openNotifBtn.onclick = () => notifModal.style.display = "flex";
-        closeNotifBtn.onclick = () => notifModal.style.display = "none";
+        editProfileForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const btn = document.getElementById("saveProfileBtn");
+            btn.innerText = "সংরক্ষণ হচ্ছে...";
+            btn.disabled = true;
+
+            const updatedData = {
+                userName: document.getElementById("editName").value.trim(),
+                bio: document.getElementById("editBio").value.trim(),
+                targetLevel: document.getElementById("editLevel").value,
+                age: document.getElementById("editAge").value.trim() || null,
+                updatedAt: Date.now()
+            };
+
+            try {
+                await setDoc(doc(db, "users", currentUser.email.toLowerCase()), updatedData, { merge: true });
+                editProfileModal.style.display = "none";
+                loadProfileData(currentUser.email.toLowerCase());
+            } catch (err) {
+                alert("তথ্য আপডেট করতে সমস্যা হয়েছে!");
+            } finally {
+                btn.innerText = "সংরক্ষণ করুন";
+                btn.disabled = false;
+            }
+        });
+
+        openPolicyBtn.onclick = () => policyModal.style.display = "flex";
+        closePolicyBtn.onclick = () => policyModal.style.display = "none";
+        closePolicyBottomBtn.onclick = () => policyModal.style.display = "none";
+
+        openPaymentModalBtn.onclick = () => paymentModal.style.display = "flex";
+        closePaymentModalBtn.onclick = () => paymentModal.style.display = "none";
+
         window.onclick = (e) => {
-            if (e.target === notifModal) notifModal.style.display = "none";
+            if (e.target === policyModal) policyModal.style.display = "none";
+            if (e.target === paymentModal) paymentModal.style.display = "none";
+            if (e.target === editProfileModal) editProfileModal.style.display = "none";
         };
 
-        async function loadNotifications() {
+        copyWalletBtn.onclick = () => {
+            navigator.clipboard.writeText(document.getElementById("walletNum").innerText);
+            copyWalletBtn.innerText = "কপি হয়েছে";
+            setTimeout(() => copyWalletBtn.innerText = "কপি", 2000);
+        };
+
+        premiumForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const btn = document.getElementById("submitTrxBtn");
+            btn.innerText = "পাঠানো হচ্ছে...";
+            btn.disabled = true;
+
             try {
-                let notifs = [];
-                const qAll = query(collection(db, "notifications"), where("target", "==", "all"));
-                const snapAll = await getDocs(qAll);
-                snapAll.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data() }));
+                await addDoc(collection(db, "premium_requests"), {
+                    userId: currentUser.uid,
+                    userEmail: currentUser.email.toLowerCase(),
+                    userName: document.getElementById("displayUserName").innerText,
+                    payMethod: document.getElementById("payMethod").value,
+                    senderNumber: document.getElementById("senderNumber").value.trim(),
+                    trxId: document.getElementById("trxId").value.trim(),
+                    amount: 199,
+                    status: "pending",
+                    createdAt: Date.now()
+                });
 
-                if (currentUserEmail) {
-                    const qUser = query(collection(db, "notifications"), where("target", "==", currentUserEmail));
-                    const snapUser = await getDocs(qUser);
-                    snapUser.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data(), isTargeted: true }));
-                }
-
-                notifs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-                if (notifs.length > 0) {
-                    notifBadge.style.display = "flex";
-                    notifBadge.innerText = notifs.length;
-                    notifList.innerHTML = "";
-
-                    notifs.forEach(n => {
-                        const dateStr = n.timestamp ? new Date(n.timestamp).toLocaleString('bn-BD', {
-                            day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric'
-                        }) : "";
-
-                        const itemDiv = document.createElement("div");
-                        itemDiv.className = `notif-item ${n.isTargeted ? 'targeted' : ''}`;
-                        itemDiv.innerHTML = `
-                            <h4>
-                                <span>${n.title}</span>
-                                ${n.isTargeted ? '<span style="font-size:9.5px; color:#B88326; background:#FAF2E3; padding:2px 7px; border-radius:6px; font-weight:700;">ব্যক্তিগত</span>' : ''}
-                            </h4>
-                            <p>${n.message}</p>
-                            <div class="date">${dateStr}</div>
-                        `;
-                        notifList.appendChild(itemDiv);
-                    });
-                } else {
-                    notifBadge.style.display = "none";
-                    notifList.innerHTML = `<div class="no-notif">কোনো নোটিফিকেশন নেই।</div>`;
-                }
+                paymentModal.style.display = "none";
+                premiumForm.reset();
+                alert("আপনার তথ্য জমা হয়েছে! ভেরিফিকেশনের পর প্রোফাইল সক্রিয় হবে।");
             } catch (err) {
-                notifList.innerHTML = `<div class="no-notif" style="color:var(--brand-vermilion);">নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</div>`;
+                alert("সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন।");
+            } finally {
+                btn.innerText = "সাবমিট করুন";
+                btn.disabled = false;
             }
-        }
+        });
+
+        avatarTrigger.onclick = () => {
+            if (isOwnProfile) imageInput.click();
+        };
+
+        imageInput.onchange = (e) => {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById("imageToCrop").src = event.target.result;
+                    document.getElementById("cropperModal").style.display = "flex";
+
+                    if (cropper) cropper.destroy();
+                    cropper = new Cropper(document.getElementById("imageToCrop"), {
+                        aspectRatio: 1,
+                        viewMode: 1,
+                        autoCropArea: 0.85
+                    });
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        };
+
+        document.getElementById("btnCancelCrop").onclick = () => {
+            document.getElementById("cropperModal").style.display = "none";
+            if (cropper) cropper.destroy();
+        };
+
+        document.getElementById("btnSaveCrop").onclick = async () => {
+            if (!cropper || !currentUser) return;
+            const btn = document.getElementById("btnSaveCrop");
+            btn.innerText = "...";
+            btn.disabled = true;
+
+            const canvas = cropper.getCroppedCanvas({ width: 180, height: 180 });
+            const base64 = canvas.toDataURL("image/jpeg", 0.75);
+
+            try {
+                await setDoc(doc(db, "users", currentUser.email.toLowerCase()), {
+                    photoBase64: base64
+                }, { merge: true });
+
+                avatarContainer.innerHTML = `<img src="${base64}" alt="Avatar">`;
+                document.getElementById("cropperModal").style.display = "none";
+                if (cropper) cropper.destroy();
+            } catch(e) {
+                alert("ছবি সেভ করা যায়নি!");
+            } finally {
+                btn.innerText = "সেভ";
+                btn.disabled = false;
+            }
+        };
+
+        logoutBtn.onclick = async () => {
+            if (confirm("লগআউট করতে চান?")) {
+                await signOut(auth);
+                window.location.href = "login.html";
+            }
+        };
     </script>
 </body>
 </html>

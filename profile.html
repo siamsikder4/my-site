@@ -2,157 +2,212 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>প্রোফাইল - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Cropper.js CSS & FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            /* KOTOBA মডার্ন জাপানিজ এস্থেটিক কালার প্যালেট */
+            --bg-canvas: #F8F9F6;
+            --surface-card: #FFFFFF;
+            --surface-muted: #F0F2EB;
+
+            --brand-primary: #0F3E31;
+            --brand-primary-light: #E7F3ED;
+            --brand-accent: #15805D;
+            --brand-vermilion: #C83E2B;
+            --brand-vermilion-soft: #FDF1EE;
+            --brand-ochre: #B88326;
+            --brand-ochre-soft: #FAF2E2;
+
+            --text-main: #13221C;
+            --text-sub: #5E6E66;
+            --text-tertiary: #92A099;
+
+            --border-soft: #E5E9E2;
+            --border-highlight: #D2DDD6;
+
+            --shadow-sm: 0 2px 6px rgba(15, 62, 49, 0.04);
+            --shadow-card: 0 4px 16px rgba(15, 62, 49, 0.05);
+            --shadow-float: 0 10px 28px rgba(15, 62, 49, 0.09);
+
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --radius-pill: 999px;
+        }
+
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            padding-bottom: 80px;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            padding-bottom: 96px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* স্টিকি টপ বার */
         .top-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(248, 249, 246, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 11px 18px;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 18px; background: #ffffff;
-            border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 100;
         }
 
         .back-btn {
-            color: #334155; text-decoration: none; background: #f8fafc;
-            width: 36px; height: 36px; border-radius: 10px;
+            color: var(--text-main); text-decoration: none;
+            background: var(--surface-card);
+            width: 38px; height: 38px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid #e2e8f0; font-size: 14px;
+            border: 1px solid var(--border-soft); font-size: 14px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .back-btn:active { transform: scale(0.92); background: var(--surface-muted); }
+
+        .nav-title {
+            font-weight: 700; font-size: 16px; color: var(--brand-primary);
+            letter-spacing: -0.2px;
         }
 
-        .nav-title { font-weight: 700; font-size: 16px; color: #0f172a; }
-
-        .page-content { padding: 16px; max-width: 440px; margin: 0 auto; }
+        .page-content { padding: 18px 16px; max-width: 480px; margin: 0 auto; }
 
         /* প্রোফাইল কার্ড */
         .profile-card {
-            background: #ffffff; border-radius: 20px; padding: 24px 18px 20px;
-            text-align: center; border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); margin-bottom: 14px;
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px 20px;
+            text-align: center;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 16px;
+            position: relative;
         }
 
         .avatar-wrap {
-            position: relative; width: 84px; height: 84px; margin: 0 auto 12px; cursor: pointer;
+            position: relative; width: 88px; height: 88px; margin: 0 auto 14px; cursor: pointer;
         }
 
         .avatar-circle {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #f1f5f9; color: #047857; border: 2.5px solid #e2e8f0;
+            background: var(--surface-muted); color: var(--brand-primary);
+            border: 3px solid var(--surface-card);
+            box-shadow: 0 4px 14px rgba(15, 62, 49, 0.12);
             display: flex; align-items: center; justify-content: center;
-            font-size: 30px; font-weight: 700; overflow: hidden;
+            font-size: 30px; font-weight: 800; overflow: hidden;
         }
 
         .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
 
         .camera-badge {
-            position: absolute; bottom: -2px; right: -2px;
-            width: 26px; height: 26px; background: #047857; color: #ffffff;
-            border: 2px solid #ffffff; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 10px;
+            position: absolute; bottom: 0; right: 0;
+            width: 28px; height: 28px; background: var(--brand-primary); color: #ffffff;
+            border: 2px solid var(--surface-card); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 11px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
-        /* পরিচ্ছন্ন নাম ও ভেরিফাইড আইকন */
         .user-name-row {
             display: flex; align-items: center; justify-content: center;
-            gap: 6px; margin-bottom: 6px;
+            gap: 6px; margin-bottom: 4px;
         }
 
-        .user-name { font-size: 19px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px; }
+        .user-name { font-size: 20px; font-weight: 800; color: var(--brand-primary); letter-spacing: -0.3px; }
 
         .verified-icon {
             color: #0284c7;
             font-size: 16px;
-            display: inline-flex;
-            align-items: center;
+            display: inline-flex; align-items: center;
         }
 
         .btn-edit-trigger {
-            background: none; border: none; color: #94a3b8;
-            cursor: pointer; font-size: 13px; padding: 2px 4px;
+            background: none; border: none; color: var(--text-tertiary);
+            cursor: pointer; font-size: 14px; padding: 4px;
             border-radius: 6px; transition: color 0.15s;
         }
-        .btn-edit-trigger:hover { color: #0f172a; }
+        .btn-edit-trigger:hover, .btn-edit-trigger:active { color: var(--brand-accent); }
 
-        /* নামের নিচের ব্যাজ রো */
         .user-badges-row {
             display: flex; align-items: center; justify-content: center;
-            gap: 6px; margin-bottom: 10px; min-height: 22px;
+            gap: 6px; margin-bottom: 8px; min-height: 24px;
         }
 
         .badge-founder {
-            background: #0f172a; color: #38bdf8;
+            background: var(--brand-primary); color: #38bdf8;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px; font-weight: 800; padding: 2.5px 9px;
-            border-radius: 20px; letter-spacing: 0.5px;
+            font-size: 9.5px; font-weight: 800; padding: 3px 10px;
+            border-radius: var(--radius-pill); letter-spacing: 0.6px;
             display: inline-flex; align-items: center; gap: 4px;
-            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 2px 8px rgba(15, 62, 49, 0.15);
         }
 
         .badge-pro {
-            background: #fefce8; color: #b45309;
+            background: var(--brand-ochre-soft); color: var(--brand-ochre);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px; font-weight: 800; padding: 2px 9px;
-            border-radius: 20px; border: 1px solid #fef08a;
+            font-size: 9.5px; font-weight: 800; padding: 2.5px 10px;
+            border-radius: var(--radius-pill); border: 1px solid #EEDBB7;
             display: inline-flex; align-items: center; gap: 4px;
         }
 
-        .user-email { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+        .user-email { font-size: 12px; color: var(--text-tertiary); margin-bottom: 6px; }
 
         .user-bio {
-            font-size: 12px; color: #475569; margin-bottom: 8px;
-            line-height: 1.4; padding: 0 10px;
+            font-size: 12.5px; color: var(--text-sub); margin-bottom: 10px;
+            line-height: 1.45; padding: 0 14px;
         }
 
         .user-meta-tags {
-            display: flex; justify-content: center; gap: 6px; margin-bottom: 14px;
+            display: flex; justify-content: center; gap: 6px; margin-bottom: 16px;
         }
 
         .meta-pill {
-            background: #f1f5f9; color: #475569; font-size: 10.5px;
-            font-weight: 700; padding: 2px 8px; border-radius: 6px;
+            background: var(--surface-muted); color: var(--text-sub); font-size: 11px;
+            font-weight: 600; padding: 3px 10px; border-radius: 8px;
         }
 
-        /* পয়েন্ট বক্স */
+        /* XP পয়েন্ট স্ট্যাট বক্স */
         .single-stat-wrap {
             padding-top: 14px;
-            border-top: 1px solid #f1f5f9;
+            border-top: 1px solid var(--border-soft);
         }
 
         .stat-item {
-            background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 12px;
-            padding: 10px; text-align: center; max-width: 140px; margin: 0 auto;
+            background: var(--brand-primary-light);
+            border: 1px solid #CCE7DC;
+            border-radius: var(--radius-md);
+            padding: 10px 18px; text-align: center; max-width: 150px; margin: 0 auto;
         }
 
-        .stat-val { font-size: 18px; font-weight: 800; color: #047857; margin-bottom: 2px; }
-        .stat-lbl { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .stat-val {
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+            font-size: 20px; font-weight: 800; color: var(--brand-accent); line-height: 1.2;
+        }
+        .stat-lbl {
+            font-size: 10.5px; color: var(--brand-primary); font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
 
-        /* প্রিমিয়াম কার্ড */
+        /* প্রিমিয়াম ব্যানার কার্ড */
         .premium-card {
-            background: #ffffff; border: 1px solid #fed7aa;
-            border-radius: 18px; padding: 16px; margin-bottom: 14px;
-            position: relative; overflow: hidden;
-        }
-
-        .premium-card::after {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 4px; height: 100%; background: #f97316;
+            background: linear-gradient(135deg, #FFFBF2 0%, #FAF2E2 100%);
+            border: 1px solid #EEDBB7;
+            border-radius: var(--radius-lg); padding: 18px; margin-bottom: 16px;
+            position: relative; box-shadow: var(--shadow-sm);
         }
 
         .prem-top {
@@ -161,145 +216,219 @@
         }
 
         .prem-title {
-            font-size: 15px; font-weight: 800; color: #c2410c;
+            font-size: 15px; font-weight: 800; color: var(--brand-ochre);
             display: flex; align-items: center; gap: 6px;
         }
 
         .prem-desc {
-            font-size: 12px; color: #475569; line-height: 1.4; margin-bottom: 12px;
+            font-size: 12px; color: #6D5424; line-height: 1.45; margin-bottom: 14px;
         }
 
         .prem-btn {
-            background: #f97316; color: #ffffff; border: none;
-            width: 100%; padding: 10px; border-radius: 10px;
+            background: var(--brand-ochre); color: #ffffff; border: none;
+            width: 100%; padding: 11px; border-radius: var(--radius-md);
             font-size: 13.5px; font-weight: 700; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            transition: opacity 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 7px;
+            box-shadow: 0 4px 12px rgba(184, 131, 38, 0.2);
+            transition: opacity 0.2s, transform 0.15s;
         }
-        .prem-btn:active { opacity: 0.9; }
+        .prem-btn:active { transform: scale(0.98); opacity: 0.92; }
 
         .pro-active-card {
-            background: #f0fdf4; border: 1px solid #bbf7d0;
-            border-radius: 16px; padding: 14px; margin-bottom: 14px;
+            background: var(--brand-primary-light); border: 1px solid #CCE7DC;
+            border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 16px;
             display: none; align-items: center; gap: 12px;
         }
 
-        .pro-active-card i { font-size: 20px; color: #16a34a; }
-        .pro-active-card h4 { font-size: 13.5px; color: #166534; font-weight: 700; }
-        .pro-active-card p { font-size: 11px; color: #4b5563; }
+        .pro-active-card i { font-size: 22px; color: var(--brand-accent); }
+        .pro-active-card h4 { font-size: 14px; color: var(--brand-primary); font-weight: 700; }
+        .pro-active-card p { font-size: 11px; color: var(--text-sub); }
 
         /* মেনু লিস্ট */
         .menu-list {
-            background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0;
-            overflow: hidden; margin-bottom: 14px;
+            background: var(--surface-card); border-radius: var(--radius-lg);
+            border: 1px solid var(--border-soft); box-shadow: var(--shadow-card);
+            overflow: hidden; margin-bottom: 16px;
         }
 
         .menu-item {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 13px 16px; text-decoration: none; color: #334155;
-            font-size: 13.5px; font-weight: 600; border-bottom: 1px solid #f8fafc;
+            padding: 14px 16px; text-decoration: none; color: var(--text-main);
+            font-size: 13.5px; font-weight: 600; border-bottom: 1px solid var(--border-soft);
             cursor: pointer; background: transparent; border-left: none; border-right: none; border-top: none;
             width: 100%; text-align: left;
+            transition: background 0.15s ease;
         }
         .menu-item:last-child { border-bottom: none; }
+        .menu-item:active { background: var(--surface-muted); }
         .menu-left { display: flex; align-items: center; gap: 12px; }
-        .menu-left i { font-size: 15px; color: #047857; width: 20px; text-align: center; }
-
-        .logout-btn {
-            width: 100%; background: #ffffff; border: 1px solid #fee2e2;
-            color: #ef4444; padding: 12px; border-radius: 14px;
-            font-size: 13.5px; font-weight: 700; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
+        .menu-left i {
+            font-size: 15px; color: var(--brand-accent); width: 22px; text-align: center;
         }
 
-        /* মডাল ব্যাকড্রপ */
+        .logout-btn {
+            width: 100%; background: var(--surface-card);
+            border: 1px solid #F5C9BF; color: var(--brand-vermilion);
+            padding: 12px; border-radius: var(--radius-lg);
+            font-size: 13.5px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.15s ease;
+        }
+        .logout-btn:active {
+            background: var(--brand-vermilion-soft); transform: scale(0.98);
+        }
+
+        /* বটম-শিট মডাল */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
-            z-index: 1000; justify-content: center; align-items: center; padding: 16px;
+            background: rgba(15, 34, 27, 0.45);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            z-index: 9999; justify-content: center; align-items: flex-end; padding: 0;
+        }
+
+        @media (min-width: 520px) {
+            .modal-overlay { align-items: center; padding: 16px; }
         }
 
         .modal-card {
-            background: #ffffff; width: 100%; max-width: 380px;
-            border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: var(--bg-canvas); width: 100%; max-width: 440px;
+            border-radius: 24px 24px 0 0; overflow: hidden;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+            animation: sheetSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (min-width: 520px) {
+            .modal-card {
+                border-radius: 20px;
+                box-shadow: var(--shadow-float);
+                animation: popUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
+        @keyframes sheetSlideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes popUp {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-head {
-            background: #0f172a; color: #ffffff; padding: 14px 18px;
-            display: flex; justify-content: space-between; align-items: center;
+            background: var(--surface-card); color: var(--text-main);
+            padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-soft);
         }
-        .modal-head h3 { font-size: 15px; font-weight: 700; }
-        .close-btn { background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
+        .modal-head h3 { font-size: 15px; font-weight: 700; color: var(--brand-primary); }
+        
+        .close-btn {
+            background: var(--surface-muted); border: none; color: var(--text-sub);
+            width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; cursor: pointer;
+        }
+        .close-btn:active { background: var(--border-soft); }
 
-        .modal-body { padding: 18px; }
+        .modal-body { padding: 20px; max-height: 75vh; overflow-y: auto; }
 
         .policy-content {
-            max-height: 65vh; overflow-y: auto; font-size: 12.5px;
-            color: #475569; line-height: 1.65; padding-right: 4px;
+            font-size: 12.5px; color: var(--text-sub); line-height: 1.6;
         }
-        .policy-content h4 { font-size: 13.5px; color: #0f172a; font-weight: 700; margin: 12px 0 4px; }
+        .policy-content h4 {
+            font-size: 13.5px; color: var(--brand-primary); font-weight: 700; margin: 12px 0 4px;
+        }
         .policy-content h4:first-child { margin-top: 0; }
 
         .pay-box {
-            background: #f8fafc; border: 1px dashed #cbd5e1;
-            border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 14px;
+            background: var(--brand-ochre-soft); border: 1px dashed #EEDBB7;
+            border-radius: var(--radius-md); padding: 14px; text-align: center; margin-bottom: 16px;
         }
-        .pay-num { font-size: 16px; font-weight: 800; color: #0f172a; margin: 4px 0; }
+        .pay-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 17px; font-weight: 800; color: var(--brand-primary); margin: 6px 0;
+            letter-spacing: 0.5px;
+        }
         .btn-copy {
-            background: #e2e8f0; border: none; padding: 3px 8px;
-            border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600;
+            background: var(--surface-card); border: 1px solid #EEDBB7;
+            padding: 4px 10px; border-radius: 6px; font-size: 11px;
+            cursor: pointer; font-weight: 700; color: var(--brand-ochre);
         }
 
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 4px; }
-        .form-input, .form-select {
-            width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1;
-            border-radius: 10px; font-size: 13px; outline: none;
+        .form-group { margin-bottom: 13px; }
+        .form-group label {
+            display: block; font-size: 12px; font-weight: 700;
+            color: var(--text-main); margin-bottom: 5px;
         }
-        .form-input:focus, .form-select:focus { border-color: #047857; }
+        .form-input, .form-select {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md); font-size: 13px; outline: none;
+            background: var(--surface-card); color: var(--text-main);
+            transition: border-color 0.15s;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--brand-accent); box-shadow: 0 0 0 3px var(--brand-primary-light);
+        }
 
         .btn-submit {
-            width: 100%; background: #047857; color: #ffffff; border: none;
-            padding: 11px; border-radius: 10px; font-size: 13.5px; font-weight: 700;
-            cursor: pointer; margin-top: 6px;
+            width: 100%; background: var(--brand-primary); color: #ffffff; border: none;
+            padding: 12px; border-radius: var(--radius-md); font-size: 13.5px; font-weight: 700;
+            cursor: pointer; margin-top: 8px; transition: opacity 0.15s, transform 0.1s;
         }
+        .btn-submit:active { transform: scale(0.98); opacity: 0.9; }
 
         /* ক্রপার মডাল */
         .cropper-modal-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(15, 23, 42, 0.75); z-index: 2000;
-            justify-content: center; align-items: center; padding: 16px;
+            background: rgba(15, 34, 27, 0.75); backdrop-filter: blur(4px);
+            z-index: 10000; justify-content: center; align-items: center; padding: 16px;
         }
         .cropper-box {
-            background: #ffffff; width: 100%; max-width: 340px; border-radius: 18px;
-            overflow: hidden;
+            background: var(--surface-card); width: 100%; max-width: 360px;
+            border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-float);
         }
-        .crop-container { width: 100%; height: 260px; background: #000; }
+        .crop-container { width: 100%; height: 260px; background: #000000; }
         .crop-container img { max-width: 100%; }
-        .crop-actions { display: flex; justify-content: space-between; padding: 12px 16px; }
+        .crop-actions {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 18px; background: var(--surface-card);
+        }
 
-        /* বটম নেভিগেশন বার */
+        /* ফ্লোটিং আইল্যান্ড বটম ন্যাভিগেশন বার */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
-            background: #ffffff; border-top: 1px solid #f1f5f9;
-            display: flex; justify-content: space-around; align-items: center; z-index: 100;
+            position: fixed; bottom: 12px; left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px); max-width: 440px; height: 62px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(229, 233, 226, 0.85);
+            border-radius: var(--radius-pill);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 1000; box-shadow: var(--shadow-float); padding: 0 8px;
         }
 
         .nav-item {
-            text-decoration: none; color: #94a3b8; font-size: 11px;
-            display: flex; flex-direction: column; align-items: center; gap: 3px; font-weight: 600;
+            text-decoration: none; color: var(--text-sub); font-size: 11px;
+            display: flex; flex-direction: column; align-items: center;
+            gap: 3px; font-weight: 600; flex: 1; padding: 8px 0;
+            border-radius: var(--radius-pill); transition: all 0.2s ease;
         }
-        .nav-item i { font-size: 18px; }
-        .nav-item.active { color: #047857; }
+        .nav-item i { font-size: 18px; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .nav-item.active { color: var(--brand-primary); font-weight: 700; }
+        .nav-item.active i {
+            transform: translateY(-1px) scale(1.1); color: var(--brand-accent);
+        }
+        .nav-item:active i { transform: scale(0.9); }
     </style>
 </head>
 <body>
 
+    <!-- টপ বার -->
     <header class="top-nav">
-        <a href="leaderboard.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <a href="leaderboard.html" class="back-btn" aria-label="পিছনে যান"><i class="fa-solid fa-arrow-left"></i></a>
         <span class="nav-title" id="navPageTitle">আমার প্রোফাইল</span>
-        <div style="width: 36px;"></div>
+        <div style="width: 38px;"></div>
     </header>
 
     <main class="page-content">
@@ -322,7 +451,7 @@
                 </button>
             </div>
 
-            <!-- ব্যাজ সারি (FOUNDER ও PRO নিচে থাকবে) -->
+            <!-- ব্যাজ সারি (FOUNDER ও PRO নিচে) -->
             <div class="user-badges-row" id="userBadgesRow">
                 <span id="founderBadgeContainer"></span>
                 <span id="proBadgeContainer"></span>
@@ -336,7 +465,7 @@
                 <span class="meta-pill" id="displayUserAge">বয়স: --</span>
             </div>
 
-            <!-- শুধুমাত্র পয়েন্ট বক্স -->
+            <!-- পয়েন্ট বক্স -->
             <div class="single-stat-wrap">
                 <div class="stat-item">
                     <div class="stat-val" id="userXpCount">০</div>
@@ -349,7 +478,7 @@
         <div class="premium-card" id="premiumPromoCard" style="display: none;">
             <div class="prem-top">
                 <div class="prem-title"><i class="fa-solid fa-crown"></i> KOTOBA PRO</div>
-                <span style="font-size: 11px; font-weight: 700; color: #ea580c;">৳ ১৯৯ / লাইফটাইম</span>
+                <span style="font-size: 11px; font-weight: 800; color: var(--brand-ochre); font-family: 'Plus Jakarta Sans', sans-serif;">৳ ১৯৯ / লাইফটাইম</span>
             </div>
             <p class="prem-desc">বিজ্ঞাপনমুক্ত ব্রাউজিং, সম্পূর্ণ কাঞ্জি কুইজ এবং আনলিমিটেড AI সহায়ক পান।</p>
             <button class="prem-btn" id="openPaymentModalBtn">
@@ -357,7 +486,7 @@
             </button>
         </div>
 
-        <!-- প্রিমিয়াম একটিভ নোটিশ -->
+        <!-- প্রিমিয়াম সক্রিয় নোটিশ -->
         <div class="pro-active-card" id="proActiveCard">
             <i class="fa-solid fa-circle-check"></i>
             <div>
@@ -372,7 +501,7 @@
                     <i class="fa-solid fa-sliders"></i>
                     <span>কন্ট্রোল প্যানেল</span>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+                <i class="fa-solid fa-chevron-right" style="color: var(--border-highlight); font-size: 11px;"></i>
             </a>
 
             <a href="leaderboard.html" class="menu-item">
@@ -380,7 +509,7 @@
                     <i class="fa-solid fa-trophy"></i>
                     <span>র‍্যাঙ্কিং ও লিডারবোর্ড</span>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+                <i class="fa-solid fa-chevron-right" style="color: var(--border-highlight); font-size: 11px;"></i>
             </a>
 
             <button class="menu-item" id="openPolicyBtn" type="button">
@@ -388,7 +517,7 @@
                     <i class="fa-solid fa-shield-halved"></i>
                     <span>গোপনীয়তা নীতি (Privacy Policy)</span>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 11px;"></i>
+                <i class="fa-solid fa-chevron-right" style="color: var(--border-highlight); font-size: 11px;"></i>
             </button>
         </div>
 
@@ -402,7 +531,7 @@
         <div class="modal-card">
             <div class="modal-head">
                 <h3>প্রোফাইল তথ্য পরিবর্তন</h3>
-                <button class="close-btn" id="closeEditProfileBtn">&times;</button>
+                <button class="close-btn" id="closeEditProfileBtn" aria-label="বন্ধ করুন">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="editProfileForm">
@@ -442,7 +571,7 @@
         <div class="modal-card">
             <div class="modal-head">
                 <h3>গোপনীয়তা নীতি</h3>
-                <button class="close-btn" id="closePolicyBtn">&times;</button>
+                <button class="close-btn" id="closePolicyBtn" aria-label="বন্ধ করুন">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="policy-content">
@@ -465,14 +594,14 @@
         <div class="modal-card">
             <div class="modal-head">
                 <h3>KOTOBA PRO আপগ্রেড</h3>
-                <button class="close-btn" id="closePaymentModalBtn">&times;</button>
+                <button class="close-btn" id="closePaymentModalBtn" aria-label="বন্ধ করুন">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="pay-box">
-                    <div style="font-size: 11.5px; color: #64748b;">বিকাশ / নগদ (Send Money)</div>
+                    <div style="font-size: 12px; color: var(--brand-primary); font-weight: 600;">বিকাশ / নগদ (Send Money)</div>
                     <div class="pay-num" id="walletNum">01886861214</div>
                     <button class="btn-copy" id="copyWalletBtn">কপি করুন</button>
-                    <div style="font-size: 11px; color: #047857; margin-top: 4px; font-weight: 700;">ফি: ১৯৯ টাকা</div>
+                    <div style="font-size: 11px; color: var(--brand-accent); margin-top: 5px; font-weight: 700;">ফি: ১৯৯ টাকা</div>
                 </div>
 
                 <form id="premiumForm">
@@ -507,21 +636,31 @@
                 <img id="imageToCrop" src="" alt="Crop">
             </div>
             <div class="crop-actions">
-                <button style="background: none; border: none; color: #64748b; font-weight: 600;" id="btnCancelCrop">বাতিল</button>
-                <button style="background: #047857; color: #fff; border: none; padding: 6px 16px; border-radius: 8px; font-weight: 600;" id="btnSaveCrop">সেভ</button>
+                <button style="background: none; border: none; color: var(--text-sub); font-weight: 600; cursor: pointer;" id="btnCancelCrop">বাতিল</button>
+                <button style="background: var(--brand-primary); color: #fff; border: none; padding: 7px 18px; border-radius: 8px; font-weight: 600; cursor: pointer;" id="btnSaveCrop">সেভ</button>
             </div>
         </div>
     </div>
 
-    <!-- বটম নেভিগেশন বার -->
+    <!-- ফ্লোটিং আইল্যান্ড বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
-        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
-        <a href="profile.html" class="nav-item active"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>হোম</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>প্রোফাইল</span>
+        </a>
     </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
+    <!-- Firebase Scripts (১০০% লজিক অক্ষত) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -649,13 +788,13 @@
                     const founderContainer = document.getElementById("founderBadgeContainer");
                     const proContainer = document.getElementById("proBadgeContainer");
 
-                    // নামের পাশে শুধু ব্লু ভেরিফাইড আইকন
+                    // ব্লু ভেরিফাইড আইকন
                     verifiedContainer.innerHTML = isOwner ? `<i class="fa-solid fa-circle-check"></i>` : "";
 
-                    // নামের নিচে ব্যালেন্সড FOUNDER ব্যাজ
+                    // FOUNDER ব্যাজ
                     founderContainer.innerHTML = isOwner ? `<span class="badge-founder"><i class="fa-solid fa-shield-halved"></i> FOUNDER</span>` : "";
                     
-                    // নামের নিচে PRO ব্যাজ
+                    // PRO ব্যাজ
                     proContainer.innerHTML = isPremium ? `<span class="badge-pro"><i class="fa-solid fa-crown"></i> PRO</span>` : "";
 
                     if (isOwnProfile) {
@@ -726,7 +865,7 @@
         copyWalletBtn.onclick = () => {
             navigator.clipboard.writeText(document.getElementById("walletNum").innerText);
             copyWalletBtn.innerText = "কপি হয়েছে";
-            setTimeout(() => copyWalletBtn.innerText = "কপি", 2000);
+            setTimeout(() => copyWalletBtn.innerText = "কপি করুন", 2000);
         };
 
         premiumForm.addEventListener("submit", async (e) => {

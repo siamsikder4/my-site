@@ -2,25 +2,59 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>N5 Vocabulary - KOTOBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Google AdSense Verification Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
+
     <!-- ফন্ট ও আইকন -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- OneSignal Push Notification SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      window.OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
+          notifyButton: { enable: true },
+        });
+      });
+    </script>
 
     <style>
+        :root {
+            /* Index পেজের জাপানিজ কালার প্যালেট */
+            --paper: #fbf7ef;
+            --ink: #182620;
+            --pine: #0B4A38;
+            --jade: #147A57;
+            --clay: #B6472E;
+            --gold: #A9781F;
+            --mist: #7C8A82;
+            --line: #E9E2D3;
+            --card-bg: #ffffff;
+            --shadow-float: 0 10px 28px rgba(11, 74, 56, 0.12);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
-            padding-bottom: 75px;
+            background-color: var(--paper);
+            color: var(--ink);
+            padding-bottom: 96px;
+            min-height: 100vh;
         }
 
         /* লোডার ওভারলে */
@@ -28,7 +62,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(251, 247, 239, 0.95);
             backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
@@ -56,7 +90,7 @@
             position: absolute;
             left: 2px; top: 2px;
             width: 30px; height: 42px;
-            border: 2.2px solid #047857;
+            border: 2.2px solid var(--pine);
             border-right: none;
             border-radius: 4px 0 0 4px;
             background: #ffffff;
@@ -66,7 +100,7 @@
             position: absolute;
             right: 2px; top: 2px;
             width: 30px; height: 42px;
-            border: 2.2px solid #047857;
+            border: 2.2px solid var(--pine);
             border-left: none;
             border-radius: 0 4px 4px 0;
             background: #ffffff;
@@ -76,14 +110,14 @@
             position: absolute;
             left: 31px; top: 0;
             width: 2px; height: 46px;
-            background: #047857;
+            background: var(--pine);
         }
 
         .book-loader .page {
             position: absolute;
             width: 29px; height: 42px;
             top: 2px; right: 3px;
-            border: 2px solid #047857;
+            border: 2px solid var(--jade);
             border-left: none;
             border-radius: 0 4px 4px 0;
             background: #ffffff;
@@ -103,8 +137,8 @@
         .loading-text {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 15px;
-            font-weight: 600;
-            color: #1e293b;
+            font-weight: 700;
+            color: var(--pine);
             letter-spacing: 0.8px;
         }
 
@@ -113,9 +147,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
+            padding: 12px 18px;
+            background: rgba(251, 247, 239, 0.94);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -124,30 +159,49 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #0f3e2e;
+            gap: 10px;
             cursor: pointer;
         }
 
+        .menu-btn-icon {
+            background: #F0EAD9;
+            color: var(--pine);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            font-size: 15px;
+            transition: transform 0.15s;
+        }
+
+        .menu-btn-icon:active { transform: scale(0.92); }
+
         .nav-title {
-            font-weight: 800;
-            font-size: 16.5px;
-            color: #0f3e2e;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 900;
+            font-size: 17px;
+            color: var(--pine);
             letter-spacing: 0.5px;
         }
 
         .nav-right {
-            font-size: 11.5px;
+            font-size: 11px;
             font-weight: 700;
-            color: #047857;
-            background: #e6f4ea;
+            color: var(--jade);
+            background: #E6F3EC;
             padding: 4px 10px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 5px;
+            border: 1px solid #CCE7DC;
+            max-width: 170px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .main-container {
@@ -165,79 +219,80 @@
         .main-category-title {
             font-size: 20px;
             font-weight: 800;
-            color: #0e3b2c;
-            margin-bottom: 4px;
+            color: var(--pine);
+            margin-bottom: 3px;
         }
 
         .sub-category-desc {
             font-size: 12px;
-            color: #64748b;
+            color: var(--mist);
             font-weight: 600;
         }
 
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 11px;
         }
 
         .lesson-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #144336;
+            background: var(--card-bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--jade);
             border-radius: 14px;
-            padding: 16px 12px;
+            padding: 15px 12px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            transition: transform 0.15s ease;
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
         .lesson-card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
         .card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .l-badge {
-            background: #f1f5f9;
-            color: #475569;
+            background: #E6F3EC;
+            color: var(--jade);
             font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
+            font-weight: 800;
+            padding: 2.5px 7px;
             border-radius: 6px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .kanji-lesson-tag {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 12px;
-            color: #94a3b8;
-            font-weight: 600;
+            color: var(--mist);
+            font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
-            color: #144336;
-            margin-bottom: 3px;
+            color: var(--ink);
+            margin-bottom: 2px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: #64748b;
-            line-height: 1.3;
+            color: var(--mist);
+            line-height: 1.35;
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 10px;
+            margin-top: 8px;
             color: #cbd5e1;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         /* ফ্ল্যাশকার্ড ভিউ */
@@ -255,9 +310,9 @@
         }
 
         .fc-title {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 800;
-            color: #0f3e2e;
+            color: var(--pine);
         }
 
         .fc-tools {
@@ -270,22 +325,23 @@
 
         .fc-tool-btn {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--line);
             width: 38px;
             height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #475569;
+            color: var(--ink);
             font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
             transition: all 0.15s;
         }
 
         .fc-tool-btn:active {
             transform: scale(0.92);
+            background: #FAF7F0;
         }
 
         .flashcard-container {
@@ -318,41 +374,41 @@
             -webkit-backface-visibility: hidden;
             border-radius: 20px;
             background: #ffffff;
-            border: 1.5px solid #e2e8f0;
+            border: 1.5px solid var(--line);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 24px 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 24px rgba(11, 74, 56, 0.04);
             box-sizing: border-box;
             transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .flashcard-front {
-            border-top: 4px solid #144336;
+            border-top: 4px solid var(--pine);
         }
 
         .flashcard-back {
             transform: rotateY(180deg);
-            background: #fbfdfc;
-            border-top: 4px solid #b91c1c;
+            background: #FAF7F0;
+            border-top: 4px solid var(--clay);
         }
 
         .flashcard-container.is-highlighted .flashcard-face {
-            border-color: #ef4444 !important;
-            border-top-color: #dc2626 !important;
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.16) !important;
-            background: #fffafa !important;
+            border-color: var(--clay) !important;
+            border-top-color: var(--clay) !important;
+            box-shadow: 0 10px 25px rgba(182, 71, 46, 0.14) !important;
+            background: #FBEAE6 !important;
         }
 
         .fc-jp-text {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
-            color: #144336;
-            line-height: 1.2;
-            margin-bottom: 4px;
+            color: var(--pine);
+            line-height: 1.25;
+            margin-bottom: 6px;
             padding: 0 10px;
             word-break: break-word;
         }
@@ -360,23 +416,23 @@
         .fc-meaning-text {
             font-size: 20px;
             font-weight: 800;
-            color: #b91c1c;
+            color: var(--clay);
             margin-bottom: 4px;
             line-height: 1.3;
             padding: 0 10px;
         }
 
         .fc-ro-text {
-            font-size: 14px;
-            color: #64748b;
+            font-size: 13.5px;
+            color: var(--mist);
             font-weight: 600;
         }
 
         .fc-tap-hint {
             position: absolute;
             bottom: 16px;
-            font-size: 12px;
-            color: #94a3b8;
+            font-size: 11.5px;
+            color: var(--mist);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -387,8 +443,8 @@
             position: absolute;
             top: 16px;
             left: 18px;
-            color: #94a3b8;
-            background: #f1f5f9;
+            color: var(--mist);
+            background: #FAF7F0;
             width: 34px;
             height: 34px;
             border-radius: 50%;
@@ -396,23 +452,24 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            border: none;
+            border: 1px solid var(--line);
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .fc-highlight-btn.active {
             color: #ffffff;
-            background: #ef4444;
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+            background: var(--clay);
+            border-color: var(--clay);
+            box-shadow: 0 2px 8px rgba(182, 71, 46, 0.35);
         }
 
         .fc-speaker-icon {
             position: absolute;
             top: 16px;
             right: 18px;
-            color: #047857;
-            background: #f1f5f9;
+            color: var(--jade);
+            background: #E6F3EC;
             width: 34px;
             height: 34px;
             border-radius: 50%;
@@ -420,14 +477,14 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            border: none;
+            border: 1px solid #CCE7DC;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .fc-speaker-icon:active {
             transform: scale(0.9);
-            background: #047857;
+            background: var(--jade);
             color: #ffffff;
         }
 
@@ -441,18 +498,22 @@
 
         .fc-arrow-btn {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--line);
             width: 42px;
             height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #334155;
-            font-size: 15px;
+            color: var(--ink);
+            font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
             transition: all 0.15s;
+        }
+
+        .fc-arrow-btn:active {
+            transform: scale(0.92);
         }
 
         .fc-progress-wrap {
@@ -466,29 +527,30 @@
         .fc-counter-text {
             font-size: 12px;
             font-weight: 800;
-            color: #475569;
+            color: var(--mist);
             letter-spacing: 0.5px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .fc-progress-bar {
             width: 100%;
-            height: 4px;
-            background: #e2e8f0;
-            border-radius: 4px;
+            height: 5px;
+            background: #E9E2D3;
+            border-radius: 6px;
             overflow: hidden;
         }
 
         .fc-progress-fill {
             height: 100%;
-            background: #144336;
+            background: var(--jade);
             width: 5%;
             transition: width 0.25s ease;
         }
 
         .vocab-accordion-header {
-            background: #144336;
+            background: var(--pine);
             color: #ffffff;
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 13px 16px;
             display: flex;
             justify-content: space-between;
@@ -496,7 +558,7 @@
             cursor: pointer;
             font-weight: 700;
             font-size: 13.5px;
-            box-shadow: 0 3px 6px rgba(20, 67, 54, 0.15);
+            box-shadow: 0 3px 8px rgba(11, 74, 56, 0.12);
         }
 
         .vocab-accordion-header .acc-title {
@@ -513,11 +575,11 @@
         .vocab-table-card {
             display: none;
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
             margin-top: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 8px rgba(11, 74, 56, 0.03);
         }
 
         .vocab-table {
@@ -527,72 +589,71 @@
         }
 
         .vocab-table th {
-            background: #f8fafc;
-            color: #144336;
+            background: #FAF7F0;
+            color: var(--pine);
             font-weight: 800;
             font-size: 12px;
             padding: 12px 6px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--line);
             line-height: 1.3;
         }
 
         .vocab-table td {
             padding: 12px 6px;
             font-size: 12.5px;
-            border-bottom: 1px solid #f1f5f9;
-            color: #334155;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
             vertical-align: middle;
         }
 
         .vocab-table tr:nth-child(even) {
-            background: #fafcfb;
+            background: #FAF9F5;
         }
 
         .vocab-table tr.highlighted-row {
-            background-color: #fff1f2 !important;
-            border-left: 4px solid #ef4444;
+            background-color: #FBEAE6 !important;
+            border-left: 4px solid var(--clay);
         }
 
         .col-kana {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
-            color: #0f3e2e;
-            word-break: break-word;
+            color: var(--pine);
         }
 
         .col-ro {
-            font-size: 12px;
-            color: #64748b;
+            font-size: 11.5px;
+            color: var(--mist);
             font-weight: 500;
         }
 
         .col-bn {
             font-size: 12px;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--ink);
         }
 
         .table-hl-btn {
             background: none;
             border: none;
-            font-size: 16px;
+            font-size: 15px;
             color: #cbd5e1;
             cursor: pointer;
             transition: transform 0.15s, color 0.15s;
         }
 
         .table-hl-btn.active {
-            color: #ef4444;
+            color: var(--clay);
         }
 
-        /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন বার */
+        /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন */
         .lesson-jump-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 25px;
-            margin-bottom: 15px;
+            margin-top: 26px;
+            margin-bottom: 20px;
             padding: 16px 8px;
             position: relative;
         }
@@ -604,7 +665,7 @@
             top: 20%;
             height: 60%;
             width: 1px;
-            background-color: #e2e8f0;
+            background-color: var(--line);
             transform: translateX(-50%);
         }
 
@@ -629,17 +690,18 @@
         }
 
         .jump-label {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 800;
-            color: #144336;
+            color: var(--jade);
             letter-spacing: 0.8px;
             margin-bottom: 4px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .jump-title {
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 800;
-            color: #0e3b2c;
+            color: var(--pine);
             line-height: 1.3;
         }
 
@@ -661,38 +723,60 @@
             overflow: hidden;
         }
 
+        /* ফ্লোটিং আইল্যান্ড বটম বার */
         .bottom-nav {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            max-width: 440px;
             height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(233, 226, 211, 0.9);
+            border-radius: 999px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
+            box-shadow: var(--shadow-float);
+            padding: 0 8px;
         }
 
         .nav-item {
             text-decoration: none;
-            color: #8392a5;
+            color: var(--mist);
             font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             font-weight: 600;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .nav-item.active {
-            color: #144336;
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 999px;
+            transition: all 0.2s ease;
         }
 
         .nav-item i {
-            font-size: 19px;
+            font-size: 18px;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .nav-item.active {
+            color: var(--pine);
+            font-weight: 700;
+        }
+
+        .nav-item.active i {
+            transform: translateY(-1px) scale(1.1);
+            color: var(--jade);
+        }
+
+        .nav-item:active i {
+            transform: scale(0.9);
         }
     </style>
 </head>
@@ -714,7 +798,9 @@
     <!-- টপ বার -->
     <header class="top-nav">
         <div class="nav-left" id="btnBackToGrid">
-            <i class="fa-solid fa-bars" id="menuIcon"></i>
+            <div class="menu-btn-icon">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </div>
             <span class="nav-title">KOTOBA</span>
         </div>
         <div class="nav-right" id="userEmailDisplay">
@@ -728,7 +814,7 @@
         <div id="lessonGridView">
             <div class="grid-header-wrap">
                 <h2 class="main-category-title">N5 Vocabulary</h2>
-                <p class="sub-category-desc">মোট ২৫টি লেসন • সম্পূর্ণ শব্দভাণ্ডার</p>
+                <p class="sub-category-desc">লেসন ১ থেকে ২৫ • সম্পূর্ণ শব্দভাণ্ডার</p>
             </div>
 
             <div class="lesson-grid" id="gridContainer"></div>
@@ -753,10 +839,10 @@
             <div class="flashcard-container" id="flashcardContainer">
                 <div class="flashcard-inner">
                     <div class="flashcard-face flashcard-front">
-                        <button class="fc-highlight-btn" id="fcFrontHlBtn">
+                        <button class="fc-highlight-btn" id="fcFrontHlBtn" title="বুকমার্ক">
                             <i class="fa-solid fa-bookmark"></i>
                         </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn"><i class="fa-solid fa-volume-high"></i></button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-jp-text" id="fcKana">わたし</div>
                         <div class="fc-tap-hint">
                             <i class="fa-solid fa-hand-pointer"></i>
@@ -764,10 +850,10 @@
                         </div>
                     </div>
                     <div class="flashcard-face flashcard-back">
-                        <button class="fc-highlight-btn" id="fcBackHlBtn">
+                        <button class="fc-highlight-btn" id="fcBackHlBtn" title="বুকমার্ক">
                             <i class="fa-solid fa-bookmark"></i>
                         </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn"><i class="fa-solid fa-volume-high"></i></button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-meaning-text" id="fcMeaning">আমি</div>
                         <div class="fc-ro-text" id="fcRomaji">watashi</div>
                         <div class="fc-tap-hint">
@@ -839,9 +925,9 @@
             <i class="fa-solid fa-house"></i>
             <span>হোম</span>
         </a>
-        <a href="index.html" class="nav-item active">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>লিডারবোর্ড</span>
         </a>
         <a href="profile.html" class="nav-item">
             <i class="fa-solid fa-circle-user"></i>
@@ -935,7 +1021,7 @@
 
         initPageAds();
 
-        // সম্পূর্ণ শব্দভাণ্ডার ডেটা (লেসন ১ থেকে ১৫)
+        // মিন্না নো নিহোঙ্গো N5 এর সম্পূর্ণ ১ থেকে ২৫ লেসনের শব্দভাণ্ডার
         const lessons = {
             1: {
                 title: "প্রারম্ভিক শব্দার্থ ও পরিচয়",
@@ -950,8 +1036,8 @@
                     { kana: "～さん", ro: "-san", bn: "-জনাব/সাহেব (সম্মানসূচক)" },
                     { kana: "～ちゃん", ro: "-chan", bn: "-বাচ্চাদের নামের শেষে (স্নেহসূচক)" },
                     { kana: "せんせい", ro: "sensei", bn: "শিক্ষক" },
-                    { kana: "きょうし", ro: "kyoushi", bn: "শিক্ষক" },
-                    { kana: "がくせい", ro: "gakusei", bn: "ছাত্র" },
+                    { kana: "きょうし", ro: "kyoushi", bn: "শিক্ষক (পেশা)" },
+                    { kana: "がくせい", ro: "gakusei", bn: "ছাত্র / ছাত্রী" },
                     { kana: "かいしゃいん", ro: "kaishain", bn: "কোম্পানি কর্মচারী" },
                     { kana: "しゃいん", ro: "shain", bn: "কর্মচারী" },
                     { kana: "ぎんこういん", ro: "ginkouin", bn: "ব্যাংক কর্মচারী" },
@@ -960,92 +1046,76 @@
                     { kana: "エンジニア", ro: "enjinia", bn: "প্রকৌশলী" },
                     { kana: "だいがく", ro: "daigaku", bn: "বিশ্ববিদ্যালয়" },
                     { kana: "びょういん", ro: "byouin", bn: "হাসপাতাল" },
-                    { kana: "でんき", ro: "denki", bn: "বিদ্যুৎ" },
+                    { kana: "でんき", ro: "denki", bn: "বিদ্যুৎ / বাতি" },
                     { kana: "だれ", ro: "dare", bn: "কে" },
                     { kana: "どなた", ro: "donata", bn: "কে (ভদ্রভাবে)" },
-                    { kana: "さい", ro: "sai", bn: "বয়সের একক" },
+                    { kana: "～さい", ro: "~sai", bn: "-বছর বয়স" },
                     { kana: "なんさい", ro: "nansai", bn: "কত বছর বয়স" },
-                    { kana: "おいくつ", ro: "oikutsu", bn: "কত বছর বয়স (ভদ্রভাবে)" },
+                    { kana: "おいくつ", ro: "oikutsu", bn: "কত বয়স (ভদ্রভাবে)" },
                     { kana: "はい", ro: "hai", bn: "হ্যাঁ" },
                     { kana: "いいえ", ro: "iie", bn: "না" },
                     { kana: "しつれいですが", ro: "shitsurei desu ga", bn: "মাফ করবেন কিন্তু..." },
-                    { kana: "おなまえは？", ro: "onamae wa?", bn: "আপনার নাম কি?" },
-                    { kana: "はじめまして", ro: "hajimemashite", bn: "প্রথম দেখা হওয়াতে ভালো লাগলো" },
-                    { kana: "どうぞよろしく", ro: "douzo yoroshiku", bn: "আপনার সাথে পরিচিত হয়ে খুশি হলাম" },
-                    { kana: "こちらは～さんです", ro: "kochira wa ~san desu", bn: "ইনি হলেন..." },
+                    { kana: "おなまえは？", ro: "onamae wa?", bn: "আপনার নাম কী?" },
+                    { kana: "はじめまして", ro: "hajimemashite", bn: "প্রথম দেখায় পরিচিত হলাম" },
+                    { kana: "どうぞよろしく", ro: "douzo yoroshiku", bn: "পরিচিত হয়ে খুশি হলাম" },
+                    { kana: "こちらは～さんです", ro: "kochira wa ~san desu", bn: "ইনি হলেন জনাব..." },
                     { kana: "～から来ました", ro: "~kara kimashita", bn: "...থেকে এসেছি" },
                     { kana: "アメリカ", ro: "amerika", bn: "আমেরিকা" },
                     { kana: "イギリス", ro: "igirisu", bn: "যুক্তরাজ্য" },
                     { kana: "インド", ro: "indo", bn: "ভারত" },
                     { kana: "インドネシア", ro: "indoneshia", bn: "ইন্দোনেশিয়া" },
-                    { kana: "韓国", ro: "kankoku", bn: "দক্ষিণ কোরিয়া" },
+                    { kana: "かんこく", ro: "kankoku", bn: "দক্ষিণ কোরিয়া" },
                     { kana: "タイ", ro: "tai", bn: "থাইল্যান্ড" },
-                    { kana: "中国", ro: "chuugoku", bn: "চীন" },
+                    { kana: "ちゅうごく", ro: "chuugoku", bn: "চীন" },
                     { kana: "ドイツ", ro: "doitsu", bn: "জার্মানি" },
-                    { kana: "日本", ro: "nihon", bn: "জাপান" },
+                    { kana: "にほん", ro: "nihon", bn: "জাপান" },
                     { kana: "フランス", ro: "furansu", bn: "ফ্রান্স" },
-                    { kana: "ブラジル", ro: "burajiru", bn: "ব্রাজিল" },
-                    { kana: "さくら大学", ro: "sakura daigaku", bn: "কাল্পনিক বিশ্ববিদ্যালয়" },
-                    { kana: "富士大学", ro: "fuji daigaku", bn: "কাল্পনিক বিশ্ববিদ্যালয়" },
-                    { kana: "IMC", ro: "IMC", bn: "একটি কাল্পনিক কোম্পানি" },
-                    { kana: "パワー電気", ro: "pawaa denki", bn: "একটি কাল্পনিক কোম্পানি" },
-                    { kana: "ブラジルエアー", ro: "burajiru eaa", bn: "একটি কাল্পনিক কোম্পানি" },
-                    { kana: "AKC", ro: "AKC", bn: "একটি কাল্পনিক প্রতিষ্ঠান" },
-                    { kana: "神戸病院", ro: "koube byouin", bn: "একটি কাল্পনিক হাসপাতাল" }
+                    { kana: "ブラジル", ro: "burajiru", bn: "ব্রাজিল" }
                 ]
             },
             2: {
                 title: "বস্তু ও পরিচিত জিনিসপত্র",
                 kanji: "第2課",
                 words: [
-                    { kana: "これ", ro: "kore", bn: "এটা (বস্তু)" },
-                    { kana: "それ", ro: "sore", bn: "ওটা (বস্তু)" },
-                    { kana: "あれ", ro: "are", bn: "ঐটা (দূরের বস্তু)" },
-                    { kana: "この～", ro: "kono ~", bn: "এই ~ (বস্তুর সাথে)" },
-                    { kana: "その～", ro: "sono ~", bn: "ওই ~ (বস্তুর সাথে)" },
-                    { kana: "あの～", ro: "ano ~", bn: "ঐ ~ (দূরের বস্তুর সাথে)" },
+                    { kana: "これ", ro: "kore", bn: "এটা (কাছের বস্তু)" },
+                    { kana: "それ", ro: "sore", bn: "ওটা (শ্রোতার কাছের বস্তু)" },
+                    { kana: "あれ", ro: "are", bn: "ঐটা (উভয়ের দূরের বস্তু)" },
+                    { kana: "この～", ro: "kono ~", bn: "এই ~ (নাউনের পূর্বে)" },
+                    { kana: "その～", ro: "sono ~", bn: "ওই ~ (নাউনের পূর্বে)" },
+                    { kana: "あの～", ro: "ano ~", bn: "ঐ ~ (নাউনের পূর্বে)" },
                     { kana: "ほん", ro: "hon", bn: "বই" },
                     { kana: "じしょ", ro: "jisho", bn: "অভিধান" },
                     { kana: "ざっし", ro: "zasshi", bn: "ম্যাগাজিন" },
                     { kana: "しんぶん", ro: "shinbun", bn: "সংবাদপত্র" },
-                    { kana: "ノート", ro: "nooto", bn: "নোটবুক" },
+                    { kana: "ノート", ro: "nooto", bn: "নোটবুক / খাতা" },
                     { kana: "てちょう", ro: "techou", bn: "পকেট নোটবুক" },
                     { kana: "めいし", ro: "meishi", bn: "ভিজিটিং কার্ড" },
                     { kana: "カード", ro: "kaado", bn: "কার্ড" },
-                    { kana: "テレホンカード", ro: "terehon kaado", bn: "টেলিফোন কার্ড" },
                     { kana: "えんぴつ", ro: "enpitsu", bn: "পেন্সিল" },
-                    { kana: "ボールペン", ro: "boorupen", bn: "বলপয়েন্ট পেন" },
-                    { kana: "シャープペンシル", ro: "shaapu penshiru", bn: "মেকানিক্যাল পেন্সিল" },
+                    { kana: "ボールペン", ro: "boorupen", bn: "বলপেন" },
+                    { kana: "シャープペンシル", ro: "shaapupenshiru", bn: "মেকানিক্যাল পেন্সিল" },
                     { kana: "かぎ", ro: "kagi", bn: "চাবি" },
                     { kana: "とけい", ro: "tokei", bn: "ঘড়ি" },
                     { kana: "かさ", ro: "kasa", bn: "ছাতা" },
                     { kana: "かばん", ro: "kaban", bn: "ব্যাগ" },
-                    { kana: "テープ", ro: "teepu", bn: "টেপ" },
-                    { kana: "テープレコーダー", ro: "teepu rekoodaa", bn: "টেপ রেকর্ডার" },
                     { kana: "テレビ", ro: "terebi", bn: "টেলিভিশন" },
                     { kana: "ラジオ", ro: "rajio", bn: "রেডিও" },
                     { kana: "カメラ", ro: "kamera", bn: "ক্যামেরা" },
                     { kana: "コンピューター", ro: "konpyuutaa", bn: "কম্পিউটার" },
-                    { kana: "じどうしゃ", ro: "jidousha", bn: "মোটর গাড়ি" },
+                    { kana: "じどうしゃ", ro: "jidousha", bn: "মোটরগাড়ি" },
                     { kana: "つくえ", ro: "tsukue", bn: "টেবিল" },
                     { kana: "いす", ro: "isu", bn: "চেয়ার" },
                     { kana: "チョコレート", ro: "chokoreeto", bn: "চকলেট" },
                     { kana: "コーヒー", ro: "koohii", bn: "কফি" },
-                    { kana: "～ご", ro: "~go", bn: "...ভাষা" },
                     { kana: "えいご", ro: "eigo", bn: "ইংরেজি ভাষা" },
                     { kana: "にほんご", ro: "nihongo", bn: "জাপানি ভাষা" },
-                    { kana: "なん", ro: "nan", bn: "কি" },
+                    { kana: "なん", ro: "nan", bn: "কী" },
                     { kana: "そう", ro: "sou", bn: "তাই" },
-                    { kana: "ちがいます", ro: "chigaimasu", bn: "না, ভুল/অন্যরকম" },
+                    { kana: "ちがいます", ro: "chigaimasu", bn: "না, তা নয় / ভুল" },
                     { kana: "そうですか", ro: "sou desu ka", bn: "তাই নাকি?" },
-                    { kana: "あのう", ro: "anou", bn: "যে... (দ্বিধা প্রকাশ)" },
-                    { kana: "ほんのきもちです", ro: "honno kimochi desu", bn: "সামান্য কিছু উপহার" },
+                    { kana: "ほんのきもちです", ro: "honno kimochi desu", bn: "সামান্য শুভেচ্ছা উপহার" },
                     { kana: "どうぞ", ro: "douzo", bn: "অনুগ্রহ করে নিন" },
-                    { kana: "どうも", ro: "doumo", bn: "ধন্যবাদ" },
-                    { kana: "ありがとう", ro: "arigatou", bn: "অনেক ধন্যবাদ" },
-                    { kana: "ありがとうございます", ro: "arigatou gozaimasu", bn: "আপনাকে ধন্যবাদ" },
-                    { kana: "これからお世話になります", ro: "korekara osewa ni narimasu", bn: "ভবিষ্যতে আপনার সাহায্য আশা করি" },
-                    { kana: "こちらこそよろしく", ro: "kochirakoso yoroshiku", bn: "আমিও আপনার সাহায্য প্রত্যাশী" }
+                    { kana: "どうもありがとう", ro: "doumo arigatou", bn: "অনেক ধন্যবাদ" }
                 ]
             },
             3: {
@@ -1054,52 +1124,40 @@
                 words: [
                     { kana: "ここ", ro: "koko", bn: "এখানে" },
                     { kana: "そこ", ro: "soko", bn: "সেখানে" },
-                    { kana: "あそこ", ro: "asoko", bn: "ঐখানে / দূরে" },
+                    { kana: "あそこ", ro: "asoko", bn: "ঐখানে (দূরে)" },
                     { kana: "どこ", ro: "doko", bn: "কোথায়" },
-                    { kana: "こちら", ro: "kochira", bn: "এই দিকে (ভদ্রভাবে)" },
-                    { kana: "そちら", ro: "sochira", bn: "ওই দিকে (ভদ্রভাবে)" },
-                    { kana: "あちら", ro: "achira", bn: "ঐ দিকে (ভদ্রভাবে)" },
-                    { kana: "どちら", ro: "dochira", bn: "কোন দিকে (ভদ্রভাবে)" },
+                    { kana: "こちら", ro: "kochira", bn: "এই দিকে (ভদ্ররূপ)" },
+                    { kana: "そちら", ro: "sochira", bn: "ওই দিকে (ভদ্ররূপ)" },
+                    { kana: "あちら", ro: "achira", bn: "ঐ দিকে (ভদ্ররূপ)" },
+                    { kana: "どちら", ro: "dochira", bn: "কোন দিকে / কোথায়" },
                     { kana: "きょうしつ", ro: "kyoushitsu", bn: "শ্রেণিকক্ষ" },
-                    { kana: "しょくどう", ro: "shokudou", bn: "ডাইনিং রুম" },
+                    { kana: "しょくどう", ro: "shokudou", bn: "ডাইনিং রুম / ক্যান্টিন" },
                     { kana: "じむしょ", ro: "jimusho", bn: "অফিস" },
                     { kana: "かいぎしつ", ro: "kaigishitsu", bn: "মিটিং রুম" },
                     { kana: "うけつけ", ro: "uketsuke", bn: "রিসেপশন ডেস্ক" },
                     { kana: "ロビー", ro: "robii", bn: "লবি" },
-                    { kana: "へや", ro: "heya", bn: "রুম" },
-                    { kana: "トイレ", ro: "toire", bn: "টয়লেট" },
-                    { kana: "おてあらい", ro: "otearai", bn: "টয়লেট (ভদ্রভাবে)" },
+                    { kana: "へや", ro: "heya", bn: "রুম / কামরা" },
+                    { kana: "トイレ (おてあらい)", ro: "toire (otearai)", bn: "টয়লেট / ওয়াশরুম" },
                     { kana: "かいだん", ro: "kaidan", bn: "সিঁড়ি" },
                     { kana: "エレベーター", ro: "erebeetaa", bn: "লিফট" },
-                    { kana: "エスカレーター", ro: "esukareetaa", bn: "এসকেলেটর" },
-                    { kana: "おくに", ro: "okuni", bn: "দেশ" },
+                    { kana: "エスカレーター", ro: "esukareetaa", bn: "চলন্ত সিঁড়ি" },
                     { kana: "かいしゃ", ro: "kaisha", bn: "কোম্পানি" },
-                    { kana: "うち", ro: "uchi", bn: "বাড়ি" },
+                    { kana: "うち", ro: "uchi", bn: "বাড়ি / ঘর" },
                     { kana: "でんわ", ro: "denwa", bn: "টেলিফোন" },
                     { kana: "くつ", ro: "kutsu", bn: "জুতো" },
                     { kana: "ネクタイ", ro: "nekutai", bn: "টাই" },
-                    { kana: "ワイン", ro: "wain", bn: "ওয়াইন" },
+                    { kana: "ワイン", ro: "wain", bn: "ওয়াইন" },
                     { kana: "たばこ", ro: "tabako", bn: "সিগারেট" },
-                    { kana: "うりば", ro: "uriba", bn: "বিক্রয় কাউন্টার" },
-                    { kana: "ちか", ro: "chika", bn: "বেসমেন্ট" },
-                    { kana: "～かい (～がい)", ro: "~kai (~gai)", bn: "-তলা" },
-                    { kana: "なんがい", ro: "nan-gai", bn: "কত তলা" },
+                    { kana: "うりば", ro: "uriba", bn: "বিক্রয় কেন্দ্র / কাউন্টার" },
+                    { kana: "ちか", ro: "chika", bn: "বেসমেন্ট / পাতাল" },
+                    { kana: "～かい (～がい)", ro: "~kai (~gai)", bn: "-তম তলা" },
+                    { kana: "なんがい", ro: "nangai", bn: "কত তলা" },
                     { kana: "～えん", ro: "~en", bn: "-ইয়েন" },
-                    { kana: "いくら", ro: "ikura", bn: "দাম কত?" },
+                    { kana: "いくら", ro: "ikura", bn: "দাম কত" },
                     { kana: "ひゃく", ro: "hyaku", bn: "একশত" },
                     { kana: "せん", ro: "sen", bn: "এক হাজার" },
                     { kana: "まん", ro: "man", bn: "দশ হাজার" },
-                    { kana: "すみません", ro: "sumimasen", bn: "দুঃখিত/মাফ করবেন" },
-                    { kana: "～でございます", ro: "~de gozaimasu", bn: "~desu এর মার্জিত রূপ" },
-                    { kana: "～を見せてください", ro: "~o misete kudasai", bn: "দয়া করে ~টি আমাকে দেখান" },
-                    { kana: "じゃ", ro: "ja", bn: "তাহলে" },
-                    { kana: "～をください", ro: "~o kudasai", bn: "দয়া করে ~টি আমাকে দিন" },
-                    { kana: "新大阪", ro: "shin-Oosaka", bn: "শিন-ওসাকা (ওসাকার স্টেশন)" },
-                    { kana: "イタリア", ro: "itaria", bn: "ইতালি" },
-                    { kana: "スイス", ro: "suisu", bn: "সুইজারল্যান্ড" },
-                    { kana: "MT", ro: "MT", bn: "একটি কাল্পনিক কোম্পানি" },
-                    { kana: "ヨーネン", ro: "Yōnen", bn: "একটি কাল্পনিক কোম্পানি" },
-                    { kana: "アキックス", ro: "Akikkusu", bn: "একটি কাল্পনিক কোম্পানি" }
+                    { kana: "すみません", ro: "sumimasen", bn: "মাফ করবেন / শুনুন" }
                 ]
             },
             4: {
@@ -1109,36 +1167,32 @@
                     { kana: "おきます", ro: "okimasu", bn: "ঘুম থেকে ওঠা" },
                     { kana: "ねます", ro: "nemasu", bn: "ঘুমাতে যাওয়া" },
                     { kana: "はたらきます", ro: "hatarakimasu", bn: "কাজ করা" },
-                    { kana: "やすみます", ro: "yasumimasu", bn: "বিশ্রাম নেওয়া" },
+                    { kana: "やすみます", ro: "yasumimasu", bn: "বিশ্রাম নেওয়া / ছুটি" },
                     { kana: "べんきょうします", ro: "benkyoushimasu", bn: "পড়াশোনা করা" },
                     { kana: "おわります", ro: "owarimasu", bn: "শেষ হওয়া" },
-                    { kana: "デパート", ro: "depaato", bn: "ডিপার্টমেন্ট স্টোর" },
+                    { kana: "デパート", ro: "depaato", bn: "ডিপার্টমেন্টাল স্টোর" },
                     { kana: "ぎんこう", ro: "ginkou", bn: "ব্যাংক" },
-                    { kana: "ゆうびんきょく", ro: "yuubinkyoku", bn: "পোস্ট অফিস" },
+                    { kana: "ゆうびんきょく", ro: "yuubinkyoku", bn: "ডাকঘর" },
                     { kana: "としょかん", ro: "toshokan", bn: "লাইব্রেরি" },
-                    { kana: "びじゅつかん", ro: "bijutsukan", bn: "আর্ট মিউজিয়াম" },
+                    { kana: "びじゅつかん", ro: "bijutsukan", bn: "আর্ট মিউজিয়াম" },
                     { kana: "いま", ro: "ima", bn: "এখন" },
                     { kana: "～じ", ro: "~ji", bn: "-টা বাজে" },
                     { kana: "～ふん (～ぷん)", ro: "~fun (~pun)", bn: "-মিনিট" },
-                    { kana: "はん", ro: "han", bn: "অর্ধেক" },
+                    { kana: "はん", ro: "han", bn: "অর্ধেক / সাড়ে" },
                     { kana: "なんじ", ro: "nanji", bn: "কয়টা বাজে" },
                     { kana: "なんぷん", ro: "nanpun", bn: "কত মিনিট" },
-                    { kana: "ごぜん", ro: "gozen", bn: "সকাল (a.m.)" },
-                    { kana: "ごご", ro: "gogo", bn: "বিকাল (p.m.)" },
+                    { kana: "ごぜん", ro: "gozen", bn: "সকাল (AM)" },
+                    { kana: "ごご", ro: "gogo", bn: "বিকাল/সন্ধ্যা (PM)" },
                     { kana: "あさ", ro: "asa", bn: "সকাল" },
-                    { kana: "ひる", ro: "hiru", bn: "দুপুর/বেলা" },
+                    { kana: "ひる", ro: "hiru", bn: "দুপুর" },
                     { kana: "ばん (よる)", ro: "ban (yoru)", bn: "রাত" },
                     { kana: "おととい", ro: "ototoi", bn: "গত পরশু" },
                     { kana: "きのう", ro: "kinou", bn: "গতকাল" },
                     { kana: "きょう", ro: "kyou", bn: "আজ" },
                     { kana: "あした", ro: "ashita", bn: "আগামীকাল" },
                     { kana: "あさって", ro: "asatte", bn: "আগামী পরশু" },
-                    { kana: "けさ", ro: "kesa", bn: "আজ সকাল" },
-                    { kana: "こんばん", ro: "konban", bn: "আজ রাত" },
-                    { kana: "やすみ", ro: "yasumi", bn: "বিশ্রাম / ছুটি" },
-                    { kana: "ひるやすみ", ro: "hiruyasumi", bn: "দুপুরের বিরতি" },
-                    { kana: "まいあさ", ro: "maiasa", bn: "প্রতিদিন সকাল" },
-                    { kana: "まいばん", ro: "maiban", bn: "প্রতিদিন রাত" },
+                    { kana: "けさ", ro: "kesa", bn: "আজ সকালে" },
+                    { kana: "こんばん", ro: "konban", bn: "আজ রাতে" },
                     { kana: "まいにち", ro: "mainichi", bn: "প্রতিদিন" },
                     { kana: "げつようび", ro: "getsuyoubi", bn: "সোমবার" },
                     { kana: "かようび", ro: "kayoubi", bn: "মঙ্গলবার" },
@@ -1147,54 +1201,32 @@
                     { kana: "きんようび", ro: "kinyoubi", bn: "শুক্রবার" },
                     { kana: "どようび", ro: "doyoubi", bn: "শনিবার" },
                     { kana: "にちようび", ro: "nichiyoubi", bn: "রবিবার" },
-                    { kana: "なんようび", ro: "nanyoubi", bn: "কি বার" },
-                    { kana: "ばんごう", ro: "bangou", bn: "নম্বর" },
-                    { kana: "なんばん", ro: "nanban", bn: "কত নম্বর" },
+                    { kana: "なんようび", ro: "nanyoubi", bn: "কী বার" },
                     { kana: "～から", ro: "~kara", bn: "-থেকে" },
-                    { kana: "～まで", ro: "~made", bn: "-পর্যন্ত" },
-                    { kana: "～と～", ro: "~to~", bn: "-এবং-" },
-                    { kana: "そちら", ro: "sochira", bn: "আপনার জায়গা" },
-                    { kana: "たいへんですね", ro: "taihen desu ne", bn: "কঠিন, তাই না?" },
-                    { kana: "えーと", ro: "eeto", bn: "আচ্ছা, দেখি..." },
-                    { kana: "104", ro: "104", bn: "১০৪" },
-                    { kana: "おねがいします", ro: "onegai shimasu", bn: "অনুগ্রহ" },
-                    { kana: "かしこまりました", ro: "kashikomarimashita", bn: "বুঝেছি (বিনম্রভাবে)" },
-                    { kana: "お問い合わせの番号", ro: "otoiawase no bangou", bn: "অনুসন্ধান করা নম্বর" },
-                    { kana: "どうもありがとうございました", ro: "doumo arigatou gozaimashita", bn: "আপনাকে অনেক ধন্যবাদ" },
-                    { kana: "ニューヨーク", ro: "nyuuyooku", bn: "নিউ ইয়র্ক" },
-                    { kana: "ペキン", ro: "pekin", bn: "বেইজিং" },
-                    { kana: "ロンドン", ro: "rondon", bn: "লন্ডন" },
-                    { kana: "バンコク", ro: "bankoku", bn: "ব্যাংকক" },
-                    { kana: "ロサンゼルス", ro: "rosanzerusu", bn: "লস অ্যাঞ্জেলেস" },
-                    { kana: "やまと美術館", ro: "yamato bijutsukan", bn: "কাল্পনিক আর্ট মিউজিয়াম" },
-                    { kana: "大阪デパート", ro: "Oosaka depaato", bn: "কাল্পনিক ডিপার্টমেন্টাল স্টোর" },
-                    { kana: "みどり図書館", ro: "midori toshokan", bn: "কাল্পনিক লাইব্রেরি" },
-                    { kana: "アップル銀行", ro: "appuru ginkou", bn: "কাল্পনিক ব্যাংক" }
+                    { kana: "～まで", ro: "~made", bn: "-পর্যন্ত" }
                 ]
             },
             5: {
                 title: "যাতায়াত ও ভ্রমণ",
                 kanji: "第5課",
                 words: [
-                    { kana: "いきます", ro: "ikimasu", bn: "যাওয়া" },
+                    { kana: "いきます", ro: "ikimasu", bn: "যাওয়া" },
                     { kana: "きます", ro: "kimasu", bn: "আসা" },
-                    { kana: "かえります", ro: "kaerimasu", bn: "ফিরে যাওয়া" },
+                    { kana: "かえります", ro: "kaerimasu", bn: "ফিরে যাওয়া" },
                     { kana: "がっこう", ro: "gakkou", bn: "স্কুল" },
                     { kana: "スーパー", ro: "suupaa", bn: "সুপারমার্কেট" },
                     { kana: "えき", ro: "eki", bn: "স্টেশন" },
-                    { kana: "ひこうき", ro: "hikouki", bn: "বিমান" },
+                    { kana: "ひこうき", ro: "hikouki", bn: "উড়োজাহাজ" },
                     { kana: "ふね", ro: "fune", bn: "জাহাজ" },
-                    { kana: "でんしゃ", ro: "densha", bn: "বৈদ্যুতিক ট্রেন" },
+                    { kana: "でんしゃ", ro: "densha", bn: "ইলেকট্রিক ট্রেন" },
                     { kana: "ちかてつ", ro: "chikatetsu", bn: "পাতাল রেল" },
-                    { kana: "しんかんせん", ro: "shinkansen", bn: "শিনকানসেন (বুলেট ট্রেন)" },
+                    { kana: "しんかんせん", ro: "shinkansen", bn: "বুলেট ট্রেন" },
                     { kana: "バス", ro: "basu", bn: "বাস" },
                     { kana: "タクシー", ro: "takushii", bn: "ট্যাক্সি" },
                     { kana: "じてんしゃ", ro: "jitensha", bn: "সাইকেল" },
                     { kana: "あるいて", ro: "aruite", bn: "পায়ে হেঁটে" },
                     { kana: "ひと", ro: "hito", bn: "ব্যক্তি / মানুষ" },
                     { kana: "ともだち", ro: "tomodachi", bn: "বন্ধু" },
-                    { kana: "かれ", ro: "kare", bn: "সে (পুরুষ), প্রেমিক" },
-                    { kana: "かのじょ", ro: "kanojo", bn: "সে (মহিলা), প্রেমিকা" },
                     { kana: "かぞく", ro: "kazoku", bn: "পরিবার" },
                     { kana: "ひとりで", ro: "hitoride", bn: "একা একা" },
                     { kana: "せんしゅう", ro: "senshuu", bn: "গত সপ্তাহ" },
@@ -1208,33 +1240,21 @@
                     { kana: "らいねん", ro: "rainen", bn: "আগামী বছর" },
                     { kana: "～がつ", ro: "~gatsu", bn: "-তম মাস" },
                     { kana: "なんがつ", ro: "nangatsu", bn: "কোন মাস" },
-                    { kana: "ついたち", ro: "tsuitachi", bn: "১ তারিখ / প্রথম দিন" },
-                    { kana: "ふつか", ro: "futsuka", bn: "২ তারিখ / দুই দিন" },
-                    { kana: "みっか", ro: "mikka", bn: "৩ তারিখ / তিন দিন" },
-                    { kana: "よっか", ro: "yokka", bn: "৪ তারিখ / চার দিন" },
-                    { kana: "いつか", ro: "itsuka", bn: "৫ তারিখ / পাঁচ দিন" },
-                    { kana: "むいか", ro: "muika", bn: "৬ তারিখ / ছয় দিন" },
-                    { kana: "なのか", ro: "nanoka", bn: "৭ তারিখ / সাত দিন" },
-                    { kana: "ようか", ro: "youka", bn: "৮ তারিখ / আট দিন" },
-                    { kana: "ここのか", ro: "kokonoka", bn: "৯ তারিখ / নয় দিন" },
-                    { kana: "とおか", ro: "tooka", bn: "১০ তারিখ / দশ দিন" },
-                    { kana: "じゅうよっか", ro: "juuyokka", bn: "১৪ তারিখ / চৌদ্দ দিন" },
-                    { kana: "はつか", ro: "hatsuka", bn: "২০ তারিখ / বিশ দিন" },
-                    { kana: "にじゅうよっか", ro: "nijuuyokka", bn: "২৪ তারিখ / চব্বিশ দিন" },
-                    { kana: "～にち", ro: "~nichi", bn: "-তারিখ / -দিন" },
-                    { kana: "なんにち", ro: "nannichi", bn: "কত তারিখ / কত দিন" },
+                    { kana: "ついたち", ro: "tsuitachi", bn: "১ তারিখ" },
+                    { kana: "ふつか", ro: "futsuka", bn: "২ তারিখ" },
+                    { kana: "みっか", ro: "mikka", bn: "৩ তারিখ" },
+                    { kana: "よっか", ro: "yokka", bn: "৪ তারিখ" },
+                    { kana: "いつか", ro: "itsuka", bn: "৫ তারিখ" },
+                    { kana: "むいか", ro: "muika", bn: "৬ তারিখ" },
+                    { kana: "なのか", ro: "nanoka", bn: "৭ তারিখ" },
+                    { kana: "ようか", ro: "youka", bn: "৮ তারিখ" },
+                    { kana: "ここのか", ro: "kokonoka", bn: "৯ তারিখ" },
+                    { kana: "とおか", ro: "tooka", bn: "১০ তারিখ" },
+                    { kana: "じゅうよっか", ro: "juuyokka", bn: "১৪ তারিখ" },
+                    { kana: "はつか", ro: "hatsuka", bn: "২০ তারিখ" },
+                    { kana: "にじゅうよっか", ro: "nijuuyokka", bn: "২৪ তারিখ" },
                     { kana: "いつ", ro: "itsu", bn: "কখন" },
-                    { kana: "たんじょうび", ro: "tanjoubi", bn: "জন্মদিন" },
-                    { kana: "ふつう", ro: "futsuu", bn: "সাধারণ (লোকাল ট্রেন)" },
-                    { kana: "きゅうこう", ro: "kyuukou", bn: "এক্সপ্রেস (দ্রুতগতির ট্রেন)" },
-                    { kana: "とっきゅう", ro: "tokkyuu", bn: "বিশেষ এক্সপ্রেস ট্রেন" },
-                    { kana: "つぎの", ro: "tsugi no", bn: "পরবর্তী" },
-                    { kana: "どういたしまして", ro: "dou itashimashite", bn: "স্বাগতম / কোনো ব্যাপার না" },
-                    { kana: "一番線 (いちばんせん)", ro: "ichiban-sen", bn: "১ নম্বর প্ল্যাটফর্ম" },
-                    { kana: "博多 (はかた)", ro: "Hakata", bn: "হাকাতা (একটি শহর)" },
-                    { kana: "伏見 (ふしみ)", ro: "Fushimi", bn: "ফুশিমি (একটি শহর)" },
-                    { kana: "甲子園 (こうしえん)", ro: "Koushien", bn: "কোশিয়েন (একটি শহর)" },
-                    { kana: "大阪城 (おおさかじょう)", ro: "Oosakajou", bn: "ওসাকা ক্যাসেল (ওসাকার দুর্গ)" }
+                    { kana: "たんじょうび", ro: "tanjoubi", bn: "জন্মদিন" }
                 ]
             },
             6: {
@@ -1247,12 +1267,12 @@
                     { kana: "みます", ro: "mimasu", bn: "দেখা" },
                     { kana: "ききます", ro: "kikimasu", bn: "শোনা" },
                     { kana: "よみます", ro: "yomimasu", bn: "পড়া" },
-                    { kana: "かきます", ro: "kakimasu", bn: "লেখা/আঁকা" },
+                    { kana: "かきます", ro: "kakimasu", bn: "লেখা / আঁকা" },
                     { kana: "かいます", ro: "kaimasu", bn: "কেনা" },
-                    { kana: "とります", ro: "torimasu", bn: "তোলা (ছবি)" },
+                    { kana: "とります", ro: "torimasu", bn: "ছবি তোলা" },
                     { kana: "します", ro: "shimasu", bn: "করা" },
                     { kana: "あいます", ro: "aimasu", bn: "দেখা করা (বন্ধুর সাথে)" },
-                    { kana: "ごはん", ro: "gohan", bn: "ভাত/খাবার" },
+                    { kana: "ごはん", ro: "gohan", bn: "ভাত / খাবার" },
                     { kana: "あさごはん", ro: "asagohan", bn: "সকালের নাস্তা" },
                     { kana: "ひるごはん", ro: "hirugohan", bn: "দুপুরের খাবার" },
                     { kana: "ばんごはん", ro: "bangohan", bn: "রাতের খাবার" },
@@ -1261,40 +1281,22 @@
                     { kana: "にく", ro: "niku", bn: "মাংস" },
                     { kana: "さかな", ro: "sakana", bn: "মাছ" },
                     { kana: "やさい", ro: "yasai", bn: "সবজি" },
-                    { kana: "くだもの", ro: "kudamono", bn: "ফল" },
+                    { kana: "くだもの", ro: "kudamono", bn: "ফলমূল" },
                     { kana: "みず", ro: "mizu", bn: "পানি" },
-                    { kana: "おちゃ", ro: "ocha", bn: "চা (গ্রিন টি)" },
+                    { kana: "おちゃ", ro: "ocha", bn: "সবুজ চা" },
                     { kana: "こうちゃ", ro: "koucha", bn: "ব্ল্যাক টি" },
                     { kana: "ぎゅうにゅう", ro: "gyuunyuu", bn: "দুধ" },
                     { kana: "ジュース", ro: "juusu", bn: "জুস" },
                     { kana: "ビール", ro: "biiru", bn: "বিয়ার" },
-                    { kana: "おさけ", ro: "osake", bn: "মদ (জাপানি মদ)" },
-                    { kana: "ビデオ", ro: "bideo", bn: "ভিডিও" },
+                    { kana: "おさけ", ro: "osake", bn: "জাপানি মদ" },
                     { kana: "えいが", ro: "eiga", bn: "সিনেমা" },
-                    { kana: "CD", ro: "shīdī", bn: "সিডি" },
                     { kana: "てがみ", ro: "tegami", bn: "চিঠি" },
-                    { kana: "レポート", ro: "repooto", bn: "রিপোর্ট" },
                     { kana: "しゃしん", ro: "shashin", bn: "ছবি" },
                     { kana: "みせ", ro: "mise", bn: "দোকান" },
                     { kana: "レストラン", ro: "resutoran", bn: "রেস্তোরাঁ" },
-                    { kana: "にわ", ro: "niwa", bn: "বাগান" },
-                    { kana: "しゅくだい", ro: "shukudai", bn: "হোমওয়ার্ক" },
-                    { kana: "テニス", ro: "tenisu", bn: "টেনিস" },
-                    { kana: "サッカー", ro: "sakkaa", bn: "ফুটবল" },
-                    { kana: "おはなみ", ro: "ohanami", bn: "চেরি ফুল দেখা" },
-                    { kana: "なに", ro: "nani", bn: "কি" },
                     { kana: "いっしょに", ro: "isshoni", bn: "একসাথে" },
-                    { kana: "ちょっと", ro: "chotto", bn: "একটু" },
                     { kana: "いつも", ro: "itsumo", bn: "সবসময়" },
-                    { kana: "ときどき", ro: "tokidoki", bn: "মাঝে মাঝে" },
-                    { kana: "それから", ro: "sorekara", bn: "তারপর" },
-                    { kana: "ええ", ro: "ee", bn: "হ্যাঁ" },
-                    { kana: "いいですね", ro: "ii desu ne", bn: "ভালো তো!" },
-                    { kana: "わかりました", ro: "wakarimashita", bn: "বুঝেছি" },
-                    { kana: "なんですか", ro: "nan desu ka", bn: "কী, বলুন? (ডাকের জবাবে)" },
-                    { kana: "じゃ、また", ro: "ja, mata", bn: "তাহলে বিদায়/পরে দেখা হবে" },
-                    { kana: "メキシコ", ro: "mekishiko", bn: "মেক্সিকো" },
-                    { kana: "大阪城公園", ro: "Oosakajou Kouen", bn: "ওসাকা দুর্গ পার্ক" }
+                    { kana: "ときどき", ro: "tokidoki", bn: "মাঝে মাঝে" }
                 ]
             },
             7: {
@@ -1309,20 +1311,15 @@
                     { kana: "かります", ro: "karimasu", bn: "ধার নেওয়া" },
                     { kana: "おしえます", ro: "oshiemasu", bn: "শেখানো" },
                     { kana: "ならいます", ro: "naraimasu", bn: "শেখা" },
-                    { kana: "かけます", ro: "kakemasu", bn: "করা (টেলিফোন করা)" },
+                    { kana: "かけます [でんわを~]", ro: "kakemasu", bn: "টেলিফোন করা" },
                     { kana: "て", ro: "te", bn: "হাত" },
-                    { kana: "はし", ro: "hashi", bn: "চপস্টিকস" },
+                    { kana: "はし", ro: "hashi", bn: "চপস্টিক" },
                     { kana: "スプーン", ro: "supuun", bn: "চামচ" },
-                    { kana: "ナイフ", ro: "naifu", bn: "ছুড়ি" },
+                    { kana: "ナイフ", ro: "naifu", bn: "ছুরি" },
                     { kana: "フォーク", ro: "fooku", bn: "কাঁটাচামচ" },
                     { kana: "はさみ", ro: "hasami", bn: "কাঁচি" },
-                    { kana: "ファクス", ro: "fakusu", bn: "ফ্যাক্স" },
-                    { kana: "ワープロ", ro: "waapuro", bn: "ওয়ার্ড প্রসেসর" },
-                    { kana: "パソコン", ro: "pasokon", bn: "পার্সোনাল কম্পিউটার" },
-                    { kana: "パンチ", ro: "panchi", bn: "পাঞ্চ মেশিন" },
-                    { kana: "ホッチキス", ro: "hotchikisu", bn: "স্টেপলার" },
-                    { kana: "セロテープ", ro: "seroteepu", bn: "স্কচটেপ / সেলো টেপ" },
-                    { kana: "けしゴム", ro: "keshigomu", bn: "ইরেজার / রাবার" },
+                    { kana: "パソコン", ro: "pasokon", bn: "কম্পিউটার" },
+                    { kana: "けしゴム", ro: "keshigomu", bn: "ইরেজার" },
                     { kana: "かみ", ro: "kami", bn: "কাগজ" },
                     { kana: "はな", ro: "hana", bn: "ফুল" },
                     { kana: "シャツ", ro: "shatsu", bn: "শার্ট" },
@@ -1330,38 +1327,22 @@
                     { kana: "にもつ", ro: "nimotsu", bn: "মালপত্র" },
                     { kana: "おかね", ro: "okane", bn: "টাকা" },
                     { kana: "きっぷ", ro: "kippu", bn: "টিকিট" },
-                    { kana: "ちち", ro: "chichi", bn: "বাবা (আমার)" },
-                    { kana: "はは", ro: "haha", bn: "মা (আমার)" },
-                    { kana: "おとうさん", ro: "otousan", bn: "বাবা (অন্যের)" },
-                    { kana: "おかあさん", ro: "okaasan", bn: "মা (অন্যের)" },
                     { kana: "もう", ro: "mou", bn: "ইতিমধ্যে" },
-                    { kana: "まだ", ro: "mada", bn: "এখনো না" },
-                    { kana: "これから", ro: "korekara", bn: "এখন থেকে" },
-                    { kana: "すてきですね", ro: "suteki desu ne", bn: "কি সুন্দর!" },
-                    { kana: "ごめんください", ro: "gomen kudasai", bn: "মাফ করবেন / কেউ আছেন?" },
-                    { kana: "いらっしゃい", ro: "irasshai", bn: "স্বাগতম" },
-                    { kana: "どうぞおあがりください", ro: "douzo oagari kudasai", bn: "অনুগ্রহ করে ভিতরে আসুন" },
-                    { kana: "しつれいします", ro: "shitsurei shimasu", bn: "অনুমতি প্রার্থনা" },
-                    { kana: "いかがですか", ro: "ikaga desu ka", bn: "কেমন হয়?" },
-                    { kana: "いただきます", ro: "itadakimasu", bn: "ধন্যবাদ, আমি নিচ্ছি (খাবার খাওয়ার আগে বলা হয়)" },
-                    { kana: "りょこう", ro: "ryokou", bn: "ভ্রমণ" },
-                    { kana: "おみやげ", ro: "omiyage", bn: "উপহার" },
-                    { kana: "ヨーロッパ", ro: "yooroppa", bn: "ইউরোপ" },
-                    { kana: "スペイン", ro: "supein", bn: "স্পেন" }
+                    { kana: "まだ", ro: "mada", bn: "এখনো না" }
                 ]
             },
             8: {
                 title: "বিশেষণ (Adjectives)",
                 kanji: "第8課",
                 words: [
-                    { kana: "ハンサム [な]", ro: "hansamu [na]", bn: "সুন্দর (পুরুষ)" },
-                    { kana: "きれい [な]", ro: "kirei [na]", bn: "সুন্দর/পরিষ্কার" },
+                    { kana: "ハンサム [な]", ro: "hansamu [na]", bn: "সুদর্শন" },
+                    { kana: "きれい [な]", ro: "kirei [na]", bn: "সুন্দর / পরিষ্কার" },
                     { kana: "しずか [な]", ro: "shizuka [na]", bn: "শান্ত" },
-                    { kana: "にぎやか [な]", ro: "nigiyaka [na]", bn: "জনবহুল / কোলাহল" },
+                    { kana: "にぎやか [な]", ro: "nigiyaka [na]", bn: "কোলাহলপূর্ণ / চঞ্চল" },
                     { kana: "ゆうめい [な]", ro: "yuumei [na]", bn: "বিখ্যাত" },
                     { kana: "しんせつ [な]", ro: "shinsetsu [na]", bn: "দয়ালু" },
-                    { kana: "げんき [な]", ro: "genki [na]", bn: "সুস্থ / প্রাণবন্ত" },
-                    { kana: "ひま [な]", ro: "hima [na]", bn: "ফ্রি (সময়)" },
+                    { kana: "げんき [な]", ro: "genki [na]", bn: "সুস্থ / উদ্যমী" },
+                    { kana: "ひま [な]", ro: "hima [na]", bn: "অবসর সময়" },
                     { kana: "べんり [な]", ro: "benri [na]", bn: "সুবিধাজনক" },
                     { kana: "すてき [な]", ro: "suteki [na]", bn: "চমৎকার" },
                     { kana: "おおきい", ro: "ookii", bn: "বড়" },
@@ -1372,50 +1353,20 @@
                     { kana: "わるい", ro: "warui", bn: "খারাপ" },
                     { kana: "あつい", ro: "atsui", bn: "গরম" },
                     { kana: "さむい", ro: "samui", bn: "ঠান্ডা (আবহাওয়া)" },
-                    { kana: "つめたい", ro: "tsumetai", bn: "ঠান্ডা (স্পর্শ)" },
+                    { kana: "つめたい", ro: "tsumetai", bn: "ঠান্ডা (স্পর্শে)" },
                     { kana: "むずかしい", ro: "muzukashii", bn: "কঠিন" },
-                    { kana: "やさしい", ro: "yasashii", bn: "সহজ" },
-                    { kana: "たかい", ro: "takai", bn: "দামী / উঁচু" },
+                    { kana: "やさしい", ro: "yasashii", bn: "সহজ / অমায়িক" },
+                    { kana: "たかい", ro: "takai", bn: "উঁচু / দামি" },
                     { kana: "やすい", ro: "yasui", bn: "সস্তা" },
                     { kana: "ひくい", ro: "hikui", bn: "নিচু" },
-                    { kana: "おもしろい", ro: "omoshiroi", bn: "মজার" },
+                    { kana: "おもしろい", ro: "omoshiroi", bn: "মজার / আকর্ষণীয়" },
                     { kana: "おいしい", ro: "oishii", bn: "সুস্বাদু" },
                     { kana: "いそがしい", ro: "isogashii", bn: "ব্যস্ত" },
                     { kana: "たのしい", ro: "tanoshii", bn: "আনন্দদায়ক" },
                     { kana: "しろい", ro: "shiroi", bn: "সাদা" },
                     { kana: "くろい", ro: "kuroi", bn: "কালো" },
                     { kana: "あかい", ro: "akai", bn: "লাল" },
-                    { kana: "あおい", ro: "aoi", bn: "নীল" },
-                    { kana: "さくら", ro: "sakura", bn: "চেরিফুল" },
-                    { kana: "やま", ro: "yama", bn: "পাহাড়" },
-                    { kana: "まち", ro: "machi", bn: "শহর" },
-                    { kana: "たべもの", ro: "tabemono", bn: "খাবার" },
-                    { kana: "くるま", ro: "kuruma", bn: "গাড়ি" },
-                    { kana: "ところ", ro: "tokoro", bn: "স্থান / জায়গা" },
-                    { kana: "りょう", ro: "ryou", bn: "ছাত্রাবাস" },
-                    { kana: "べんきょう", ro: "benkyou", bn: "পড়াশোনা" },
-                    { kana: "せいかつ", ro: "seikatsu", bn: "জীবন" },
-                    { kana: "しごと", ro: "shigoto", bn: "কাজ / পেশা" },
-                    { kana: "どう", ro: "dou", bn: "কেমন" },
-                    { kana: "どんな", ro: "donna", bn: "কেমনতরো" },
-                    { kana: "どれ", ro: "dore", bn: "কোনটি" },
-                    { kana: "とても", ro: "totemo", bn: "খুব" },
-                    { kana: "あまり", ro: "amari", bn: "তেমন নয় (নেতিবাচক)" },
-                    { kana: "そして", ro: "soshite", bn: "এবং" },
-                    { kana: "～が、～", ro: "~ga, ~", bn: "-কিন্তু-" },
-                    { kana: "おげんきですか", ro: "ogenki desu ka", bn: "আপনি কেমন আছেন?" },
-                    { kana: "そうですね", ro: "sou desu ne", bn: "হ্যাঁ, তাই তো" },
-                    { kana: "にほんのせいかつになれましたか", ro: "nihon no seikatsu ni naremashita ka", bn: "জাপানের জীবনে অভ্যস্ত হতে পেরেছেন?" },
-                    { kana: "もういっぱいいかがですか", ro: "mou ippai ikaga desu ka", bn: "আরেক কাপ কেমন হয়?" },
-                    { kana: "いいえ、けっこうです", ro: "iie, kekkou desu", bn: "না, ধন্যবাদ, যথেষ্ট হয়েছে" },
-                    { kana: "もう～です [ね]", ro: "mou ~desu [ne]", bn: "ইতিমধ্যে ~হয়ে গেছে" },
-                    { kana: "そろそろしつれいします", ro: "sorosoro shitsurei shimasu", bn: "এবার আমার বিদায় নেওয়া উচিত" },
-                    { kana: "またいらっしゃってください", ro: "mata irasshatte kudasai", bn: "আবার আসবেন" },
-                    { kana: "ふじさん", ro: "fujisan", bn: "ফুজি পর্বত" },
-                    { kana: "びわこ", ro: "biwako", bn: "বিওয়া হ্রদ" },
-                    { kana: "シャンハイ", ro: "shanhai", bn: "সাংহাই" },
-                    { kana: "しちにんのさむらい", ro: "shichinin no samurai", bn: "\"সাতজন সামুরাই\" নামক বিখ্যাত চলচ্চিত্র" },
-                    { kana: "きんかくじ", ro: "kinkakuji", bn: "স্বর্ণমণ্ডপ মন্দির (কিংবাকুজি)" }
+                    { kana: "あおい", ro: "aoi", bn: "নীল" }
                 ]
             },
             9: {
@@ -1424,87 +1375,52 @@
                 words: [
                     { kana: "わかります", ro: "wakarimasu", bn: "বোঝা" },
                     { kana: "あります", ro: "arimasu", bn: "থাকা / হওয়া" },
-                    { kana: "すき [な]", ro: "suki [na]", bn: "পছন্দ হওয়া / ভালোবাসা" },
-                    { kana: "きらい [な]", ro: "kirai [na]", bn: "অপছন্দ হওয়া / ঘৃণা করা" },
-                    { kana: "じょうず [な]", ro: "jouzu [na]", bn: "দক্ষ" },
+                    { kana: "すき [な]", ro: "suki [na]", bn: "পছন্দনীয়" },
+                    { kana: "きらい [な]", ro: "kirai [na]", bn: "অপছন্দনীয়" },
+                    { kana: "じょうず [な]", ro: "jouzu [na]", bn: "দক্ষ / পারদর্শী" },
                     { kana: "へた [な]", ro: "heta [na]", bn: "অদক্ষ" },
-                    { kana: "りょうり", ro: "ryouri", bn: "রান্না/খাবার" },
-                    { kana: "のみもの", ro: "nomimono", bn: "পানীয় দ্রব্য" },
+                    { kana: "りょうり", ro: "ryouri", bn: "রান্না / ডিশ" },
+                    { kana: "のみもの", ro: "nomimono", bn: "পানীয়" },
                     { kana: "スポーツ", ro: "supootsu", bn: "খেলাধুলা" },
-                    { kana: "やきゅう", ro: "yakyuu", bn: "বেসবল" },
-                    { kana: "ダンス", ro: "dansu", bn: "নাচ" },
-                    { kana: "おんがく", ro: "ongaku", bn: "সঙ্গীত" },
+                    { kana: "おんがく", ro: "ongaku", bn: "গান / সঙ্গীত" },
                     { kana: "うた", ro: "uta", bn: "গান" },
-                    { kana: "クラシック", ro: "kurashikku", bn: "ক্লাসিক্যাল সঙ্গীত" },
-                    { kana: "ジャズ", ro: "jazu", bn: "জ্যাজ সঙ্গীত" },
-                    { kana: "コンサート", ro: "konsaato", bn: "কনসার্ট" },
-                    { kana: "え", ro: "e", bn: "ছবি / পেইন্টিং" },
+                    { kana: "え", ro: "e", bn: "ছবি / চিত্র" },
                     { kana: "じ", ro: "ji", bn: "অক্ষর" },
-                    { kana: "かんじ", ro: "kanji", bn: "কাঞ্জি (চীন বর্ণমালা)" },
-                    { kana: "ひらがな", ro: "hiragana", bn: "হিরাগানা" },
-                    { kana: "カタカナ", ro: "katakana", bn: "কাতাকানা" },
-                    { kana: "ローマじ", ro: "roomaji", bn: "রোমান অক্ষর" },
+                    { kana: "かんじ", ro: "kanji", bn: "কাঞ্জি" },
                     { kana: "こまかいおかね", ro: "komakai okane", bn: "ভাংতি টাকা" },
-                    { kana: "チケット", ro: "chiketto", bn: "টিকেট" },
                     { kana: "じかん", ro: "jikan", bn: "সময়" },
-                    { kana: "ようじ", ro: "youji", bn: "কাজ/বিষয়" },
-                    { kana: "やくそく", ro: "yakusoku", bn: "প্রতিশ্রুতি" },
-                    { kana: "ごしゅじん", ro: "goshujin", bn: "স্বামী (অন্যের)" },
-                    { kana: "おっと / しゅじん", ro: "otto / shujin", bn: "স্বামী (আমার)" },
-                    { kana: "おくさん", ro: "okusan", bn: "স্ত্রী (অন্যের)" },
-                    { kana: "つま / かない", ro: "tsuma / kanai", bn: "স্ত্রী (আমার)" },
-                    { kana: "こども", ro: "kodomo", bn: "শিশু" },
-                    { kana: "よく", ro: "yoku", bn: "ভালোভাবে / ঘনঘন" },
+                    { kana: "ようじ", ro: "youji", bn: "জরুরি কাজ" },
+                    { kana: "やくそく", ro: "yakusoku", bn: "প্রতিশ্রুতি / ওয়াদা" },
+                    { kana: "よく", ro: "yoku", bn: "ভালোভাবে" },
                     { kana: "だいたい", ro: "daitai", bn: "মোটামুটি" },
                     { kana: "たくさん", ro: "takusan", bn: "অনেক" },
-                    { kana: "すこし", ro: "sukoshi", bn: "একটু" },
-                    { kana: "ぜんぜん", ro: "zenzen", bn: "একদমই না (নেতিবাচক)" },
-                    { kana: "はやく", ro: "hayaku", bn: "দ্রুত / শীঘ্রই" },
-                    { kana: "～から", ro: "~kara", bn: "কারণ / -" },
-                    { kana: "どうして", ro: "doushite", bn: "কেন" },
-                    { kana: "ざんねんです [ね]", ro: "zannen desu [ne]", bn: "এটা আফসোসের" },
-                    { kana: "すみません", ro: "sumimasen", bn: "মাফ করবেন" },
-                    { kana: "もしもし", ro: "moshimoshi", bn: "হ্যালো (ফোনে)" },
-                    { kana: "ああ", ro: "aa", bn: "আহ" },
-                    { kana: "いっしょにいかがですか", ro: "isshoni ikaga desu ka", bn: "একসাথে গেলে কেমন হয়?" },
-                    { kana: "～はちょっと……", ro: "~wa chotto......", bn: "~একটু সমস্যা হবে (অস্বীকৃতিতে)" },
-                    { kana: "だめですか", ro: "dame desu ka", bn: "হবে না? / সম্ভব নয়?" },
-                    { kana: "またこんどおねがいします", ro: "mata kondo onegai shimasu", bn: "আবার অন্যসময় দেখা যাবে" }
+                    { kana: "すこし", ro: "sukoshi", bn: "একটু / সামান্য" },
+                    { kana: "ぜんぜん", ro: "zenzen", bn: "একদমই না" },
+                    { kana: "どうして", ro: "doushite", bn: "কেন" }
                 ]
             },
             10: {
-                title: "অস্তিত্ব ও অবস্থান (Position & Existence)",
+                title: "অস্তিত্ব ও অবস্থান",
                 kanji: "第10課",
                 words: [
-                    { kana: "います", ro: "imasu", bn: "আছে / অবস্থান করছে (জীবিত বস্তু)" },
-                    { kana: "あります", ro: "arimasu", bn: "আছে (জড়বস্তু বা জড় কোনো কিছু)" },
-                    { kana: "いろいろ [な]", ro: "iroiro [na]", bn: "বিভিন্ন" },
-                    { kana: "おとこのひと", ro: "otoko no hito", bn: "পুরুষ" },
+                    { kana: "います", ro: "imasu", bn: "আছে (জীবিত ব্যক্তি বা প্রাণী)" },
+                    { kana: "あります", ro: "arimasu", bn: "আছে (জড়বস্তু বা উদ্ভিদ)" },
+                    { kana: "おとこのひと", ro: "otoko no hito", bn: "পুরুষ লোক" },
                     { kana: "おんなのひと", ro: "onna no hito", bn: "মহিলা" },
-                    { kana: "おとこのこ", ro: "otoko no ko", bn: "ছেলে" },
-                    { kana: "おんなのこ", ro: "onna no ko", bn: "মেয়ে" },
+                    { kana: "おとこのこ", ro: "otoko no ko", bn: "ছেলে শিশু" },
+                    { kana: "おんなのこ", ro: "onna no ko", bn: "মেয়ে শিশু" },
                     { kana: "いぬ", ro: "inu", bn: "কুকুর" },
                     { kana: "ねこ", ro: "neko", bn: "বিড়াল" },
                     { kana: "き", ro: "ki", bn: "গাছ" },
                     { kana: "もの", ro: "mono", bn: "জিনিস" },
-                    { kana: "フィルム", ro: "firumu", bn: "ফিল্ম" },
-                    { kana: "でんち", ro: "denchi", bn: "ব্যাটারি" },
                     { kana: "はこ", ro: "hako", bn: "বাক্স" },
-                    { kana: "スイッチ", ro: "suitchi", bn: "সুইচ" },
-                    { kana: "れいぞうこ", ro: "reizouko", bn: "রেফ্রিজারেটর" },
+                    { kana: "れいぞうこ", ro: "reizouko", bn: "ফ্রিজ" },
                     { kana: "テーブル", ro: "teeburu", bn: "টেবিল" },
                     { kana: "ベッド", ro: "beddo", bn: "বিছানা" },
                     { kana: "たな", ro: "tana", bn: "তাক / শেলফ" },
                     { kana: "ドア", ro: "doa", bn: "দরজা" },
                     { kana: "まど", ro: "mado", bn: "জানালা" },
-                    { kana: "ポスト", ro: "posuto", bn: "পোস্টবক্স" },
-                    { kana: "ビル", ro: "biru", bn: "বিল্ডিং" },
                     { kana: "こうえん", ro: "kouen", bn: "পার্ক" },
-                    { kana: "きっさてん", ro: "kissaten", bn: "কফি শপ" },
-                    { kana: "ほんや", ro: "hon'ya", bn: "বইয়ের দোকান" },
-                    { kana: "～や", ro: "~ya", bn: "-দোকান" },
-                    { kana: "のりば", ro: "noriba", bn: "যান / ট্যাক্সি স্ট্যান্ড" },
-                    { kana: "けん", ro: "ken", bn: "প্রিফেকচার (জাপানের প্রশাসনিক বিভাগ)" },
                     { kana: "うえ", ro: "ue", bn: "উপরে" },
                     { kana: "した", ro: "shita", bn: "নিচে" },
                     { kana: "まえ", ro: "mae", bn: "সামনে" },
@@ -1514,30 +1430,16 @@
                     { kana: "なか", ro: "naka", bn: "ভিতরে" },
                     { kana: "そと", ro: "soto", bn: "বাইরে" },
                     { kana: "となり", ro: "tonari", bn: "পাশে" },
-                    { kana: "ちかく", ro: "chikaku", bn: "কাছে" },
-                    { kana: "あいだ", ro: "aida", bn: "মাঝে" },
-                    { kana: "～や～ [など]", ro: "~ya~ [nado]", bn: "~, ~ ইত্যাদি" },
-                    { kana: "いちばん", ro: "ichiban", bn: "সবচেয়ে" },
-                    { kana: "いちだんめ", ro: "ichidan-me", bn: "প্রথম ধাপ" },
-                    { kana: "どうもすみません", ro: "doumo sumimasen", bn: "অনেক ধন্যবাদ, মাফ করবেন" },
-                    { kana: "チリソース", ro: "chiri soosu", bn: "চিলি সস" },
-                    { kana: "おく", ro: "oku", bn: "ভিতরে / গভীরে" },
-                    { kana: "スパイス・コーナー", ro: "supaisu kounaa", bn: "মশলার কর্নার" },
-                    { kana: "東京ディズニーランド", ro: "Toukyou Dizuniirando", bn: "টোকিও ডিজনিল্যান্ড" },
-                    { kana: "ユニュヤー・ストア", ro: "Yunyuyaa Sutoa", bn: "কাল্পনিক সুপারমার্কেট" }
+                    { kana: "ちかく", ro: "chikaku", bn: "কাছাকাছি" },
+                    { kana: "あいだ", ro: "aida", bn: "মাঝখানে" }
                 ]
             },
             11: {
                 title: "গণনা, পরিমাণ ও সময়কাল",
                 kanji: "第11課",
                 words: [
-                    { kana: "います", ro: "imasu", bn: "থাকা / থাকা (বাচ্চা)" },
-                    { kana: "こどもがいます", ro: "kodomo ga imasu", bn: "সন্তান আছে" },
-                    { kana: "にほんにいます", ro: "nihon ni imasu", bn: "জাপানে অবস্থান" },
-                    { kana: "かかります", ro: "kakarimasu", bn: "সময় লাগা" },
-                    { kana: "やすみます", ro: "yasumimasu", bn: "ছুটি নেওয়া (কাজে অনুপস্থিত)" },
-                    { kana: "かいしゃをやすみます", ro: "kaisha o yasumimasu", bn: "অফিসে ছুটি নেওয়া / কাজে অনুপস্থিত থাকা" },
-                    { kana: "ひとつ", ro: "hitotsu", bn: "একটি (বস্তু গণনার একক)" },
+                    { kana: "かかります", ro: "kakarimasu", bn: "সময় বা টাকা লাগা" },
+                    { kana: "ひとつ", ro: "hitotsu", bn: "একটি" },
                     { kana: "ふたつ", ro: "futatsu", bn: "দুটি" },
                     { kana: "みっつ", ro: "mittsu", bn: "তিনটি" },
                     { kana: "よっつ", ro: "yottsu", bn: "চারটি" },
@@ -1547,54 +1449,21 @@
                     { kana: "やっつ", ro: "yattsu", bn: "আটটি" },
                     { kana: "ここのつ", ro: "kokonotsu", bn: "নয়টি" },
                     { kana: "とお", ro: "too", bn: "দশটি" },
-                    { kana: "いくつ", ro: "ikutsu", bn: "কয়টি/কতগুলো" },
+                    { kana: "いくつ", ro: "ikutsu", bn: "কয়টি" },
                     { kana: "ひとり", ro: "hitori", bn: "একজন" },
                     { kana: "ふたり", ro: "futari", bn: "দুইজন" },
-                    { kana: "～にん", ro: "~nin", bn: "-জন (মানুষ গণনার একক)" },
-                    { kana: "～だい", ro: "~dai", bn: "-টি (যন্ত্র বা গাড়ি গণনার একক)" },
-                    { kana: "～まい", ro: "~mai", bn: "-টি (কাগজ বা পাতলা জিনিস গণনার একক)" },
-                    { kana: "～かい", ro: "~kai", bn: "-বার (ফ্রিকোয়েন্সি নির্দেশক)" },
+                    { kana: "～にん", ro: "~nin", bn: "-জন" },
+                    { kana: "～だい", ro: "~dai", bn: "-টি (মেশিন বা গাড়ি)" },
+                    { kana: "～まい", ro: "~mai", bn: "-টি (পাতলা কাগজ/শার্ট)" },
                     { kana: "りんご", ro: "ringo", bn: "আপেল" },
                     { kana: "みかん", ro: "mikan", bn: "কমলা" },
-                    { kana: "サンドイッチ", ro: "sandoitchi", bn: "স্যান্ডউইচ" },
-                    { kana: "カレー [ライス]", ro: "karee [raisu]", bn: "কারি [ভাত]" },
-                    { kana: "アイスクリーム", ro: "aisukuriimu", bn: "আইসক্রিম" },
                     { kana: "きって", ro: "kitte", bn: "ডাকটিকিট" },
                     { kana: "はがき", ro: "hagaki", bn: "পোস্টকার্ড" },
                     { kana: "ふうとう", ro: "fuutou", bn: "খাম" },
-                    { kana: "そくたつ", ro: "sokutatsu", bn: "বিশেষ দ্রুতি ডাক / এক্সপ্রেস ডাক" },
-                    { kana: "かきとめ", ro: "kakitome", bn: "রেজিস্টার্ড ডাক" },
-                    { kana: "エアメール", ro: "eameeru", bn: "এয়ারমেইল" },
-                    { kana: "こうくうびん", ro: "koukuubin", bn: "বিমান ডাক" },
-                    { kana: "ふなびん", ro: "funabin", bn: "জাহাজ ডাক" },
                     { kana: "りょうしん", ro: "ryoushin", bn: "পিতামাতা" },
                     { kana: "きょうだい", ro: "kyoudai", bn: "ভাইবোন" },
-                    { kana: "あに", ro: "ani", bn: "বড় ভাই (আমার)" },
-                    { kana: "おにいさん", ro: "oniisan", bn: "বড় ভাই (অন্যের)" },
-                    { kana: "あね", ro: "ane", bn: "বড় বোন (আমার)" },
-                    { kana: "おねえさん", ro: "oneesan", bn: "বড় বোন (অন্যের)" },
-                    { kana: "おとうと", ro: "otouto", bn: "ছোট ভাই (আমার)" },
-                    { kana: "おとうとさん", ro: "otoutosan", bn: "ছোট ভাই (অন্যের)" },
-                    { kana: "いもうと", ro: "imouto", bn: "ছোট বোন (আমার)" },
-                    { kana: "いもうとさん", ro: "imoutosan", bn: "ছোট বোন (অন্যের)" },
-                    { kana: "がいこく", ro: "gaikoku", bn: "বিদেশ" },
-                    { kana: "～じかん", ro: "~jikan", bn: "-ঘণ্টা" },
-                    { kana: "～しゅうかん", ro: "~shuukan", bn: "-সপ্তাহ" },
-                    { kana: "～かげつ", ro: "~kagetsu", bn: "-মাস" },
-                    { kana: "～ねん", ro: "~nen", bn: "-বছর" },
-                    { kana: "～ぐらい", ro: "~gurai", bn: "প্রায়-" },
-                    { kana: "どのくらい", ro: "dono kurai", bn: "কতটুকু / কতক্ষণ" },
-                    { kana: "ぜんぶで", ro: "zenbu de", bn: "সব মিলিয়ে" },
-                    { kana: "みんな", ro: "minna", bn: "সবাই" },
-                    { kana: "～だけ", ro: "~dake", bn: "শুধু-" },
-                    { kana: "いらっしゃいませ", ro: "irasshaimase", bn: "স্বাগতম (দোকানে)" },
-                    { kana: "いいおてんきですね", ro: "ii otenki desu ne", bn: "আজ চমৎকার আবহাওয়া, তাই না?" },
-                    { kana: "おでかけですか", ro: "odekake desu ka", bn: "বাইরে যাচ্ছেন?" },
-                    { kana: "ちょっと～まで", ro: "chotto ~made", bn: "একটু ~পর্যন্ত যাচ্ছি" },
-                    { kana: "いっていらっしゃい", ro: "itte irasshai", bn: "ভালোভাবে ঘুরে আসুন (বিদায় সম্ভাষণ)" },
-                    { kana: "いってまいります", ro: "itte mairimasu", bn: "আমি আসছি (বিদায় সম্ভাষণ)" },
-                    { kana: "それから", ro: "sorekara", bn: "এবং / তারপর" },
-                    { kana: "オーストラリア", ro: "Oosutoraria", bn: "অস্ট্রেলিয়া" }
+                    { kana: "どのくらい", ro: "dono kurai", bn: "কতক্ষণ / কতটুকু" },
+                    { kana: "ぜんぶで", ro: "zenbu de", bn: "সব মিলিয়ে" }
                 ]
             },
             12: {
@@ -1604,54 +1473,26 @@
                     { kana: "かんたん [な]", ro: "kantan [na]", bn: "সহজ" },
                     { kana: "ちかい", ro: "chikai", bn: "কাছে" },
                     { kana: "とおい", ro: "tooi", bn: "দূরে" },
-                    { kana: "はやい", ro: "hayai", bn: "দ্রুত / তাড়াতাড়ি" },
-                    { kana: "おそい", ro: "osoi", bn: "ধীর / দেরি" },
-                    { kana: "おおい", ro: "ooi", bn: "অনেক (মানুষ)" },
-                    { kana: "すくない", ro: "sukunai", bn: "কম (মানুষ)" },
-                    { kana: "あたたかい", ro: "atatakai", bn: "উষ্ণ / আরামদায়ক আবহাওয়া" },
-                    { kana: "すずしい", ro: "suzushii", bn: "হালকা শীতল" },
+                    { kana: "はやい", ro: "hayai", bn: "দ্রুত / সকালের" },
+                    { kana: "おそい", ro: "osoi", bn: "ধীর / দেরিতে" },
+                    { kana: "おおい", ro: "ooi", bn: "বেশি / প্রচুর" },
+                    { kana: "すくない", ro: "sukunai", bn: "কম / সামান্য" },
+                    { kana: "あたたかい", ro: "atatakai", bn: "উষ্ণ" },
+                    { kana: "すずしい", ro: "suzushii", bn: "শীতল / মনোরম" },
                     { kana: "あまい", ro: "amai", bn: "মিষ্টি" },
                     { kana: "からい", ro: "karai", bn: "ঝাল" },
                     { kana: "おもい", ro: "omoi", bn: "ভারী" },
                     { kana: "かるい", ro: "karui", bn: "হালকা" },
-                    { kana: "いい", ro: "ii", bn: "ভালো" },
                     { kana: "きせつ", ro: "kisetsu", bn: "ঋতু" },
-                    { kana: "はる", ro: "haru", bn: "বসন্তকাল" },
-                    { kana: "なつ", ro: "natsu", bn: "গ্রীষ্মকাল" },
-                    { kana: "あき", ro: "aki", bn: "শরৎকাল" },
-                    { kana: "ふゆ", ro: "fuyu", bn: "শীতকাল" },
+                    { kana: "はる", ro: "haru", bn: "বসন্ত" },
+                    { kana: "なつ", ro: "natsu", bn: "গ্রীষ্ম" },
+                    { kana: "あき", ro: "aki", bn: "শরৎ" },
+                    { kana: "ふゆ", ro: "fuyu", bn: "শীত" },
                     { kana: "てんき", ro: "tenki", bn: "আবহাওয়া" },
                     { kana: "あめ", ro: "ame", bn: "বৃষ্টি" },
                     { kana: "ゆき", ro: "yuki", bn: "তুষার" },
-                    { kana: "くもり", ro: "kumori", bn: "মেঘলা" },
-                    { kana: "ホテル", ro: "hoteru", bn: "হোটেল" },
-                    { kana: "くうこう", ro: "kuukou", bn: "বিমানবন্দর" },
-                    { kana: "うみ", ro: "umi", bn: "সমুদ্র" },
-                    { kana: "せかい", ro: "sekai", bn: "পৃথিবী" },
-                    { kana: "パーティー", ro: "paatii", bn: "পার্টি" },
-                    { kana: "おまつり", ro: "omatsuri", bn: "উৎসব" },
-                    { kana: "しけん", ro: "shiken", bn: "পরীক্ষা" },
-                    { kana: "すきやき", ro: "sukiyaki", bn: "সুকিয়াকি (গরুর মাংসের জাপানি ডিশ)" },
-                    { kana: "さしみ", ro: "sashimi", bn: "সাশিমি (কাঁচা মাছের ডিশ)" },
-                    { kana: "おすし", ro: "osushi", bn: "সুশি" },
-                    { kana: "てんぷら", ro: "tenpura", bn: "তেম্পুরা (ভাজা খাবার)" },
-                    { kana: "いけばな", ro: "ikebana", bn: "ইকেবানা (ফুল সাজানো)" },
-                    { kana: "もみじ", ro: "momiji", bn: "ম্যাপল পাতা (শরৎকালের লাল পাতা)" },
                     { kana: "どちら", ro: "dochira", bn: "কোনটি (দুটির মধ্যে)" },
-                    { kana: "どちらも", ro: "dochira mo", bn: "দুটিই" },
-                    { kana: "ずっと", ro: "zutto", bn: "অনেক বেশি" },
-                    { kana: "はじめて", ro: "hajimete", bn: "প্রথমবার" },
-                    { kana: "ただいま", ro: "tadaima", bn: "আমি বাড়ি ফিরে এসেছি" },
-                    { kana: "おかえりなさい", ro: "okaerinasai", bn: "স্বাগতম (বাড়ি ফেরার জবাবে)" },
-                    { kana: "すごいですね", ro: "sugoi desu ne", bn: "অসাধারণ!" },
-                    { kana: "でも", ro: "demo", bn: "কিন্তু" },
-                    { kana: "つかれました", ro: "tsukaremashita", bn: "আমি ক্লান্ত" },
-                    { kana: "ぎおんまつり", ro: "Gion-Matsuri", bn: "গিওন উৎসব (কিয়োটোর)" },
-                    { kana: "ホンコン", ro: "Honkon", bn: "হংকং" },
-                    { kana: "シンガポール", ro: "Shingapooru", bn: "সিঙ্গাপুর" },
-                    { kana: "毎日屋 (まいにちや)", ro: "Mainichiya", bn: "কাল্পনিক সুপারমার্কেট" },
-                    { kana: "ABCストア", ro: "ABC Sutoa", bn: "কাল্পনিক সুপারমার্কেট" },
-                    { kana: "ジャパン", ro: "Japan", bn: "কাল্পনিক সুপারমার্কেট" }
+                    { kana: "ずっと", ro: "zutto", bn: "অনেক বেশি" }
                 ]
             },
             13: {
@@ -1660,94 +1501,50 @@
                 words: [
                     { kana: "あそびます", ro: "asobimasu", bn: "খেলা করা / আনন্দ করা" },
                     { kana: "およぎます", ro: "oyogimasu", bn: "সাঁতার কাটা" },
-                    { kana: "むかえます", ro: "mukaemasu", bn: "স্বাগত জানানো / অভ্যর্থনা" },
+                    { kana: "むかえます", ro: "mukaemasu", bn: "স্বাগত জানানো" },
                     { kana: "つかれます", ro: "tsukaremasu", bn: "ক্লান্ত হওয়া" },
-                    { kana: "だします", ro: "dashimasu", bn: "পাঠানো (চিঠি)" },
-                    { kana: "はいります", ro: "hairimasu", bn: "প্রবেশ করা (কফিশপে)" },
-                    { kana: "でます", ro: "demasu", bn: "বের হওয়া (কফিশপ থেকে)" },
                     { kana: "けっこんします", ro: "kekkonshimasu", bn: "বিয়ে করা" },
-                    { kana: "かいものします", ro: "kaimonoshimasu", bn: "কেনাকাটা করা" },
-                    { kana: "しょくじします", ro: "shokujishimasu", bn: "খাবার খাওয়া" },
-                    { kana: "さんぽします", ro: "sanposhimasu", bn: "হাঁটা / পায়চারি করা" },
+                    { kana: "かいものします", ro: "kaimonoshimasu", bn: "শপিং করা" },
+                    { kana: "しょくじします", ro: "shokujishimasu", bn: "খাওয়া দাওয়া করা" },
+                    { kana: "さんぽします", ro: "sanposhimasu", bn: "পায়চারি করা" },
                     { kana: "たいへん [な]", ro: "taihen [na]", bn: "কঠিন / মারাত্মক" },
-                    { kana: "ほしい", ro: "hoshii", bn: "চাওয়া" },
-                    { kana: "さびしい", ro: "sabishii", bn: "একাকী" },
+                    { kana: "ほしい", ro: "hoshii", bn: "চাওয়া / পাওয়ার ইচ্ছা" },
                     { kana: "ひろい", ro: "hiroi", bn: "প্রশস্ত" },
                     { kana: "せまい", ro: "semai", bn: "সংকীর্ণ" },
-                    { kana: "しやくしょ", ro: "shiyakusho", bn: "সিটি হল" },
                     { kana: "プール", ro: "puuru", bn: "সুইমিং পুল" },
                     { kana: "かわ", ro: "kawa", bn: "নদী" },
-                    { kana: "けいざい", ro: "keizai", bn: "অর্থনীতি" },
-                    { kana: "びじゅつ", ro: "bijutsu", bn: "চারুকলা" },
                     { kana: "つり", ro: "tsuri", bn: "মাছ ধরা" },
                     { kana: "スキー", ro: "sukii", bn: "স্কি করা" },
-                    { kana: "かいぎ", ro: "kaigi", bn: "সভা / মিটিং" },
-                    { kana: "とうろく", ro: "touroku", bn: "নিবন্ধন" },
-                    { kana: "しゅうまつ", ro: "shuumatsu", bn: "সাপ্তাহিক ছুটি" },
-                    { kana: "～ごろ", ro: "~goro", bn: "প্রায় (সময়)" },
-                    { kana: "なにか", ro: "nanika", bn: "কিছু" },
-                    { kana: "どこか", ro: "dokoka", bn: "কোথাও" },
-                    { kana: "おなかがすきました", ro: "onaka ga sukimashita", bn: "পেট খালি হয়েছে (ক্ষুধা লেগেছে)" },
-                    { kana: "おなかがいっぱいです", ro: "onaka ga ippai desu", bn: "পেট ভরা" },
-                    { kana: "のどかわきました", ro: "nodo ga kawakimashita", bn: "গলা শুকিয়ে গেছে (পিপাসা লেগেছে)" },
-                    { kana: "そうですね", ro: "sou desu ne", bn: "হ্যাঁ, ঠিক বলেছেন" },
-                    { kana: "そうしましょう", ro: "sou shimashou", bn: "তাহলে তাই করা যাক" },
-                    { kana: "ごちゅうもんは？", ro: "gochuumon wa?", bn: "কী অর্ডার করবেন বলুন?" },
-                    { kana: "ていしょく", ro: "teishoku", bn: "সেট মিল" },
-                    { kana: "ぎゅうどん", ro: "gyuudon", bn: "গরুর মাংসের ভাতের ডিশ" },
-                    { kana: "しょうしょうおまちください", ro: "shoushou omachi kudasai", bn: "একটু অপেক্ষা করুন" },
-                    { kana: "べつべつに", ro: "betsubetsu ni", bn: "আলাদাভাবে" },
-                    { kana: "ロシア", ro: "Roshia", bn: "রাশিয়া" },
-                    { kana: "あさひテレビ", ro: "Asahi Terebi", bn: "একটি কাল্পনিক টিভি চ্যানেল" },
-                    { kana: "鶴屋 (つるや)", ro: "Tsuruya", bn: "একটি কাল্পনিক জাপানি মিষ্টির দোকান" },
-                    { kana: "おはようテレビ", ro: "Ohayou Terebi", bn: "কাল্পনিক টিভি প্রোগ্রাম" }
+                    { kana: "おなかがすきました", ro: "onaka ga sukimashita", bn: "ক্ষুধা পেয়েছে" },
+                    { kana: "のどがかわきました", ro: "nodo ga kawakimashita", bn: "পিপাসা পেয়েছে" }
                 ]
             },
             14: {
                 title: "অনুরোধ, নির্দেশনা ও ক্রমাগত কাজ",
                 kanji: "第14課",
                 words: [
-                    { kana: "つけます", ro: "tsukemasu", bn: "চালানো (লাইট / ফ্যান ইত্যাদি)" },
-                    { kana: "けします", ro: "keshimasu", bn: "নেভানো (লাইট / আগুন ইত্যাদি)" },
-                    { kana: "あけます", ro: "akemasu", bn: "খুলে দেওয়া (দরজা / বাক্স)" },
-                    { kana: "しめます", ro: "shimemasu", bn: "বন্ধ করা (দরজা / জানালা)" },
+                    { kana: "つけます", ro: "tsukemasu", bn: "চালু করা (লাইট)" },
+                    { kana: "けします", ro: "keshimasu", bn: "বন্ধ করা (লাইট)" },
+                    { kana: "あけます", ro: "akemasu", bn: "খোলা (দরজা)" },
+                    { kana: "しめます", ro: "shimemasu", bn: "বন্ধ করা (দরজা)" },
                     { kana: "いそぎます", ro: "isogimasu", bn: "তাড়াহুড়ো করা" },
                     { kana: "まちます", ro: "machimasu", bn: "অপেক্ষা করা" },
-                    { kana: "とめます", ro: "tomemasu", bn: "থামানো / গাড়ি পার্ক করা" },
+                    { kana: "とめます", ro: "tomemasu", bn: "থামানো / পার্ক করা" },
                     { kana: "まがります", ro: "magarimasu", bn: "মোড় নেওয়া" },
-                    { kana: "もちます", ro: "mochimasu", bn: "ধরে রাখা" },
-                    { kana: "とります", ro: "torimasu", bn: "তুলে নেওয়া" },
+                    { kana: "もちます", ro: "mochimasu", bn: "হাতে নেওয়া / ধরা" },
                     { kana: "てつだいます", ro: "tetsudaimasu", bn: "সাহায্য করা" },
                     { kana: "よびます", ro: "yobimasu", bn: "ডাকা" },
                     { kana: "はなします", ro: "hanashimasu", bn: "কথা বলা" },
                     { kana: "みせます", ro: "misemasu", bn: "দেখানো" },
                     { kana: "おしえます", ro: "oshiemasu", bn: "শেখানো" },
-                    { kana: "はじめます", ro: "hajimemasu", bn: "শুরু করা" },
-                    { kana: "ふります", ro: "furimasu", bn: "বৃষ্টি পড়া" },
-                    { kana: "コピーします", ro: "kopiishimasu", bn: "কপি করা" },
-                    { kana: "エアコン", ro: "eakon", bn: "এয়ার কন্ডিশনার" },
+                    { kana: "ふります [あめが~]", ro: "furimasu", bn: "বৃষ্টি পড়া" },
+                    { kana: "エアコン", ro: "eakon", bn: "এসি" },
                     { kana: "パスポート", ro: "pasupooto", bn: "পাসপোর্ট" },
                     { kana: "なまえ", ro: "namae", bn: "নাম" },
                     { kana: "じゅうしょ", ro: "juusho", bn: "ঠিকানা" },
                     { kana: "ちず", ro: "chizu", bn: "মানচিত্র" },
-                    { kana: "しお", ro: "shio", bn: "লবণ" },
-                    { kana: "さとう", ro: "satou", bn: "চিনি" },
-                    { kana: "よみかた", ro: "yomikata", bn: "পড়ার পদ্ধতি" },
-                    { kana: "～かた", ro: "~kata", bn: "-করার পদ্ধতি" },
                     { kana: "ゆっくり", ro: "yukkuri", bn: "ধীরে ধীরে" },
-                    { kana: "すぐ", ro: "sugu", bn: "তাড়াতাড়ি" },
-                    { kana: "また", ro: "mata", bn: "আবার" },
-                    { kana: "あとで", ro: "ato de", bn: "পরে" },
-                    { kana: "もうすこし", ro: "mou sukoshi", bn: "আর একটু" },
-                    { kana: "もう～", ro: "mou ~", bn: "আর-" },
-                    { kana: "いいですよ", ro: "ii desu yo", bn: "ঠিক আছে" },
-                    { kana: "さあ", ro: "saa", bn: "চলুন" },
-                    { kana: "あれ？", ro: "are?", bn: "আরে! (বিস্ময়ে)" },
-                    { kana: "しんごうをみぎへまがってください", ro: "shingou o migi e magatte kudasai", bn: "সিগন্যালে ডানে ঘুরুন" },
-                    { kana: "まっすぐ", ro: "massugu", bn: "সোজা" },
-                    { kana: "これでおねがいします", ro: "kore de onegai shimasu", bn: "এটা দিয়ে সাহায্য করুন" },
-                    { kana: "おつり", ro: "otsuri", bn: "ফেরত টাকা" },
-                    { kana: "うめだ", ro: "Umeda", bn: "উমেদা (ওসাকার একটি এলাকা)" }
+                    { kana: "すぐ", ro: "sugu", bn: "এখনই / দ্রুত" }
                 ]
             },
             15: {
@@ -1763,25 +1560,247 @@
                     { kana: "しります", ro: "shirimasu", bn: "জানা" },
                     { kana: "すみます", ro: "sumimasu", bn: "বাস করা" },
                     { kana: "けんきゅうします", ro: "kenkyuushimasu", bn: "গবেষণা করা" },
-                    { kana: "しっています", ro: "shitte imasu", bn: "জানি / পরিচিত" },
-                    { kana: "すんでいます", ro: "sunde imasu", bn: "বাস করি / বসবাস করছি" },
-                    { kana: "しりょう", ro: "shiryou", bn: "তথ্যাদি / নথিপত্র" },
+                    { kana: "しっています", ro: "shitte imasu", bn: "জানি" },
+                    { kana: "すんでいます", ro: "sunde imasu", bn: "বসবাস করছি" },
+                    { kana: "しりょう", ro: "shiryou", bn: "নথিপত্র / ডকুমেন্ট" },
                     { kana: "カタログ", ro: "katarogu", bn: "ক্যাটালগ" },
-                    { kana: "じこくひょう", ro: "jikokuhyou", bn: "সময়সূচি" },
-                    { kana: "ふく", ro: "fuku", bn: "পোশাক" },
-                    { kana: "せいひん", ro: "seihin", bn: "পণ্য" },
-                    { kana: "ソフト", ro: "sofuto", bn: "সফটওয়্যার" },
-                    { kana: "せんもん", ro: "senmon", bn: "বিশেষজ্ঞতা" },
+                    { kana: "ふく", ro: "fuku", bn: "জামাকাপড়" },
                     { kana: "はいしゃ", ro: "haisha", bn: "দাঁতের ডাক্তার" },
-                    { kana: "とこや", ro: "tokoya", bn: "চুল কাটার দোকান" },
-                    { kana: "プレイガイド", ro: "pureigaido", bn: "টিকিট কাউন্টার" },
-                    { kana: "どくしん", ro: "dokushin", bn: "অবিবাহিত" },
-                    { kana: "とくに", ro: "tokuni", bn: "বিশেষ করে" },
-                    { kana: "おもいだします", ro: "omoidashimasu", bn: "মনে করা / মনে পড়া" },
-                    { kana: "ごかぞく", ro: "gokazoku", bn: "আপনার পরিবার" },
-                    { kana: "いらっしゃいます", ro: "irasshaimasu", bn: "আছেন (সম্মানসূচক)" },
-                    { kana: "こうこう", ro: "koukou", bn: "উচ্চ মাধ্যমিক বিদ্যালয়" },
-                    { kana: "なんば", ro: "Nanba", bn: "নাম্বা (ওসাকার একটি এলাকা)" }
+                    { kana: "どくしん", ro: "dokushin", bn: "অবিবাহিত" }
+                ]
+            },
+            16: {
+                title: "ধারাবাহিক কাজ ও শারীরিক অঙ্গ",
+                kanji: "第16課",
+                words: [
+                    { kana: "のります [でんしゃに~]", ro: "norimasu", bn: "চড়া / ওঠা (ট্রেনে)" },
+                    { kana: "おります [でんしゃを~]", ro: "orimasu", bn: "নামা (ট্রেন থেকে)" },
+                    { kana: "のりかえます", ro: "norikaemasu", bn: "ট্রেন পরিবর্তন করা" },
+                    { kana: "あびます [シャワーを~]", ro: "abimasu", bn: "গোসল করা (শাওয়ার)" },
+                    { kana: "いれます", ro: "iremasu", bn: "ভেতরে রাখা / ঢোকানো" },
+                    { kana: "だします", ro: "dashimasu", bn: "বের করা / জমা দেওয়া" },
+                    { kana: "おろします [おかねを~]", ro: "oroshimasu", bn: "তোলা (টাকা)" },
+                    { kana: "はいります [だいがくに~]", ro: "hairimasu", bn: "ভর্তি হওয়া / ঢোকা" },
+                    { kana: "でます [だいがくを~]", ro: "demasu", bn: "পাস করা / বের হওয়া" },
+                    { kana: "おします", ro: "oshimasu", bn: "চাপা / ধাক্কা দেওয়া" },
+                    { kana: "わかい", ro: "wakai", bn: "তরুণ / কমবয়সী" },
+                    { kana: "ながい", ro: "nagai", bn: "লম্বা" },
+                    { kana: "みじかい", ro: "mijikai", bn: "খাটো" },
+                    { kana: "あかるい", ro: "akarui", bn: "উজ্জ্বল" },
+                    { kana: "くらい", ro: "kurai", bn: "অন্ধকার" },
+                    { kana: "からだ", ro: "karada", bn: "শরীর" },
+                    { kana: "あたま", ro: "atama", bn: "মাথা" },
+                    { kana: "かお", ro: "kao", bn: "মুখমণ্ডল" },
+                    { kana: "め", ro: "me", bn: "চোখ" },
+                    { kana: "みみ", ro: "mimi", bn: "কান" },
+                    { kana: "はな", ro: "hana", bn: "নাক" },
+                    { kana: "くち", ro: "kuchi", bn: "মুখ" },
+                    { kana: "は", ro: "ha", bn: "দাঁত" },
+                    { kana: "おなか", ro: "onaka", bn: "পেট" },
+                    { kana: "あし", ro: "ashi", bn: "পা" },
+                    { kana: "おてら", ro: "otera", bn: "বৌদ্ধ মন্দির" },
+                    { kana: "じんじゃ", ro: "jinja", bn: "শিন্তো মাজার" }
+                ]
+            },
+            17: {
+                title: "বাধ্যবাধকতা ও স্বাস্থ্য সচেতনতা",
+                kanji: "第17課",
+                words: [
+                    { kana: "おぼえます", ro: "oboemasu", bn: "মনে রাখা / মুখস্থ করা" },
+                    { kana: "わすれます", ro: "wasuremasu", bn: "ভুলে যাওয়া" },
+                    { kana: "なくします", ro: "nakushimasu", bn: "হারিয়ে ফেলা" },
+                    { kana: "はらいます", ro: "haraimasu", bn: "পরিশোধ করা" },
+                    { kana: "かえします", ro: "kaeshimasu", bn: "ফেরত দেওয়া" },
+                    { kana: "でかけます", ro: "dekakemasu", bn: "বাইরে যাওয়া" },
+                    { kana: "ぬぎます", ro: "nugimasu", bn: "খোলা (জুতো/কাপড়)" },
+                    { kana: "もっていきます", ro: "motte ikimasu", bn: "সাথে নিয়ে যাওয়া" },
+                    { kana: "もってきます", ro: "motte kimasu", bn: "সাথে নিয়ে আসা" },
+                    { kana: "しんぱいします", ro: "shinpaishimasu", bn: "দুশ্চিন্তা করা" },
+                    { kana: "ざんぎょうします", ro: "zangyoushimasu", bn: "ওভারটাইম কাজ করা" },
+                    { kana: "たいせつ [な]", ro: "taisetsu [na]", bn: "মূল্যবান / গুরুত্বপূর্ণ" },
+                    { kana: "だいじょうぶ [な]", ro: "daijoubu [na]", bn: "ঠিক আছে / সমস্যা নেই" },
+                    { kana: "あぶない", ro: "abunai", bn: "বিপজ্জনক" },
+                    { kana: "きんえん", ro: "kin'en", bn: "ধূমপান নিষেধ" },
+                    { kana: "ほけんしょう", ro: "hokenshou", bn: "স্বাস্থ্য বীমা কার্ড" },
+                    { kana: "ねつ", ro: "netsu", bn: "জ্বর" },
+                    { kana: "びょうき", ro: "byouki", bn: "অসুখ / রোগ" },
+                    { kana: "くすり", ro: "kusuri", bn: "ওষুধ" },
+                    { kana: "おふろ", ro: "ofuro", bn: "বাথটাব / গোসল" }
+                ]
+            },
+            18: {
+                title: "শখ, দক্ষতা ও নিয়মাবলী",
+                kanji: "第18課",
+                words: [
+                    { kana: "できます", ro: "dekimasu", bn: "পারতে পারা / সক্ষম হওয়া" },
+                    { kana: "あらいます", ro: "araimasu", bn: "ধোয়া / পরিষ্কার করা" },
+                    { kana: "ひきます [ピアノを~]", ro: "hikimasu", bn: "বাজানো (পিয়ানো)" },
+                    { kana: "うたいます", ro: "utaimasu", bn: "গান গাওয়া" },
+                    { kana: "あつめます", ro: "atsumemasu", bn: "সংগ্রহ করা" },
+                    { kana: "すてます", ro: "sutemasu", bn: "ফেলে দেওয়া" },
+                    { kana: "かえます", ro: "kaemasu", bn: "বিনিময় করা" },
+                    { kana: "うんてんします", ro: "untenshimasu", bn: "ড্রাইভিং করা" },
+                    { kana: "よやくします", ro: "yoyakushimasu", bn: "বুকিং করা" },
+                    { kana: "ピアノ", ro: "piano", bn: "পিয়ানো" },
+                    { kana: "げんきん", ro: "genkin", bn: "নগদ টাকা" },
+                    { kana: "しゅみ", ro: "shumi", bn: "শখ" },
+                    { kana: "にっき", ro: "nikki", bn: "ডায়েরি" },
+                    { kana: "おいのり", ro: "oinori", bn: "প্রার্থনা / নামাজ" },
+                    { kana: "しゃちょう", ro: "shachou", bn: "কোম্পানির প্রেসিডেন্ট" },
+                    { kana: "どうぶつ", ro: "doubutsu", bn: "প্রাণী" },
+                    { kana: "うま", ro: "uma", bn: "ঘোড়া" },
+                    { kana: "インターネット", ro: "intaanetto", bn: "ইন্টারনেট" },
+                    { kana: "とくに", ro: "tokuni", bn: "বিশেষ করে" }
+                ]
+            },
+            19: {
+                title: "অভিজ্ঞতা ও ক্রমান্বয়ে পরিবর্তন",
+                kanji: "第19課",
+                words: [
+                    { kana: "のぼります [やまに~]", ro: "noborimasu", bn: "ওঠা (পাহাড়ে)" },
+                    { kana: "とまります [ホテルに~]", ro: "tomarimasu", bn: "থাকা (হোটেলে রাত্রিযাপন)" },
+                    { kana: "そうじします", ro: "soujishimasu", bn: "ঘর পরিষ্কার করা" },
+                    { kana: "せんたくします", ro: "sentakushimasu", bn: "কাপড় ধোয়া" },
+                    { kana: "なります", ro: "narimasu", bn: "হওয়া / পরিণত হওয়া" },
+                    { kana: "ねむい", ro: "nemui", bn: "ঘুম ঘুম ভাব" },
+                    { kana: "つよい", ro: "tsuyoi", bn: "শক্তিশালী" },
+                    { kana: "よわい", ro: "yowai", bn: "দুর্বল" },
+                    { kana: "ちょうし", ro: "choushi", bn: "শারীরিক অবস্থা" },
+                    { kana: "いちど", ro: "ichido", bn: "একবার" },
+                    { kana: "いちども", ro: "ichidomo", bn: "একবারও না" },
+                    { kana: "だんだん", ro: "dandan", bn: "ধীরে ধীরে / ক্রমশ" },
+                    { kana: "もうすぐ", ro: "mousugu", bn: "খুব শীঘ্রই" },
+                    { kana: "かんぱい", ro: "kanpai", bn: "চিয়ার্স (পানীয় পানের পূর্বে)" },
+                    { kana: "ダイエット", ro: "daietto", bn: "ডায়েট" }
+                ]
+            },
+            20: {
+                title: "অনানুষ্ঠানিক ভাষা (Casual Speech)",
+                kanji: "第20課",
+                words: [
+                    { kana: "いります [ビザが~]", ro: "irimasu", bn: "প্রয়োজন হওয়া (ভিসা)" },
+                    { kana: "しらべます", ro: "shirabemasu", bn: "তদন্ত করা / খোঁজা" },
+                    { kana: "なおします", ro: "naoshimasu", bn: "মেরামত করা" },
+                    { kana: "ぼく", ro: "boku", bn: "আমি (পুরুষদের ক্যাজুয়াল)" },
+                    { kana: "きみ", ro: "kimi", bn: "তুমি (ক্যাজুয়াল)" },
+                    { kana: "～くん", ro: "~kun", bn: "-ছেলেদের নামের শেষে" },
+                    { kana: "うん", ro: "un", bn: "হ্যাঁ (ক্যাজুয়াল)" },
+                    { kana: "ううん", ro: "uun", bn: "না (ক্যাজুয়াল)" },
+                    { kana: "ことば", ro: "kotoba", bn: "শব্দ / ভাষা" },
+                    { kana: "きもの", ro: "kimono", bn: "কিমোনো" },
+                    { kana: "ビザ", ro: "biza", bn: "ভিসা" },
+                    { kana: "はじめ", ro: "hajime", bn: "শুরু" },
+                    { kana: "おわり", ro: "owari", bn: "শেষ" },
+                    { kana: "こっち", ro: "kotchi", bn: "এই দিকে (ক্যাজুয়াল)" },
+                    { kana: "そっち", ro: "sotchi", bn: "ওই দিকে (ক্যাজুয়াল)" },
+                    { kana: "あっち", ro: "atchi", bn: "ঐ দিকে (ক্যাজুয়াল)" },
+                    { kana: "どっち", ro: "dotchi", bn: "কোন দিকে (ক্যাজুয়াল)" }
+                ]
+            },
+            21: {
+                title: "মতামত ও উদ্ধৃতি",
+                kanji: "第21課",
+                words: [
+                    { kana: "おもいます", ro: "omoimasu", bn: "মনে করা / ভাবা" },
+                    { kana: "いいます", ro: "iimasu", bn: "বলা" },
+                    { kana: "かちます", ro: "kachimasu", bn: "জেতা / জয়ী হওয়া" },
+                    { kana: "まけます", ro: "makemasu", bn: "পরাজিত হওয়া" },
+                    { kana: "くに", ro: "kuni", bn: "দেশ" },
+                    { kana: "しゅしょう", ro: "shushou", bn: "প্রধানমন্ত্রী" },
+                    { kana: "だいとうりょう", ro: "daitouryou", bn: "রাষ্ট্রপতি" },
+                    { kana: "せいじ", ro: "seiji", bn: "রাজনীতি" },
+                    { kana: "ニュース", ro: "nyuusu", bn: "সংবাদ" },
+                    { kana: "スピーチ", ro: "supiichi", bn: "বক্তৃতা" },
+                    { kana: "しあい", ro: "shiai", bn: "ম্যাচ / খেলা" },
+                    { kana: "アルバイト", ro: "arubaito", bn: "পার্ট-টাইম কাজ" },
+                    { kana: "いけん", ro: "iken", bn: "মতামত" },
+                    { kana: "おなじ", ro: "onaji", bn: "একই" },
+                    { kana: "たぶん", ro: "tabun", bn: "সম্ভবত" },
+                    { kana: "きっと", ro: "kitto", bn: "নিশ্চয়ই" },
+                    { kana: "ほんとうに", ro: "hontou ni", bn: "সত্যিই" }
+                ]
+            },
+            22: {
+                title: "পোশাক পরিধান ও বাক্য বিশেষণ",
+                kanji: "第22課",
+                words: [
+                    { kana: "きます [シャツを~]", ro: "kimasu", bn: "পরা (উপরের পোশাক)" },
+                    { kana: "はきます [くつを~]", ro: "hakimasu", bn: "পরা (প্যান্ট/জুতো)" },
+                    { kana: "かぶります [ぼうしを~]", ro: "kaburimasu", bn: "পরা (টুপি)" },
+                    { kana: "かけます [めがねを~]", ro: "kakemasu", bn: "পরা (চশমা)" },
+                    { kana: "うまれます", ro: "umaremasu", bn: "জন্মগ্রহণ করা" },
+                    { kana: "コート", ro: "kooto", bn: "কোট" },
+                    { kana: "スーツ", ro: "suutsu", bn: "স্যুট" },
+                    { kana: "セーター", ro: "seetaa", bn: "সোয়েটার" },
+                    { kana: "ぼうし", ro: "boushi", bn: "টুপি" },
+                    { kana: "めがね", ro: "megane", bn: "চশমা" },
+                    { kana: "ケーキ", ro: "keeki", bn: "কেক" },
+                    { kana: "おべんとう", ro: "obentou", bn: "লাঞ্চবক্স" },
+                    { kana: "つごう", ro: "tsugou", bn: "সুবিধা / সময়সূচি" },
+                    { kana: "おめでとうございます", ro: "omedetou gozaimasu", bn: "অভিনন্দন!" }
+                ]
+            },
+            23: {
+                title: "সময়, রাস্তা ও দিকনির্দেশনা",
+                kanji: "第23課",
+                words: [
+                    { kana: "ききます [せんせいに~]", ro: "kikimasu", bn: "জিজ্ঞাসা করা (শিক্ষককে)" },
+                    { kana: "まわします", ro: "mawashimasu", bn: "ঘোরানো" },
+                    { kana: "ひきます", ro: "hikimasu", bn: "টানা" },
+                    { kana: "かえます", ro: "kaemasu", bn: "পরিবর্তন করা" },
+                    { kana: "さわります", ro: "sawarimasu", bn: "স্পর্শ করা" },
+                    { kana: "あるきます", ro: "arukimasu", bn: "হাঁটা" },
+                    { kana: "わたります [はしを~]", ro: "watarimasu", bn: "পার হওয়া (সেতু)" },
+                    { kana: "まがります [みぎへ~]", ro: "magarimasu", bn: "মোড় নেওয়া (ডানে)" },
+                    { kana: "さびしい", ro: "sabishii", bn: "একাকী / মন খারাপ" },
+                    { kana: "おゆ", ro: "oyu", bn: "গরম পানি" },
+                    { kana: "おと", ro: "oto", bn: "শব্দ" },
+                    { kana: "こしょう", ro: "koshou", bn: "নষ্ট / অচল অবস্থা" },
+                    { kana: "みち", ro: "michi", bn: "রাস্তা" },
+                    { kana: "こうさてん", ro: "kousaten", bn: "চৌরাস্তা" },
+                    { kana: "しんごう", ro: "shingou", bn: "ট্রাফিক সিগন্যাল" },
+                    { kana: "かど", ro: "kado", bn: "কোণা / মোড়" },
+                    { kana: "はし", ro: "hashi", bn: "সেতু" },
+                    { kana: "ちゅうしゃじょう", ro: "chuushajou", bn: "পার্কিং লট" }
+                ]
+            },
+            24: {
+                title: "উপকার ও উপহার আদান-প্রদান",
+                kanji: "第24課",
+                words: [
+                    { kana: "くれます", ro: "kuremasu", bn: "আমাকে দেওয়া" },
+                    { kana: "つれていきます", ro: "tsurete ikimasu", bn: "সাথে নিয়ে যাওয়া" },
+                    { kana: "つれてきます", ro: "tsurete kimasu", bn: "সাথে নিয়ে আসা" },
+                    { kana: "おくります [ひとを~]", ro: "okurimasu", bn: "এগিয়ে দেওয়া (মানুষকে)" },
+                    { kana: "しょうかいします", ro: "shoukaishimasu", bn: "পরিচয় করিয়ে দেওয়া" },
+                    { kana: "あんないします", ro: "annaishimasu", bn: "ঘুরিয়ে দেখানো / পথ প্রদর্শন" },
+                    { kana: "せつめいします", ro: "setsumeishimasu", bn: "ব্যাখ্যা করা" },
+                    { kana: "おじいさん", ro: "ojiisan", bn: "দাদা / বৃদ্ধ লোক" },
+                    { kana: "おばあさん", ro: "obaasan", bn: "দাদি / বৃদ্ধ মহিলা" },
+                    { kana: "じゅんび", ro: "junbi", bn: "প্রস্তুতি" },
+                    { kana: "ひっこし", ro: "hikkoshi", bn: "বাসা বদল" },
+                    { kana: "おかし", ro: "okashi", bn: "মিষ্টান্ন / স্ন্যাক্স" },
+                    { kana: "ホームステイ", ro: "hoomusutei", bn: "হোমস্টে" },
+                    { kana: "ぜんぶ", ro: "zenbu", bn: "সব কিছু" },
+                    { kana: "じぶんで", ro: "jibun de", bn: "নিজে নিজে" }
+                ]
+            },
+            25: {
+                title: "শর্ত ও ভবিষ্যৎ সম্ভাবনা",
+                kanji: "第25課",
+                words: [
+                    { kana: "かんがえます", ro: "kangaemasu", bn: "চিন্তা করা / বিবেচনা করা" },
+                    { kana: "つきます [えきに~]", ro: "tsukimasu", bn: "পৌঁছানো (স্টেশনে)" },
+                    { kana: "りゅうがくします", ro: "ryuugakushimasu", bn: "উচ্চশিক্ষার্থে বিদেশে যাওয়া" },
+                    { kana: "とります [としを~]", ro: "torimasu", bn: "বয়স বাড়া" },
+                    { kana: "いなか", ro: "inaka", bn: "গ্রামাঞ্চল" },
+                    { kana: "チャンス", ro: "chansu", bn: "সুযোগ" },
+                    { kana: "おく", ro: "oku", bn: "দশ কোটি (১০০ মিলিয়ন)" },
+                    { kana: "もし [～たら]", ro: "moshi", bn: "যদি..." },
+                    { kana: "いくら [～ても]", ro: "ikura", bn: "যতই হোক না কেন..." },
+                    { kana: "てんきん", ro: "tenkin", bn: "চাকরি বদলি" },
+                    { kana: "がんばります", ro: "ganbarimasu", bn: "সর্বোচ্চ চেষ্টা করা" },
+                    { kana: "どうぞおげんきで", ro: "douzo ogenki de", bn: "ভালো থাকবেন (দীর্ঘ বিদায় সম্ভাষণ)" }
                 ]
             }
         };
@@ -1791,13 +1810,11 @@
         let currentIndex = 0;
         let isTableOpen = false;
 
-        // লোডার হ্যান্ডলার
         window.addEventListener("load", () => {
             const loader = document.getElementById("pageLoader");
             if (loader) loader.classList.add("hidden");
         });
 
-        // সিঙ্ক হাইলাইটস
         onAuthStateChanged(auth, async (user) => {
             const syncText = document.getElementById("syncText");
 
@@ -1887,7 +1904,6 @@
             }
         }
 
-        // গ্রিড রেন্ডার
         function renderLessonGrid() {
             const container = document.getElementById("gridContainer");
             container.innerHTML = "";
@@ -1900,7 +1916,7 @@
                 card.onclick = () => openLesson(i);
                 card.innerHTML = `
                     <div class="card-top">
-                        <span class="l-badge">L-${i}</span>
+                        <span class="l-badge">L-${i < 10 ? '0' + i : i}</span>
                         <span class="kanji-lesson-tag">${lesson.kanji}</span>
                     </div>
                     <div class="card-lesson-title">লেসন ${convertBengaliNumber(i)}</div>
@@ -2074,7 +2090,7 @@
                     <td><span class="col-ro">${item.ro}</span></td>
                     <td><span class="col-bn">${item.bn}</span></td>
                     <td>
-                        <button class="table-hl-btn ${highlighted ? 'active' : ''}">
+                        <button class="table-hl-btn ${highlighted ? 'active' : ''}" title="মার্ক করুন">
                             <i class="fa-${highlighted ? 'solid' : 'regular'} fa-bookmark"></i>
                         </button>
                     </td>
@@ -2105,7 +2121,6 @@
             return n.toString().split('').map(d => bnDigits[d] || d).join('');
         }
 
-        // ইভেন্ট বাইন্ডিং
         document.getElementById("btnBackToGrid").addEventListener("click", () => backToGrid(false));
         document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
         document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);

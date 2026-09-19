@@ -326,6 +326,29 @@
             background: #FAF7F0;
         }
 
+        /* মার্ক করা ল্যাঙ্গুয়েজ সুইচ বাটন */
+        .mode-toggle-btn {
+            background: var(--pine);
+            color: #ffffff;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.15);
+            transition: transform 0.15s, background-color 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .mode-toggle-btn:active {
+            transform: scale(0.94);
+            background: var(--jade);
+        }
+
         .flashcard-container {
             perspective: 1200px;
             width: 100%;
@@ -693,7 +716,7 @@
             pointer-events: none;
         }
 
-        /* বটম বার (Index এর মতই) */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -779,7 +802,14 @@
 
             <div class="fc-tools">
                 <button class="fc-tool-btn" id="btnShuffle" title="শাফল করুন"><i class="fa-solid fa-shuffle"></i></button>
-                <button class="fc-tool-btn" id="btnSpeakMain" title="উচ্চারণ শুনুন"><i class="fa-solid fa-volume-high"></i></button>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <!-- মার্ক করা বাটন: JP ⇄ BN টগল বাটন -->
+                    <button class="mode-toggle-btn" id="btnToggleMode" title="ভাষা পরিবর্তন করুন">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        <span id="modeText">JP → BN</span>
+                    </button>
+                    <button class="fc-tool-btn" id="btnSpeakMain" title="উচ্চারণ শুনুন"><i class="fa-solid fa-volume-high"></i></button>
+                </div>
             </div>
 
             <!-- ৩ডি অ্যানিমেটেড ফ্ল্যাশকার্ড -->
@@ -789,7 +819,7 @@
                         <button class="fc-highlight-btn" id="fcFrontHlBtn" title="বুকমার্ক">
                             <i class="fa-solid fa-bookmark"></i>
                         </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn" id="frontSpeakerBtn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-jp-text" id="fcKana">みます</div>
                         <div class="fc-tap-hint">
                             <i class="fa-solid fa-hand-pointer"></i>
@@ -800,7 +830,7 @@
                         <button class="fc-highlight-btn" id="fcBackHlBtn" title="বুকমার্ক">
                             <i class="fa-solid fa-bookmark"></i>
                         </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
+                        <button class="fc-speaker-icon fc-speak-voice-btn" id="backSpeakerBtn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
                         <div class="fc-meaning-text" id="fcMeaning">দেখা, চেক করা</div>
                         <div class="fc-ro-text" id="fcRomaji">mimasu</div>
                         <div class="fc-tap-hint">
@@ -898,6 +928,7 @@
 
         let currentUserEmail = null;
         let highlightedWords = [];
+        let cardMode = "JP_TO_BN"; // JP_TO_BN অথবা BN_TO_JP
 
         const lessons = {
             26: {
@@ -907,7 +938,7 @@
                     { kana: "みます II", ro: "mimasu", bn: "দেখা, চেক করা" },
                     { kana: "さがします I", ro: "sagashimasu", bn: "খোঁজা, অনুসন্ধান করা" },
                     { kana: "おくれます II [じかんに~]", ro: "okuremasu [jikan ni]", bn: "দেরি করা [সময়]" },
-                    { kana: "まニアいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
+                    { kana: "まにあいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
                     { kana: "やります I", ro: "yarimasu", bn: "করা" },
                     { kana: "ひろいます I", ro: "hiroimasu", bn: "তুলে নেওয়া" },
                     { kana: "れんらくします III", ro: "renrakushimasu", bn: "যোগাযোগ করা" },
@@ -1216,8 +1247,114 @@
                     { kana: "ブロードウェイ", ro: "buroodowei", bn: "ব্রডওয়ে" },
                     { kana: "つき", ro: "tsuki", bn: "চাঁদ" },
                     { kana: "ちきゅう", ro: "chikyuu", bn: "পৃথিবী" },
-                    { kana: "こうばん", ro: "kouban", bn: "পুলিশ স্টেশন" },
+                    { kana: "こうばん", ro: "kouばん", bn: "পুলিশ স্টেশন" },
                     { kana: "ほど", ro: "hodo", bn: "সম্পর্কে, শুধু" }
+                ]
+            },
+            31: {
+                title: "ইচ্ছা ও ভবিষ্যৎ পরিকল্পনা",
+                kanji: "第31課",
+                words: [
+                    { kana: "つづけます II", ro: "tsudukemasu", bn: "চালানো, চালিয়ে যাওয়া" },
+                    { kana: "みつけます II", ro: "mitsukemasu", bn: "খোঁজা" },
+                    { kana: "とります I [やすみを~]", ro: "torimasu [yasumi o]", bn: "নেওয়া [ছুটি]" },
+                    { kana: "うけます II [しけんを~]", ro: "ukemasu [shiken o]", bn: "অংশগ্রহণ করা, দেওয়া [পরীক্ষা]" },
+                    { kana: "もうしこみます I", ro: "moushikomimasu", bn: "আবেদন করা, ভর্তি ফর্ম" },
+                    { kana: "きゅうけいします III", ro: "kyuukeishimasu", bn: "বিরতি নেওয়া" },
+                    { kana: "れんきゅう", ro: "renkyuu", bn: "ধারাবাহিক ছুটির দিন" },
+                    { kana: "さくぶん", ro: "sakubun", bn: "রচনা" },
+                    { kana: "はっぴょう", ro: "happyou", bn: "বক্তব্য, উপস্থাপন করা" },
+                    { kana: "てんらんかい", ro: "tenrankai", bn: "প্রদর্শনী" },
+                    { kana: "けっこんしき", ro: "kekkonshiki", bn: "বিবাহ অনুষ্ঠান" },
+                    { kana: "おそうしき", ro: "osoushiki", bn: "অন্ত্যেষ্টিক্রিয়া" },
+                    { kana: "しき", ro: "shiki", bn: "অনুষ্ঠান" },
+                    { kana: "ほんしゃ", ro: "honsha", bn: "প্রধান অফিস" },
+                    { kana: "してん", ro: "shiten", bn: "শাখা অফিস" },
+                    { kana: "きょうかい", ro: "kyoukai", bn: "চার্চ, গির্জা" },
+                    { kana: "だいがくいん", ro: "daigakuin", bn: "স্নাতক স্কুল (Graduate school)" },
+                    { kana: "どうぶつえん", ro: "doubutsuen", bn: "চিড়িয়াখানা" },
+                    { kana: "おんせん", ro: "onsen", bn: "গরম পানির ঝর্ণা, স্পা" },
+                    { kana: "かえり", ro: "kaeri", bn: "ফেরার পথ" },
+                    { kana: "おこさん", ro: "okosan", bn: "অন্যের বাচ্চা" },
+                    { kana: "〜ごう", ro: "~gou", bn: "ট্রেন নম্বর, টাইফুন নম্বর ইত্যাদি" },
+                    { kana: "〜のほう", ro: "~no hou", bn: "দিক নির্দেশনা, দিকে" },
+                    { kana: "ずっと", ro: "zutto", bn: "সম্পূর্ণ সময়" },
+                    { kana: "のこります I", ro: "nokorimasu", bn: "বাকি, ছেড়ে যাওয়া, পড়ে থাকা" },
+                    { kana: "にゅうがくしけん", ro: "nyuugakushiken", bn: "ভর্তি পরীক্ষা" },
+                    { kana: "つきに", ro: "tsuki ni", bn: "প্রতিমাসে" },
+                    { kana: "むら", ro: "mura", bn: "গ্রাম" },
+                    { kana: "そつぎょうします III", ro: "sotsugyoushimasu", bn: "স্নাতক (Graduate)" },
+                    { kana: "えいがかん", ro: "eigakan", bn: "সিনেমা হল, সিনেমা" },
+                    { kana: "とじます II", ro: "tojimasu", bn: "বন্ধ করা (চোখ/বই)" },
+                    { kana: "とかい", ro: "tokai", bn: "শহর" },
+                    { kana: "パリ", ro: "pari", bn: "প্যারিস (ফ্রান্সের রাজধানী)" },
+                    { kana: "ピカソ", ro: "pikaso", bn: "পাবলো পিকাসো, স্প্যানিশ চিত্রশিল্পী" },
+                    { kana: "のぞみ", ro: "nozomi", bn: "শিনকানসেন ট্রেনের নাম" },
+                    { kana: "しんこうべ", ro: "shinkoube", bn: "হিয়োগোর স্টেশনের নাম" }
+                ]
+            },
+            32: {
+                title: "পরামর্শ ও পূর্বাভাস",
+                kanji: "第32課",
+                words: [
+                    { kana: "うんどうします III", ro: "undoushimasu", bn: "ব্যায়াম করা" },
+                    { kana: "せいこうします III", ro: "seikoushimasu", bn: "সফল" },
+                    { kana: "しっぱいします III [しけんに~]", ro: "shippaishimasu [shiken ni]", bn: "ব্যর্থ, ফেল করা [পরীক্ষায়]" },
+                    { kana: "ごうかくします III [しけんに~]", ro: "goukakushimasu [shiken ni]", bn: "উত্তীর্ণ হওয়া, পাস [পরীক্ষায়]" },
+                    { kana: "やみます I [あめが~]", ro: "yamimasu [ame ga]", bn: "থামা [বৃষ্টি]" },
+                    { kana: "はれます II", ro: "haremasu", bn: "পরিষ্কার (আকাশে রোদ)" },
+                    { kana: "くもります I", ro: "kumorimasu", bn: "মেঘলাচ্ছন্ন" },
+                    { kana: "つづきます I [ねつが~]", ro: "tsudukimasu [netsu ga]", bn: "অব্যাহত থাকা, চলতে থাকা [জ্বর]" },
+                    { kana: "ひきます I [かぜを~]", ro: "hikimasu [kaze o]", bn: "ধরা, ঠান্ডা লাগা [সর্দি]" },
+                    { kana: "ひやします I", ro: "hiyashimasu", bn: "ঠান্ডা করা" },
+                    { kana: "こみます I [みちが~]", ro: "komimasu [michi ga]", bn: "জনাকীর্ণ [রাস্তা]" },
+                    { kana: "すきます I [みちが~]", ro: "sukimasu [michi ga]", bn: "ফাঁকা হওয়া, ছেড়ে দেওয়া [রাস্তা]" },
+                    { kana: "でます II [しあいに~]", ro: "demasu [shiai ni]", bn: "অংশগ্রহণ করা [ম্যাচে]" },
+                    { kana: "でます II [パーティーに~]", ro: "demasu [paatii ni]", bn: "যোগদান করা [পার্টিতে]" },
+                    { kana: "むりをします III", ro: "muri o shimasu", bn: "অতিরিক্ত পরিশ্রম" },
+                    { kana: "じゅうぶん [な]", ro: "juubun [na]", bn: "পর্যাপ্ত, প্রচুর" },
+                    { kana: "おかしい", ro: "okashii", bn: "মজার, অদ্ভুত" },
+                    { kana: "うるさい", ro: "urusai", bn: "শব্দ, বিরক্তিকর" },
+                    { kana: "せんせい", ro: "sensei", bn: "ডাক্তার, শিক্ষক" },
+                    { kana: "やけど", ro: "yakedo", bn: "পুড়ে যাওয়া" },
+                    { kana: "けが", ro: "kega", bn: "আঘাত, ক্ষত" },
+                    { kana: "せき", ro: "seki", bn: "কাশি" },
+                    { kana: "インフルエンザ", ro: "infuruenza", bn: "ইনফ্লুয়েঞ্জা" },
+                    { kana: "そら", ro: "sora", bn: "আকাশ" },
+                    { kana: "たいよう", ro: "taiyou", bn: "সূর্য" },
+                    { kana: "ほし", ro: "hoshi", bn: "তারা" },
+                    { kana: "かぜ", ro: "kaze", bn: "বাতাস" },
+                    { kana: "ひがし", ro: "higashi", bn: "পূর্ব" },
+                    { kana: "にし", ro: "nishi", bn: "পশ্চিম" },
+                    { kana: "みなみ", ro: "minami", bn: "দক্ষিণ" },
+                    { kana: "きた", ro: "kita", bn: "উত্তর" },
+                    { kana: "こくさい〜", ro: "kokusai~", bn: "আন্তর্জাতিক~" },
+                    { kana: "すいどう", ro: "suidou", bn: "পানির পাইপ, পানির কল" },
+                    { kana: "エンジン", ro: "enjin", bn: "ইঞ্জিন" },
+                    { kana: "チーム", ro: "chiimu", bn: "টিম, দল" },
+                    { kana: "こんや", ro: "kon'ya", bn: "এই রাত" },
+                    { kana: "ゆうがた", ro: "yuugata", bn: "সন্ধ্যাবেলা" },
+                    { kana: "まえ", ro: "mae", bn: "আগের সময়" },
+                    { kana: "おそく", ro: "osoku", bn: "দেরি হওয়া" },
+                    { kana: "こんなに", ro: "konnani", bn: "এই (রকমভাবে)" },
+                    { kana: "そんなに", ro: "sonnani", bn: "ঐরকমভাবে" },
+                    { kana: "あんなに", ro: "annani", bn: "ঐ রকমের (অনেক)" },
+                    { kana: "もしかしたら", ro: "moshikashitara", bn: "হয়তো, হয়তোবা" },
+                    { kana: "い", ro: "i", bn: "পেট" },
+                    { kana: "ストレス", ro: "sutoresu", bn: "চাপ" },
+                    { kana: "それはいけませんね", ro: "sore wa ikemasen ne", bn: "এটা ঠিক নয় / খারাপ হলো" },
+                    { kana: "ほしうらない", ro: "hoshiuranai", bn: "জ্যোতিষ শাস্ত্র" },
+                    { kana: "おうしざ", ro: "oushiza", bn: "বৃষ রাশি" },
+                    { kana: "はたらきすぎ", ro: "hatarakisugi", bn: "অতিরিক্ত কাজ" },
+                    { kana: "こまります I", ro: "komarimasu", bn: "সমস্যায় পড়া, ঝামেলা" },
+                    { kana: "たからくじ", ro: "takarakuji", bn: "লটারি" },
+                    { kana: "あたります I [たからくじが~]", ro: "atarimasu [takarakuji ga]", bn: "লটারি জেতা" },
+                    { kana: "けんこう", ro: "kenkou", bn: "স্বাস্থ্য" },
+                    { kana: "れんあい", ro: "ren'ai", bn: "ভালোবাসা" },
+                    { kana: "こいびと", ro: "koibito", bn: "প্রেমিক / প্রেমিকা" },
+                    { kana: "ラッキーアイテム", ro: "rakkii aitemu", bn: "সৌভাগ্যজনক উপাদান" },
+                    { kana: "いし", ro: "ishi", bn: "পাথর" },
+                    { kana: "ヨーロッパ", ro: "yooroppa", bn: "ইউরোপ" }
                 ]
             }
         };
@@ -1436,13 +1573,34 @@
             }
         });
 
+        function toggleCardMode() {
+            if (cardMode === "JP_TO_BN") {
+                cardMode = "BN_TO_JP";
+                document.getElementById("modeText").innerText = "BN → JP";
+            } else {
+                cardMode = "JP_TO_BN";
+                document.getElementById("modeText").innerText = "JP → BN";
+            }
+            updateCardWithAnimation();
+        }
+
         function fillCardData() {
             if (currentWords.length === 0) return;
             const item = currentWords[currentIndex];
 
-            document.getElementById("fcKana").innerText = item.kana;
-            document.getElementById("fcMeaning").innerText = item.bn;
-            document.getElementById("fcRomaji").innerText = item.ro;
+            const fcKana = document.getElementById("fcKana");
+            const fcMeaning = document.getElementById("fcMeaning");
+            const fcRomaji = document.getElementById("fcRomaji");
+
+            if (cardMode === "JP_TO_BN") {
+                fcKana.innerText = item.kana;
+                fcMeaning.innerText = item.bn;
+                fcRomaji.innerText = item.ro;
+            } else {
+                fcKana.innerText = item.bn;
+                fcMeaning.innerText = item.kana;
+                fcRomaji.innerText = item.ro;
+            }
 
             document.getElementById("cardCounter").innerText = `CARD ${currentIndex + 1} / ${currentWords.length}`;
             const pct = ((currentIndex + 1) / currentWords.length) * 100;
@@ -1552,6 +1710,7 @@
 
         document.getElementById("btnBackToGrid").addEventListener("click", () => backToGrid(false));
         document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
+        document.getElementById("btnToggleMode").addEventListener("click", toggleCardMode);
         document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);
         document.getElementById("flashcardContainer").addEventListener("click", flipCard);
         document.getElementById("fcFrontHlBtn").addEventListener("click", toggleCurrentHighlight);

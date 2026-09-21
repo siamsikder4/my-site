@@ -12,7 +12,6 @@
     
     <style>
         :root {
-            /* Index পেজের কালার প্যালেট */
             --paper: #fbf7ef;
             --ink: #182620;
             --pine: #0B4A38;
@@ -181,15 +180,39 @@
         .kanji-view { display: none; }
 
         .view-header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 14px;
+            background: #FAF7F0;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
         }
 
         .view-header h3 {
-            font-size: 17.5px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--pine);
         }
+
+        .lesson-test-btn {
+            background: var(--clay);
+            color: #ffffff;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 3px 8px rgba(182, 71, 46, 0.2);
+            transition: transform 0.15s;
+        }
+
+        .lesson-test-btn:active { transform: scale(0.93); }
 
         .kanji-item {
             margin-bottom: 11px;
@@ -198,6 +221,11 @@
             box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
             border: 1px solid var(--line);
             background: var(--card-bg);
+            transition: border-color 0.2s;
+        }
+
+        .kanji-item.learned {
+            border-left: 4px solid var(--gold);
         }
 
         .kanji-header {
@@ -223,6 +251,33 @@
             padding: 2px 7px;
             border-radius: 6px;
             font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mark-learned-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .mark-learned-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #ffffff;
         }
 
         .kanji-header .arrow-icon {
@@ -375,13 +430,13 @@
             color: var(--ink);
         }
 
-        /* ব্লাইন্ড টেস্ট পপ-আপ (ভিডিওর মতো হুবহু) */
+        /* মোডাল গ্লোবাল ওভারলে */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(11, 30, 22, 0.6);
+            background: rgba(11, 30, 22, 0.65);
             backdrop-filter: blur(4px);
             z-index: 9999;
             justify-content: center;
@@ -389,6 +444,7 @@
             padding: 16px;
         }
 
+        /* ব্লাইন্ড টেস্ট কার্ড */
         .blind-test-card {
             background: #ffffff;
             width: 100%;
@@ -419,7 +475,7 @@
         }
 
         .blind-title {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
             color: var(--pine);
             line-height: 1.35;
@@ -476,13 +532,8 @@
             line-height: 1.4;
         }
 
-        .status-correct {
-            color: var(--jade) !important;
-        }
-
-        .status-completed {
-            color: #0284c7 !important;
-        }
+        .status-correct { color: var(--jade) !important; }
+        .status-completed { color: #0284c7 !important; }
 
         .blind-btn-group {
             display: flex;
@@ -507,7 +558,126 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
-        /* বটম বার (Index এর মতই) */
+        /* কাঞ্জি কুইজ / টেস্ট মোডাল স্টাইল */
+        .quiz-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 24px;
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+            animation: popUp 0.22s ease-out;
+        }
+
+        .quiz-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #E9E2D3;
+            border-radius: 3px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--jade);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-header-badge {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--mist);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .quiz-question-box {
+            background: #FAF7F0;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 16px 12px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-q-main {
+            font-family: 'Klee One', 'Noto Sans JP', sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--pine);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .quiz-q-sub {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--mist);
+        }
+
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .quiz-opt-btn {
+            background: #ffffff;
+            border: 1.5px solid var(--line);
+            border-radius: 14px;
+            padding: 14px 8px;
+            font-family: 'Klee One', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ink);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 64px;
+            line-height: 1.2;
+        }
+
+        .quiz-opt-btn .opt-sub {
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--mist);
+            margin-top: 3px;
+        }
+
+        .quiz-opt-btn:active { transform: scale(0.96); }
+
+        .quiz-opt-btn.correct {
+            background: #E6F3EC !important;
+            border-color: var(--jade) !important;
+            color: var(--jade) !important;
+        }
+
+        .quiz-opt-btn.wrong {
+            background: #FBEAE6 !important;
+            border-color: var(--clay) !important;
+            color: var(--clay) !important;
+        }
+
+        .quiz-opt-btn:disabled {
+            cursor: default;
+        }
+
+        .quiz-feedback {
+            font-size: 14px;
+            font-weight: 700;
+            min-height: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -549,9 +719,9 @@
     </header>
 
     <main class="container">
-        <!-- লেসন গ্রিড (১২১ থেকে ৩২০ পর্যন্ত ২০টি লেসন) -->
+        <!-- লেসন গ্রিড -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • MLC ১২১ থেকে ৩২০ সম্পূর্ণ N4 কাঞ্জি</div>
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ N4 কাঞ্জি ও কুইজ টেস্ট</div>
             <div class="lesson-grid" id="lessonsContainer"></div>
         </div>
 
@@ -559,12 +729,15 @@
         <div id="kanjiDetailView" class="kanji-view">
             <div class="view-header">
                 <h3 id="lessonHeaderTitle">কাঞ্জি তালিকা</h3>
+                <button class="lesson-test-btn" onclick="startLessonQuiz()">
+                    <i class="fa-solid fa-graduation-cap"></i> টেস্ট দিন
+                </button>
             </div>
             <div id="kanjiListContainer"></div>
         </div>
     </main>
 
-    <!-- ভিডিওর মতো নিখুঁত ব্লাইন্ড টেস্ট পপ-আপ -->
+    <!-- ১. ব্লাইন্ড স্ট্রোক টেস্ট পপ-আপ -->
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
@@ -584,6 +757,28 @@
         </div>
     </div>
 
+    <!-- ২. লেসন ৪-অপশন কাঞ্জি কুইজ টেস্ট পপ-আপ -->
+    <div class="modal-overlay" id="kanjiQuizModal">
+        <div class="quiz-card">
+            <button class="modal-close-icon" onclick="closeQuizModal()">&times;</button>
+            <div class="quiz-header-badge" id="quizCounter">QUESTION 1 / 10</div>
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" id="quizProgressFill"></div>
+            </div>
+
+            <div class="quiz-question-box">
+                <div class="quiz-q-main" id="quizQuestionMain">曜</div>
+                <div class="quiz-q-sub" id="quizQuestionSub">সঠিক কাঞ্জি বা রিডিং সিলেক্ট করুন</div>
+            </div>
+
+            <div class="quiz-options-grid" id="quizOptionsContainer">
+                <!-- অপশন বাটন ডায়নামিক লোড হবে -->
+            </div>
+
+            <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
+    </div>
+
     <!-- বটম বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
@@ -592,7 +787,6 @@
     </nav>
 
     <script>
-        // ১২১ থেকে ৩২০ পর্যন্ত সম্পূর্ণ ২০০টি N4 কাঞ্জি ডাটাবেস
         const rawN4Kanji = [
             // লেসন ০১ (১২১-১৩০)
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
@@ -841,6 +1035,26 @@
             });
         }
 
+        // লোকালস্টোরেজ থেকে শেখা কাঞ্জি ট্র্যাক করা
+        let learnedKanjiSet = new Set(JSON.parse(localStorage.getItem("kotoba_learned_kanji") || "[]"));
+
+        function saveLearnedKanji() {
+            localStorage.setItem("kotoba_learned_kanji", JSON.stringify(Array.from(learnedKanjiSet)));
+        }
+
+        function toggleLearnedState(char, btnEl, itemEl) {
+            if (learnedKanjiSet.has(char)) {
+                learnedKanjiSet.delete(char);
+                btnEl.classList.remove('active');
+                itemEl.classList.remove('learned');
+            } else {
+                learnedKanjiSet.add(char);
+                btnEl.classList.add('active');
+                itemEl.classList.add('learned');
+            }
+            saveLearnedKanji();
+        }
+
         function renderLessonGrid() {
             const container = document.getElementById("lessonsContainer");
             container.innerHTML = "";
@@ -870,7 +1084,6 @@
 
         const svgCache = {};
 
-        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ ক্লিন করা যাতে স্ক্রিনে ']' বা '>' না আসে
         function cleanSvg(svgStr) {
             if (!svgStr) return "";
             const start = svgStr.indexOf("<svg");
@@ -922,19 +1135,22 @@
             }
         }
 
-        // লেসন ওপেন (ফিক্স: কোনো কাঞ্জি প্রথমে নিজে থেকে খোলা থাকবে না)
+        let currentActiveLesson = 1;
+
         function openLesson(lessonNo) {
+            currentActiveLesson = lessonNo;
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
             document.getElementById("kanjiDetailView").style.display = "block";
-            document.getElementById("lessonHeaderTitle").innerText = `কাঞ্জি লেসন ${lessonNo} (কাঞ্জি ${items[0].id}–${items[items.length - 1].id})`;
+            document.getElementById("lessonHeaderTitle").innerText = `কাঞ্জি লেসন ${lessonNo} (${items[0].id}–${items[items.length - 1].id})`;
 
             const container = document.getElementById("kanjiListContainer");
             container.innerHTML = "";
 
             items.forEach((k, index) => {
+                const isLearned = learnedKanjiSet.has(k.char);
                 const itemDiv = document.createElement("div");
-                itemDiv.className = `kanji-item`;
+                itemDiv.className = `kanji-item ${isLearned ? 'learned' : ''}`;
                 itemDiv.id = `kanjiItem_${index}`;
 
                 let vocabHtml = k.vocab.map(v => `<li><span class="jp-word">${v.w}</span> — ${v.m}</li>`).join('');
@@ -945,7 +1161,14 @@
                             <span class="icon-box"><i class="fa-solid fa-language"></i></span>
                             <span>Kanji ${k.id}: ${k.char}</span>
                         </div>
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                        <div class="header-actions">
+                            <button class="mark-learned-btn ${isLearned ? 'active' : ''}" 
+                                onclick="event.stopPropagation(); toggleLearnedState('${k.char}', this, document.getElementById('kanjiItem_${index}'))" 
+                                title="শেখা সম্পন্ন হিসেবে মার্ক করুন">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                        </div>
                     </div>
                     <div class="kanji-body">
                         <div class="kanji-anim-stage">
@@ -979,7 +1202,6 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি খুললে অন্যগুলো বন্ধ হয়ে যাবে (Accordion Mode)
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -1030,7 +1252,7 @@
             const paths = svgEl.querySelectorAll("path");
             let delay = 0;
 
-            paths.forEach((path, i) => {
+            paths.forEach((path) => {
                 const len = path.getTotalLength();
                 path.style.stroke = "#147A57";
                 path.style.strokeWidth = "4.5";
@@ -1051,7 +1273,7 @@
         }
 
         /* -------------------------------------------------------------
-           ভিডিওর মতো হুবহু অটো-স্ন্যাপ ব্লাইন্ড টেস্ট ইঞ্জিন
+           ব্লাইন্ড স্ট্রোক টেস্ট ইঞ্জিন
         ------------------------------------------------------------- */
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
@@ -1087,10 +1309,7 @@
             } catch(e) {}
         }
 
-        function playSnapSound() {
-            playAudioTone(720, 'sine', 0.12);
-        }
-
+        function playSnapSound() { playAudioTone(720, 'sine', 0.12); }
         function playSuccessFanfare() {
             setTimeout(() => playAudioTone(523.25, 'triangle', 0.15), 0);
             setTimeout(() => playAudioTone(659.25, 'triangle', 0.15), 120);
@@ -1098,10 +1317,10 @@
         }
 
         async function openCanvasModal(char, hexCode, mode) {
-            showHint = true;
+            showHint = (mode === 'practice');
             currentStrokeIdx = 0;
 
-            modalTitle.innerText = "Blind Test (না দেখে লিখুন)";
+            modalTitle.innerText = mode === 'practice' ? "Practice (অনুশীলন)" : "Blind Test (না দেখে লিখুন)";
             statusText.className = "blind-status-text";
             statusText.innerText = "";
 
@@ -1248,7 +1467,6 @@
 
             if (dist < 36) {
                 checkpointProgress++;
-
                 if (checkpointProgress >= activeCheckpoints.length) {
                     onStrokeAutoSnapped();
                 }
@@ -1263,7 +1481,6 @@
 
             statusText.className = "blind-status-text status-correct";
             statusText.innerText = "সঠিক!";
-
             setupActiveStroke();
         }
 
@@ -1274,6 +1491,140 @@
         canvas.addEventListener("touchstart", onDrawStart, { passive: false });
         canvas.addEventListener("touchmove", onDrawMove, { passive: false });
         window.addEventListener("touchend", onDrawEnd);
+
+        /* -------------------------------------------------------------
+           ৪-অপশন কাঞ্জি কুইজ টেস্ট ইঞ্জিন (MCQ)
+        ------------------------------------------------------------- */
+        let quizQuestions = [];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        function startLessonQuiz() {
+            const lessonKanjiList = kanjiData[currentActiveLesson] || kanjiData[1];
+            quizQuestions = [];
+
+            // ১০টি কাঞ্জির ভিত্তিতে প্রশ্ন তৈরি
+            lessonKanjiList.forEach(k => {
+                const questionType = Math.random() > 0.5 ? 'kanji_to_reading' : 'reading_to_kanji';
+                
+                // সঠিক উত্তর
+                const correctObj = k;
+                
+                // ৩টি ভুল ডামি অপশন
+                const distractors = rawN4Kanji.filter(x => x.char !== k.char).sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                const options = [correctObj, ...distractors].sort(() => 0.5 - Math.random());
+
+                quizQuestions.push({
+                    type: questionType,
+                    target: correctObj,
+                    options: options
+                });
+            });
+
+            currentQuizIndex = 0;
+            quizScore = 0;
+
+            document.getElementById("kanjiQuizModal").style.display = "flex";
+            renderCurrentQuestion();
+        }
+
+        function closeQuizModal() {
+            document.getElementById("kanjiQuizModal").style.display = "none";
+        }
+
+        function renderCurrentQuestion() {
+            if (currentQuizIndex >= quizQuestions.length) {
+                // কুইজ শেষ
+                document.getElementById("quizCounter").innerText = "RESULTS";
+                document.getElementById("quizProgressFill").style.width = "100%";
+                document.getElementById("quizQuestionMain").innerText = `স্কোর: ${quizScore}/${quizQuestions.length}`;
+                document.getElementById("quizQuestionSub").innerText = quizScore >= 8 ? "দারুণ! আপনি এই লেসনে দুর্দান্ত করেছেন।" : "পুনরায় অনুশীলন করুন।";
+                
+                document.getElementById("quizOptionsContainer").innerHTML = `
+                    <button class="quiz-opt-btn" style="grid-column: span 2; background: var(--jade); color:#fff;" onclick="startLessonQuiz()">
+                        <i class="fa-solid fa-rotate-right"></i> আবার টেস্ট দিন
+                    </button>
+                `;
+                document.getElementById("quizFeedback").innerText = "";
+                playSuccessFanfare();
+                return;
+            }
+
+            const q = quizQuestions[currentQuizIndex];
+            const total = quizQuestions.length;
+
+            document.getElementById("quizCounter").innerText = `QUESTION ${currentQuizIndex + 1} / ${total}`;
+            document.getElementById("quizProgressFill").style.width = `${((currentQuizIndex) / total) * 100}%`;
+            document.getElementById("quizFeedback").innerText = "";
+
+            const qMain = document.getElementById("quizQuestionMain");
+            const qSub = document.getElementById("quizQuestionSub");
+            const optContainer = document.getElementById("quizOptionsContainer");
+            optContainer.innerHTML = "";
+
+            if (q.type === 'kanji_to_reading') {
+                // উপরে কাঞ্জি, নিচে ৪টি রিডিং/অর্থ
+                qMain.innerText = q.target.char;
+                const hintReading = q.target.kun !== '-' ? q.target.kun : q.target.on;
+                qSub.innerText = `এর সঠিক রিডিং বা অর্থ কী?`;
+
+                q.options.forEach(opt => {
+                    const btn = document.createElement("button");
+                    btn.className = "quiz-opt-btn";
+                    const reading = opt.kun !== '-' ? opt.kun : opt.on;
+                    btn.innerHTML = `<span>${reading}</span><span class="opt-sub">${opt.meaning}</span>`;
+                    btn.onclick = () => handleQuizAnswer(opt.char === q.target.char, btn);
+                    optContainer.appendChild(btn);
+                });
+            } else {
+                // উপরে হিরাগানা/অর্থ, নিচে ৪টি কাঞ্জি
+                const reading = q.target.kun !== '-' ? q.target.kun : q.target.on;
+                qMain.innerText = reading;
+                qSub.innerText = `অর্থ: "${q.target.meaning}" — সঠিক কাঞ্জি বেছে নিন`;
+
+                q.options.forEach(opt => {
+                    const btn = document.createElement("button");
+                    btn.className = "quiz-opt-btn";
+                    btn.innerHTML = `<span style="font-size: 24px;">${opt.char}</span><span class="opt-sub">${opt.meaning}</span>`;
+                    btn.onclick = () => handleQuizAnswer(opt.char === q.target.char, btn);
+                    optContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function handleQuizAnswer(isCorrect, selectedBtn) {
+            const allBtns = document.querySelectorAll(".quiz-opt-btn");
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById("quizFeedback");
+
+            if (isCorrect) {
+                selectedBtn.classList.add("correct");
+                feedback.style.color = "var(--jade)";
+                feedback.innerText = "✓ সঠিক উত্তর!";
+                playSnapSound();
+                quizScore++;
+            } else {
+                selectedBtn.classList.add("wrong");
+                feedback.style.color = "var(--clay)";
+                feedback.innerText = "✗ ভুল উত্তর!";
+                playAudioTone(280, 'sawtooth', 0.2);
+
+                // সঠিক বাটনটি হাইলাইট করা
+                const q = quizQuestions[currentQuizIndex];
+                allBtns.forEach(b => {
+                    if (b.innerText.includes(q.target.char) || (q.target.kun !== '-' && b.innerText.includes(q.target.kun))) {
+                        b.classList.add("correct");
+                    }
+                });
+            }
+
+            setTimeout(() => {
+                currentQuizIndex++;
+                renderCurrentQuestion();
+            }, 1000);
+        }
 
         window.addEventListener("DOMContentLoaded", () => {
             renderLessonGrid();

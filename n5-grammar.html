@@ -107,7 +107,7 @@
             letter-spacing: 0.8px;
         }
 
-        /* টপ বার (স্ক্রিনশটের আদলে তৈরি) */
+        /* টপ বার */
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -156,9 +156,31 @@
         }
 
         .nav-right {
-            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ফুরিগানা টগল বাটন */
+        .furigana-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            padding: 5px 9px;
+            border-radius: 8px;
+            font-size: 11px;
             font-weight: 700;
-            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .furigana-toggle-btn.off {
+            background: #f1f5f9;
+            color: #64748b;
+            border-color: #cbd5e1;
         }
 
         .container {
@@ -167,7 +189,7 @@
             margin: 0 auto;
         }
 
-        /* লেসন একর্ডিয়ন কার্ড (স্ক্রিনশট স্টাইল) */
+        /* লেসন একর্ডিয়ন কার্ড */
         .lesson-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -234,7 +256,6 @@
             background: #e6f4ea;
         }
 
-        /* একর্ডিয়ন বডি (লুকানো থাকবে, ক্লিক করলে খুলবে) */
         .lesson-body {
             max-height: 0;
             overflow: hidden;
@@ -244,7 +265,7 @@
         }
 
         .lesson-card.active .lesson-body {
-            max-height: 2000px; /* পর্যাপ্ত বড় হাইট যেন সব কন্টেন্ট ধরে */
+            max-height: 2200px;
             border-top: 1px solid #eef2f5;
             padding: 16px;
         }
@@ -278,11 +299,41 @@
         .example-box {
             background: #f1f8f5;
             border-left: 3px solid #047857;
-            padding: 7px 10px;
-            font-size: 12px;
+            padding: 8px 11px;
+            font-size: 13px;
             color: #1e293b;
             border-radius: 0 6px 6px 0;
             font-weight: 600;
+            line-height: 1.7;
+        }
+
+        /* ফুরিগানা ও রুবির স্টাইল */
+        ruby {
+            ruby-align: center;
+        }
+        rt {
+            font-size: 0.65em;
+            color: #047857;
+            font-weight: 700;
+        }
+        body.hide-furigana rt {
+            display: none;
+        }
+
+        /* ব্যাকরণ হাইলাইটিং কালার কোডিং */
+        .highlight {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-weight: 700;
+            border-bottom: 1.5px solid #047857;
+        }
+
+        .particle {
+            color: #b91c1c;
+            font-weight: 800;
+            padding: 0 2px;
         }
 
         /* বটম বার */
@@ -342,7 +393,13 @@
             <span class="brand-title">KOTOBA</span>
             <span class="brand-badge">N5 GRAMMAR</span>
         </div>
-        <div class="nav-right">লেসন ১-২৫</div>
+        <div class="nav-right">
+            <!-- ফুরিগানা অন/অফ বাটন -->
+            <button id="furiganaBtn" class="furigana-toggle-btn" onclick="toggleFurigana()">
+                <i class="fa-solid fa-language"></i>
+                <span id="furiganaStatus">Furigana: ON</span>
+            </button>
+        </div>
     </header>
 
     <main class="container">
@@ -360,18 +417,18 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01: পার্টিকেল は এবং です</div>
-                    <div class="rule-desc">সাবজেক্টের পরে は (wa উচ্চারিত হয়) বসে এবং বাক্যে একবারই বসে। এটি ইংরেজি BE Verb-এর মতো কাজ করে[span_0](start_span)[span_0](end_span)।</div>
-                    <div class="example-box">Structure: N1 + は + N2 + です[span_1](start_span)[span_1](end_span)<br>উদাহরণ: わたしはモストファです (আমি [হই] মোস্তফা)[span_2](start_span)[span_2](end_span)</div>
+                    <div class="rule-desc">সাবজেক্টের পরে は (wa উচ্চারিত হয়) বসে এবং বাক্যে একবারই বসে। এটি ইংরেজি BE Verb-এর মতো কাজ করে।</div>
+                    <div class="example-box">Structure: N1 + <span class="highlight">は</span> + N2 + <span class="highlight">です</span><br>উদাহরণ: わたし<span class="highlight">は</span>モストファ<span class="highlight">です</span> (আমি [হই] মোস্তফা)</div>
                 </div>
                 <div class="rule-item">
                     <div class="rule-name">Rule-02: অধিকার বা মালিকানা (-র / এর)</div>
-                    <div class="rule-desc">Noun-এর পরে の বসে ব্যক্তি, বস্তু ইত্যাদির মালিকানা বোঝায়[span_3](start_span)[span_3](end_span)।</div>
-                    <div class="example-box">উদাহরণ: わたしのほんです (আমার বই)[span_4](start_span)[span_4](end_span)</div>
+                    <div class="rule-desc">Noun-এর পরে の বসে ব্যক্তি, বস্তু ইত্যাদির মালিকানা বোঝায়।</div>
+                    <div class="example-box">উদাহরণ: わたし<span class="highlight">の</span><ruby>本<rt>ほん</rt></ruby><span class="highlight">です</span> (আমার বই)</div>
                 </div>
                 <div class="rule-item">
-                    <div class="rule-name">Rule-03: Also / o (も)</div>
-                    <div class="rule-desc">একই অর্থ বোঝাতে は-এর পরিবর্তে も বসে[span_5](start_span)[span_5](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ミラさんはかいしゃいんです。サントスさんもかいしゃいんです[span_6](start_span)[span_6](end_span)</div>
+                    <div class="rule-name">Rule-03: Also / ও (も)</div>
+                    <div class="rule-desc">একই অর্থ বোঝাতে は-এর পরিবর্তে も বসে।</div>
+                    <div class="example-box">উদাহরণ: ミラーさん<span class="highlight">は</span><ruby>会社員<rt>かいしゃいん</rt></ruby>です。サントスさん<span class="highlight">も</span><ruby>会社員<rt>かいしゃいん</rt></ruby>です</div>
                 </div>
             </div>
         </div>
@@ -389,13 +446,13 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: Demonstration (これ, それ, あれ & この, その, あの)</div>
-                    <div class="rule-desc">これ/それ/あれ সরাসরি বস্তুর ক্ষেত্রে এবং この/その/あの Noun-এর পূর্বে বসে[span_7](start_span)[span_7](end_span)।</div>
-                    <div class="example-box">উদাহরণ: これはざっしです (এটা ম্যাগাজিন)[span_8](start_span)[span_8](end_span) | このかぎはわたしのです[span_9](start_span)[span_9](end_span)</div>
+                    <div class="rule-desc">これ/それ/あれ সরাসরি বস্তুর ক্ষেত্রে এবং この/その/あの Noun-এর পূর্বে বসে।</div>
+                    <div class="example-box">উদাহরণ: <span class="highlight">これ</span>は<ruby>雑誌<rt>ざっし</rt></ruby>です (এটা ম্যাগাজিন) | <span class="highlight">この</span><ruby>鍵<rt>かぎ</rt></ruby>はわたしのです</div>
                 </div>
                 <div class="rule-item">
                     <div class="rule-name">Rule-04: বিকল্প প্রশ্ন (...か...か)</div>
-                    <div class="rule-desc">দুটি জিনিসের মধ্যে সন্দেহ দূর করতে か...か ব্যবহৃত হয়[span_10](start_span)[span_10](end_span)।</div>
-                    <div class="example-box">উদাহরণ: それはざっしですか、ほんですか (ওটা ম্যাগাজিন নাকি বই?)[span_11](start_span)[span_11](end_span)</div>
+                    <div class="rule-desc">দুটি জিনিসের মধ্যে সন্দেহ দূর করতে か...か ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: それは<ruby>雑誌<rt>ざっし</rt></ruby><span class="highlight">ですか</span>、<ruby>本<rt>ほん</rt></ruby><span class="highlight">ですか</span> (ওটা ম্যাগাজিন নাকি বই?)</div>
                 </div>
             </div>
         </div>
@@ -413,8 +470,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01: স্থান নির্দেশক শব্দ</div>
-                    <div class="rule-desc">এখানে, ওখানে, ওইখানে বোঝাতে ここ, そこ, あそこ এবং ভদ্র বা Polite রূপ হিসেবে こちら, そちら, あちら ব্যবহৃত হয়[span_12](start_span)[span_12](end_span)।</div>
-                    <div class="example-box">উদাহরণ: じむしょはどこですか / そこです (অফিস কোথায়? / ওখানে)[span_13](start_span)[span_13](end_span)</div>
+                    <div class="rule-desc">এখানে, ওখানে, ওইখানে বোঝাতে ここ, そこ, あそこ এবং ভদ্র বা Polite রূপ হিসেবে こちら, そちら, あちら ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: <ruby>事務所<rt>じむしょ</rt></ruby>は<span class="highlight">どこ</span>ですか / <span class="highlight">そこ</span>です (অফিস কোথায়? / ওখানে)</div>
                 </div>
             </div>
         </div>
@@ -432,13 +489,13 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: সময় ও নির্দিষ্ট কাজ</div>
-                    <div class="rule-desc">নির্দিষ্ট সময়ে কাজ সংঘটিত হলে সময়ের পরে に বসে[span_14](start_span)[span_14](end_span)। Present-এ ます এবং Past-এ ました বসে[span_15](start_span)[span_15](end_span)।</div>
-                    <div class="example-box">উদাহরণ: まいにち、6じにおきます (প্রতিদিন ৬টায় ঘুম থেকে উঠি)[span_16](start_span)[span_16](end_span)</div>
+                    <div class="rule-desc">নির্দিষ্ট সময়ে কাজ সংঘটিত হলে সময়ের পরে に বসে। Present-এ ます এবং Past-এ ました বসে।</div>
+                    <div class="example-box">উদাহরণ: <ruby>毎日<rt>まいにち</rt></ruby>、6<ruby>時<rt>じ</rt></ruby><span class="highlight">に</span><ruby>起<rt>お</rt></ruby>き<span class="highlight">ます</span> (প্রতিদিন ৬টায় ঘুম থেকে উঠি)</div>
                 </div>
                 <div class="rule-item">
                     <div class="rule-name">Rule-04: থেকে ও পর্যন্ত (から ... まで)</div>
-                    <div class="rule-desc">সময় বা জায়গার শুরু ও শেষ বোঝাতে から...まで বসে[span_17](start_span)[span_17](end_span)।</div>
-                    <div class="example-box">উদাহরণ: 4じから9じまではたらきました (৪টা থেকে ৯টা পর্যন্ত কাজ করেছি)[span_18](start_span)[span_18](end_span)</div>
+                    <div class="rule-desc">সময় বা জায়গার শুরু ও শেষ বোঝাতে から...まで বসে।</div>
+                    <div class="example-box">উদাহরণ: 4<ruby>時<rt>じ</rt></ruby><span class="highlight">から</span>9<ruby>時<rt>じ</rt></ruby><span class="highlight">まで</span><ruby>働<rt>はたら</rt></ruby>き<span class="highlight">ました</span> (৪টা থেকে ৯টা পর্যন্ত কাজ করেছি)</div>
                 </div>
             </div>
         </div>
@@ -456,8 +513,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 04: দিক (へ) ও মাধ্যম (で)</div>
-                    <div class="rule-desc">নির্দিষ্ট জায়গায় যাওয়া বোঝাতে へ এবং যানবাহন বা মাধ্যম বোঝাতে で বসে[span_19](start_span)[span_19](end_span)। পায়ে হেঁটে গেলে あくて বসে (で বসে না)[span_20](start_span)[span_20](end_span)।</div>
-                    <div class="example-box">উদাহরণ: がっこうへいきます (স্কুলে যাই)[span_21](start_span)[span_21](end_span) | でんしゃでがっこうへきました (ট্রেন দিয়ে স্কুলে এসেছি)[span_22](start_span)[span_22](end_span)</div>
+                    <div class="rule-desc">নির্দিষ্ট জায়গায় যাওয়া বোঝাতে へ এবং যানবাহন বা মাধ্যম বোঝাতে で বসে। পায়ে হেঁটে গেলে あるいて বসে (で বসে না)।</div>
+                    <div class="example-box">উদাহরণ: <ruby>学校<rt>がっこう</rt></ruby><span class="highlight">へ</span><ruby>行<rt>い</rt></ruby>きます (স্কুলে যাই) | <ruby>電車<rt>でんしゃ</rt></ruby><span class="highlight">で</span><ruby>学校<rt>がっこう</rt></ruby><span class="highlight">へ</span><ruby>来<rt>き</rt></ruby>ました (ট্রেন দিয়ে স্কুলে এসেছি)</div>
                 </div>
             </div>
         </div>
@@ -475,8 +532,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 04: Transitive Verb & Proposal</div>
-                    <div class="rule-desc">Object-এর পরে を এবং Transitive Verb বসে[span_23](start_span)[span_23](end_span)। কাউকে আহ্বান জানাতে ませんか বা ましょう বসে[span_24](start_span)[span_24](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ごはんをたべます (ভাত খাবো)[span_25](start_span)[span_25](end_span) | いっしょにひるごはんをたべませんか[span_26](start_span)[span_26](end_span)</div>
+                    <div class="rule-desc">Object-এর পরে を এবং Transitive Verb বসে। কাউকে আহ্বান জানাতে ませんか বা ましょう বসে।</div>
+                    <div class="example-box">উদাহরণ: ごはん<span class="highlight">を</span><ruby>食<rt>た</rt></ruby>べます (ভাত খাবো) | <ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>昼<rt>ひる</rt></ruby>ごはんを<ruby>食<rt>た</rt></ruby>べ<span class="highlight">ませんか</span></div>
                 </div>
             </div>
         </div>
@@ -494,8 +551,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 04: ভাষা, লেনদেন ও もう</div>
-                    <div class="rule-desc">ভাষার ক্ষেত্রে で, দেওয়া-নেওয়ায় に/から এবং ইতোমধ্যে কাজ শেষ হলে もう ব্যবহৃত হয়[span_27](start_span)[span_27](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ぎんこうからおかねをかりました (ব্যাংক থেকে টাকা ধার নিয়েছি)[span_28](start_span)[span_28](end_span)</div>
+                    <div class="rule-desc">ভাষার ক্ষেত্রে で, দেওয়া-নেওয়ায় に/から এবং ইতোমধ্যে কাজ শেষ হলে もう ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: <ruby>銀行<rt>ぎんこう</rt></ruby><span class="highlight">から</span>お<ruby>金<rt>かね</rt></ruby>を<ruby>借<rt>か</rt></ruby>り<span class="highlight">ました</span> (ব্যাংক থেকে টাকা ধার নিয়েছি)</div>
                 </div>
             </div>
         </div>
@@ -513,8 +570,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 04: Adjective Rules</div>
-                    <div class="rule-desc">না ও ই-অ্যাডজেক্টিভের পজিটিভ/নেগেটিভ রূপ। বিপরীত বাক্যে が এবং সমজাতীয় বাক্যে そして বসে[span_29](start_span)[span_29](end_span)।</div>
-                    <div class="example-box">উদাহরণ: くるまはべんりですがたかいです (গাড়ি সুবিধাজনক কিন্তু দামি)[span_30](start_span)[span_30](end_span)</div>
+                    <div class="rule-desc">না ও ই-অ্যাডজেক্টিভের পজিটিভ/নেগেটিভ রূপ। বিপরীত বাক্যে が এবং সমজাতীয় বাক্যে そして বসে।</div>
+                    <div class="example-box">উদাহরণ: <ruby>車<rt>くるま</rt></ruby>は<ruby>便利<rt>べんり</rt></ruby><span class="highlight">ですが</span><ruby>高<rt>たか</rt></ruby>いです (গাড়ি সুবিধাজনক কিন্তু দামি)</div>
                 </div>
             </div>
         </div>
@@ -532,8 +589,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 05: が এবং কারণ দর্শানো</div>
-                    <div class="rule-desc">あります, います, 好き, じょうず ইত্যাদির পূর্বে が বসে[span_31](start_span)[span_31](end_span)। কারণ বোঝাতে から ব্যবহৃত হয়[span_32](start_span)[span_32](end_span)।</div>
-                    <div class="example-box">উদাহরণ: じかんがありませんから、ごはんをたべません[span_33](start_span)[span_33](end_span)</div>
+                    <div class="rule-desc">あります, います, 好き, じょうず ইত্যাদির পূর্বে が বসে। কারণ বোঝাতে から ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: <ruby>時間<rt>じかん</rt></ruby><span class="highlight">が</span>ありません<span class="highlight">から</span>、ごはんを<ruby>食<rt>た</rt></ruby>べません</div>
                 </div>
             </div>
         </div>
@@ -551,8 +608,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: Place + に + Noun + が + あります/います</div>
-                    <div class="rule-desc">কোথায় কী বা কে আছে তা বোঝাতে এই স্ট্রাকচার ব্যবহৃত হয়[span_34](start_span)[span_34](end_span)। অবস্থানবাচক শব্দের পরে の বসে[span_35](start_span)[span_35](end_span)।</div>
-                    <div class="example-box">উদাহরণ: へやにつくえがあります (ঘরে ডেস্ক আছে)[span_36](start_span)[span_36](end_span) | つくえのうえにほんがあります[span_37](start_span)[span_37](end_span)</div>
+                    <div class="rule-desc">কোথায় কী বা কে আছে তা বোঝাতে এই স্ট্রাকচার ব্যবহৃত হয়। অবস্থানবাচক শব্দের পরে の বসে।</div>
+                    <div class="example-box">উদাহরণ: <ruby>部屋<rt>へや</rt></ruby><span class="highlight">に</span><ruby>机<rt>つくえ</rt></ruby><span class="highlight">が</span>あります (ঘরে ডেস্ক আছে) | <ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby><span class="highlight">に</span><ruby>本<rt>ほん</rt></ruby><span class="highlight">が</span>あります</div>
                 </div>
             </div>
         </div>
@@ -570,8 +627,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: কাউন্টার ও だけ</div>
-                    <div class="rule-desc">সংখ্যাবাচক শব্দ বা কাউন্টার Verb-এর পূর্বে বসে[span_38](start_span)[span_38](end_span)। নির্দিষ্ট সীমার পরে だけ (মাত্র) বসে[span_39](start_span)[span_39](end_span)।</div>
-                    <div class="example-box">উদাহরণ: 1か月に3かいえいがをみます (১ মাসে ৩বার সিনেমা দেখি)[span_40](start_span)[span_40](end_span)</div>
+                    <div class="rule-desc">সংখ্যাবাচক শব্দ বা কাউন্টার Verb-এর পূর্বে বসে। নির্দিষ্ট সীমার পরে だけ (মাত্র) বসে।</div>
+                    <div class="example-box">উদাহরণ: 1か<ruby>月<rt>げつ</rt></ruby><span class="highlight">に</span>3<ruby>回<rt>かい</rt></ruby><ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ます (১ মাসে ৩বার সিনেমা দেখি)</div>
                 </div>
             </div>
         </div>
@@ -589,8 +646,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 03 & 05: Past Form ও Superlative</div>
-                    <div class="rule-desc">Noun/Adj-এর Past Form (でした/かったです), তুলনা করতে より এবং শ্রেষ্টত্ব বোঝাতে いちばん ব্যবহৃত হয়[span_41](start_span)[span_41](end_span)।</div>
-                    <div class="example-box">উদাহরণ: マンゴはみかんよりおいしいです (আম কমলার চেয়ে সুস্বাদু)[span_42](start_span)[span_42](end_span)</div>
+                    <div class="rule-desc">Noun/Adj-এর Past Form (でした/かったです), তুলনা করতে より এবং শ্রেষ্ঠত্ব বোঝাতে いちばん ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: マンゴーはみかん<span class="highlight">より</span>おいしいです (আম কমলার চেয়ে সুস্বাদু)</div>
                 </div>
             </div>
         </div>
@@ -608,8 +665,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: ほしい, たい ও に いきます</div>
-                    <div class="rule-desc">বস্তু চাওয়ায় ほしい, কাজে ইচ্ছায় Stem + たい এবং উদ্দেশ্যে যাতায়াতে [Stem] + に + いきます বসে[span_43](start_span)[span_43](end_span)।</div>
-                    <div class="example-box">উদাহরণ: にほんへべんきょうしにいきます (জাপানে পড়াশোনা করতে যাবো)[span_44](start_span)[span_44](end_span)</div>
+                    <div class="rule-desc">বস্তু চাওয়ায় ほしい, কাজে ইচ্ছায় Stem + たい এবং উদ্দেশ্যে যাতায়াতে [Stem] + に + いきます বসে।</div>
+                    <div class="example-box">উদাহরণ: <ruby>日本<rt>にほん</rt></ruby>へ<ruby>勉強<rt>べんきょう</rt></ruby>し<span class="highlight">にいきます</span> (জাপানে পড়াশোনা করতে যাবো)</div>
                 </div>
             </div>
         </div>
@@ -620,15 +677,15 @@
                 <div class="lesson-info">
                     <div class="lesson-tag">Lesson 14</div>
                     <div class="lesson-title">লেসন ১৪: Te-Form ও অনুরোধ</div>
-                    <div class="lesson-subtitle">てくだざい, ています, ましょうか</div>
+                    <div class="lesson-subtitle">てください, ています, ましょうか</div>
                 </div>
                 <div class="arrow-icon"><i class="fa-solid fa-chevron-right"></i></div>
             </div>
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: Te-Form Rules</div>
-                    <div class="rule-desc">অনুরোধে てください, চলমান কাজে ています এবং অফারে ましょうか ব্যবহৃত হয়[span_45](start_span)[span_45](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ほん कोかしてください (দয়া করে বই ধার দিন)[span_46](start_span)[span_46](end_span)</div>
+                    <div class="rule-desc">অনুরোধে てください, চলমান কাজে ています এবং অফারে ましょうか ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: <ruby>本<rt>ほん</rt></ruby>を<ruby>貸<rt>か</rt></ruby>し<span class="highlight">てください</span> (দয়া করে বই ধার দিন)</div>
                 </div>
             </div>
         </div>
@@ -646,8 +703,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: অনুমতি ও নিষেধ</div>
-                    <div class="rule-desc">অনুমতি নিতে てもいいですか এবং নিষেধ করতে てはいけません ব্যবহৃত হয়[span_47](start_span)[span_47](end_span)।</div>
-                    <div class="example-box">উদাহরণ: おさけをのんではいけません (মদ খাওয়া নিষেধ)[span_48](start_span)[span_48](end_span)</div>
+                    <div class="rule-desc">অনুমতি নিতে てもいいですか এবং নিষেধ করতে てはいけません ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: お<ruby>酒<rt>さけ</rt></ruby>を<ruby>飲<rt>の</rt></ruby>ん<span class="highlight">ではいけません</span> (মদ খাওয়া নিষেধ)</div>
                 </div>
             </div>
         </div>
@@ -665,8 +722,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: ধারাবাহিক কাজ</div>
-                    <div class="rule-desc">পরপর একাধিক কাজ সম্পন্ন করতে Te-Form এবং কাজ শেষের পর দ্বিতীয় কাজ বোঝাতে てから বসে[span_49](start_span)[span_49](end_span)।</div>
-                    <div class="example-box">উদাহরণ: うちへかえってから、シャワーをあびます[span_50](start_span)[span_50](end_span)</div>
+                    <div class="rule-desc">পরপর একাধিক কাজ সম্পন্ন করতে Te-Form এবং কাজ শেষের পর দ্বিতীয় কাজ বোঝাতে てから বসে।</div>
+                    <div class="example-box">উদাহরণ: うちへ<ruby>帰<rt>かえ</rt></ruby>っ<span class="highlight">てから</span>、シャワーを<ruby>浴<rt>あ</rt></ruby>びます</div>
                 </div>
             </div>
         </div>
@@ -684,8 +741,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 05: বাধ্যবাধকতা ও পর্যন্ত</div>
-                    <div class="rule-desc">না করার অনুরোধে ないでください, কর্তব্যে なければなりません এবং নির্দিষ্ট সময়ের মধ্যে বোঝাতে までに বসে[span_51](start_span)[span_51](end_span)।</div>
-                    <div class="example-box">উদাহরণ: くすりをのまなければなりません (ওষুধ খেতেই হবে)[span_52](start_span)[span_52](end_span)</div>
+                    <div class="rule-desc">না করার অনুরোধে ないでください, কর্তব্যে なければなりません এবং নির্দিষ্ট সময়ের মধ্যে বোঝাতে までに বসে।</div>
+                    <div class="example-box">উদাহরণ: <ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>ま<span class="highlight">なければなりません</span> (ওষুধ খেতেই হবে)</div>
                 </div>
             </div>
         </div>
@@ -703,8 +760,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: ক্ষমতা ও শখ প্রকাশ</div>
-                    <div class="rule-desc">পারা বোঝাতে ことができます, শখে しゅみは ... ことです এবং পূর্বের কাজে まえに ব্যবহৃত হয়[span_53](start_span)[span_53](end_span)।</div>
-                    <div class="example-box">উদাহরণ: わたしのしゅみはサッカーをすることです[span_54](start_span)[span_54](end_span)</div>
+                    <div class="rule-desc">পারা বোঝাতে ことができます, শখে しゅみは ... ことです এবং পূর্বের কাজে まえに ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: わたしの<ruby>趣味<rt>しゅみ</rt></ruby>はサッカーを<span class="highlight">することです</span></div>
                 </div>
             </div>
         </div>
@@ -722,8 +779,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01, 02 & 03: অভিজ্ঞতা ও পরিবর্তন</div>
-                    <div class="rule-desc">অভিজ্ঞতায় たことがあります, উদাহরণে たり〜たり এবং পরিবর্তনে に/くなります বসে[span_55](start_span)[span_55](end_span)।</div>
-                    <div class="example-box">উদাহরণ: バングラデシュはあつくなりました (বাংলাদেশ উত্তপ্ত হয়ে উঠেছে)[span_56](start_span)[span_56](end_span)</div>
+                    <div class="rule-desc">অভিজ্ঞতায় たことがあります, উদাহরণে たり〜たり এবং পরিবর্তনে に/くなります বসে।</div>
+                    <div class="example-box">উদাহরণ: バングラデシュは<ruby>暑<rt>あつ</rt></ruby>く<span class="highlight">なりました</span> (বাংলাদেশ উত্তপ্ত হয়ে উঠেছে)</div>
                 </div>
             </div>
         </div>
@@ -741,8 +798,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Plain Form Rules</div>
-                    <div class="rule-desc">বন্ধুবান্ধব বা অনানুষ্ঠানিক কথোপকথনে Polite ফর্মকে Plain ফর্মে রূপান্তর করার নিয়ম[span_57](start_span)[span_57](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ます $\rightarrow$ Dictionary Form, ません $\rightarrow$ ない Form[span_58](start_span)[span_58](end_span)</div>
+                    <div class="rule-desc">বন্ধুবান্ধব বা অনানুষ্ঠানিক কথোপকথনে Polite ফর্মকে Plain ফর্মে রূপান্তর করার নিয়ম।</div>
+                    <div class="example-box">উদাহরণ: ます $\rightarrow$ <span class="highlight">Dictionary Form</span>, ません $\rightarrow$ <span class="highlight">ない Form</span></div>
                 </div>
             </div>
         </div>
@@ -760,8 +817,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: অনুমান ও উক্তি প্রকাশ</div>
-                    <div class="rule-desc">অনুমান প্রকাশে Plain Form + とおもいます এবং কারো উক্তি প্রকাশে といいます বসে[span_59](start_span)[span_59](end_span)।</div>
-                    <div class="example-box">উদাহরণ: あしたあめがふるとおもいます[span_60](start_span)[span_60](end_span)</div>
+                    <div class="rule-desc">অনুমান প্রকাশে Plain Form + とおもいます এবং কারো উক্তি প্রকাশে といいます বসে।</div>
+                    <div class="example-box">উদাহরণ: あした<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>る<span class="highlight">とおもいます</span></div>
                 </div>
             </div>
         </div>
@@ -779,8 +836,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: Verb দিয়ে Noun মডিফাই</div>
-                    <div class="rule-desc">Verb-এর Plain Form দিয়ে Noun-কে মডিফাই করা হয়[span_61](start_span)[span_61](end_span)। じかん/やくそく এর পূর্বে Dictionary Form বসে[span_62](start_span)[span_62](end_span)।</div>
-                    <div class="example-box">উদাহরণ: わたしがかったかばん (আমার কেনা ব্যাগ)[span_63](start_span)[span_63](end_span)</div>
+                    <div class="rule-desc">Verb-এর Plain Form দিয়ে Noun-কে মডিফাই করা হয়। じかん/やくそく এর পূর্বে Dictionary Form বসে।</div>
+                    <div class="example-box">উদাহরণ: わたしが<span class="highlight"><ruby>買<rt>か</rt></ruby>った</span>かばん (আমার কেনা ব্যাগ)</div>
                 </div>
             </div>
         </div>
@@ -798,8 +855,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: とき ও と এর ব্যবহার</div>
-                    <div class="rule-desc">কোনো কাজের সময় বোঝাতে とき এবং তাৎক্ষণিক ফল বা শর্ত প্রকাশ করতে ト (to) ব্যবহৃত হয়[span_64](start_span)[span_64](end_span)।</div>
-                    <div class="example-box">উদাহরণ: がっこうへいくとき、ごはんをたべました[span_65](start_span)[span_65](end_span)</div>
+                    <div class="rule-desc">কোনো কাজের সময় বোঝাতে とき এবং তাৎক্ষণিক ফল বা শর্ত প্রকাশ করতে と (to) ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: <ruby>学校<rt>がっこう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>く<span class="highlight">とき</span>、ごはんを<ruby>食<rt>た</rt></ruby>べました</div>
                 </div>
             </div>
         </div>
@@ -817,8 +874,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: Give & Receive Verbs</div>
-                    <div class="rule-desc">উপহার বা সাহায্য দেওয়া-নেওয়া বোঝাতে あげます, もらいます, くれます এবং Te-ফর্মে এদের ব্যবহার[span_66](start_span)[span_66](end_span)।</div>
-                    <div class="example-box">উদাহরণ: ちちはくるまをかってくれました[span_67](start_span)[span_67](end_span)</div>
+                    <div class="rule-desc">উপহার বা সাহায্য দেওয়া-নেওয়া বোঝাতে あげます, もらいます, くれます এবং Te-ফর্মে এদের ব্যবহার।</div>
+                    <div class="example-box">উদাহরণ: <ruby>父<rt>ちち</rt></ruby>は<ruby>車<rt>くるま</rt></ruby>を<ruby>買<rt>か</rt></ruby>って<span class="highlight">くれました</span></div>
                 </div>
             </div>
         </div>
@@ -836,8 +893,8 @@
             <div class="lesson-body">
                 <div class="rule-item">
                     <div class="rule-name">Rule-01 & 02: たら ও ても এর ব্যবহার</div>
-                    <div class="rule-desc">শর্ত বা সম্ভাবনা বোঝাতে Plain Past Ta-Form + ら (যদি) এবং বিপরীত প্রতিক্রিয়া বোঝাতে ても ব্যবহৃত হয়[span_68](start_span)[span_68](end_span)।</div>
-                    <div class="example-box">উদাহরণ: いいてんきだったら、さんぽしませんか[span_69](start_span)[span_69](end_span)</div>
+                    <div class="rule-desc">শর্ত বা সম্ভাবনা বোঝাতে Plain Past Ta-Form + ら (যদি) এবং বিপরীত প্রতিক্রিয়া বোঝাতে ても ব্যবহৃত হয়।</div>
+                    <div class="example-box">উদাহরণ: いい<ruby>天気<rt>てんき</rt></ruby><span class="highlight">だったら</span>、<ruby>散歩<rt>さんぽ</rt></ruby>しませんか</div>
                 </div>
             </div>
         </div>
@@ -860,12 +917,28 @@
         </a>
     </nav>
 
-    <!-- একর্ডিয়ন টগল স্ক্রিপ্ট -->
+    <!-- জাভাস্ক্রিপ্ট কোড -->
     <script>
         function toggleCard(header) {
             const card = header.parentElement;
-            // ইচ্ছা করলে অন্য কার্ডগুলো বন্ধ করতে পারেন, অথবা শুধু বর্তমান কার্ড টগল করতে পারেন
             card.classList.toggle('active');
+        }
+
+        // ফুরিগানা টগল স্ক্রিপ্ট
+        function toggleFurigana() {
+            const body = document.body;
+            const btn = document.getElementById('furiganaBtn');
+            const statusText = document.getElementById('furiganaStatus');
+
+            body.classList.toggle('hide-furigana');
+
+            if (body.classList.contains('hide-furigana')) {
+                btn.classList.add('off');
+                statusText.innerText = 'Furigana: OFF';
+            } else {
+                btn.classList.remove('off');
+                statusText.innerText = 'Furigana: ON';
+            }
         }
 
         window.addEventListener("load", () => {

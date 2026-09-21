@@ -332,25 +332,6 @@
 
         .formula-box strong { color: var(--clay); }
 
-        .point-item {
-            margin-bottom: 11px;
-            padding-left: 10px;
-            border-left: 3px solid var(--jade);
-        }
-
-        .point-title {
-            font-size: 12.5px;
-            font-weight: 800;
-            color: var(--pine);
-            margin-bottom: 3px;
-        }
-
-        .point-desc {
-            font-size: 12px;
-            color: #4B5A52;
-            line-height: 1.6;
-        }
-
         .note-box {
             background: #fff8eb;
             border: 1px solid #f6dca7;
@@ -535,18 +516,18 @@
     </header>
 
     <main class="container">
-        <!-- ভিউ ১: লেসন গ্রিড ভিউ -->
+        <!-- ভিউ ১: লেসন তালিকা -->
         <div id="lessonGridView">
             <div class="search-wrap">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="লেসন নম্বর বা বিষয় দিয়ে খুঁজুন..." onkeyup="filterLessons()">
+                <input type="text" id="searchInput" placeholder="লেসন নম্বর বা ব্যাকরণের বিষয় দিয়ে খুঁজুন..." onkeyup="filterLessons()">
             </div>
 
             <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ ২৫টি পাঠ্য লেসন ও বোনাস সিট</div>
             <div class="lesson-grid" id="lessonsGridContainer"></div>
         </div>
 
-        <!-- ভিউ ২: লেসন ডিটেইল ভিউ -->
+        <!-- ভিউ ২: লেসন বিস্তারিত -->
         <div id="lessonDetailView" class="detail-view">
             <div class="detail-header-wrap">
                 <h2 class="detail-main-title" id="detailMainTitle">লেসন ২৬</h2>
@@ -575,7 +556,6 @@
     </nav>
 
     <script>
-        // PDF (N4 V+G) এর ওপর ভিত্তি করে প্রতিটি নিয়ম, ব্যতিক্রম ও সাব-রুল
         const grammarData = {
             26: {
                 minnaLesson: 26,
@@ -584,62 +564,62 @@
                 rules: [
                     {
                         title: "মূল ভিত্তি: Plain Form বা ふつうけい (চলিত রূপ)",
-                        desc: "N4 লেভেল ভালোভাবে বোঝার জন্য Plain Form আয়ত্ত করা বাধ্যতামূলক[span_3](start_span)[span_3](end_span)। এটি মূলত Dictionary Form, た-Form এবং ない-Form এর সমন্বয়ে গঠিত[span_4](start_span)[span_4](end_span)।",
+                        desc: "N4 লেভেল ভালোভাবে বোঝার জন্য Plain Form আয়ত্ত করা আবশ্যক। এটি মূলত Dictionary Form, た-Form এবং ない-Form এর সমন্বয়ে গঠিত।",
                         formula: "<strong>Verb:</strong> いく (Present Pos) | いかない (Present Neg) | いった (Past Pos) | いかなかった (Past Neg)<br><strong>い-adj:</strong> さむい | さむくない | さむかった | さむくなかった<br><strong>な-adj:</strong> げんきだ | げんきじゃない | げんきだった | げんきじゃなかった<br><strong>Noun:</strong> あめだ | あめじゃない | あめだった | あめじゃなかった",
-                        note: "Noun এবং な-Adjective এ だ (দা) একই নিয়মে বসে[span_5](start_span)[span_5](end_span)।"
+                        note: "Noun এবং な-Adjective এ だ (দা) একই নিয়মে বসে।"
                     },
                     {
                         title: "Rule 1: Plain Form + んです (কারণ, ব্যাখ্যা ও অভিব্যক্তি)",
-                        desc: "এর মাধ্যমে Expression বা অভিব্যক্তি প্রকাশ পায়[span_6](start_span)[span_6](end_span)। বলার সময় んです এবং লেখার সময় のです বসে[span_7](start_span)[span_7](end_span)। কোনো বিষয়ের কারণ জানতে んですか দিয়ে প্রশ্ন করা হয় এবং উত্তরে んです দিয়ে বলতে হয়[span_8](start_span)[span_8](end_span)。",
+                        desc: "এর মাধ্যমে Expression বা অভিব্যক্তি প্রকাশ পায়। বলার সময় んです এবং লেখার সময় のです বসে। কোনো বিষয়ের কারণ জানতে んですか দিয়ে প্রশ্ন করা হয় এবং উত্তরে んです দিয়ে বলা হয়।",
                         formula: "<strong>Verb (Plain)</strong> + んです<br><strong>い-adj (Plain)</strong> + んです<br><strong>な-adj / Noun</strong> + <strong>なんです</strong> (だ হবে না, な হবে)",
-                        note: "যখন んですか এর প্রয়োজন নেই তখন তা ব্যবহার করলে শ্রোতার কাছে তা অদ্ভুত বা হাস্যকর মনে হতে পারে[span_9](start_span)[span_9](end_span)。",
+                        note: "যখন んですか এর প্রয়োজন নেই তখন তা ব্যবহার করলে অদ্ভুত বা হাস্যকর শোনাতে পারে।",
                         examples: [
-                            { jp: "あめが ふっている<mark class='hl'>んですか</mark>。･･･はい、あめが ふっている<mark class='hl'>んです</mark>。", bn: "বৃষ্টি হচ্ছে কি? হ্যাঁ, বৃষ্টি হচ্ছে[span_10](start_span)[span_10](end_span)।" },
-                            { jp: "どうして おくれた<mark class='hl'>んですか</mark>。･･･バスが こなかった<mark class='hl'>んです</mark>。", bn: "কেন দেরি করেছিলে? বাস আসছিল না বলে[span_11](start_span)[span_11](end_span)।" },
-                            { jp: "どうした<mark class='hl'>んですか</mark>。･･･ちょっと きぶんが わるい<mark class='hl'>んです</mark>。", bn: "কী হয়েছে? একটু শরীর খারাপ লাগছে[span_12](start_span)[span_12](end_span)।" },
-                            { jp: "どこで かった<mark class='hl'>んですか</mark>。･･･スーパーで かった<mark class='hl'>んです</mark>。", bn: "কোথা থেকে কিনেছিলে? সুপার মার্কেট থেকে কিনেছিলাম[span_13](start_span)[span_13](end_span)।" },
-                            { jp: "どうして かいしゃを やすんだ<mark class='hl'>んですか</mark>。･･･あたまが いたかった<mark class='hl'>んです</mark>。", bn: "কেন অফিস ছুটি নিয়েছিলে? মাথা ব্যথা ছিল বলে[span_14](start_span)[span_14](end_span)।" }
+                            { jp: "あめが ふっている<mark class='hl'>んですか</mark>。･･･はい、あめが ふっている<mark class='hl'>んです</mark>。", bn: "বৃষ্টি হচ্ছে কি? হ্যাঁ, বৃষ্টি হচ্ছে।" },
+                            { jp: "どうして おくれた<mark class='hl'>んですか</mark>。･･･バスが こなかった<mark class='hl'>んです</mark>。", bn: "কেন দেরি করেছিলে? বাস আসছিল না বলে।" },
+                            { jp: "どうした<mark class='hl'>んですか</mark>。･･･ちょっと きぶんが わるい<mark class='hl'>んです</mark>。", bn: "কী হয়েছে? একটু শরীর খারাপ লাগছে।" },
+                            { jp: "どこで かった<mark class='hl'>んですか</mark>。･･･スーパーで かった<mark class='hl'>んです</mark>。", bn: "কোথা থেকে কিনেছিলে? সুপার মার্কেট থেকে কিনেছিলাম।" },
+                            { jp: "どうして かいしゃを やすんだ<mark class='hl'>んですか</mark>。･･･あたまが いたかった<mark class='hl'>んです</mark>。", bn: "কেন অফিস ছুটি নিয়েছিলে? মাথা ব্যথা ছিল বলে।" }
                         ]
                     },
                     {
                         title: "Rule 1.1: 〜んですが、〜 (অনুরোধ ও দাওয়াত)",
-                        desc: "কাউকে কোনো অনুরোধ করা (Request) বা দাওয়াত (Invitation) করার পূর্বে ভূমিকা হিসেবে বসে[span_15](start_span)[span_15](end_span)。",
+                        desc: "কাউকে কোনো অনুরোধ করা (Request) বা দাওয়াত (Invitation) করার পূর্বে ভূমিকা হিসেবে বসে।",
                         formula: "<strong>Plain Form</strong> + <strong>んですが</strong>、[অনুরোধ/দাওয়াত]",
                         examples: [
-                            { jp: "あたまが いたい<mark class='hl'>んですが</mark>、かえっても いいですか。", bn: "মাথা ব্যথা করতেছে, আমি কি বাড়ি ফিরে যেতে পারি[span_16](start_span)[span_16](end_span)?" },
-                            { jp: "らいしゅう スキーに いく<mark class='hl'>んですが</mark>、ミラーさんも いっしょに いきませんか。", bn: "আগামী সপ্তাহে স্কি করার জন্য যাব, মিলার সাহেবও একসাথে যাবেন নাকি[span_17](start_span)[span_17](end_span)?" },
-                            { jp: "おゆが でない<mark class='hl'>んですが</mark>･････。", bn: "গরম পানি বের হচ্ছে না･････[span_18](start_span)[span_18](end_span)।" }
+                            { jp: "あたまが いたい<mark class='hl'>んですが</mark>、かえっても いいですか。", bn: "মাথা ব্যথা করতেছে, আমি কি বাড়ি ফিরে যেতে পারি?" },
+                            { jp: "らいしゅう スキーに いく<mark class='hl'>んですが</mark>、ミラーさんも いっしょに いきませんか。", bn: "আগামী সপ্তাহে স্কি করার জন্য যাব, মিলার সাহেবও একসাথে যাবেন নাকি?" },
+                            { jp: "おゆが でない<mark class='hl'>んですが</mark>･････。", bn: "গরম পানি বের হচ্ছে না･････।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vて-form + いただけませんか (করে দেবেন কি?)",
-                        desc: "কারও কাছে বিনম্রভাবে অনুরোধ করার জন্য এটি ব্যবহৃত হয়[span_19](start_span)[span_19](end_span)। এটি মূলত Vて-form + ください এর অতি ভদ্র ও মার্জিত রূপ[span_20](start_span)[span_20](end_span)。",
+                        desc: "কারও কাছে বিনম্রভাবে অনুরোধ করার জন্য এটি ব্যবহৃত হয়। এটি মূলত Vて-form + ください এর অতি ভদ্র ও মার্জিত রূপ।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>いただけませんか</strong>",
                         examples: [
-                            { jp: "いい せんせいを しょうかいして <mark class='hl'>いただけませんか</mark>。", bn: "ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি[span_21](start_span)[span_21](end_span)?" },
-                            { jp: "しりょうが ほしいんですが、おくって <mark class='hl'>いただけませんか</mark>。", bn: "ডকুমেন্ট চাই বলে, পাঠিয়ে দেবেন কি[span_22](start_span)[span_22](end_span)?" },
-                            { jp: "かきかたが わからないんですが、おしえて <mark class='hl'>いただけませんか</mark>。", bn: "লেখার পদ্ধতি বুঝতে পারছি না, বুঝিয়ে দেবেন কি[span_23](start_span)[span_23](end_span)?" }
+                            { jp: "いい せんせいを しょうかいして <mark class='hl'>いただけませんか</mark>。", bn: "ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি?" },
+                            { jp: "しりょうが ほしいんですが、おくって <mark class='hl'>いただけませんか</mark>。", bn: "ডকুমেন্ট চাই বলে, পাঠিয়ে দেবেন কি?" },
+                            { jp: "かきかたが わからないんですが、おしえて <mark class='hl'>いただけませんか</mark>。", bn: "লেখার পদ্ধতি বুঝতে পারছি না, বুঝিয়ে দেবেন কি?" }
                         ]
                     },
                     {
                         title: "Rule 3: প্রশ্নবোধক + Vた-form + ら いいですか (কী করলে ভালো হয়?)",
-                        desc: "কারও কাছ থেকে কোনো বিষয়ে 'কী করলে ভালো হয়' এমন পরামর্শ বা উপদেশ চাওয়ার জন্য ব্যবহৃত হয়[span_24](start_span)[span_24](end_span)。",
+                        desc: "কারও কাছ থেকে কোনো বিষয়ে 'কী করলে ভালো হয়' এমন পরামর্শ বা উপদেশ চাওয়ার জন্য ব্যবহৃত হয়।",
                         formula: "<strong>প্রশ্নবোধক শব্দ (どこ / どう)</strong> + <strong>Verb (たら-form)</strong> + <strong>いいですか</strong>",
                         examples: [
-                            { jp: "どこで カメラを かった<mark class='hl'>ら いいですか</mark>。", bn: "কোথা থেকে ক্যামেরা কিনলে ভালো হয়[span_25](start_span)[span_25](end_span)?" },
-                            { jp: "こっかいぎじどうを けんがくしたいんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "ডায়েট বিল্ডিং পরিদর্শনে যাব, কী করলে ভালো হয়[span_26](start_span)[span_26](end_span)?" },
-                            { jp: "さくらだいがくへ いきたいんですが、どこで おりたら <mark class='hl'>いいですか</mark>。", bn: "সাকুরা বিশ্ববিদ্যালয়ে যেতে চাই, কোথায় নামলে ভালো হবে[span_27](start_span)[span_27](end_span)?" },
-                            { jp: "ほけんしょうを わすれたんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "স্বাস্থ্যকার্ড ফেলে এসেছি, কী করলে ভালো হয়[span_28](start_span)[span_28](end_span)?" }
+                            { jp: "どこで カメラを かった<mark class='hl'>ら いいですか</mark>。", bn: "কোথা থেকে ক্যামেরা কিনলে ভালো হয়?" },
+                            { jp: "こっかいぎじどうを けんがくしたいんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "ডায়েট বিল্ডিং পরিদর্শনে যাব, কী করলে ভালো হয়?" },
+                            { jp: "さくらだいがくへ いきたいんですが、どこで おりたら <mark class='hl'>いいですか</mark>。", bn: "সাকুরা বিশ্ববিদ্যালয়ে যেতে চাই, কোথায় নামলে ভালো হবে?" },
+                            { jp: "ほけんしょうを わすれたんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "স্বাস্থ্যকার্ড ফেলে এসেছি, কী করলে ভালো হয়?" }
                         ]
                     },
                     {
                         title: "Rule 4: Noun (Object) は すき / きらい / じょうず / へた / あります",
-                        desc: "পছন্দ-অপছন্দ, দক্ষতা-অদক্ষতা বা উপস্থিতি বোঝাতে Object-এর পর が-এর পরিবর্তে は বসে[span_29](start_span)[span_29](end_span)। উত্তরে মিল রেখে নাবোধক হলে কারণ নেগেটিভ এবং হ্যাঁ-বোধক হলে কারণ পজিটিভ হয়[span_30](start_span)[span_30](end_span)。",
+                        desc: "পছন্দ-অপছন্দ, দক্ষতা-অদক্ষতা বা উপস্থিতি বোঝাতে Object-এর পর が-এর পরিবর্তে は বসে। উত্তরে মিল রেখে নাবোধক হলে কারণ নেগেটিভ এবং হ্যাঁ-বোধক হলে কারণ পজিটিভ হয়।",
                         formula: "<strong>Noun (Object)</strong> + <strong>は</strong> + すきじゃないんです / あります",
                         examples: [
-                            { jp: "よく カラオケに いきますか。･･･いいえ、カラオケ<mark class='hl'>は</mark> すきじゃないんです。", bn: "প্রায়ই কারাওকে দেখতে যান? না, যাই না। কারাওকে পছন্দ করি না বলে[span_31](start_span)[span_31](end_span)।" },
-                            { jp: "わたしは うんどうかいに いきません。ようじが ある<mark class='hl'>んです</mark>。", bn: "আমি খেলার মিটিংয়ে যাব না। কাজ আছে বলে[span_32](start_span)[span_32](end_span)।" },
-                            { jp: "わたしは うんどうかいに いきません。つごうが わるい<mark class='hl'>んです</mark>。", bn: "আমি খেলার মিটিংয়ে যাব না। শরীর খারাপ/অসুবিধা আছে বলে[span_33](start_span)[span_33](end_span)।" }
+                            { jp: "よく カラオケに いきますか。･･･いいえ、カラオケ<mark class='hl'>は</mark> すきじゃないんです。", bn: "প্রায়ই কারাওকে দেখতে যান? না, যাই না। কারাওকে পছন্দ করি না বলে।" },
+                            { jp: "わたしは うんどうかいに いきません。ようじが ある<mark class='hl'>んです</mark>。", bn: "আমি খেলার মিটিংয়ে যাব না। কাজ আছে বলে।" },
+                            { jp: "わたしは うんどうかいに いきません。つごうが わるい<mark class='hl'>んです</mark>。", bn: "আমি খেলার মিটিংয়ে যাব না। শরীর খারাপ/অসুবিধা আছে বলে।" }
                         ]
                     }
                 ]
@@ -651,74 +631,74 @@
                 rules: [
                     {
                         title: "Rule 1: Potential Verb রূপান্তর (かのうけい - সামর্থ্যমূলক রূপ)",
-                        desc: "কোনো কিছু করতে পারা, ক্ষমতা বা সক্ষমতা নির্দেশ করে (V-Dic + ことができます এর সংক্ষিপ্ত রূপ)[span_34](start_span)[span_34](end_span)。",
+                        desc: "কোনো কিছু করতে পারা, ক্ষমতা বা সক্ষমতা নির্দেশ করে (V-Dic + ことができます এর সংক্ষিপ্ত রূপ)।",
                         formula: "<strong>Group 1:</strong> い-কলাম → え-কলাম + ます (かきます → かけます / はなします → はなせます)<br><strong>Group 2:</strong> ます কেটে られ ます (たべます → たべられます / おきます → おきられます)<br><strong>Group 3:</strong> きます → <strong>こられます</strong> | します → <strong>できます</strong>",
                         examples: [
-                            { jp: "ひとりで びょういんへ <mark class='hl'>いけますか</mark>。", bn: "একা হাসপাতালে যেতে পারবে কি[span_35](start_span)[span_35](end_span)?" },
-                            { jp: "たなかさんに <mark class='hl'>あえませんでした</mark>。", bn: "তানাকা সাহেবের সাথে দেখা করতে পারি নাই[span_36](start_span)[span_36](end_span)।" }
+                            { jp: "ひとりで びょういんへ <mark class='hl'>いけますか</mark>。", bn: "একা হাসপাতালে যেতে পারবে কি?" },
+                            { jp: "たなかさんに <mark class='hl'>あえませんでした</mark>。", bn: "তানাকা সাহেবের সাথে দেখা করতে পারি নাই।" }
                         ]
                     },
                     {
                         title: "Rule 2: Potential Verb-এ が পার্টিক্যালের ব্যবহার",
-                        desc: "সাধারণ Transitive Verb-এ を বসলেও Potential Verb-এর পূর্বে কর্ম (Object)-এর সাথে সবসময় が পার্টিক্যাল বসে[span_37](start_span)[span_37](end_span)。",
+                        desc: "সাধারণ Transitive Verb-এ を বসলেও Potential Verb-এর পূর্বে কর্ম (Object)-এর সাথে সবসময় が পার্টিক্যাল বসে।",
                         formula: "<strong>Noun が</strong> + <strong>Potential Verb</strong>",
                         examples: [
-                            { jp: "わたしは にほんご<mark class='hl'>が はなせます</mark>。", bn: "আমি জাপানি ভাষায় কথা বলতে পারি[span_38](start_span)[span_38](end_span)।" },
-                            { jp: "ミラーさんは かんじ<mark class='hl'>が よめます</mark>。", bn: "মিলার সাহেব কাঞ্জি পড়তে পারেন[span_39](start_span)[span_39](end_span)।" },
-                            { jp: "この ぎんこうで ドル<mark class='hl'>が かえられます</mark>。", bn: "এই ব্যাংকে ডলার পরিবর্তন করা যায়[span_40](start_span)[span_40](end_span)।" },
-                            { jp: "わたしは さしみ<mark class='hl'>が たべられます</mark>。", bn: "আমি সাশিমি খেতে পারি[span_41](start_span)[span_41](end_span)।" }
+                            { jp: "わたしは にほんご<mark class='hl'>が はなせます</mark>。", bn: "আমি জাপানি ভাষায় কথা বলতে পারি।" },
+                            { jp: "ミラーさんは かんじ<mark class='hl'>が よめます</mark>。", bn: "মিলার সাহেব কাঞ্জি পড়তে পারেন।" },
+                            { jp: "この ぎんこうで ドル<mark class='hl'>が かえられます</mark>。", bn: "এই ব্যাংকে ডলার পরিবর্তন করা যায়।" },
+                            { jp: "わたしは さしみ<mark class='hl'>が たべられます</mark>。", bn: "আমি সাশিমি খেতে পারি।" }
                         ]
                     },
                     {
                         title: "Rule 3: みえます (দেখা যায়) ও きこえます (শোনা যায়)",
-                        desc: "চেষ্টা ছাড়া স্বাভাবিকভাবে চোখে পড়া (みえます) এবং কানে ভেসে আসা (きこえます) বোঝায়[span_42](start_span)[span_42](end_span)। এদের আগে সবসময় が বসে[span_43](start_span)[span_43](end_span)。",
+                        desc: "চেষ্টা ছাড়া স্বাভাবিকভাবে চোখে পড়া (みえます) এবং কানে ভেসে আসা (きこえます) বোঝায়। এদের আগে সবসময় が বসে।",
                         formula: "<strong>Noun が</strong> + <strong>みえます / きこえます</strong>",
-                        note: "চেষ্টা করে বা টিকিট কেটে সিনেমা দেখার ক্ষেত্রে みられます এবং খবর শোনার ক্ষেত্রে きけます বসে[span_44](start_span)[span_44](end_span)。",
+                        note: "চেষ্টা করে বা টিকিট কেটে সিনেমা দেখার ক্ষেত্রে みられます এবং খবর শোনার ক্ষেত্রে きけます বসে।",
                         examples: [
-                            { jp: "しんかんせんから ふじさん<mark class='hl'>が みえます</mark>。", bn: "বুলেট ট্রেন থেকে ফুজি পাহাড় দেখতে পাওয়া যায়[span_45](start_span)[span_45](end_span)।" },
-                            { jp: "ラジオの おと<mark class='hl'>が きこえます</mark>。", bn: "রেডিওর শব্দ শুনতে পাওয়া যায়[span_46](start_span)[span_46](end_span)।" },
-                            { jp: "しんじゅくで えいがが <mark class='hl'>みられます</mark>。", bn: "শিনজুকুতে সিনেমা দেখতে পাবে[span_47](start_span)[span_47](end_span)।" },
-                            { jp: "でんわで てんきよほうが <mark class='hl'>きけます</mark>。", bn: "টেলিফোনে আবহাওয়ার খবর শুনতে পাবে[span_48](start_span)[span_48](end_span)।" }
+                            { jp: "しんかんせんから ふじさん<mark class='hl'>が みえます</mark>。", bn: "বুলেট ট্রেন থেকে ফুজি পাহাড় দেখতে পাওয়া যায়।" },
+                            { jp: "ラジオの おと<mark class='hl'>が きこえます</mark>。", bn: "রেডিওর শব্দ শুনতে পাওয়া যায়।" },
+                            { jp: "しんじゅくで えいがが <mark class='hl'>みられます</mark>。", bn: "শিনজুকুতে সিনেমা দেখতে পাবে।" },
+                            { jp: "でんわで てんきよほうが <mark class='hl'>きけます</mark>。", bn: "টেলিফোনে আবহাওয়ার খবর শুনতে পাবে।" }
                         ]
                     },
                     {
                         title: "Rule 4: できます (অস্তিত্ব লাভ / তৈরি হওয়া)",
-                        desc: "কোনো কাজ শেষ বা সম্পন্ন হয়ে গেছে, নতুন বাড়ি/স্থাপনা তৈরি হয়েছে বোঝাতে できます ব্যবহৃত হয়[span_49](start_span)[span_49](end_span)。",
+                        desc: "কোনো কাজ শেষ বা সম্পন্ন হয়ে গেছে, নতুন বাড়ি/স্থাপনা তৈরি হয়েছে বোঝাতে できます ব্যবহৃত হয়।",
                         formula: "<strong>Noun が</strong> + <strong>できました</strong>",
                         examples: [
-                            { jp: "えきの まえに おおきい スーパー<mark class='hl'>が できました</mark>。", bn: "স্টেশনের সামনে বড় সুপার মার্কেট তৈরি হয়েছিল[span_50](start_span)[span_50](end_span)।" },
-                            { jp: "あたらしい いえ<mark class='hl'>が できました</mark>。", bn: "নতুন বাড়ি তৈরি হয়ে গেছে[span_51](start_span)[span_51](end_span)।" },
-                            { jp: "ばんごはん<mark class='hl'>が できました</mark>。", bn: "রাতের খাবার তৈরি হয়ে গেছে[span_52](start_span)[span_52](end_span)।" },
-                            { jp: "ほうりゅうじは 607ねんに <mark class='hl'>できました</mark>。", bn: "হোরিউজি ৬০৭ সালে তৈরি হয়েছিল[span_53](start_span)[span_53](end_span)।" }
+                            { jp: "えきの まえに おおきい スーパー<mark class='hl'>が できました</mark>。", bn: "স্টেশনের সামনে বড় সুপার মার্কেট তৈরি হয়েছিল।" },
+                            { jp: "あたらしい いえ<mark class='hl'>が できました</mark>。", bn: "নতুন বাড়ি তৈরি হয়ে গেছে।" },
+                            { jp: "ばんごはん<mark class='hl'>が できました</mark>。", bn: "রাতের খাবার তৈরি হয়ে গেছে।" },
+                            { jp: "ほうりゅうじは 607ねんに <mark class='hl'>できました</mark>。", bn: "হোরিউজি ৬০৭ সালে তৈরি হয়েছিল।" }
                         ]
                     },
                     {
                         title: "Rule 5: しか (শুধুমাত্র / ছাড়া)",
-                        desc: "বাক্যে নেগেটিভ অর্থে বসে[span_54](start_span)[span_54](end_span)। しか থাকলে Verb নেগেটিভ হবে কিন্তু বাক্যের ভাবার্থ পজিটিভ থাকবে[span_55](start_span)[span_55](end_span)。",
+                        desc: "বাক্যে নেগেটিভ অর্থে বসে। しか থাকলে Verb নেগেটিভ হবে কিন্তু বাক্যের ভাবার্থ পজিটিভ থাকবে।",
                         formula: "<strong>Noun</strong> + <strong>しか</strong> + <strong>Negative Verb</strong>",
-                        note: "だけ (দাকে) অর্থও শুধুমাত্র, কিন্তু だけ এর সাথে Verb পজিটিভ বসে[span_56](start_span)[span_56](end_span)。",
+                        note: "だけ (দাকে) অর্থও শুধুমাত্র, কিন্তু だけ এর সাথে Verb পজিটিভ বসে।",
                         examples: [
-                            { jp: "ローマじ<mark class='hl'>しか かけません</mark>。", bn: "রোমাজি ছাড়া লিখতে পারি না[span_57](start_span)[span_57](end_span)।" },
-                            { jp: "ローマじだけ かけます。", bn: "রোমাজি শুধুমাত্র লিখতে পারি[span_58](start_span)[span_58](end_span)।" }
+                            { jp: "ローマじ<mark class='hl'>しか かけません</mark>。", bn: "রোমাজি ছাড়া লিখতে পারি না।" },
+                            { jp: "ローマじだけ かけます。", bn: "রোমাজি শুধুমাত্র লিখতে পারি।" }
                         ]
                     },
                     {
                         title: "Rule 6: Noun は (Contrast - বৈসাদৃশ্য)",
-                        desc: "যেকোনো দুটি বিষয়ের একটি পারি কিন্তু অন্যটি পারি না বোঝাতে উভয় বাক্যের Noun-এর সাথেই は বসে[span_59](start_span)[span_59](end_span)。",
+                        desc: "যেকোনো দুটি বিষয়ের একটি পারি কিন্তু অন্যটি পারি না বোঝাতে উভয় বাক্যের Noun-এর সাথেই は বসে।",
                         formula: "<strong>Noun 1 は Verb が、Noun 2 は Verb (Neg)</strong>",
                         examples: [
-                            { jp: "ワイン<mark class='hl'>は のみますが</mark>、ビール<mark class='hl'>は のみません</mark>。", bn: "ওয়াইন পান করি কিন্তু বিয়ার পান করি না[span_60](start_span)[span_60](end_span)।" },
-                            { jp: "ひらがな<mark class='hl'>は かけますが</mark>、かんじ<mark class='hl'>は かけません</mark>。", bn: "হিরাগানা লিখতে পারি কিন্তু কাঞ্জি লিখতে পারি না[span_61](start_span)[span_61](end_span)।" },
-                            { jp: "やま<mark class='hl'>は みえますが</mark>、うみ<mark class='hl'>は みえません</mark>。", bn: "পাহাড় দেখতে পারি কিন্তু সাগর দেখতে পারি না[span_62](start_span)[span_62](end_span)।" }
+                            { jp: "ワイン<mark class='hl'>は のみますが</mark>、ビール<mark class='hl'>は のみません</mark>。", bn: "ওয়াইন পান করি কিন্তু বিয়ার পান করি না।" },
+                            { jp: "ひらがな<mark class='hl'>は かけますが</mark>、かんじ<mark class='hl'>は かけません</mark>。", bn: "হিরাগানা লিখতে পারি কিন্তু কাঞ্জি লিখতে পারি না।" },
+                            { jp: "やま<mark class='hl'>は みえますが</mark>、うみ<mark class='hl'>は みえません</mark>。", bn: "পাহাড় দেখতে পারি কিন্তু সাগর দেখতে পারি না।" }
                         ]
                     },
                     {
                         title: "Rule 7: Double Particle (পার্টিক্যালের দ্বৈত ব্যবহার)",
-                        desc: "আগে থেকেই থাকা পার্টিক্যালের সাথে は যুক্ত হয়ে ফোকাস করা হয়[span_63](start_span)[span_63](end_span)。",
+                        desc: "আগে থেকেই থাকা পার্টিক্যালের সাথে は যুক্ত হয়ে ফোকাস করা হয়।",
                         formula: "<strong>(では / には / からは)</strong>",
                         examples: [
-                            { jp: "にほん<mark class='hl'>では</mark> うまを みることが できません。", bn: "জাপানে ঘোড়া দেখতে পাওয়া যায় না[span_64](start_span)[span_64](end_span)।" },
-                            { jp: "ここ<mark class='hl'>からは</mark> スカイツリーが みえません。", bn: "এখান থেকে স্কাইট্রি দেখা যায় না[span_65](start_span)[span_65](end_span)।" }
+                            { jp: "にほん<mark class='hl'>では</mark> うまを みることが できません。", bn: "জাপানে ঘোড়া দেখতে পাওয়া যায় না।" },
+                            { jp: "ここ<mark class='hl'>からは</mark> スカイツリーが みえません。", bn: "এখান থেকে স্কাইট্রি দেখা যায় না।" }
                         ]
                     }
                 ]
@@ -730,52 +710,52 @@
                 rules: [
                     {
                         title: "Rule 1: V1 ます কেটে ながら + V2 (করতে করতে)",
-                        desc: "একটি কাজ করার পাশাপাশি একই সাথে আরেকটি কাজ সম্পন্ন করা বোঝায়[span_66](start_span)[span_66](end_span)। Verb-2 প্রধান কাজ[span_67](start_span)[span_67](end_span)。",
+                        desc: "একটি কাজ করার পাশাপাশি একই সাথে আরেকটি কাজ সম্পন্ন করা বোঝায়। Verb-2 প্রধান কাজ।",
                         formula: "<strong>Verb 1 (ます কেটে)</strong> + <strong>ながら</strong> + <strong>Verb 2</strong>",
                         examples: [
-                            { jp: "おんがくを きき<mark class='hl'>ながら</mark> しょくじします。", bn: "মিউজিক শুনতে শুনতে খাবার খাই[span_68](start_span)[span_68](end_span)।" },
-                            { jp: "はたらき<mark class='hl'>ながら</mark> にほんごを べんきょうしています。", bn: "কাজ করতে করতে জাপানি ভাষা পড়াশোনা করছি[span_69](start_span)[span_69](end_span)।" },
-                            { jp: "おちゃを のみ<mark class='hl'>ながら</mark> しんぶんを よみます。", bn: "চা পান করতে করতে পত্রিকা পড়ি[span_70](start_span)[span_70](end_span)।" }
+                            { jp: "おんがくを きき<mark class='hl'>ながら</mark> しょくじします。", bn: "মিউজিক শুনতে শুনতে খাবার খাই।" },
+                            { jp: "はたらき<mark class='hl'>ながら</mark> にほんごを べんきょうしています。", bn: "কাজ করতে করতে জাপানি ভাষা পড়াশোনা করছি।" },
+                            { jp: "おちゃを のみ<mark class='hl'>ながら</mark> しんぶんを よみます。", bn: "চা পান করতে করতে পত্রিকা পড়ি।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vて-form + います (অভ্যাসগত বা নিয়মিত কাজ)",
-                        desc: "অতীতকালে শুরু হয়ে বর্তমান কালেও চলমান থাকা নিয়মিত কাজের বিবরণ বা বর্তমান ফলাফল বোঝাতে বসে[span_71](start_span)[span_71](end_span)。",
+                        desc: "অতীতকালে শুরু হয়ে বর্তমান কালেও চলমান থাকা নিয়মিত কাজের বিবরণ বা বর্তমান ফলাফল বোঝাতে বসে।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>います / いました</strong>",
                         examples: [
-                            { jp: "まいあさ ジョギングを <mark class='hl'>しています</mark>。", bn: "প্রতি সকালে জগিং করি[span_72](start_span)[span_72](end_span)।" },
-                            { jp: "こどもの とき まいばん 8じに <mark class='hl'>ねていました</mark>。", bn: "বাচ্চা সময়ে প্রতিরাতে ৮টায় ঘুমিয়ে পড়তাম[span_73](start_span)[span_73](end_span)।" },
-                            { jp: "わたしは けっこん<mark class='hl'>しています</mark>。", bn: "আমি বিবাহিত[span_74](start_span)[span_74](end_span)।" },
-                            { jp: "おおさかに すんで<mark class='hl'>います</mark>。", bn: "ওসাকাতে বাস করি[span_75](start_span)[span_75](end_span)।" },
-                            { jp: "IMCは コンピューターソフトを つくって<mark class='hl'>います</mark>。", bn: "আইএমসি কম্পিউটার সফটওয়্যার তৈরি করে[span_76](start_span)[span_76](end_span)।" }
+                            { jp: "まいあさ ジョギングを <mark class='hl'>しています</mark>。", bn: "প্রতি সকালে জগিং করি।" },
+                            { jp: "こどもの とき まいばん 8じに <mark class='hl'>ねていました</mark>。", bn: "বাচ্চা সময়ে প্রতিরাতে ৮টায় ঘুমিয়ে পড়তাম।" },
+                            { jp: "わたしは けっこん<mark class='hl'>しています</mark>。", bn: "আমি বিবাহিত।" },
+                            { jp: "おおさかに すんで<mark class='hl'>います</mark>。", bn: "ওসাকাতে বাস করি।" },
+                            { jp: "IMCは コンピューターソフトを つくって<mark class='hl'>います</mark>。", bn: "আইএমসি কম্পিউটার সফটওয়্যার তৈরি করে।" }
                         ]
                     },
                     {
                         title: "Rule 3: Plain Form + し、~し (একাধিক গুণ ও কারণ)",
-                        desc: "অনেকগুলো কাজের দক্ষতা প্রকাশ করতে বা কারণের বর্ণনা দিতে বসে[span_77](start_span)[span_77](end_span)。",
+                        desc: "অনেকগুলো কাজের দক্ষতা প্রকাশ করতে বা কারণের বর্ণনা দিতে বসে।",
                         formula: "<strong>Plain Form</strong> + <strong>し</strong>、<strong>Plain Form</strong> + <strong>し</strong>",
                         examples: [
-                            { jp: "ピアノも ひける<mark class='hl'>し</mark>、うたも うたえる<mark class='hl'>し</mark>、ダンスも できます。", bn: "পিয়ানোও বাজাতে পারে, গানও পারে, ড্যান্সও পারে[span_78](start_span)[span_78](end_span)।" },
-                            { jp: "たなかさんは まじめだ<mark class='hl'>し</mark>、ちゅうごくごも じょうずだ<mark class='hl'>し</mark>、けいけんも あります。", bn: "তানাকা সাহেব সিরিয়াসও, চীনা ভাষাতেও দক্ষ, তদুপরি অভিজ্ঞতাও আছে[span_79](start_span)[span_79](end_span)।" },
-                            { jp: "ここは ねだんも やすい<mark class='hl'>し</mark>、さかなも あたらしい<mark class='hl'>し</mark>、よく たべに きます。", bn: "এখানে দামও কম, মাছও ফ্রেশ, প্রায়ই খেতে আসি[span_80](start_span)[span_80](end_span)।" }
+                            { jp: "ピアノも ひける<mark class='hl'>し</mark>、うたも うたえる<mark class='hl'>し</mark>、ダンスも できます。", bn: "পিয়ানোও বাজাতে পারে, গানও পারে, ড্যান্সও পারে।" },
+                            { jp: "たなかさんは まじめだ<mark class='hl'>し</mark>、ちゅうごくごも じょうずだ<mark class='hl'>し</mark>、けいけんも あります。", bn: "তানাকা সাহেব সিরিয়াসও, চীনা ভাষাতেও দক্ষ, তদুপরি অভিজ্ঞতাও আছে।" },
+                            { jp: "ここは ねだんも やすい<mark class='hl'>し</mark>、さかなも あたらしい<mark class='hl'>し</mark>、よく たべに きます。", bn: "এখানে দামও কম, মাছও ফ্রেশ, প্রায়ই খেতে আসি।" }
                         ]
                     },
                     {
                         title: "Rule 4: それで (এই জন্য / এবং তাই)",
-                        desc: "পূর্বের প্রসঙ্গ থেকে অনুমিত বিষয়ের ফলাফল ব্যাখ্যা করার পূর্বে বসে[span_81](start_span)[span_81](end_span)。",
+                        desc: "পূর্বের প্রসঙ্গ থেকে অনুমিত বিষয়ের ফলাফল ব্যাখ্যা করার পূর্বে বসে।",
                         formula: "<strong>বাক্য ১</strong>。<strong>それで</strong> + <strong>ফলাফল</strong>",
                         examples: [
-                            { jp: "しょうせつかに なりたいです。<mark class='hl'>それで</mark> いまは アルバイトをしながら かいています。", bn: "ঔপন্যাসিক হতে চাই, এই জন্য পার্টটাইম কাজের পাশাপাশি উপন্যাস লিখছি[span_82](start_span)[span_82](end_span)।" },
-                            { jp: "コーヒーも おいしいし、しょくじも できるし･･･。<mark class='hl'>それで</mark> にんきが あるんですね。", bn: "কফিও সুস্বাদু, খাবারও পাওয়া যায়･･･ এই জন্যই এতো জনপ্রিয়তা[span_83](start_span)[span_83](end_span)।" }
+                            { jp: "しょうせつかに なりたいです。<mark class='hl'>それで</mark> いまは アルバイトをしながら かいています。", bn: "ঔপন্যাসিক হতে চাই, এই জন্য পার্টটাইম কাজের পাশাপাশি উপন্যাস লিখছি।" },
+                            { jp: "コーヒーも おいしいし、しょくじも できるし･･･。<mark class='hl'>それで</mark> にんきが あるんですね。", bn: "কফিও সুস্বাদু, খাবারও পাওয়া যায়･･･ এই জন্যই এতো জনপ্রিয়তা।" }
                         ]
                     },
                     {
                         title: "Rule 5: とき + Particle (যখন/তখন)",
-                        desc: "দুটি বিষয়ের সংযোগ করতে বসে[span_84](start_span)[span_84](end_span)। Present Positive বাক্যে とき এর পূর্বে Verb-এর Dictionary Form বসে[span_85](start_span)[span_85](end_span)。",
+                        desc: "দুটি বিষয়ের সংযোগ করতে বসে। Present Positive বাক্যে とき এর পূর্বে Verb-এর Dictionary Form বসে।",
                         formula: "<strong>Verb (Dictionary form)</strong> + <strong>ときは</strong>",
                         examples: [
-                            { jp: "べんきょうする <mark class='hl'>ときは</mark> おんがくを ききません。", bn: "পড়াশোনা করার সময় মিউজিক শুনি না[span_86](start_span)[span_86](end_span)।" },
-                            { jp: "つかれた <mark class='hl'>ときや</mark> さびしい とき、いなかの そらを おもいだす。", bn: "যখন ক্লান্ত বা একা থাকি, গ্রামের নীল আকাশ কল্পনা করি[span_87](start_span)[span_87](end_span)।" }
+                            { jp: "べんきょうする <mark class='hl'>ときは</mark> おんがくを ききません。", bn: "পড়াশোনা করার সময় মিউজিক শুনি না।" },
+                            { jp: "つかれた <mark class='hl'>ときや</mark> さびしい とき、いなかの そらを おもいだす。", bn: "যখন ক্লান্ত বা একা থাকি, গ্রামের নীল আকাশ কল্পনা করি।" }
                         ]
                     }
                 ]
@@ -787,61 +767,61 @@
                 rules: [
                     {
                         title: "Rule 1: Intransitive Vて-form + います (স্বয়ংক্রিয় স্থিতি)",
-                        desc: "অতীতের কোনো কাজের ফলাফল বর্তমানেও দৃশ্যমান বজায় থাকা প্রকাশ করে[span_88](start_span)[span_88](end_span)。",
+                        desc: "অতীতের কোনো কাজের ফলাফল বর্তমানেও দৃশ্যমান বজায় থাকা প্রকাশ করে।",
                         formula: "<strong>Noun が</strong> + <strong>Intransitive Verb (て-form)</strong> + <strong>います</strong>",
-                        note: "নির্দিষ্ট কোনো বস্তুকে বোঝাতে この, その, あの এর সাথে は বসে[span_89](start_span)[span_89](end_span)。",
+                        note: "নির্দিষ্ট কোনো বস্তুকে বোঝাতে この, その, あの এর সাথে は বসে।",
                         examples: [
-                            { jp: "まどが <mark class='hl'>われています</mark>。", bn: "জানালা ভেঙে রয়েছে[span_90](start_span)[span_90](end_span)।" },
-                            { jp: "でんきが <mark class='hl'>ついています</mark>。", bn: "বাতি জ্বলে আছে[span_91](start_span)[span_91](end_span)।" },
-                            { jp: "ドアが <mark class='hl'>あいています</mark>。", bn: "দরজা খোলা আছে[span_92](start_span)[span_92](end_span)।" },
-                            { jp: "この いすは <mark class='hl'>こわれています</mark>。", bn: "এই চেয়ার ভেঙে আছে[span_93](start_span)[span_93](end_span)।" },
-                            { jp: "この ふくろは <mark class='hl'>やぶれています</mark>。", bn: "এই ব্যাগ ছিঁড়ে আছে[span_94](start_span)[span_94](end_span)।" }
+                            { jp: "まどが <mark class='hl'>われています</mark>。", bn: "জানালা ভেঙে রয়েছে।" },
+                            { jp: "でんきが <mark class='hl'>ついています</mark>。", bn: "বাতি জ্বলে আছে।" },
+                            { jp: "ドアが <mark class='hl'>あいています</mark>。", bn: "দরজা খোলা আছে।" },
+                            { jp: "この いすは <mark class='hl'>こわれています</mark>。", bn: "এই চেয়ার ভেঙে আছে।" },
+                            { jp: "この ふくろは <mark class='hl'>やぶれています</mark>。", bn: "এই ব্যাগ ছিঁড়ে আছে।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vて-form + しまいます / しまいました",
-                        desc: "কোনো কাজ শেষ হবে বোঝাতে しまいます এবং সম্পন্ন হয়ে গেছে বোঝাতে しまいました বসে[span_95](start_span)[span_95](end_span)। হারানো বা ভুলের ক্ষেত্রে হতাশা প্রকাশ করে[span_96](start_span)[span_96](end_span)。",
+                        desc: "কোনো কাজ শেষ হবে বোঝাতে しまいます এবং সম্পন্ন হয়ে গেছে বোঝাতে しまいました বসে। হারানো বা ভুলের ক্ষেত্রে হতাশা প্রকাশ করে।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>しまいました / しまいます</strong>",
                         examples: [
-                            { jp: "ワインは みんなで のんで <mark class='hl'>しまいました</mark>。", bn: "ওয়াইন সবাই পান করে শেষ করেছিলাম[span_97](start_span)[span_97](end_span)।" },
-                            { jp: "かんじの しゅくだいは もう やって <mark class='hl'>しまいました</mark>。", bn: "কাঞ্জির হোমওয়ার্ক ইতোমধ্যে শেষ করে ফেলেছি[span_98](start_span)[span_98](end_span)।" },
-                            { jp: "ひるごはんまでに レポートを かいて <mark class='hl'>しまいます</mark>。", bn: "দুপুরের খাবারের আগেই রিপোর্ট লিখে শেষ করব[span_99](start_span)[span_99](end_span)।" },
-                            { jp: "さいふを おとして <mark class='hl'>しまいました</mark>。", bn: "মানিব্যাগ পড়ে গিয়েছিল (হতাশা)[span_100](start_span)[span_100](end_span)।" },
-                            { jp: "パスポートを なくして <mark class='hl'>しまいました</mark>。", bn: "পাসপোর্ট হারিয়ে ফেলেছি[span_101](start_span)[span_101](end_span)।" }
+                            { jp: "ワインは みんなで のんで <mark class='hl'>しまいました</mark>。", bn: "ওয়াইন সবাই পান করে শেষ করেছিলাম।" },
+                            { jp: "かんじの しゅくだいは もう やって <mark class='hl'>しまいました</mark>。", bn: "কাঞ্জির হোমওয়ার্ক ইতোমধ্যে শেষ করে ফেলেছি।" },
+                            { jp: "ひるごはんまでに レポートを かいて <mark class='hl'>しまいます</mark>。", bn: "দুপুরের খাবারের আগেই রিপোর্ট লিখে শেষ করব।" },
+                            { jp: "さいふを おとして <mark class='hl'>しまいました</mark>。", bn: "মানিব্যাগ পড়ে গিয়েছিল (হতাশা)।" },
+                            { jp: "パスポートを なくして <mark class='hl'>しまいました</mark>。", bn: "পাসপোর্ট হারিয়ে ফেলেছি।" }
                         ]
                     },
                     {
                         title: "Rule 3: Noun (place) に いきます / きます / かえります",
-                        desc: "কোথাও কোনো কাজের জন্য যেতে চাইলে へ এর পরিবর্তে に পার্টিক্যাল বসে[span_102](start_span)[span_102](end_span)。",
+                        desc: "কোথাও কোনো কাজের জন্য যেতে চাইলে へ এর পরিবর্তে に পার্টিক্যাল বসে।",
                         formula: "<strong>Noun (স্থান) に</strong> + いきます / きます / かえります",
                         examples: [
-                            { jp: "すぐ こうばんに <mark class='hl'>いかないと</mark>。", bn: "দ্রুত পুলিশ বক্সে যাওয়া উচিত[span_103](start_span)[span_103](end_span)।" }
+                            { jp: "すぐ こうばんに <mark class='hl'>いかないと</mark>。", bn: "দ্রুত পুলিশ বক্সে যাওয়া উচিত।" }
                         ]
                     },
                     {
                         title: "Rule 4: それ / その / そう (কথোপকথনে নির্দেশ)",
-                        desc: "অন্যের বক্তব্যের প্রতি সংবেদনশীলতা প্রকাশ বা সম্মতি জানাতে বসে[span_104](start_span)[span_104](end_span)。",
+                        desc: "অন্যের বক্তব্যের প্রতি সংবেদনশীলতা প্রকাশ বা সম্মতি জানাতে বসে।",
                         formula: "<strong>それは / そのばあいは / そうします</strong>",
                         examples: [
-                            { jp: "それは たいへんですね。", bn: "শুনে কষ্ট পেলাম[span_105](start_span)[span_105](end_span)।" },
-                            { jp: "ええ、そうします。", bn: "হ্যাঁ, তাই করব[span_106](start_span)[span_106](end_span)।" }
+                            { jp: "それは たいへんですね。", bn: "শুনে কষ্ট পেলাম।" },
+                            { jp: "ええ、そうします。", bn: "হ্যাঁ, তাই করব।" }
                         ]
                     },
                     {
                         title: "Rule 5: ありましたよ (এইতো পেয়ে গেছি)",
-                        desc: "খুঁজতে থাকা কোনো জিনিস হঠাৎ দেখতে পেলে বলা হয়[span_107](start_span)[span_107](end_span)。",
+                        desc: "খুঁজতে থাকা কোনো জিনিস হঠাৎ দেখতে পেলে বলা হয়।",
                         formula: "<strong>Noun が ありましたよ</strong>",
                         examples: [
-                            { jp: "かばんが <mark class='hl'>ありましたよ</mark>。", bn: "এখানে ব্যাগটি পাওয়া গেছে[span_108](start_span)[span_108](end_span)!" }
+                            { jp: "かばんが <mark class='hl'>ありましたよ</mark>。", bn: "এখানে ব্যাগটি পাওয়া গেছে!" }
                         ]
                     },
                     {
                         title: "Rule 6: どこかで (অনির্দিষ্ট) vs どこかに (নির্দিষ্ট)",
-                        desc: "অনির্দিষ্ট স্থানে どこかで এবং নির্দিষ্ট অবস্থানে どこかに বসে[span_109](start_span)[span_109](end_span)。",
+                        desc: "অনির্দিষ্ট স্থানে どこかで এবং নির্দিষ্ট অবস্থানে どこかに বসে।",
                         formula: "<strong>どこかで</strong> + হারানো | <strong>どこかに</strong> + উপস্থিতি",
                         examples: [
-                            { jp: "<mark class='hl'>どこかで</mark> さいふを なくして しまいました。", bn: "কোথাও একটা মানিব্যাগ হারিয়ে ফেলেছি[span_110](start_span)[span_110](end_span)।" },
-                            { jp: "<mark class='hl'>どこかに</mark> でんわが ありますか。", bn: "কোথাও কি টেলিফোন আছে[span_111](start_span)[span_111](end_span)?" }
+                            { jp: "<mark class='hl'>どこかで</mark> さいふを なくして しまいました。", bn: "কোথাও একটা মানিব্যাগ হারিয়ে ফেলেছি।" },
+                            { jp: "<mark class='hl'>どこかに</mark> でんわが ありますか。", bn: "কোথাও কি টেলিফোন আছে?" }
                         ]
                     }
                 ]
@@ -853,49 +833,49 @@
                 rules: [
                     {
                         title: "Rule 1: Vて-form + あります (উদ্দেশ্যমূলক স্থিতি)",
-                        desc: "ভবিষ্যতের সুবিধার জন্য কেউ উদ্দেশ্যমূলকভাবে কাজ করে রেখেছে এবং অবস্থা চলমান আছে[span_112](start_span)[span_112](end_span)。",
+                        desc: "ভবিষ্যতের সুবিধার জন্য কেউ উদ্দেশ্যমূলকভাবে কাজ করে রেখেছে এবং অবস্থা চলমান আছে।",
                         formula: "কাঠামো ১: <strong>N (স্থান) に N (বস্তু) が Vて-form あります</strong><br>কাঠামো ২: <strong>N (বস্তু) は N (স্থান) に Vて-form あります</strong>",
                         examples: [
-                            { jp: "つくえの うえに メモが <mark class='hl'>おいてあります</mark>。", bn: "টেবিলের উপরে মেমো রাখা আছে[span_113](start_span)[span_113](end_span)।" },
-                            { jp: "カレンダーに こんげつの よていが <mark class='hl'>かいてあります</mark>。", bn: "ক্যালেন্ডারে এই মাসের পরিকল্পনা লেখা আছে[span_114](start_span)[span_114](end_span)।" },
-                            { jp: "メモは つくえの うえに <mark class='hl'>おいてあります</mark>。", bn: "মেমো টেবিলের উপরে রাখা আছে[span_115](start_span)[span_115](end_span)।" },
-                            { jp: "よていひょうは ドアの みぎに <mark class='hl'>はってあります</mark>。", bn: "কর্মপরিকল্পনা দরজার ডানে লাগানো আছে[span_116](start_span)[span_116](end_span)।" }
+                            { jp: "つくえの うえに メモが <mark class='hl'>おいてあります</mark>。", bn: "টেবিলের উপরে মেমো রাখা আছে।" },
+                            { jp: "カレンダーに こんげつの よていが <mark class='hl'>かいてあります</mark>。", bn: "ক্যালেন্ডারে এই মাসের পরিকল্পনা লেখা আছে।" },
+                            { jp: "メモは つくえの うえに <mark class='hl'>おいてあります</mark>。", bn: "মেমো টেবিলের উপরে রাখা আছে।" },
+                            { jp: "よていひょうは ドアの みぎに <mark class='hl'>はってあります</mark>。", bn: "কর্মপরিকল্পনা দরজার ডানে লাগানো আছে।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vて-form + おきます (আগাম প্রস্তুতি)",
-                        desc: "কোনো কাজ শুরু করার বা কোথাও যাওয়ার পূর্বেই প্রয়োজনীয় কাজ সম্পন্ন করে রাখা[span_117](start_span)[span_117](end_span)。",
+                        desc: "কোনো কাজ শুরু করার বা কোথাও যাওয়ার পূর্বেই প্রয়োজনীয় কাজ সম্পন্ন করে রাখা।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>おきます / おいてください</strong>",
                         examples: [
-                            { jp: "りょこうの まえに きっぷを かって <mark class='hl'>おきます</mark>。", bn: "ভ্রমণের আগে টিকিট কেটে রাখতে হয়[span_118](start_span)[span_118](end_span)।" },
-                            { jp: "この しりょうを よんで <mark class='hl'>おいてください</mark>。", bn: "এই ডকুমেন্টটি পড়ে রাখবেন প্লিজ[span_119](start_span)[span_119](end_span)।" },
-                            { jp: "いすは そのままにして <mark class='hl'>おいてください</mark>。", bn: "চেয়ার যেভাবে আছে সেভাবেই রেখে দিন প্লিজ[span_120](start_span)[span_120](end_span)।" }
+                            { jp: "りょこうの まえに きっぷを かって <mark class='hl'>おきます</mark>。", bn: "ভ্রমণের আগে টিকিট কেটে রাখতে হয়।" },
+                            { jp: "この しりょうを よんで <mark class='hl'>おいてください</mark>。", bn: "এই ডকুমেন্টটি পড়ে রাখবেন প্লিজ।" },
+                            { jp: "いすは そのままにして <mark class='hl'>おいてください</mark>。", bn: "চেয়ার যেভাবে আছে সেভাবেই রেখে দিন প্লিজ।" }
                         ]
                     },
                     {
                         title: "Rule 3: まだ + Affirmative (এখনো চলমান)",
-                        desc: "কোন কাজ এখনো চলছে বোঝাতে Affirmative বাক্যের সাথে まだ বসে[span_121](start_span)[span_121](end_span)。",
+                        desc: "কোন কাজ এখনো চলছে বোঝাতে Affirmative বাক্যের সাথে まだ বসে।",
                         formula: "<strong>まだ</strong> + Verb (て-form) います",
                         examples: [
-                            { jp: "<mark class='hl'>まだ</mark> あめが ふっています。", bn: "এখনো বৃষ্টি হচ্ছে[span_122](start_span)[span_122](end_span)।" },
-                            { jp: "<mark class='hl'>まだ</mark> つかっていますから、そのままにして おいてください。", bn: "এখনো ব্যবহার করছি বলে সেভাবেই রেখে দিন[span_123](start_span)[span_123](end_span)।" }
+                            { jp: "<mark class='hl'>まだ</mark> あめが ふっています。", bn: "এখনো বৃষ্টি হচ্ছে।" },
+                            { jp: "<mark class='hl'>まだ</mark> つかっていますから、そのままにして おいてください。", bn: "এখনো ব্যবহার করছি বলে সেভাবেই রেখে দিন।" }
                         ]
                     },
                     {
                         title: "Rule 4: とか ･･･ とか (এবং, আরও অনেক কিছু)",
-                        desc: "অনেকগুলো বিষয়ের উদাহরণ একসাথে তুলে ধরতে বসে[span_124](start_span)[span_124](end_span)。",
+                        desc: "অনেকগুলো বিষয়ের উদাহরণ একসাথে তুলে ধরতে বসে।",
                         formula: "<strong>Noun とか Noun とか</strong>",
                         examples: [
-                            { jp: "テニス<mark class='hl'>とか</mark> すいえい<mark class='hl'>とか</mark>･･･。", bn: "টেনিস এবং সাঁতার এবং আরও অনেক কিছু･･･[span_125](start_span)[span_125](end_span)।" }
+                            { jp: "テニス<mark class='hl'>とか</mark> すいえい<mark class='hl'>とか</mark>･･･。", bn: "টেনিস এবং সাঁতার এবং আরও অনেক কিছু･･･।" }
                         ]
                     },
                     {
                         title: "Rule 5: Particle + も (পার্টিক্যালের সাথে も)",
-                        desc: "に, で, から, まで, と এর সাথে も যুক্ত হয়; তবে が, を, へ পার্টিক্যাল উঠে গিয়ে সরাসরি も বসে[span_126](start_span)[span_126](end_span)。",
+                        desc: "に, で, から, まで, と এর সাথে も যুক্ত হয়; তবে が, を, へ পার্টিক্যাল উঠে গিয়ে সরাসরি も বসে।",
                         formula: "<strong>(にも / でも / からも / どこも)</strong>",
                         examples: [
-                            { jp: "ほか<mark class='hl'>にも</mark> いろいろ あります。", bn: "পাশাপাশি আরও অনেক কিছু আছে[span_127](start_span)[span_127](end_span)।" },
-                            { jp: "どこ<mark class='hl'>も</mark> いきません。", bn: "কোথাও যাব না[span_128](start_span)[span_128](end_span)।" }
+                            { jp: "ほか<mark class='hl'>にも</mark> いろいろ あります。", bn: "পাশাপাশি আরও অনেক কিছু আছে।" },
+                            { jp: "どこ<mark class='hl'>も</mark> いきません。", bn: "কোথাও যাব না।" }
                         ]
                     }
                 ]
@@ -907,56 +887,56 @@
                 rules: [
                     {
                         title: "Rule 1: Volitional Form বা いこうけい (ঐচ্ছিক রূপ)",
-                        desc: "Verb-এর ঐচ্ছিক রূপ[span_129](start_span)[span_129](end_span)। ます-এর পরিবর্তে informal কথোপকথনে বসে[span_130](start_span)[span_130](end_span)。",
+                        desc: "Verb-এর ঐচ্ছিক রূপ। ます-এর পরিবর্তে informal কথোপকথনে বসে।",
                         formula: "<strong>Group 1:</strong> い-কলাম → お-কলাম + う (かきます → かこう / いそぎます → いそごう)<br><strong>Group 2:</strong> ます কেটে よう (たべます → たべよう / みます → みよう)<br><strong>Group 3:</strong> きます → <strong>こよう</strong> | します → <strong>しよう</strong>",
                         examples: [
-                            { jp: "ちょっと やすまない? ･･･うん、<mark class='hl'>やすもう</mark>。", bn: "একটু বিশ্রাম করবে নাকি? হ্যাঁ, বিশ্রাম করা যাক[span_131](start_span)[span_131](end_span)।" },
-                            { jp: "てつだ<mark class='hl'>おうか</mark>。", bn: "সাহায্য করব কি[span_132](start_span)[span_132](end_span)?" }
+                            { jp: "ちょっと やすまない? ･･･うん、<mark class='hl'>やすもう</mark>。", bn: "একটু বিশ্রাম করবে নাকি? হ্যাঁ, বিশ্রাম করা যাক।" },
+                            { jp: "てつだ<mark class='hl'>おうか</mark>。", bn: "সাহায্য করব কি?" }
                         ]
                     },
                     {
                         title: "Rule 2: Volitional + と おもっています (সিদ্ধান্ত / পরিকল্পনা)",
-                        desc: "কিছুক্ষণ আগেই সিদ্ধান্ত নিয়েছি বা ভেবে রেখেছি বোঝায়[span_133](start_span)[span_133](end_span)। ৩য় ব্যক্তির চিন্তাও প্রকাশ করা যায়[span_134](start_span)[span_134](end_span)。",
+                        desc: "কিছুক্ষণ আগেই সিদ্ধান্ত নিয়েছি বা ভেবে রেখেছি বোঝায়। ৩য় ব্যক্তির চিন্তাও প্রকাশ করা যায়।",
                         formula: "<strong>Volitional Form</strong> + <strong>と おもっています</strong>",
                         examples: [
-                            { jp: "しゅうまつは うみへ <mark class='hl'>いこうと おもっています</mark>。", bn: "সপ্তাহের ছুটিতে সাগরে যাব সিদ্ধান্ত নিয়েছি[span_135](start_span)[span_135](end_span)।" },
-                            { jp: "がいこくで しごとを <mark class='hl'>みつけようと おもっています</mark>。", bn: "বিদেশে চাকরি খোঁজার কথা চিন্তা করেছি[span_136](start_span)[span_136](end_span)।" },
-                            { jp: "かれは がっこうを <mark class='hl'>つくろうと おもっています</mark>。", bn: "তিনি স্কুল প্রতিষ্ঠা করার সিদ্ধান্ত নিয়েছেন[span_137](start_span)[span_137](end_span)।" }
+                            { jp: "しゅうまつは うみへ <mark class='hl'>いこうと おもっています</mark>。", bn: "সপ্তাহের ছুটিতে সাগরে যাব সিদ্ধান্ত নিয়েছি।" },
+                            { jp: "がいこくで しごとを <mark class='hl'>みつけようと おもっています</mark>。", bn: "বিদেশে চাকরি খোঁজার কথা চিন্তা করেছি।" },
+                            { jp: "かれは がっこうを <mark class='hl'>つくろうと おもっています</mark>。", bn: "তিনি স্কুল প্রতিষ্ঠা করার সিদ্ধান্ত নিয়েছেন।" }
                         ]
                     },
                     {
                         title: "Rule 3: V-(Dic / ない) + つもりです (ইচ্ছা)",
-                        desc: "দৃঢ় ইচ্ছা প্রকাশ করে (Dic ফর্ম দিয়ে ইতিবাচক এবং ない ফর্ম দিয়ে নেতিবাচক ইচ্ছা)[span_138](start_span)[span_138](end_span)。",
+                        desc: "দৃঢ় ইচ্ছা প্রকাশ করে (Dic ফর্ম দিয়ে ইতিবাচক এবং ない ফর্ম দিয়ে নেতিবাচক ইচ্ছা)।",
                         formula: "<strong>Verb (Dictionary / ない)</strong> + <strong>つもりです</strong>",
                         examples: [
-                            { jp: "くにへ かえっても、にほんごの べんきょうを <mark class='hl'>つづけるつもりです</mark>。", bn: "দেশে ফিরে গিয়েও পড়াশোনা চালিয়ে যাওয়ার ইচ্ছা আছে[span_139](start_span)[span_139](end_span)।" },
-                            { jp: "あしたからは たばこを <mark class='hl'>すわないつもりです</mark>。", bn: "আগামীকাল থেকে সিগারেট না খাওয়ার ইচ্ছা আছে[span_140](start_span)[span_140](end_span)।" }
+                            { jp: "くにへ かえっても、にほんごの べんきょうを <mark class='hl'>つづけるつもりです</mark>。", bn: "দেশে ফিরে গিয়েও পড়াশোনা চালিয়ে যাওয়ার ইচ্ছা আছে।" },
+                            { jp: "あしたからは たばこを <mark class='hl'>すわないつもりです</mark>。", bn: "আগামীকাল থেকে সিগারেট না খাওয়ার ইচ্ছা আছে।" }
                         ]
                     },
                     {
                         title: "Rule 4: V-Dic / Noun の + よていです (শিডিউল)",
-                        desc: "সুনির্দিষ্ট বা নিশ্চিত সময়সূচি বোঝাতে ব্যবহৃত হয়[span_141](start_span)[span_141](end_span)。",
+                        desc: "সুনির্দিষ্ট বা নিশ্চিত সময়সূচি বোঝাতে ব্যবহৃত হয়।",
                         formula: "<strong>Verb (Dictionary form) / Noun の</strong> + <strong>よていです</strong>",
                         examples: [
-                            { jp: "7がつの おわりに ドイツへ <mark class='hl'>しゅっちょうする よていです</mark>。", bn: "জুলাই মাসের শেষে জার্মানিতে ব্যবসা ভ্রমণের পরিকল্পনা আছে[span_142](start_span)[span_142](end_span)।" },
-                            { jp: "りょこうは 1しゅうかんぐらいの <mark class='hl'>よていです</mark>。", bn: "প্রায় ১ সপ্তাহের ভ্রমণের পরিকল্পনা আছে[span_143](start_span)[span_143](end_span)।" }
+                            { jp: "7がつの おわりに ドイツへ <mark class='hl'>しゅっちょうする よていです</mark>。", bn: "জুলাই মাসের শেষে জার্মানিতে ব্যবসা ভ্রমণের পরিকল্পনা আছে।" },
+                            { jp: "りょこうは 1しゅうかんぐらいの <mark class='hl'>よていです</mark>。", bn: "প্রায় ১ সপ্তাহের ভ্রমণের পরিকল্পনা আছে।" }
                         ]
                     },
                     {
                         title: "Rule 5: まだ + Verb て-form いません (এখনো সম্পন্ন হয়নি)",
-                        desc: "কোনো কাজ এখনো শেষ হয়নি বোঝাতে বসে[span_144](start_span)[span_144](end_span)。",
+                        desc: "কোনো কাজ এখনো শেষ হয়নি বোঝাতে বসে।",
                         formula: "<strong>まだ</strong> + Verb (て-form) <strong>いません</strong>",
                         examples: [
-                            { jp: "ぎんこうは <mark class='hl'>まだ あいていません</mark>。", bn: "ব্যাংক এখনো খোলা নাই[span_145](start_span)[span_145](end_span)।" },
-                            { jp: "いいえ、<mark class='hl'>まだ かいていません</mark>。", bn: "না, এখনো লিখি নাই[span_146](start_span)[span_146](end_span)।" }
+                            { jp: "ぎんこうは <mark class='hl'>まだ あいていません</mark>。", bn: "ব্যাংক এখনো খোলা নাই।" },
+                            { jp: "いいえ、<mark class='hl'>まだ かいていません</mark>。", bn: "না, এখনো লিখি নাই।" }
                         ]
                     },
                     {
                         title: "Rule 6: Verb-এর ます উঠে Noun হওয়া",
-                        desc: "ক্রিয়ার ます কেটে দিলে তা স্বয়ংক্রিয়ভাবে Noun-এ পরিণত হয়[span_147](start_span)[span_147](end_span)。",
+                        desc: "ক্রিয়ার ます কেটে দিলে তা স্বয়ংক্রিয়ভাবে Noun-এ পরিণত হয়।",
                         formula: "<strong>かえります → かえり | あそびます → あそび | こたえます → こたえ</strong>",
                         examples: [
-                            { jp: "<mark class='hl'>かえり</mark>の しんかんせんは どこから のりますか。", bn: "ফিরে যাওয়ার বুলেট ট্রেনে কোথা থেকে উঠব[span_148](start_span)[span_148](end_span)?" }
+                            { jp: "<mark class='hl'>かえり</mark>の しんかんせんは どこから のりますか。", bn: "ফিরে যাওয়ার বুলেট ট্রেনে কোথা থেকে উঠব?" }
                         ]
                     }
                 ]
@@ -968,55 +948,55 @@
                 rules: [
                     {
                         title: "Rule 1: Vた / Vない + ほうが いいです (উপদেশ)",
-                        desc: "করলে ভালো হয় (た-form) অথবা না করলে ভালো হয় (ない-form) অর্থে উপদেশ দেওয়া[span_149](start_span)[span_149](end_span)。",
+                        desc: "করলে ভালো হয় (た-form) অথবা না করলে ভালো হয় (ない-form) অর্থে উপদেশ দেওয়া।",
                         formula: "<strong>Verb (た-form / ない-form)</strong> + <strong>ほうが いいです</strong>",
                         examples: [
-                            { jp: "まいにち うんどう<mark class='hl'>した ほうが いいです</mark>。", bn: "প্রতিদিন ব্যায়াম করলে ভালো হয়[span_150](start_span)[span_150](end_span)।" },
-                            { jp: "たばこを <mark class='hl'>すわない ほうが いいです</mark>。", bn: "ধূমপান না করলে ভালো হয়[span_151](start_span)[span_151](end_span)।" },
-                            { jp: "おふろに <mark class='hl'>はいらない ほうが いいです</mark>。", bn: "গোসল না করলে ভালো হয়[span_152](start_span)[span_152](end_span)।" }
+                            { jp: "まいにち うんどう<mark class='hl'>した ほうが いいです</mark>。", bn: "প্রতিদিন ব্যায়াম করলে ভালো হয়।" },
+                            { jp: "たばこを <mark class='hl'>すわない ほうが いいです</mark>。", bn: "ধূমপান না করলে ভালো হয়।" },
+                            { jp: "おふろに <mark class='hl'>はいらない ほうが いいです</mark>。", bn: "গোসল না করলে ভালো হয়।" }
                         ]
                     },
                     {
                         title: "Rule 2: Plain Form + でしょう (সম্ভাবনা বেশি)",
-                        desc: "ভবিষ্যতে কোনো ঘটনা ঘটার প্রবল সম্ভাবনা বোঝাতে বসে (だ হবে না)[span_153](start_span)[span_153](end_span)。",
+                        desc: "ভবিষ্যতে কোনো ঘটনা ঘটার প্রবল সম্ভাবনা বোঝাতে বসে (だ হবে না)।",
                         formula: "<strong>Verb / い-adj / な-adj (だ বাদ) / Noun (だ বাদ)</strong> + <strong>でしょう</strong>",
                         examples: [
-                            { jp: "あしたは あめが <mark class='hl'>ふるでしょう</mark>。", bn: "আগামীকাল বৃষ্টি পড়ার সম্ভাবনা আছে[span_154](start_span)[span_154](end_span)।" },
-                            { jp: "こんやは つきが <mark class='hl'>きれいでしょう</mark>。", bn: "আজ রাতে চাঁদ সুন্দর হওয়ার সম্ভাবনা আছে[span_155](start_span)[span_155](end_span)।" }
+                            { jp: "あしたは あめが <mark class='hl'>ふるでしょう</mark>。", bn: "আগামীকাল বৃষ্টি পড়ার সম্ভাবনা আছে।" },
+                            { jp: "こんやは つきが <mark class='hl'>きれいでしょう</mark>。", bn: "আজ রাতে চাঁদ সুন্দর হওয়ার সম্ভাবনা আছে।" }
                         ]
                     },
                     {
                         title: "Rule 3: Plain Form + かもしれません (সম্ভাবনা কম/ধারণা)",
-                        desc: "হতেও পারে আবার নাও হতে পারে—এমন অনিশ্চিত ধারণা বোঝাতে বসে[span_156](start_span)[span_156](end_span)。",
+                        desc: "হতেও পারে আবার নাও হতে পারে—এমন অনিশ্চিত ধারণা বোঝাতে বসে।",
                         formula: "<strong>Verb / い-adj / な-adj (だ বাদ) / Noun (だ বাদ)</strong> + <strong>かもしれません</strong>",
                         examples: [
-                            { jp: "やくそくの じかんに <mark class='hl'>まにあわないかもしれません</mark>。", bn: "প্রতিশ্রুতি রক্ষার জন্য সময়মতো পৌঁছাতে পারব না মনে হয়[span_157](start_span)[span_157](end_span)।" },
-                            { jp: "かれは びょうき<mark class='hl'>かもしれません</mark>。", bn: "সে অসুস্থ মনে হয়[span_158](start_span)[span_158](end_span)।" }
+                            { jp: "やくそくの じかんに <mark class='hl'>まにあわないかもしれません</mark>。", bn: "প্রতিশ্রুতি রক্ষার জন্য সময়মতো পৌঁছাতে পারব না মনে হয়।" },
+                            { jp: "かれは びょうき<mark class='hl'>かもしれません</mark>。", bn: "সে অসুস্থ মনে হয়।" }
                         ]
                     },
                     {
                         title: "Rule 4: Verb ます + ましょう (সম্মতি / লেটস ডু)",
-                        desc: "কারও সাথে একমত হয়ে কোনো কাজ শুরু করার প্রস্তাব[span_159](start_span)[span_159](end_span)。",
+                        desc: "কারও সাথে একমত হয়ে কোনো কাজ শুরু করার প্রস্তাব।",
                         formula: "<strong>Verb (ます কেটে)</strong> + <strong>ましょう</strong>",
                         examples: [
-                            { jp: "ちょっと <mark class='hl'>しらべましょう</mark>。", bn: "একটু চেক করা যাক[span_160](start_span)[span_160](end_span)।" }
+                            { jp: "ちょっと <mark class='hl'>しらべましょう</mark>。", bn: "একটু চেক করা যাক।" }
                         ]
                     },
                     {
                         title: "Rule 5: Quantifier + で (পরিমাণ বা সীমা)",
-                        desc: "সময় এবং সংখ্যার গণনা নির্দিষ্ট করার জন্য Quantifier-এর পর で বসে[span_161](start_span)[span_161](end_span)。",
+                        desc: "সময় এবং সংখ্যার গণনা নির্দিষ্ট করার জন্য Quantifier-এর পর で বসে।",
                         formula: "<strong>সময় / টাকা</strong> + <strong>で</strong>",
                         examples: [
-                            { jp: "えきまで 30ぷん<mark class='hl'>で</mark> いけますか。", bn: "স্টেশন পর্যন্ত ৩০ মিনিটে যেতে পারবে[span_162](start_span)[span_162](end_span)?" },
-                            { jp: "3まんえん<mark class='hl'>で</mark> パソコンが かえますか。", bn: "৩০,০০০ ইয়েন দিয়ে কম্পিউটার কিনতে পারব কি[span_163](start_span)[span_163](end_span)?" }
+                            { jp: "えきまで 30ぷん<mark class='hl'>で</mark> いけますか。", bn: "স্টেশন পর্যন্ত ৩০ মিনিটে যেতে পারবে?" },
+                            { jp: "3まんえん<mark class='hl'>で</mark> パソコンが かえますか。", bn: "৩০,০০০ ইয়েন দিয়ে কম্পিউটার কিনতে পারব কি?" }
                         ]
                     },
                     {
                         title: "Rule 6: なにか しんぱいな こと (বিশেষ বিন্যাস)",
-                        desc: "চিন্তার বিষয় আছে বোঝাতে なにか しんぱいな こと বসে, কিন্তু しんぱいな なに কখনো হয় না[span_164](start_span)[span_164](end_span)。",
+                        desc: "চিন্তার বিষয় আছে বোঝাতে なにか しんぱいな こと বসে, কিন্তু しんぱいな なに কখনো হয় না।",
                         formula: "<strong>なにか･･･もの | どこか･･･ところ | だれか･･･ひと | いつか･･･とき</strong>",
                         examples: [
-                            { jp: "スキーに いきたいんですが、<mark class='hl'>どこか いい ところ</mark>は ありますか。", bn: "স্কি করতে যেতে চাই কিন্তু কোথাও ভালো জায়গা আছে কি[span_165](start_span)[span_165](end_span)?" }
+                            { jp: "スキーに いきたいんですが、<mark class='hl'>どこか いい ところ</mark>は ありますか。", bn: "স্কি করতে যেতে চাই কিন্তু কোথাও ভালো জায়গা আছে কি?" }
                         ]
                     }
                 ]
@@ -1028,49 +1008,49 @@
                 rules: [
                     {
                         title: "Rule 1: Imperative (আদেশ) ও Prohibitive (নিষেধ)",
-                        desc: "কঠোর আদেশ দিতে Imperative এবং কঠোর নিষেধ করতে Prohibitive রূপ বসে[span_166](start_span)[span_166](end_span)。",
+                        desc: "কঠোর আদেশ দিতে Imperative এবং কঠোর নিষেধ করতে Prohibitive রূপ বসে।",
                         formula: "<strong>Imperative:</strong> G1: い-কলাম → え-কলাম (かけ) | G2: ます কেটে ろ (たべろ) | きます→こい | します→しろ<br><strong>Prohibitive:</strong> Verb (Dictionary form) + <strong>な</strong> (かくな / たべるな)",
-                        note: "あります, できます, わかります এর কোনো Imperative রূপ নেই[span_167](start_span)[span_167](end_span)。",
+                        note: "あります, できます, わかります এর কোনো Imperative রূপ নেই।",
                         examples: [
-                            { jp: "はやく <mark class='hl'>ねろ</mark>。", bn: "দ্রুত ঘুমাও (আদেশ)[span_168](start_span)[span_168](end_span)।" },
-                            { jp: "でんしゃの なかで <mark class='hl'>さわぐな</mark>。", bn: "ট্রেনের ভেতরে হট্টগোল কোরো না (নিষেধ)[span_169](start_span)[span_169](end_span)।" },
-                            { jp: "あした うちへ <mark class='hl'>こいよ</mark>。", bn: "আগামীকাল বাড়িতে এসো (বন্ধুর প্রতি)[span_170](start_span)[span_170](end_span)।" }
+                            { jp: "はやく <mark class='hl'>ねろ</mark>。", bn: "দ্রুত ঘুমাও (আদেশ)।" },
+                            { jp: "でんしゃの なかで <mark class='hl'>さわぐな</mark>。", bn: "ট্রেনের ভেতরে হট্টগোল কোরো না (নিষেধ)।" },
+                            { jp: "あした うちへ <mark class='hl'>こいよ</mark>。", bn: "আগামীকাল বাড়িতে এসো (বন্ধুর প্রতি)।" }
                         ]
                     },
                     {
                         title: "Rule 2: 〜と かいてあります / と よみます",
-                        desc: "কোথাও কোনো কিছু লেখা আছে বা কোনো চিহ্নের পাঠ কী তা প্রকাশ করে[span_171](start_span)[span_171](end_span)。",
+                        desc: "কোথাও কোনো কিছু লেখা আছে বা কোনো চিহ্নের পাঠ কী তা প্রকাশ করে।",
                         formula: "<strong>... と かいてあります / と よみます</strong>",
                         examples: [
-                            { jp: "あそこに くるまを とめるな<mark class='hl'>と かいてあります</mark>。", bn: "ঐখানে 'গাড়ি থামানো নিষেধ' লেখা আছে[span_172](start_span)[span_172](end_span)।" },
-                            { jp: "あのかんじは いりぐち<mark class='hl'>と よみます</mark>。", bn: "ঐ কাঞ্জি দিয়ে 'প্রবেশ পথ' বলা আছে[span_173](start_span)[span_173](end_span)।" }
+                            { jp: "あそこに くるまを とめるな<mark class='hl'>と かいてあります</mark>。", bn: "ঐখানে 'গাড়ি থামানো নিষেধ' লেখা আছে।" },
+                            { jp: "あのかんじは いりぐち<mark class='hl'>と よみます</mark>。", bn: "ঐ কাঞ্জি দিয়ে 'প্রবেশ পথ' বলা আছে।" }
                         ]
                     },
                     {
                         title: "Rule 3: X は Y という いみです (অর্থ প্রকাশ)",
-                        desc: "কোনো সংকেত বা কথার অর্থ কী তা বিস্তারিত ব্যাখ্যা করতে বসে[span_174](start_span)[span_174](end_span)。",
+                        desc: "কোনো সংকেত বা কথার অর্থ কী তা বিস্তারিত ব্যাখ্যা করতে বসে।",
                         formula: "<strong>শব্দ は</strong> + <strong>ব্যাখ্যা + という いみです</strong>",
                         examples: [
-                            { jp: "この マークは とまれ<mark class='hl'>という いみです</mark>。", bn: "এই চিহ্ন দিয়ে 'থামা' অর্থ বোঝানো হয়েছে[span_175](start_span)[span_175](end_span)।" },
-                            { jp: "たちいりきんしは はいるな<mark class='hl'>という いみです</mark>。", bn: "তাচিরিকিংশি এর অর্থ হলো 'প্রবেশ নিষেধ[span_176](start_span)'[span_176](end_span)।" }
+                            { jp: "この マークは とまれ<mark class='hl'>という いみです</mark>。", bn: "এই চিহ্ন দিয়ে 'থামা' অর্থ বোঝানো হয়েছে।" },
+                            { jp: "たちいりきんしは はいるな<mark class='hl'>という いみです</mark>。", bn: "তাচিরিকিংশি এর অর্থ হলো 'প্রবেশ নিষেধ'।" }
                         ]
                     },
                     {
                         title: "Rule 4: Plain Form + と いっていました (বলেছিল)",
-                        desc: "কারও বক্তব্য নির্দেশ করতে বা কোট করে উল্লেখ করতে বসে[span_177](start_span)[span_177](end_span)。",
+                        desc: "কারও বক্তব্য নির্দেশ করতে বা কোট করে উল্লেখ করতে বসে।",
                         formula: "<strong>Plain Form</strong> + <strong>といっていました</strong>",
                         examples: [
-                            { jp: "やまださんは あした 5じに くる<mark class='hl'>と いっていました</mark>。", bn: "ইয়ামাদা বলেছিল যে আগামীকাল ৫টায় আসবে[span_178](start_span)[span_178](end_span)।" },
-                            { jp: "たなかさんは あした やすむ<mark class='hl'>と いっていました</mark>。", bn: "তানাকা বলেছিল যে আগামীকাল ছুটি কাটাবে[span_179](start_span)[span_179](end_span)।" }
+                            { jp: "やまださんは あした 5じに くる<mark class='hl'>と いっていました</mark>。", bn: "ইয়ামাদা বলেছিল যে আগামীকাল ৫টায় আসবে।" },
+                            { jp: "たなかさんは あした やすむ<mark class='hl'>と いっていました</mark>。", bn: "তানাকা বলেছিল যে আগামীকাল ছুটি কাটাবে।" }
                         ]
                     },
                     {
                         title: "Rule 5: V-Plain + と つたえていただけませんか (বলে দেবেন কি?)",
-                        desc: "ভদ্রভাবে কাউকে কোনো সংবাদ পৌঁছে দেওয়ার জন্য অনুরোধ করতে বসে[span_180](start_span)[span_180](end_span)。",
+                        desc: "ভদ্রভাবে কাউকে কোনো সংবাদ পৌঁছে দেওয়ার জন্য অনুরোধ করতে বসে।",
                         formula: "<strong>Plain Form</strong> + <strong>と つたえていただけませんか</strong>",
                         examples: [
-                            { jp: "たなかさんに 10ぷんほど おくれる<mark class='hl'>と つたえていただけませんか</mark>。", bn: "তানাকা সাহেবকে বলে দেবেন কি '১০ মিনিট দেরি হবে[span_181](start_span)'[span_181](end_span)?" },
-                            { jp: "あとで でんわを ください<mark class='hl'>と つたえていただけませんか</mark>。", bn: "আমাকে যেন পরে ফোন করে তা বলে দেবেন কি[span_182](start_span)[span_182](end_span)?" }
+                            { jp: "たなかさんに 10ぷんほど おくれる<mark class='hl'>と つたえていただけませんか</mark>。", bn: "তানাকা সাহেবকে বলে দেবেন কি '১০ মিনিট দেরি হবে'?" },
+                            { jp: "あとで でんわを ください<mark class='hl'>と つたえていただけませんか</mark>。", bn: "আমাকে যেন পরে ফোন করে তা বলে দেবেন কি?" }
                         ]
                     }
                 ]
@@ -1082,31 +1062,31 @@
                 rules: [
                     {
                         title: "Rule 1: Vた / Noun の + とおりに (হুবহু সেভাবে)",
-                        desc: "একটি কাজের সাদৃশ্যে হুবহু সেভাবে কাজ করার আদেশ দিতে বসে[span_183](start_span)[span_183](end_span)。",
+                        desc: "একটি কাজের সাদৃশ্যে হুবহু সেভাবে কাজ করার আদেশ দিতে বসে।",
                         formula: "<strong>Verb (た-form) / Noun の</strong> + <strong>とおりに</strong> + Verb 2",
-                        note: "Noun হিসেবে বসলে このとおりに, そのとおりに বসে[span_184](start_span)[span_184](end_span)。",
+                        note: "Noun হিসেবে বসলে このとおりに, そのとおりに বসে।",
                         examples: [
-                            { jp: "わたしが やった<mark class='hl'>とおりに</mark>、やって ください。", bn: "আমি যেভাবে করি সেভাবে করবে দয়া করে[span_185](start_span)[span_185](end_span)।" },
-                            { jp: "せんの <mark class='hl'>とおりに</mark>、かみを きって ください。", bn: "রেখা যেভাবে আছে সেভাবে পেপার কাটবে দয়া করে[span_186](start_span)[span_186](end_span)।" }
+                            { jp: "わたしが やった<mark class='hl'>とおりに</mark>、やって ください。", bn: "আমি যেভাবে করি সেভাবে করবে দয়া করে।" },
+                            { jp: "せんの <mark class='hl'>とおりに</mark>、かみを きって ください。", bn: "রেখা যেভাবে আছে সেভাবে পেপার কাটবে দয়া করে।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vた / Noun の + あとで (পরে)",
-                        desc: "একটি কাজ শেষ হওয়ার পরে আরেকটি কাজ করার সময়ক্রম বোঝায়[span_187](start_span)[span_187](end_span)。",
+                        desc: "একটি কাজ শেষ হওয়ার পরে আরেকটি কাজ করার সময়ক্রম বোঝায়।",
                         formula: "<strong>Verb (た-form) / Noun の</strong> + <strong>あとで</strong> + Verb 2",
                         examples: [
-                            { jp: "しごとが おわった<mark class='hl'>あとで</mark>、のみに いきます。", bn: "কাজ শেষ হওয়ার পরে পান করার জন্য যাব[span_188](start_span)[span_188](end_span)।" },
-                            { jp: "スポーツの <mark class='hl'>あとで</mark>、シャワーを あびます。", bn: "খেলার পরে গোসল করব[span_189](start_span)[span_189](end_span)।" }
+                            { jp: "しごとが おわった<mark class='hl'>あとで</mark>、のみに いきます。", bn: "কাজ শেষ হওয়ার পরে পান করার জন্য যাব।" },
+                            { jp: "スポーツの <mark class='hl'>あとで</mark>、シャワーを あびます。", bn: "খেলার পরে গোসল করব।" }
                         ]
                     },
                     {
                         title: "Rule 3: V1て + V2 বনাম V1ないで + V2",
-                        desc: "কোনো উপাদান সঙ্গে নিয়ে করলে Vて এবং ছাড়া করলে Vないで বসে[span_190](start_span)[span_190](end_span)。",
+                        desc: "কোনো উপাদান সঙ্গে নিয়ে করলে Vて এবং ছাড়া করলে Vないで বসে।",
                         formula: "উপাদানসহ: <strong>V1-て + V2</strong> | উপাদান ছাড়া: <strong>V1-ないで + V2</strong>",
                         examples: [
-                            { jp: "しょうゆを つけて <mark class='hl'>たべます</mark>。", bn: "সয়া সস লাগিয়ে খাই[span_191](start_span)[span_191](end_span)।" },
-                            { jp: "しょうゆを つけないで <mark class='hl'>たべます</mark>。", bn: "সয়া সস না লাগিয়ে খাই[span_192](start_span)[span_192](end_span)।" },
-                            { jp: "かさを もたないで <mark class='hl'>でかけます</mark>。", bn: "ছাতা না নিয়ে বাইরে যাব[span_193](start_span)[span_193](end_span)।" }
+                            { jp: "しょうゆを つけて <mark class='hl'>たべます</mark>。", bn: "সয়া সস লাগিয়ে খাই।" },
+                            { jp: "しょうゆを つけないで <mark class='hl'>たべます</mark>。", bn: "সয়া সস না লাগিয়ে খাই।" },
+                            { jp: "かさを もたないで <mark class='hl'>でかけます</mark>。", bn: "ছাতা না নিয়ে বাইরে যাব।" }
                         ]
                     }
                 ]
@@ -1118,36 +1098,36 @@
                 rules: [
                     {
                         title: "Rule 1: Conditional Form (じょうけんけい - যদি)",
-                        desc: "কোনো কাজ বা বিষয়ের ক্ষেত্রে শর্ত জুড়ে দেওয়া[span_194](start_span)[span_194](end_span)。",
+                        desc: "কোনো কাজ বা বিষয়ের ক্ষেত্রে শর্ত জুড়ে দেওয়া।",
                         formula: "<strong>Group 1:</strong> い-কলাম → え-কলাম + ば (あいます → あえば / のみます → のめば)<br><strong>Group 2:</strong> ます কেটে れば (たべます → たべれば)<br><strong>Group 3:</strong> きます → <strong>くれば</strong> | します → <strong>すれば</strong><br><strong>い-adj:</strong> い কেটে ければ | <strong>な-adj / Noun:</strong> + なら",
                         examples: [
-                            { jp: "ボタンを おせ<mark class='hl'>ば</mark>、まどが あきます。", bn: "যদি বাটন পুশ করো জানালা খুলবে[span_195](start_span)[span_195](end_span)।" },
-                            { jp: "いい てんき<mark class='hl'>なら</mark>、むこうに しまが みえます。", bn: "যদি আবহাওয়া ভালো থাকে ওপাশে দ্বীপ দেখতে পাবে[span_196](start_span)[span_196](end_span)।" },
-                            { jp: "ボールペンが な<mark class='hl'>ければ</mark>、えんぴつで かいて ください。", bn: "যদি কলম না থাকে পেন্সিল দিয়ে লিখুন[span_197](start_span)[span_197](end_span)।" }
+                            { jp: "ボタンを おせ<mark class='hl'>ば</mark>、まどが あきます。", bn: "যদি বাটন পুশ করো জানালা খুলবে।" },
+                            { jp: "いい てんき<mark class='hl'>なら</mark>、むこうに しまが みえます。", bn: "যদি আবহাওয়া ভালো থাকে ওপাশে দ্বীপ দেখতে পাবে।" },
+                            { jp: "ボールペンが な<mark class='hl'>ければ</mark>、えんぴつで かいて ください。", bn: "যদি কলম না থাকে পেন্সিল দিয়ে লিখুন।" }
                         ]
                     },
                     {
                         title: "Rule 2: Interrogative + V-ば いいですか (কী করলে ভালো হয়?)",
-                        desc: "মতামত বা সাজেশন চাওয়ার জন্য শর্তযুক্ত প্রশ্ন[span_198](start_span)[span_198](end_span)。",
+                        desc: "মতামত বা সাজেশন চাওয়ার জন্য শর্তযুক্ত প্রশ্ন।",
                         formula: "<strong>প্রশ্নবোধক শব্দ</strong> + <strong>Verb (ば-form)</strong> + <strong>いいですか</strong>",
                         examples: [
-                            { jp: "ほんを かりたいんですが、どう <mark class='hl'>すれば いいですか</mark>。", bn: "যদি বই ধার করতে চাই, কী করলে ভালো হবে[span_199](start_span)[span_199](end_span)?" }
+                            { jp: "ほんを かりたいんですが、どう <mark class='hl'>すれば いいですか</mark>。", bn: "যদি বই ধার করতে চাই, কী করলে ভালো হবে?" }
                         ]
                     },
                     {
                         title: "Rule 3: Noun + なら (প্রসঙ্গ ধরে পরামর্শ)",
-                        desc: "উত্থাপিত টপিককে শর্ত ধরে কোনো সুনির্দিষ্ট পরামর্শ দিতে বসে[span_200](start_span)[span_200](end_span)。",
+                        desc: "উত্থাপিত টপিককে শর্ত ধরে কোনো সুনির্দিষ্ট পরামর্শ দিতে বসে।",
                         formula: "<strong>Noun</strong> + <strong>なら</strong> + পরামর্শ",
                         examples: [
-                            { jp: "おんせんに いきたいんですが。･･･おんせん<mark class='hl'>なら</mark> はくばが いいですよ。", bn: "গরম ঝর্ণায় যেতে চাই･･･ গরম ঝর্ণা হলে হাকুবা ভালো হবে[span_201](start_span)[span_201](end_span)।" }
+                            { jp: "おんせんに いきたいんですが。･･･おんせん<mark class='hl'>なら</mark> はくばが いいですよ。", bn: "গরম ঝর্ণায় যেতে চাই･･･ গরম ঝর্ণা হলে হাকুবা ভালো হবে।" }
                         ]
                     },
                     {
                         title: "Rule 4: 〜は ありませんか (কোথাও কি আছে?)",
-                        desc: "ভদ্রভাবে কোনো সুযোগ বা স্থান সম্পর্কে জানতে চাওয়া[span_202](start_span)[span_202](end_span)。",
+                        desc: "ভদ্রভাবে কোনো সুযোগ বা স্থান সম্পর্কে জানতে চাওয়া।",
                         formula: "<strong>Noun は ありませんか</strong>",
                         examples: [
-                            { jp: "どこか いい ところ<mark class='hl'>は ありませんか</mark>。", bn: "কোথাও একটা ভালো জায়গা আছে কি[span_203](start_span)[span_203](end_span)?" }
+                            { jp: "どこか いい ところ<mark class='hl'>は ありませんか</mark>。", bn: "কোথাও একটা ভালো জায়গা আছে কি?" }
                         ]
                     }
                 ]
@@ -1159,37 +1139,37 @@
                 rules: [
                     {
                         title: "Rule 1: V-Dic / V-ない + ように + V2 (উদ্দেশ্যে)",
-                        desc: "লক্ষ্য পূরণ বা গন্তব্যে পৌঁছানোর প্রচেষ্টা বোঝায়[span_204](start_span)[span_204](end_span)。",
+                        desc: "লক্ষ্য পূরণ বা গন্তব্যে পৌঁছানোর প্রচেষ্টা বোঝায়।",
                         formula: "<strong>Potential Verb (Dic) / Verb (ない)</strong> + <strong>ように</strong> + Action Verb",
                         examples: [
-                            { jp: "はやく およげる<mark class='hl'>ように</mark>、まいにち れんしゅうしています。", bn: "দ্রুত সাঁতার কাটার জন্য প্রতিদিন অনুশীলন করতেছি[span_205](start_span)[span_205](end_span)।" },
-                            { jp: "わすれない<mark class='hl'>ように</mark>、メモして ください。", bn: "ভুলে না যাওয়ার জন্য নোট করে রাখো[span_206](start_span)[span_206](end_span)।" }
+                            { jp: "はやく およげる<mark class='hl'>ように</mark>、まいにち れんしゅうしています。", bn: "দ্রুত সাঁতার কাটার জন্য প্রতিদিন অনুশীলন করতেছি।" },
+                            { jp: "わすれない<mark class='hl'>ように</mark>、メモして ください。", bn: "ভুলে না যাওয়ার জন্য নোট করে রাখো।" }
                         ]
                     },
                     {
                         title: "Rule 2: V-Dic + ように なります (সক্ষম হওয়া)",
-                        desc: "নিজের সক্ষমতা বা দক্ষতা তৈরি হওয়া নির্দেশ করে[span_207](start_span)[span_207](end_span)。",
+                        desc: "নিজের সক্ষমতা বা দক্ষতা তৈরি হওয়া নির্দেশ করে।",
                         formula: "<strong>Verb (Dictionary form)</strong> + <strong>ように なります</strong>",
                         examples: [
-                            { jp: "やっと じてんしゃに のれる<mark class='hl'>ように なりました</mark>。", bn: "অবশেষে সাইকেলে চড়তে সক্ষম হয়েছি[span_208](start_span)[span_208](end_span)।" },
-                            { jp: "テレビの にほんごが かなり わかる<mark class='hl'>ように なりました</mark>。", bn: "টেলিভিশনের জাপানি ভাষা পরিষ্কার বুঝতে সক্ষম হয়েছি[span_209](start_span)[span_209](end_span)।" }
+                            { jp: "やっと じてんしゃに のれる<mark class='hl'>ように なりました</mark>。", bn: "অবশেষে সাইকেলে চড়তে সক্ষম হয়েছি।" },
+                            { jp: "テレビの にほんごが かなり わかる<mark class='hl'>ように なりました</mark>。", bn: "টেলিভিশনের জাপানি ভাষা পরিষ্কার বুঝতে সক্ষম হয়েছি।" }
                         ]
                     },
                     {
                         title: "Rule 3: ように しています / して ください",
-                        desc: "অভ্যাস বজায় রাখার চেষ্টা করা এবং অপরকে তা করার অনুরোধ করা[span_210](start_span)[span_210](end_span)。",
+                        desc: "অভ্যাস বজায় রাখার চেষ্টা করা এবং অপরকে তা করার অনুরোধ করা।",
                         formula: "<strong>Verb (Dic / ない)</strong> + <strong>ように しています / して ください</strong>",
                         examples: [
-                            { jp: "まいにち やさいを たべる<mark class='hl'>ように しています</mark>。", bn: "প্রতিদিন শাকসবজি খাওয়ার চেষ্টা করতেছি[span_211](start_span)[span_211](end_span)।" },
-                            { jp: "もっと やさいを たべる<mark class='hl'>ように して ください</mark>。", bn: "বেশি করে সবজি খাওয়ার চেষ্টা করুন প্লিজ[span_212](start_span)[span_212](end_span)।" }
+                            { jp: "まいにち やさいを たべる<mark class='hl'>ように しています</mark>。", bn: "প্রতিদিন শাকসবজি খাওয়ার চেষ্টা করতেছি।" },
+                            { jp: "もっと やさいを たべる<mark class='hl'>ように して ください</mark>。", bn: "বেশি করে সবজি খাওয়ার চেষ্টা করুন প্লিজ।" }
                         ]
                     },
                     {
                         title: "Rule 4: はやい → はやく / じょうずな → じょうずに",
-                        desc: "Adjective-কে Adverbial ফর্মে রূপান্তর[span_213](start_span)[span_213](end_span)。",
+                        desc: "Adjective-কে Adverbial ফর্মে রূপান্তর।",
                         formula: "<strong>い-adj:</strong> い কেটে く | <strong>な-adj:</strong> な কেটে に",
                         examples: [
-                            { jp: "<mark class='hl'>はやく じょうずに</mark> おちゃが たてられるように なりたいです。", bn: "দ্রুত ও ভালোভাবে চা তৈরি করতে দক্ষ হতে চাই[span_214](start_span)[span_214](end_span)।" }
+                            { jp: "<mark class='hl'>はやく じょうずに</mark> おちゃが たてられるように なりたいです。", bn: "দ্রুত ও ভালোভাবে চা তৈরি করতে দক্ষ হতে চাই।" }
                         ]
                     }
                 ]
@@ -1201,38 +1181,38 @@
                 rules: [
                     {
                         title: "Rule 1: Passive Verb রূপান্তর (うけみけい)",
-                        desc: "কারও দ্বারা প্রশংসিত বা ক্ষতিগ্রস্ত হওয়া[span_215](start_span)[span_215](end_span)。",
+                        desc: "কারও দ্বারা প্রশংসিত বা ক্ষতিগ্রস্ত হওয়া।",
                         formula: "<strong>Group 1:</strong> い-কলাম → あ-কলাম + れます (かきます → かかれます)<br><strong>Group 2:</strong> ます কেটে られます (ほめます → ほめられます)<br><strong>Group 3:</strong> きます → <strong>こられます</strong> | します → <strong>されます</strong>",
                         examples: [
-                            { jp: "せんせいに <mark class='hl'>ほめられました</mark>。", bn: "শিক্ষকের কাছ থেকে প্রশংসা পেয়েছিলাম[span_216](start_span)[span_216](end_span)।" }
+                            { jp: "せんせいに <mark class='hl'>ほめられました</mark>。", bn: "শিক্ষকের কাছ থেকে প্রশংসা পেয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 2: N1 は N2 に N3 を Passive (ভিকটিম প্যাসিভ)",
-                        desc: "অন্যের দ্বারা নিজের কোনো ক্ষতির সম্মুখীন হওয়া[span_217](start_span)[span_217](end_span)。",
+                        desc: "অন্যের দ্বারা নিজের কোনো ক্ষতির সম্মুখীন হওয়া।",
                         formula: "<strong>N1 は N2 に N3 を</strong> + <strong>Passive Verb</strong>",
                         examples: [
-                            { jp: "わたしは おとうとに パソコンを <mark class='hl'>こわされました</mark>。", bn: "আমার ছোট ভাই দ্বারা কম্পিউটার ভাঙা হয়েছিল[span_218](start_span)[span_218](end_span)।" },
-                            { jp: "いぬに てを <mark class='hl'>かまれました</mark>。", bn: "কুকুর দ্বারা হাতে কামড় খেয়েছিলাম[span_219](start_span)[span_219](end_span)।" },
-                            { jp: "じてんしゃを <mark class='hl'>とられました</mark>。", bn: "সাইকেল চুরি হয়েছিল[span_220](start_span)[span_220](end_span)।" }
+                            { jp: "わたしは おとうとに パソコンを <mark class='hl'>こわされました</mark>。", bn: "আমার ছোট ভাই দ্বারা কম্পিউটার ভাঙা হয়েছিল।" },
+                            { jp: "いぬに てを <mark class='hl'>かまれました</mark>。", bn: "কুকুর দ্বারা হাতে কামড় খেয়েছিলাম।" },
+                            { jp: "じてんしゃを <mark class='hl'>とられました</mark>。", bn: "সাইকেল চুরি হয়েছিল।" }
                         ]
                     },
                     {
                         title: "Rule 3: ঘটনা ও আবিষ্কার (が / は Passive)",
-                        desc: "ঐতিহাসিক ঘটনা বা কোনো জিনিস আবিষ্কৃত হওয়া[span_221](start_span)[span_221](end_span)。",
+                        desc: "ঐতিহাসিক ঘটনা বা কোনো জিনিস আবিষ্কৃত হওয়া।",
                         formula: "অনুষ্ঠান: <strong>Noun が ひらかれました</strong> | উদ্ভাবন: <strong>Noun は はつめいされました</strong>",
                         examples: [
-                            { jp: "おおさかで てんらんかいが <mark class='hl'>ひらかれました</mark>。", bn: "ওসাকাতে প্রদর্শনী মেলা শুরু হয়েছিল[span_222](start_span)[span_222](end_span)।" },
-                            { jp: "でんわは 19せいきに <mark class='hl'>はつめいされました</mark>。", bn: "টেলিফোন ১৯ শতকে তৈরি করা হয়েছিল[span_223](start_span)[span_223](end_span)।" }
+                            { jp: "おおさかで てんらんかいが <mark class='hl'>ひらかれました</mark>。", bn: "ওসাকাতে প্রদর্শনী মেলা শুরু হয়েছিল।" },
+                            { jp: "でんわは 19せいきに <mark class='hl'>はつめいされました</mark>。", bn: "টেলিফোন ১৯ শতকে তৈরি করা হয়েছিল।" }
                         ]
                     },
                     {
                         title: "Rule 4: Noun から / で つくります (তৈরি হওয়া)",
-                        desc: "উপাদান সম্পূর্ণ পরিবর্তিত হলে から এবং মূল উপাদান চেনা গেলে で বসে[span_224](start_span)[span_224](end_span)。",
+                        desc: "উপাদান সম্পূর্ণ পরিবর্তিত হলে から এবং মূল উপাদান চেনা গেলে で বসে।",
                         formula: "রূপান্তর: <strong>から つくります</strong> | আকৃতি পরিবর্তন: <strong>で つくります</strong>",
                         examples: [
-                            { jp: "ビールは むぎ<mark class='hl'>から つくります</mark>。", bn: "বিয়ার তৈরি করা হয় গম থেকে[span_225](start_span)[span_225](end_span)।" },
-                            { jp: "にほんの いえは き<mark class='hl'>で つくられました</mark>。", bn: "জাপানের পুরাতন বাড়ি গাছ দিয়ে তৈরি করা হয়েছিল[span_226](start_span)[span_226](end_span)।" }
+                            { jp: "ビールは むぎ<mark class='hl'>から つくります</mark>。", bn: "বিয়ার তৈরি করা হয় গম থেকে।" },
+                            { jp: "にほんの いえは き<mark class='hl'>で つくられました</mark>。", bn: "জাপানের পুরাতন বাড়ি গাছ দিয়ে তৈরি করা হয়েছিল।" }
                         ]
                     }
                 ]
@@ -1244,46 +1224,46 @@
                 rules: [
                     {
                         title: "Rule 1: V-Dic + のは + Adjective です",
-                        desc: "নির্দিষ্ট করে 'কাজটি করাটা' নির্দেশ করতে বসে[span_227](start_span)[span_227](end_span)。",
+                        desc: "নির্দিষ্ট করে 'কাজটি করাটা' নির্দেশ করতে বসে।",
                         formula: "<strong>Verb (Dictionary form) + のは</strong> + おもしろい / むりです",
                         examples: [
-                            { jp: "ひとりで にもつを はこぶ<mark class='hl'>のは むりです</mark>。", bn: "একা এই পার্সেলটা বহন করা অসম্ভব[span_228](start_span)[span_228](end_span)।" },
-                            { jp: "テニスを する<mark class='hl'>のは おもしろいです</mark>。", bn: "টেনিস খেলাটা আনন্দের[span_229](start_span)[span_229](end_span)।" }
+                            { jp: "ひとりで にもつを はこぶ<mark class='hl'>のは むりです</mark>。", bn: "একা এই পার্সেলটা বহন করা অসম্ভব।" },
+                            { jp: "テニスを する<mark class='hl'>のは おもしろいです</mark>。", bn: "টেনিস খেলাটা আনন্দের।" }
                         ]
                     },
                     {
                         title: "Rule 2: V-Dic + のが + Adjective です",
-                        desc: "পছন্দ, অপছন্দ বা ক্ষমতা বর্ণনা করতে বসে[span_230](start_span)[span_230](end_span)。",
+                        desc: "পছন্দ, অপছন্দ বা ক্ষমতা বর্ণনা করতে বসে।",
                         formula: "<strong>Verb (Dictionary form) + のが</strong> + すき / へた / はやい",
                         examples: [
-                            { jp: "わたしは はなを そだてる<mark class='hl'>のが すきです</mark>。", bn: "আমি ফুলের পরিচর্যা করা পছন্দ করি[span_231](start_span)[span_231](end_span)।" },
-                            { jp: "えを かく<mark class='hl'>のが へたです</mark>。", bn: "ছবি আঁকায় অদক্ষ[span_232](start_span)[span_232](end_span)।" }
+                            { jp: "わたしは はなを そだてる<mark class='hl'>のが すきです</mark>。", bn: "আমি ফুলের পরিচর্যা করা পছন্দ করি।" },
+                            { jp: "えを かく<mark class='hl'>のが へたです</mark>。", bn: "ছবি আঁকায় অদক্ষ।" }
                         ]
                     },
                     {
                         title: "Rule 3: V-Dic + のを わすれました (ভুলে যাওয়া)",
-                        desc: "কোন কাজ করতে ভুলে যাওয়া প্রকাশ করতে বসে[span_233](start_span)[span_233](end_span)。",
+                        desc: "কোন কাজ করতে ভুলে যাওয়া প্রকাশ করতে বসে।",
                         formula: "<strong>Verb (Dictionary form)</strong> + <strong>のを わすれました</strong>",
                         examples: [
-                            { jp: "でんきを けす<mark class='hl'>のを わすれました</mark>。", bn: "বাতি বন্ধ করতে ভুলে গিয়েছিলাম[span_234](start_span)[span_234](end_span)।" },
-                            { jp: "くるまの まどを しめる<mark class='hl'>のを わすれました</mark>。", bn: "গাড়ির জানালা বন্ধ করতে ভুলে গিয়েছিলাম[span_235](start_span)[span_235](end_span)।" }
+                            { jp: "でんきを けす<mark class='hl'>のを わすれました</mark>。", bn: "বাতি বন্ধ করতে ভুলে গিয়েছিলাম।" },
+                            { jp: "くるまの まどを しめる<mark class='hl'>のを わすれました</mark>。", bn: "গাড়ির জানালা বন্ধ করতে ভুলে গিয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 4: Plain Form + のを しっていますか (জানেন কি?)",
-                        desc: "শ্রোতা নির্দিষ্ট ঘটনা সম্পর্কে অবগত কি না তা জানার প্রশ্ন[span_236](start_span)[span_236](end_span)。",
+                        desc: "শ্রোতা নির্দিষ্ট ঘটনা সম্পর্কে অবগত কি না তা জানার প্রশ্ন।",
                         formula: "<strong>Plain Form</strong> + <strong>のを しっていますか</strong>",
                         examples: [
-                            { jp: "すずきさんが らいげつ けっこんする<mark class='hl'>のを しっていますか</mark>。", bn: "সুজুকি সাহেব আগামী মাসে বিয়ে করবেন আপনি জানেন কি[span_237](start_span)[span_237](end_span)?" }
+                            { jp: "すずきさんが らいげつ けっこんする<mark class='hl'>のを しっていますか</mark>。", bn: "সুজুকি সাহেব আগামী মাসে বিয়ে করবেন আপনি জানেন কি?" }
                         ]
                     },
                     {
                         title: "Rule 5: Plain Form + のは Noun です ('হয়' অর্থে)",
-                        desc: "Noun-এর ওপর ফোকাস করতে বসে (な-adj/Noun এ な বসে)[span_238](start_span)[span_238](end_span)。",
+                        desc: "Noun-এর ওপর ফোকাস করতে বসে (な-adj/Noun এ な বসে)।",
                         formula: "<strong>Plain Form + のは Noun です</strong>",
                         examples: [
-                            { jp: "わたしが ほしい<mark class='hl'>のは</mark> イタリアせいの くつ<mark class='hl'>です</mark>。", bn: "আমি যা চাই তা হলো ইতালির তৈরি জুতো[span_239](start_span)[span_239](end_span)।" },
-                            { jp: "ちちが うまれた<mark class='hl'>のは</mark> ほっかいどうの むら<mark class='hl'>です</mark>。", bn: "বাবার জন্মস্থান হলো হোক্কাইডোর ছোট গ্রামে[span_240](start_span)[span_240](end_span)।" }
+                            { jp: "わたしが ほしい<mark class='hl'>のは</mark> イタリアせいの くつ<mark class='hl'>です</mark>。", bn: "আমি যা চাই তা হলো ইতালির তৈরি জুতো।" },
+                            { jp: "ちちが うまれた<mark class='hl'>のは</mark> ほっかいどうの むら<mark class='hl'>です</mark>。", bn: "বাবার জন্মস্থান হলো হোক্কাইডোর ছোট গ্রামে।" }
                         ]
                     }
                 ]
@@ -1295,38 +1275,38 @@
                 rules: [
                     {
                         title: "Rule 1: Vて / Vなくて / い-くて / な-で (আবেগীয় কারণ)",
-                        desc: "কোনো কাজের ফলাফল হিসেবে অনুভূতি প্রকাশ পায়[span_241](start_span)[span_241](end_span)。",
+                        desc: "কোনো কাজের ফলাফল হিসেবে অনুভূতি প্রকাশ পায়।",
                         formula: "<strong>Verb (て/なくて) / い-adj (くて) / な-adj (で)</strong> + ফলাফল",
                         examples: [
-                            { jp: "ニュースを きいて、<mark class='hl'>びっくりしました</mark>。", bn: "খবর শুনে অবাক হয়েছিলাম[span_242](start_span)[span_242](end_span)।" },
-                            { jp: "かぞくに あえなくて、<mark class='hl'>さびしいです</mark>。", bn: "পরিবারের সাথে দেখা না করে একা হয়ে গেছি[span_243](start_span)[span_243](end_span)।" },
-                            { jp: "つかいかたが ふくざつ<mark class='hl'>で</mark>、わかりません。", bn: "ব্যবহারের পদ্ধতি কঠিন, বুঝতে পারছি না[span_244](start_span)[span_244](end_span)।" }
+                            { jp: "ニュースを きいて、<mark class='hl'>びっくりしました</mark>。", bn: "খবর শুনে অবাক হয়েছিলাম।" },
+                            { jp: "かぞくに あえなくて、<mark class='hl'>さびしいです</mark>。", bn: "পরিবারের সাথে দেখা না করে একা হয়ে গেছি।" },
+                            { jp: "つかいかたが ふくざつ<mark class='hl'>で</mark>、わかりません。", bn: "ব্যবহারের পদ্ধতি কঠিন, বুঝতে পারছি না।" }
                         ]
                     },
                     {
                         title: "Rule 2: Noun + で (প্রাকৃতিক কারণ বা দুর্ঘটনা)",
-                        desc: "ভূমিকম্প বা রোগের কারণে কোনো ক্ষতি বা ছুটি নেওয়া[span_245](start_span)[span_245](end_span)。",
+                        desc: "ভূমিকম্প বা রোগের কারণে কোনো ক্ষতি বা ছুটি নেওয়া।",
                         formula: "<strong>じしん / びょうき / じこ</strong> + <strong>で</strong>",
                         examples: [
-                            { jp: "じしん<mark class='hl'>で</mark> ビルが たおれました。", bn: "ভূমিকম্পে বিল্ডিং পড়ে গিয়েছিল[span_246](start_span)[span_246](end_span)।" },
-                            { jp: "びょうき<mark class='hl'>で</mark> かいしゃを やすみました。", bn: "অসুস্থতার জন্য অফিস ছুটি ছিল[span_247](start_span)[span_247](end_span)।" }
+                            { jp: "じしん<mark class='hl'>で</mark> ビルが たおれました。", bn: "ভূমিকম্পে বিল্ডিং পড়ে গিয়েছিল।" },
+                            { jp: "びょうき<mark class='hl'>で</mark> かいしゃを やすみました。", bn: "অসুস্থতার জন্য অফিস ছুটি ছিল।" }
                         ]
                     },
                     {
                         title: "Rule 3: Plain Form + ので (কারণ / জন্যে)",
-                        desc: "ভদ্রভাবে কোনো কারণ ব্যাখ্যা করতে বসে (な-adj/Noun এ な বসে)[span_248](start_span)[span_248](end_span)。",
+                        desc: "ভদ্রভাবে কোনো কারণ ব্যাখ্যা করতে বসে (な-adj/Noun এ な বসে)।",
                         formula: "<strong>Plain Form</strong> + <strong>ので</strong>",
                         examples: [
-                            { jp: "にほんごが わからない<mark class='hl'>ので</mark>、えいごで はなして いただけませんか。", bn: "জাপানি ভাষা বুঝি না বলে ইংরেজিতে কথা বলবেন কি[span_249](start_span)[span_249](end_span)?" },
-                            { jp: "きょうは ひまな<mark class='hl'>ので</mark>、かいものに いきます。", bn: "আজ অবসর আছি বলে শপিং করতে যাব[span_250](start_span)[span_250](end_span)।" }
+                            { jp: "にほんごが わからない<mark class='hl'>ので</mark>、えいごで はなして いただけませんか。", bn: "জাপানি ভাষা বুঝি না বলে ইংরেজিতে কথা বলবেন কি?" },
+                            { jp: "きょうは ひまな<mark class='hl'>ので</mark>、かいものに いきます。", bn: "আজ অবসর আছি বলে শপিং করতে যাব।" }
                         ]
                     },
                     {
                         title: "Rule 4: とちゅうで (মাঝপথে)",
-                        desc: "কোনো কাজ চলার মাঝপথে হঠাৎ অন্য কিছু ঘটা[span_251](start_span)[span_251](end_span)。",
+                        desc: "কোনো কাজ চলার মাঝপথে হঠাৎ অন্য কিছু ঘটা।",
                         formula: "<strong>Verb (Dic) / Noun の</strong> + <strong>とちゅうで</strong>",
                         examples: [
-                            { jp: "マラソンの <mark class='hl'>とちゅうで</mark> きぶんが わるく なりました。", bn: "ম্যারাথনের মাঝপথে অসুস্থ হয়ে পড়েছিলাম[span_252](start_span)[span_252](end_span)।" }
+                            { jp: "マラソンの <mark class='hl'>とちゅうで</mark> きぶんが わるく なりました。", bn: "ম্যারাথনের মাঝপথে অসুস্থ হয়ে পড়েছিলাম।" }
                         ]
                     }
                 ]
@@ -1338,46 +1318,46 @@
                 rules: [
                     {
                         title: "Rule 1: প্রশ্নবোধক + Plain Form + か (পরোক্ষ প্রশ্ন)",
-                        desc: "বাক্যের মাঝখানে প্রশ্ন জুড়ে দিয়ে পরোক্ষ প্রশ্ন করা (だ হবে না)[span_253](start_span)[span_253](end_span)。",
+                        desc: "বাক্যের মাঝখানে প্রশ্ন জুড়ে দিয়ে পরোক্ষ প্রশ্ন করা (だ হবে না)।",
                         formula: "<strong>প্রশ্নবোধক শব্দ + Plain Form (だ বাদ)</strong> + <strong>か</strong>",
                         examples: [
-                            { jp: "なんじに しけんが はじまる<mark class='hl'>か</mark>、わかりません。", bn: "কয়টায় পরীক্ষা আরম্ভ হবে জানি না[span_254](start_span)[span_254](end_span)।" },
-                            { jp: "どれが ただしい こたえ<mark class='hl'>か</mark>、わかりません。", bn: "কোনটা সঠিক উত্তর বুঝতে পারছি না[span_255](start_span)[span_255](end_span)।" }
+                            { jp: "なんじに しけんが はじまる<mark class='hl'>か</mark>、わかりません。", bn: "কয়টায় পরীক্ষা আরম্ভ হবে জানি না।" },
+                            { jp: "どれが ただしい こたえ<mark class='hl'>か</mark>、わかりません。", bn: "কোনটা সঠিক উত্তর বুঝতে পারছি না।" }
                         ]
                     },
                     {
                         title: "Rule 2: Plain Form + かどうか (হবে কি হবে না)",
-                        desc: "দোটানা বা সংশয় প্রকাশ করতে বসে (だ হবে না)[span_256](start_span)[span_256](end_span)。",
+                        desc: "দোটানা বা সংশয় প্রকাশ করতে বসে (だ হবে না)।",
                         formula: "<strong>Plain Form (だ বাদ)</strong> + <strong>かどうか</strong>",
                         examples: [
-                            { jp: "きずが ない<mark class='hl'>かどうか</mark>、たしかめて ください。", bn: "কোনো খুঁত আছে কি না নিশ্চিত করুন দয়া করে[span_257](start_span)[span_257](end_span)।" },
-                            { jp: "まちがいが ない<mark class='hl'>かどうか</mark>、しらべて ください。", bn: "কোনো ভুল আছে কি না চেক করে দেখুন[span_258](start_span)[span_258](end_span)।" }
+                            { jp: "きずが ない<mark class='hl'>かどうか</mark>、たしかめて ください。", bn: "কোনো খুঁত আছে কি না নিশ্চিত করুন দয়া করে।" },
+                            { jp: "まちがいが ない<mark class='hl'>かどうか</mark>、しらべて ください。", bn: "কোনো ভুল আছে কি না চেক করে দেখুন।" }
                         ]
                     },
                     {
                         title: "Rule 3: Vて-form + みます (করে দেখা)",
-                        desc: "কোনো কাজ নিজে একবার করে দেখা বা ট্রাই করা[span_259](start_span)[span_259](end_span)。",
+                        desc: "কোনো কাজ নিজে একবার করে দেখা বা ট্রাই করা।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>みます</strong>",
                         examples: [
-                            { jp: "この ズボンを はいて <mark class='hl'>みます</mark>。", bn: "এই ট্রাউজার পরে দেখছি[span_260](start_span)[span_260](end_span)।" },
-                            { jp: "せんせいに きいて <mark class='hl'>みます</mark>。", bn: "শিক্ষককে জিজ্ঞেস করে দেখি[span_261](start_span)[span_261](end_span)।" },
-                            { jp: "もう いちど かんがえて <mark class='hl'>みます</mark>。", bn: "আরেকবার চিন্তা করে দেখি[span_262](start_span)[span_262](end_span)।" }
+                            { jp: "この ズボンを はいて <mark class='hl'>みます</mark>。", bn: "এই ট্রাউজার পরে দেখছি।" },
+                            { jp: "せんせいに きいて <mark class='hl'>みます</mark>。", bn: "শিক্ষককে জিজ্ঞেস করে দেখি।" },
+                            { jp: "もう いちど かんがえて <mark class='hl'>みます</mark>。", bn: "আরেকবার চিন্তা করে দেখি।" }
                         ]
                     },
                     {
                         title: "Rule 4: Adjective い কেটে さ (পরিমাপ)",
-                        desc: "বিশেষণে রূপান্তর[span_263](start_span)[span_263](end_span)。",
+                        desc: "বিশেষণে রূপান্তর।",
                         formula: "<strong>たかい → たかさ (উচ্চতা) | ながい → ながさ (দৈর্ঘ্য) | はやい → はやさ (গতি)</strong>",
                         examples: [
-                            { jp: "やまの <mark class='hl'>たかさ</mark>は どうやって はかるか しっていますか。", bn: "পাহাড়ের উচ্চতা কীভাবে মাপতে হয় জানো কি[span_264](start_span)[span_264](end_span)?" }
+                            { jp: "やまの <mark class='hl'>たかさ</mark>は どうやって はかるか しっていますか。", bn: "পাহাড়ের উচ্চতা কীভাবে মাপতে হয় জানো কি?" }
                         ]
                     },
                     {
                         title: "Rule 5: 〜でしょうか (ভদ্র প্রশ্ন)",
-                        desc: "অধিক বিনম্রভাবে জানতে চাওয়া[span_265](start_span)[span_265](end_span)。",
+                        desc: "অধিক বিনম্রভাবে জানতে চাওয়া।",
                         formula: "<strong>〜でしょうか</strong>",
                         examples: [
-                            { jp: "ハンスは がっこうで <mark class='hl'>どうでしょうか</mark>。", bn: "হান্স স্কুলে কেমন করছে[span_266](start_span)[span_266](end_span)?" }
+                            { jp: "ハンスは がっこうで <mark class='hl'>どうでしょうか</mark>。", bn: "হান্স স্কুলে কেমন করছে?" }
                         ]
                     }
                 ]
@@ -1389,53 +1369,53 @@
                 rules: [
                     {
                         title: "Rule 1: N1(বড় ব্যক্তি) に N2 を いただきます",
-                        desc: "বড় বা সম্মানিত ব্যক্তির কাছ থেকে কিছু পাওয়া (もらいます এর ভদ্র রূপ)[span_267](start_span)[span_267](end_span)。",
+                        desc: "বড় বা সম্মানিত ব্যক্তির কাছ থেকে কিছু পাওয়া (もらいます এর ভদ্র রূপ)।",
                         formula: "<strong>সম্মানিত ব্যক্তি に</strong> + বস্তু を + <strong>いただきます</strong>",
                         examples: [
-                            { jp: "わたしは ぶちょうに おみやげを <mark class='hl'>いただきました</mark>。", bn: "আমি বসের কাছ থেকে উপহার পেয়েছিলাম[span_268](start_span)[span_268](end_span)।" }
+                            { jp: "わたしは ぶちょうに おみやげを <mark class='hl'>いただきました</mark>。", bn: "আমি বসের কাছ থেকে উপহার পেয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 2: N1(বড় ব্যক্তি) が わたしに くださいます",
-                        desc: "বড় ব্যক্তি আমাকে দিয়েছেন (くれます এর ভদ্র রূপ)[span_269](start_span)[span_269](end_span)。",
+                        desc: "বড় ব্যক্তি আমাকে দিয়েছেন (くれます এর ভদ্র রূপ)।",
                         formula: "<strong>সম্মানিত ব্যক্তি が</strong> + わたしに + <strong>くださいました</strong>",
                         examples: [
-                            { jp: "ぶちょうが わたしに おみやげを <mark class='hl'>くださいました</mark>。", bn: "ম্যানেজার আমাকে উপহার দিয়েছিলেন[span_270](start_span)[span_270](end_span)।" }
+                            { jp: "ぶちょうが わたしに おみやげを <mark class='hl'>くださいました</mark>。", bn: "ম্যানেজার আমাকে উপহার দিয়েছিলেন।" }
                         ]
                     },
                     {
                         title: "Rule 3: N1(ছোট/প্রাণী) に N2 を やります",
-                        desc: "ছোটদের বা পশুপাখিকে দেওয়া (あげます এর পরিবর্তে)[span_271](start_span)[span_271](end_span)。",
+                        desc: "ছোটদের বা পশুপাখিকে দেওয়া (あげます এর পরিবর্তে)।",
                         formula: "<strong>ছোট ব্যক্তি / প্রাণী に</strong> + <strong>やります</strong>",
                         examples: [
-                            { jp: "わたしは いぬに えさを <mark class='hl'>やりました</mark>。", bn: "আমি কুকুরকে খাবার দিয়েছিলাম[span_272](start_span)[span_272](end_span)।" },
-                            { jp: "きに みずを <mark class='hl'>やりました</mark>。", bn: "গাছে পানি দিয়েছিলাম[span_273](start_span)[span_273](end_span)।" }
+                            { jp: "わたしは いぬに えさを <mark class='hl'>やりました</mark>。", bn: "আমি কুকুরকে খাবার দিয়েছিলাম।" },
+                            { jp: "きに みずを <mark class='hl'>やりました</mark>。", bn: "গাছে পানি দিয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 4: Vて-form + いただきます / くださいます / やります",
-                        desc: "বড়দের কাছ থেকে কাজ করিয়ে নেওয়া, বড়রা কাজ করে দিয়েছেন এবং ছোটদের কোনো কাজ করে দেওয়া[span_274](start_span)[span_274](end_span)。",
+                        desc: "বড়দের কাছ থেকে কাজ করিয়ে নেওয়া, বড়রা কাজ করে দিয়েছেন এবং ছোটদের কোনো কাজ করে দেওয়া।",
                         formula: "<strong>Verb (て-form)</strong> + いただきます / くださいます / やります",
                         examples: [
-                            { jp: "せんせいに レポートを なおして <mark class='hl'>いただきました</mark>。", bn: "শিক্ষকের কাছ থেকে রিপোর্ট সংশোধন পেয়েছিলাম[span_275](start_span)[span_275](end_span)।" },
-                            { jp: "ぶちょうが レポートを なおして <mark class='hl'>くださいました</mark>。", bn: "ম্যানেজার আমার রিপোর্ট ঠিক করে দিয়েছিলেন[span_276](start_span)[span_276](end_span)।" },
-                            { jp: "むすこに かみひこうきを つくって <mark class='hl'>やりました</mark>。", bn: "ছেলেকে কাগজের বিমান তৈরি করে দিয়েছিলাম[span_277](start_span)[span_277](end_span)।" }
+                            { jp: "せんせいに レポートを なおして <mark class='hl'>いただきました</mark>。", bn: "শিক্ষকের কাছ থেকে রিপোর্ট সংশোধন পেয়েছিলাম।" },
+                            { jp: "ぶちょうが レポートを なおして <mark class='hl'>くださいました</mark>。", bn: "ম্যানেজার আমার রিপোর্ট ঠিক করে দিয়েছিলেন।" },
+                            { jp: "むすこに かみひこうきを つくって <mark class='hl'>やりました</mark>。", bn: "ছেলেকে কাগজের বিমান তৈরি করে দিয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 5: Vて-form + くださいませんか (দিবেন কি?)",
-                        desc: "অধিকতর ভদ্রভাবে কোনো কিছু করে দেওয়ার অনুরোধ[span_278](start_span)[span_278](end_span)。",
+                        desc: "অধিকতর ভদ্রভাবে কোনো কিছু করে দেওয়ার অনুরোধ।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>くださいませんか</strong>",
                         examples: [
-                            { jp: "ひらがなで かいて <mark class='hl'>くださいませんか</mark>。", bn: "হিরাগানা দিয়ে লিখে দেবেন কি[span_279](start_span)[span_279](end_span)?" }
+                            { jp: "ひらがなで かいて <mark class='hl'>くださいませんか</mark>。", bn: "হিরাগানা দিয়ে লিখে দেবেন কি?" }
                         ]
                     },
                     {
                         title: "Rule 6: Noun に Verb (স্মৃতিচিহ্ন হিসেবে)",
-                        desc: "উপহার হিসেবে কোনো স্মৃতি বোঝাতে Noun-এর পর に বসে[span_280](start_span)[span_280](end_span)。",
+                        desc: "উপহার হিসেবে কোনো স্মৃতি বোঝাতে Noun-এর পর に বসে।",
                         formula: "<strong>Noun に Verb</strong>",
                         examples: [
-                            { jp: "けっこんいわい<mark class='hl'>に</mark> この おさらを くださいました。", bn: "বিয়ের উপহার হিসেবে এই ডিশ দিয়েছিলেন[span_281](start_span)[span_281](end_span)।" }
+                            { jp: "けっこんいわい<mark class='hl'>に</mark> この おさらを くださいました。", bn: "বিয়ের উপহার হিসেবে এই ডিশ দিয়েছিলেন।" }
                         ]
                     }
                 ]
@@ -1447,37 +1427,37 @@
                 rules: [
                     {
                         title: "Rule 1: V-Dic / Noun の + ために (উদ্দেশ্যে)",
-                        desc: "ভবিষ্যতের লক্ষ্য পূরণের জন্য বর্তমানে কাজ করা[span_282](start_span)[span_282](end_span)。",
+                        desc: "ভবিষ্যতের লক্ষ্য পূরণের জন্য বর্তমানে কাজ করা।",
                         formula: "<strong>Verb (Dictionary form) / Noun の</strong> + <strong>ために</strong>",
                         examples: [
-                            { jp: "いえを かう<mark class='hl'>ために</mark>、いっしょうけんめい はたらきます。", bn: "বাড়ি কেনার জন্য সর্বোচ্চ দিয়ে কাজ করব[span_283](start_span)[span_283](end_span)।" },
-                            { jp: "けんこうの <mark class='hl'>ために</mark>、まいあさ はしっています。", bn: "স্বাস্থ্যের জন্য প্রতি সকালে দৌড়াচ্ছি[span_284](start_span)[span_284](end_span)।" }
+                            { jp: "いえを かう<mark class='hl'>ために</mark>、いっしょうけんめい はたらきます。", bn: "বাড়ি কেনার জন্য সর্বোচ্চ দিয়ে কাজ করব।" },
+                            { jp: "けんこうの <mark class='hl'>ために</mark>、まいあさ はしっています。", bn: "স্বাস্থ্যের জন্য প্রতি সকালে দৌড়াচ্ছি।" }
                         ]
                     },
                     {
                         title: "Rule 2: V-Dic のに / Noun に + つかいます (ব্যবহার)",
-                        desc: "কোনো সরঞ্জাম নির্দিষ্ট কাজে ব্যবহার হওয়া বা ভালো হওয়া[span_285](start_span)[span_285](end_span)。",
+                        desc: "কোনো সরঞ্জাম নির্দিষ্ট কাজে ব্যবহার হওয়া বা ভালো হওয়া।",
                         formula: "<strong>Verb (Dic) のに / Noun に</strong> + つかいます / いいです / かかります",
                         examples: [
-                            { jp: "この はさみは はなを きる<mark class='hl'>のに つかいます</mark>。", bn: "এই কাঁচি ফুল কাটার জন্য ব্যবহার করব[span_286](start_span)[span_286](end_span)।" },
-                            { jp: "この かばんは りょこう<mark class='hl'>に べんりです</mark>。", bn: "এই ব্যাগ ভ্রমণের জন্য সুবিধাজনক[span_287](start_span)[span_287](end_span)।" }
+                            { jp: "この はさみは はなを きる<mark class='hl'>のに つかいます</mark>。", bn: "এই কাঁচি ফুল কাটার জন্য ব্যবহার করব।" },
+                            { jp: "この かばんは りょこう<mark class='hl'>に べんりです</mark>。", bn: "এই ব্যাগ ভ্রমণের জন্য সুবিধাজনক।" }
                         ]
                     },
                     {
                         title: "Rule 3: Quantifier + は / も",
-                        desc: "কমপক্ষে বোঝাতে は এবং সর্বোচ্চ বা প্রত্যাশার চেয়ে বেশি বোঝাতে も বসে[span_288](start_span)[span_288](end_span)。",
+                        desc: "কমপক্ষে বোঝাতে は এবং সর্বোচ্চ বা প্রত্যাশার চেয়ে বেশি বোঝাতে も বসে।",
                         formula: "<strong>পরিমাণ + は / も</strong>",
                         examples: [
-                            { jp: "ボーナスの はんぶん<mark class='hl'>は</mark> ちょきんする つもりです。", bn: "বোনাসের কমপক্ষে অর্ধেক সঞ্চয় করব ভেবেছি[span_289](start_span)[span_289](end_span)।" },
-                            { jp: "はんぶん<mark class='hl'>も</mark> ちょきんするんですか。", bn: "অর্ধেক টাকাই সঞ্চয় করবেন[span_290](start_span)[span_290](end_span)?!" }
+                            { jp: "ボーナスの はんぶん<mark class='hl'>は</mark> ちょきんする つもりです。", bn: "বোনাসের কমপক্ষে অর্ধেক সঞ্চয় করব ভেবেছি।" },
+                            { jp: "はんぶん<mark class='hl'>も</mark> ちょきんするんですか。", bn: "অর্ধেক টাকাই সঞ্চয় করবেন?!" }
                         ]
                     },
                     {
                         title: "Rule 4: 〜によって (দ্বারা / উদ্ভাবক)",
-                        desc: "কোনো বিখ্যাত জিনিস কার মাধ্যমে উদ্ভাবিত হয়েছিল তা প্রকাশ করে[span_291](start_span)[span_291](end_span)。",
+                        desc: "কোনো বিখ্যাত জিনিস কার মাধ্যমে উদ্ভাবিত হয়েছিল তা প্রকাশ করে।",
                         formula: "<strong>ব্যক্তির নাম</strong> + <strong>によって</strong> + はつめいされました",
                         examples: [
-                            { jp: "チキンラーメンは あんどうさん<mark class='hl'>によって</mark> はつめいされました。", bn: "চিকেন রামেন আন্দো সাহেব দ্বারা উদ্ভাবন করা হয়েছিল[span_292](start_span)[span_292](end_span)।" }
+                            { jp: "チキンラーメンは あんどうさん<mark class='hl'>によって</mark> はつめいされました。", bn: "চিকেন রামেন আন্দো সাহেব দ্বারা উদ্ভাবন করা হয়েছিল।" }
                         ]
                     }
                 ]
@@ -1489,29 +1469,29 @@
                 rules: [
                     {
                         title: "Rule 1: Vます কেটে / Adj কেটে + そうです (দেখে মনে হওয়া)",
-                        desc: "চোখে দেখে কোনো ঘটনা ঘটতে পারে বা খাবার ঝাল/সুস্বাদু মনে হওয়া[span_293](start_span)[span_293](end_span)。",
+                        desc: "চোখে দেখে কোনো ঘটনা ঘটতে পারে বা খাবার ঝাল/সুস্বাদু মনে হওয়া।",
                         formula: "<strong>Verb (ます কেটে) / い-adj (い বাদ) / な-adj (な বাদ)</strong> + <strong>そうです</strong>",
                         examples: [
-                            { jp: "いまにも あめが ふり<mark class='hl'>そうです</mark>。", bn: "যেকোনো সময় বৃষ্টি পড়বে মনে হয়[span_294](start_span)[span_294](end_span)।" },
-                            { jp: "この りょうりは から<mark class='hl'>そうです</mark>。", bn: "এই খাবার ঝাল মনে হয়[span_295](start_span)[span_295](end_span)।" },
-                            { jp: "にもつが おち<mark class='hl'>そうです</mark>。", bn: "পার্সেল পড়ে যাবে মনে হয়[span_296](start_span)[span_296](end_span)।" }
+                            { jp: "いまにも あめが ふり<mark class='hl'>そうです</mark>。", bn: "যেকোনো সময় বৃষ্টি পড়বে মনে হয়।" },
+                            { jp: "この りょうりは から<mark class='hl'>そうです</mark>。", bn: "এই খাবার ঝাল মনে হয়।" },
+                            { jp: "にもつが おち<mark class='hl'>そうです</mark>。", bn: "পার্সেল পড়ে যাবে মনে হয়।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vて-form + きます (গিয়ে ফিরে আসা)",
-                        desc: "অল্প সময়ের জন্য কোনো কাজ করতে গিয়ে আবার আগের জায়গায় ফিরে আসা[span_297](start_span)[span_297](end_span)。",
+                        desc: "অল্প সময়ের জন্য কোনো কাজ করতে গিয়ে আবার আগের জায়গায় ফিরে আসা।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>きます</strong>",
                         examples: [
-                            { jp: "ちょっと のみものを かって <mark class='hl'>きます</mark>。", bn: "একটু পানীয় কিনে আসতেছি[span_298](start_span)[span_298](end_span)।" },
-                            { jp: "ゆうびんきょくへ いって <mark class='hl'>きます</mark>。", bn: "পোস্ট অফিসে গিয়ে আসতেছি[span_299](start_span)[span_299](end_span)।" }
+                            { jp: "ちょっと のみものを かって <mark class='hl'>きます</mark>。", bn: "একটু পানীয় কিনে আসতেছি।" },
+                            { jp: "ゆうびんきょくへ いって <mark class='hl'>きます</mark>。", bn: "পোস্ট অফিসে গিয়ে আসতেছি।" }
                         ]
                     },
                     {
                         title: "Rule 3: Vて-form + くれませんか (আনার অনুরোধ)",
-                        desc: "আসার সময় কোনো কিছু কিনে এনে দেওয়ার অনুরোধ[span_300](start_span)[span_300](end_span)。",
+                        desc: "আসার সময় কোনো কিছু কিনে এনে দেওয়ার অনুরোধ।",
                         formula: "<strong>Verb (て-form)</strong> + <strong>くれませんか</strong>",
                         examples: [
-                            { jp: "おべんとうを かってきて <mark class='hl'>くれませんか</mark>。", bn: "বক্স খাবার কিনে এনে দেবে কি[span_301](start_span)[span_301](end_span)?" }
+                            { jp: "おべんとうを かってきて <mark class='hl'>くれませんか</mark>。", bn: "বক্স খাবার কিনে এনে দেবে কি?" }
                         ]
                     }
                 ]
@@ -1523,40 +1503,40 @@
                 rules: [
                     {
                         title: "Rule 1: Vます কেটে / Adj কেটে + すぎます (অতিরিক্ত)",
-                        desc: "কোনো কিছু অতিরিক্ত করে ফেলা (Group 2 Verb হয়ে যায়)[span_302](start_span)[span_302](end_span)。",
+                        desc: "কোনো কিছু অতিরিক্ত করে ফেলা (Group 2 Verb হয়ে যায়)।",
                         formula: "<strong>Verb (ます কেটে) / い-adj (い বাদ) / な-adj (な বাদ)</strong> + <strong>すぎます</strong>",
                         examples: [
-                            { jp: "ごはんを たべ<mark class='hl'>すぎました</mark>。", bn: "খাবার বেশি খেয়ে ফেলেছিলাম[span_303](start_span)[span_303](end_span)।" },
-                            { jp: "ゆうべ おさけを のみ<mark class='hl'>すぎました</mark>。", bn: "গতরাতে অতিরিক্ত মদ পান করেছিলাম[span_304](start_span)[span_304](end_span)।" },
-                            { jp: "この セーターは おおき<mark class='hl'>すぎました</mark>。", bn: "এই সোয়েটার অতিরিক্ত বড়[span_305](start_span)[span_305](end_span)।" }
+                            { jp: "ごはんを たべ<mark class='hl'>すぎました</mark>。", bn: "খাবার বেশি খেয়ে ফেলেছিলাম।" },
+                            { jp: "ゆうべ おさけを のみ<mark class='hl'>すぎました</mark>。", bn: "গতরাতে অতিরিক্ত মদ পান করেছিলাম।" },
+                            { jp: "この セーターは おおき<mark class='hl'>すぎました</mark>。", bn: "এই সোয়েটার অতিরিক্ত বড়।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vます কেটে + やすいです / にくいです (সহজ / কঠিন)",
-                        desc: "কোন কাজ সম্পাদন করা সহজ নাকি কঠিন নির্দেশ করে[span_306](start_span)[span_306](end_span)。",
+                        desc: "কোন কাজ সম্পাদন করা সহজ নাকি কঠিন নির্দেশ করে।",
                         formula: "<strong>Verb (ます কেটে)</strong> + <strong>やすいです / にくいです</strong>",
                         examples: [
-                            { jp: "この くすりは のみ<mark class='hl'>やすいです</mark>。", bn: "এই ওষুধ পান করা সহজ[span_307](start_span)[span_307](end_span)।" },
-                            { jp: "この くつは あるき<mark class='hl'>にくいです</mark>。", bn: "এই জুতো পরে হাঁটা কঠিন[span_308](start_span)[span_308](end_span)।" },
-                            { jp: "この コップは われ<mark class='hl'>にくいです</mark>。", bn: "এই গ্লাস ভাঙা কঠিন[span_309](start_span)[span_309](end_span)।" }
+                            { jp: "この くすりは のみ<mark class='hl'>やすいです</mark>。", bn: "এই ওষুধ পান করা সহজ।" },
+                            { jp: "この くつは あるき<mark class='hl'>にくいです</mark>。", bn: "এই জুতো পরে হাঁটা কঠিন।" },
+                            { jp: "この コップは われ<mark class='hl'>にくいです</mark>。", bn: "এই গ্লাস ভাঙা কঠিন।" }
                         ]
                     },
                     {
                         title: "Rule 3: 〜く します / 〜に します (পরিবর্তন করা)",
-                        desc: "নিয়ন্ত্রণ করে পরিবর্তন আনা[span_310](start_span)[span_310](end_span)。",
+                        desc: "নিয়ন্ত্রণ করে পরিবর্তন আনা।",
                         formula: "<strong>い-adj:</strong> い কেটে く します | <strong>な-adj:</strong> な কেটে に します",
                         examples: [
-                            { jp: "おとを おおき<mark class='hl'>く します</mark>。", bn: "শব্দ বাড়াব[span_311](start_span)[span_311](end_span)।" },
-                            { jp: "へやを きれい<mark class='hl'>に します</mark>。", bn: "রুম পরিষ্কার করব[span_312](start_span)[span_312](end_span)।" }
+                            { jp: "おとを おおき<mark class='hl'>く します</mark>。", bn: "শব্দ বাড়াব।" },
+                            { jp: "へやを きれい<mark class='hl'>に します</mark>。", bn: "রুম পরিষ্কার করব।" }
                         ]
                     },
                     {
                         title: "Rule 4: Noun に します (সিদ্ধান্ত নেওয়া)",
-                        desc: "পছন্দ বা মেনু চূড়ান্ত করা বোঝায়[span_313](start_span)[span_313](end_span)。",
+                        desc: "পছন্দ বা মেনু চূড়ান্ত করা বোঝায়।",
                         formula: "<strong>Noun</strong> + <strong>に します</strong>",
                         examples: [
-                            { jp: "へやは シングル<mark class='hl'>に します</mark>。", bn: "রুম সিঙ্গেলটাই পছন্দ করলাম[span_314](start_span)[span_314](end_span)।" },
-                            { jp: "かいぎは あした<mark class='hl'>に します</mark>。", bn: "আগামীকাল মিটিং করব সিদ্ধান্ত নিলাম[span_315](start_span)[span_315](end_span)।" }
+                            { jp: "へやは シングル<mark class='hl'>に します</mark>。", bn: "রুম সিঙ্গেলটাই পছন্দ করলাম।" },
+                            { jp: "かいぎは あした<mark class='hl'>に します</mark>。", bn: "আগামীকাল মিটিং করব সিদ্ধান্ত নিলাম।" }
                         ]
                     }
                 ]
@@ -1568,22 +1548,22 @@
                 rules: [
                     {
                         title: "Rule 1: Plain Form + ばあいは (ক্ষেত্রে / সময়ে)",
-                        desc: "কোনো জরুরি পরিস্থিতি বা ঘটনা ঘটলে করণীয় বিকল্প নির্দেশ করে[span_316](start_span)[span_316](end_span)。",
+                        desc: "কোনো জরুরি পরিস্থিতি বা ঘটনা ঘটলে করণীয় বিকল্প নির্দেশ করে।",
                         formula: "<strong>Verb (Plain) / い-adj / な-adj な / Noun の</strong> + <strong>ばあいは</strong>",
                         examples: [
-                            { jp: "かいしゃに おくれる <mark class='hl'>ばあいは</mark>、れんらくして ください。", bn: "কোম্পানিতে দেরি হলে যোগাযোগ কোরো দয়া করে[span_317](start_span)[span_317](end_span)।" },
-                            { jp: "かいぎに まにあわない <mark class='hl'>ばあいは</mark>、れんらくして ください。", bn: "মিটিংয়ে সময়মতো পৌঁছাতে না পারলে যোগাযোগ কোরো[span_318](start_span)[span_318](end_span)।" },
-                            { jp: "かじや じしんの <mark class='hl'>ばあいは</mark>、エレベーターを つかわないで ください。", bn: "আগুন এবং ভূমিকম্পের সময় লিফট ব্যবহার করবেন না[span_319](start_span)[span_319](end_span)।" }
+                            { jp: "かいしゃに おくれる <mark class='hl'>ばあいは</mark>、れんらくして ください。", bn: "কোম্পানিতে দেরি হলে যোগাযোগ কোরো দয়া করে।" },
+                            { jp: "かいぎに まにあわない <mark class='hl'>ばあいは</mark>、れんらくして ください。", bn: "মিটিংয়ে সময়মতো পৌঁছাতে না পারলে যোগাযোগ কোরো।" },
+                            { jp: "かじや じしんの <mark class='hl'>ばあいは</mark>、エレベーターを つかわないで ください。", bn: "আগুন এবং ভূমিকম্পের সময় লিফট ব্যবহার করবেন না।" }
                         ]
                     },
                     {
                         title: "Rule 2: Plain Form + のに (তা সত্ত্বেও / কিন্তু)",
-                        desc: "চেষ্টা করা সত্ত্বেও প্রত্যাশার বিপরীত ফলাফল হওয়া বোঝায় (な-adj/Noun এ な বসে)[span_320](start_span)[span_320](end_span)。",
+                        desc: "চেষ্টা করা সত্ত্বেও প্রত্যাশার বিপরীত ফলাফল হওয়া বোঝায় (な-adj/Noun এ な বসে)।",
                         formula: "<strong>Verb / い-adj (Plain) / な-adj な / Noun な</strong> + <strong>のに</strong>",
                         examples: [
-                            { jp: "いっしょうけんめい べんきょうした<mark class='hl'>のに</mark>、てんが わるかったです。", bn: "সর্বোচ্চ পড়াশোনা করেছিলাম কিন্তু পরীক্ষার নম্বর খারাপ হয়েছিল[span_321](start_span)[span_321](end_span)।" },
-                            { jp: "30ぷんも まっている<mark class='hl'>のに</mark>、タクシーが きません。", bn: "৩০ মিনিট অপেক্ষা করছি কিন্তু ট্যাক্সি আসছে না[span_322](start_span)[span_322](end_span)।" },
-                            { jp: "やくそくを した<mark class='hl'>のに</mark>、かのじょは きませんでした。", bn: "দেখা করতে আসার কথা ছিল কিন্তু বান্ধবী আসেনি[span_323](start_span)[span_323](end_span)।" }
+                            { jp: "いっしょうけんめい べんきょうした<mark class='hl'>のに</mark>、てんが わるかったです。", bn: "সর্বোচ্চ পড়াশোনা করেছিলাম কিন্তু পরীক্ষার নম্বর খারাপ হয়েছিল।" },
+                            { jp: "30ぷんも まっている<mark class='hl'>のに</mark>、タクシーが きません。", bn: "৩০ মিনিট অপেক্ষা করছি কিন্তু ট্যাক্সি আসছে না।" },
+                            { jp: "やくそくを した<mark class='hl'>のに</mark>、かのじょは きませんでした。", bn: "দেখা করতে আসার কথা ছিল কিন্তু বান্ধবী আসেনি।" }
                         ]
                     }
                 ]
@@ -1595,30 +1575,30 @@
                 rules: [
                     {
                         title: "Rule 1: ところです (৩টি তাৎক্ষণিক ধাপ)",
-                        desc: "এইমাত্র শুরু হবে (Dic), চলমান আছে (ている), নাকি এইমাত্র শেষ হলো (た-form)[span_324](start_span)[span_324](end_span)。",
+                        desc: "এইমাত্র শুরু হবে (Dic), চলমান আছে (ている), নাকি এইমাত্র শেষ হলো (た-form)।",
                         formula: "শুরু হতে যাওয়া: <strong>Verb (Dic) + ところです</strong><br>চলমান: <strong>Verb (て-form) いる + ところです</strong><br>শেষ হওয়া: <strong>Verb (た-form) + ところです</strong>",
                         examples: [
-                            { jp: "ちょうど いまから しあいが はじまる <mark class='hl'>ところです</mark>。", bn: "ঠিক এইমাত্র খেলা আরম্ভ হবে[span_325](start_span)[span_325](end_span)।" },
-                            { jp: "いま へやを かたづけて いる <mark class='hl'>ところです</mark>。", bn: "এখন রুম গোছানো হচ্ছে[span_326](start_span)[span_326](end_span)।" },
-                            { jp: "たったいま バスが でた <mark class='hl'>ところです</mark>。", bn: "এইমাত্র বাস ছেড়ে গেল[span_327](start_span)[span_327](end_span)।" }
+                            { jp: "ちょうど いまから しあいが はじまる <mark class='hl'>ところです</mark>。", bn: "ঠিক এইমাত্র খেলা আরম্ভ হবে।" },
+                            { jp: "いま へやを かたづけて いる <mark class='hl'>ところです</mark>。", bn: "এখন রুম গোছানো হচ্ছে।" },
+                            { jp: "たったいま バスが でた <mark class='hl'>ところです</mark>。", bn: "এইমাত্র বাস ছেড়ে গেল।" }
                         ]
                     },
                     {
                         title: "Rule 2: Vた-form + ばかりです (সবেমাত্র সম্পন্ন)",
-                        desc: "কোন কাজ এইমাত্র শেষ হয়েছে কিন্তু প্রভাব এখনো বিদ্যমান[span_328](start_span)[span_328](end_span)。",
+                        desc: "কোন কাজ এইমাত্র শেষ হয়েছে কিন্তু প্রভাব এখনো বিদ্যমান।",
                         formula: "<strong>Verb (た-form)</strong> + <strong>ばかりです</strong>",
                         examples: [
-                            { jp: "さっき ひるごはんを たべた<mark class='hl'>ばかりです</mark>。", bn: "কিছুক্ষণ আগে দুপুরের খাবার খেয়েছি মাত্র[span_329](start_span)[span_329](end_span)।" },
-                            { jp: "ワットさんは せんげつ けっこんした<mark class='hl'>ばかりです</mark>。", bn: "ওয়াট সাহেব মাত্র গতমাসে বিয়ে করেছেন[span_330](start_span)[span_330](end_span)।" }
+                            { jp: "さっき ひるごはんを たべた<mark class='hl'>ばかりです</mark>。", bn: "কিছুক্ষণ আগে দুপুরের খাবার খেয়েছি মাত্র।" },
+                            { jp: "ワットさんは せんげつ けっこんした<mark class='hl'>ばかりです</mark>。", bn: "ওয়াট সাহেব মাত্র গতমাসে বিয়ে করেছেন।" }
                         ]
                     },
                     {
                         title: "Rule 3: Plain Form + はずです (দৃঢ় নিশ্চয়তা)",
-                        desc: "যৌক্তিক কারণে মনে হয় বা নিশ্চিত মনে করা[span_331](start_span)[span_331](end_span)。",
+                        desc: "যৌক্তিক কারণে মনে হয় বা নিশ্চিত মনে করা।",
                         formula: "<strong>Verb (Dic/ない) / い-adj / な-adj な / Noun の</strong> + <strong>はずです</strong>",
                         examples: [
-                            { jp: "にもつは あした とどく<mark class='hl'>はずです</mark>。", bn: "পার্সেল আগামীকাল পৌঁছাবে মনে হয়[span_332](start_span)[span_332](end_span)।" },
-                            { jp: "グプタさんは おさけを のまない<mark class='hl'>はずです</mark>。", bn: "গুপ্তা সাহেব মদ পান করেন না মনে হয়[span_333](start_span)[span_333](end_span)।" }
+                            { jp: "にもつは あした とどく<mark class='hl'>はずです</mark>。", bn: "পার্সেল আগামীকাল পৌঁছাবে মনে হয়।" },
+                            { jp: "グプタさんは おさけを のまない<mark class='hl'>はずです</mark>。", bn: "গুপ্তা সাহেব মদ পান করেন না মনে হয়।" }
                         ]
                     }
                 ]
@@ -1630,28 +1610,28 @@
                 rules: [
                     {
                         title: "Rule 1: Plain Form + そうです (শুনেছি / তারা বলেছিল)",
-                        desc: "অন্য কারও মাধ্যমে তথ্য শুনে অপরকে হুবহু জানানো[span_334](start_span)[span_334](end_span)。",
+                        desc: "অন্য কারও মাধ্যমে তথ্য শুনে অপরকে হুবহু জানানো।",
                         formula: "<strong>Plain Form</strong> + <strong>そうです</strong>",
                         examples: [
-                            { jp: "あしたは ゆきが ふる<mark class='hl'>そうです</mark>。", bn: "আগামীকাল বরফ পড়বে শুনেছি[span_335](start_span)[span_335](end_span)।" },
-                            { jp: "きのう ひどい じこが あった<mark class='hl'>そうです</mark>。", bn: "গতকাল ভয়ানক দুর্ঘটনা ঘটেছিল শুনেছি[span_336](start_span)[span_336](end_span)।" }
+                            { jp: "あしたは ゆきが ふる<mark class='hl'>そうです</mark>。", bn: "আগামীকাল বরফ পড়বে শুনেছি।" },
+                            { jp: "きのう ひどい じこが あった<mark class='hl'>そうです</mark>。", bn: "গতকাল ভয়ানক দুর্ঘটনা ঘটেছিল শুনেছি।" }
                         ]
                     },
                     {
                         title: "Rule 2: Plain Form + ようです (লক্ষণ দেখে অনুমান)",
-                        desc: "আপাতদৃষ্টিতে স্বচক্ষে দেখে বা নিজের অনুভূতির ভিত্তিতে অনুমান করা[span_337](start_span)[span_337](end_span)。",
+                        desc: "আপাতদৃষ্টিতে স্বচক্ষে দেখে বা নিজের অনুভূতির ভিত্তিতে অনুমান করা।",
                         formula: "<strong>Verb / い-adj (Plain) / な-adj な / Noun の</strong> + <strong>ようです</strong>",
                         examples: [
-                            { jp: "コンサートが はじまる<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে কনসার্ট শুরু হবে[span_338](start_span)[span_338](end_span)।" },
-                            { jp: "きのうの ばん あめが ふった<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে গতরাতে বৃষ্টি হয়েছে[span_339](start_span)[span_339](end_span)।" }
+                            { jp: "コンサートが はじまる<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে কনসার্ট শুরু হবে।" },
+                            { jp: "きのうの ばん あめが ふった<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে গতরাতে বৃষ্টি হয়েছে।" }
                         ]
                     },
                     {
                         title: "Rule 3: こえ / おと / におい / あじ が します",
-                        desc: "শব্দ শোনা যাওয়া, স্বাদ বা ঘ্রাণ অনুভূত হওয়া[span_340](start_span)[span_340](end_span)。",
+                        desc: "শব্দ শোনা যাওয়া, স্বাদ বা ঘ্রাণ অনুভূত হওয়া।",
                         formula: "<strong>こえ / おと / におい / あじ</strong> + <strong>が します</strong>",
                         examples: [
-                            { jp: "にぎやかな こえ<mark class='hl'>が しますね</mark>。", bn: "চমৎকার আনন্দঘন কণ্ঠ শোনা যাচ্ছে তাই না[span_341](start_span)[span_341](end_span)?" }
+                            { jp: "にぎやかな こえ<mark class='hl'>が しますね</mark>。", bn: "চমৎকার আনন্দঘন কণ্ঠ শোনা যাচ্ছে তাই না?" }
                         ]
                     }
                 ]
@@ -1663,29 +1643,29 @@
                 rules: [
                     {
                         title: "Rule 1: Causative Verb রূপান্তর (しえきけい)",
-                        desc: "অন্যকে দিয়ে কোনো কিছু করিয়ে নেওয়া বোঝায় (Group 2 Verb হয়ে যায়)[span_342](start_span)[span_342](end_span)。",
+                        desc: "অন্যকে দিয়ে কোনো কিছু করিয়ে নেওয়া বোঝায় (Group 2 Verb হয়ে যায়)।",
                         formula: "<strong>Group 1:</strong> い-কলাম → あ-কলাম + せます (いきます → いかせます)<br><strong>Group 2:</strong> ます কেটে させます (たべます → たべさせます)<br><strong>Group 3:</strong> きます → <strong>こさせます</strong> | します → <strong>させます</strong>",
                         examples: [
-                            { jp: "むすめを じゆうに <mark class='hl'>あそばせました</mark>。", bn: "মেয়েকে স্বাধীনভাবে খেলা করতে দিয়েছিলাম[span_343](start_span)[span_343](end_span)।" }
+                            { jp: "むすめを じゆうに <mark class='hl'>あそばせました</mark>。", bn: "মেয়েকে স্বাধীনভাবে খেলা করতে দিয়েছিলাম।" }
                         ]
                     },
                     {
                         title: "Rule 2: ব্যক্তিকে を / に Causative",
-                        desc: "অকর্মক ক্রিয়া হলে ব্যক্তিকে を এবং সকর্মক ক্রিয়া হলে ব্যক্তিকে に বসে[span_344](start_span)[span_344](end_span)。",
+                        desc: "অকর্মক ক্রিয়া হলে ব্যক্তিকে を এবং সকর্মক ক্রিয়া হলে ব্যক্তিকে に বসে।",
                         formula: "অকর্মক: <strong>ব্যক্তি を Causative</strong> | সকর্মক: <strong>ব্যক্তি に বস্তু を Causative</strong>",
                         examples: [
-                            { jp: "ぶちょうは ミラーさん<mark class='hl'>を</mark> アメリカへ しゅっちょう<mark class='hl'>させました</mark>。", bn: "ম্যানেজার মিলার সাহেবকে আমেরিকাতে ব্যবসায়িক সফর করিয়েছিলেন[span_345](start_span)[span_345](end_span)।" },
-                            { jp: "せんせいは せいと<mark class='hl'>に</mark> じゆうに いけんを <mark class='hl'>いわせました</mark>。", bn: "শিক্ষক ছাত্রকে স্বাধীনভাবে মতামত দিতে বলেছিলেন[span_346](start_span)[span_346](end_span)।" },
-                            { jp: "おとうとに へやを そうじ<mark class='hl'>させます</mark>。", bn: "ছোট ভাইকে দিয়ে নিজের রুম পরিষ্কার করাব[span_347](start_span)[span_347](end_span)।" }
+                            { jp: "ぶちょうは ミラーさん<mark class='hl'>を</mark> アメリカへ しゅっちょう<mark class='hl'>させました</mark>。", bn: "ম্যানেজার মিলার সাহেবকে আমেরিকাতে ব্যবসায়িক সফর করিয়েছিলেন।" },
+                            { jp: "せんせいは せいと<mark class='hl'>に</mark> じゆうに いけんを <mark class='hl'>いわせました</mark>。", bn: "শিক্ষক ছাত্রকে স্বাধীনভাবে মতামত দিতে বলেছিলেন।" },
+                            { jp: "おとうとに へやを そうじ<mark class='hl'>させます</mark>。", bn: "ছোট ভাইকে দিয়ে নিজের রুম পরিষ্কার করাব।" }
                         ]
                     },
                     {
                         title: "Rule 3: Causative て-form + いただけませんか (অনুমতি চাওয়া)",
-                        desc: "আমাকে কোনো কাজ করতে অনুমতি দেবেন কি—এমন বিনীত প্রার্থনা[span_348](start_span)[span_348](end_span)。",
+                        desc: "আমাকে কোনো কাজ করতে অনুমতি দেবেন কি—এমন বিনীত প্রার্থনা।",
                         formula: "<strong>Causative Verb (て-form)</strong> + <strong>いただけませんか</strong>",
                         examples: [
-                            { jp: "すみませんが、あした <mark class='hl'>やすませて いただけませんか</mark>。", bn: "দুঃখিত, কিন্তু আগামীকাল ছুটি দেবেন কি[span_349](start_span)[span_349](end_span)?" },
-                            { jp: "ともだちの けっこんしきが あるので、はやく <mark class='hl'>かえらせて いただけませんか</mark>。", bn: "বন্ধুর বিয়ে আছে বলে দ্রুত ফিরে যেতে দেবেন কি[span_350](start_span)[span_350](end_span)?" }
+                            { jp: "すみませんが、あした <mark class='hl'>やすませて いただけませんか</mark>。", bn: "দুঃখিত, কিন্তু আগামীকাল ছুটি দেবেন কি?" },
+                            { jp: "ともだちの けっこんしきが あるので、はやく <mark class='hl'>かえらせて いただけませんか</mark>。", bn: "বন্ধুর বিয়ে আছে বলে দ্রুত ফিরে যেতে দেবেন কি?" }
                         ]
                     }
                 ]
@@ -1697,39 +1677,39 @@
                 rules: [
                     {
                         title: "Rule 1: そんけいご Passive রূপান্তর",
-                        desc: "সম্মানিত ব্যক্তির কাজকে শ্রদ্ধা জানাতে Passive রূপ ব্যবহার করা হয়[span_351](start_span)[span_351](end_span)。",
+                        desc: "সম্মানিত ব্যক্তির কাজকে শ্রদ্ধা জানাতে Passive রূপ ব্যবহার করা হয়।",
                         formula: "G1: あ-কলাম + れます | G2: られます | きます→こられます | します→されます",
                         examples: [
-                            { jp: "いとう せんせいは さっき <mark class='hl'>こられました</mark>。", bn: "ইতো শিক্ষক কিছুক্ষণ আগে এসেছিলেন[span_352](start_span)[span_352](end_span)।" },
-                            { jp: "おさけを <mark class='hl'>やめられたんですか</mark>。", bn: "মদ ছেড়ে দিয়েছেন কি[span_353](start_span)[span_353](end_span)?" }
+                            { jp: "いとう せんせいは さっき <mark class='hl'>こられました</mark>。", bn: "ইতো শিক্ষক কিছুক্ষণ আগে এসেছিলেন।" },
+                            { jp: "おさけを <mark class='hl'>やめられたんですか</mark>。", bn: "মদ ছেড়ে দিয়েছেন কি?" }
                         ]
                     },
                     {
                         title: "Rule 2: お + Verbます কেটে + に なります",
-                        desc: "সাধারণ ক্রিয়ার পূর্বে お এবং শেষে に なります বসিয়ে সম্মানিত করা[span_354](start_span)[span_354](end_span)。",
+                        desc: "সাধারণ ক্রিয়ার পূর্বে お এবং শেষে に なります বসিয়ে সম্মানিত করা।",
                         formula: "<strong>お + Verb (ます কেটে) + に なります</strong>",
                         examples: [
-                            { jp: "しゃちょうは <mark class='hl'>おかえりに なりました</mark>。", bn: "বস বাড়ি ফিরে গিয়েছিলেন[span_355](start_span)[span_355](end_span)।" },
-                            { jp: "しゃちょうは <mark class='hl'>おでかけに なりました</mark>。", bn: "বস বাইরে বের হয়ে গিয়েছিলেন[span_356](start_span)[span_356](end_span)।" }
+                            { jp: "しゃちょうは <mark class='hl'>おかえりに なりました</mark>。", bn: "বস বাড়ি ফিরে গিয়েছিলেন।" },
+                            { jp: "しゃちょうは <mark class='hl'>おでかけに なりました</mark>。", bn: "বস বাইরে বের হয়ে গিয়েছিলেন।" }
                         ]
                     },
                     {
                         title: "Rule 3: বিশেষ সম্মানসূচক শব্দসমূহ (そんけいご Verbs)",
-                        desc: "নির্ধারিত সম্মানজনক শব্দাবলী[span_357](start_span)[span_357](end_span)。",
+                        desc: "নির্ধারিত সম্মানজনক শব্দাবলী।",
                         formula: "いきます/きます/います → <strong>いらっしゃいます</strong><br>たべます/のみます → <strong>めしあがります</strong><br>いいます → <strong>おっしゃいます</strong><br>しっています → <strong>ごぞんじです</strong><br>みます → <strong>ごらんに なります</strong><br>します → <strong>なさいます</strong><br>くれます → <strong>くださいます</strong>",
                         examples: [
-                            { jp: "しゃちょうは かいぎしつに <mark class='hl'>いらっしゃいます</mark>。", bn: "বস মিটিং রুমে আছেন[span_358](start_span)[span_358](end_span)।" },
-                            { jp: "しゃちょうは ゴルフを <mark class='hl'>なさいます</mark>。", bn: "বস গলফ খেলছেন[span_359](start_span)[span_359](end_span)।" }
+                            { jp: "しゃちょうは かいぎしつに <mark class='hl'>いらっしゃいます</mark>。", bn: "বস মিটিং রুমে আছেন।" },
+                            { jp: "しゃちょうは ゴルフを <mark class='hl'>なさいます</mark>。", bn: "বস গলফ খেলছেন।" }
                         ]
                     },
                     {
                         title: "Rule 4: お / ご ････ ください (সম্মানিত অনুরোধ)",
-                        desc: "কাউকে সম্মান প্রদর্শন করে অনুরোধ করতে বসে[span_360](start_span)[span_360](end_span)。",
+                        desc: "কাউকে সম্মান প্রদর্শন করে অনুরোধ করতে বসে।",
                         formula: "<strong>お + Vます কেটে + ください</strong> / <strong>ご + Noun + ください</strong>",
                         examples: [
-                            { jp: "どうぞ <mark class='hl'>おはいり ください</mark>。", bn: "প্রবেশ করুন দয়া করে[span_361](start_span)[span_361](end_span)।" },
-                            { jp: "<mark class='hl'>おかけ ください</mark>。", bn: "বসুন দয়া করে[span_362](start_span)[span_362](end_span)।" },
-                            { jp: "<mark class='hl'>ごちゅうい ください</mark>。", bn: "সতর্ক হোন দয়া করে[span_363](start_span)[span_363](end_span)।" }
+                            { jp: "どうぞ <mark class='hl'>おはいり ください</mark>。", bn: "প্রবেশ করুন দয়া করে।" },
+                            { jp: "<mark class='hl'>おかけ ください</mark>。", bn: "বসুন দয়া করে।" },
+                            { jp: "<mark class='hl'>ごちゅうい ください</mark>。", bn: "সতর্ক হোন দয়া করে।" }
                         ]
                     }
                 ]
@@ -1741,24 +1721,24 @@
                 rules: [
                     {
                         title: "Rule 1: お / ご ････ します (বিনম্র সেবা প্রদান)",
-                        desc: "নিজের কাজকে বিনয়ের সাথে তুলে ধরে অপরকে সম্মান জানানো[span_364](start_span)[span_364](end_span)。",
+                        desc: "নিজের কাজকে বিনয়ের সাথে তুলে ধরে অপরকে সম্মান জানানো।",
                         formula: "G1/G2: <strong>お + Vます কেটে + します</strong><br>G3: <strong>ご + Noun + します</strong>",
                         examples: [
-                            { jp: "わたくしが コーヒーを <mark class='hl'>おいれします</mark>。", bn: "আমি কফি তৈরি করতে পারি[span_365](start_span)[span_365](end_span)।" },
-                            { jp: "えきまで <mark class='hl'>おおくりします</mark>。", bn: "আমি স্টেশন পর্যন্ত পৌঁছে দেব[span_366](start_span)[span_366](end_span)।" },
-                            { jp: "きょうの よていを <mark class='hl'>ごせつめいします</mark>。", bn: "আমি আজকের পরিকল্পনা ব্যাখ্যা করব[span_367](start_span)[span_367](end_span)।" },
-                            { jp: "おもそうですね。<mark class='hl'>おもちしましょうか</mark>。", bn: "ভারী তাই না? ধরে সাহায্য করব কি[span_368](start_span)[span_368](end_span)?" }
+                            { jp: "わたくしが コーヒーを <mark class='hl'>おいれします</mark>。", bn: "আমি কফি তৈরি করতে পারি।" },
+                            { jp: "えきまで <mark class='hl'>おおくりします</mark>。", bn: "আমি স্টেশন পর্যন্ত পৌঁছে দেব।" },
+                            { jp: "きょうの よていを <mark class='hl'>ごせつめいします</mark>。", bn: "আমি আজকের পরিকল্পনা ব্যাখ্যা করব।" },
+                            { jp: "おもそうですね。<mark class='hl'>おもちしましょうか</mark>。", bn: "ভারী তাই না? ধরে সাহায্য করব কি?" }
                         ]
                     },
                     {
                         title: "Rule 2: বিশেষ বিনম্র ক্রিয়াপদসমূহ (けんじょうご Verbs)",
-                        desc: "নিজের কাজের জন্য মার্জিত শব্দাবলী[span_369](start_span)[span_369](end_span)。",
+                        desc: "নিজের কাজের জন্য মার্জিত শব্দাবলী।",
                         formula: "いきます/きます → <strong>まいります</strong><br>います → <strong>おります</strong><br>たべます/のみます/もらいます → <strong>いただきます</strong><br>いいます → <strong>もうします</strong><br>します → <strong>いたします</strong><br>しっています → <strong>ぞんじて おります / ぞんじます</strong><br>しりません → <strong>ぞんじません</strong><br>みます → <strong>はいけんします</strong><br>ききます/いきます → <strong>うかがいます</strong><br>あいます → <strong>おめに かかります</strong>",
                         examples: [
-                            { jp: "あした 3じに おたくへ <mark class='hl'>うかがいます</mark>。", bn: "আগামীকাল ৩টায় বাড়ি যাব/উপস্থিত হব[span_370](start_span)[span_370](end_span)।" },
-                            { jp: "わたくしは ミラーと <mark class='hl'>もうします</mark>。", bn: "আমাকে মিলার বলা হয় / আমি মিলার বলছি[span_371](start_span)[span_371](end_span)।" },
-                            { jp: "IMCに つとめて <mark class='hl'>おります</mark>。", bn: "আমি আইএমসিতে কাজ করছি[span_372](start_span)[span_372](end_span)।" },
-                            { jp: "アメリカから <mark class='hl'>まいりました</mark>。", bn: "আমেরিকা থেকে এসেছি[span_373](start_span)[span_373](end_span)।" }
+                            { jp: "あした 3じに おたくへ <mark class='hl'>うかがいます</mark>。", bn: "আগামীকাল ৩টায় বাড়ি যাব/উপস্থিত হব।" },
+                            { jp: "わたくしは ミラーと <mark class='hl'>もうします</mark>。", bn: "আমাকে মিলার বলা হয় / আমি মিলার বলছি।" },
+                            { jp: "IMCに つとめて <mark class='hl'>おります</mark>。", bn: "আমি আইএমসিতে কাজ করছি।" },
+                            { jp: "アメリカから <mark class='hl'>まいりました</mark>。", bn: "আমেরিকা থেকে এসেছি।" }
                         ]
                     }
                 ]
@@ -1770,8 +1750,8 @@
                 rules: [
                     {
                         title: "পিডিএফের বোনাস: N4-এর সম্পূর্ণ ২২টি な (না) Adjective",
-                        desc: "JLPT ও NAT N4 পরীক্ষার জন্য অত্যন্ত গুরুত্বপূর্ণ ২২টি な-Adjective তালিকা[span_374](start_span)[span_374](end_span)。",
-                        formula: "১) しんぱいな (দুশ্চিন্তা)<br>২) だいすきな (বেশি পছন্দ করা)<br>৩) ふしぎな (রহস্যময়)<br>৪) まじめな (সিরিয়াস)<br>৫) ねっしんな (উদ্যমী)<br>৬) いやな (অনিচ্ছাকৃত/ঘৃণা করা)<br>৭) じゅうぶんな (পর্যাপ্ত)<br>৮) ひつような (প্রয়োজনীয়)<br>৯) とくべつな (স্পেশাল)<br>১০) ごうかな (গর্জিয়াস)<br>১১) ふくざつな (জটিল)<br>১২) じゃまな (বাধা)<br>১৩) でんとうてきな (ঐতিহ্যগত)<br>১৪) まっしろな (খাঁটি সাদা)<br>১৫) じょうぶな (শক্তিশালী)<br>১৬) へんな (অদ্ভুত)<br>১৭) しあわせな (খুশি বা সুখী)<br>১৮) らくな (সহজ)<br>১৯) あんぜんな (নিরাপদ)<br>২০) きけんな (বিপদজনক)<br>২১) あんしんな (স্বস্তিদায়ক/মুক্তি পাওয়া)<br>২২) だめな (নিষিদ্ধ/ভালো না)[span_375](start_span)[span_375](end_span)",
+                        desc: "JLPT ও NAT N4 পরীক্ষার জন্য অত্যন্ত গুরুত্বপূর্ণ ২২টি な-Adjective তালিকা।",
+                        formula: "১) しんぱいな (দুশ্চিন্তা)<br>২) だいすきな (বেশি পছন্দ করা)<br>৩) ふしぎな (রহস্যময়)<br>৪) まじめな (সিরিয়াস)<br>৫) ねっしんな (উদ্যমী)<br>৬) いやな (অনিচ্ছাকৃত/ঘৃণা করা)<br>৭) じゅうぶんな (পর্যাপ্ত)<br>৮) ひつような (প্রয়োজনীয়)<br>৯) とくべつな (স্পেশাল)<br>১০) ごうかな (গর্জিয়াস)<br>১১) ふくざつな (জটিল)<br>১২) じゃまな (বাধা)<br>১৩) でんとうてきな (ঐতিহ্যগত)<br>১৪) まっしろな (খাঁটি সাদা)<br>১৫) じょうぶな (শক্তিশালী)<br>১৬) へんな (অদ্ভুত)<br>১৭) しあわせな (খুশি বা সুখী)<br>১৮) らくな (সহজ)<br>১৯) あんぜんな (নিরাপদ)<br>২০) きけんな (বিপদজনক)<br>২১) あんしんな (স্বস্তিদায়ক/মুক্তি পাওয়া)<br>২২) だめな (নিষিদ্ধ/ভালো না)",
                         examples: [
                             { jp: "この へやは <mark class='hl'>しずかです</mark>。", bn: "এই রুমটি শান্ত।" }
                         ]

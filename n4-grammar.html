@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>N4 ব্যাকরণ সমগ্র - KOTOBA</title>
+    <title>N4 ব্যাকরণ সমগ্র (লেসন ২৬-৫০) - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
     
     <!-- ফন্ট ও আইকন -->
@@ -24,7 +24,7 @@
             --line: #E9E2D3;
             --card-bg: #ffffff;
             --highlight: #ffeaa7;
-            --highlight-text: #634a00;
+            --highlight-text: #533f03;
         }
 
         * {
@@ -42,7 +42,6 @@
             min-height: 100vh;
         }
 
-        /* টপ নেভিগেশন */
         .top-nav {
             display: flex;
             align-items: center;
@@ -102,11 +101,10 @@
 
         .container {
             padding: 14px 16px;
-            max-width: 480px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
-        /* সার্চ বক্স */
         .search-wrap {
             position: relative;
             margin-bottom: 14px;
@@ -150,7 +148,6 @@
             border: 1px solid var(--line);
         }
 
-        /* ভিউ ১: লেসন গ্রিড */
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -169,12 +166,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 104px;
+            min-height: 108px;
         }
 
-        .lesson-card:active {
-            transform: scale(0.97);
-        }
+        .lesson-card:active { transform: scale(0.97); }
 
         .card-top {
             display: flex;
@@ -195,7 +190,7 @@
 
         .kana-lesson-tag {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--mist);
             font-weight: 700;
         }
@@ -221,10 +216,7 @@
             font-size: 11px;
         }
 
-        /* ভিউ ২: লেসন ডিটেইল ভিউ */
-        .detail-view {
-            display: none;
-        }
+        .detail-view { display: none; }
 
         .detail-header-wrap {
             text-align: center;
@@ -233,11 +225,10 @@
         }
 
         .detail-main-title {
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--pine);
             margin-bottom: 4px;
-            letter-spacing: -0.3px;
         }
 
         .detail-sub-title {
@@ -246,7 +237,6 @@
             color: var(--mist);
         }
 
-        /* রুল কার্ড */
         .rule-card {
             background: var(--card-bg);
             border-radius: 14px;
@@ -260,7 +250,7 @@
         .rule-header {
             background: var(--pine);
             color: #ffffff;
-            padding: 14px 16px;
+            padding: 13px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -269,9 +259,7 @@
             transition: background 0.15s ease;
         }
 
-        .rule-header:active {
-            background: #093c2d;
-        }
+        .rule-header:active { background: #093c2d; }
 
         .rule-header-left {
             display: flex;
@@ -281,7 +269,7 @@
         }
 
         .rule-header-left i.book-icon {
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 3px;
             color: #ffffff;
             opacity: 0.9;
@@ -291,7 +279,6 @@
             font-size: 13.5px;
             font-weight: 700;
             line-height: 1.5;
-            letter-spacing: 0.2px;
             white-space: pre-line;
             font-family: 'Noto Sans JP', 'Hind Siliguri', sans-serif;
         }
@@ -310,7 +297,7 @@
 
         .rule-body {
             display: none;
-            padding: 18px 16px;
+            padding: 16px 14px;
             background: #ffffff;
             border-top: 1px solid var(--line);
         }
@@ -335,7 +322,7 @@
         .formula-box {
             background: #FAF7F0;
             border: 1px dashed #D2DDD6;
-            padding: 10px 14px;
+            padding: 10px 12px;
             border-radius: 10px;
             font-size: 12.5px;
             font-weight: 700;
@@ -345,32 +332,40 @@
             font-family: 'Noto Sans JP', 'Hind Siliguri', sans-serif;
         }
 
-        .formula-box strong {
-            color: var(--clay);
-        }
+        .formula-box strong { color: var(--clay); }
 
         .point-item {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             padding-left: 10px;
             border-left: 3px solid var(--jade);
         }
 
         .point-title {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 800;
             color: var(--pine);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .point-desc {
             font-size: 12px;
             color: #4B5A52;
             line-height: 1.6;
-            margin-bottom: 6px;
+        }
+
+        .note-box {
+            background: #fff8eb;
+            border: 1px solid #f6dca7;
+            border-radius: 8px;
+            padding: 9px 12px;
+            margin: 12px 0;
+            font-size: 12px;
+            color: #7c5208;
+            line-height: 1.6;
         }
 
         .sub-heading-point {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 800;
             color: var(--pine);
             margin: 14px 0 8px;
@@ -379,11 +374,10 @@
             gap: 6px;
         }
 
-        /* উদাহরণ তালিকা */
         .examples-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 9px;
+            gap: 8px;
             margin-top: 8px;
         }
 
@@ -391,27 +385,24 @@
             background: #FAF9F5;
             border: 1px solid var(--line);
             border-radius: 10px;
-            padding: 11px 13px;
+            padding: 10px 12px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 10px;
         }
 
-        .ex-text-wrap {
-            flex: 1;
-        }
+        .ex-text-wrap { flex: 1; }
 
         .jp-sentence {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: var(--ink);
             line-height: 1.5;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
-        /* গ্রামার হাইলাইট স্টাইল */
         mark.hl {
             background-color: var(--highlight);
             color: var(--highlight-text);
@@ -449,14 +440,13 @@
             color: #ffffff;
         }
 
-        /* লেসন জাম্প ন্যাভবার */
         .lesson-jump-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 26px;
-            margin-bottom: 20px;
-            padding: 16px 8px;
+            margin-top: 24px;
+            margin-bottom: 18px;
+            padding: 14px 8px;
             position: relative;
         }
 
@@ -494,7 +484,7 @@
         }
 
         .jump-title {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--pine);
             line-height: 1.3;
@@ -509,7 +499,7 @@
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            height: 64px;
+            height: 62px;
             background: rgba(251, 247, 239, 0.96);
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--line);
@@ -531,7 +521,7 @@
         }
 
         .nav-item.active { color: var(--jade); }
-        .nav-item i { font-size: 18px; }
+        .nav-item i { font-size: 17px; }
     </style>
 </head>
 <body>
@@ -547,22 +537,22 @@
     </header>
 
     <main class="container">
-        <!-- ভিউ ১: লেসন গ্রিড -->
+        <!-- ভিউ ১: লেসন তালিকা -->
         <div id="lessonGridView">
             <div class="search-wrap">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="লেসন বা ব্যাকরণের বিষয় খুঁজুন..." onkeyup="filterLessons()">
+                <input type="text" id="searchInput" placeholder="লেসন নম্বর বা ব্যাকরণের টপিক দিয়ে খুঁজুন..." onkeyup="filterLessons()">
             </div>
 
             <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ ২৫টি ব্যাকরণ লেসন</div>
             <div class="lesson-grid" id="lessonsGridContainer"></div>
         </div>
 
-        <!-- ভিউ ২: লেসন ডিটেইল ভিউ -->
+        <!-- ভিউ ২: লেসন বিস্তারিত -->
         <div id="lessonDetailView" class="detail-view">
             <div class="detail-header-wrap">
-                <h2 class="detail-main-title" id="detailMainTitle">N4_ব্যাকরণ লেসন ০১</h2>
-                <div class="detail-sub-title" id="detailSubTitle">লেসন ০১ (Grammar/ব্যাকরণ) এর ব্যাখ্যা</div>
+                <h2 class="detail-main-title" id="detailMainTitle">লেসন ২৬</h2>
+                <div class="detail-sub-title" id="detailSubTitle">লেসন ২৬ এর বিস্তারিত ব্যাকরণ</div>
             </div>
 
             <div id="rulesListContainer"></div>
@@ -570,11 +560,11 @@
             <div class="lesson-jump-nav">
                 <button class="jump-btn prev-btn" id="btnPrevLesson" onclick="goToPrevLesson()">
                     <span class="jump-label">PREVIOUS</span>
-                    <span class="jump-title" id="prevLessonTitle">লেসন ০০</span>
+                    <span class="jump-title" id="prevLessonTitle">লেসন ২৫</span>
                 </button>
                 <button class="jump-btn next-btn" id="btnNextLesson" onclick="goToNextLesson()">
                     <span class="jump-label">NEXT</span>
-                    <span class="jump-title" id="nextLessonTitle">লেসন ০২</span>
+                    <span class="jump-title" id="nextLessonTitle">লেসন ২৭</span>
                 </button>
             </div>
         </div>
@@ -587,246 +577,1010 @@
     </nav>
 
     <script>
-        // কাঞ্জিমুক্ত হিরাগানা ও কাতাকানা ডাটাবেস এবং হাইলাইটেড ব্যাকরণ
+        // আপনার নতুন পিডিএফ (N4 V+G) থেকে সংগৃহীত পূর্ণাঙ্গ ২৫টি লেসনের ব্যাকরণ ডাটাবেস
         const grammarData = {
-            1: {
-                lessonNo: 1,
+            26: {
                 minnaLesson: 26,
-                title: "কারণ ও ব্যাখ্যা",
-                kana: "だいいっか",
+                title: "অভিব্যক্তি ও ব্যাখ্যা (んです)",
+                kana: "だいにじゅうろっか",
                 rules: [
                     {
-                        title: "Rule ①: どうし (ふつうけい) + んです\nいけいようし (ふつうけい) + んです\nなけいようし / めいし + なんです",
-                        desc: "কথা বলার সময় কোনো ঘটনার কারণ, ব্যাখ্যা বা জোর প্রকাশের জন্য 'んです' ব্যবহৃত হয়।",
-                        formula: "<strong>どうし (ふつうけい)</strong> + んです (かくんです / かかないんです)<br><strong>いけいようし</strong> + んです (あついんです)<br><strong>なけいようし / めいし</strong> + <strong>なんです</strong>",
-                        points: [
-                            { pTitle: "১. কারণ বা ব্যাখ্যা প্রদান:", pDesc: "শ্রোতার কাছে কোনো কাজের কারণ স্বতঃস্ফূর্তভাবে তুলে ধরতে।" },
-                            { pTitle: "২. কারণ জিজ্ঞাসা (〜んですか):", pDesc: "চোখে দেখা অবস্থা দেখে কৌতুহলবশত কারণ জানতে চাইতে।" },
-                            { pTitle: "৩. ভূমিকা হিসেবে (〜んですが):", pDesc: "কোনো অনুরোধ করার পূর্বে প্রসঙ্গ টানতে।" }
-                        ],
+                        title: "Rule 1: Plain Form + んです (কারণ, ব্যাখ্যা ও অভিব্যক্তি)",
+                        desc: "কোনো বিষয় বা ঘটনার কারণ (Explanation) জানার জন্য んですか দিয়ে প্রশ্ন করা হয় এবং উত্তরে んです দিয়ে বলা হয়। কথ্য ভাষায় んです এবং লিখিত ভাষায় のです ব্যবহৃত হয়।",
+                        formula: "<strong>Verb (Plain)</strong> + んです<br><strong>い-adj (Plain)</strong> + んです<br><strong>な-adj / Noun</strong> + <strong>なんです</strong> (だ হবে না, な হবে)",
+                        note: "খেয়াল রাখতে হবে, যখন んですか এর প্রয়োজন নেই তখন তা ব্যবহার করলে শ্রোতার কাছে অদ্ভুত বা হাস্যকর শোনাতে পারে।",
                         examples: [
-                            { jp: "どうして おくれた<mark class='hl'>んですか</mark>。", bn: "কেন দেরি হলো? (কারণ জানতে চাওয়া)" },
-                            { jp: "バスが こなかった<mark class='hl'>んです</mark>。", bn: "আসলে বাস আসেনি বলে দেরি হয়েছে।" },
-                            { jp: "あたまが いたい<mark class='hl'>んです</mark>。", bn: "আসলে মাথাটা খুব ব্যথা করছে।" },
-                            { jp: "にほんごを べんきょうしたい<mark class='hl'>んですが</mark>、いい せんせいを しょうかいして ください。", bn: "জাপানি ভাষা শিখতে চাইছিলাম, ভালো শিক্ষক থাকলে পরিচয় করিয়ে দিন না।" }
+                            { jp: "あめが ふっている<mark class='hl'>んですか</mark>。", bn: "বৃষ্টি হচ্ছে কি? (হ্যাঁ, বৃষ্টি হচ্ছে)" },
+                            { jp: "どうして おくれた<mark class='hl'>んですか</mark>。･･･バスが こなかった<mark class='hl'>んです</mark>。", bn: "কেন দেরি করেছিলে? বাস আসছিল না বলে।" },
+                            { jp: "どうした<mark class='hl'>んですか</mark>。･･･ちょっと きぶんが わるい<mark class='hl'>んです</mark>。", bn: "কী হয়েছে? একটু শরীর খারাপ লাগছে।" }
                         ]
                     },
                     {
-                        title: "Rule ②: どうし て-form + いただけませんか",
-                        desc: "কারো কাছে অত্যন্ত বিনম্রভাবে কোনো সাহায্য বা রিকোয়েস্ট করার জন্য ব্যবহৃত হয়।",
-                        formula: "<strong>どうし (て-form)</strong> + <strong>いただけませんか</strong>",
-                        points: [{ pTitle: "ব্যবহারের নিয়ম:", pDesc: "て-ください এর চেয়ে অনেক বেশি ভদ্র রূপ।" }],
+                        title: "Rule 1.1: 〜んですが、〜 (অনুরোধ ও দাওয়াত)",
+                        desc: "んですが দিয়ে কথা শুরু করে কাউকে কোনো অনুরোধ (Request) বা দাওয়াত (Invitation) করার ভূমিকা টানা হয়।",
+                        formula: "<strong>Plain Form</strong> + <strong>んですが</strong>、[অনুরোধ/আমন্ত্রণ]",
                         examples: [
-                            { jp: "いい せんせいを しょうかいして <mark class='hl'>いただけませんか</mark>。", bn: "একজন ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি?" },
-                            { jp: "もう いちど せつめいして <mark class='hl'>いただけませんか</mark>。", bn: "দয়া করে আরেকবার বুঝিয়ে দেবেন কি?" },
-                            { jp: "コピーきの つかいかたを おしえて <mark class='hl'>いただけませんか</mark>。", bn: "ফটোকপি মেশিনের ব্যবহার একটু দেখিয়ে দেবেন কি?" }
+                            { jp: "あたまが いたい<mark class='hl'>んですが</mark>、かえっても いいですか。", bn: "মাথা ব্যথা করছে, আমি কি বাড়ি ফিরে যেতে পারি?" },
+                            { jp: "らいしゅう ともだちと スキーに いく<mark class='hl'>んですが</mark>、ミラーさんも いっしょに いきませんか。", bn: "আগামী সপ্তাহে বন্ধুর সাথে স্কি করতে যাব, মিলার সাহেবও কি সাথে যাবেন?" },
+                            { jp: "おゆが でない<mark class='hl'>んですが</mark>･････。", bn: "গরম পানি বের হচ্ছে না যে･････।" }
                         ]
                     },
                     {
-                        title: "Rule ③: ぎもんし + どうし た-form + ら いいですか",
-                        desc: "কী, কোথায় বা কীভাবে কাজটি করলে ভালো হবে সে বিষয়ে অন্যের পরামর্শ বা উপদেশ চাইতে ব্যবহৃত হয়।",
-                        formula: "<strong>ぎもんし (どう / どこ / なに)</strong> + <strong>どうし (たら-form)</strong> + <strong>いいですか</strong>",
-                        points: [{ pTitle: "উপদেশ চাওয়া:", pDesc: "সিদ্ধান্ত নেওয়ার জন্য অভিজ্ঞদের মতামত নেওয়ার সবচেয়ে সুবিধাজনক কাঠামো।" }],
+                        title: "Rule 2: Vて-form + いただけませんか (মার্জিত অনুরোধ)",
+                        desc: "এর অর্থ 'করে দেবেন কি?'। কারও কাছে বিনীতভাবে অনুরোধ করার জন্য てください এর অতি ভদ্র রূপ হিসেবে এটি ব্যবহৃত হয়।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>いただけませんか</strong>",
                         examples: [
-                            { jp: "どこで カメラを <mark class='hl'>かったら いいですか</mark>。", bn: "কোথা থেকে ক্যামেরা কিনলে ভালো হবে?" },
-                            { jp: "なにを もって <mark class='hl'>いったら いいですか</mark>。", bn: "সাথে করে কী নিয়ে গেলে সবচেয়ে ভালো হবে?" },
-                            { jp: "パスポートを なくしたんですが、どう <mark class='hl'>したら いいですか</mark>。", bn: "পাসপোর্ট হারিয়ে ফেলেছি, এখন কী করলে ভালো হবে?" }
+                            { jp: "いい せんせいを しょうかいして <mark class='hl'>いただけませんか</mark>。", bn: "ভালো শিক্ষকের সাথে পরিচয় করিয়ে দেবেন কি?" },
+                            { jp: "しりょうが ほしいんですが、おくって <mark class='hl'>いただけませんか</mark>。", bn: "ডকুমেন্ট দরকার ছিল, পাঠিয়ে দেবেন কি?" },
+                            { jp: "かきかたが わからないんですが、おしえて <mark class='hl'>いただけませんか</mark>。", bn: "লেখার নিয়ম বুঝতে পারছি না, শিখিয়ে দেবেন কি?" }
                         ]
                     },
                     {
-                        title: "Rule ④: めいし + は すき / きらい / じょうず / へた / あります",
-                        desc: "নির্দিষ্ট কোনো বিষয়ের ওপর ফোকাস করতে বা বৈসাদৃশ্য প্রকাশ করতে অবজেক্টের পর 'は' বসে।",
-                        formula: "<strong>めいし</strong> + <strong>は</strong> + すきです / じょうずです / あります",
-                        points: [{ pTitle: "টপিক ও বৈসাদৃশ্য:", pDesc: "অন্যান্য বিষয় থেকে নির্দিষ্ট একটিকে আলাদা করে গুরুত্ব দেওয়া।" }],
+                        title: "Rule 3: প্রশ্নবোধক + Vた-form + ら いいですか (পরামর্শ চাওয়া)",
+                        desc: "'কী করলে ভালো হয়?'—কোনো পরিস্থিতিতে অভিজ্ঞ কারও কাছ থেকে উপযুক্ত পরামর্শ বা উপদেশ চাওয়ার জন্য ব্যবহৃত হয়।",
+                        formula: "<strong>প্রশ্নবোধক শব্দ (どこ / どう)</strong> + <strong>Verb (たら-form)</strong> + <strong>いいですか</strong>",
                         examples: [
-                            { jp: "スポーツ<mark class='hl'>は</mark> なにが すきですか。", bn: "খেলাধুলার মধ্যে কোনটি আপনার সবচেয়ে পছন্দ?" },
-                            { jp: "ひらがな<mark class='hl'>は</mark> かけますが、かんじ<mark class='hl'>は</mark> かけません。", bn: "হিরাগানা লিখতে পারি, কিন্তু কাঞ্জি পারি না।" }
+                            { jp: "どこで カメラを かった<mark class='hl'>ら いいですか</mark>。", bn: "কোথা থেকে ক্যামেরা কিনলে ভালো হয়?" },
+                            { jp: "こっかいぎじどうを けんがくしたいんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "ডায়েট ভবন পরিদর্শনে যেতে চাই, কী করলে ভালো হয়?" },
+                            { jp: "ほけんしょうを わすれたんですが、どう したら <mark class='hl'>いいですか</mark>。", bn: "স্বাস্থ্যকার্ড ভুলে ফেলে এসেছি, কী করলে ভালো হয়?" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Noun (Object) は すき / きらい / じょうず / へた",
+                        desc: "পছন্দ-অপছন্দ, দক্ষতা-অদক্ষতা বা উপস্থিতি বোঝাতে Object-এর পর が-এর বদলে は বসিয়ে নির্দিষ্ট বিষয়ের ওপর ফোকাস করা হয়।",
+                        formula: "<strong>Noun (Object)</strong> + <strong>は</strong> + すきじゃないんです / あります",
+                        examples: [
+                            { jp: "よく カラオケに いきますか。･･･いいえ、カラオケ<mark class='hl'>は</mark> すきじゃないんです。", bn: "প্রায়ই কারাওকে যান? না, যাই না। কারাওকে পছন্দ করি না বলে।" },
+                            { jp: "わたしは うんどうかいに いきません。つごうが わるい<mark class='hl'>んです</mark>。", bn: "আমি ক্রীড়া দিবসে যাব না। শরীর খারাপ/অসুবিধা আছে বলে।" }
                         ]
                     }
                 ]
             },
-            2: {
-                lessonNo: 2,
+            27: {
                 minnaLesson: 27,
-                title: "করার ক্ষমতা ও সক্ষমতা",
-                kana: "だいにか",
+                title: "সম্ভাবনামূলক ক্রিয়া (かのうけい)",
+                kana: "だいにじゅうななか",
                 rules: [
                     {
-                        title: "Rule ①: かのうけい (সম্ভাবনামূলক ক্রিয়া - Potential Verb)",
-                        desc: "কোনো কাজ করতে পারার সামর্থ্য বা যোগ্যতা প্রকাশ করে।",
-                        formula: "<strong>Group 1:</strong> u → e + ます (かく → かけます / のむ → のめます)<br><strong>Group 2:</strong> Stem + られます (たべる → たべられます)<br><strong>Group 3:</strong> します → <strong>できます</strong> | くる → <strong>こられます</strong>",
-                        points: [{ pTitle: "পার্টিক্যাল পরিবর্তন:", pDesc: "Potential Verb-এর পূর্বে 'を' এর পরিবর্তে সাধারণত <strong>が (ga)</strong> বসে।" }],
+                        title: "Rule 1: Potential Verb রূপান্তর (かのうけい)",
+                        desc: "কোনো কিছু করতে পারা, সামর্থ্য বা অভিজ্ঞতা প্রকাশ করে (V-Dic + ことができます এর সংক্ষিপ্ত রূপ)।",
+                        formula: "<strong>Group 1:</strong> い-কলাম → え-কলাম + ます (かきます → かけます / はなします → はなせます)<br><strong>Group 2:</strong> ます কেটে られ ます (たべます → たべられます)<br><strong>Group 3:</strong> きます → <strong>こられます</strong> | します → <strong>できます</strong>",
+                        note: "Potential Verb এর পূর্বে Transitive Verb-এর সাধারণ を পার্টিক্যালের পরিবর্তে が পার্টিক্যাল বসে।",
                         examples: [
-                            { jp: "ミラーさんは ひらがなが <mark class='hl'>よめます</mark>。", bn: "মিলার বাবু হিরাগানা পড়তে পারেন।" },
-                            { jp: "ひとりで びょういんへ <mark class='hl'>いけますか</mark>。", bn: "একা হাসপাতালে যেতে পারবেন কি?" }
+                            { jp: "わたしは にほんご<mark class='hl'>が はなせます</mark>。", bn: "আমি জাপানি ভাষায় কথা বলতে পারি।" },
+                            { jp: "ひとりで びょういんへ <mark class='hl'>いけますか</mark>。", bn: "একা হাসপাতালে যেতে পারবে কি?" },
+                            { jp: "この ぎんこうで ドル<mark class='hl'>が かえられます</mark>。", bn: "এই ব্যাংকে ডলার পরিবর্তন করা যায়।" }
                         ]
                     },
                     {
-                        title: "Rule ②: みえます vs みられます & きこえます vs きけます",
-                        desc: "স্বাভাবিক ও অনিচ্ছাকৃত শ্রবণ/দর্শন বনাম চেষ্টা ও সুযোগ নিয়ে দেখার মধ্যে পার্থক্য।",
-                        formula: "প্রাকৃতিক/স্বয়ংক্রিয়: <strong>が みえます / きこえます</strong><br>সুযোগ/চেষ্টা: <strong>が みられます / きけます</strong>",
-                        points: [{ pTitle: "পার্থক্য:", pDesc: "みえます/きこえます নিজের অজান্তেই চোখে পড়া বা কানে আসা। みられます/きけます সুযোগ তৈরি করে দেখা/শোনা।" }],
+                        title: "Rule 2: みえます (দেখা যাওয়া) ও きこえます (শোনা যাওয়া)",
+                        desc: "ইচ্ছা বা চেষ্টা ছাড়া প্রাকৃতিক বা স্বয়ংক্রিয়ভাবে চোখে পড়া বা কানে ভেসে আসা বোঝায়। এদের আগে সবসময় が বসে।",
+                        formula: "<strong>Noun が</strong> + <strong>みえます / きこえます</strong>",
                         examples: [
-                            { jp: "しんかんせんから ふじさんが <mark class='hl'>みえます</mark>。", bn: "বুলেট ট্রেন থেকে ফুজি পাহাড় চোখে পড়ে।" },
-                            { jp: "えいがかん で おもしろい えいがが <mark class='hl'>みられます</mark>。", bn: "সিনেমা হলে চমৎকার সিনেমা দেখতে পারি।" },
-                            { jp: "となりの へやから ピアノの おとが <mark class='hl'>きこえます</mark>。", bn: "পাশের ঘর থেকে পিয়ানোর শব্দ কানে ভেসে আসছে।" }
+                            { jp: "しんかんせんから ふじさん<mark class='hl'>が みえます</mark>。", bn: "বুলেট ট্রেন থেকে ফুজি পাহাড় দেখতে পাওয়া যায়।" },
+                            { jp: "ラジオの おと<mark class='hl'>が きこえます</mark>。", bn: "রেডিওর শব্দ শুনতে পাওয়া যাচ্ছে।" }
                         ]
                     },
                     {
-                        title: "Rule ③: めいし + しか + Negative Verb (সীমাবদ্ধতা)",
-                        desc: "শুধুমাত্র একটি জিনিস বা অল্প পরিমাণ বোঝাতে ব্যবহৃত হয় এবং শেষের বাক্যটি বাধ্যতামূলক নেগেটিভ হয়।",
-                        formula: "<strong>めいし</strong> + <strong>しか</strong> + <strong>Negative Verb</strong>",
-                        points: [{ pTitle: "শুধু সীমাবদ্ধতা:", pDesc: "একটি অতৃপ্তির ভাব প্রকাশ পায়।" }],
+                        title: "Rule 3: できます (সম্পন্ন হওয়া বা গড়ে ওঠা)",
+                        desc: "কোনো কাজ শেষ হওয়া, তৈরি হয়ে যাওয়া বা নতুন কোনো কিছু অস্তিত্ব লাভ করা বোঝাতে বসে।",
+                        formula: "<strong>Noun が</strong> + <strong>できました</strong>",
                         examples: [
-                            { jp: "ひらがな<mark class='hl'>しか かけません</mark>。", bn: "শুধুমাত্র হিরাগানা ছাড়া আর কিছুই লিখতে পারি না।" },
-                            { jp: "せんえん<mark class='hl'>しか ありません</mark>。", bn: "আমার কাছে মাত্র এক হাজার ইয়েন ছাড়া আর নেই।" }
+                            { jp: "えきの まえに おおきい スーパー<mark class='hl'>が できました</mark>。", bn: "স্টেশনের সামনে বড় সুপার মার্কেট তৈরি হয়েছে।" },
+                            { jp: "ばんごはん<mark class='hl'>が できました</mark>。", bn: "রাতের খাবার তৈরি হয়ে গেছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: しか (শুধুমাত্র / ছাড়া)",
+                        desc: "শুধুমাত্র একটি জিনিস সীমাবদ্ধ বোঝাতে ব্যবহৃত হয়। しか বসলে ক্রিয়াপদটি নেগেটিভ হয়, তবে অর্থ হ্যাঁ-বোধক থাকে।",
+                        formula: "<strong>Noun</strong> + <strong>しか</strong> + <strong>Negative Verb</strong>",
+                        examples: [
+                            { jp: "ローマじ<mark class='hl'>しか かけません</mark>。", bn: "রোমাজি ছাড়া আর কিছুই লিখতে পারি না।" },
+                            { jp: "ローマじだけ かけます。", bn: "শুধুমাত্র রোমাজি লিখতে পারি (পজিটিভ)।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 5: Contrast Noun は (তুলনা)",
+                        desc: "দুটি বিষয়ের একটি পারি কিন্তু অন্যটি পারি না—এমন বৈসাদৃশ্য বোঝাতে উভয় Noun-এর পরেই は বসে।",
+                        formula: "<strong>Noun 1 は Verb が、Noun 2 は Verb (Neg)</strong>",
+                        examples: [
+                            { jp: "ワイン<mark class='hl'>は のみますが</mark>、ビール<mark class='hl'>は のみません</mark>。", bn: "ওয়াইন পান করি কিন্তু বিয়ার পান করি না।" },
+                            { jp: "ひらがな<mark class='hl'>は かけますが</mark>、かんじ<mark class='hl'>は かけません</mark>。", bn: "হিরাগানা লিখতে পারি কিন্তু কাঞ্জি লিখতে পারি না।" }
                         ]
                     }
                 ]
             },
-            3: {
-                lessonNo: 3,
+            28: {
                 minnaLesson: 28,
-                title: "একসাথে দুই কাজ ও কারণ",
-                kana: "だいさんか",
+                title: "একসাথে দুই কাজ ও কারণ (ながら)",
+                kana: "だいにじゅうはっか",
                 rules: [
                     {
-                        title: "Rule ①: どうし (ます-form بغیر ます) + ながら",
-                        desc: "একই সাথে একই ব্যক্তির দ্বারা দুটি কাজ সম্পন্ন করা বোঝাতে ব্যবহৃত হয়। পেছনের কাজটি মূল কাজ।",
-                        formula: "<strong>どうし 1 (Stem)</strong> + <strong>ながら</strong> + <strong>どうし 2</strong>",
-                        points: [{ pTitle: "প্রধান ও গৌণ কাজ:", pDesc: "শেষের Verb-টি হলো প্রধান কাজ।" }],
+                        title: "Rule 1: V1 ます কেটে ながら + V2 (করতে করতে)",
+                        desc: "একই সাথে দুটি কাজ করা বোঝাতে প্রথম Verb-এর ます কেটে ながら বসে। পেছনের কাজটি মূল কাজ।",
+                        formula: "<strong>Verb 1 (ます কেটে)</strong> + <strong>ながら</strong> + <strong>Verb 2</strong>",
                         examples: [
-                            { jp: "おんがくを きき<mark class='hl'>ながら</mark> ごはんを たべます。", bn: "গান শুনতে শুনতে খাবার খাই।" },
-                            { jp: "はたらき<mark class='hl'>ながら</mark> だいがくで べんきょうしています。", bn: "চাকরি করার পাশাপাশি বিশ্ববিদ্যালয়ে পড়াশোনা করছি।" }
+                            { jp: "おんがくを きき<mark class='hl'>ながら</mark> しょくじします。", bn: "গান শুনতে শুনতে খাবার খাই।" },
+                            { jp: "はたらき<mark class='hl'>ながら</mark> にほんごを べんきょうしています。", bn: "চাকরি করার পাশাপাশি জাপানি ভাষা পড়াশোনা করছি।" }
                         ]
                     },
                     {
-                        title: "Rule ②: ふつうけい + し、~し (ধারাবাহিক কারণ)",
-                        desc: "দুই বা ততোধিক কারণ একের পর এক তুলে ধরে কোনো ফলাফল বা মতামত প্রকাশ করতে ব্যবহৃত হয়।",
-                        formula: "<strong>ふつうけい</strong> + <strong>し</strong>、<strong>ふつうけい</strong> + <strong>し</strong>",
-                        points: [{ pTitle: "একাধিক কারণ:", pDesc: "কেবল একটি কারণ নয়, আরও অনুকূল/প্রতিকূল কারণ রয়েছে।" }],
+                        title: "Rule 2: Vて-form + います (অভ্যাসগত বা নিয়মিত কাজ)",
+                        desc: "অতীতকালে শুরু হয়ে বর্তমানেও নিয়মিত চলছে এমন অভ্যাসগত কাজ বা পেশা প্রকাশ করতে বসে।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>ています</strong>",
                         examples: [
-                            { jp: "この みせは ねだんも やすい<mark class='hl'>し</mark>、さかなも あたらしいです。", bn: "এই দোকানের দামও সস্তা, মাছও তাজা।" },
-                            { jp: "あたまも いたい<mark class='hl'>し</mark>、ねつも あるから、はやく かえります。", bn: "মাথাও ব্যথা করছে, জ্বরও আছে, তাই তাড়াতাড়ি বাড়ি ফিরব।" }
+                            { jp: "まいあさ ジョギングを <mark class='hl'>しています</mark>。", bn: "প্রতি সকালে নিয়মিত জগিং করি।" },
+                            { jp: "ミラーさんは IMCで はたらいて <mark class='hl'>います</mark>。", bn: "মিলার সাহেব আইএমসি কোম্পানিতে কাজ করেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Plain Form + し、~し (একাধিক গুণ বা কারণ)",
+                        desc: "একাধিক গুণ বা কারণ একের পর এক তুলে ধরতে এবং বাক্যের শেষে それに (তদুপরি) ব্যবহার করতে বসে।",
+                        formula: "<strong>Plain Form</strong> + <strong>し</strong>、<strong>Plain Form</strong> + <strong>し</strong>",
+                        examples: [
+                            { jp: "すずきさんは ピアノも ひける<mark class='hl'>し</mark>、うたも うたえる<mark class='hl'>し</mark>、ダンスも できます。", bn: "সুজুকি সাহেব পিয়ানোও বাজাতে পারেন, গানও গাইতে পারেন, আবার নাচতেও পারেন।" },
+                            { jp: "ここは ねだんも やすい<mark class='hl'>し</mark>、さかなも あたらしい<mark class='hl'>し</mark>、よく たべに きます。", bn: "এখানে দামও সস্তা, মাছও তাজা, তাই প্রায়ই খেতে আসি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: それで (এইজন্য / এবং তাই)",
+                        desc: "পূর্বের কারণগুলোর যৌক্তিক ফলাফল ব্যক্ত করার আগে বাক্যের শুরুতে それで বসে।",
+                        formula: "<strong>কারণ বাক্য</strong>。<strong>それで</strong> + <strong>ফলাফল</strong>",
+                        examples: [
+                            { jp: "ここは コーヒーも おいしいし、しょくじも できるし･･･。･･･<mark class='hl'>それで</mark> にんきが あるんですね。", bn: "এখানে কফিও সুস্বাদু, খাবারও পাওয়া যায়･･･ এইজন্যই এতো জনপ্রিয়তা তাই না।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 5: とき + Particle (যখন-তখন)",
+                        desc: "কোনো কাজ করার সময় বা মুহূর্তে অন্য কিছু করা বা না করা বোঝাতে বসে।",
+                        formula: "<strong>Verb (Dictionary form)</strong> + <strong>ときは</strong>",
+                        examples: [
+                            { jp: "べんきょうする <mark class='hl'>ときは</mark> おんがくを ききません。", bn: "পড়াশোনা করার সময় গান শুনি না।" }
                         ]
                     }
                 ]
             },
-            4: {
-                lessonNo: 4,
+            29: {
                 minnaLesson: 29,
-                title: "বর্তমান অবস্থা ও ফলাফল",
-                kana: "だいよんか",
+                title: "স্বয়ংক্রিয় অবস্থা ও সমাপ্তি",
+                kana: "だいにじゅうきゅうか",
                 rules: [
                     {
-                        title: "Rule ①: じどうし て-form + います (অবস্থার স্থিতি)",
-                        desc: "অতীতে ঘটে যাওয়া কাজের ফলাফল বর্তমান সময় পর্যন্ত অপরিবর্তিত বজায় থাকা প্রকাশ করে।",
-                        formula: "<strong>めいし が</strong> + <strong>じどうし (て-form)</strong> + <strong>います</strong>",
-                        points: [{ pTitle: "ফলাফলের স্থিতি:", pDesc: "কাজটি আগে সম্পন্ন হয়ে বর্তমানে অবস্থাটি চোখে দৃশ্যমান।" }],
+                        title: "Rule 1: Intransitive Vて-form + います (অবস্থার ধারাবাহিকতা)",
+                        desc: "অতীতের কোনো কাজের প্রভাব বা অবস্থা বর্তমানেও বিদ্যমান রয়েছে বোঝাতে অকর্মক ক্রিয়ার সাথে বসে।",
+                        formula: "<strong>Noun が</strong> + <strong>Intransitive Verb (て-form)</strong> + <strong>います</strong>",
+                        note: "নির্দিষ্ট কোনো বস্তুকে বোঝাতে この, その, あの এর সাথে は বসে।",
                         examples: [
-                            { jp: "まどが <mark class='hl'>われています</mark>。", bn: "জানালাটি ভেঙে রয়েছে।" },
+                            { jp: "まどが <mark class='hl'>われています</mark>。", bn: "জানালাটি ভেঙে রয়েছে (ভাঙা অবস্থা বজায় আছে)।" },
                             { jp: "でんきが <mark class='hl'>ついています</mark>。", bn: "বাতিটি জ্বলে রয়েছে।" },
-                            { jp: "この みちは <mark class='hl'>こんでいます</mark>。", bn: "এই রাস্তায় খুব জ্যাম লেগে আছে।" }
+                            { jp: "この いすは <mark class='hl'>こわれています</mark>。", bn: "এই চেয়ারটি ভেঙে রয়েছে।" }
                         ]
                     },
                     {
-                        title: "Rule ②: どうし て-form + しまいました",
-                        desc: "কোনো কাজ সম্পূর্ণ শেষ করে ফেলা অথবা কোনো ভুলের প্রতি অনুশোচনা বা হতাশা প্রকাশ করা।",
-                        formula: "<strong>どうし (て-form)</strong> + <strong>しまいました</strong>",
-                        points: [
-                            { pTitle: "১. পুরোপুরি সমাপ্তি:", pDesc: "কাজটি পুরোপুরি সম্পন্ন হয়েছে।" },
-                            { pTitle: "২. অনুশোচনা বা আফসোস:", pDesc: "অনাকাঙ্ক্ষিত কোনো ভুলের প্রতি দুঃখ প্রকাশ।" }
-                        ],
+                        title: "Rule 2: Vて-form + しまいました (সমাপ্তি বা অনুশোচনা)",
+                        desc: "কোনো কাজ সম্পূর্ণ শেষ হয়ে গেছে, অথবা অনাকাঙ্ক্ষিত কোনো ভুলের প্রতি আক্ষেপ ও হতাশা প্রকাশ করে।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>しまいました / しまいます</strong>",
                         examples: [
-                            { jp: "しゅくだいを ぜんぶ やって <mark class='hl'>しまいました</mark>。", bn: "বাড়ির কাজ পুরোপুরি শেষ করে ফেলেছি।" },
-                            { jp: "パスポートを なくして <mark class='hl'>しまいました</mark>。", bn: "পাসপোর্ট হারিয়ে ফেলেছি (আফসোস)।" }
+                            { jp: "かんじの しゅくだいは もう やって <mark class='hl'>しまいました</mark>。", bn: "কাঞ্জির বাড়ির কাজ ইতোমধ্যে সম্পূর্ণ শেষ করে ফেলেছি।" },
+                            { jp: "パスポートを なくして <mark class='hl'>しまいました</mark>。", bn: "পাসপোর্ট হারিয়ে ফেলেছি (হতাশা ও আফসোস)।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: どこかで (অনির্দিষ্ট) vs どこかに (নির্দিষ্ট)",
+                        desc: "অনির্দিষ্ট কোথাও কিছু হারিয়ে গেলে どこかで এবং নির্দিষ্ট কোথাও কিছু আছে কি না জানতে どこかに বসে।",
+                        formula: "<strong>どこかで</strong> + হারানো | <strong>どこかに</strong> + উপস্থিতি",
+                        examples: [
+                            { jp: "<mark class='hl'>どこかで</mark> さいふを なくして しまいました。", bn: "কোথাও একটা মানিব্যাগ হারিয়ে ফেলেছি।" },
+                            { jp: "<mark class='hl'>どこかに</mark> でんわが ありますか。", bn: "কোথাও কি কোনো টেলিফোন আছে?" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: ありましたよ (এইতো পেয়ে গেছি)",
+                        desc: "কোনো হারিয়ে যাওয়া বা খুঁজতে থাকা জিনিস হঠাৎ দেখতে পেলে আনন্দের সাথে বলা হয়।",
+                        formula: "<strong>Noun が ありましたよ</strong>",
+                        examples: [
+                            { jp: "かばんが <mark class='hl'>ありましたよ</mark>。", bn: "এইতো ব্যাগটি পেয়ে গেছি!" }
                         ]
                     }
                 ]
             },
-            5: {
-                lessonNo: 5,
+            30: {
                 minnaLesson: 30,
-                title: "আগাম প্রস্তুতি ও স্থিতি",
-                kana: "だいごか",
+                title: "উদ্দেশ্যমূলক প্রস্তুতি ও স্থিতি",
+                kana: "だいさんじゅっか",
                 rules: [
                     {
-                        title: "Rule ①: めいし が たどうし て-form + あります",
-                        desc: "ভবিষ্যতের কোনো উদ্দেশ্যে কেউ ইচ্ছাকৃতভাবে কোনো কাজ করে রেখেছে এবং অবস্থাটি বজায় আছে।",
-                        formula: "<strong>めいし が</strong> + <strong>たどうし (て-form)</strong> + <strong>あります</strong>",
-                        points: [{ pTitle: "উদ্দেশ্যমূলক স্থিতি:", pDesc: "কারো পরিকল্পনা বা পূর্বপ্রস্তুতি জড়িয়ে থাকে।" }],
+                        title: "Rule 1: Vて-form + あります (উদ্দেশ্যমূলক স্থিতি)",
+                        desc: "ভবিষ্যতের কোনো লক্ষ্য নিয়ে কেউ উদ্দেশ্যমূলকভাবে কাজ করে রেখেছে এবং ফলাফল বিদ্যমান আছে।",
+                        formula: "<strong>Noun (স্থান) に Noun (বস্তু) が</strong> + <strong>Transitive Verb (て-form) + あります</strong>",
                         examples: [
-                            { jp: "カレンダーに よていが かいて<mark class='hl'>あります</mark>。", bn: "ক্যালেন্ডারে সূচি লিখে রাখা আছে।" },
-                            { jp: "かべに えが かけて<mark class='hl'>あります</mark>。", bn: "দেওয়ালে ছবি ঝুলিয়ে রাখা আছে।" }
+                            { jp: "つくえの うえに メモが <mark class='hl'>おいてあります</mark>。", bn: "টেবিলের উপরে মেমো রাখা আছে।" },
+                            { jp: "カレンダーに こんげつの よていが <mark class='hl'>かいてあります</mark>。", bn: "ক্যালেন্ডারে এই মাসের পরিকল্পনা লিখে রাখা আছে।" }
                         ]
                     },
                     {
-                        title: "Rule ②: どうし て-form + おきます",
-                        desc: "ভবিষ্যতের সুবিধার জন্য কোনো কাজ আগে থেকেই রেডি বা সম্পন্ন করে রাখা।",
-                        formula: "<strong>どうし (て-form)</strong> + <strong>おきます</strong>",
-                        points: [{ pTitle: "ভবিষ্যত প্রস্তুতি:", pDesc: "পরবর্তী কোনো কাজের সুবিধার্থে আগে থেকেই গুছিয়ে রাখা।" }],
+                        title: "Rule 2: Vて-form + おきます (পূর্বপ্রস্তুতি)",
+                        desc: "ভবিষ্যতের সুবিধার জন্য কোনো কাজ আগে থেকেই সম্পন্ন করে রাখা।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>おきます / おいてください</strong>",
                         examples: [
-                            { jp: "りょこうの まえに きっぷを かって <mark class='hl'>おきます</mark>。", bn: "ভ্রমণের পূর্বেই টিকিট কেটে রাখব।" },
-                            { jp: "じゅぎょうの まえに よしゅうして <mark class='hl'>おきます</mark>。", bn: "ক্লাসের পূর্বেই অধ্যায়টি পড়ে রাখব।" }
+                            { jp: "りょこうの まえに きっぷを かって <mark class='hl'>おきます</mark>。", bn: "ভ্রমণের পূর্বে টিকিট কিনে রাখতে হবে।" },
+                            { jp: "つぎの かいぎまでに この しりょうを よんで <mark class='hl'>おいてください</mark>。", bn: "পরবর্তী মিটিংয়ের আগেই এই ডকুমেন্টটি পড়ে রাখবেন দয়া করে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: まだ + Affirmative (এখনো চলমান)",
+                        desc: "কোনো কাজ এখনো চলমান বা ঘটছে বোঝাতে まだ এর সাথে হ্যাঁ-বোধক বাক্য বসে।",
+                        formula: "<strong>まだ</strong> + Verb (て-form) います",
+                        examples: [
+                            { jp: "<mark class='hl'>まだ</mark> あめが ふっています。", bn: "এখনো বৃষ্টি হচ্ছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: 〜とか、〜とか (এবং, ইত্যাদি)",
+                        desc: "অনেকগুলো বিষয় একসাথে চমৎকারভাবে উপস্থাপন করতে とか বসে।",
+                        formula: "<strong>Noun とか Noun とか</strong>",
+                        examples: [
+                            { jp: "テニス<mark class='hl'>とか</mark>、すいえい<mark class='hl'>とか</mark>を しています。", bn: "টেনিস এবং সাঁতার ইত্যাদি খেলাধুলা করছি।" }
+                        ]
+                    }
+                ]
+            },
+            31: {
+                minnaLesson: 31,
+                title: "ঐচ্ছিক রূপ ও পরিকল্পনা (いこうけい)",
+                kana: "だいさんじゅういっか",
+                rules: [
+                    {
+                        title: "Rule 1: Volitional Form (いこうけい - ঐচ্ছিক রূপ)",
+                        desc: "কাউকে কোনো কাজের প্রস্তাব বা সংকল্প বোঝাতে ます-এর বদলে informal হিসেবে বসে।",
+                        formula: "<strong>Group 1:</strong> い-কলাম → お-কলাম + う (かきます → かこう / よみます → よもう)<br><strong>Group 2:</strong> ます কেটে よう (たべます → たべよう)<br><strong>Group 3:</strong> きます → <strong>こよう</strong> | します → <strong>しよう</strong>",
+                        examples: [
+                            { jp: "ちょっと <mark class='hl'>やすもう</mark>。", bn: "চল একটু বিশ্রাম নেওয়া যাক।" },
+                            { jp: "てつだ<mark class='hl'>おうか</mark>。", bn: "তোমাকে সাহায্য করব কি?" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Volitional + と おもっています (ভাবছি)",
+                        desc: "কোনো বিষয়ে আগেই সিদ্ধান্ত নিয়েছি বা পরিকল্পনা মনে মনে পোষণ করছি বোঝাতে বসে।",
+                        formula: "<strong>Volitional Form</strong> + <strong>と おもっています</strong>",
+                        examples: [
+                            { jp: "しゅうまつは うみへ <mark class='hl'>いこうと おもっています</mark>。", bn: "সাপ্তাহিক ছুটিতে সাগরে যাব বলে ভাবছি/পরিকল্পনা করেছি।" },
+                            { jp: "がいこくで しごとを <mark class='hl'>みつけようと おもっています</mark>。", bn: "বিদেশে চাকরি খোঁজার কথা চিন্তা করেছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: V-(Dic / ない) + つもりです (ইচ্ছা আছে/নাই)",
+                        desc: "কোনো কাজ করার ইতিবাচক ইচ্ছা (Dic) বা না করার নেতিবাচক ইচ্ছা (ない) প্রকাশ করে।",
+                        formula: "<strong>Verb (Dictionary / ない)</strong> + <strong>つもりです</strong>",
+                        examples: [
+                            { jp: "くにへ かえっても、べんきょうを <mark class='hl'>つづけるつもりです</mark>。", bn: "দেশে ফিরে গিয়েও পড়াশোনা চালিয়ে যাওয়ার ইচ্ছা আছে।" },
+                            { jp: "あしたからは たばこを <mark class='hl'>すわないつもりです</mark>。", bn: "আগামীকাল থেকে ধূমপান না করার ইচ্ছা পোষণ করছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: V-Dic / Noun の + よていです (শিডিউল)",
+                        desc: "আগে থেকে সুনির্দিষ্ট ও নির্ধারিত পরিকল্পনা বা সময়সূচি নির্দেশ করতে বসে।",
+                        formula: "<strong>Verb (Dictionary form) / Noun の</strong> + <strong>よていです</strong>",
+                        examples: [
+                            { jp: "7がつの おわりに ドイツへ しゅっちょうする <mark class='hl'>よていです</mark>。", bn: "জুলাই মাসের শেষে জার্মানিতে ব্যবসায়িক সফরের শিডিউল আছে।" },
+                            { jp: "りょこうは 1しゅうかんぐらいの <mark class='hl'>よていです</mark>。", bn: "ভ্রমণ এক সপ্তাহের মতো হওয়ার পরিকল্পনা রয়েছে।" }
+                        ]
+                    }
+                ]
+            },
+            32: {
+                minnaLesson: 32,
+                title: "উপদেশ ও সম্ভাবনা (ほうがいい / でしょう)",
+                kana: "だいさんじゅうにか",
+                rules: [
+                    {
+                        title: "Rule 1: Vた / Vない + ほうが いいです (উপদেশ)",
+                        desc: "কাউকে কোনো কাজ করা ভালো (た-form) অথবা না করা ভালো (ない-form)—এমন সুপরামর্শ দিতে বসে।",
+                        formula: "<strong>Verb (た-form / ない-form)</strong> + <strong>ほうが いいです</strong>",
+                        examples: [
+                            { jp: "まいにち うんどう<mark class='hl'>した ほうが いいです</mark>。", bn: "প্রতিদিন ব্যায়াম করা আপনার জন্য ভালো।" },
+                            { jp: "たばこを <mark class='hl'>すわない ほうが いいです</mark>。", bn: "ধূমপান না করাটাই ভালো।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Plain Form + でしょう (সম্ভাবনা বেশি)",
+                        desc: "ভবিষ্যতে কোনো ঘটনা ঘটার জোরালো সম্ভাবনা বোঝাতে ব্যবহৃত হয় (だ হবে না)।",
+                        formula: "<strong>Verb / い-adj / な-adj (だ বাদ) / Noun (だ বাদ)</strong> + <strong>でしょう</strong>",
+                        examples: [
+                            { jp: "あしたは あめが <mark class='hl'>ふるでしょう</mark>。", bn: "আগামীকাল বৃষ্টি পড়ার জোরালো সম্ভাবনা আছে।" },
+                            { jp: "こんやは つきが <mark class='hl'>きれいでしょう</mark>。", bn: "আজ রাতে চাঁদ সুন্দর হওয়ার সম্ভাবনা আছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Plain Form + かもしれません (সম্ভাবনা কম/ধারণা)",
+                        desc: "হতেও পারে আবার নাও হতে পারে—এমন অস্পষ্ট বা ক্ষীণ সম্ভাবনা নির্দেশ করে।",
+                        formula: "<strong>Verb / い-adj / な-adj (だ বাদ) / Noun (だ বাদ)</strong> + <strong>かもしれません</strong>",
+                        examples: [
+                            { jp: "やくそくの じかんに まにあわない<mark class='hl'>かもしれません</mark>。", bn: "প্রতিশ্রুত সময়ে হয়তো ঠিকমতো নাও পৌঁছাতে পারি।" },
+                            { jp: "かれは びょうき<mark class='hl'>かもしれません</mark>。", bn: "সে অসুস্থ হতে পারে মনে হয়।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Quantifier + で (পরিমাণ বা সীমা)",
+                        desc: "নির্দিষ্ট সময় বা খরচের অর্থের সীমার পর で বসে।",
+                        formula: "<strong>সময় / টাকা</strong> + <strong>で</strong>",
+                        examples: [
+                            { jp: "えきまで 30ぷん<mark class='hl'>で</mark> いけますか。", bn: "স্টেশনে ৩০ মিনিটের মধ্যে যেতে পারবে কি?" },
+                            { jp: "3まんえん<mark class='hl'>で</mark> パソコンが かえますか。", bn: "৩০ হাজার ইয়েন দিয়ে কি কম্পিউটার কিনতে পারব?" }
+                        ]
+                    }
+                ]
+            },
+            33: {
+                minnaLesson: 33,
+                title: "আদেশ ও নিষেধ (めいれい / きんし)",
+                kana: "だいさんじゅうさんか",
+                rules: [
+                    {
+                        title: "Rule 1: Imperative (めいれいけい) ও Prohibitive (きんしけい)",
+                        desc: "কঠোর আদেশ দিতে Imperative এবং কোনো কাজ জোর দিয়ে নিষেধ করতে Prohibitive রূপ বসে।",
+                        formula: "<strong>Imperative:</strong> G1: い-কলাম → え-কলাম (かけ) | G2: ます কেটে ろ (たべろ) | きます→こい | します→しろ<br><strong>Prohibitive:</strong> Verb (Dictionary form) + <strong>な</strong> (かくな / たべるな)",
+                        note: "あります, できます, わかります এর কোনো Imperative রূপ নেই।",
+                        examples: [
+                            { jp: "こうつうきそくを <mark class='hl'>まもれ</mark>。", bn: "ট্রাফিক নিয়ম মেনে চলো! (আদেশ)" },
+                            { jp: "でんしゃの なかで <mark class='hl'>さわぐな</mark>。", bn: "ট্রেনের ভেতরে গোলমাল কোরো না! (নিষেধ)" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: 〜と かいてあります / と よみます",
+                        desc: "কোথাও কোনো কিছু লেখা আছে বা কোনো চিহ্নের পাঠ কী—তা নির্দেশ করতে বসে।",
+                        formula: "<strong>... と かいてあります / と よみます</strong>",
+                        examples: [
+                            { jp: "あそこに くるまを とめるな<mark class='hl'>と かいてあります</mark>。", bn: "ঐখানে 'গাড়ি পার্ক করা নিষেধ' লেখা আছে।" },
+                            { jp: "あの かんじは いりぐち<mark class='hl'>と よみます</mark>。", bn: "ঐ কাঞ্জিটি 'প্রবেশদ্বার' বলে পড়া হয়।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: X は Y という いみです (অর্থ প্রকাশ)",
+                        desc: "কোনো সংকেত বা কথার অর্থ কী তা বিস্তারিত ব্যাখ্যা করতে ব্যবহৃত হয়।",
+                        formula: "<strong>শব্দ は</strong> + <strong>ব্যাখ্যা + という いみです</strong>",
+                        examples: [
+                            { jp: "たちいりきんしは はいるな<mark class='hl'>という いみです</mark>。", bn: "তাচিরিকিংশি মানে হলো 'ভেতরে প্রবেশ নিষেধ'।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Plain Form + と いっていました / と つたえていただけませんか",
+                        desc: "অন্যের দেওয়া বক্তব্য হুবহু তুলে ধরতে এবং ৩য় ব্যক্তির কাছে কোনো বার্তা পৌঁছে দেওয়ার অনুরোধ করতে বসে।",
+                        formula: "<strong>Plain Form</strong> + <strong>といっていました</strong> / <strong>と つたえていただけませんか</strong>",
+                        examples: [
+                            { jp: "やまださんは あした 5じに くる<mark class='hl'>と いっていました</mark>。", bn: "ইয়ামাদা সাহেব বলেছিলেন যে উনি কাল ৫টায় আসবেন।" },
+                            { jp: "たなかさんに 10ぷんほど おくれる<mark class='hl'>と つたえていただけませんか</mark>。", bn: "তানাকা সাহেবকে একটু বলে দেবেন কি যে '১০ মিনিট দেরি হবে'?" }
+                        ]
+                    }
+                ]
+            },
+            34: {
+                minnaLesson: 34,
+                title: "অনুকরণ ও পর্যায়ক্রম (とおりに / あとで)",
+                kana: "だいさんじゅうよんか",
+                rules: [
+                    {
+                        title: "Rule 1: Vた / Noun の + とおりに (হুবহু সেভাবে)",
+                        desc: "যেভাবে দেখেছি বা যেভাবে বলা হয়েছে, অবিকল সেভাবে কাজ করার নির্দেশনা দিতে ব্যবহৃত হয়।",
+                        formula: "<strong>Verb (た-form) / Noun の</strong> + <strong>とおりに</strong> + Verb 2",
+                        examples: [
+                            { jp: "わたしが やった<mark class='hl'>とおりに</mark>、やって ください。", bn: "আমি যেভাবে করি ঠিক সেভাবে করুন দয়া করে।" },
+                            { jp: "せんの <mark class='hl'>とおりに</mark>、かみを きって ください。", bn: "লাইন যেভাবে আছে সেভাবে কাগজটি কাটুন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Vた / Noun の + あとで (পরে)",
+                        desc: "একটি কাজ শেষ হওয়ার পর পরবর্তী কাজটি শুরু করার সময়ক্রম বোঝাতে বসে।",
+                        formula: "<strong>Verb (た-form) / Noun の</strong> + <strong>あとで</strong> + Verb 2",
+                        examples: [
+                            { jp: "しごとが おわった<mark class='hl'>あとで</mark>、のみに いきます。", bn: "কাজ শেষ হওয়ার পরে পান করতে যাব।" },
+                            { jp: "スポーツの <mark class='hl'>あとで</mark>、シャワーを あびます。", bn: "খেলাধুলার পরে গোসল করব।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: V1て + V2 বনাম V1ないで + V2",
+                        desc: "কোনো উপাদান যোগ করে বা সাথে নিয়ে কাজ করলে Vて এবং তা ছাড়া বা বাদ দিয়ে করলে Vないで বসে।",
+                        formula: "প্রয়োগ করে: <strong>V1-て + V2</strong> | উপাদান ছাড়া: <strong>V1-ないで + V2</strong>",
+                        examples: [
+                            { jp: "しょうゆを つけて <mark class='hl'>たべます</mark>。", bn: "সয়া সস লাগিয়ে খাব।" },
+                            { jp: "しょうゆを つけないで <mark class='hl'>たべます</mark>。", bn: "সয়া সস না লাগিয়ে খাব।" }
+                        ]
+                    }
+                ]
+            },
+            35: {
+                minnaLesson: 35,
+                title: "শর্তযুক্ত বাক্য (じょうけんけい - ば)",
+                kana: "だいさんじゅうごか",
+                rules: [
+                    {
+                        title: "Rule 1: Conditional Form (じょうけんけい - যদি)",
+                        desc: "কোনো কাজের ওপর অন্য একটি কাজ নির্ভর করলে 'যদি' অর্থে রূপান্তর করতে হয়।",
+                        formula: "<strong>Group 1:</strong> い-কলাম → え-কলাম + ば (あいます → あえば / のみます → のめば)<br><strong>Group 2:</strong> ます কেটে れば (たべます → たべれば)<br><strong>Group 3:</strong> きます → <strong>くれば</strong> | します → <strong>すれば</strong><br><strong>い-adj:</strong> い কেটে ければ | <strong>な-adj / Noun:</strong> + なら",
+                        examples: [
+                            { jp: "ボタンを おせ<mark class='hl'>ば</mark>、まどが あきます。", bn: "যদি বোতাম চাপেন তবে জানালা খুলবে।" },
+                            { jp: "いい てんき<mark class='hl'>なら</mark>、むこうに しまが みえます。", bn: "যদি আবহাওয়া ভালো থাকে তবে ওপাশে দ্বীপ দেখতে পাবে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Interrogative + V-ば いいですか",
+                        desc: "কী করলে সবচেয়ে ভালো হবে—এমন বিষয়ে কারও মতামত বা সাজেশন চাওয়ার প্রশ্ন।",
+                        formula: "<strong>প্রশ্নবোধক শব্দ</strong> + <strong>Verb (ば-form)</strong> + <strong>いいですか</strong>",
+                        examples: [
+                            { jp: "ほんを かりたいんですが、どう <mark class='hl'>すれば いいですか</mark>。", bn: "বই ধার নিতে চাই, কী করলে ভালো হবে?" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Noun + なら (প্রসঙ্গ ধরে পরামর্শ)",
+                        desc: "উত্থাপিত টপিককে শর্ত ধরে কোনো সুনির্দিষ্ট পরামর্শ দিতে ব্যবহৃত হয়।",
+                        formula: "<strong>Noun</strong> + <strong>なら</strong> + পরামর্শ",
+                        examples: [
+                            { jp: "おんせんに いきたいんですが。･･･おんせん<mark class='hl'>なら</mark> はくばが いいですよ。", bn: "উষ্ণ প্রস্রবণে যেতে চাই･･･ গরম ঝর্ণা হলে হাকুবা সবচেয়ে ভালো হবে।" }
+                        ]
+                    }
+                ]
+            },
+            36: {
+                minnaLesson: 36,
+                title: "লক্ষ্য অর্জন ও অভ্যাস (ように)",
+                kana: "だいさんじゅうろっか",
+                rules: [
+                    {
+                        title: "Rule 1: V-Dic / V-ない + ように + V2 (উদ্দেশ্যে)",
+                        desc: "নির্দিষ্ট লক্ষ্য পূরণ বা গন্তব্যে পৌঁছানোর প্রচেষ্টা বোঝাতে ように বসে।",
+                        formula: "<strong>Potential Verb (Dic) / Verb (ない)</strong> + <strong>ように</strong> + Action Verb",
+                        examples: [
+                            { jp: "はやく およげる<mark class='hl'>ように</mark>、まいにち れんしゅうしています。", bn: "যাতে দ্রুত সাঁতার কাটতে পারি, সেজন্য প্রতিদিন অনুশীলন করছি।" },
+                            { jp: "わすれない<mark class='hl'>ように</mark>、メモして ください。", bn: "ভুলে যাতে না যাও সেজন্য নোট করে রাখো।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: V-Dic + ように なります (সক্ষম হওয়া)",
+                        desc: "আগে পারতাম না কিন্তু এখন নিজের সক্ষমতা তৈরি হয়েছে বা দক্ষতা অর্জিত হয়েছে।",
+                        formula: "<strong>Verb (Dictionary form)</strong> + <strong>ように なります</strong>",
+                        examples: [
+                            { jp: "やっと じてんしゃに のれる<mark class='hl'>ように なりました</mark>。", bn: "অবশেষে সাইকেলে চড়তে সক্ষম হয়েছি।" },
+                            { jp: "テレビの にほんごが かなり わかる<mark class='hl'>ように なりました</mark>。", bn: "টেলিভিশনের জাপানি ভাষা অনেকটাই বুঝতে সক্ষম হয়েছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: ように しています / して ください",
+                        desc: "নিয়মিত কোনো অভ্যাস বজায় রাখার চেষ্টা চালিয়ে যাওয়া এবং অপরকে অনুরোধ করতে বসে।",
+                        formula: "<strong>Verb (Dic / ない)</strong> + <strong>ように しています / して ください</strong>",
+                        examples: [
+                            { jp: "まいにち やさいを たべる<mark class='hl'>ように しています</mark>。", bn: "প্রতিদিন শাকসবজি খাওয়ার চেষ্টা চালিয়ে যাচ্ছি।" },
+                            { jp: "もっと やさいを たべる<mark class='hl'>ように して ください</mark>。", bn: "দয়া করে বেশি করে সবজি খাওয়ার চেষ্টা করবেন।" }
+                        ]
+                    }
+                ]
+            },
+            37: {
+                minnaLesson: 37,
+                title: "নিষ্ক্রিয় বাচ্য (うけみけい - Passive)",
+                kana: "だいさんじゅうななか",
+                rules: [
+                    {
+                        title: "Rule 1: Passive Verb রূপান্তর (うけみけい)",
+                        desc: "কারও দ্বারা প্রশংসিত হওয়া অথবা কারও দ্বারা কোনো ক্ষতির সম্মুখীন হওয়া প্রকাশ করে।",
+                        formula: "<strong>Group 1:</strong> い-কলাম → あ-কলাম + れます (かきます → かかれます)<br><strong>Group 2:</strong> ます কেটে られます (ほめます → ほめられます)<br><strong>Group 3:</strong> きます → <strong>こられます</strong> | します → <strong>されます</strong>",
+                        examples: [
+                            { jp: "わたしは せんせいに <mark class='hl'>ほめられました</mark>。", bn: "আমি শিক্ষকের কাছ থেকে প্রশংসিত হয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: N1 は N2 に N3 を Passive (ভিকটিম প্যাসিভ)",
+                        desc: "অন্য কারও কাজের কারণে নিজের কোনো জিনিস ক্ষতিগ্রস্ত হওয়া বা বিপদে পড়া।",
+                        formula: "<strong>N1 は N2 に N3 を</strong> + <strong>Passive Verb</strong>",
+                        examples: [
+                            { jp: "わたしは おとうとに パソコンを <mark class='hl'>こわされました</mark>。", bn: "আমার ছোট ভাই আমার কম্পিউটারটি ভেঙে ফেলেছে (ক্ষতিগ্রস্ত)।" },
+                            { jp: "わたしは だれかに じてんしゃを <mark class='hl'>とられました</mark>。", bn: "আমার সাইকেলটি কারও দ্বারা চুরি হয়েছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Noun から / で つくります (তৈরি হওয়া)",
+                        desc: "উপাদান সম্পূর্ণ রূপান্তরিত হলে から এবং মূল উপাদান চেনা গেলে で বসে।",
+                        formula: "রূপান্তর: <strong>から つくります</strong> | আকৃতি পরিবর্তন: <strong>で つくります</strong>",
+                        examples: [
+                            { jp: "ビールは むぎ<mark class='hl'>から つくります</mark>。", bn: "বিয়ার গম থেকে তৈরি হয়।" },
+                            { jp: "むかし にほんの いえは き<mark class='hl'>で つくられました</mark>。", bn: "জাপানের পুরাতন বাড়ি কাঠ দিয়ে তৈরি হয়েছিল।" }
+                        ]
+                    }
+                ]
+            },
+            38: {
+                minnaLesson: 38,
+                title: "বিশেষ্যকরণ (Nominaliser の)",
+                kana: "だいさんじゅうはっか",
+                rules: [
+                    {
+                        title: "Rule 1: V-Dic + のは + Adjective です",
+                        desc: "ক্রিয়াপদের সাথে の যুক্ত করে নির্দিষ্ট কোনো 'কাজ করাটা' বিশেষ্যে রূপান্তর করে অনুভূতি প্রকাশ করা।",
+                        formula: "<strong>Verb (Dictionary form) + のは</strong> + きもちがいい / おもしろい",
+                        examples: [
+                            { jp: "テニスを する<mark class='hl'>のは おもしろいです</mark>。", bn: "টেনিস খেলাটা খুবই মজার।" },
+                            { jp: "あさ はやく さんぽする<mark class='hl'>のは きもちが いいです</mark>。", bn: "সকালে দ্রুত হাঁটাহাঁটি করাটা ভালো অনুভূতি দেয়।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: V-Dic + のが + Adjective です",
+                        desc: "কোনো কাজ করতে পছন্দ/অপছন্দ, দক্ষতা বা গতি প্রকাশ করতে বসে।",
+                        formula: "<strong>Verb (Dictionary form) + のが</strong> + すき / へた / はやい",
+                        examples: [
+                            { jp: "わたしは はなを そだてる<mark class='hl'>のが すきです</mark>。", bn: "আমি ফুলের পরিচর্যা করা পছন্দ করি।" },
+                            { jp: "とうきょうの ひとは あるく<mark class='hl'>のが はやいです</mark>。", bn: "টোকিওর মানুষ দ্রুত হাঁটতে পারে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: V-Dic + のを わすれました (ভুলে যাওয়া)",
+                        desc: "কোনো কাজ করতে ভুলে যাওয়া প্রকাশ করতে ব্যবহৃত হয়।",
+                        formula: "<strong>Verb (Dictionary form)</strong> + <strong>のを わすれました</strong>",
+                        examples: [
+                            { jp: "くるまの まどを しめる<mark class='hl'>のを わすれました</mark>。", bn: "গাড়ির জানালা বন্ধ করতে ভুলে গিয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Plain Form + のを しっていますか",
+                        desc: "শ্রোতা কোনো নির্দিষ্ট ঘটনা সম্পর্কে 'জানে কি না' তা জানার প্রশ্ন।",
+                        formula: "<strong>Plain Form</strong> + <strong>のを しっていますか</strong>",
+                        examples: [
+                            { jp: "きむらさんに あかちゃんが うまれた<mark class='hl'>のを しっていますか</mark>。", bn: "কিমুরা সাহেবের বাচ্চা হয়েছে তুমি জানো কি?" }
+                        ]
+                    }
+                ]
+            },
+            39: {
+                minnaLesson: 39,
+                title: "আবেগ ও কারণ (〜て / 〜ので)",
+                kana: "だいさんじゅうきゅうか",
+                rules: [
+                    {
+                        title: "Rule 1: Vて / Vなくて / い-くて / な-で (আবেগীয় ফলাফল)",
+                        desc: "কোনো ঘটনা ঘটার কারণে অবাক হওয়া, নিশ্চিন্ত হওয়া বা দুঃখ পাওয়ার অনুভূতি প্রকাশ পায়।",
+                        formula: "<strong>Verb (て/なくて) / い-adj (くて) / な-adj (で)</strong> + ফলাফল",
+                        examples: [
+                            { jp: "ニュースを きいて、<mark class='hl'>びっくりしました</mark>。", bn: "সংবাদটি শুনে অবাক হয়েছিলাম।" },
+                            { jp: "かぞくに あえなくて、<mark class='hl'>さびしいです</mark>。", bn: "পরিবারের সাথে দেখা না করতে পেরে একা লাগছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Noun + で (প্রাকৃতিক কারণ বা দুর্ঘটনা)",
+                        desc: "ভূমিকম্প, ঝড়, দুর্ঘটনা বা অসুস্থতার কারণে কোনো ক্ষতি হলে সরাসরি で বসে।",
+                        formula: "<strong>じしん / じこ / びょうき</strong> + <strong>で</strong>",
+                        examples: [
+                            { jp: "じしん<mark class='hl'>で</mark> ビルが たおれました。", bn: "ভূমিকম্পে বিল্ডিং ধসে পড়েছিল।" },
+                            { jp: "びょうき<mark class='hl'>で</mark> かいしゃを やすみました。", bn: "অসুস্থতার কারণে অফিস ছুটি নিয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Plain Form + ので (কারণ / জন্যে)",
+                        desc: "ভদ্রভাবে কোনো কারণ দর্শিয়ে অন্য কাজ করার কথা জানাতে ので বসে (だ এর বদলে な বসে)।",
+                        formula: "<strong>Verb / い-adj (Plain) / な-adj な / Noun な</strong> + <strong>ので</strong>",
+                        examples: [
+                            { jp: "にほんごが わからない<mark class='hl'>ので</mark>、えいごで はなして いただけませんか。", bn: "জাপানি ভাষা বুঝি না বলে ইংরেজিতে কথা বলবেন কি?" },
+                            { jp: "きょうは ひまな<mark class='hl'>ので</mark>、かいものに いきます。", bn: "আজ অবসর আছি বলে শপিং করতে যাব।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: とちゅうで (মাঝপথে)",
+                        desc: "কোনো কাজ চলার মাঝপথে হঠাৎ অন্য ঘটনা ঘটে যাওয়া।",
+                        formula: "<strong>Verb (Dic) / Noun の</strong> + <strong>とちゅうで</strong>",
+                        examples: [
+                            { jp: "マラソンの <mark class='hl'>とちゅうで</mark> きぶんが わるく なりました。", bn: "ম্যারাথনের মাঝপথে হঠাৎ শরীর খারাপ হয়েছিল।" }
+                        ]
+                    }
+                ]
+            },
+            40: {
+                minnaLesson: 40,
+                title: "পরোক্ষ প্রশ্ন ও পরখ (〜か / 〜かどうか)",
+                kana: "だいよんじゅっか",
+                rules: [
+                    {
+                        title: "Rule 1: প্রশ্নবোধক + Plain Form + か (পরোক্ষ প্রশ্ন)",
+                        desc: "বাক্যের মাঝখানে কোনো প্রশ্ন জুড়ে দিয়ে দ্বিধা বা তথ্য খোঁজা প্রকাশ করা।",
+                        formula: "<strong>প্রশ্নবোধক শব্দ + Plain Form (だ ছাড়া)</strong> + <strong>か</strong>",
+                        examples: [
+                            { jp: "なんじに しけんが はじまる<mark class='hl'>か</mark>、わかりません。", bn: "কয়টায় পরীক্ষা শুরু হবে জানি না।" },
+                            { jp: "どれが ただしい こたえ<mark class='hl'>か</mark>、わかりません。", bn: "কোনটা সঠিক উত্তর বুঝতে পারছি না।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Plain Form + かどうか (হবে কি হবে না)",
+                        desc: "কোনো কাজ হবে কি হবে না—এমন সংশয় বা দোটানা প্রকাশ করতে বসে।",
+                        formula: "<strong>Plain Form (だ ছাড়া)</strong> + <strong>かどうか</strong>",
+                        examples: [
+                            { jp: "まちがいが ない<mark class='hl'>かどうか</mark>、しらべて ください。", bn: "কোনো ভুল আছে কি না চেক করে দেখুন দয়া করে।" },
+                            { jp: "その はなしは ほんとう<mark class='hl'>かどうか</mark>、たしかめて ください。", bn: "ঐ কথাটি সত্য কি না নিশ্চিত করুন দয়া করে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Vて-form + みます (করে দেখা)",
+                        desc: "কোনো কাজ নিজে একবার করে দেখা বা পরখ করা বোঝায়।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>みます / みて ください</strong>",
+                        examples: [
+                            { jp: "この ズボンを はいて <mark class='hl'>みても いいですか</mark>。", bn: "এই ট্রাউজার পরে দেখতে পারি কি?" },
+                            { jp: "せんせいに きいて <mark class='hl'>みます</mark>。", bn: "শিক্ষককে জিজ্ঞেস করে দেখছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Adjective い কেটে さ (পরিমাপ)",
+                        desc: "Adjective-এর い উঠে さ বসলে তা বিশেষ্য ও পরিমাপে রূপান্তরিত হয়।",
+                        formula: "<strong>たかい → たかさ (উচ্চতা) | ながい → ながさ (দৈর্ঘ্য)</strong>",
+                        examples: [
+                            { jp: "やまの <mark class='hl'>たかさ</mark>は どうやって はかるか しっていますか。", bn: "পাহাড়ের উচ্চতা কীভাবে মাপতে হয় জানো কি?" }
+                        ]
+                    }
+                ]
+            },
+            41: {
+                minnaLesson: 41,
+                title: "দান ও গ্রহণ (いただきます / くださいます)",
+                kana: "だいよんじゅういっか",
+                rules: [
+                    {
+                        title: "Rule 1: N1(বড় ব্যক্তি) に N2 を いただきます",
+                        desc: "বড় বা সম্মানিত কারও কাছ থেকে কোনো উপহার বা সাহায্য গ্রহণ করা (もらいます এর ভদ্র রূপ)।",
+                        formula: "<strong>সম্মানিত ব্যক্তি に</strong> + বস্তু を + <strong>いただきます</strong>",
+                        examples: [
+                            { jp: "わたしは ぶちょうに おみやげを <mark class='hl'>いただきました</mark>。", bn: "আমি বসের কাছ থেকে উপহার পেয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: N1(বড় ব্যক্তি) が わたしに くださいます",
+                        desc: "সম্মানিত কেউ বক্তাকে কোনো কিছু দিয়েছেন (くれます এর অতি ভদ্র রূপ)।",
+                        formula: "<strong>সম্মানিত ব্যক্তি が</strong> + わたしに + <strong>くださいました</strong>",
+                        examples: [
+                            { jp: "せんせいが わたしに おみやげを <mark class='hl'>くださいました</mark>。", bn: "শিক্ষক আমাকে উপহার দিয়েছিলেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: N1(ছোট/প্রাণী) に N2 を やります",
+                        desc: "ছোটদের, নিজের সন্তানকে বা পশুপাখিকে খাবার/উপহার দেওয়া বোঝাতে বসে।",
+                        formula: "<strong>ছোট ব্যক্তি / প্রাণী に</strong> + <strong>やります</strong>",
+                        examples: [
+                            { jp: "わたしは いぬに えさを <mark class='hl'>やりました</mark>。", bn: "আমি কুকুরকে খাবার দিয়েছিলাম।" },
+                            { jp: "きに みずを <mark class='hl'>やりました</mark>。", bn: "গাছে পানি দিয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Vて-form + いただきます / くださいます",
+                        desc: "বড় কারও কাছ থেকে কাজ করিয়ে নেওয়া (Vていただきます) বা বড়রা কাজ করে দিয়েছেন (Vてくださいます)।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>いただきます / くださいます</strong>",
+                        examples: [
+                            { jp: "せんせいに レポートを なおして <mark class='hl'>いただきました</mark>。", bn: "শিক্ষকের কাছ থেকে রিপোর্ট সংশোধন করে পেয়েছিলাম।" },
+                            { jp: "ぶちょうが えきまで おくって <mark class='hl'>くださいました</mark>。", bn: "ম্যানেজার আমাকে স্টেশন পর্যন্ত পৌঁছে দিয়েছিলেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 5: Vて-form + くださいませんか",
+                        desc: "কাউকে কোনো কিছু করে দেওয়ার জন্য অতি বিনম্র অনুরোধ।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>くださいませんか</strong>",
+                        examples: [
+                            { jp: "ひらがなで かいて <mark class='hl'>くださいませんか</mark>。", bn: "হিরাগানা দিয়ে লিখে দেবেন কি?" }
+                        ]
+                    }
+                ]
+            },
+            42: {
+                minnaLesson: 42,
+                title: "উদ্দেশ্য ও উপযোগিতা (ために / のに)",
+                kana: "だいよんじゅうにか",
+                rules: [
+                    {
+                        title: "Rule 1: V-Dic / Noun の + ために (উদ্দেশ্যে)",
+                        desc: "ভবিষ্যতের লক্ষ্য বা উদ্দেশ্য পূরণের উদ্দেশ্যে বর্তমানে কাজ করা।",
+                        formula: "<strong>Verb (Dictionary form) / Noun の</strong> + <strong>ために</strong>",
+                        examples: [
+                            { jp: "いえを かう<mark class='hl'>ために</mark>、いっしょうけんめい はたらきます。", bn: "বাড়ি কেনার উদ্দেশ্যে সর্বোচ্চ দিয়ে কাজ করব।" },
+                            { jp: "けんこうの <mark class='hl'>ために</mark>、まいあさ はしっています。", bn: "স্বাস্থ্যের জন্য প্রতি সকালে দৌড়াচ্ছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: V-Dic のに / Noun に + つかいます (ব্যবহার)",
+                        desc: "কোনো নির্দিষ্ট সরঞ্জাম কোনো কাজে ব্যবহার হওয়া, ভালো হওয়া বা সময় লাগা বোঝাতে বসে।",
+                        formula: "<strong>Verb (Dic) のに / Noun に</strong> + つかいます / いいです / かかります",
+                        examples: [
+                            { jp: "この はさみは はなを きる<mark class='hl'>のに つかいます</mark>。", bn: "এই কাঁচিটি ফুল কাটার কাজে ব্যবহার করব।" },
+                            { jp: "この かばんは パソコンを いれる<mark class='hl'>のに いいです</mark>。", bn: "এই ব্যাগ কম্পিউটার রাখার জন্য ভালো।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Quantifier + は / も",
+                        desc: "নির্দিষ্ট সংখ্যায় কমপক্ষে বোঝাতে は এবং সর্বোচ্চ বা প্রত্যাশার চেয়ে বেশি বোঝাতে も বসে।",
+                        formula: "<strong>পরিমাণ + は</strong> (কমপক্ষে) | <strong>পরিমাণ + も</strong> (এত বেশি!)",
+                        examples: [
+                            { jp: "ボーナスの はんぶん<mark class='hl'>は</mark> ちょきんする つもりです。", bn: "বোনাসের কমপক্ষে অর্ধেক টাকা সঞ্চয় করব ভেবেছি।" },
+                            { jp: "はんぶん<mark class='hl'>も</mark> ちょきんするんですか。", bn: "অর্ধেক টাকাই সঞ্চয় করবে?!" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: ব্যক্তি + によって (উদ্ভাবক)",
+                        desc: "কোনো বিখ্যাত জিনিস কার মাধ্যমে বা দ্বারা উদ্ভাবিত হয়েছিল তা প্রকাশ করতে বসে।",
+                        formula: "<strong>ব্যক্তির নাম</strong> + <strong>によって</strong> + はつめいされました",
+                        examples: [
+                            { jp: "チキンラーメンは あんどうさん<mark class='hl'>によって</mark> はつめいされました。", bn: "চিকেন রামেন আন্দো সাহেব কর্তৃক উদ্ভাবিত হয়েছিল।" }
+                        ]
+                    }
+                ]
+            },
+            43: {
+                minnaLesson: 43,
+                title: "দেখে মনে হওয়া ও ফিরে আসা (そうです / きます)",
+                kana: "だいよんじゅうさんか",
+                rules: [
+                    {
+                        title: "Rule 1: Vます কেটে / Adj কেটে + そうです (দেখে মনে হওয়া)",
+                        desc: "চোখে দেখে কোনো ঘটনা ঘটতে পারে বা খাবার ঝাল/সুস্বাদু হতে পারে বলে অনুমান করা।",
+                        formula: "<strong>Verb (ます কেটে) / い-adj (い কেটে) / な-adj (な কেটে)</strong> + <strong>そうです</strong>",
+                        examples: [
+                            { jp: "いまにも あめが ふり<mark class='hl'>そうです</mark>。", bn: "যেকোনো মুহূর্তে বৃষ্টি পড়বে পড়বে মনে হচ্ছে।" },
+                            { jp: "この りょうりは から<mark class='hl'>そうです</mark>。", bn: "এই রান্নাটি দেখে ঝাল মনে হচ্ছে।" },
+                            { jp: "にもつが おち<mark class='hl'>そうです</mark>。", bn: "মালামাল পড়ে যাবে মনে হচ্ছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Vて-form + きます (গিয়ে ফিরে আসা)",
+                        desc: "অল্প সময়ের জন্য কোনো কাজ করতে গিয়ে আবার আগের স্থানে ফিরে আসা।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>きます</strong>",
+                        examples: [
+                            { jp: "ちょっと のみものを かって <mark class='hl'>きます</mark>。", bn: "একটু পানীয় কিনে আসতেছি।" },
+                            { jp: "ちょっと でんわを かけて <mark class='hl'>きます</mark>。", bn: "একটু ফোন করে আসতেছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Vて-form + くれませんか",
+                        desc: "আসার সময় কোনো কিছু কিনে এনে দেওয়ার অনুরোধ করতে বসে।",
+                        formula: "<strong>Verb (て-form)</strong> + <strong>くれませんか</strong>",
+                        examples: [
+                            { jp: "おべんとうを かってきて <mark class='hl'>くれませんか</mark>。", bn: "আমার জন্য বক্স খাবার কিনে নিয়ে আসবে কি?" }
+                        ]
+                    }
+                ]
+            },
+            44: {
+                minnaLesson: 44,
+                title: "অতিরিক্ততা ও সহজতা (すぎます / やすい)",
+                kana: "だいよんじゅうよんか",
+                rules: [
+                    {
+                        title: "Rule 1: Vます কেটে / Adj কেটে + すぎます (অতিরিক্ত)",
+                        desc: "কোনো কাজ বা অবস্থা অতিরিক্ত করে ফেলা বোঝাতে বসে। এটি Group-2 Verb হয়ে যায়।",
+                        formula: "<strong>Verb (ます কেটে) / い-adj (い বাদ) / な-adj (な বাদ)</strong> + <strong>すぎます</strong>",
+                        examples: [
+                            { jp: "ごはんを たべ<mark class='hl'>すぎました</mark>。", bn: "খাবার অতিরিক্ত বেশি খেয়ে ফেলেছিলাম।" },
+                            { jp: "ゆうべ おさけを のみ<mark class='hl'>すぎました</mark>。", bn: "গতরাতে অতিরিক্ত মদ পান করেছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Vます কেটে + やすいです / にくいです (সহজ / কঠিন)",
+                        desc: "কোনো কাজ করা সহজ হলে やすい এবং কঠিন হলে にくい বসে।",
+                        formula: "<strong>Verb (ます কেটে)</strong> + <strong>やすいです / にくいです</strong>",
+                        examples: [
+                            { jp: "この くすりは のみ<mark class='hl'>やすいです</mark>。", bn: "এই ওষুধটি সেবন করা সহজ।" },
+                            { jp: "この くつは あるき<mark class='hl'>にくいです</mark>。", bn: "এই জুতো পরে হাঁটা কঠিন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: 〜く します / 〜に します (পরিবর্তন করা)",
+                        desc: "সাউন্ড বাড়ানো, চুল ছোট করা বা রুম পরিষ্কার করার মতো পরিবর্তন আনা।",
+                        formula: "<strong>い-adj:</strong> い কেটে く します | <strong>な-adj:</strong> な কেটে に します",
+                        examples: [
+                            { jp: "おとを おおき<mark class='hl'>く します</mark>。", bn: "শব্দ বাড়াবো।" },
+                            { jp: "へやを きれい<mark class='hl'>に します</mark>。", bn: "রুম পরিষ্কার করব।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: Noun に します (সিদ্ধান্ত নেওয়া)",
+                        desc: "খাবার বা রুম বাছাই করতে নিজের সিদ্ধান্ত চূড়ান্ত করা বোঝায়।",
+                        formula: "<strong>Noun</strong> + <strong>に します</strong>",
+                        examples: [
+                            { jp: "へやは シングル<mark class='hl'>に します</mark>。", bn: "রুম সিঙ্গেলটাই চূড়ান্ত করলাম।" }
+                        ]
+                    }
+                ]
+            },
+            45: {
+                minnaLesson: 45,
+                title: "শর্ত ও বিপরীত ফলাফল (ばあいは / のに)",
+                kana: "だいよんじゅうごか",
+                rules: [
+                    {
+                        title: "Rule 1: Plain Form + ばあいは (ক্ষেত্রে / সময়ে)",
+                        desc: "কোনো জরুরি পরিস্থিতি ঘটলে কী করতে হবে তার বিকল্প বা ব্যবস্থা নির্দেশ করতে বসে।",
+                        formula: "<strong>Verb (Plain) / い-adj / な-adj な / Noun の</strong> + <strong>ばあいは</strong>",
+                        examples: [
+                            { jp: "かいぎに まにあわない <mark class='hl'>ばあいは</mark>、れんらくして ください。", bn: "মিটিংয়ে সময়মতো পৌঁছাতে না পারলে দয়া করে যোগাযোগ করবেন।" },
+                            { jp: "じしんの <mark class='hl'>ばあいは</mark>、エレベーターを つかわないで ください。", bn: "ভূমিকম্পের সময় লিফট ব্যবহার করবেন না।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Plain Form + のに (তা সত্ত্বেও / কিন্তু)",
+                        desc: "যথেষ্ট চেষ্টা করা সত্ত্বেও ফলাফল সম্পূর্ণ বিপরীত হওয়া বোঝাতে বসে (হতাশা থাকে)।",
+                        formula: "<strong>Verb / い-adj (Plain) / な-adj な / Noun な</strong> + <strong>のに</strong>",
+                        examples: [
+                            { jp: "いっしょうけんめい べんきょうした<mark class='hl'>のに</mark>、てんが わるかったです。", bn: "সর্বোচ্চ পড়াশোনা করা সত্ত্বেও পরীক্ষার নম্বর খারাপ হয়েছিল।" },
+                            { jp: "やくそくを した<mark class='hl'>のに</mark>、かのじょは きませんでした。", bn: "কথা দেওয়া সত্ত্বেও সে আসেনি।" }
+                        ]
+                    }
+                ]
+            },
+            46: {
+                minnaLesson: 46,
+                title: "কাজের পর্যায় ও যৌক্তিক বিশ্বাস (ところ / はず)",
+                kana: "だいよんじゅうろっか",
+                rules: [
+                    {
+                        title: "Rule 1: ところです (৩টি তাৎক্ষণিক পর্যায়)",
+                        desc: "কোনো কাজ এইমাত্র শুরু হবে (Dic), চলমান আছে (ている), নাকি এইমাত্র শেষ হলো (た-form)।",
+                        formula: "শুরু হতে যাওয়া: <strong>Verb (Dic) + ところです</strong><br>চলমান: <strong>Verb (て-form) いる + ところです</strong><br>শেষ হওয়া: <strong>Verb (た-form) + ところです</strong>",
+                        examples: [
+                            { jp: "かいぎは いまから はじまる <mark class='hl'>ところです</mark>。", bn: "এইমাত্র মিটিং শুরু হতে যাচ্ছে।" },
+                            { jp: "いま へやを かたづけて いる <mark class='hl'>ところです</mark>。", bn: "এখন রুম গোছানো চলমান আছে।" },
+                            { jp: "たったいま バスが でた <mark class='hl'>ところです</mark>。", bn: "ঠিক এইমাত্র বাস ছেড়ে গেল।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Vた-form + ばかりです (মাত্র শেষ হওয়া)",
+                        desc: "কোন কাজ অল্প কিছুক্ষণ আগেই মাত্র শেষ হয়েছে এবং প্রভাব এখনো আছে।",
+                        formula: "<strong>Verb (た-form)</strong> + <strong>ばかりです</strong>",
+                        examples: [
+                            { jp: "さっき ひるごはんを たべた<mark class='hl'>ばかりです</mark>。", bn: "কিছুক্ষণ আগে মাত্র দুপুরের খাবার খেলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Plain Form + はずです (দৃঢ় নিশ্চয়তা)",
+                        desc: "যৌক্তিক কারণে কোনো ঘটনা অবশ্যই ঘটবে বা নিশ্চিত মনে করা।",
+                        formula: "<strong>Verb (Dic/ない) / い-adj / な-adj な / Noun の</strong> + <strong>はずです</strong>",
+                        examples: [
+                            { jp: "にもつは あした とどく<mark class='hl'>はずです</mark>。", bn: "পার্সেল আগামীকাল নিশ্চিতভাবেই পৌঁছাবে মনে হয়।" },
+                            { jp: "ぶちょうは きょうは いそがしい<mark class='hl'>はずです</mark>。", bn: "বস আজকে নিশ্চিত ব্যস্ত থাকবেন মনে হয়।" }
+                        ]
+                    }
+                ]
+            },
+            47: {
+                minnaLesson: 47,
+                title: "শোনা তথ্য ও লক্ষণ (そうです / ようです)",
+                kana: "だいよんじゅうななか",
+                rules: [
+                    {
+                        title: "Rule 1: Plain Form + そうです (শুনেছি / তারা বলেছিল)",
+                        desc: "অন্যের মুখে শোনা বা সংবাদের তথ্য সরাসরি অন্যকে জানাতে বসে (だ সহ বসে)।",
+                        formula: "<strong>Plain Form</strong> + <strong>そうです</strong>",
+                        examples: [
+                            { jp: "あしたは ゆきが ふる<mark class='hl'>そうです</mark>。", bn: "আগামীকাল বরফ পড়বে শুনেছি।" },
+                            { jp: "きのう ひどい じこが あった<mark class='hl'>そうです</mark>。", bn: "গতকাল ভয়ানক দুর্ঘটনা ঘটেছে শুনেছি।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: Plain Form + ようです (লক্ষণ দেখে অনুমান)",
+                        desc: "পারিপার্শ্বিক অবস্থা বা চাক্ষুষ প্রমাণ দেখে কোনো কিছু ঘটেছে বলে মনে হওয়া।",
+                        formula: "<strong>Verb / い-adj (Plain) / な-adj な / Noun の</strong> + <strong>ようです</strong>",
+                        examples: [
+                            { jp: "コンサートが はじまる<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে কনসার্ট শুরু হবে।" },
+                            { jp: "きのうの ばん あめが ふった<mark class='hl'>ようです</mark>。", bn: "দেখে মনে হচ্ছে গত রাতে বৃষ্টি হয়েছে।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: こえ / おと / におい / あじ が します",
+                        desc: "শব্দ শোনা যাওয়া, ঘ্রাণ পাওয়া বা খাবারের স্বাদ অনুভূত হওয়া।",
+                        formula: "<strong>こえ / おと / におい / あじ</strong> + <strong>が します</strong>",
+                        examples: [
+                            { jp: "にぎやかな こえ<mark class='hl'>が しますね</mark>。", bn: "চমৎকার আনন্দঘন কণ্ঠ শোনা যাচ্ছে তাই না?" }
+                        ]
+                    }
+                ]
+            },
+            48: {
+                minnaLesson: 48,
+                title: "প্রেরণামূলক ক্রিয়া (しえきけい - Causative)",
+                kana: "だいにじゅうはっか",
+                rules: [
+                    {
+                        title: "Rule 1: Causative Verb রূপান্তর (しえきけい)",
+                        desc: "অন্যকে দিয়ে জোর করে বা অনুমতি দিয়ে কোনো কাজ করিয়ে নেওয়া বোঝায়।",
+                        formula: "<strong>Group 1:</strong> い-কলাম → あ-কলাম + せます (いきます → いかせます)<br><strong>Group 2:</strong> ます কেটে させます (たべます → たべさせます)<br><strong>Group 3:</strong> きます → <strong>こさせます</strong> | します → <strong>させます</strong>",
+                        examples: [
+                            { jp: "むすめを じゆうに <mark class='hl'>あそばせました</mark>。", bn: "মেয়েকে স্বাধীনভাবে খেলা করতে দিয়েছিলাম।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: ব্যক্তিকে を / に Causative",
+                        desc: "অকর্মক ক্রিয়া হলে ব্যক্তিকে を এবং সকর্মক ক্রিয়া হলে ব্যক্তিকে に পার্টিক্যাল বসে।",
+                        formula: "অকর্মক: <strong>ব্যক্তি を Causative</strong> | সকর্মক: <strong>ব্যক্তি に বস্তু を Causative</strong>",
+                        examples: [
+                            { jp: "ぶちょうは ミラーさん<mark class='hl'>を</mark> アメリカへ しゅっちょう<mark class='hl'>させました</mark>。", bn: "ম্যানেজার মিলার সাহেবকে আমেরিকা ব্যবসায়িক সফরে পাঠিয়েছিলেন।" },
+                            { jp: "せんせいは せいと<mark class='hl'>に</mark> いけんを <mark class='hl'>いわせました</mark>。", bn: "শিক্ষক ছাত্রদের স্বাধীনভাবে মতামত প্রকাশ করতে দিয়েছিলেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: Causative て-form + いただけませんか (অনুমতি চাওয়া)",
+                        desc: "আমাকে দয়া করে কোনো কাজ করতে দেওয়ার অনুমতি দেবেন কি—এমন বিনম্র প্রার্থনা।",
+                        formula: "<strong>Causative Verb (て-form)</strong> + <strong>いただけませんか</strong>",
+                        examples: [
+                            { jp: "すみませんが、あした <mark class='hl'>やすませて いただけませんか</mark>。", bn: "দুঃখিত, আগামীকাল আমাকে ছুটি দেবেন কি?" },
+                            { jp: "ともだちの けっこんしきが あるので、はやく <mark class='hl'>かえらせて いただけませんか</mark>。", bn: "বন্ধুর বিয়ে আছে বলে দ্রুত ফিরে যেতে দেবেন কি?" }
+                        ]
+                    }
+                ]
+            },
+            49: {
+                minnaLesson: 49,
+                title: "সম্মানসূচক ভাষা (そんけいご - Respectful)",
+                kana: "だいにじゅうきゅうか",
+                rules: [
+                    {
+                        title: "Rule 1: そんけいご Passive রূপান্তর",
+                        desc: "সম্মানিত ব্যক্তির কাজকে সম্মান প্রদর্শন করতে Passive Verb ব্যবহার করা যায়।",
+                        formula: "G1: あ-কলাম + れます (あわれます) | G2: られます (たべられます) | きます→こられます | します→されます",
+                        examples: [
+                            { jp: "いとう せんせいは さっき <mark class='hl'>こられました</mark>。", bn: "ইতো শিক্ষক কিছুক্ষণ আগে এসেছিলেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: お + Verbます কেটে + に なります",
+                        desc: "সাধারণ ক্রিয়ার পূর্বে お এবং শেষে に なります যোগ করে অতি মার্জিত করা।",
+                        formula: "<strong>お + Verb (ます কেটে) + に なります</strong>",
+                        examples: [
+                            { jp: "しゃちょうは <mark class='hl'>おかえりに なりました</mark>。", bn: "কোম্পানি প্রধান বাড়ি ফিরে গেছেন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 3: বিশেষ সম্মানসূচক শব্দ (そんけいご Verbs)",
+                        desc: "নির্দিষ্ট গুরুত্বপূর্ণ কাজের জন্য নির্ধারিত সম্মানজনক শব্দাবলী।",
+                        formula: "いきます/きます/います → <strong>いらっしゃいます</strong><br>たべます/のみます → <strong>めしあがります</strong><br>いいます → <strong>おっしゃいます</strong><br>みます → <strong>ごらんに なります</strong><br>します → <strong>なさいます</strong>",
+                        examples: [
+                            { jp: "しゃちょうは かいぎしつに <mark class='hl'>いらっしゃいます</mark>。", bn: "বস মিটিং রুমে উপস্থিত আছেন।" },
+                            { jp: "どうぞ <mark class='hl'>めしあがって ください</mark>。", bn: "দয়া করে আহার গ্রহণ করুন।" }
+                        ]
+                    },
+                    {
+                        title: "Rule 4: お / ご ････ ください (সম্মানিত অনুরোধ)",
+                        desc: "গ্রাহক বা বয়সে বড় কাউকে সম্মান সহকারে অনুরোধ করতে বসে।",
+                        formula: "<strong>お + Vます কেটে + ください</strong> / <strong>ご + Noun + ください</strong>",
+                        examples: [
+                            { jp: "どうぞ <mark class='hl'>おはいり ください</mark>。", bn: "দয়া করে ভেতরে প্রবেশ করুন।" },
+                            { jp: "わすれものに <mark class='hl'>ごちゅうい ください</mark>。", bn: "ফেলে যাওয়া জিনিসের প্রতি দয়া করে সতর্ক হোন।" }
+                        ]
+                    }
+                ]
+            },
+            50: {
+                minnaLesson: 50,
+                title: "বিনম্র ভাষা (けんじょうご - Humble)",
+                kana: "だいごじゅっか",
+                rules: [
+                    {
+                        title: "Rule 1: お / ご ････ します (বিনম্র সেবা প্রদান)",
+                        desc: "বড়দের সামনে নিজের কাজকে অত্যন্ত বিনয়ের সাথে উপস্থাপন করে অপরকে সম্মান জানানো।",
+                        formula: "G1/G2: <strong>お + Vます কেটে + します</strong><br>G3: <strong>ご + Noun + します</strong>",
+                        examples: [
+                            { jp: "わたくしが えきまで <mark class='hl'>おおくりします</mark>。", bn: "আমি স্টেশন পর্যন্ত আপনাকে পৌঁছে দেব।" },
+                            { jp: "きょうの よていを <mark class='hl'>ごせつめいします</mark>。", bn: "আজকের পরিকল্পনা আমি ব্যাখ্যা করে দিচ্ছি।" },
+                            { jp: "にもつを <mark class='hl'>おもちしましょうか</mark>。", bn: "ভারী ব্যাগটি কি আমি বহন করে সাহায্য করব?" }
+                        ]
+                    },
+                    {
+                        title: "Rule 2: বিশেষ বিনম্র ক্রিয়াপদ (けんじょうご Verbs)",
+                        desc: "নিজের কাজের জন্য সাধারণ শব্দের পরিবর্তে বিশেষ বিনম্র শব্দের প্রয়োগ।",
+                        formula: "いきます/きます → <strong>まいります</strong><br>います → <strong>おります</strong><br>たべます/のみます/もらいます → <strong>いただきます</strong><br>いいます → <strong>もうします</strong><br>します → <strong>いたします</strong><br>みます → <strong>はいけんします</strong><br>ききます/いきます → <strong>うかがいます</strong><br>あいます → <strong>おめに かかります</strong>",
+                        examples: [
+                            { jp: "わたくしは ミラーと <mark class='hl'>もうします</mark>。", bn: "আমি মিলার বলে নিজের পরিচয় দিচ্ছি।" },
+                            { jp: "あした 3じに おたくへ <mark class='hl'>うかがいます</mark>。", bn: "আগামীকাল ৩টায় আপনার বাসায় যাব/উপস্থিত হব।" },
+                            { jp: "アメリカから <mark class='hl'>まいりました</mark>。", bn: "আমেরিকা থেকে এসেছি।" }
                         ]
                     }
                 ]
             }
         };
 
-        // লেসন ৬ থেকে ২৫ (সম্পূর্ণ কাঞ্জিমুক্ত হিরাগানা ও কাতাকানায়)
-        const fullN4Topics = [
-            { minna: 31, kana: "だいろっか", title: "ইচ্ছা ও ভবিষ্যৎ প্ল্যান", rTitle: "Rule ①: いこうけい (Volitional Form)\nRule ②: いこうけい + と おもっています\nRule ③: どうし (じしょけい/ないけい) + つもりです", desc: "ভবিষ্যতের পরিকল্পনা ও সংকল্প প্রকাশ।", formula: "G1: u → o + う | G2: Stem + よう | G3: しよう, こよう", ex: { jp: "くにへ <mark class='hl'>かえろうと おもっています</mark>。", bn: "দেশে ফিরে যাব বলে পরিকল্পনা করছি।" } },
-            { minna: 32, kana: "だいななか", title: "উপদেশ ও ধারণা", rTitle: "Rule ①: どうし (た-けい / ない-けい) + ほうが いいです\nRule ②: ふつうけい + でしょう\nRule ③: ふつうけい + かもしれません", desc: "কাউকে সদুপদেশ প্রদান ও বিভিন্ন মাত্রার সম্ভাবনা প্রকাশ।", formula: "どうし (た-けい / ない-けい) + ほうが いいです", ex: { jp: "まいにち うんどう<mark class='hl'>した ほうが いいです</mark>。", bn: "প্রতিদিন ব্যায়াম করা ভালো।" } },
-            { minna: 33, kana: "だいはっか", title: "আদেশ ও নিষেধ", rTitle: "Rule ①: めいれいけい (Imperative Form)\nRule ②: きんしけい (Prohibitive Form)\nRule ③: 〜という いみです", desc: "জরুরি আদেশ প্রদান, কঠোর নিষেধাজ্ঞা ও কোনো চিহ্নের অর্থ প্রকাশ।", formula: "G1: u → e | G2: Stem + ろ | きんしけい: じしょけい + な", ex: { jp: "ここに くるまを <mark class='hl'>とめるな</mark>！", bn: "এখানে গাড়ি পার্ক কোরো না!" } },
-            { minna: 34, kana: "だいきゅうか", title: "নির্দেশনা ও অনুকরণ", rTitle: "Rule ①: どうし た-けい / めいし の + とおりに\nRule ②: どうし た-けい / めいし の + あとで\nRule ③: どうし て-けい / ないで", desc: "হুবহু নির্দেশনা অনুযায়ী কাজ করা এবং পূর্বাপর অবস্থা।", formula: "どうし (た-けい) + とおりに / めいし + の とおりに", ex: { jp: "せんせいが <mark class='hl'>いったとおりに</mark> かいて ください。", bn: "শিক্ষক যেভাবে বলেছেন সেভাবে লিখুন।" } },
-            { minna: 35, kana: "だいじゅっか", title: "শর্তযুক্ত বাক্য ও আনুপাতিক রূপ", rTitle: "Rule ①: じょうけんけい (~ば / ~なら)\nRule ②: ~ば ~ほど (যত... তত...)", desc: "শর্ত সাপেক্ষে ফলাফল ও সমানুপাতিক বৃদ্ধি বা হ্রাস।", formula: "G1: u → e + ば | G2: れば | い-adj: ければ | な/めいし: なら", ex: { jp: "<mark class='hl'>やすければ やすいほど</mark> いいです。", bn: "যত সস্তা হবে ততই ভালো।" } },
-            { minna: 36, kana: "だいじゅういっか", title: "উদ্দেশ্য ও পরিবর্তন", rTitle: "Rule ①: じしょけい / ないけい + ように\nRule ②: じしょけい + ように なりました\nRule ③: ように して ください", desc: "উদ্দেশ্য নির্ধারণ ও নতুন অভ্যাস বা দক্ষতায় রূপান্তর।", formula: "どうし (じしょけい/ないけい) + ように + Action", ex: { jp: "にほんごが はなせる<mark class='hl'>ように なりました</mark>。", bn: "জাপানি ভাষায় কথা বলতে সক্ষম হয়েছি।" } },
-            { minna: 37, kana: "だいじゅうにか", title: "নিষ্ক্রিয় বাচ্য (Passive Voice)", rTitle: "Rule ①: うけみけい (Passive Form - られる)\nRule ②: ক্ষতিগ্রস্ত হওয়া বা ভিকটিম প্যাসিভ", desc: "অন্যের দ্বারা প্রশংসিত হওয়া অথবা ক্ষতিগ্রস্ত হওয়া।", formula: "G1: a-sound + れます | G2: られます | G3: されます", ex: { jp: "せんせいに <mark class='hl'>ほめられました</mark>。", bn: "শিক্ষকের দ্বারা প্রশংসিত হয়েছিলাম।" } },
-            { minna: 38, kana: "だいじゅうさんか", title: "ক্রিয়াপদের বিশেষ্যকরণ (Noun Clause)", rTitle: "Rule ①: じしょけい + のは / のが\nRule ②: じしょけい + のを わすれました", desc: "ক্রিয়াপদকে বিশেষ্যে রূপান্তর করে বাক্যের অংশ করা।", formula: "どうし (じしょけい) + の + は / が / を", ex: { jp: "テニスを <mark class='hl'>するのが</mark> すきです。", bn: "টেনিস খেলা আমার প্রিয়।" } },
-            { minna: 39, kana: "だいじゅうよんか", title: "কারণ ও ফলাফল", rTitle: "Rule ①: どうし て-けい / い-くて / な-で\nRule ②: めいし + で (প্রাকৃতিক কারণ)", desc: "আবেগ, অনুভূতি বা প্রাকৃতিক দুর্যোগের পেছনের কারণ।", formula: "どうし (て-けい) / けいようし (て-けい) / めいし で", ex: { jp: "ニュースを <mark class='hl'>きいて</mark>、びっくりしました。", bn: "সংবাদটি শুনে চমকে গিয়েছিলাম।" } },
-            { minna: 40, kana: "だいじゅうごか", title: "পরোক্ষ প্রশ্ন", rTitle: "Rule ①: ぎもんし + か\nRule ②: ふつうけい + かどうか\nRule ③: どうし て-けい + みます (চেষ্টা করে দেখা)", desc: "বাক্যের ভেতরে পরোক্ষ প্রশ্ন ও কোনো কিছু পরখ করা।", formula: "ぎもんし + ふつうけい + か / 〜かどうか", ex: { jp: "おいしい<mark class='hl'>かどうか</mark> たべて<mark class='hl'>みます</mark>。", bn: "সুস্বাদু কি না খেয়ে পরখ করে দেখছি।" } },
-            { minna: 41, kana: "だいじゅうろっか", title: "দান ও গ্রহণ (উন্নত স্তর)", rTitle: "Rule ①: やる / いただく / くださる\nRule ②: どうし て-けい + いただきます / くださいます", desc: "শ্রদ্ধাশীল ও স্নেহপূর্ণভাবে দান এবং গ্রহণের মার্জিত রূপ।", formula: "めいし に もの を いただきます / めいし が くださいます", ex: { jp: "しゃちょうに おみやげを <mark class='hl'>いただきました</mark>。", bn: "প্রেসিডেন্টের কাছ থেকে উপহার পেয়েছি।" } },
-            { minna: 42, kana: "だいじゅうななか", title: "উদ্দেশ্যমূলক কাজ ও ব্যবহার", rTitle: "Rule ①: じしょけい / めいし の + ために\nRule ②: じしょけい / めいし の + に つかいます", desc: "নির্দিষ্ট লক্ষ্য পূরণ বা কোনো সরঞ্জামের কার্যকারিতা।", formula: "どうし (じしょけい) / めいし の + ために", ex: { jp: "じぶんの うちを かう<mark class='hl'>ために</mark>、ちょきんしています。", bn: "নিজের বাড়ি কেনার উদ্দেশ্যে সঞ্চয় করছি।" } },
-            { minna: 43, kana: "だいじゅうはっか", title: "অনুমান ও আসন্ন অবস্থা", rTitle: "Rule ①: ます-form بغیر ます / けいようし + そうです\nRule ②: どうし て-けい + きます (গিয়ে ফিরে আসা)", desc: "চোখে দেখে কোনো কিছু ঘটার উপক্রম হওয়া অনুমান করা।", formula: "どうし (Stem) / けいようし (Stem) + そうです", ex: { jp: "あめが ふり<mark class='hl'>そうです</mark>。", bn: "বৃষ্টি পড়বে পড়বে মনে হচ্ছে।" } },
-            { minna: 44, kana: "だいじゅうきゅうか", title: "মাত্রারিক্ততা ও সুবিধা-অসুবিধা", rTitle: "Rule ①: ます-form بغیر ます + すぎます (অতিরিক্ত)\nRule ②: ます-form بغیر ます + やすい / にくい (সহজ/কঠিন)", desc: "মাত্রাতিরিক্ত কাজ এবং কোনো কাজ করার সহজতা বা জটিলতা।", formula: "どうし (Stem) + すぎます / やすいです / にくいです", ex: { jp: "この くすりは のみ<mark class='hl'>やすいです</mark>。", bn: "এই ওষুধটি খাওয়া সহজ।" } },
-            { minna: 45, kana: "だいにじゅっか", title: "শর্ত ও অপ্রত্যাশিত ফলাফল", rTitle: "Rule ①: ふつうけい + ばあい (ばあいは)\nRule ②: ふつうけい + のに (তা সত্ত্বেও)", desc: "বিশেষ পরিস্থিতি এবং প্রত্যাশার সম্পূর্ণ বিপরীত ফলাফল।", formula: "ふつうけい + ばあいは / ふつうけい + のに", ex: { jp: "やくそくした<mark class='hl'>のに</mark>、かれは きませんでした。", bn: "কথা দেওয়া সত্ত্বেও সে আসেনি।" } },
-            { minna: 46, kana: "だいにじゅういっか", title: "তাৎক্ষণিক পর্যায় ও নিশ্চয়তা", rTitle: "Rule ①: ところです (৩টি তাৎক্ষণিক পর্যায়)\nRule ②: どうし た-けい + ばかりです (এইমাত্র সম্পন্ন)\nRule ③: ふつうけい + はずです (দৃঢ় নিশ্চয়তা)", desc: "কাজের শুরু, চলমান বা ঠিক শেষ মুহূর্ত এবং যৌক্তিক বিশ্বাস।", formula: "じしょけい / ている / た-けい + ところです", ex: { jp: "たったいま かえった<mark class='hl'>ところです</mark>。", bn: "ঠিক এইমাত্র বাড়ি ফিরেছি।" } },
-            { minna: 47, kana: "だいにじゅうにか", title: "শোনা কথা ও আভাস", rTitle: "Rule ①: ふつうけい + そうです (শুনেছি)\nRule ②: ふつうけい + ようです (আভাস/অনুমান)", desc: "অন্যের মুখে শোনা তথ্য এবং প্রমাণের ভিত্তিতে অনুমান।", formula: "ふつうけい + そうです (শোনা তথ্য)", ex: { jp: "あしたは あめが ふる<mark class='hl'>そうです</mark>。", bn: "শুনেছি আগামীকাল বৃষ্টি হবে।" } },
-            { minna: 48, kana: "だいにじゅうさんか", title: "প্রেরণামূলক রূপ (Causative Verb)", rTitle: "Rule ①: しえきけい (Causative Verb - させる)\nRule ②: どうし (しえき て-けい) + いただけませんか", desc: "কাউকে কোনো কাজ করতে দেওয়া বা করানো এবং অনুমতি চাওয়া।", formula: "G1: a-sound + せます | G2: させます | G3: こさせます", ex: { jp: "はやく かえらせて <mark class='hl'>いただけませんか</mark>。", bn: "আমাকে একটু তাড়াতাড়ি যেতে অনুমতি দেবেন কি?" } },
-            { minna: 49, kana: "だいにじゅうよんか", title: "সম্মানসূচক ভাষা (そんけいご)", rTitle: "Rule ①: お + どうし (Stem) + に なります\nRule ②: বিশেষ সম্মানসূচক ক্রিয়াপদ\nRule ③: お + どうし (Stem) + ください", desc: "অন্যের বা উর্ধ্বতন ব্যক্তির কাজকে সম্মান দিয়ে উপস্থাপন।", formula: "お + どうし (Stem) + に なります", ex: { jp: "しゃちょうは もう <mark class='hl'>お帰りに なりました</mark>。", bn: "প্রেসিডেন্ট মহোদয় বাড়ি ফিরে গিয়েছেন।" } },
-            { minna: 50, kana: "だいにじゅうごか", title: "বিনম্র ভাষা (けんじょうご)", rTitle: "Rule ①: お / ご + どうし (Stem) + します\nRule ②: বিশেষ বিনম্র ক্রিয়াপদ (まいる / もうす / うかがう)", desc: "নিজের কাজকে বিনয়ের সাথে তুলে ধরে অন্যকে সম্মান জানানো।", formula: "お + どうし (Stem) + します / ご + めいし + します", ex: { jp: "おもい にもつを <mark class='hl'>おもちします</mark>。", bn: "ভারী ব্যাগটি আমি বহন করে দিচ্ছি।" } }
-        ];
-
-        fullN4Topics.forEach((t, index) => {
-            const lessonId = index + 6;
-            grammarData[lessonId] = {
-                lessonNo: lessonId,
-                minnaLesson: t.minna,
-                title: t.title,
-                kana: t.kana,
-                rules: [
-                    {
-                        title: t.rTitle,
-                        desc: t.desc,
-                        formula: t.formula,
-                        points: [{ pTitle: "মূল তাৎপর্য:", pDesc: t.desc }],
-                        examples: [
-                            t.ex,
-                            { jp: "しっかり ふくしゅうして <mark class='hl'>ください</mark>。", bn: "মনোযোগ দিয়ে রিভিশন দিন।" }
-                        ]
-                    }
-                ]
-            };
-        });
-
-        let currentActiveLesson = 1;
+        let currentActiveLesson = 26;
 
         function renderLessonGrid() {
             const container = document.getElementById("lessonsGridContainer");
             container.innerHTML = "";
 
-            for (let i = 1; i <= 25; i++) {
+            for (let i = 26; i <= 50; i++) {
                 const item = grammarData[i];
                 const card = document.createElement("div");
                 card.className = "lesson-card";
@@ -835,7 +1589,7 @@
 
                 card.innerHTML = `
                     <div class="card-top">
-                        <span class="l-badge">L-${i < 10 ? '0' + i : i}</span>
+                        <span class="l-badge">L-${i}</span>
                         <span class="kana-lesson-tag">${item.kana}</span>
                     </div>
                     <div class="card-lesson-title">লেসন ${toBn(i)}</div>
@@ -847,15 +1601,14 @@
         }
 
         function openLessonDetail(lessonNo, pushHistory = true) {
-            const item = grammarData[lessonNo] || grammarData[1];
+            const item = grammarData[lessonNo] || grammarData[26];
             currentActiveLesson = lessonNo;
 
             document.getElementById("lessonGridView").style.display = "none";
             document.getElementById("lessonDetailView").style.display = "block";
 
-            const formattedNo = lessonNo < 10 ? `০${toBn(lessonNo)}` : toBn(lessonNo);
-            document.getElementById("detailMainTitle").innerText = `N4_ব্যাকরণ লেসন ${formattedNo}`;
-            document.getElementById("detailSubTitle").innerText = `লেসন ${formattedNo} (${item.kana}) এর ব্যাখ্যা`;
+            document.getElementById("detailMainTitle").innerText = `N4_ব্যাকরণ লেসন ${toBn(lessonNo)}`;
+            document.getElementById("detailSubTitle").innerText = `লেসন ${toBn(lessonNo)} (${item.kana}) এর সম্পূর্ণ ব্যাখ্যা`;
 
             const rulesContainer = document.getElementById("rulesListContainer");
             rulesContainer.innerHTML = "";
@@ -873,6 +1626,8 @@
                         </div>
                     `).join('');
                 }
+
+                let noteHtml = r.note ? `<div class="note-box"><i class="fa-solid fa-circle-info"></i> <strong>নোট:</strong> ${r.note}</div>` : '';
 
                 let exHtml = r.examples.map(ex => `
                     <div class="example-item">
@@ -898,6 +1653,7 @@
                         <p class="rule-desc">${r.desc}</p>
                         ${r.formula ? `<div class="formula-box">${r.formula}</div>` : ''}
                         ${pointsHtml}
+                        ${noteHtml}
                         <div class="sub-heading-point"><i class="fa-solid fa-circle-check" style="color:var(--jade);"></i> উদাহরণ বাক্য:</div>
                         <div class="examples-wrapper">${exHtml}</div>
                     </div>
@@ -933,29 +1689,29 @@
             const prevNum = currentActiveLesson - 1;
             const nextNum = currentActiveLesson + 1;
 
-            if (prevNum < 1) {
+            if (prevNum < 26) {
                 prevBtn.classList.add("disabled");
                 prevTitle.innerText = "শুরু";
             } else {
                 prevBtn.classList.remove("disabled");
-                prevTitle.innerText = `লেসন ${prevNum < 10 ? '০' + toBn(prevNum) : toBn(prevNum)}`;
+                prevTitle.innerText = `লেসন ${toBn(prevNum)}`;
             }
 
-            if (nextNum > 25) {
+            if (nextNum > 50) {
                 nextBtn.classList.add("disabled");
                 nextTitle.innerText = "শেষ";
             } else {
                 nextBtn.classList.remove("disabled");
-                nextTitle.innerText = `লেসন ${nextNum < 10 ? '০' + toBn(nextNum) : toBn(nextNum)}`;
+                nextTitle.innerText = `লেসন ${toBn(nextNum)}`;
             }
         }
 
         function goToPrevLesson() {
-            if (currentActiveLesson > 1) openLessonDetail(currentActiveLesson - 1);
+            if (currentActiveLesson > 26) openLessonDetail(currentActiveLesson - 1);
         }
 
         function goToNextLesson() {
-            if (currentActiveLesson < 25) openLessonDetail(currentActiveLesson + 1);
+            if (currentActiveLesson < 50) openLessonDetail(currentActiveLesson + 1);
         }
 
         function handleBack(fromHistory = false) {

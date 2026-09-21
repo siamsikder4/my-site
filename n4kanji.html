@@ -430,7 +430,6 @@
             color: var(--ink);
         }
 
-        /* মোডাল গ্লোবাল ওভারলে */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -444,7 +443,6 @@
             padding: 16px;
         }
 
-        /* ব্লাইন্ড টেস্ট কার্ড */
         .blind-test-card {
             background: #ffffff;
             width: 100%;
@@ -558,7 +556,7 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
-        /* কাঞ্জি কুইজ / টেস্ট মোডাল স্টাইল */
+        /* কাঞ্জি কুইজ / টেস্ট মোডাল */
         .quiz-card {
             background: #ffffff;
             width: 100%;
@@ -666,9 +664,7 @@
             color: var(--clay) !important;
         }
 
-        .quiz-opt-btn:disabled {
-            cursor: default;
-        }
+        .quiz-opt-btn:disabled { cursor: default; }
 
         .quiz-feedback {
             font-size: 14px;
@@ -677,7 +673,6 @@
             margin-bottom: 12px;
         }
 
-        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -771,10 +766,7 @@
                 <div class="quiz-q-sub" id="quizQuestionSub">সঠিক কাঞ্জি বা রিডিং সিলেক্ট করুন</div>
             </div>
 
-            <div class="quiz-options-grid" id="quizOptionsContainer">
-                <!-- অপশন বাটন ডায়নামিক লোড হবে -->
-            </div>
-
+            <div class="quiz-options-grid" id="quizOptionsContainer"></div>
             <div class="quiz-feedback" id="quizFeedback"></div>
         </div>
     </div>
@@ -787,6 +779,29 @@
     </nav>
 
     <script>
+        // লোকালস্টোরেজ থেকে শেখা কাঞ্জি ট্র্যাক করা
+        let learnedKanjiSet = new Set(JSON.parse(localStorage.getItem("kotoba_learned_kanji") || "[]"));
+
+        function saveLearnedKanji() {
+            localStorage.setItem("kotoba_learned_kanji", JSON.stringify(Array.from(learnedKanjiSet)));
+        }
+
+        function toggleLearnedState(char, btnEl, itemEl) {
+            if (learnedKanjiSet.has(char)) {
+                learnedKanjiSet.delete(char);
+                btnEl.classList.remove('active');
+                itemEl.classList.remove('learned');
+            } else {
+                learnedKanjiSet.add(char);
+                btnEl.classList.add('active');
+                itemEl.classList.add('learned');
+            }
+            saveLearnedKanji();
+        }
+
+        /* -------------------------------------------------------------
+           সম্পূর্ণ N4 কাঞ্জি ডাটাবেস (১২১ - ৩২০)
+        ------------------------------------------------------------- */
         const rawN4Kanji = [
             // লেসন ০১ (১২১-১৩০)
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
@@ -816,7 +831,7 @@
             { char: "正", kun: "ただ(しい)", on: "セイ・ショウ", meaning: "সঠিক", vocab: [{w: "正しい (ただしい)", m: "সঠিক"}, {w: "正月 (しょうがつ)", m: "নববর্ষ"}] },
             { char: "田", kun: "た", on: "デン", meaning: "ধানক্ষেত", vocab: [{w: "田んぼ (たんぼ)", m: "ধানক্ষেত"}, {w: "田中 (たなか)", m: "তানাকা (পদবি)"}] },
             { char: "同", kun: "おな(じ)", on: "ドウ", meaning: "একই", vocab: [{w: "同じ (おなじ)", m: "একই"}, {w: "同時に (どうじに)", m: "একই সাথে"}] },
-            { char: "早", kun: "はや(い)", on: "ソウ", meaning: "তাড়াতাড়ি / দ্রুত", vocab: [{w: "早い (はやい)", m: "তাড়াতাড়ি (বিশেষণ)"}, {w: "早く (はやく)", m: "দ্রুত (ক্রিয়াবিশেষণ)"}] },
+            { char: "早", kun: "はや(ই)", on: "ソウ", meaning: "তাড়াতাড়ি / দ্রুত", vocab: [{w: "早い (はやい)", m: "তাড়াতাড়ি (বিশেষণ)"}, {w: "早く (はやく)", m: "দ্রুত (ক্রিয়াবিশেষণ)"}] },
             { char: "明", kun: "あか(るい)", on: "メイ・ミョウ", meaning: "উজ্জ্বল", vocab: [{w: "明るい (あかるい)", m: "উজ্জ্বল"}, {w: "明日 (あした)", m: "আগামীকাল"}, {w: "説明 (せつめい)", m: "ব্যাখ্যা"}] },
             { char: "牛", kun: "うし", on: "ギュウ", meaning: "গরু", vocab: [{w: "牛 (うし)", m: "গরু"}, {w: "牛肉 (ぎゅうにく)", m: "গরুর মাংস"}, {w: "牛乳 (ぎゅうにゅう)", m: "দুধ"}] },
             { char: "肉", kun: "-", on: "ニク", meaning: "মাংস", vocab: [{w: "肉 (にく)", m: "মাংস"}, {w: "鳥肉 (とりにく)", m: "মুরগির মাংস"}] },
@@ -952,7 +967,7 @@
             { char: "違", kun: "ちが(う)", on: "イ", meaning: "ভুল / ভিন্ন হওয়া", vocab: [{w: "違います (ちがいます)", m: "ভুল/আলাদা"}, {w: "間違い (まちがい)", m: "ভুল"}] },
             { char: "暑", kun: "あつ(い)", on: "ショ", meaning: "গরম (আবহাওয়া)", vocab: [{w: "暑い (あつい)", m: "গরম"}] },
             { char: "寒", kun: "さむ(い)", on: "カン", meaning: "ঠান্ডা (আবহাওয়া)", vocab: [{w: "寒い (さむい)", m: "ঠান্ডা"}] },
-            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まにあいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
+            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まニアいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
             // লেসন ১৬ (২৭১-২৮০)
             { char: "伝", kun: "つた(える)", on: "デン", meaning: "জানানো / পৌঁছে দেওয়া", vocab: [{w: "伝えます (つたえます)", m: "জানানো"}, {w: "手伝います (てつだいます)", m: "সাহায্য করা"}] },
             { char: "決", kun: "き(める)", on: "ケツ", meaning: "সিদ্ধান্ত নেওয়া", vocab: [{w: "決めます (きめます)", m: "সিদ্ধান্ত নেওয়া"}, {w: "決して (けっして)", m: "কখনোই নয়"}] },
@@ -1033,26 +1048,6 @@
                     vocab: item.vocab
                 };
             });
-        }
-
-        // লোকালস্টোরেজ থেকে শেখা কাঞ্জি ট্র্যাক করা
-        let learnedKanjiSet = new Set(JSON.parse(localStorage.getItem("kotoba_learned_kanji") || "[]"));
-
-        function saveLearnedKanji() {
-            localStorage.setItem("kotoba_learned_kanji", JSON.stringify(Array.from(learnedKanjiSet)));
-        }
-
-        function toggleLearnedState(char, btnEl, itemEl) {
-            if (learnedKanjiSet.has(char)) {
-                learnedKanjiSet.delete(char);
-                btnEl.classList.remove('active');
-                itemEl.classList.remove('learned');
-            } else {
-                learnedKanjiSet.add(char);
-                btnEl.classList.add('active');
-                itemEl.classList.add('learned');
-            }
-            saveLearnedKanji();
         }
 
         function renderLessonGrid() {
@@ -1503,16 +1498,10 @@
             const lessonKanjiList = kanjiData[currentActiveLesson] || kanjiData[1];
             quizQuestions = [];
 
-            // ১০টি কাঞ্জির ভিত্তিতে প্রশ্ন তৈরি
             lessonKanjiList.forEach(k => {
                 const questionType = Math.random() > 0.5 ? 'kanji_to_reading' : 'reading_to_kanji';
-                
-                // সঠিক উত্তর
                 const correctObj = k;
-                
-                // ৩টি ভুল ডামি অপশন
                 const distractors = rawN4Kanji.filter(x => x.char !== k.char).sort(() => 0.5 - Math.random()).slice(0, 3);
-                
                 const options = [correctObj, ...distractors].sort(() => 0.5 - Math.random());
 
                 quizQuestions.push({
@@ -1535,7 +1524,6 @@
 
         function renderCurrentQuestion() {
             if (currentQuizIndex >= quizQuestions.length) {
-                // কুইজ শেষ
                 document.getElementById("quizCounter").innerText = "RESULTS";
                 document.getElementById("quizProgressFill").style.width = "100%";
                 document.getElementById("quizQuestionMain").innerText = `স্কোর: ${quizScore}/${quizQuestions.length}`;
@@ -1564,9 +1552,7 @@
             optContainer.innerHTML = "";
 
             if (q.type === 'kanji_to_reading') {
-                // উপরে কাঞ্জি, নিচে ৪টি রিডিং/অর্থ
                 qMain.innerText = q.target.char;
-                const hintReading = q.target.kun !== '-' ? q.target.kun : q.target.on;
                 qSub.innerText = `এর সঠিক রিডিং বা অর্থ কী?`;
 
                 q.options.forEach(opt => {
@@ -1578,7 +1564,6 @@
                     optContainer.appendChild(btn);
                 });
             } else {
-                // উপরে হিরাগানা/অর্থ, নিচে ৪টি কাঞ্জি
                 const reading = q.target.kun !== '-' ? q.target.kun : q.target.on;
                 qMain.innerText = reading;
                 qSub.innerText = `অর্থ: "${q.target.meaning}" — সঠিক কাঞ্জি বেছে নিন`;
@@ -1611,7 +1596,6 @@
                 feedback.innerText = "✗ ভুল উত্তর!";
                 playAudioTone(280, 'sawtooth', 0.2);
 
-                // সঠিক বাটনটি হাইলাইট করা
                 const q = quizQuestions[currentQuizIndex];
                 allBtns.forEach(b => {
                     if (b.innerText.includes(q.target.char) || (q.target.kun !== '-' && b.innerText.includes(q.target.kun))) {

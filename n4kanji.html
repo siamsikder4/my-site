@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
@@ -99,7 +98,7 @@
             border-radius: 16px;
             padding: 14px 16px;
             margin-bottom: 14px;
-            box-shadow: 0 2px 8px rgba(11, 74, 56, 0.04);
+            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.04);
         }
 
         .progress-header-row {
@@ -111,7 +110,7 @@
 
         .prog-title {
             font-size: 13.5px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--pine);
             display: flex;
             align-items: center;
@@ -124,32 +123,44 @@
             color: var(--jade);
             background: #E6F3EC;
             padding: 2px 8px;
-            border-radius: 12px;
+            border-radius: 10px;
         }
 
         .prog-bar-container {
             width: 100%;
-            height: 7px;
+            height: 8px;
             background: #F0EAD9;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
 
         .prog-bar-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--jade) 0%, var(--gold) 100%);
-            border-radius: 4px;
+            border-radius: 6px;
             transition: width 0.3s ease;
         }
 
         .prog-sub-row {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 11.5px;
             color: var(--mist);
             font-weight: 600;
+        }
+
+        .subtitle-bar {
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--mist);
+            font-weight: 600;
+            margin-bottom: 14px;
+            background: #F0EAD9;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
         }
 
         /* লেসন গ্রিড */
@@ -167,7 +178,7 @@
             padding: 15px 12px;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
-            transition: transform 0.15s ease, border-color 0.15s ease;
+            transition: transform 0.15s ease;
         }
         .lesson-card:active { transform: scale(0.97); }
 
@@ -211,7 +222,6 @@
             font-size: 11px;
         }
 
-        /* কাঞ্জি ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
@@ -225,7 +235,7 @@
             border: 1px solid var(--line);
         }
 
-        .view-header h3 { font-size: 14.5px; font-weight: 800; color: var(--pine); }
+        .view-header h3 { font-size: 14px; font-weight: 800; color: var(--pine); }
 
         .lesson-test-btn {
             background: var(--clay);
@@ -398,7 +408,6 @@
             display: flex; align-items: center; gap: 6px;
         }
 
-        /* ভোকাবুলারি লিস্ট ও চেকমার্ক বাটন */
         .vocab-list {
             list-style: none;
             display: flex;
@@ -414,7 +423,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: border-color 0.15s;
         }
 
         .vocab-item.learned-v {
@@ -455,7 +463,6 @@
             color: #ffffff;
         }
 
-        /* মোডাল গ্লোবাল ওভারলে */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -469,7 +476,6 @@
             padding: 16px;
         }
 
-        /* ব্লাইন্ড টেস্ট কার্ড */
         .blind-test-card {
             background: #ffffff;
             width: 100%;
@@ -544,7 +550,7 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
-        /* কুইজ মোডাল */
+        /* কুইজ কার্ড */
         .quiz-card {
             background: #ffffff;
             width: 100%; max-width: 360px;
@@ -583,7 +589,7 @@
 
         .quiz-q-main {
             font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 32px; font-weight: 700;
+            font-size: 34px; font-weight: 700;
             color: var(--pine); line-height: 1.2;
             margin-bottom: 4px;
         }
@@ -603,18 +609,18 @@
             border-radius: 14px;
             padding: 12px 6px;
             font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 16px; font-weight: 700;
+            font-size: 15px; font-weight: 700;
             color: var(--ink); cursor: pointer;
             transition: all 0.15s ease;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            min-height: 66px; line-height: 1.2;
+            min-height: 64px; line-height: 1.25;
         }
         .quiz-opt-btn:active { transform: scale(0.96); }
 
         .quiz-opt-btn .opt-sub {
             font-family: 'Hind Siliguri', sans-serif;
-            font-size: 11px; font-weight: 500;
+            font-size: 11px; font-weight: 600;
             color: var(--mist); margin-top: 3px;
         }
 
@@ -681,7 +687,7 @@
 
         <!-- লেসন গ্রিড -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ N4 কাঞ্জি ও ডাবল কাঞ্জি কুইজ</div>
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ N4 কাঞ্জি ও কুইজ টেস্ট</div>
             <div class="lesson-grid" id="lessonsContainer"></div>
         </div>
 
@@ -727,8 +733,8 @@
             </div>
 
             <div class="quiz-question-box">
-                <div class="quiz-q-main" id="quizQuestionMain">世界</div>
-                <div class="quiz-q-sub" id="quizQuestionSub">সঠিক রিডিং বা অর্থ বেছে নিন</div>
+                <div class="quiz-q-main" id="quizQuestionMain">残</div>
+                <div class="quiz-q-sub" id="quizQuestionSub">সঠিক অর্থ বা রিডিং বেছে নিন</div>
             </div>
 
             <div class="quiz-options-grid" id="quizOptionsContainer"></div>
@@ -743,9 +749,6 @@
     </nav>
 
     <script>
-        /* -------------------------------------------------------------
-           Firebase Configuration & Sync Engine
-        ------------------------------------------------------------- */
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -843,7 +846,7 @@
         }
 
         /* -------------------------------------------------------------
-           সম্পূর্ণ N4 কাঞ্জি ও ভোকাবুলারি ডাটাবেস (১২১ - ৩২০)
+           সম্পূর্ণ N4 কাঞ্জি ডাটাবেস (১২১ - ৩২০) - ৩১৫ নং কাঞ্জি "薬" সহ
         ------------------------------------------------------------- */
         const rawN4Kanji = [
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
@@ -1022,7 +1025,7 @@
             { char: "残", kun: "のこ(る)", on: "ザン", meaning: "বাকি থাকা", vocab: [{w: "残ります (のこります)", m: "বাকি থাকা"}, {w: "残業 (ざんぎょう)", m: "ওভারটাইম"}] },
             { char: "調", kun: "しら(べる)", on: "チョウ", meaning: "তদন্ত করা / খোঁজ নেওয়া", vocab: [{w: "調べます (しらべます)", m: "খোঁজা/তদন্ত করা"}, {w: "調子 (ちょうし)", m: "অবস্থা"}] },
             { char: "続", kun: "つづ(く)・つづ(ける)", on: "ゾク", meaning: "চালিয়ে যাওয়া", vocab: [{w: "続けます (つづけます)", m: "চালিয়ে যাওয়া"}, {w: "続きます (つづきます)", m: "অব্যাহত থাকা"}] },
-            { char: "练", kun: "ね(る)", on: "レン", meaning: "অনুশীলন", vocab: [{w: "練習 (れんしゅう)", m: "অনুশীলন"}] },
+            { char: "練", kun: "ね(る)", on: "レン", meaning: "অনুশীলন", vocab: [{w: "練習 (れんしゅう)", m: "অনুশীলন"}] },
             { char: "落", kun: "お(ちる)・お(とす)", on: "ラク", meaning: "পড়ে যাওয়া / ফেলা", vocab: [{w: "落ちます (おちます)", m: "পড়ে যাওয়া"}, {w: "落とします (おとします)", m: "ফেলে দেওয়া"}] },
             { char: "寝", kun: "ね(る)", on: "シン", meaning: "ঘুমানো", vocab: [{w: "寝ます (ねます)", m: "ঘুমানো"}, {w: "昼寝 (ひるね)", m: "দুপুরের ঘুম"}] },
             { char: "遅", kun: "おそ(い)・おく(れる)", on: "チ", meaning: "দেরি হওয়া / ধীর", vocab: [{w: "遅い (おそい)", m: "দেরি/ধীর"}, {w: "遅れます (おくれます)", m: "দেরি হওয়া"}] },
@@ -1040,7 +1043,8 @@
             { char: "森", kun: "もり", on: "シン", meaning: "গভীর জঙ্গল / বন", vocab: [{w: "森 (もり)", m: "জঙ্গল/বন"}, {w: "森林 (しんりん)", m: "বনভূমি"}] },
             { char: "池", kun: "いけ", on: "チ", meaning: "পুকুর", vocab: [{w: "池 (いけ)", m: "পুকুর"}, {w: "電池 (でんち)", m: "ব্যাটারি"}] },
             { char: "門", kun: "かど", on: "モン", meaning: "ফটক / গেট", vocab: [{w: "門 (もん)", m: "ফটক/গেট"}, {w: "専門 (せんもん)", m: "বিশেষত্ব"}] },
-            { char: "葉", kun: "は", on: "ヨウ", meaning: "পাতা", vocab: [{w: "言葉 (ことば)", m: "শব্দ/ভাষা"}, {w: "葉 (は)", m: "গাছের পাতা"}] },
+            // ৩১৫ নাম্বার কাঞ্জি: 薬 (ঔষধ)
+            { char: "薬", kun: "くすり", on: "ヤク", meaning: "ঔষধ", vocab: [{w: "薬 (くすり)", m: "ঔষধ"}, {w: "目薬 (めぐすり)", m: "চোখের ড্রপ"}, {w: "薬屋 (くすりや)", m: "ঔষধের দোকান"}] },
             { char: "洗", kun: "あら(う)", on: "セン", meaning: "ধোয়া", vocab: [{w: "洗います (あらいます)", m: "ধোয়া"}, {w: "洗濯 (せんたく)", m: "কাপড় ধোয়া"}] },
             { char: "進", kun: "すす(む)", on: "シン", meaning: "এগিয়ে যাওয়া", vocab: [{w: "進みます (すすみます)", m: "এগিয়ে যাওয়া"}, {w: "進学 (しんがく)", m: "উচ্চশিক্ষা"}] },
             { char: "暗", kun: "くら(い)", on: "アン", meaning: "অন্ধকার", vocab: [{w: "暗い (くらい)", m: "অন্ধকার"}] },
@@ -1215,7 +1219,7 @@
                             <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary (যৌগিক কাঞ্জি)</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary (যৌগিক শব্দ)</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -1229,14 +1233,8 @@
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
-
-            document.querySelectorAll(".kanji-item").forEach(item => {
-                item.classList.remove("open");
-            });
-
-            if (!isAlreadyOpen) {
-                currentItem.classList.add("open");
-            }
+            document.querySelectorAll(".kanji-item").forEach(item => item.classList.remove("open"));
+            if (!isAlreadyOpen) currentItem.classList.add("open");
         }
 
         function handleBack() {
@@ -1251,7 +1249,6 @@
 
         async function playKanjiStroke(char, hexCode, index) {
             const holder = document.getElementById(`svgHolder_${index}`);
-
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(char);
@@ -1269,12 +1266,10 @@
             svgEl.setAttribute("viewBox", "0 0 109 109");
             svgEl.style.width = "100%";
             svgEl.style.height = "100%";
-
             svgEl.querySelectorAll("text").forEach(t => t.style.display = "none");
 
             const paths = svgEl.querySelectorAll("path");
             let delay = 0;
-
             paths.forEach((path) => {
                 const len = path.getTotalLength();
                 path.style.stroke = "#147A57";
@@ -1290,7 +1285,6 @@
                     path.style.transition = "stroke-dashoffset 0.55s cubic-bezier(0.4, 0, 0.2, 1)";
                     path.style.strokeDashoffset = "0";
                 }, delay);
-
                 delay += 550;
             });
         }
@@ -1342,11 +1336,9 @@
         async function openCanvasModal(char, hexCode, mode) {
             showHint = (mode === 'practice');
             currentStrokeIdx = 0;
-
             modalTitle.innerText = mode === 'practice' ? "Practice (অনুশীলন)" : "Blind Test (না দেখে লিখুন)";
             statusText.className = "blind-status-text";
             statusText.innerText = "";
-
             document.getElementById("blindTestModal").style.display = "flex";
 
             const svgText = await fetchKanjiSvg(hexCode);
@@ -1367,12 +1359,7 @@
                     const pt = path.getPointAtLength(len * frac);
                     checkpoints.push({ x: pt.x * SVG_SCALE, y: pt.y * SVG_SCALE });
                 }
-
-                return {
-                    pathEl: path,
-                    length: len,
-                    checkpoints: checkpoints
-                };
+                return { pathEl: path, length: len, checkpoints: checkpoints };
             });
 
             updateSvgDisplayState();
@@ -1423,7 +1410,6 @@
                 playSuccessFanfare();
                 return;
             }
-
             activeCheckpoints = strokePathsData[currentStrokeIdx].checkpoints;
             checkpointProgress = 0;
         }
@@ -1451,10 +1437,7 @@
             const rect = canvas.getBoundingClientRect();
             const clientX = e.clientX || (e.touches && e.touches[0].clientX);
             const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-            return {
-                x: (clientX - rect.left),
-                y: (clientY - rect.top)
-            };
+            return { x: (clientX - rect.left), y: (clientY - rect.top) };
         }
 
         function onDrawStart(e) {
@@ -1484,10 +1467,8 @@
 
         function verifyCheckpoint(x, y) {
             if (!activeCheckpoints || checkpointProgress >= activeCheckpoints.length) return;
-
             const target = activeCheckpoints[checkpointProgress];
             const dist = Math.hypot(x - target.x, y - target.y);
-
             if (dist < 36) {
                 checkpointProgress++;
                 if (checkpointProgress >= activeCheckpoints.length) {
@@ -1501,7 +1482,6 @@
             currentStrokeIdx++;
             clearScratchpad();
             updateSvgDisplayState();
-
             statusText.className = "blind-status-text status-correct";
             statusText.innerText = "সঠিক!";
             setupActiveStroke();
@@ -1510,13 +1490,12 @@
         canvas.addEventListener("mousedown", onDrawStart);
         canvas.addEventListener("mousemove", onDrawMove);
         window.addEventListener("mouseup", onDrawEnd);
-
         canvas.addEventListener("touchstart", onDrawStart, { passive: false });
         canvas.addEventListener("touchmove", onDrawMove, { passive: false });
         window.addEventListener("touchend", onDrawEnd);
 
         /* -------------------------------------------------------------
-           ৪-অপশন ডাবল কাঞ্জি ও ভোকাব কুইজ টেস্ট ইঞ্জিন (MCQ)
+           ৪-অপশন কুইজ টেস্ট ইঞ্জিন (ফিক্সড: অপশনে ডুপ্লিকেট কাঞ্জি আসবে না)
         ------------------------------------------------------------- */
         let quizQuestions = [];
         let currentQuizIndex = 0;
@@ -1526,52 +1505,57 @@
             const lessonKanjiList = kanjiData[currentActiveLesson] || kanjiData[1];
             quizQuestions = [];
 
-            // ১. একক কাঞ্জি প্রশ্ন যোগ করা
+            // ১. একক কাঞ্জি প্রশ্ন: উপরে কাঞ্জি -> নিচে রিডিং ও বাংলা অর্থ
             lessonKanjiList.forEach(k => {
-                const distractors = rawN4Kanji.filter(x => x.char !== k.char).sort(() => 0.5 - Math.random()).slice(0, 3);
-                const options = [
-                    { main: k.char, sub: k.meaning, reading: k.kun !== '-' ? k.kun : k.on, isCorrect: true },
-                    ...distractors.map(d => ({ main: d.char, sub: d.meaning, reading: d.kun !== '-' ? d.kun : d.on, isCorrect: false }))
-                ].sort(() => 0.5 - Math.random());
+                const reading = k.kun !== '-' ? k.kun : k.on;
+                const correctOption = { main: reading, sub: k.meaning, isCorrect: true };
+
+                const distractors = rawN4Kanji
+                    .filter(x => x.char !== k.char)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(d => ({ main: d.kun !== '-' ? d.kun : d.on, sub: d.meaning, isCorrect: false }));
+
+                const options = [correctOption, ...distractors].sort(() => 0.5 - Math.random());
 
                 quizQuestions.push({
                     qMain: k.char,
-                    qSub: `এর সঠিক অর্থ বা রিডিং বেছে নিন:`,
+                    qSub: "এর সঠিক রিডিং ও অর্থ বেছে নিন:",
                     options: options
                 });
             });
 
-            // ২. ডাবল কাঞ্জি / ভোকাবুলারি প্রশ্ন তৈরি করা
+            // ২. ডাবল কাঞ্জি (যৌগিক শব্দ) প্রশ্ন: উপরে শব্দ -> নিচে রিডিং ও অর্থ
             lessonKanjiList.forEach(k => {
                 if (k.vocab && k.vocab.length > 0) {
-                    const targetVocab = k.vocab[0]; // যেমন: 世界 (せかい)
-                    const kanjiWord = targetVocab.w.split(' ')[0]; // শুধুমাত্র কাঞ্জি অংশ
+                    const targetVocab = k.vocab[0];
+                    const kanjiWord = targetVocab.w.split(' ')[0];
                     const reading = targetVocab.w.split('(')[1]?.replace(')', '') || targetVocab.w;
 
-                    // ৩টি ভুল অপশন তৈরি
                     const dummyVocabs = [
-                        { main: "旅行", reading: "りょこう", sub: "ভ্রমণ" },
-                        { main: "安心", reading: "あんしん", sub: "স্বস্তি" },
-                        { main: "注意", reading: "ちゅうい", sub: "সতর্কতা" },
-                        { main: "食事", reading: "しょくじ", sub: "খাবার খাওয়া" }
-                    ].filter(d => d.main !== kanjiWord).slice(0, 3);
+                        { main: "りょこう", sub: "ভ্রমণ" },
+                        { main: "あんしん", sub: "স্বস্তি" },
+                        { main: "ちゅうい", sub: "সতর্কতা" },
+                        { main: "しょくじ", sub: "খাবার খাওয়া" },
+                        { main: "べんきょう", sub: "পড়াশোনা" },
+                        { main: "しけん", sub: "পরীক্ষা" },
+                        { main: "じゅぎょう", sub: "ক্লাস" }
+                    ].filter(d => d.main !== reading).slice(0, 3);
 
                     const vOptions = [
                         { main: reading, sub: targetVocab.m, isCorrect: true },
-                        ...dummyVocabs.map(d => ({ main: d.reading, sub: d.sub, isCorrect: false }))
+                        ...dummyVocabs.map(d => ({ main: d.main, sub: d.sub, isCorrect: false }))
                     ].sort(() => 0.5 - Math.random());
 
                     quizQuestions.push({
                         qMain: kanjiWord,
-                        qSub: `ডাবল কাঞ্জি শব্দ: সঠিক রিডিং ও অর্থ কোনটি?`,
+                        qSub: "যৌগিক শব্দ: সঠিক রিডিং ও অর্থ কোনটি?",
                         options: vOptions
                     });
                 }
             });
 
-            // প্রশ্নগুলো এলোমেলো করা
             quizQuestions = quizQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
-
             currentQuizIndex = 0;
             quizScore = 0;
 
@@ -1625,7 +1609,6 @@
         function handleQuizAnswer(isCorrect, selectedBtn) {
             const allBtns = document.querySelectorAll(".quiz-opt-btn");
             allBtns.forEach(b => b.disabled = true);
-
             const feedback = document.getElementById("quizFeedback");
 
             if (isCorrect) {

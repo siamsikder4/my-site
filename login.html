@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লগইন - Kotoba</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,17 +16,28 @@
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
+            background-color: #0b0c10;
+            color: #f1f5f9;
+            min-height: 100vh;
             padding-bottom: 75px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
         }
 
+        /* রুমের ব্যাকগ্রাউন্ড যখন লাইট জ্বলবে */
+        body.light-on {
+            background-color: #12141a;
+        }
+
+        /* --- টপ ন্যাভিগেশন --- */
         .top-nav {
             display: flex;
             align-items: center;
             padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
+            background: rgba(18, 20, 26, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -34,7 +45,7 @@
 
         .back-btn {
             text-decoration: none;
-            color: #0f3e2e;
+            color: #10b981;
             font-size: 16px;
             margin-right: 14px;
         }
@@ -42,47 +53,156 @@
         .logo {
             font-weight: 800;
             font-size: 17px;
-            color: #0f3e2e;
+            color: #10b981;
+            letter-spacing: 1px;
         }
 
+        /* --- ল্যাম্প ও লাইটিং এফেক্ট --- */
+        .lamp-container {
+            position: absolute;
+            top: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .wire {
+            width: 3px;
+            height: 60px;
+            background: #444;
+        }
+
+        .lamp-shade {
+            width: 80px;
+            height: 48px;
+            background: #252830;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .bulb {
+            width: 24px;
+            height: 20px;
+            background: #333842;
+            border-radius: 0 0 14px 14px;
+            transition: all 0.3s ease;
+        }
+
+        body.light-on .bulb {
+            background: #ffe57f;
+            box-shadow: 0 0 25px #ffe57f, 0 0 50px #ffc107;
+        }
+
+        /* টানার দড়ি (Cord) */
+        .cord {
+            position: absolute;
+            top: 105px;
+            right: -15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 5px;
+        }
+
+        .cord:active {
+            transform: translateY(16px);
+        }
+
+        .cord-line {
+            width: 2px;
+            height: 50px;
+            background: #888;
+        }
+
+        .cord-handle {
+            width: 8px;
+            height: 12px;
+            background: #c5a059;
+            border-radius: 3px;
+        }
+
+        /* আলোর রশ্মি (Light Beam Cone) */
+        .light-beam {
+            position: absolute;
+            top: 125px;
+            width: 500px;
+            height: 750px;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 220, 120, 0.25) 0%, rgba(255, 220, 120, 0.04) 55%, transparent 75%);
+            clip-path: polygon(48% 0%, 52% 0%, 100% 100%, 0% 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 10;
+        }
+
+        body.light-on .light-beam {
+            opacity: 1;
+        }
+
+        /* --- কন্টেইনার ও কার্ড --- */
         .container {
-            padding: 24px 16px;
+            padding: 130px 16px 30px;
             max-width: 420px;
             margin: 0 auto;
+            position: relative;
+            z-index: 15;
         }
 
         .auth-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            background: rgba(22, 24, 29, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 24px 20px;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            opacity: 0.2;
+            filter: brightness(0.5) blur(1px);
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* লাইট অফ থাকলে ফর্মে ক্লিক বন্ধ থাকবে */
+        }
+
+        body.light-on .auth-card {
+            opacity: 1;
+            filter: brightness(1) blur(0);
+            transform: translateY(0);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 225, 120, 0.08);
+            border-color: rgba(255, 225, 120, 0.2);
+            pointer-events: auto; /* লাইট জ্বললে ক্লিক সক্রিয় হবে */
         }
 
         .auth-title {
             text-align: center;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
-            color: #0f3e2e;
+            color: #ffffff;
             margin-bottom: 6px;
         }
 
         .auth-sub {
             text-align: center;
-            font-size: 12px;
-            color: #64748b;
+            font-size: 13px;
+            color: #94a3b8;
             margin-bottom: 20px;
         }
 
         .google-btn {
             width: 100%;
             padding: 11px;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
+            background: #1e222d;
+            border: 1px solid #333a4d;
             border-radius: 10px;
             font-size: 13.5px;
             font-weight: 600;
-            color: #1e293b;
+            color: #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +212,7 @@
         }
 
         .google-btn:active {
-            background: #f1f5f9;
+            background: #282e3d;
         }
 
         .google-icon {
@@ -105,14 +225,14 @@
             align-items: center;
             text-align: center;
             margin: 18px 0;
-            color: #94a3b8;
+            color: #64748b;
             font-size: 11px;
         }
 
         .divider::before, .divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #282e3d;
         }
 
         .divider span {
@@ -127,58 +247,65 @@
             display: block;
             font-size: 12px;
             font-weight: 600;
-            color: #334155;
+            color: #cbd5e1;
             margin-bottom: 6px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 10px 14px;
-            border: 1px solid #cbd5e1;
+            padding: 11px 14px;
+            background: #181a20;
+            border: 1px solid #282a32;
             border-radius: 10px;
-            font-size: 13px;
+            font-size: 13.5px;
+            color: #fff;
             outline: none;
             transition: border-color 0.2s;
         }
 
         .form-group input:focus {
-            border-color: #047857;
+            border-color: #f5a623;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 11px;
-            background: #0f3e2e;
-            color: #ffffff;
+            padding: 12px;
+            background: #f5a623;
+            color: #121316;
             border: none;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 8px;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            filter: brightness(1.08);
         }
 
         .submit-btn:active {
-            background: #14532d;
+            transform: scale(0.99);
         }
 
         .toggle-text {
             text-align: center;
             font-size: 12px;
-            color: #64748b;
+            color: #94a3b8;
             margin-top: 16px;
         }
 
         .toggle-link {
-            color: #c51636;
+            color: #f5a623;
             font-weight: 700;
             cursor: pointer;
             text-decoration: underline;
         }
 
         .error-msg {
-            color: #dc2626;
-            font-size: 11.5px;
+            color: #ef4444;
+            font-size: 12px;
             text-align: center;
             margin-top: 10px;
             display: none;
@@ -194,24 +321,24 @@
             height: 70px;
             border-radius: 50%;
             margin: 0 auto 12px;
-            border: 2px solid #047857;
+            border: 2px solid #f5a623;
             display: block;
         }
 
         .user-name {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
-            color: #0f3e2e;
+            color: #ffffff;
         }
 
         .user-email {
-            font-size: 12px;
-            color: #64748b;
+            font-size: 12.5px;
+            color: #94a3b8;
             margin-bottom: 18px;
         }
 
         .logout-btn {
-            background: #c51636;
+            background: #dc2626;
             color: #ffffff;
             border: none;
             padding: 9px 24px;
@@ -221,14 +348,16 @@
             cursor: pointer;
         }
 
+        /* --- বটম ন্যাভিগেশন --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            background: rgba(18, 20, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -237,7 +366,7 @@
 
         .nav-item {
             text-decoration: none;
-            color: #8392a5;
+            color: #64748b;
             font-size: 11px;
             display: flex;
             flex-direction: column;
@@ -247,7 +376,7 @@
         }
 
         .nav-item.active {
-            color: #0f3e2e;
+            color: #10b981;
         }
 
         .nav-item i {
@@ -255,15 +384,26 @@
         }
     </style>
 </head>
-<body>
+<body class="light-on"> <!-- ডিফল্টভাবে আলো অন রাখা হয়েছে, অফ রাখতে ক্লাসটি মুছে দিতে পারেন -->
 
     <header class="top-nav">
         <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
         <div class="logo">KOTOBA</div>
     </header>
 
+    <!-- ল্যাম্প অ্যানিমেশন সেকশন -->
+    <div class="lamp-container">
+        <div class="wire"></div>
+        <div class="lamp-shade"></div>
+        <div class="bulb"></div>
+        <div class="cord" id="cordBtn" title="বাতি অন/অফ করতে টানুন">
+            <div class="cord-line"></div>
+            <div class="cord-handle"></div>
+        </div>
+        <div class="light-beam"></div>
+    </div>
+
     <main class="container">
-        
         <div class="auth-card" id="authBox">
             <h2 class="auth-title" id="formTitle">লগইন করুন</h2>
             <p class="auth-sub" id="formSubtitle">আপনার অ্যাকাউন্টে প্রবেশ করে প্রস্তুতি শুরু করুন</p>
@@ -275,7 +415,6 @@
 
             <div class="divider"><span>অথবা ইমেইল দিয়ে</span></div>
 
-            <!-- নাম ইনপুট ফিল্ড (ডিফল্টভাবে লুকানো, সাইন আপে প্রদর্শিত হবে) -->
             <div class="form-group" id="nameGroup" style="display: none;">
                 <label>আপনার পূর্ণ নাম</label>
                 <input type="text" id="nameInput" placeholder="যেমন: সিয়াম হোসাইন">
@@ -306,7 +445,6 @@
             <p class="user-email" id="userEmail">user@example.com</p>
             <button class="logout-btn" id="logoutBtn">সাইন আউট</button>
         </div>
-
     </main>
 
     <nav class="bottom-nav">
@@ -323,6 +461,15 @@
             <span>লগইন</span>
         </a>
     </nav>
+
+    <!-- স্ক্রিপ্ট কোড -->
+    <script>
+        // বাতির দড়িতে ক্লিক করে লাইট অন/অফ করার স্ক্রিপ্ট
+        const cordBtn = document.getElementById('cordBtn');
+        cordBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-on');
+        });
+    </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";

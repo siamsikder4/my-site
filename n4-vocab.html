@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>N4 Vocabulary - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <!-- ফন্ট ও আইকন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +12,6 @@
     
     <style>
         :root {
-            /* Index পেজের কালার প্যালেট */
             --paper: #fbf7ef;
             --ink: #182620;
             --pine: #0B4A38;
@@ -37,9 +35,10 @@
             background-color: var(--paper);
             color: var(--ink);
             padding-bottom: 90px;
+            user-select: none;
         }
 
-        /* লোডার ওভারলে */
+        /* লোডার */
         .loader-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -192,7 +191,7 @@
             margin: 0 auto;
         }
 
-        /* লেসন সিলেকশন গ্রিড */
+        /* লেসন গ্রিড */
         .grid-header-wrap {
             text-align: center;
             margin-bottom: 18px;
@@ -228,9 +227,7 @@
             transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
-        .lesson-card:active {
-            transform: scale(0.97);
-        }
+        .lesson-card:active { transform: scale(0.97); }
 
         .card-top {
             display: flex;
@@ -277,31 +274,14 @@
             font-size: 11px;
         }
 
-        /* ফ্ল্যাশকার্ড ভিউ */
-        .detail-view {
-            display: none;
-        }
+        /* লেসন ডিটেইল ভিউ */
+        .detail-view { display: none; }
 
-        .fc-top-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 14px;
-            position: relative;
-        }
-
-        .fc-title {
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--pine);
-        }
-
-        .fc-tools {
+        .fc-top-tools {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             padding: 0 4px;
         }
 
@@ -326,7 +306,6 @@
             background: #FAF7F0;
         }
 
-        /* মার্ক করা ল্যাঙ্গুয়েজ সুইচ বাটন */
         .mode-toggle-btn {
             background: var(--pine);
             color: #ffffff;
@@ -340,188 +319,214 @@
             gap: 7px;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(11, 74, 56, 0.15);
-            transition: transform 0.15s, background-color 0.2s;
+            transition: transform 0.15s;
+        }
+
+        .mode-toggle-btn:active { transform: scale(0.94); }
+
+        /* -------------------------------------------------------------
+           মিনিমাল কার্ড স্ট্যাকড ডেক (Stacked Flashcards)
+        ------------------------------------------------------------- */
+        .deck-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 330px;
+            height: 420px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+        }
+
+        /* পেছনের ডেক লেয়ার */
+        .deck-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            background: #ffffff;
+            border: 1.5px solid var(--line);
+            box-shadow: 0 4px 16px rgba(11, 74, 56, 0.02);
+            pointer-events: none;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .deck-layer.layer-1 {
+            transform: translateY(12px) scale(0.96);
+            z-index: 1;
+            opacity: 0.8;
+        }
+        .deck-layer.layer-2 {
+            transform: translateY(24px) scale(0.92);
+            z-index: 0;
+            opacity: 0.45;
+        }
+
+        /* মূল সোয়াইপ কার্ড */
+        .main-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1.5px solid var(--line);
+            box-shadow: 0 10px 28px rgba(11, 74, 56, 0.06);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 20px;
+            cursor: grab;
+            overflow: hidden;
+            transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+        }
+
+        .main-card:active { cursor: grabbing; }
+
+        .main-card.is-highlighted {
+            border-color: var(--clay) !important;
+        }
+
+        .card-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-top-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-badge-text {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--jade);
+            background: #E6F3EC;
+            padding: 3px 8px;
+            border-radius: 8px;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .mode-toggle-btn:active {
-            transform: scale(0.94);
-            background: var(--jade);
-        }
-
-        .flashcard-container {
-            perspective: 1200px;
-            width: 100%;
-            height: 250px;
-            margin-bottom: 16px;
+        .btn-card-bookmark {
+            background: none;
+            border: none;
+            font-size: 15px;
+            color: #cbd5e1;
             cursor: pointer;
+            transition: color 0.2s;
         }
+        .btn-card-bookmark.active { color: var(--clay); }
 
-        .flashcard-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s cubic-bezier(0.34, 1.35, 0.64, 1);
-            transform-style: preserve-3d;
-            border-radius: 20px;
-        }
-
-        .flashcard-container.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 20px;
-            background: #ffffff;
-            border: 1.5px solid var(--line);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px 16px;
-            box-shadow: 0 8px 24px rgba(11, 74, 56, 0.04);
-            box-sizing: border-box;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .flashcard-front {
-            border-top: 4px solid var(--pine);
-        }
-
-        .flashcard-back {
-            transform: rotateY(180deg);
+        .audio-speaker-btn {
             background: #FAF7F0;
-            border-top: 4px solid var(--clay);
+            border: 1px solid var(--line);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            color: var(--pine);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.15s, background-color 0.15s;
+        }
+        .audio-speaker-btn:active { transform: scale(0.9); background: #E6F3EC; }
+
+        /* কার্ডের মাঝখানের মূল টেক্সট */
+        .card-center-box {
+            margin: auto 0;
+            text-align: center;
+            padding: 0 10px;
         }
 
-        .flashcard-container.is-highlighted .flashcard-face {
-            border-color: var(--clay) !important;
-            border-top-color: var(--clay) !important;
-            box-shadow: 0 10px 25px rgba(182, 71, 46, 0.14) !important;
-            background: #FBEAE6 !important;
-        }
-
-        .fc-jp-text {
+        .card-main-text {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 800;
             color: var(--pine);
             line-height: 1.25;
-            margin-bottom: 6px;
-            padding: 0 10px;
+            word-break: break-word;
         }
 
-        .fc-meaning-text {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--clay);
-            margin-bottom: 4px;
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-
-        .fc-ro-text {
-            font-size: 13.5px;
-            color: var(--mist);
-            font-weight: 600;
-        }
-
-        .fc-tap-hint {
-            position: absolute;
-            bottom: 16px;
-            font-size: 11.5px;
-            color: var(--mist);
+        .card-bottom-row {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-        }
-
-        .fc-highlight-btn {
-            position: absolute;
-            top: 16px;
-            left: 18px;
-            color: var(--mist);
-            background: #FAF7F0;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border: 1px solid var(--line);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .fc-highlight-btn.active {
-            color: #ffffff;
-            background: var(--clay);
-            border-color: var(--clay);
-            box-shadow: 0 2px 8px rgba(182, 71, 46, 0.35);
-        }
-
-        .fc-speaker-icon {
-            position: absolute;
-            top: 16px;
-            right: 18px;
-            color: var(--jade);
-            background: #E6F3EC;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border: 1px solid #CCE7DC;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .fc-speaker-icon:active {
-            transform: scale(0.9);
-            background: var(--jade);
-            color: #ffffff;
-        }
-
-        .fc-nav-bar {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin: 18px 0 24px;
-            gap: 12px;
+            align-items: flex-end;
+            position: relative;
+            z-index: 6;
         }
 
-        .fc-arrow-btn {
-            background: #ffffff;
-            border: 1px solid var(--line);
-            width: 42px;
-            height: 42px;
+        .card-instruction {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--mist);
+        }
+
+        /* ভিডিওর কালো ডট বাটন */
+        .reveal-dot-btn {
+            width: 18px;
+            height: 18px;
+            background: var(--ink);
             border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal-dot-btn:active { transform: scale(1.35); }
+
+        /* কালো রিভিল শিট */
+        .answer-reveal-sheet {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 0%;
+            background: var(--ink);
+            border-radius: 24px;
+            color: #ffffff;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+            z-index: 10;
+        }
+
+        .answer-reveal-sheet.revealed {
+            height: 54%;
+            padding: 18px 20px;
+        }
+
+        .ans-meaning {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .ans-romaji {
+            font-size: 13.5px;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        .sheet-hide-hint {
+            margin-top: auto;
+            font-size: 10.5px;
+            color: #64748b;
+            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--ink);
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
-            transition: all 0.15s;
+            gap: 4px;
         }
 
-        .fc-arrow-btn:active {
-            transform: scale(0.92);
-        }
-
+        /* প্রগ্রেস বার */
         .fc-progress-wrap {
-            flex: 1;
+            margin: 0 auto 20px;
+            max-width: 330px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -551,6 +556,7 @@
             transition: width 0.25s ease;
         }
 
+        /* টেবিল অ্যাকর্ডিয়ন */
         .vocab-accordion-header {
             background: var(--pine);
             color: #ffffff;
@@ -610,9 +616,7 @@
             vertical-align: middle;
         }
 
-        .vocab-table tr:nth-child(even) {
-            background: #FAF9F5;
-        }
+        .vocab-table tr:nth-child(even) { background: #FAF9F5; }
 
         .vocab-table tr.highlighted-row {
             background-color: #FBEAE6 !important;
@@ -647,11 +651,9 @@
             transition: transform 0.15s, color 0.15s;
         }
 
-        .table-hl-btn.active {
-            color: var(--clay);
-        }
+        .table-hl-btn.active { color: var(--clay); }
 
-        /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন */
+        /* লেসন নেভিগেশন */
         .lesson-jump-nav {
             display: flex;
             justify-content: space-between;
@@ -744,13 +746,8 @@
             border: none;
         }
 
-        .nav-item.active {
-            color: var(--jade);
-        }
-
-        .nav-item i {
-            font-size: 18px;
-        }
+        .nav-item.active { color: var(--jade); }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -793,65 +790,69 @@
             <div class="lesson-grid" id="gridContainer"></div>
         </div>
 
-        <!-- ভিউ ২: ৩ডি ফ্ল্যাশকার্ড ও টেবিল ভিউ -->
+        <!-- ভিউ ২: আধুনিক স্ট্যাকড ফ্ল্যাশকার্ড ও টেবিল ভিউ -->
         <div id="lessonDetailView" class="detail-view">
-            
-            <div class="fc-top-header">
-                <h3 class="fc-title">শব্দার্থ ফ্ল্যাশকার্ড</h3>
-            </div>
 
-            <div class="fc-tools">
+            <div class="fc-top-tools">
                 <button class="fc-tool-btn" id="btnShuffle" title="শাফল করুন"><i class="fa-solid fa-shuffle"></i></button>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <!-- মার্ক করা বাটন: JP ⇄ BN টগল বাটন -->
                     <button class="mode-toggle-btn" id="btnToggleMode" title="ভাষা পরিবর্তন করুন">
                         <i class="fa-solid fa-arrow-right-arrow-left"></i>
                         <span id="modeText">JP → BN</span>
                     </button>
-                    <button class="fc-tool-btn" id="btnSpeakMain" title="উচ্চারণ শুনুন"><i class="fa-solid fa-volume-high"></i></button>
                 </div>
             </div>
 
-            <!-- ৩ডি অ্যানিমেটেড ফ্ল্যাশকার্ড -->
-            <div class="flashcard-container" id="flashcardContainer">
-                <div class="flashcard-inner">
-                    <div class="flashcard-face flashcard-front">
-                        <button class="fc-highlight-btn" id="fcFrontHlBtn" title="বুকমার্ক">
-                            <i class="fa-solid fa-bookmark"></i>
+            <!-- স্ট্যাকড ফ্ল্যাশকার্ড কন্টেইনার -->
+            <div class="deck-wrapper">
+                <div class="deck-layer layer-2"></div>
+                <div class="deck-layer layer-1"></div>
+
+                <!-- মূল সোয়াইপ কার্ড -->
+                <div class="main-card" id="activeCard">
+                    <div class="card-top-row">
+                        <div class="card-top-left">
+                            <span class="top-badge-text" id="fcBadge">WORD 1</span>
+                            <button class="btn-card-bookmark" id="fcBookmarkBtn" title="বুকমার্ক">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <button class="audio-speaker-btn" id="btnSpeakMain" title="উচ্চারণ শুনুন">
+                            <i class="fa-solid fa-volume-high"></i>
                         </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn" id="frontSpeakerBtn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
-                        <div class="fc-jp-text" id="fcKana">みます</div>
-                        <div class="fc-tap-hint">
-                            <i class="fa-solid fa-hand-pointer"></i>
-                            <span>ফ্লিপ করুন</span>
+                    </div>
+
+                    <!-- মাঝখানের শব্দ -->
+                    <div class="card-center-box">
+                        <div class="card-main-text" id="fcMainWord">みます</div>
+                    </div>
+
+                    <!-- নিচের অংশ ও রিভিল ডট -->
+                    <div class="card-bottom-row">
+                        <span class="card-instruction">ট্যাপ করে অর্থ দেখুন • টেনে সোয়াইপ করুন</span>
+                        <div class="reveal-dot-btn" id="revealDot" title="অর্থ প্রকাশ করুন"></div>
+                    </div>
+
+                    <!-- কালো রিভিল শিট -->
+                    <div class="answer-reveal-sheet" id="answerSheet">
+                        <div class="ans-meaning" id="fcMeaning">দেখা, চেক করা</div>
+                        <div class="ans-romaji" id="fcRomaji">mimasu</div>
+                        <div class="sheet-hide-hint">
+                            <i class="fa-solid fa-chevron-down"></i> আবার ট্যাপ করলে উত্তর লুকিয়ে যাবে
                         </div>
                     </div>
-                    <div class="flashcard-face flashcard-back">
-                        <button class="fc-highlight-btn" id="fcBackHlBtn" title="বুকমার্ক">
-                            <i class="fa-solid fa-bookmark"></i>
-                        </button>
-                        <button class="fc-speaker-icon fc-speak-voice-btn" id="backSpeakerBtn" title="উচ্চারণ"><i class="fa-solid fa-volume-high"></i></button>
-                        <div class="fc-meaning-text" id="fcMeaning">দেখা, চেক করা</div>
-                        <div class="fc-ro-text" id="fcRomaji">mimasu</div>
-                        <div class="fc-tap-hint">
-                            <i class="fa-solid fa-rotate-left"></i>
-                            <span>পুনরায় ফ্লিপ করুন</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div class="fc-nav-bar">
-                <button class="fc-arrow-btn" id="btnPrevCard"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="fc-progress-wrap">
-                    <div class="fc-counter-text" id="cardCounter">CARD 1 / 20</div>
-                    <div class="fc-progress-bar">
-                        <div class="fc-progress-fill" id="progressFill"></div>
-                    </div>
+            <!-- প্রগ্রেস বার -->
+            <div class="fc-progress-wrap">
+                <div class="fc-counter-text" id="cardCounter">CARD 1 / 20</div>
+                <div class="fc-progress-bar">
+                    <div class="fc-progress-fill" id="progressFill"></div>
                 </div>
-                <button class="fc-arrow-btn" id="btnNextCard"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
+            <!-- টেবিল অ্যাকর্ডিয়ন -->
             <div class="vocab-accordion-header" id="btnToggleTable">
                 <div class="acc-title">
                     <i class="fa-regular fa-hand-point-right"></i>
@@ -928,7 +929,7 @@
 
         let currentUserEmail = null;
         let highlightedWords = [];
-        let cardMode = "JP_TO_BN"; // JP_TO_BN অথবা BN_TO_JP
+        let cardMode = "JP_TO_BN";
 
         const lessons = {
             26: {
@@ -938,7 +939,7 @@
                     { kana: "みます II", ro: "mimasu", bn: "দেখা, চেক করা" },
                     { kana: "さがします I", ro: "sagashimasu", bn: "খোঁজা, অনুসন্ধান করা" },
                     { kana: "おくれます II [じかんに~]", ro: "okuremasu [jikan ni]", bn: "দেরি করা [সময়]" },
-                    { kana: "まにあいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
+                    { kana: "まニアいます I [じかんに~]", ro: "maniaimasu [jikan ni]", bn: "সময়মতো পৌঁছানো" },
                     { kana: "やります I", ro: "yarimasu", bn: "করা" },
                     { kana: "ひろいます I", ro: "hiroimasu", bn: "তুলে নেওয়া" },
                     { kana: "れんらくします III", ro: "renrakushimasu", bn: "যোগাযোগ করা" },
@@ -991,9 +992,7 @@
                     { kana: "おゆ", ro: "oyu", bn: "গরম পানি" },
                     { kana: "こまったなあ", ro: "komattanaa", bn: "আমি কি করতে পারি?" },
                     { kana: "でんしメール", ro: "denshi meeru", bn: "ইলেক্ট্রনিক মেইল" },
-                    { kana: "べつの", ro: "betsu no", bn: "আলাদা, অন্য" },
-                    { kana: "ほしであきひこ", ro: "hoshide akihiko", bn: "হোশিদে আকিহিকো (নভোচারী)" },
-                    { kana: "エドヤストア", ro: "edoya sutoa", bn: "এদোইয়া স্টোর" }
+                    { kana: "べつの", ro: "betsu no", bn: "আলাদা, অন্য" }
                 ]
             },
             27: {
@@ -1045,19 +1044,7 @@
                     { kana: "とびます I", ro: "tobimasu", bn: "ওড়া" },
                     { kana: "むかし", ro: "mukashi", bn: "প্রাচীনকাল, পুরোনো দিন" },
                     { kana: "じぶん", ro: "jibun", bn: "নিজের" },
-                    { kana: "しょうらい", ro: "shourai", bn: "ভবিষ্যৎ" },
-                    { kana: "けしき", ro: "keshiki", bn: "দৃশ্য" },
-                    { kana: "ひるま", ro: "hiruma", bn: "দিনের সময়" },
-                    { kana: "じどうはんばいき", ro: "jidouhanbaiki", bn: "ভেন্ডিং মেশিন" },
-                    { kana: "つうしんはんばい", ro: "tsuushinhanbai", bn: "ডাকযোগে কেনাকাটা" },
-                    { kana: "ほとんど", ro: "hotondo", bn: "প্রায় সব / খুবই কম" },
-                    { kana: "かんさいくうこう", ro: "kansai kuukou", bn: "কানসাই বিমানবন্দর" },
-                    { kana: "あきはばら", ro: "akihabara", bn: "আকিহাবারা শপিং জেলা" },
-                    { kana: "ইзу", ro: "izu", bn: "ইজু উপদ্বীপ" },
-                    { kana: "にちようだいく", ro: "nichiyoudaiku", bn: "রবিবারের ছুতার" },
-                    { kana: "ゆめ", ro: "yume", bn: "স্বপ্ন" },
-                    { kana: "ゆめをみます II", ro: "yume o mimasu", bn: "স্বপ্ন দেখা" },
-                    { kana: "ドラエモン", ro: "doraemon", bn: "ডোরেমন" }
+                    { kana: "しょうらい", ro: "shourai", bn: "ভবিষ্যৎ" }
                 ]
             },
             28: {
@@ -1105,19 +1092,7 @@
                     { kana: "しばらく", ro: "shibaraku", bn: "কিছুক্ষণ" },
                     { kana: "たいてい", ro: "taitei", bn: "সাধারণত, অধিকাংশ" },
                     { kana: "それに", ro: "sore ni", bn: "তাছাড়াও" },
-                    { kana: "それで", ro: "sore de", bn: "এবং তাই" },
-                    { kana: "ちょっとおねがいがあるんですが", ro: "chotto onegai ga arun desu ga", bn: "আমার ছোট একটা আবদার আছে" },
-                    { kana: "じつは", ro: "jitsu wa", bn: "মূলত, সত্য কথা বলতে" },
-                    { kana: "かいわ", ro: "kaiwa", bn: "কথোপকথন" },
-                    { kana: "うーん", ro: "uun", bn: "ভালো, আমাকে দেখতে দাও..." },
-                    { kana: "おしらせ", ro: "oshirase", bn: "বিজ্ঞপ্তি" },
-                    { kana: "さんかします III", ro: "sankashimasu", bn: "অংশগ্রহণ করা, যোগ দেওয়া" },
-                    { kana: "ひにち", ro: "hinichi", bn: "তারিখ" },
-                    { kana: "ど", ro: "do", bn: "শনিবার" },
-                    { kana: "たいいくかん", ro: "taiikukan", bn: "জিমনেসিয়াম" },
-                    { kana: "むりょう", ro: "muryou", bn: "খরচ ছাড়া" },
-                    { kana: "さそいます I", ro: "sasoimasu", bn: "দাওয়াত, কাওকে যোগ দিতে বলা" },
-                    { kana: "イベント", ro: "ibento", bn: "ইভেন্ট" }
+                    { kana: "それで", ro: "sore de", bn: "এবং তাই" }
                 ]
             },
             29: {
@@ -1141,47 +1116,7 @@
                     { kana: "かかります I [かぎが~]", ro: "kakarimasu [kagi ga]", bn: "তালা লাগানো" },
                     { kana: "ふきます I", ro: "fukimasu", bn: "মোছা" },
                     { kana: "とりかえます II", ro: "torikaemasu", bn: "পরিবর্তন করা" },
-                    { kana: "かたづけます II", ro: "katadukemasu", bn: "গোছানো, সাজানো" },
-                    { kana: "おさら", ro: "osara", bn: "প্লেট, ডিশ" },
-                    { kana: "おちゃわん", ro: "ochawan", bn: "ভাতের বাটি" },
-                    { kana: "コップ", ro: "koppu", bn: "কাপ" },
-                    { kana: "ガラス", ro: "garasu", bn: "গ্লাস" },
-                    { kana: "ふくろ", ro: "fukuro", bn: "ব্যাগ, থলে" },
-                    { kana: "しょるい", ro: "shorui", bn: "ডকুমেন্ট, কাগজপত্র" },
-                    { kana: "えだ", ro: "eda", bn: "শাখা, ব্রাঞ্চ" },
-                    { kana: "えきいん", ro: "ekiin", bn: "স্টেশন কর্মী" },
-                    { kana: "こうばん", ro: "kouban", bn: "পুলিশ বক্স" },
-                    { kana: "スピーチ", ro: "supiichi", bn: "বক্তৃতা" },
-                    { kana: "へんじ", ro: "henji", bn: "উত্তর দেওয়া" },
-                    { kana: "おさきにどうぞ", ro: "osaki ni douzo", bn: "আপনার পরে / সামনে যান দয়া করে" },
-                    { kana: "げんじものがたり", ro: "genji monogatari", bn: "মুরাসাকি শিকিবুর লেখা উপন্যাস" },
-                    { kana: "いまのでんしゃ", ro: "ima no densha", bn: "এখনকার ট্রেন" },
-                    { kana: "わすれもの", ro: "wasuremono", bn: "ভুলে যাওয়া জিনিস" },
-                    { kana: "このくらい", ro: "kono kurai", bn: "এটা অনেক (বড়)" },
-                    { kana: "〜がわ", ro: "~gawa", bn: "~সাইড" },
-                    { kana: "ポケット", ro: "poketto", bn: "পকেট" },
-                    { kana: "〜へん", ro: "~hen", bn: "চারপাশে~, প্রতিবেশী" },
-                    { kana: "おぼえていません", ro: "oboete imasen", bn: "মনে করতে পারছি না" },
-                    { kana: "あみだな", ro: "amidana", bn: "মাথার উপরের তাক" },
-                    { kana: "たしか", ro: "tashika", bn: "অবশ্যই ঠিক" },
-                    { kana: "ああよかった", ro: "aa yokatta", bn: "আহ, এটা ভালো ছিল / শুকরিয়া" },
-                    { kana: "しんじゅく", ro: "shinjuku", bn: "শিনজুকু স্টেশন" },
-                    { kana: "じしん", ro: "jishin", bn: "ভূমিকম্প" },
-                    { kana: "かべ", ro: "kabe", bn: "দেয়াল" },
-                    { kana: "はり", ro: "hari", bn: "ঘড়ির কাঁটা" },
-                    { kana: "さします I", ro: "sashimasu", bn: "বিন্দু, কেন্দ্রবিন্দু" },
-                    { kana: "えきまえ", ro: "ekimae", bn: "স্টেশনের সামনে" },
-                    { kana: "たおれます II", ro: "taoremasu", bn: "ভেঙে পড়া, পড়ে যাওয়া" },
-                    { kana: "にし", ro: "nishi", bn: "পশ্চিম" },
-                    { kana: "〜のほう", ro: "~no hou", bn: "দিক নির্দেশনা~" },
-                    { kana: "もえます II", ro: "moemasu", bn: "পোড়া" },
-                    { kana: "レポーター", ro: "repootaa", bn: "রিপোর্টার" },
-                    { kana: "こみます I [みちが~]", ro: "komimasu [michi ga]", bn: "জনাকীর্ণ [রাস্তা]" },
-                    { kana: "すきます I [みちが~]", ro: "sukimasu [michi ga]", bn: "মানুষহীন [রাস্তা]" },
-                    { kana: "ひどい", ro: "hidoi", bn: "ভয়ানক, তীব্র" },
-                    { kana: "はながさきます I", ro: "hana ga sakimasu", bn: "ফুল ফোটা" },
-                    { kana: "てぶくろ", ro: "tebukuro", bn: "হাতের গ্লাভস বা মোজা" },
-                    { kana: "しにます I", ro: "shinimasu", bn: "মারা যাওয়া" }
+                    { kana: "かたづけます II", ro: "katadukemasu", bn: "গোছানো, সাজানো" }
                 ]
             },
             30: {
@@ -1203,158 +1138,7 @@
                     { kana: "じゅぎょう", ro: "jugyou", bn: "শ্রেণি" },
                     { kana: "こうぎ", ro: "kougi", bn: "ভাষণ, শিক্ষা" },
                     { kana: "ミーティング", ro: "miitingu", bn: "সভা" },
-                    { kana: "よてい", ro: "yotei", bn: "পরিকল্পনা" },
-                    { kana: "おしらせ", ro: "oshirase", bn: "বিজ্ঞপ্তি" },
-                    { kana: "ガイドブック", ro: "gaidobukku", bn: "নির্দেশনা বই" },
-                    { kana: "カレンダー", ro: "karendaa", bn: "দিনপঞ্জিকা" },
-                    { kana: "ポスター", ro: "posutaa", bn: "পোস্টার" },
-                    { kana: "よていひょう", ro: "yoteihyou", bn: "পরিকল্পনা তালিকা" },
-                    { kana: "ごみばこ", ro: "gomibako", bn: "ময়লা ফেলার বাক্স" },
-                    { kana: "にんぎょう", ro: "ningyou", bn: "পুতুল" },
-                    { kana: "かびん", ro: "kabin", bn: "ফুলদানী" },
-                    { kana: "かがみ", ro: "kagami", bn: "আয়না" },
-                    { kana: "ひきだし", ro: "hikidashi", bn: "ড্রয়ার" },
-                    { kana: "げんかん", ro: "genkan", bn: "প্রবেশ পথ, সামনের দরজা" },
-                    { kana: "ろうか", ro: "rouka", bn: "করিডোর, হলওয়ে" },
-                    { kana: "かべ", ro: "kabe", bn: "দেয়াল" },
-                    { kana: "いけ", ro: "ike", bn: "পুকুর" },
-                    { kana: "もとのところ", ro: "moto no tokoro", bn: "মূল জায়গা" },
-                    { kana: "まわり", ro: "mawari", bn: "চারপাশ" },
-                    { kana: "まんなか", ro: "mannaka", bn: "কেন্দ্রবিন্দু" },
-                    { kana: "すみ", ro: "sumi", bn: "কর্ণার" },
-                    { kana: "まだ", ro: "mada", bn: "এখনও" },
-                    { kana: "リュック", ro: "ryukku", bn: "কাঁধের ব্যাগ" },
-                    { kana: "ひじょうぶくろ", ro: "hijoubukuro", bn: "জরুরি কিট বা জিনিস" },
-                    { kana: "ひじょうじ", ro: "hijouji", bn: "জরুরি অবস্থা" },
-                    { kana: "せいかつします III", ro: "seikatsushimasu", bn: "জীবনযাপন করা" },
-                    { kana: "かいちゅうでんとう", ro: "kaichuudentou", bn: "লাইট, ফ্লাশলাইট" },
-                    { kana: "〜とか、〜とか", ro: "~toka, ~toka", bn: "~,~, এবং আরও অনেক কিছু" },
-                    { kana: "まるい", ro: "marui", bn: "গোল, বৃত্ত" },
-                    { kana: "ある〜", ro: "aru~", bn: "একটি নির্দিষ্ট~" },
-                    { kana: "ゆめをみます II", ro: "yume o mimasu", bn: "স্বপ্ন দেখা" },
-                    { kana: "うれしい", ro: "ureshii", bn: "আনন্দিত, খুশি" },
-                    { kana: "いや [な]", ro: "iya [na]", bn: "ঘৃণা করা, অপছন্দ করা" },
-                    { kana: "すると", ro: "suruto", bn: "এবং, পরে" },
-                    { kana: "めがさめます II", ro: "me ga samemasu", bn: "জেগে ওঠা" },
-                    { kana: "しらせます II", ro: "shirasemasu", bn: "তথ্য জানানো" },
-                    { kana: "そうだんします III", ro: "soudanshimasu", bn: "আলোচনা করা" },
-                    { kana: "おこさん", ro: "okosan", bn: "অন্যের বাচ্চা" },
-                    { kana: "ごくろうさま", ro: "gokurousama", bn: "কঠোর পরিশ্রমের জন্য ধন্যবাদ" },
-                    { kana: "きぼう", ro: "kibou", bn: "আশা, অনুরোধ" },
-                    { kana: "なにかごきぼうがありますか", ro: "nanika gokibou ga arimasu ka", bn: "আপনার কোনো অনুরোধ আছে?" },
-                    { kana: "ミュージカル", ro: "myuujikaru", bn: "মিউজিক্যাল" },
-                    { kana: "これはいいですね", ro: "kore wa ii desu ne", bn: "এটা ভালো ধারণা / সুন্দর লাগছে" },
-                    { kana: "ブロードウェイ", ro: "buroodowei", bn: "ব্রডওয়ে" },
-                    { kana: "つき", ro: "tsuki", bn: "চাঁদ" },
-                    { kana: "ちきゅう", ro: "chikyuu", bn: "পৃথিবী" },
-                    { kana: "こうばん", ro: "kouばん", bn: "পুলিশ স্টেশন" },
-                    { kana: "ほど", ro: "hodo", bn: "সম্পর্কে, শুধু" }
-                ]
-            },
-            31: {
-                title: "ইচ্ছা ও ভবিষ্যৎ পরিকল্পনা",
-                kanji: "第31課",
-                words: [
-                    { kana: "つづけます II", ro: "tsudukemasu", bn: "চালানো, চালিয়ে যাওয়া" },
-                    { kana: "みつけます II", ro: "mitsukemasu", bn: "খোঁজা" },
-                    { kana: "とります I [やすみを~]", ro: "torimasu [yasumi o]", bn: "নেওয়া [ছুটি]" },
-                    { kana: "うけます II [しけんを~]", ro: "ukemasu [shiken o]", bn: "অংশগ্রহণ করা, দেওয়া [পরীক্ষা]" },
-                    { kana: "もうしこみます I", ro: "moushikomimasu", bn: "আবেদন করা, ভর্তি ফর্ম" },
-                    { kana: "きゅうけいします III", ro: "kyuukeishimasu", bn: "বিরতি নেওয়া" },
-                    { kana: "れんきゅう", ro: "renkyuu", bn: "ধারাবাহিক ছুটির দিন" },
-                    { kana: "さくぶん", ro: "sakubun", bn: "রচনা" },
-                    { kana: "はっぴょう", ro: "happyou", bn: "বক্তব্য, উপস্থাপন করা" },
-                    { kana: "てんらんかい", ro: "tenrankai", bn: "প্রদর্শনী" },
-                    { kana: "けっこんしき", ro: "kekkonshiki", bn: "বিবাহ অনুষ্ঠান" },
-                    { kana: "おそうしき", ro: "osoushiki", bn: "অন্ত্যেষ্টিক্রিয়া" },
-                    { kana: "しき", ro: "shiki", bn: "অনুষ্ঠান" },
-                    { kana: "ほんしゃ", ro: "honsha", bn: "প্রধান অফিস" },
-                    { kana: "してん", ro: "shiten", bn: "শাখা অফিস" },
-                    { kana: "きょうかい", ro: "kyoukai", bn: "চার্চ, গির্জা" },
-                    { kana: "だいがくいん", ro: "daigakuin", bn: "স্নাতক স্কুল (Graduate school)" },
-                    { kana: "どうぶつえん", ro: "doubutsuen", bn: "চিড়িয়াখানা" },
-                    { kana: "おんせん", ro: "onsen", bn: "গরম পানির ঝর্ণা, স্পা" },
-                    { kana: "かえり", ro: "kaeri", bn: "ফেরার পথ" },
-                    { kana: "おこさん", ro: "okosan", bn: "অন্যের বাচ্চা" },
-                    { kana: "〜ごう", ro: "~gou", bn: "ট্রেন নম্বর, টাইফুন নম্বর ইত্যাদি" },
-                    { kana: "〜のほう", ro: "~no hou", bn: "দিক নির্দেশনা, দিকে" },
-                    { kana: "ずっと", ro: "zutto", bn: "সম্পূর্ণ সময়" },
-                    { kana: "のこります I", ro: "nokorimasu", bn: "বাকি, ছেড়ে যাওয়া, পড়ে থাকা" },
-                    { kana: "にゅうがくしけん", ro: "nyuugakushiken", bn: "ভর্তি পরীক্ষা" },
-                    { kana: "つきに", ro: "tsuki ni", bn: "প্রতিমাসে" },
-                    { kana: "むら", ro: "mura", bn: "গ্রাম" },
-                    { kana: "そつぎょうします III", ro: "sotsugyoushimasu", bn: "স্নাতক (Graduate)" },
-                    { kana: "えいがかん", ro: "eigakan", bn: "সিনেমা হল, সিনেমা" },
-                    { kana: "とじます II", ro: "tojimasu", bn: "বন্ধ করা (চোখ/বই)" },
-                    { kana: "とかい", ro: "tokai", bn: "শহর" },
-                    { kana: "パリ", ro: "pari", bn: "প্যারিস (ফ্রান্সের রাজধানী)" },
-                    { kana: "ピカソ", ro: "pikaso", bn: "পাবলো পিকাসো, স্প্যানিশ চিত্রশিল্পী" },
-                    { kana: "のぞみ", ro: "nozomi", bn: "শিনকানসেন ট্রেনের নাম" },
-                    { kana: "しんこうべ", ro: "shinkoube", bn: "হিয়োগোর স্টেশনের নাম" }
-                ]
-            },
-            32: {
-                title: "পরামর্শ ও পূর্বাভাস",
-                kanji: "第32課",
-                words: [
-                    { kana: "うんどうします III", ro: "undoushimasu", bn: "ব্যায়াম করা" },
-                    { kana: "せいこうします III", ro: "seikoushimasu", bn: "সফল" },
-                    { kana: "しっぱいします III [しけんに~]", ro: "shippaishimasu [shiken ni]", bn: "ব্যর্থ, ফেল করা [পরীক্ষায়]" },
-                    { kana: "ごうかくします III [しけんに~]", ro: "goukakushimasu [shiken ni]", bn: "উত্তীর্ণ হওয়া, পাস [পরীক্ষায়]" },
-                    { kana: "やみます I [あめが~]", ro: "yamimasu [ame ga]", bn: "থামা [বৃষ্টি]" },
-                    { kana: "はれます II", ro: "haremasu", bn: "পরিষ্কার (আকাশে রোদ)" },
-                    { kana: "くもります I", ro: "kumorimasu", bn: "মেঘলাচ্ছন্ন" },
-                    { kana: "つづきます I [ねつが~]", ro: "tsudukimasu [netsu ga]", bn: "অব্যাহত থাকা, চলতে থাকা [জ্বর]" },
-                    { kana: "ひきます I [かぜを~]", ro: "hikimasu [kaze o]", bn: "ধরা, ঠান্ডা লাগা [সর্দি]" },
-                    { kana: "ひやします I", ro: "hiyashimasu", bn: "ঠান্ডা করা" },
-                    { kana: "こみます I [みちが~]", ro: "komimasu [michi ga]", bn: "জনাকীর্ণ [রাস্তা]" },
-                    { kana: "すきます I [みちが~]", ro: "sukimasu [michi ga]", bn: "ফাঁকা হওয়া, ছেড়ে দেওয়া [রাস্তা]" },
-                    { kana: "でます II [しあいに~]", ro: "demasu [shiai ni]", bn: "অংশগ্রহণ করা [ম্যাচে]" },
-                    { kana: "でます II [パーティーに~]", ro: "demasu [paatii ni]", bn: "যোগদান করা [পার্টিতে]" },
-                    { kana: "むりをします III", ro: "muri o shimasu", bn: "অতিরিক্ত পরিশ্রম" },
-                    { kana: "じゅうぶん [な]", ro: "juubun [na]", bn: "পর্যাপ্ত, প্রচুর" },
-                    { kana: "おかしい", ro: "okashii", bn: "মজার, অদ্ভুত" },
-                    { kana: "うるさい", ro: "urusai", bn: "শব্দ, বিরক্তিকর" },
-                    { kana: "せんせい", ro: "sensei", bn: "ডাক্তার, শিক্ষক" },
-                    { kana: "やけど", ro: "yakedo", bn: "পুড়ে যাওয়া" },
-                    { kana: "けが", ro: "kega", bn: "আঘাত, ক্ষত" },
-                    { kana: "せき", ro: "seki", bn: "কাশি" },
-                    { kana: "インフルエンザ", ro: "infuruenza", bn: "ইনফ্লুয়েঞ্জা" },
-                    { kana: "そら", ro: "sora", bn: "আকাশ" },
-                    { kana: "たいよう", ro: "taiyou", bn: "সূর্য" },
-                    { kana: "ほし", ro: "hoshi", bn: "তারা" },
-                    { kana: "かぜ", ro: "kaze", bn: "বাতাস" },
-                    { kana: "ひがし", ro: "higashi", bn: "পূর্ব" },
-                    { kana: "にし", ro: "nishi", bn: "পশ্চিম" },
-                    { kana: "みなみ", ro: "minami", bn: "দক্ষিণ" },
-                    { kana: "きた", ro: "kita", bn: "উত্তর" },
-                    { kana: "こくさい〜", ro: "kokusai~", bn: "আন্তর্জাতিক~" },
-                    { kana: "すいどう", ro: "suidou", bn: "পানির পাইপ, পানির কল" },
-                    { kana: "エンジン", ro: "enjin", bn: "ইঞ্জিন" },
-                    { kana: "チーム", ro: "chiimu", bn: "টিম, দল" },
-                    { kana: "こんや", ro: "kon'ya", bn: "এই রাত" },
-                    { kana: "ゆうがた", ro: "yuugata", bn: "সন্ধ্যাবেলা" },
-                    { kana: "まえ", ro: "mae", bn: "আগের সময়" },
-                    { kana: "おそく", ro: "osoku", bn: "দেরি হওয়া" },
-                    { kana: "こんなに", ro: "konnani", bn: "এই (রকমভাবে)" },
-                    { kana: "そんなに", ro: "sonnani", bn: "ঐরকমভাবে" },
-                    { kana: "あんなに", ro: "annani", bn: "ঐ রকমের (অনেক)" },
-                    { kana: "もしかしたら", ro: "moshikashitara", bn: "হয়তো, হয়তোবা" },
-                    { kana: "い", ro: "i", bn: "পেট" },
-                    { kana: "ストレス", ro: "sutoresu", bn: "চাপ" },
-                    { kana: "それはいけませんね", ro: "sore wa ikemasen ne", bn: "এটা ঠিক নয় / খারাপ হলো" },
-                    { kana: "ほしうらない", ro: "hoshiuranai", bn: "জ্যোতিষ শাস্ত্র" },
-                    { kana: "おうしざ", ro: "oushiza", bn: "বৃষ রাশি" },
-                    { kana: "はたらきすぎ", ro: "hatarakisugi", bn: "অতিরিক্ত কাজ" },
-                    { kana: "こまります I", ro: "komarimasu", bn: "সমস্যায় পড়া, ঝামেলা" },
-                    { kana: "たからくじ", ro: "takarakuji", bn: "লটারি" },
-                    { kana: "あたります I [たからくじが~]", ro: "atarimasu [takarakuji ga]", bn: "লটারি জেতা" },
-                    { kana: "けんこう", ro: "kenkou", bn: "স্বাস্থ্য" },
-                    { kana: "れんあい", ro: "ren'ai", bn: "ভালোবাসা" },
-                    { kana: "こいびと", ro: "koibito", bn: "প্রেমিক / প্রেমিকা" },
-                    { kana: "ラッキーアイテム", ro: "rakkii aitemu", bn: "সৌভাগ্যজনক উপাদান" },
-                    { kana: "いし", ro: "ishi", bn: "পাথর" },
-                    { kana: "ヨーロッパ", ro: "yooroppa", bn: "ইউরোপ" }
+                    { kana: "よてい", ro: "yotei", bn: "পরিকল্পনা" }
                 ]
             }
         };
@@ -1363,12 +1147,15 @@
         let currentWords = [];
         let currentIndex = 0;
         let isTableOpen = false;
+        let isAnswerRevealed = false;
+
+        const activeCard = document.getElementById("activeCard");
+        const answerSheet = document.getElementById("answerSheet");
+        const revealDot = document.getElementById("revealDot");
 
         window.addEventListener("load", () => {
             const loader = document.getElementById("pageLoader");
-            if (loader) {
-                loader.classList.add("hidden");
-            }
+            if (loader) loader.classList.add("hidden");
         });
 
         onAuthStateChanged(auth, async (user) => {
@@ -1445,18 +1232,15 @@
             const item = currentWords[currentIndex];
             const highlighted = isWordHighlighted(currentLesson, item.kana);
 
-            const cardContainer = document.getElementById("flashcardContainer");
-            const frontBtn = document.getElementById("fcFrontHlBtn");
-            const backBtn = document.getElementById("fcBackHlBtn");
+            const card = document.getElementById("activeCard");
+            const bookmarkBtn = document.getElementById("fcBookmarkBtn");
 
             if (highlighted) {
-                cardContainer.classList.add("is-highlighted");
-                frontBtn.classList.add("active");
-                backBtn.classList.add("active");
+                card.classList.add("is-highlighted");
+                bookmarkBtn.classList.add("active");
             } else {
-                cardContainer.classList.remove("is-highlighted");
-                frontBtn.classList.remove("active");
-                backBtn.classList.remove("active");
+                card.classList.remove("is-highlighted");
+                bookmarkBtn.classList.remove("active");
             }
         }
 
@@ -1528,7 +1312,6 @@
             document.getElementById("tableCard").style.display = "none";
             document.getElementById("accChevron").style.transform = "rotate(0deg)";
 
-            document.getElementById("flashcardContainer").classList.remove("flipped");
             fillCardData();
             renderTable();
             updateJumpNavButtons();
@@ -1540,15 +1323,11 @@
         }
 
         function goToPrevLesson() {
-            if (currentLesson > 26) {
-                openLesson(currentLesson - 1);
-            }
+            if (currentLesson > 26) openLesson(currentLesson - 1);
         }
 
         function goToNextLesson() {
-            if (currentLesson < 50) {
-                openLesson(currentLesson + 1);
-            }
+            if (currentLesson < 50) openLesson(currentLesson + 1);
         }
 
         function backToGrid(fromHistory = false) {
@@ -1581,67 +1360,138 @@
                 cardMode = "JP_TO_BN";
                 document.getElementById("modeText").innerText = "JP → BN";
             }
-            updateCardWithAnimation();
+            hideAnswerSheet();
+            fillCardData();
+        }
+
+        function toggleCardReveal() {
+            isAnswerRevealed = !isAnswerRevealed;
+            if (isAnswerRevealed) {
+                answerSheet.classList.add("revealed");
+            } else {
+                answerSheet.classList.remove("revealed");
+            }
+        }
+
+        function hideAnswerSheet() {
+            isAnswerRevealed = false;
+            answerSheet.classList.remove("revealed");
         }
 
         function fillCardData() {
+            hideAnswerSheet();
             if (currentWords.length === 0) return;
             const item = currentWords[currentIndex];
 
-            const fcKana = document.getElementById("fcKana");
+            const fcMainWord = document.getElementById("fcMainWord");
             const fcMeaning = document.getElementById("fcMeaning");
             const fcRomaji = document.getElementById("fcRomaji");
 
             if (cardMode === "JP_TO_BN") {
-                fcKana.innerText = item.kana;
+                fcMainWord.innerText = item.kana;
                 fcMeaning.innerText = item.bn;
                 fcRomaji.innerText = item.ro;
             } else {
-                fcKana.innerText = item.bn;
+                fcMainWord.innerText = item.bn;
                 fcMeaning.innerText = item.kana;
                 fcRomaji.innerText = item.ro;
             }
 
+            document.getElementById("fcBadge").innerText = `WORD ${currentIndex + 1}`;
             document.getElementById("cardCounter").innerText = `CARD ${currentIndex + 1} / ${currentWords.length}`;
             const pct = ((currentIndex + 1) / currentWords.length) * 100;
             document.getElementById("progressFill").style.width = `${pct}%`;
 
             updateCardHighlightState();
-        }
 
-        function flipCard() {
-            document.getElementById("flashcardContainer").classList.toggle("flipped");
-        }
-
-        function nextCard() {
-            if (currentIndex < currentWords.length - 1) {
-                currentIndex++;
-                updateCardWithAnimation();
-            }
-        }
-
-        function prevCard() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCardWithAnimation();
-            }
-        }
-
-        function updateCardWithAnimation() {
-            const container = document.getElementById("flashcardContainer");
-            if (container.classList.contains("flipped")) {
-                container.classList.remove("flipped");
-                setTimeout(fillCardData, 200);
-            } else {
-                fillCardData();
-            }
+            activeCard.style.transition = "none";
+            activeCard.style.transform = "translate(0px, 0px) rotate(0deg)";
+            activeCard.style.opacity = "1";
         }
 
         function shuffleCards() {
             currentWords.sort(() => Math.random() - 0.5);
             currentIndex = 0;
-            updateCardWithAnimation();
+            fillCardData();
         }
+
+        /* -------------------------------------------------------------
+           টাচ অ্যান্ড ড্র্যাগ সোয়াইপ ইন্টারঅ্যাকশন
+        ------------------------------------------------------------- */
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let isDragging = false;
+
+        function onTouchStart(e) {
+            if (e.target.closest('#btnSpeakMain') || e.target.closest('#fcBookmarkBtn') || e.target.closest('#revealDot')) return;
+            const touch = e.touches ? e.touches[0] : e;
+            startX = touch.clientX;
+            startY = touch.clientY;
+            isDragging = true;
+            activeCard.style.transition = "none";
+        }
+
+        function onTouchMove(e) {
+            if (!isDragging) return;
+            const touch = e.touches ? e.touches[0] : e;
+            currentX = touch.clientX - startX;
+            currentY = touch.clientY - startY;
+
+            const rotateDeg = currentX * 0.07;
+            activeCard.style.transform = `translate(${currentX}px, ${currentY * 0.2}px) rotate(${rotateDeg}deg)`;
+        }
+
+        function onTouchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const swipeThreshold = 80;
+            if (currentX < -swipeThreshold) {
+                swipeOutCard(-1);
+            } else if (currentX > swipeThreshold) {
+                swipeOutCard(1);
+            } else {
+                activeCard.style.transition = "transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)";
+                activeCard.style.transform = "translate(0px, 0px) rotate(0deg)";
+            }
+            currentX = 0;
+            currentY = 0;
+        }
+
+        function swipeOutCard(direction) {
+            activeCard.style.transition = "transform 0.25s ease-in, opacity 0.25s ease-in";
+            activeCard.style.transform = `translate(${direction * 350}px, 20px) rotate(${direction * 20}deg)`;
+            activeCard.style.opacity = "0";
+
+            setTimeout(() => {
+                if (direction === -1) {
+                    currentIndex = (currentIndex + 1) % currentWords.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + currentWords.length) % currentWords.length;
+                }
+                fillCardData();
+            }, 220);
+        }
+
+        activeCard.addEventListener("touchstart", onTouchStart, { passive: true });
+        activeCard.addEventListener("touchmove", onTouchMove, { passive: true });
+        activeCard.addEventListener("touchend", onTouchEnd);
+
+        activeCard.addEventListener("mousedown", onTouchStart);
+        window.addEventListener("mousemove", onTouchMove);
+        window.addEventListener("mouseup", onTouchEnd);
+
+        revealDot.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleCardReveal();
+        });
+
+        answerSheet.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleCardReveal();
+        });
 
         function toggleTable() {
             isTableOpen = !isTableOpen;
@@ -1711,23 +1561,15 @@
         document.getElementById("btnBackToGrid").addEventListener("click", () => backToGrid(false));
         document.getElementById("btnShuffle").addEventListener("click", shuffleCards);
         document.getElementById("btnToggleMode").addEventListener("click", toggleCardMode);
-        document.getElementById("btnSpeakMain").addEventListener("click", speakCurrent);
-        document.getElementById("flashcardContainer").addEventListener("click", flipCard);
-        document.getElementById("fcFrontHlBtn").addEventListener("click", toggleCurrentHighlight);
-        document.getElementById("fcBackHlBtn").addEventListener("click", toggleCurrentHighlight);
-        document.getElementById("btnPrevCard").onclick = prevCard;
-        document.getElementById("btnNextCard").onclick = nextCard;
+        document.getElementById("btnSpeakMain").addEventListener("click", (e) => {
+            e.stopPropagation();
+            speakCurrent();
+        });
+        document.getElementById("fcBookmarkBtn").addEventListener("click", toggleCurrentHighlight);
         document.getElementById("btnToggleTable").onclick = toggleTable;
 
         document.getElementById("btnPrevLesson").onclick = goToPrevLesson;
         document.getElementById("btnNextLesson").onclick = goToNextLesson;
-
-        document.querySelectorAll(".fc-speak-voice-btn").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                speakCurrent();
-            });
-        });
 
         history.replaceState({ view: "grid" }, "");
         renderLessonGrid();

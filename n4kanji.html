@@ -57,7 +57,9 @@
             border: 1px solid var(--line);
             cursor: pointer;
             font-size: 15px;
+            transition: transform 0.15s;
         }
+        .back-btn:active { transform: scale(0.92); }
 
         .logo-text {
             font-family: 'Noto Sans JP', sans-serif;
@@ -65,6 +67,7 @@
             font-size: 17px;
             color: var(--pine);
             display: flex; align-items: center; gap: 6px;
+            letter-spacing: 0.5px;
         }
 
         .level-pill {
@@ -174,7 +177,9 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+            transition: transform 0.15s;
         }
+        .lesson-flash-btn:active { transform: scale(0.93); }
 
         .kanji-item {
             margin-bottom: 11px;
@@ -196,6 +201,11 @@
             font-size: 14.5px;
         }
 
+        .kanji-header .arrow-icon {
+            font-size: 13px;
+            transition: transform 0.25s ease;
+        }
+
         .kanji-item.open .arrow-icon { transform: rotate(90deg); }
 
         .kanji-body {
@@ -209,16 +219,41 @@
         .kanji-anim-stage {
             width: 160px; height: 160px;
             margin: 0 auto 16px;
+            position: relative;
             background: #f8fafc;
             border: 1.5px dashed #cbd5e1;
             border-radius: 18px;
             display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
         }
 
         .kanji-svg-wrap {
             width: 130px; height: 130px;
             display: flex; align-items: center; justify-content: center;
         }
+        .kanji-svg-wrap svg { width: 100% !important; height: 100% !important; display: block; }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .action-btn {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 12.5px;
+            font-weight: 700;
+            display: flex; align-items: center; gap: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .action-btn:active { transform: scale(0.95); }
+        .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
+        .action-btn.card { color: #0f172a; border-color: #cbd5e1; background: #f8fafc; }
 
         .readings-box {
             text-align: center;
@@ -232,6 +267,16 @@
             border: 1px solid var(--line);
         }
 
+        .readings-box span.jp-font { font-family: 'Klee One', sans-serif; font-weight: 700; color: #0f172a; }
+
+        .detail-sub-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 12px 0 8px;
+            display: flex; align-items: center; gap: 6px;
+        }
+
         .vocab-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 
         .vocab-item {
@@ -243,7 +288,7 @@
         }
 
         /* -------------------------------------------------------------
-           মিনিমাল কার্ড সোয়াইপ ডেক (ভিডিওর হুবহু ডিজাইন)
+           মিনিমাল কার্ড সোয়াইপ ডেক (ভিডিওর হুবহু ইন্টারঅ্যাকশন)
         ------------------------------------------------------------- */
         .flashcard-fullscreen {
             display: none;
@@ -261,11 +306,11 @@
 
         .stack-top-info {
             width: 100%;
-            max-width: 340px;
+            max-width: 330px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #94a3b8;
         }
@@ -279,7 +324,9 @@
             font-size: 16px;
             color: #475569;
             display: flex; align-items: center; justify-content: center;
+            transition: transform 0.15s;
         }
+        .stack-close-btn:active { transform: scale(0.9); }
 
         .deck-wrapper {
             position: relative;
@@ -291,7 +338,7 @@
             justify-content: center;
         }
 
-        /* পেছনের স্তূপাকার কার্ড লেয়ার */
+        /* পেছনের ডেক কার্ড লেয়ার */
         .deck-layer {
             position: absolute;
             width: 100%;
@@ -314,7 +361,7 @@
             opacity: 0.4;
         }
 
-        /* মূল সোয়াইপ কার্ড */
+        /* মূল সোয়াইপ কার্ড */
         .main-card {
             position: absolute;
             width: 100%;
@@ -356,7 +403,10 @@
             font-size: 20px;
             color: #94a3b8;
             display: flex; align-items: center; justify-content: center;
+            transition: transform 0.15s, color 0.15s;
         }
+        .audio-speaker-btn:hover { color: #0f172a; }
+        .audio-speaker-btn:active { transform: scale(0.9); }
 
         .card-center-kanji {
             font-family: 'Klee One', 'Noto Sans JP', sans-serif;
@@ -376,7 +426,7 @@
             z-index: 6;
         }
 
-        /* ভিডিওর কালো ডট */
+        /* ভিডিওর কালো ডট বাটন */
         .reveal-dot-btn {
             width: 18px;
             height: 18px;
@@ -385,7 +435,7 @@
             cursor: pointer;
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .reveal-dot-btn:active { transform: scale(1.3); }
+        .reveal-dot-btn:active { transform: scale(1.35); }
 
         /* কালো রিভিল শিট (ট্যাপ করলে নিচ থেকে উঠবে) */
         .answer-reveal-sheet {
@@ -435,6 +485,7 @@
             max-height: 110px;
             overflow-y: auto;
         }
+        .ans-vocab-item { margin-bottom: 5px; line-height: 1.35; }
         .ans-vocab-item strong {
             color: #38bdf8;
             font-family: 'Klee One', sans-serif;
@@ -448,6 +499,25 @@
             align-items: center;
             gap: 6px;
         }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line);
+            display: flex; justify-content: space-around;
+            align-items: center; z-index: 1000;
+        }
+
+        .nav-item {
+            text-decoration: none; color: #94a3b8;
+            font-size: 11px; display: flex; flex-direction: column;
+            align-items: center; gap: 4px; font-weight: 600;
+        }
+        .nav-item.active { color: #0f172a; }
+        .nav-item i { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -465,7 +535,7 @@
     <main class="container">
         <!-- লেসন গ্রিড -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • আঙুল দিয়ে সোয়াইপ করুন</div>
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • আঙুল দিয়ে টেনে সোয়াইপ করুন</div>
             <div class="lesson-grid" id="lessonsContainer"></div>
         </div>
 
@@ -495,11 +565,11 @@
             <div class="deck-layer layer-2"></div>
             <div class="deck-layer layer-1"></div>
 
-            <!-- মূল কার্ড (ড্র্যাগ ও সোয়াইপ করা যাবে) -->
+            <!-- মূল কার্ড (আঙুল দিয়ে ড্র্যাগ ও সোয়াইপ করা যাবে) -->
             <div class="main-card" id="activeCard">
                 <div class="card-top-row">
                     <span class="top-kanji-label" id="cardTopKanji">曜</span>
-                    <button class="audio-speaker-btn" onclick="event.stopPropagation(); playCurrentDeckAudio();">
+                    <button class="audio-speaker-btn" onclick="event.stopPropagation(); playCurrentDeckAudio();" title="উচ্চারণ শুনুন">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
                 </div>
@@ -507,7 +577,7 @@
                 <div class="card-center-kanji" id="cardCenterKanji">曜</div>
 
                 <div class="card-bottom-row">
-                    <div class="reveal-dot-btn" id="revealDot" title="উত্তর দেখুন"></div>
+                    <div class="reveal-dot-btn" id="revealDot" title="উত্তর প্রকাশ করুন"></div>
                 </div>
 
                 <!-- কালো শিট (ট্যাপে উত্তর খুলবে) -->
@@ -528,11 +598,20 @@
         </div>
 
         <div class="bottom-hint-row">
-            <i class="fa-solid fa-hand-pointer"></i> ডটে ট্যাপ করে উত্তর দেখুন • আঙুল দিয়ে টেনে সরিয়ে দিন
+            <i class="fa-solid fa-hand-pointer"></i> ডটে ট্যাপ করে উত্তর দেখুন • আঙুল দিয়ে টেনে সোয়াইপ করুন
         </div>
     </div>
 
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+        <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
+    </nav>
+
     <script>
+        /* -------------------------------------------------------------
+           সম্পূর্ণ N4 কাঞ্জি ডাটাবেস (১২১ - ৩২০) - মোট ২০০টি কাঞ্জি
+        ------------------------------------------------------------- */
         const rawN4Kanji = [
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
             { char: "作", kun: "つく(る)", on: "サク・サ", meaning: "তৈরি করা", vocab: [{w: "作ります (つくります)", m: "তৈরি করা"}, {w: "作文 (さくぶん)", m: "রচনা"}] },
@@ -683,7 +762,7 @@
             { char: "違", kun: "ちが(う)", on: "イ", meaning: "ভুল / ভিন্ন হওয়া", vocab: [{w: "違います (ちがいます)", m: "ভুল/আলাদা"}, {w: "間違い (まちがい)", m: "ভুল"}] },
             { char: "暑", kun: "あつ(い)", on: "ショ", meaning: "গরম (আবহাওয়া)", vocab: [{w: "暑い (あつい)", m: "গরম"}] },
             { char: "寒", kun: "さむ(い)", on: "カン", meaning: "ঠান্ডা (আবহাওয়া)", vocab: [{w: "寒い (さむい)", m: "ঠান্ডা"}] },
-            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まニアいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
+            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まにあいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
             { char: "伝", kun: "つた(える)", on: "デン", meaning: "জানানো / পৌঁছে দেওয়া", vocab: [{w: "伝えます (つたえます)", m: "জানানো"}, {w: "手伝います (てつだいます)", m: "সাহায্য করা"}] },
             { char: "決", kun: "き(める)", on: "ケツ", meaning: "সিদ্ধান্ত নেওয়া", vocab: [{w: "決めます (きめます)", m: "সিদ্ধান্ত নেওয়া"}, {w: "決して (けっして)", m: "কখনোই নয়"}] },
             { char: "困", kun: "こま(る)", on: "コン", meaning: "সমস্যায় পড়া", vocab: [{w: "困ります (こまります)", m: "অসুবিধায় পড়া"}] },
@@ -699,7 +778,7 @@
             { char: "捨", kun: "す(てる)", on: "シャ", meaning: "ফেলে দেওয়া", vocab: [{w: "捨てます (すてます)", m: "ফেলে দেওয়া"}] },
             { char: "説", kun: "と(く)", on: "セツ", meaning: "ব্যাখ্যা / মতবাদ", vocab: [{w: "説明 (せつめい)", m: "ব্যাখ্যা"}, {w: "小説 (しょうせつ)", m: "উপন্যাস"}] },
             { char: "受", kun: "う(ける)", on: "ジュ", meaning: "গ্রহণ করা / পরীক্ষা দেওয়া", vocab: [{w: "受けます (うけます)", m: "পরীক্ষা দেওয়া/গ্রহণ করা"}, {w: "受付 (うけつけ)", m: "রিসেপশন"}] },
-            { char: "取", kun: "と(る)", on: "シュ", meaning: "নেওয়া / ধরা", vocab: [{w: "取ります (とります)", m: "নেওয়া"}] },
+            { char: "取", kun: "と(る)", on: "シュ", meaning: "নেওয়া / ধরা", vocab: [{w: "取ります (トります)", m: "নেওয়া"}] },
             { char: "席", kun: "-", on: "セキ", meaning: "আসন / সিট", vocab: [{w: "席 (せき)", m: "আসন"}, {w: "出席 (しゅっせき)", m: "উপস্থিতি"}] },
             { char: "連", kun: "つ(れる)", on: "レン", meaning: "সাথে নেওয়া / যুক্ত", vocab: [{w: "連れて行きます (つれていきます)", m: "সাথে নিয়ে যাওয়া"}, {w: "連絡 (れんらく)", m: "যোগাযোগ"}] },
             { char: "座", kun: "すわ(る)", on: "ザ", meaning: "বসা", vocab: [{w: "座ります (すわります)", m: "বসা"}, {w: "口座 (こうざ)", m: "ব্যাংক অ্যাকাউন্ট"}] },
@@ -787,6 +866,50 @@
             }
         }
 
+        const svgCache = {};
+        function cleanSvg(svgStr) {
+            if (!svgStr) return "";
+            const start = svgStr.indexOf("<svg");
+            const end = svgStr.indexOf("</svg>");
+            if (start !== -1 && end !== -1) return svgStr.substring(start, end + 6);
+            return svgStr;
+        }
+
+        async function fetchKanjiSvg(hexCode) {
+            if (svgCache[hexCode]) return svgCache[hexCode];
+            try {
+                const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const text = await res.text();
+                const cleaned = cleanSvg(text);
+                svgCache[hexCode] = cleaned;
+                return cleaned;
+            } catch (e) { return null; }
+        }
+
+        async function renderStaticSvg(holderId, hexCode) {
+            const holder = document.getElementById(holderId);
+            if (!holder) return;
+            const svgText = await fetchKanjiSvg(hexCode);
+            if (svgText) {
+                holder.innerHTML = svgText;
+                const svg = holder.querySelector('svg');
+                if (!svg) return;
+                svg.setAttribute("viewBox", "0 0 109 109");
+                svg.style.width = "100%";
+                svg.style.height = "100%";
+                svg.querySelectorAll("text").forEach(t => t.style.display = "none");
+                svg.querySelectorAll("path").forEach(p => {
+                    p.style.stroke = "#0f172a";
+                    p.style.strokeWidth = "4.2";
+                    p.style.strokeLinecap = "round";
+                    p.style.strokeLinejoin = "round";
+                    p.style.fill = "none";
+                });
+            }
+        }
+
         let currentActiveLesson = 1;
 
         function openLesson(lessonNo) {
@@ -816,15 +939,31 @@
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
                     <div class="kanji-body">
+                        <div class="kanji-anim-stage">
+                            <div class="kanji-svg-wrap" id="svgHolder_${index}"></div>
+                        </div>
+
+                        <div class="action-btns">
+                            <button class="action-btn play" onclick="playKanjiStroke('${k.char}', '${k.code}', ${index})">
+                                <i class="fa-solid fa-play"></i> Play Stroke
+                            </button>
+                            <button class="action-btn card" onclick="openSingleDeckCard(${index})">
+                                <i class="fa-regular fa-clone"></i> Flash Card
+                            </button>
+                        </div>
+
                         <div class="readings-box">
-                            <div><strong>Kunyomi:</strong> ${k.kun}</div>
-                            <div><strong>Onyomi:</strong> ${k.on}</div>
+                            <div><strong>Kunyomi:</strong> <span class="jp-font">${k.kun}</span></div>
+                            <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
+
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary (যৌগিক শব্দ)</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
                 container.appendChild(itemDiv);
+                renderStaticSvg(`svgHolder_${index}`, k.code);
             });
 
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -857,6 +996,42 @@
             }
         }
 
+        async function playKanjiStroke(char, hexCode, index) {
+            const holder = document.getElementById(`svgHolder_${index}`);
+            speakWord(char);
+
+            const svgText = await fetchKanjiSvg(hexCode);
+            if (!svgText) return;
+
+            holder.innerHTML = svgText;
+            const svgEl = holder.querySelector('svg');
+            if (!svgEl) return;
+            svgEl.setAttribute("viewBox", "0 0 109 109");
+            svgEl.style.width = "100%";
+            svgEl.style.height = "100%";
+            svgEl.querySelectorAll("text").forEach(t => t.style.display = "none");
+
+            const paths = svgEl.querySelectorAll("path");
+            let delay = 0;
+            paths.forEach((path) => {
+                const len = path.getTotalLength();
+                path.style.stroke = "#147A57";
+                path.style.strokeWidth = "4.5";
+                path.style.strokeLinecap = "round";
+                path.style.strokeLinejoin = "round";
+                path.style.fill = "none";
+                path.style.strokeDasharray = len;
+                path.style.strokeDashoffset = len;
+                path.style.transition = "none";
+
+                setTimeout(() => {
+                    path.style.transition = "stroke-dashoffset 0.55s cubic-bezier(0.4, 0, 0.2, 1)";
+                    path.style.strokeDashoffset = "0";
+                }, delay);
+                delay += 550;
+            });
+        }
+
         /* -------------------------------------------------------------
            ভিডিওর স্ট্যাকড ফ্ল্যাশকার্ড ও আঙুল দিয়ে ড্র্যাগ/সোয়াইপ ইঞ্জিন
         ------------------------------------------------------------- */
@@ -872,6 +1047,14 @@
             const list = kanjiData[currentActiveLesson] || kanjiData[1];
             deckList = [...list];
             currentDeckIndex = 0;
+            document.getElementById("deckOverlay").style.display = "flex";
+            renderDeckCard();
+        }
+
+        function openSingleDeckCard(index) {
+            const list = kanjiData[currentActiveLesson] || kanjiData[1];
+            deckList = [...list];
+            currentDeckIndex = index;
             document.getElementById("deckOverlay").style.display = "flex";
             renderDeckCard();
         }
@@ -955,6 +1138,8 @@
         let isDragging = false;
 
         function onTouchStart(e) {
+            // অডিও বাটনে ক্লিক হলে ড্র্যাগ হবে না
+            if (e.target.closest('.audio-speaker-btn')) return;
             const touch = e.touches ? e.touches[0] : e;
             startX = touch.clientX;
             startY = touch.clientY;
@@ -968,7 +1153,7 @@
             currentX = touch.clientX - startX;
             currentY = touch.clientY - startY;
 
-            // ভিডিওর মতো সুন্দর রোটেশন ও ড্র্যাগ অ্যানিমেশন
+            // ভিডিওর মতো রোটেটিং ড্র্যাগ অ্যানিমেশন
             const rotateDeg = currentX * 0.08;
             activeCard.style.transform = `translate(${currentX}px, ${currentY * 0.25}px) rotate(${rotateDeg}deg)`;
         }
@@ -977,12 +1162,12 @@
             if (!isDragging) return;
             isDragging = false;
 
-            const swipeThreshold = 90; // নির্দিষ্ট দূরত্বের বেশি টানলে কার্ড পাল্টাবে
+            const swipeThreshold = 80; // নির্দিষ্ট দূরত্বের বেশি টানলে কার্ড পরিবর্তন হবে
             if (currentX < -swipeThreshold) {
-                // বাঁমে সোয়াইপ (Next Card)
+                // বাঁমে সোয়াইপ (পরের কার্ড)
                 swipeOutCard(-1);
             } else if (currentX > swipeThreshold) {
-                // ডানে সোয়াইপ (Previous Card)
+                // ডানে সোয়াইপ (আগের কার্ড)
                 swipeOutCard(1);
             } else {
                 // বাউন্স ব্যাক আগের জায়গায়

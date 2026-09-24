@@ -237,11 +237,11 @@
 
         .view-header h3 { font-size: 14px; font-weight: 800; color: var(--pine); }
 
-        .lesson-test-btn {
-            background: var(--clay);
+        .lesson-flash-btn {
+            background: var(--gold);
             color: #ffffff;
             border: none;
-            padding: 7px 14px;
+            padding: 7px 15px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
@@ -249,10 +249,10 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 3px 8px rgba(182, 71, 46, 0.2);
-            transition: transform 0.15s;
+            box-shadow: 0 3px 8px rgba(169, 120, 31, 0.25);
+            transition: transform 0.15s, background 0.2s;
         }
-        .lesson-test-btn:active { transform: scale(0.93); }
+        .lesson-flash-btn:active { transform: scale(0.93); }
 
         .kanji-item {
             margin-bottom: 11px;
@@ -384,7 +384,7 @@
         .action-btn:active { transform: scale(0.95); }
         .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
         .action-btn.practice { color: var(--ink); border-color: var(--line); background: #FAF7F0; }
-        .action-btn.test { color: var(--clay); border-color: #F5C9BF; background: #FBEAE6; }
+        .action-btn.card { color: var(--gold); border-color: #F0DFB6; background: #FFFDF5; }
 
         .readings-box {
             text-align: center;
@@ -463,19 +463,30 @@
             color: #ffffff;
         }
 
+        /* মোডাল বেস */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             background: rgba(11, 30, 22, 0.65);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
             padding: 16px;
         }
 
+        .modal-close-icon {
+            position: absolute;
+            top: 14px; right: 18px;
+            background: none; border: none;
+            font-size: 24px; color: var(--mist);
+            cursor: pointer; line-height: 1;
+            z-index: 10;
+        }
+
+        /* ব্লাইন্ড স্ট্রোক টেস্ট কার্ড */
         .blind-test-card {
             background: #ffffff;
             width: 100%;
@@ -491,14 +502,6 @@
         @keyframes popUp {
             from { transform: scale(0.92); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-close-icon {
-            position: absolute;
-            top: 14px; right: 18px;
-            background: none; border: none;
-            font-size: 22px; color: var(--mist);
-            cursor: pointer; line-height: 1;
         }
 
         .blind-title {
@@ -550,92 +553,225 @@
         .btn-hint { background: #fef08a; color: #854d0e; }
         .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
 
-        /* কুইজ কার্ড */
-        .quiz-card {
-            background: #ffffff;
-            width: 100%; max-width: 360px;
-            border-radius: 24px;
-            padding: 24px 20px;
-            text-align: center;
+        /* -------------------------------------------------------------
+           3D ফ্ল্যাশকার্ড কার্ড UI & অ্যানিমেশন
+        ------------------------------------------------------------- */
+        .flashcard-modal-box {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-            animation: popUp 0.22s ease-out;
         }
 
-        .quiz-progress-bar {
-            width: 100%; height: 6px;
-            background: #E9E2D3; border-radius: 3px;
-            margin-bottom: 16px; overflow: hidden;
+        .flashcard-counter-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 0 4px;
         }
 
-        .quiz-progress-fill {
-            height: 100%; width: 0%;
-            background: var(--jade); transition: width 0.3s ease;
+        .flashcard-counter-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
         }
 
-        .quiz-header-badge {
-            font-size: 11px; font-weight: 800;
-            color: var(--mist); letter-spacing: 0.8px;
-            margin-bottom: 8px;
+        .card-perspective-container {
+            width: 100%;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
         }
 
-        .quiz-question-box {
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 26px;
+        }
+
+        .flashcard-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 26px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+            border: 1.5px solid var(--line);
+        }
+
+        /* কার্ডের সামনের পাশ */
+        .card-front {
+            background: #ffffff;
+            color: var(--ink);
+        }
+
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-id-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--jade);
+            background: #E6F3EC;
+            padding: 3px 8px;
+            border-radius: 8px;
+        }
+
+        .card-audio-icon {
+            font-size: 18px;
+            color: var(--pine);
             background: #FAF7F0;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 16px 12px;
-            margin-bottom: 16px;
+            cursor: pointer;
+            transition: transform 0.15s;
         }
+        .card-audio-icon:active { transform: scale(0.9); }
 
-        .quiz-q-main {
+        .front-center-kanji {
             font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 34px; font-weight: 700;
-            color: var(--pine); line-height: 1.2;
-            margin-bottom: 4px;
+            font-size: 86px;
+            font-weight: 700;
+            color: var(--pine);
+            line-height: 1;
+            margin: 10px 0;
+            text-shadow: 0 2px 4px rgba(11, 74, 56, 0.1);
         }
 
-        .quiz-q-sub { font-size: 13px; font-weight: 600; color: var(--mist); }
+        .front-readings {
+            background: #FAF7F0;
+            border-radius: 14px;
+            padding: 8px 12px;
+            font-size: 13.5px;
+            border: 1px dashed #D2DDD6;
+            line-height: 1.6;
+        }
 
-        .quiz-options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+        .front-readings span {
+            font-family: 'Klee One', sans-serif;
+            font-weight: 700;
+            color: var(--jade);
+        }
+
+        .flip-hint {
+            font-size: 11.5px;
+            color: var(--mist);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* কার্ডের পেছনের পাশ */
+        .card-back {
+            background: #FAF7F0;
+            color: var(--ink);
+            transform: rotateY(180deg);
+            border-color: #D2DDD6;
+            overflow-y: auto;
+        }
+
+        .back-meaning-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--pine);
+            margin-bottom: 2px;
+        }
+
+        .back-sub-meaning {
+            font-size: 13px;
+            color: var(--mist);
+            font-weight: 600;
             margin-bottom: 14px;
         }
 
-        .quiz-opt-btn {
+        .back-vocab-box {
             background: #ffffff;
-            border: 1.5px solid var(--line);
+            border: 1px solid var(--line);
             border-radius: 14px;
-            padding: 12px 6px;
-            font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 15px; font-weight: 700;
-            color: var(--ink); cursor: pointer;
+            padding: 10px 12px;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+
+        .back-vocab-item {
+            font-size: 12.5px;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            color: #334155;
+        }
+        .back-vocab-item:last-child { margin-bottom: 0; }
+        .back-vocab-item strong {
+            font-family: 'Klee One', sans-serif;
+            font-weight: 700;
+            color: var(--pine);
+            font-size: 13.5px;
+        }
+
+        /* কার্ড নেভিগেশন কন্ট্রোল */
+        .flash-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 18px;
+            width: 100%;
+        }
+
+        .flash-nav-btn {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            color: var(--pine);
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: all 0.15s ease;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            min-height: 64px; line-height: 1.25;
         }
-        .quiz-opt-btn:active { transform: scale(0.96); }
+        .flash-nav-btn:active { transform: scale(0.92); }
 
-        .quiz-opt-btn .opt-sub {
-            font-family: 'Hind Siliguri', sans-serif;
-            font-size: 11px; font-weight: 600;
-            color: var(--mist); margin-top: 3px;
+        .flash-btn-shuffle {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 6px;
+            transition: background 0.2s;
         }
-
-        .quiz-opt-btn.correct {
-            background: #E6F3EC !important; border-color: var(--jade) !important; color: var(--jade) !important;
-        }
-        .quiz-opt-btn.wrong {
-            background: #FBEAE6 !important; border-color: var(--clay) !important; color: var(--clay) !important;
-        }
-        .quiz-opt-btn:disabled { cursor: default; }
-
-        .quiz-feedback {
-            font-size: 14px; font-weight: 700;
-            min-height: 20px; margin-bottom: 12px;
-        }
+        .flash-btn-shuffle:active { transform: scale(0.94); }
 
         .bottom-nav {
             position: fixed;
@@ -687,7 +823,7 @@
 
         <!-- লেসন গ্রিড -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ N4 কাঞ্জি ও কুইজ টেস্ট</div>
+            <div class="subtitle-bar">লেসন নির্বাচন করুন • সম্পূর্ণ N4 কাঞ্জি ও ফ্ল্যাশকার্ড</div>
             <div class="lesson-grid" id="lessonsContainer"></div>
         </div>
 
@@ -695,8 +831,8 @@
         <div id="kanjiDetailView" class="kanji-view">
             <div class="view-header">
                 <h3 id="lessonHeaderTitle">কাঞ্জি তালিকা</h3>
-                <button class="lesson-test-btn" onclick="startLessonQuiz()">
-                    <i class="fa-solid fa-graduation-cap"></i> টেস্ট দিন
+                <button class="lesson-flash-btn" onclick="startFlashcards()">
+                    <i class="fa-solid fa-layer-group"></i> ফ্ল্যাশ কার্ড
                 </button>
             </div>
             <div id="kanjiListContainer"></div>
@@ -707,7 +843,7 @@
     <div class="modal-overlay" id="blindTestModal">
         <div class="blind-test-card">
             <button class="modal-close-icon" onclick="closeBlindModal()">&times;</button>
-            <h4 class="blind-title" id="blindModalTitle">Blind Test (না দেখে লিখুন)</h4>
+            <h4 class="blind-title" id="blindModalTitle">Practice (অনুশীলন)</h4>
 
             <div class="blind-canvas-box">
                 <div class="blind-svg-layer" id="testSvgLayer"></div>
@@ -723,22 +859,69 @@
         </div>
     </div>
 
-    <!-- লেসন ৪-অপশন কাঞ্জি ও ভোকাব কুইজ টেস্ট -->
-    <div class="modal-overlay" id="kanjiQuizModal">
-        <div class="quiz-card">
-            <button class="modal-close-icon" onclick="closeQuizModal()">&times;</button>
-            <div class="quiz-header-badge" id="quizCounter">QUESTION 1 / 10</div>
-            <div class="quiz-progress-bar">
-                <div class="quiz-progress-fill" id="quizProgressFill"></div>
+    <!-- 3D ফ্ল্যাশকার্ড মোডাল -->
+    <div class="modal-overlay" id="flashcardModal">
+        <div class="flashcard-modal-box">
+            <button class="modal-close-icon" onclick="closeFlashcardModal()">&times;</button>
+            
+            <div class="flashcard-counter-wrap">
+                <span class="flashcard-counter-badge" id="fcCounter">CARD 1 / 10</span>
+                <button class="flash-btn-shuffle" onclick="shuffleFlashcards()">
+                    <i class="fa-solid fa-shuffle"></i> Shuffle
+                </button>
             </div>
 
-            <div class="quiz-question-box">
-                <div class="quiz-q-main" id="quizQuestionMain">残</div>
-                <div class="quiz-q-sub" id="quizQuestionSub">সঠিক অর্থ বা রিডিং বেছে নিন</div>
+            <!-- 3D ফ্লিপ কার্ড কন্টেইনার -->
+            <div class="card-perspective-container" onclick="toggleCardFlip()">
+                <div class="flashcard-inner" id="flashcardElement">
+                    <!-- সামনের দিক -->
+                    <div class="card-face card-front">
+                        <div class="card-header-bar">
+                            <span class="card-id-tag" id="fcId">Kanji #121</span>
+                            <div class="card-audio-icon" onclick="event.stopPropagation(); playCurrentKanjiAudio();">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </div>
+                        </div>
+
+                        <div class="front-center-kanji" id="fcKanji">曜</div>
+
+                        <div class="front-readings">
+                            <div>Kunyomi: <span id="fcKun">-</span></div>
+                            <div>Onyomi: <span id="fcOn">ヨウ</span></div>
+                        </div>
+
+                        <div class="flip-hint">
+                            <i class="fa-solid fa-arrow-rotate-left"></i> ট্যাপ করে অর্থ ও শব্দ দেখুন
+                        </div>
+                    </div>
+
+                    <!-- পেছনের দিক -->
+                    <div class="card-face card-back">
+                        <div>
+                            <div class="back-meaning-title" id="fcMeaning">সপ্তাহের দিন</div>
+                            <div class="back-sub-meaning">মূল অর্থ ও ব্যবহার</div>
+                        </div>
+
+                        <div class="back-vocab-box">
+                            <div style="font-size: 11px; font-weight: 700; color: var(--mist); margin-bottom: 6px;">
+                                <i class="fa-solid fa-book-open"></i> যৌগিক শব্দ ও উদাহরণ:
+                            </div>
+                            <div id="fcVocabList"></div>
+                        </div>
+
+                        <div class="flip-hint">
+                            <i class="fa-solid fa-arrow-rotate-right"></i> ট্যাপ করে আবার সামনে ফিরুন
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="quiz-options-grid" id="quizOptionsContainer"></div>
-            <div class="quiz-feedback" id="quizFeedback"></div>
+            <!-- নেভিগেশন কন্ট্রোল বাটন -->
+            <div class="flash-controls">
+                <button class="flash-nav-btn" onclick="prevFlashcard()"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="flash-nav-btn" onclick="playCurrentKanjiAudio()"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="flash-nav-btn" onclick="nextFlashcard()"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
         </div>
     </div>
 
@@ -846,7 +1029,7 @@
         }
 
         /* -------------------------------------------------------------
-           সম্পূর্ণ N4 কাঞ্জি ডাটাবেস (১২১ - ৩২০) - ৩১৫ নং কাঞ্জি "薬" সহ
+           সম্পূর্ণ N4 কাঞ্জি ডাটাবেস (১২১ - ৩২০)
         ------------------------------------------------------------- */
         const rawN4Kanji = [
             { char: "曜", kun: "-", on: "ヨウ", meaning: "সপ্তাহের দিন", vocab: [{w: "土曜日 (どようび)", m: "শনিবার"}, {w: "何曜日 (なんようび)", m: "কী বার"}] },
@@ -883,7 +1066,7 @@
             { char: "仕", kun: "つか(える)", on: "シ", meaning: "সেবা / কাজ", vocab: [{w: "仕事 (しごと)", m: "কাজ"}, {w: "仕方 (しかた)", m: "উপায়"}] },
             { char: "事", kun: "こと", on: "ジ", meaning: "বিষয় / ঘটনা", vocab: [{w: "仕事 (しごと)", m: "কাজ"}, {w: "食事 (しょくじ)", m: "খাবার খাওয়া"}, {w: "大事 (だいじ)", m: "গুরুত্বপূর্ণ"}] },
             { char: "工", kun: "-", on: "コウ・ク", meaning: "কারখানা / নির্মাণ", vocab: [{w: "工事 (こうじ)", m: "নির্মাণ কাজ"}, {w: "工場 (こうじょう)", m: "কারখানা"}] },
-            { char: "場", kun: "ば", on: "ジョウ", meaning: "স্থান / জায়গা", vocab: [{w: "場所 (ばしょ)", m: "স্থান"}, {w: "会場 (かいじょう)", m: "হল / ইভেন্ট প্লেস"}] },
+            { char: "场", kun: "ば", on: "ジョウ", meaning: "স্থান / জায়গা", vocab: [{w: "場所 (ばしょ)", m: "স্থান"}, {w: "会場 (かいじょう)", m: "হল / ইভেন্ট প্লেস"}] },
             { char: "屋", kun: "や", on: "オク", meaning: "দোকান / ছাদ", vocab: [{w: "本屋 (ほんや)", m: "বইয়ের দোকান"}, {w: "部屋 (へや)", m: "রুম"}, {w: "屋上 (おくじょう)", m: "ছাদ"}] },
             { char: "旅", kun: "たび", on: "リョ", meaning: "ভ্রমণ", vocab: [{w: "旅行 (りょこう)", m: "ভ্রমণ"}, {w: "旅館 (りょかん)", m: "জাপানি হোটেল"}] },
             { char: "動", kun: "うご(く)", on: "ドウ", meaning: "নড়াচড়া করা", vocab: [{w: "動きます (うごきます)", m: "চলাচল করা"}, {w: "動物 (どうぶつ)", m: "প্রাণী"}, {w: "自動車 (じどうしゃ)", m: "গাড়ি"}] },
@@ -964,7 +1147,7 @@
             { char: "服", kun: "-", on: "フク", meaning: "পোশাক", vocab: [{w: "服 (ふく)", m: "জামাকাপড়"}, {w: "洋服 (ようふく)", m: "পশ্চিমা পোশাক"}] },
             { char: "建", kun: "た(てる)", on: "ケン", meaning: "তৈরি করা / ভবন", vocab: [{w: "建てます (たてます)", m: "নির্মাণ করা"}, {w: "建物 (たてもの)", m: "বিল্ডিং"}] },
             { char: "海", kun: "うみ", on: "カイ", meaning: "সমুদ্র", vocab: [{w: "海 (うみ)", m: "সমুদ্র"}, {w: "海外 (かいがい)", m: "বিদেশ"}] },
-            { char: "员", kun: "-", on: "イン", meaning: "সদস্য / কর্মী", vocab: [{w: "会社員 (かいしゃいん)", m: "কোম্পানি কর্মী"}, {w: "店員 (てんいん)", m: "দোকান কর্মী"}] },
+            { char: "員", kun: "-", on: "イン", meaning: "সদস্য / কর্মী", vocab: [{w: "会社員 (かいしゃいん)", m: "কোম্পানি কর্মী"}, {w: "店員 (てんいん)", m: "দোকান কর্মী"}] },
             { char: "族", kun: "-", on: "ゾク", meaning: "পরিবার / গোত্র", vocab: [{w: "家族 (かぞく)", m: "পরিবার"}] },
             { char: "飯", kun: "めし", on: "ハン", meaning: "ভাত / খাবার", vocab: [{w: "ご飯 (ごはん)", m: "ভাত / খাবার"}, {w: "朝ご飯 (あさごはん)", m: "সকালের নাশতা"}] },
             { char: "野", kun: "の", on: "ヤ", meaning: "মাঠ / প্রান্তর", vocab: [{w: "野菜 (やさい)", m: "সবজি"}, {w: "野原 (のはら)", m: "খোলা মাঠ"}] },
@@ -1043,7 +1226,6 @@
             { char: "森", kun: "もり", on: "シン", meaning: "গভীর জঙ্গল / বন", vocab: [{w: "森 (もり)", m: "জঙ্গল/বন"}, {w: "森林 (しんりん)", m: "বনভূমি"}] },
             { char: "池", kun: "いけ", on: "チ", meaning: "পুকুর", vocab: [{w: "池 (いけ)", m: "পুকুর"}, {w: "電池 (でんち)", m: "ব্যাটারি"}] },
             { char: "門", kun: "かど", on: "モン", meaning: "ফটক / গেট", vocab: [{w: "門 (もん)", m: "ফটক/গেট"}, {w: "専門 (せんもん)", m: "বিশেষত্ব"}] },
-            // ৩১৫ নাম্বার কাঞ্জি: 薬 (ঔষধ)
             { char: "薬", kun: "くすり", on: "ヤク", meaning: "ঔষধ", vocab: [{w: "薬 (くすり)", m: "ঔষধ"}, {w: "目薬 (めぐすり)", m: "চোখের ড্রপ"}, {w: "薬屋 (くすりや)", m: "ঔষধের দোকান"}] },
             { char: "洗", kun: "あら(う)", on: "セン", meaning: "ধোয়া", vocab: [{w: "洗います (あらいます)", m: "ধোয়া"}, {w: "洗濯 (せんたく)", m: "কাপড় ধোয়া"}] },
             { char: "進", kun: "すす(む)", on: "シン", meaning: "এগিয়ে যাওয়া", vocab: [{w: "進みます (すすみます)", m: "এগিয়ে যাওয়া"}, {w: "進学 (しんがく)", m: "উচ্চশিক্ষা"}] },
@@ -1210,8 +1392,8 @@
                             <button class="action-btn practice" onclick="openCanvasModal('${k.char}', '${k.code}', 'practice')">
                                 <i class="fa-solid fa-pencil"></i> Practice
                             </button>
-                            <button class="action-btn test" onclick="openCanvasModal('${k.char}', '${k.code}', 'test')">
-                                <i class="fa-solid fa-star"></i> Test
+                            <button class="action-btn card" onclick="openSingleFlashcard(${index})">
+                                <i class="fa-regular fa-clone"></i> Card
                             </button>
                         </div>
                         <div class="readings-box">
@@ -1247,15 +1429,19 @@
             }
         }
 
-        async function playKanjiStroke(char, hexCode, index) {
-            const holder = document.getElementById(`svgHolder_${index}`);
+        function speakWord(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(char);
+                const u = new SpeechSynthesisUtterance(text);
                 u.lang = 'ja-JP';
                 u.rate = 0.8;
                 window.speechSynthesis.speak(u);
             }
+        }
+
+        async function playKanjiStroke(char, hexCode, index) {
+            const holder = document.getElementById(`svgHolder_${index}`);
+            speakWord(char);
 
             const svgText = await fetchKanjiSvg(hexCode);
             if (!svgText) return;
@@ -1290,7 +1476,7 @@
         }
 
         /* -------------------------------------------------------------
-           ব্লাইন্ড স্ট্রোক টেস্ট ইঞ্জিন
+           ব্লাইন্ড স্ট্রোক টেস্ট ও প্র্যাকটিস ইঞ্জিন
         ------------------------------------------------------------- */
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
@@ -1336,7 +1522,7 @@
         async function openCanvasModal(char, hexCode, mode) {
             showHint = (mode === 'practice');
             currentStrokeIdx = 0;
-            modalTitle.innerText = mode === 'practice' ? "Practice (অনুশীলন)" : "Blind Test (না দেখে লিখুন)";
+            modalTitle.innerText = mode === 'practice' ? "Practice (অনুশীলন)" : "Stroke Test";
             statusText.className = "blind-status-text";
             statusText.innerText = "";
             document.getElementById("blindTestModal").style.display = "flex";
@@ -1495,145 +1681,103 @@
         window.addEventListener("touchend", onDrawEnd);
 
         /* -------------------------------------------------------------
-           ৪-অপশন কুইজ টেস্ট ইঞ্জিন (ফিক্সড: অপশনে ডুপ্লিকেট কাঞ্জি আসবে না)
+           3D ফ্ল্যাশকার্ড ইঞ্জিন (Flashcard System)
         ------------------------------------------------------------- */
-        let quizQuestions = [];
-        let currentQuizIndex = 0;
-        let quizScore = 0;
+        let flashcardList = [];
+        let currentCardIndex = 0;
+        let isCardFlipped = false;
 
-        function startLessonQuiz() {
-            const lessonKanjiList = kanjiData[currentActiveLesson] || kanjiData[1];
-            quizQuestions = [];
-
-            // ১. একক কাঞ্জি প্রশ্ন: উপরে কাঞ্জি -> নিচে রিডিং ও বাংলা অর্থ
-            lessonKanjiList.forEach(k => {
-                const reading = k.kun !== '-' ? k.kun : k.on;
-                const correctOption = { main: reading, sub: k.meaning, isCorrect: true };
-
-                const distractors = rawN4Kanji
-                    .filter(x => x.char !== k.char)
-                    .sort(() => 0.5 - Math.random())
-                    .slice(0, 3)
-                    .map(d => ({ main: d.kun !== '-' ? d.kun : d.on, sub: d.meaning, isCorrect: false }));
-
-                const options = [correctOption, ...distractors].sort(() => 0.5 - Math.random());
-
-                quizQuestions.push({
-                    qMain: k.char,
-                    qSub: "এর সঠিক রিডিং ও অর্থ বেছে নিন:",
-                    options: options
-                });
-            });
-
-            // ২. ডাবল কাঞ্জি (যৌগিক শব্দ) প্রশ্ন: উপরে শব্দ -> নিচে রিডিং ও অর্থ
-            lessonKanjiList.forEach(k => {
-                if (k.vocab && k.vocab.length > 0) {
-                    const targetVocab = k.vocab[0];
-                    const kanjiWord = targetVocab.w.split(' ')[0];
-                    const reading = targetVocab.w.split('(')[1]?.replace(')', '') || targetVocab.w;
-
-                    const dummyVocabs = [
-                        { main: "りょこう", sub: "ভ্রমণ" },
-                        { main: "あんしん", sub: "স্বস্তি" },
-                        { main: "ちゅうい", sub: "সতর্কতা" },
-                        { main: "しょくじ", sub: "খাবার খাওয়া" },
-                        { main: "べんきょう", sub: "পড়াশোনা" },
-                        { main: "しけん", sub: "পরীক্ষা" },
-                        { main: "じゅぎょう", sub: "ক্লাস" }
-                    ].filter(d => d.main !== reading).slice(0, 3);
-
-                    const vOptions = [
-                        { main: reading, sub: targetVocab.m, isCorrect: true },
-                        ...dummyVocabs.map(d => ({ main: d.main, sub: d.sub, isCorrect: false }))
-                    ].sort(() => 0.5 - Math.random());
-
-                    quizQuestions.push({
-                        qMain: kanjiWord,
-                        qSub: "যৌগিক শব্দ: সঠিক রিডিং ও অর্থ কোনটি?",
-                        options: vOptions
-                    });
-                }
-            });
-
-            quizQuestions = quizQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
-            currentQuizIndex = 0;
-            quizScore = 0;
-
-            document.getElementById("kanjiQuizModal").style.display = "flex";
-            renderCurrentQuestion();
+        function startFlashcards() {
+            const list = kanjiData[currentActiveLesson] || kanjiData[1];
+            flashcardList = [...list];
+            currentCardIndex = 0;
+            openFlashcardModal();
         }
 
-        function closeQuizModal() {
-            document.getElementById("kanjiQuizModal").style.display = "none";
+        function openSingleFlashcard(index) {
+            const list = kanjiData[currentActiveLesson] || kanjiData[1];
+            flashcardList = [...list];
+            currentCardIndex = index;
+            openFlashcardModal();
         }
 
-        function renderCurrentQuestion() {
-            if (currentQuizIndex >= quizQuestions.length) {
-                document.getElementById("quizCounter").innerText = "RESULTS";
-                document.getElementById("quizProgressFill").style.width = "100%";
-                document.getElementById("quizQuestionMain").innerText = `স্কোর: ${quizScore}/${quizQuestions.length}`;
-                document.getElementById("quizQuestionSub").innerText = quizScore >= 8 ? "দারুণ! আপনি ডাবল কাঞ্জিসহ চমৎকার করেছেন।" : "পুনরায় টেস্ট দিয়ে প্র্যাকটিস করুন।";
-                
-                document.getElementById("quizOptionsContainer").innerHTML = `
-                    <button class="quiz-opt-btn" style="grid-column: span 2; background: var(--jade); color:#fff;" onclick="startLessonQuiz()">
-                        <i class="fa-solid fa-rotate-right"></i> আবার টেস্ট দিন
-                    </button>
-                `;
-                document.getElementById("quizFeedback").innerText = "";
-                playSuccessFanfare();
-                return;
-            }
-
-            const q = quizQuestions[currentQuizIndex];
-            const total = quizQuestions.length;
-
-            document.getElementById("quizCounter").innerText = `QUESTION ${currentQuizIndex + 1} / ${total}`;
-            document.getElementById("quizProgressFill").style.width = `${((currentQuizIndex) / total) * 100}%`;
-            document.getElementById("quizFeedback").innerText = "";
-
-            document.getElementById("quizQuestionMain").innerText = q.qMain;
-            document.getElementById("quizQuestionSub").innerText = q.qSub;
-
-            const optContainer = document.getElementById("quizOptionsContainer");
-            optContainer.innerHTML = "";
-
-            q.options.forEach(opt => {
-                const btn = document.createElement("button");
-                btn.className = "quiz-opt-btn";
-                btn.innerHTML = `<span>${opt.main}</span><span class="opt-sub">${opt.sub}</span>`;
-                btn.onclick = () => handleQuizAnswer(opt.isCorrect, btn);
-                optContainer.appendChild(btn);
-            });
+        function openFlashcardModal() {
+            document.getElementById("flashcardModal").style.display = "flex";
+            renderFlashcard();
         }
 
-        function handleQuizAnswer(isCorrect, selectedBtn) {
-            const allBtns = document.querySelectorAll(".quiz-opt-btn");
-            allBtns.forEach(b => b.disabled = true);
-            const feedback = document.getElementById("quizFeedback");
+        function closeFlashcardModal() {
+            document.getElementById("flashcardModal").style.display = "none";
+            resetCardFlip();
+        }
 
-            if (isCorrect) {
-                selectedBtn.classList.add("correct");
-                feedback.style.color = "var(--jade)";
-                feedback.innerText = "✓ সঠিক উত্তর!";
-                playSnapSound();
-                quizScore++;
+        function toggleCardFlip() {
+            const cardEl = document.getElementById("flashcardElement");
+            isCardFlipped = !isCardFlipped;
+            if (isCardFlipped) {
+                cardEl.classList.add("is-flipped");
             } else {
-                selectedBtn.classList.add("wrong");
-                feedback.style.color = "var(--clay)";
-                feedback.innerText = "✗ ভুল উত্তর!";
-                playAudioTone(280, 'sawtooth', 0.2);
-
-                const q = quizQuestions[currentQuizIndex];
-                allBtns.forEach(b => {
-                    const matched = q.options.find(o => o.isCorrect && b.innerText.includes(o.main));
-                    if (matched) b.classList.add("correct");
-                });
+                cardEl.classList.remove("is-flipped");
             }
+            playAudioTone(400, 'sine', 0.05);
+        }
 
-            setTimeout(() => {
-                currentQuizIndex++;
-                renderCurrentQuestion();
-            }, 1000);
+        function resetCardFlip() {
+            isCardFlipped = false;
+            document.getElementById("flashcardElement").classList.remove("is-flipped");
+        }
+
+        function renderFlashcard() {
+            resetCardFlip();
+            if (flashcardList.length === 0) return;
+
+            const item = flashcardList[currentCardIndex];
+            const total = flashcardList.length;
+
+            document.getElementById("fcCounter").innerText = `CARD ${currentCardIndex + 1} / ${total}`;
+            document.getElementById("fcId").innerText = `Kanji #${item.id}`;
+            document.getElementById("fcKanji").innerText = item.char;
+            document.getElementById("fcKun").innerText = item.kun;
+            document.getElementById("fcOn").innerText = item.on;
+            document.getElementById("fcMeaning").innerText = item.meaning;
+
+            const vocabContainer = document.getElementById("fcVocabList");
+            vocabContainer.innerHTML = "";
+            if (item.vocab && item.vocab.length > 0) {
+                item.vocab.forEach(v => {
+                    const row = document.createElement("div");
+                    row.className = "back-vocab-item";
+                    row.innerHTML = `<strong>${v.w}</strong> — ${v.m}`;
+                    vocabContainer.appendChild(row);
+                });
+            } else {
+                vocabContainer.innerHTML = `<span style="font-size:12px; color:var(--mist);">কোনো যৌগিক শব্দ নেই</span>`;
+            }
+        }
+
+        function nextFlashcard() {
+            if (flashcardList.length === 0) return;
+            currentCardIndex = (currentCardIndex + 1) % flashcardList.length;
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            if (flashcardList.length === 0) return;
+            currentCardIndex = (currentCardIndex - 1 + flashcardList.length) % flashcardList.length;
+            renderFlashcard();
+        }
+
+        function shuffleFlashcards() {
+            flashcardList.sort(() => Math.random() - 0.5);
+            currentCardIndex = 0;
+            renderFlashcard();
+            playAudioTone(600, 'triangle', 0.1);
+        }
+
+        function playCurrentKanjiAudio() {
+            if (flashcardList.length === 0) return;
+            const item = flashcardList[currentCardIndex];
+            speakWord(item.char);
         }
 
         window.addEventListener("DOMContentLoaded", () => {

@@ -8,230 +8,261 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --paper: #f8fafc;
-            --ink: #0f172a;
-            --pine: #0B4A38;
-            --jade: #147A57;
-            --line: #e2e8f0;
+            --bg: #F4F7FE;
+            --card-white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-sub: #8E9BAE;
+            --blue-card: #5B7CFD;
+            --coral-card: #F77B82;
+            --yellow-card: #FFAE63;
+            --purple-card: #8B68EE;
+            --pill-bg: #FFE5D0;
+            --pill-text: #D96938;
+            --line: #E8EEFB;
         }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Hind Siliguri', 'Plus Jakarta Sans', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--paper);
-            color: var(--ink);
-            padding-bottom: 80px;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            padding-bottom: 90px;
             user-select: none;
+            overflow-x: hidden;
         }
 
+        /* টপ ন্যাভ */
         .top-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
+            padding: 16px 20px;
+            background: rgba(244, 247, 254, 0.95);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-left { display: flex; align-items: center; gap: 12px; }
+        .nav-left { display: flex; align-items: center; gap: 14px; }
 
         .back-btn {
-            text-decoration: none;
-            color: var(--ink);
-            background: #f1f5f9;
-            width: 36px; height: 36px;
-            border-radius: 10px;
+            background: var(--card-white);
+            color: var(--text-dark);
+            width: 40px; height: 40px;
+            border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--line);
+            border: none;
             cursor: pointer;
+            box-shadow: 0 4px 14px rgba(91, 124, 253, 0.08);
             font-size: 15px;
             transition: transform 0.15s;
         }
         .back-btn:active { transform: scale(0.92); }
 
-        .logo-text {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 17px;
-            color: var(--pine);
-            display: flex; align-items: center; gap: 6px;
-            letter-spacing: 0.5px;
+        .header-title-box h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+        .header-title-box p {
+            font-size: 13px;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-top: 3px;
         }
 
-        .level-pill {
-            background: #0f172a;
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
+        .avatar-pill {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: #E0E7FF;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            color: var(--blue-card);
+            box-shadow: 0 4px 12px rgba(91, 124, 253, 0.15);
         }
 
         .container {
-            padding: 16px;
+            padding: 10px 20px 20px;
             max-width: 480px;
             margin: 0 auto;
         }
 
-        .subtitle-bar {
-            text-align: center;
-            font-size: 13px;
-            color: #64748b;
-            font-weight: 600;
-            margin-bottom: 14px;
-            background: #ffffff;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid var(--line);
-        }
-
-        /* লেসন গ্রিড */
-        .lesson-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+        /* নতুন লেসন কার্ড লিস্ট */
+        .lesson-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .lesson-card {
-            background: #ffffff;
-            border: 1px solid var(--line);
-            border-left: 4px solid #0f172a;
-            border-radius: 16px;
-            padding: 16px 14px;
+            border-radius: 28px;
+            padding: 22px 20px;
+            color: #ffffff;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-            transition: transform 0.15s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(91, 124, 253, 0.18);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
         }
         .lesson-card:active { transform: scale(0.97); }
 
-        .card-top {
-            display: flex;
-            justify-content: space-between;
+        /* ডেকোরেটিভ শেপ */
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            pointer-events: none;
+        }
+        .lesson-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: 40%;
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+        }
+
+        .card-bg-blue { background: linear-gradient(135deg, #6B8BFF 0%, #4D70FD 100%); }
+        .card-bg-coral { background: linear-gradient(135deg, #FF8D94 0%, #F56B73 100%); box-shadow: 0 12px 28px rgba(247, 123, 130, 0.22); }
+        .card-bg-yellow { background: linear-gradient(135deg, #FFBD7A 0%, #FFA24C 100%); box-shadow: 0 12px 28px rgba(255, 174, 99, 0.22); }
+        .card-bg-purple { background: linear-gradient(135deg, #9C7DFF 0%, #7B55EC 100%); box-shadow: 0 12px 28px rgba(139, 104, 238, 0.22); }
+
+        .lesson-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .lesson-card-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+        }
+
+        .lesson-card-sub {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .card-bottom-pill {
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 8px;
+            gap: 10px;
+            background: #FFEAD9;
+            color: #D35C28;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
-        .kl-badge {
-            background: #f1f5f9;
-            color: #334155;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
-        }
-
-        .kanji-watermark {
-            font-family: 'Klee One', sans-serif;
-            font-size: 15px;
-            color: #94a3b8;
-            font-weight: 700;
-        }
-
-        .card-lesson-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 2px;
-        }
-
-        .card-lesson-desc { font-size: 11.5px; color: #64748b; }
-
-        /* কাঞ্জি লিস্ট ভিউ */
+        /* কাঞ্জি বিস্তারিত ভিউ */
         .kanji-view { display: none; }
 
         .view-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            background: #ffffff;
-            padding: 12px 16px;
-            border-radius: 14px;
-            border: 1px solid var(--line);
+            margin-bottom: 18px;
+            background: var(--card-white);
+            padding: 14px 18px;
+            border-radius: 22px;
+            box-shadow: 0 4px 16px rgba(91, 124, 253, 0.06);
         }
 
-        .view-header h3 { font-size: 15px; font-weight: 800; color: #0f172a; }
+        .view-header h3 { font-size: 16px; font-weight: 800; color: var(--text-dark); }
 
         .lesson-flash-btn {
-            background: #0f172a;
+            background: var(--blue-card);
             color: #ffffff;
             border: none;
-            padding: 8px 16px;
+            padding: 9px 18px;
             border-radius: 20px;
-            font-size: 12.5px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+            gap: 7px;
+            box-shadow: 0 6px 18px rgba(91, 124, 253, 0.28);
             transition: transform 0.15s;
         }
-        .lesson-flash-btn:active { transform: scale(0.93); }
+        .lesson-flash-btn:active { transform: scale(0.94); }
 
         .kanji-item {
-            margin-bottom: 11px;
-            border-radius: 14px;
+            margin-bottom: 12px;
+            border-radius: 20px;
             overflow: hidden;
+            background: var(--card-white);
+            box-shadow: 0 4px 16px rgba(91, 124, 253, 0.05);
             border: 1px solid var(--line);
-            background: #ffffff;
         }
 
         .kanji-header {
-            background: #0f172a;
-            color: #ffffff;
-            padding: 13px 16px;
+            background: var(--card-white);
+            color: var(--text-dark);
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14.5px;
+            font-weight: 700;
+            font-size: 15px;
         }
 
         .kanji-header .arrow-icon {
             font-size: 13px;
+            color: var(--text-sub);
             transition: transform 0.25s ease;
         }
 
-        .kanji-item.open .arrow-icon { transform: rotate(90deg); }
+        .kanji-item.open .arrow-icon { transform: rotate(90deg); color: var(--blue-card); }
 
         .kanji-body {
-            background: #ffffff;
-            padding: 18px 16px;
+            background: #FAFCFF;
+            padding: 18px;
             display: none;
+            border-top: 1px dashed var(--line);
         }
 
         .kanji-item.open .kanji-body { display: block; }
 
         .kanji-anim-stage {
-            width: 160px; height: 160px;
+            width: 150px; height: 150px;
             margin: 0 auto 16px;
-            position: relative;
-            background: #f8fafc;
-            border: 1.5px dashed #cbd5e1;
-            border-radius: 18px;
+            background: #ffffff;
+            border: 1.5px dashed #D2DBF0;
+            border-radius: 24px;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(91, 124, 253, 0.05);
         }
 
         .kanji-svg-wrap {
-            width: 130px; height: 130px;
+            width: 120px; height: 120px;
             display: flex; align-items: center; justify-content: center;
         }
-        .kanji-svg-wrap svg { width: 100% !important; height: 100% !important; display: block; }
+        .kanji-svg-wrap svg { width: 100% !important; height: 100% !important; }
 
         .action-btns {
             display: flex;
@@ -241,226 +272,239 @@
         }
 
         .action-btn {
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--line);
             background: #ffffff;
-            padding: 7px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 12.5px;
+            font-size: 13px;
             font-weight: 700;
             display: flex; align-items: center; gap: 6px;
             cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
             transition: all 0.15s;
         }
         .action-btn:active { transform: scale(0.95); }
-        .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
-        .action-btn.card { color: #0f172a; border-color: #cbd5e1; background: #f8fafc; }
+        .action-btn.play { color: var(--blue-card); border-color: #D3DEFF; background: #EEF3FF; }
+        .action-btn.card { color: var(--text-dark); }
 
         .readings-box {
             text-align: center;
             font-size: 13.5px;
-            line-height: 1.85;
+            line-height: 1.8;
             margin-bottom: 14px;
-            color: var(--ink);
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 12px;
+            color: var(--text-dark);
+            background: #ffffff;
+            padding: 14px;
+            border-radius: 16px;
             border: 1px solid var(--line);
         }
-
-        .readings-box span.jp-font { font-family: 'Klee One', sans-serif; font-weight: 700; color: #0f172a; }
+        .readings-box span.jp-font { font-family: 'Klee One', sans-serif; font-weight: 700; color: var(--blue-card); }
 
         .detail-sub-title {
             font-size: 14px;
             font-weight: 700;
-            color: #0f172a;
-            margin: 12px 0 8px;
-            display: flex; align-items: center; gap: 6px;
+            color: var(--text-dark);
+            margin: 14px 0 8px;
         }
 
-        .vocab-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+        .vocab-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 
         .vocab-item {
-            background: #f8fafc;
+            background: #ffffff;
             border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 9px 12px;
-            font-size: 13px;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-size: 13.5px;
         }
 
         /* -------------------------------------------------------------
-           মিনিমাল কার্ড সোয়াইপ ডেক (ভিডিওর হুবহু ইন্টারঅ্যাকশন)
+           রেফারেন্স অ্যাপের মতো ফ্ল্যাশকার্ড ডেক ও রিভিল UI
         ------------------------------------------------------------- */
         .flashcard-fullscreen {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: #ffffff;
+            background: #F4F7FE;
             z-index: 10000;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 20px 30px;
+            padding: 24px 20px 32px;
             overflow: hidden;
             touch-action: none;
         }
 
         .stack-top-info {
             width: 100%;
-            max-width: 330px;
+            max-width: 340px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #94a3b8;
         }
 
-        .stack-close-btn {
-            background: #f1f5f9;
+        .deck-back-btn {
+            background: #ffffff;
             border: none;
-            width: 36px; height: 36px;
-            border-radius: 50%;
+            width: 42px; height: 42px;
+            border-radius: 16px;
             cursor: pointer;
             font-size: 16px;
-            color: #475569;
+            color: var(--text-dark);
             display: flex; align-items: center; justify-content: center;
-            transition: transform 0.15s;
+            box-shadow: 0 4px 14px rgba(91, 124, 253, 0.08);
         }
-        .stack-close-btn:active { transform: scale(0.9); }
+
+        .deck-badge {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--blue-card);
+            background: #EEF3FF;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
 
         .deck-wrapper {
             position: relative;
             width: 100%;
-            max-width: 320px;
+            max-width: 325px;
             height: 480px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* পেছনের ডেক কার্ড লেয়ার */
+        /* পেছনের সফট কার্ড স্ট্যাক লেয়ার */
         .deck-layer {
             position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 28px;
+            border-radius: 36px;
             background: #ffffff;
-            border: 1.5px solid #e2e8f0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 10px 30px rgba(91, 124, 253, 0.08);
+            border: 1px solid rgba(232, 238, 251, 0.8);
             pointer-events: none;
             transition: transform 0.25s ease, opacity 0.25s ease;
         }
         .deck-layer.layer-1 {
-            transform: translateY(12px) scale(0.96);
+            transform: translateY(14px) scale(0.95);
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.85;
         }
         .deck-layer.layer-2 {
-            transform: translateY(24px) scale(0.92);
+            transform: translateY(26px) scale(0.90);
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.5;
         }
 
-        /* মূল সোয়াইপ কার্ড */
+        /* মূল অ্যাক্টিভ কার্ড */
         .main-card {
             position: absolute;
             width: 100%;
             height: 100%;
             background: #ffffff;
-            border-radius: 28px;
-            border: 1.5px solid #cbd5e1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border-radius: 36px;
+            box-shadow: 0 16px 45px rgba(91, 124, 253, 0.12);
+            border: 1px solid var(--line);
             z-index: 5;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 28px 24px;
+            padding: 30px 24px;
             cursor: grab;
             overflow: hidden;
             transition: transform 0.25s ease-out, opacity 0.25s ease-out;
         }
-
         .main-card:active { cursor: grabbing; }
 
         .card-top-row {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
         }
 
         .top-kanji-label {
-            font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 38px;
+            font-family: 'Klee One', sans-serif;
+            font-size: 32px;
             font-weight: 700;
-            color: #0f172a;
-            line-height: 1;
+            color: var(--blue-card);
         }
 
-        .audio-speaker-btn {
-            background: none;
+        .audio-speaker-pill {
+            background: #EEF3FF;
+            color: var(--blue-card);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            color: #94a3b8;
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.15s, color 0.15s;
+            font-size: 18px;
+            transition: transform 0.15s;
         }
-        .audio-speaker-btn:hover { color: #0f172a; }
-        .audio-speaker-btn:active { transform: scale(0.9); }
+        .audio-speaker-pill:active { transform: scale(0.9); }
 
         .card-center-kanji {
             font-family: 'Klee One', 'Noto Sans JP', sans-serif;
-            font-size: 110px;
+            font-size: 115px;
             font-weight: 700;
-            color: #0f172a;
+            color: var(--text-dark);
             text-align: center;
             line-height: 1;
             margin: auto 0;
+            text-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         }
 
         .card-bottom-row {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
             position: relative;
             z-index: 6;
         }
 
-        /* ভিডিওর কালো ডট বাটন */
+        .tap-prompt {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+
         .reveal-dot-btn {
-            width: 18px;
-            height: 18px;
-            background: #0f172a;
+            width: 28px;
+            height: 28px;
+            background: var(--blue-card);
+            color: #ffffff;
             border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(91, 124, 253, 0.35);
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .reveal-dot-btn:active { transform: scale(1.35); }
+        .reveal-dot-btn:active { transform: scale(1.25); }
 
-        /* কালো রিভিল শিট (ট্যাপ করলে নিচ থেকে উঠবে) */
+        /* রেফারেন্স অ্যাপ স্টাইলের অ্যানালিটিক্স ও রিভিল শিট */
         .answer-reveal-sheet {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 0%;
-            background: #000000;
-            border-radius: 26px;
+            background: #1E293B;
+            border-radius: 32px;
             color: #ffffff;
             padding: 0 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
-            transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+            transition: height 0.38s cubic-bezier(0.16, 1, 0.3, 1), padding 0.38s ease;
             z-index: 10;
         }
 
         .answer-reveal-sheet.revealed {
-            height: 58%;
-            padding: 22px 24px;
+            height: 60%;
+            padding: 24px;
         }
 
         .ans-meaning {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 6px;
@@ -472,71 +516,73 @@
         .ans-readings {
             font-size: 14px;
             line-height: 1.6;
-            color: #cbd5e1;
+            color: #CBD5E1;
             margin-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             padding-bottom: 10px;
         }
-        .ans-readings strong { color: #ffffff; font-family: 'Klee One', sans-serif; font-size: 15px; }
+        .ans-readings strong { color: #60A5FA; font-family: 'Klee One', sans-serif; font-size: 15px; }
 
         .ans-vocab-box {
             font-size: 13px;
-            color: #94a3b8;
-            max-height: 110px;
+            color: #94A3B8;
+            max-height: 115px;
             overflow-y: auto;
         }
-        .ans-vocab-item { margin-bottom: 5px; line-height: 1.35; }
+        .ans-vocab-item { margin-bottom: 6px; line-height: 1.35; }
         .ans-vocab-item strong {
-            color: #38bdf8;
+            color: #FBBF24;
             font-family: 'Klee One', sans-serif;
-            font-size: 13.5px;
+            font-size: 14px;
         }
 
         .bottom-hint-row {
             font-size: 12px;
-            color: #94a3b8;
+            font-weight: 700;
+            color: var(--text-sub);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            height: 64px;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
+            height: 68px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
             border-top: 1px solid var(--line);
             display: flex; justify-content: space-around;
             align-items: center; z-index: 1000;
         }
 
         .nav-item {
-            text-decoration: none; color: #94a3b8;
+            text-decoration: none; color: var(--text-sub);
             font-size: 11px; display: flex; flex-direction: column;
-            align-items: center; gap: 4px; font-weight: 600;
+            align-items: center; gap: 4px; font-weight: 700;
         }
-        .nav-item.active { color: #0f172a; }
-        .nav-item i { font-size: 18px; }
+        .nav-item.active { color: var(--blue-card); }
+        .nav-item i { font-size: 19px; }
     </style>
 </head>
 <body>
 
     <header class="top-nav">
         <div class="nav-left">
-            <button class="back-btn" onclick="handleBack()"><i class="fa-solid fa-arrow-left"></i></button>
-            <div class="logo-text">
-                KOTOBA <span class="level-pill">N4 KANJI</span>
+            <button class="back-btn" onclick="handleBack()"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="header-title-box">
+                <h1>Flashcards</h1>
+                <p>N4 কাঞ্জি প্র্যাকটিস (১২১–৩২০)</p>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: #475569;">১২১–৩২০ কাঞ্জি</div>
+        <div class="avatar-pill"><i class="fa-solid fa-graduation-cap"></i></div>
     </header>
 
     <main class="container">
-        <!-- লেসন গ্রিড -->
+        <!-- লেসন গ্রিড (রেফারেন্স ডিজাইন অনুযায়ী) -->
         <div id="lessonGridView">
-            <div class="subtitle-bar">লেসন নির্বাচন করুন • আঙুল দিয়ে টেনে সোয়াইপ করুন</div>
-            <div class="lesson-grid" id="lessonsContainer"></div>
+            <div class="lesson-list" id="lessonsContainer"></div>
         </div>
 
         <!-- কাঞ্জি লিস্ট ভিউ -->
@@ -552,12 +598,12 @@
     </main>
 
     <!-- -------------------------------------------------------------
-         ভিডিওর অনুরূপ ফুলস্ক্রিন মিনিমাল স্ট্যাকড ফ্ল্যাশকার্ড সিস্টেম
+         রেফারেন্স অ্যাপের অনুরূপ মিনিমাল স্ট্যাকড ফ্ল্যাশকার্ড সিস্টেম
     ------------------------------------------------------------- -->
     <div class="flashcard-fullscreen" id="deckOverlay">
         <div class="stack-top-info">
-            <span id="deckCounter">1 / 10</span>
-            <button class="stack-close-btn" onclick="closeDeck()"><i class="fa-solid fa-xmark"></i></button>
+            <button class="deck-back-btn" onclick="closeDeck()"><i class="fa-solid fa-chevron-left"></i></button>
+            <span class="deck-badge" id="deckCounter">1 / 10</span>
         </div>
 
         <!-- স্ট্যাক ডেক -->
@@ -565,11 +611,11 @@
             <div class="deck-layer layer-2"></div>
             <div class="deck-layer layer-1"></div>
 
-            <!-- মূল কার্ড (আঙুল দিয়ে ড্র্যাগ ও সোয়াইপ করা যাবে) -->
+            <!-- মূল কার্ড (আঙুল দিয়ে টেনে সোয়াইপ করা যাবে) -->
             <div class="main-card" id="activeCard">
                 <div class="card-top-row">
                     <span class="top-kanji-label" id="cardTopKanji">曜</span>
-                    <button class="audio-speaker-btn" onclick="event.stopPropagation(); playCurrentDeckAudio();" title="উচ্চারণ শুনুন">
+                    <button class="audio-speaker-pill" onclick="event.stopPropagation(); playCurrentDeckAudio();" title="উচ্চারণ শুনুন">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
                 </div>
@@ -577,14 +623,17 @@
                 <div class="card-center-kanji" id="cardCenterKanji">曜</div>
 
                 <div class="card-bottom-row">
-                    <div class="reveal-dot-btn" id="revealDot" title="উত্তর প্রকাশ করুন"></div>
+                    <span class="tap-prompt">Tap to reveal</span>
+                    <div class="reveal-dot-btn" id="revealDot" title="উত্তর প্রকাশ করুন">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
                 </div>
 
-                <!-- কালো শিট (ট্যাপে উত্তর খুলবে) -->
+                <!-- অ্যানালিটিক্স/রিভিল শিট (ট্যাপে উপরে উঠবে) -->
                 <div class="answer-reveal-sheet" id="answerSheet">
                     <div class="ans-meaning">
                         <span id="ansMeaningText">সপ্তাহের দিন</span>
-                        <button class="audio-speaker-btn" style="color:#ffffff;" onclick="event.stopPropagation(); playCurrentDeckAudio();">
+                        <button class="audio-speaker-pill" style="background:rgba(255,255,255,0.15); color:#fff;" onclick="event.stopPropagation(); playCurrentDeckAudio();">
                             <i class="fa-solid fa-volume-high"></i>
                         </button>
                     </div>
@@ -598,12 +647,12 @@
         </div>
 
         <div class="bottom-hint-row">
-            <i class="fa-solid fa-hand-pointer"></i> ডটে ট্যাপ করে উত্তর দেখুন • আঙুল দিয়ে টেনে সোয়াইপ করুন
+            <i class="fa-solid fa-hand-pointer"></i> ট্যাপ করে উত্তর দেখুন • বামে বা ডানে টেনে সোয়াইপ করুন
         </div>
     </div>
 
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="index.html" class="nav-item active"><i class="fa-solid fa-house"></i><span>হোম</span></a>
         <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
         <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
     </nav>
@@ -762,7 +811,7 @@
             { char: "違", kun: "ちが(う)", on: "イ", meaning: "ভুল / ভিন্ন হওয়া", vocab: [{w: "違います (ちがいます)", m: "ভুল/আলাদা"}, {w: "間違い (まちがい)", m: "ভুল"}] },
             { char: "暑", kun: "あつ(い)", on: "ショ", meaning: "গরম (আবহাওয়া)", vocab: [{w: "暑い (あつい)", m: "গরম"}] },
             { char: "寒", kun: "さむ(い)", on: "カン", meaning: "ঠান্ডা (আবহাওয়া)", vocab: [{w: "寒い (さむい)", m: "ঠান্ডা"}] },
-            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まにあいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
+            { char: "合", kun: "あ(う)", on: "ゴウ・ガッ", meaning: "মিল / মানানসই হওয়া", vocab: [{w: "間に合います (まニアいます)", m: "সময়মতো পৌঁছানো"}, {w: "試合 (しあい)", m: "ম্যাচ"}] },
             { char: "伝", kun: "つた(える)", on: "デン", meaning: "জানানো / পৌঁছে দেওয়া", vocab: [{w: "伝えます (つたえます)", m: "জানানো"}, {w: "手伝います (てつだいます)", m: "সাহায্য করা"}] },
             { char: "決", kun: "き(める)", on: "ケツ", meaning: "সিদ্ধান্ত নেওয়া", vocab: [{w: "決めます (きめます)", m: "সিদ্ধান্ত নেওয়া"}, {w: "決して (けっして)", m: "কখনোই নয়"}] },
             { char: "困", kun: "こま(る)", on: "コン", meaning: "সমস্যায় পড়া", vocab: [{w: "困ります (こまります)", m: "অসুবিধায় পড়া"}] },
@@ -840,6 +889,13 @@
             });
         }
 
+        const bgGradients = [
+            "card-bg-blue",
+            "card-bg-coral",
+            "card-bg-yellow",
+            "card-bg-purple"
+        ];
+
         function renderLessonGrid() {
             const container = document.getElementById("lessonsContainer");
             container.innerHTML = "";
@@ -850,17 +906,18 @@
                 const endId = list[list.length - 1].id;
                 const firstChar = list[0].char;
                 const lastChar = list[list.length - 1].char;
+                const bgClass = bgGradients[(l - 1) % bgGradients.length];
 
                 const card = document.createElement("div");
-                card.className = "lesson-card";
+                card.className = `lesson-card ${bgClass}`;
                 card.onclick = () => openLesson(l);
                 card.innerHTML = `
-                    <div class="card-top">
-                        <span class="kl-badge">N4-${l < 10 ? '0' + l : l}</span>
-                        <span class="kanji-watermark">${firstChar}〜${lastChar}</span>
+                    <div class="lesson-dot"></div>
+                    <div class="lesson-card-title">কাঞ্জি লেসন ${l}</div>
+                    <div class="lesson-card-sub">ক্রমিক (${startId}–${endId}) • ${firstChar} 〜 ${lastChar}</div>
+                    <div class="card-bottom-pill">
+                        10 Kanji <i class="fa-solid fa-angles-right"></i>
                     </div>
-                    <div class="card-lesson-title">কাঞ্জি লেসন ${l}</div>
-                    <div class="card-lesson-desc">কাঞ্জি (${startId}–${endId})</div>
                 `;
                 container.appendChild(card);
             }
@@ -901,7 +958,7 @@
                 svg.style.height = "100%";
                 svg.querySelectorAll("text").forEach(t => t.style.display = "none");
                 svg.querySelectorAll("path").forEach(p => {
-                    p.style.stroke = "#0f172a";
+                    p.style.stroke = "#5B7CFD";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -929,7 +986,7 @@
 
                 let vocabHtml = k.vocab.map(v => `
                     <li class="vocab-item">
-                        <span style="font-weight:700; color:#0f172a;">${v.w}</span> — ${v.m}
+                        <span style="font-weight:700; color:#5B7CFD;">${v.w}</span> — ${v.m}
                     </li>
                 `).join('');
 
@@ -958,7 +1015,7 @@
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
 
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary (যৌগিক শব্দ)</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:#5B7CFD;"></i> Vocabulary (যৌগিক শব্দ)</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -1015,7 +1072,7 @@
             let delay = 0;
             paths.forEach((path) => {
                 const len = path.getTotalLength();
-                path.style.stroke = "#147A57";
+                path.style.stroke = "#5B7CFD";
                 path.style.strokeWidth = "4.5";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
@@ -1033,7 +1090,7 @@
         }
 
         /* -------------------------------------------------------------
-           ভিডিওর স্ট্যাকড ফ্ল্যাশকার্ড ও আঙুল দিয়ে ড্র্যাগ/সোয়াইপ ইঞ্জিন
+           রেফারেন্স অ্যাপের মতো সোয়াইপ কার্ড ও রিভিল ইঞ্জিন
         ------------------------------------------------------------- */
         let deckList = [];
         let currentDeckIndex = 0;
@@ -1099,7 +1156,7 @@
             document.getElementById("cardTopKanji").innerText = item.char;
             document.getElementById("cardCenterKanji").innerText = item.char;
 
-            // উত্তর প্যানেল আপডেট (যা ক্লিক ছাড়া দেখা যাবে না)
+            // উত্তর প্যানেল (ক্লিক ছাড়া দেখা যাবে না)
             document.getElementById("ansMeaningText").innerText = item.meaning;
             document.getElementById("ansReadingsText").innerHTML = `
                 Kunyomi: <strong>${item.kun}</strong> &nbsp;•&nbsp; 
@@ -1117,7 +1174,7 @@
                 });
             }
 
-            // রিসেট কার্ড পজিশন
+            // কার্ড পজিশন রিসেট
             activeCard.style.transition = "none";
             activeCard.style.transform = "translate(0px, 0px) rotate(0deg)";
             activeCard.style.opacity = "1";
@@ -1129,7 +1186,7 @@
         }
 
         /* -------------------------------------------------------------
-           আঙুল দিয়ে টেনে কার্ড সরানোর ফুল টাচ ও ড্র্যাগ ইন্টারঅ্যাকশন
+           টাচ অ্যান্ড ড্র্যাগ ইন্টারঅ্যাকশন
         ------------------------------------------------------------- */
         let startX = 0;
         let startY = 0;
@@ -1138,8 +1195,7 @@
         let isDragging = false;
 
         function onTouchStart(e) {
-            // অডিও বাটনে ক্লিক হলে ড্র্যাগ হবে না
-            if (e.target.closest('.audio-speaker-btn')) return;
+            if (e.target.closest('.audio-speaker-pill') || e.target.closest('#revealDot')) return;
             const touch = e.touches ? e.touches[0] : e;
             startX = touch.clientX;
             startY = touch.clientY;
@@ -1153,7 +1209,6 @@
             currentX = touch.clientX - startX;
             currentY = touch.clientY - startY;
 
-            // ভিডিওর মতো রোটেটিং ড্র্যাগ অ্যানিমেশন
             const rotateDeg = currentX * 0.08;
             activeCard.style.transform = `translate(${currentX}px, ${currentY * 0.25}px) rotate(${rotateDeg}deg)`;
         }
@@ -1162,15 +1217,12 @@
             if (!isDragging) return;
             isDragging = false;
 
-            const swipeThreshold = 80; // নির্দিষ্ট দূরত্বের বেশি টানলে কার্ড পরিবর্তন হবে
+            const swipeThreshold = 80;
             if (currentX < -swipeThreshold) {
-                // বাঁমে সোয়াইপ (পরের কার্ড)
                 swipeOutCard(-1);
             } else if (currentX > swipeThreshold) {
-                // ডানে সোয়াইপ (আগের কার্ড)
                 swipeOutCard(1);
             } else {
-                // বাউন্স ব্যাক আগের জায়গায়
                 activeCard.style.transition = "transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)";
                 activeCard.style.transform = "translate(0px, 0px) rotate(0deg)";
             }
@@ -1193,7 +1245,6 @@
             }, 250);
         }
 
-        // মাউস ও টাচ ইভেন্ট লিসেনার
         activeCard.addEventListener("touchstart", onTouchStart, { passive: true });
         activeCard.addEventListener("touchmove", onTouchMove, { passive: true });
         activeCard.addEventListener("touchend", onTouchEnd);

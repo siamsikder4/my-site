@@ -13,9 +13,9 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
 
-    <!-- Font ken Icons -->
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
 
     <!-- OneSignal SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -31,27 +31,33 @@
 
     <style>
         :root {
-            --bg-canvas: #F8FAFC;
-            --card-white: #FFFFFF;
-            --text-dark: #1E293B;
-            --text-muted: #64748B;
-            --teal-card: #0D9488;
-            --teal-dark: #0F766E;
-            --border-soft: #F1F5F9;
-            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            /* স্ক্রিনশটের হুবহু কালার প্যালেট */
+            --bg-canvas: #F4F6F9;
+            --text-title: #1E252D;
+            --text-sub: #8B95A5;
+            
+            /* টপ ব্যানার সায়ান/গ্রিন */
+            --teal-banner: #00A896;
+            
+            /* কার্ড ১: হিরাগানা (পার্পল টিন্ট) */
+            --card-purple-bg: #F5EDFA;
+            --badge-purple: #9B51E0;
+            
+            /* কার্ড ২: কাতাকানা (স্কাই ব্লু টিন্ট) */
+            --card-blue-bg: #E8F5FD;
+            --badge-blue: #2D9CDB;
+            
+            /* কার্ড ৩: কাঞ্জি (সফট পিঙ্ক টিন্ট) */
+            --card-pink-bg: #FEECEF;
+            --badge-pink: #EB5757;
+            
+            /* কার্ড ৪: ব্যাকরণ (মিন্ট গ্রিন টিন্ট) */
+            --card-mint-bg: #E3F8F2;
+            --badge-mint: #27AE60;
 
-            /* Pastel tones kas iti ladawan */
-            --pastel-purple-bg: #F3E8FF;
-            --pastel-purple-text: #9333EA;
-            --pastel-blue-bg: #E0F2FE;
-            --pastel-blue-text: #0284C7;
-            --pastel-pink-bg: #FFE4E6;
-            --pastel-pink-text: #E11D48;
-            --pastel-mint-bg: #DCFCE7;
-            --pastel-mint-text: #16A34A;
-            --pastel-orange-bg: #FFEDD5;
-            --pastel-orange-text: #EA580C;
+            /* কার্ড ৫: অরেঞ্জ টিন্ট */
+            --card-orange-bg: #FFF4E8;
+            --badge-orange: #F2994A;
         }
 
         * {
@@ -64,46 +70,44 @@
 
         body {
             background-color: var(--bg-canvas);
-            color: var(--text-dark);
-            padding-bottom: 110px;
+            color: var(--text-title);
+            padding-bottom: 100px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 480px;
+            max-width: 440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 18px;
         }
 
-        /* Top Bar */
+        /* হেডার ও স্ট্যাটাস বার */
         .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: #ffffff;
+            padding: 14px 18px;
+            background: var(--bg-canvas);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--border-soft);
         }
 
         .user-greeting {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: #FDE047;
+            background: #FEEBC8;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 2px solid #FEF08A;
         }
 
         .user-avatar img {
@@ -113,54 +117,80 @@
         }
 
         .greeting-text {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-title);
         }
 
         .header-stats {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .streak-pill {
-            background: #FFFBEB;
-            border: 1px solid #FEF3C7;
+            background: #FFFFFF;
             border-radius: 20px;
-            padding: 6px 12px;
+            padding: 5px 11px;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #D97706;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-title);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
-        .notif-btn {
-            position: relative;
-            background: #F8FAFC;
-            border: 1px solid var(--border-soft);
-            width: 38px;
-            height: 38px;
+        .streak-pill .fire-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #EB5757;
+        }
+
+        .coin-pill {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 5px 11px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-title);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .coin-pill i {
+            color: #F2C94C;
+            font-size: 13px;
+        }
+
+        .notif-bell-btn {
+            background: #FFFFFF;
+            border: none;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
+            color: var(--text-sub);
             cursor: pointer;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
         .notif-badge {
             position: absolute;
             top: -2px;
             right: -2px;
-            background: #EF4444;
+            background: #EB5757;
             color: #ffffff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
-            width: 17px;
-            height: 17px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: none;
             align-items: center;
@@ -168,185 +198,189 @@
             border: 2px solid #ffffff;
         }
 
-        /* Banner Hero Card Kas iti UI Concept */
+        /* মেইন টিল কালার ব্যানার */
         .hero-banner {
-            background: linear-gradient(135deg, var(--teal-card), var(--teal-dark));
-            border-radius: 24px;
-            padding: 24px 22px;
+            background-color: var(--teal-banner);
+            border-radius: 20px;
+            padding: 20px 20px;
             color: #ffffff;
-            margin: 20px 0;
+            margin: 12px 0 20px;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 12px 24px -6px rgba(13, 148, 136, 0.35);
         }
 
         .hero-banner h2 {
-            font-size: 18px;
+            font-size: 15.5px;
             font-weight: 800;
             line-height: 1.4;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .hero-banner h2 span {
+            display: inline-block;
+            margin-left: 4px;
         }
 
         .hero-banner p {
-            font-size: 13px;
-            opacity: 0.9;
-            line-height: 1.5;
-            max-width: 90%;
+            font-size: 12px;
+            opacity: 0.88;
+            line-height: 1.45;
         }
 
-        /* Section Headlines */
+        /* সেকশন হেডার */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 24px 0 14px;
+            margin: 22px 0 12px;
         }
 
-        .section-header h3 {
-            font-size: 16px;
+        .section-title {
+            font-size: 14.5px;
             font-weight: 800;
-            color: var(--text-dark);
-            letter-spacing: -0.2px;
+            color: var(--text-title);
         }
 
-        .badge-pill {
+        .section-subtag {
             font-size: 11px;
             font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
+            color: var(--text-sub);
         }
 
-        .badge-purple { background: var(--pastel-purple-bg); color: var(--pastel-purple-text); }
-        .badge-blue { background: var(--pastel-blue-bg); color: var(--pastel-blue-text); }
-        .badge-orange { background: var(--pastel-orange-bg); color: var(--pastel-orange-text); }
-
-        /* Card Grid Layout */
+        /* কালারড কার্ড গ্রিড */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
-        .practice-card {
-            background: var(--card-white);
-            border-radius: 20px;
-            padding: 16px;
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-subtle);
+        .app-card {
+            border-radius: 18px;
+            padding: 16px 14px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            justify-content: space-between;
+            min-height: 112px;
+            transition: transform 0.15s ease;
             position: relative;
         }
 
-        .practice-card:active {
+        .app-card:active {
             transform: scale(0.97);
         }
 
-        .card-tag-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
+        /* কার্ডের ব্যাকগ্রাউন্ড ভ্যারিয়েশন */
+        .card-purple { background-color: var(--card-purple-bg); }
+        .card-blue   { background-color: var(--card-blue-bg); }
+        .card-pink   { background-color: var(--card-pink-bg); }
+        .card-mint   { background-color: var(--card-mint-bg); }
+        .card-orange { background-color: var(--card-orange-bg); }
+
+        /* কার্ডের উপরের ছোট আইকন ব্যাজ */
+        .card-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 800;
+            font-family: 'Noto Sans JP', sans-serif;
+            margin-bottom: 14px;
         }
 
-        .tag-purple { background: var(--pastel-purple-bg); color: var(--pastel-purple-text); }
-        .tag-blue { background: var(--pastel-blue-bg); color: var(--pastel-blue-text); }
-        .tag-pink { background: var(--pastel-pink-bg); color: var(--pastel-pink-text); }
-        .tag-mint { background: var(--pastel-mint-bg); color: var(--pastel-mint-text); }
-        .tag-orange { background: var(--pastel-orange-bg); color: var(--pastel-orange-text); }
+        .card-badge.badge-purple { background-color: var(--badge-purple); }
+        .card-badge.badge-blue   { background-color: var(--badge-blue); }
+        .card-badge.badge-pink   { background-color: var(--badge-pink); }
+        .card-badge.badge-mint   { background-color: var(--badge-mint); }
+        .card-badge.badge-orange { background-color: var(--badge-orange); }
 
-        .practice-card h4 {
+        .app-card h4 {
             font-size: 14px;
             font-weight: 800;
-            color: var(--text-dark);
+            color: var(--text-title);
             margin-bottom: 2px;
         }
 
-        .practice-card p {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.4;
+        .app-card p {
+            font-size: 10.5px;
+            color: var(--text-sub);
+            font-weight: 600;
+            line-height: 1.35;
         }
 
-        .tag-badge-mini {
+        .mini-alert-tag {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: #FEE2E2;
-            color: #DC2626;
-            font-size: 9px;
+            background: #ffffff;
+            color: var(--badge-orange);
+            font-size: 8px;
             font-weight: 800;
             padding: 2px 6px;
             border-radius: 6px;
         }
 
-        /* List Items Kas iti "All Session" */
+        /* All Session - সাদা লিস্ট কার্ড */
         .session-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .session-card {
-            background: var(--card-white);
-            border: 1px solid var(--border-soft);
-            border-radius: 18px;
-            padding: 14px 16px;
+        .session-item {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 13px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            box-shadow: var(--shadow-subtle);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            border: 1px solid #EEF1F6;
         }
 
-        .session-card-left {
+        .session-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .session-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .session-info h4 {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-title);
         }
 
         .session-info p {
-            font-size: 11px;
-            color: var(--text-muted);
+            font-size: 10.5px;
+            color: var(--text-sub);
+            font-weight: 500;
         }
 
-        /* Bottom Floating Bar Kas iti UI Mockup */
+        /* বটম ন্যাভিগেশন বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #ffffff;
-            border-top: 1px solid var(--border-soft);
+            background: #FFFFFF;
+            border-top: 1px solid #ECEFF4;
             display: flex;
             justify-content: space-around;
-            padding: 12px 16px 20px;
+            padding: 10px 10px 18px;
             z-index: 200;
         }
 
@@ -356,45 +390,44 @@
             align-items: center;
             gap: 4px;
             text-decoration: none;
-            color: var(--text-muted);
-            font-size: 11px;
+            color: #9AA5B5;
+            font-size: 10px;
             font-weight: 600;
-            transition: all 0.2s;
+            min-width: 50px;
         }
 
-        .nav-item i, .nav-item .nav-kanji {
-            font-size: 19px;
-            height: 22px;
+        .nav-item i, .nav-item .nav-kana {
+            font-size: 18px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .nav-item.active {
-            color: var(--teal-card);
+            color: var(--teal-banner);
             font-weight: 800;
         }
 
-        /* Modal Alerts & Notifications */
+        /* নোটিফিকেশন মডাল */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px);
-            z-index: 1000;
+            z-index: 9999;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
         }
 
-        .modal-box {
+        .modal-card {
             background: #ffffff;
             width: 100%;
             max-width: 380px;
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: var(--shadow-float);
+            border-radius: 20px;
+            padding: 18px;
             max-height: 80vh;
             display: flex;
             flex-direction: column;
@@ -402,12 +435,14 @@
 
         .modal-top {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #F1F5F9;
         }
 
-        .close-btn {
+        .modal-close {
             background: #F1F5F9;
             border: none;
             width: 28px;
@@ -420,22 +455,24 @@
 </head>
 <body>
 
-    <!-- Top Bar -->
+    <!-- টপ স্ট্যাটাস বার -->
     <header class="top-bar">
         <div class="user-greeting">
             <div class="user-avatar">
-                <img id="mainAppLogo" src="logo.png" alt="Logo" onerror="this.src='https://placehold.co/100x100/0D9488/ffffff?text=K'">
+                <img id="mainAppLogo" src="logo.png" alt="Logo" onerror="this.src='https://placehold.co/100x100/00A896/ffffff?text=K'">
             </div>
-            <div>
-                <div class="greeting-text">KOTOBA</div>
-            </div>
+            <div class="greeting-text">KOTOBA</div>
         </div>
         <div class="header-stats">
-            <div class="streak-pill">
-                <i class="fa-solid fa-fire text-amber-500"></i>
-                <span id="streakDays">12</span>
+            <div class="streak-pill" title="Daily Streak">
+                <span class="fire-dot"></span>
+                <span>12</span>
             </div>
-            <button id="openNotifBtn" class="notif-btn" title="নোটিফিকেশন">
+            <div class="coin-pill">
+                <i class="fa-solid fa-bolt"></i>
+                <span>25</span>
+            </div>
+            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
                 <i class="fa-regular fa-bell"></i>
                 <span class="notif-badge" id="notifBadge">0</span>
             </button>
@@ -444,179 +481,207 @@
 
     <main class="container">
 
-        <!-- Teal Motivation Card kas iti UI reference -->
+        <!-- টিল গ্রিন হিরো কার্ড -->
         <div class="hero-banner">
-            <h2>নিয়মিত চর্চাই সফলতার চাবিকাঠি! 🔥</h2>
-            <p>প্রতিদিন সামান্য সময় দিন, জাপানিজ ভাষা শেখা হবে আরও সহজ ও মজাদার।</p>
+            <h2>Consistency is key. You've crushed 12 days in a row! <span>🔥</span></h2>
+            <p>So close! You're just 13 lessons away from finishing N5 Level.</p>
         </div>
 
-        <div id="homeAdContainer" style="display:none; justify-content:center; margin-bottom:16px;"></div>
+        <!-- বিজ্ঞাপন স্লট -->
+        <div id="homeAdContainer" style="display:none; justify-content:center; margin-bottom:14px;"></div>
 
-        <!-- Section 1: A1-A2 -->
+        <!-- সেকশন ১: N5 ফাউন্ডেশন -->
         <div class="section-header">
-            <h3>বিগিনার - এলিমেন্টারি</h3>
-            <span class="badge-pill badge-purple">A1-A2 · JFT</span>
+            <h3 class="section-title">N5 লেভেল</h3>
+            <span class="section-subtag">JLPT / NAT / JLCT</span>
         </div>
         <div class="card-grid">
-            <a href="#" class="practice-card">
-                <div class="card-tag-icon tag-purple"><i class="fa-regular fa-comments"></i></div>
+            
+            <!-- Hiragana (Purple Tint) -->
+            <a href="alphabet.html" class="app-card card-purple">
+                <div class="card-badge badge-purple">あ</div>
                 <div>
-                    <h4>Conversation</h4>
-                    <p>কথোপকথন গাইড</p>
-                </div>
-            </a>
-            <a href="#" class="practice-card">
-                <span class="tag-badge-mini">শীঘ্রই</span>
-                <div class="card-tag-icon tag-orange"><i class="fa-solid fa-book-open-reader"></i></div>
-                <div>
-                    <h4>Grammar</h4>
-                    <p>ব্যাকরণ পাঠ</p>
-                </div>
-            </a>
-        </div>
-
-        <!-- Section 2: N5 Section -->
-        <div class="section-header">
-            <h3>N5 ফাউন্ডেশন</h3>
-            <span class="badge-pill badge-blue">JLPT / NAT / JLCT</span>
-        </div>
-        <div class="card-grid">
-            <a href="alphabet.html" class="practice-card">
-                <div class="card-tag-icon tag-purple">あ</div>
-                <div>
-                    <h4>বর্ণমালা</h4>
-                    <p>হিরাগানা ও কাতাকানা</p>
+                    <h4>Hiragana</h4>
+                    <p>বর্ণমালা ও সাউন্ড প্র্যাকটিস</p>
                 </div>
             </a>
 
-            <a href="n5-vocab.html" class="practice-card">
-                <div class="card-tag-icon tag-blue">語</div>
+            <!-- Katakana (Blue Tint) -->
+            <a href="alphabet.html" class="app-card card-blue">
+                <div class="card-badge badge-blue">カ</div>
                 <div>
-                    <h4>শব্দভাণ্ডার</h4>
-                    <p>ভোকাবুলারি ও মূলশব্দ</p>
+                    <h4>Katakana</h4>
+                    <p>বিদেশী শব্দ ও বর্ণমালা</p>
                 </div>
             </a>
 
-            <a href="kanji.html" class="practice-card">
-                <div class="card-tag-icon tag-pink">字</div>
+            <!-- Kanji (Pink Tint) -->
+            <a href="kanji.html" class="app-card card-pink">
+                <div class="card-badge badge-pink">字</div>
                 <div>
-                    <h4>কাঞ্জি</h4>
-                    <p>মৌলিক ও প্রয়োজনীয় কাঞ্জি</p>
+                    <h4>Kanji</h4>
+                    <p>মৌলিক ও প্রয়োজনীয় কাঞ্জি</p>
                 </div>
             </a>
 
-            <a href="n5-grammar.html" class="practice-card">
-                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-shapes"></i></div>
+            <!-- Bunpou / Grammar (Mint Tint) -->
+            <a href="n5-grammar.html" class="app-card card-mint">
+                <div class="card-badge badge-mint">文法</div>
                 <div>
-                    <h4>ব্যাকরণ</h4>
-                    <p>সহজ ভাষায় গ্রামার</p>
+                    <h4>Bunpou</h4>
+                    <p>সহজ ব্যাখ্যায় N5 ব্যাকরণ</p>
                 </div>
             </a>
 
-            <a href="#" class="practice-card">
-                <div class="card-tag-icon tag-orange"><i class="fa-solid fa-layer-group"></i></div>
+            <!-- Vocab (Blue Tint) -->
+            <a href="n5-vocab.html" class="app-card card-blue">
+                <div class="card-badge badge-blue">語</div>
+                <div>
+                    <h4>Vocab</h4>
+                    <p>N5 শব্দভাণ্ডার ও অর্থ</p>
+                </div>
+            </a>
+
+            <!-- Verbs (Orange Tint) -->
+            <a href="#" class="app-card card-orange">
+                <div class="card-badge badge-orange"><i class="fa-solid fa-layer-group"></i></div>
                 <div>
                     <h4>ক্রিয়াপদ</h4>
                     <p>Conjugation of Verbs</p>
                 </div>
             </a>
 
-            <a href="#" class="practice-card">
-                <div class="card-tag-icon tag-purple"><i class="fa-solid fa-list-check"></i></div>
+            <!-- Lesson Practice (Purple Tint) -->
+            <a href="#" class="app-card card-purple">
+                <div class="card-badge badge-purple"><i class="fa-solid fa-list-check"></i></div>
                 <div>
                     <h4>লেসন প্র্যাকটিস</h4>
                     <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
                 </div>
             </a>
 
-            <a href="appendices.html" class="practice-card">
-                <div class="card-tag-icon tag-blue"><i class="fa-solid fa-folder-open"></i></div>
+            <!-- Appendices (Mint Tint) -->
+            <a href="appendices.html" class="app-card card-mint">
+                <div class="card-badge badge-mint"><i class="fa-solid fa-folder-open"></i></div>
                 <div>
                     <h4>Appendices</h4>
-                    <p>প্রয়োজনীয় তালিকা</p>
-                </div>
-            </a>
-
-            <a href="mock-test.html" class="practice-card">
-                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-file-signature"></i></div>
-                <div>
-                    <h4>বিগত প্রশ্ন</h4>
-                    <p>NAT / JLPT প্রশ্নব্যাংক</p>
+                    <p>প্রয়োজনীয় চার্ট ও তালিকা</p>
                 </div>
             </a>
         </div>
 
-        <!-- Practice / Tests List Kas iti All Sessions -->
+        <!-- All Session (লিস্ট ভিউ - সাদা কার্ড) -->
         <div class="section-header">
-            <h3>স্কিল ও টেস্ট সেশন</h3>
+            <h3 class="section-title">All Session</h3>
+            <span class="section-subtag">প্র্যাকটিস ও বিগত প্রশ্ন</span>
         </div>
         <div class="session-list">
-            <a href="#" class="session-card">
-                <div class="session-card-left">
-                    <div class="session-icon tag-blue"><i class="fa-solid fa-headphones"></i></div>
+            
+            <a href="#" class="session-item">
+                <div class="session-left">
+                    <div class="session-icon" style="background:#E8F5FD; color:var(--badge-blue);">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
                     <div class="session-info">
-                        <h4>Listening & Audio (聴解)</h4>
-                        <p>N5 লিসেনিং প্র্যাকটিস ও টেস্ট</p>
+                        <h4>聴解 - Choukai</h4>
+                        <p>Vol. 1 · N5 Listening Practice</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                <i class="fa-solid fa-chevron-right" style="color:#C4CDD5; font-size:12px;"></i>
             </a>
 
-            <a href="#" class="session-card">
-                <div class="session-card-left">
-                    <div class="session-icon tag-mint"><i class="fa-solid fa-book-open"></i></div>
+            <a href="#" class="session-item">
+                <div class="session-left">
+                    <div class="session-icon" style="background:#E3F8F2; color:var(--badge-mint);">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
                     <div class="session-info">
-                        <h4>Reading Practice (読解)</h4>
-                        <p>N5 রিডিং ও প্যাসেজ রিডিং</p>
+                        <h4>読解 - Dokkai</h4>
+                        <p>Vol. 1 · N5 Reading Practice</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                <i class="fa-solid fa-chevron-right" style="color:#C4CDD5; font-size:12px;"></i>
             </a>
 
-            <a href="#" class="session-card">
-                <div class="session-card-left">
-                    <div class="session-icon tag-orange"><i class="fa-solid fa-video"></i></div>
+            <a href="mock-test.html" class="session-item">
+                <div class="session-left">
+                    <div class="session-icon" style="background:#FFF4E8; color:var(--badge-orange);">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <div class="session-info">
+                        <h4>বিগত প্রশ্নাবলী</h4>
+                        <p>NAT / JLPT বিগত বছরের প্রশ্ন</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color:#C4CDD5; font-size:12px;"></i>
+            </a>
+
+            <a href="#" class="session-item">
+                <div class="session-left">
+                    <div class="session-icon" style="background:#F5EDFA; color:var(--badge-purple);">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
                     <div class="session-info">
                         <h4>Skype / Zoom</h4>
                         <p>সরাসরি লাইভ ক্লাস ও সাপোর্ট</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+                <i class="fa-solid fa-chevron-right" style="color:#C4CDD5; font-size:12px;"></i>
             </a>
         </div>
 
-        <!-- Section 3: N4 Section -->
+        <!-- সেকশন ২: A1-A2 -->
         <div class="section-header">
-            <h3>N4 এলিমেন্টারি লেভেল</h3>
-            <span class="badge-pill badge-orange">লেসন ২৬-৫০</span>
+            <h3 class="section-title">বিগিনার - এলিমেন্টারি</h3>
+            <span class="section-subtag">A1-A2 · JFT</span>
         </div>
         <div class="card-grid">
-            <a href="n4-vocab.html" class="practice-card">
-                <div class="card-tag-icon tag-purple"><i class="fa-solid fa-book-bookmark"></i></div>
+            <a href="#" class="app-card card-pink">
+                <div class="card-badge badge-pink"><i class="fa-regular fa-comments"></i></div>
+                <div>
+                    <h4>Conversation</h4>
+                    <p>কথোপকথন গাইড</p>
+                </div>
+            </a>
+            <a href="#" class="app-card card-orange">
+                <span class="mini-alert-tag">শীঘ্রই</span>
+                <div class="card-badge badge-orange"><i class="fa-solid fa-book-open-reader"></i></div>
+                <div>
+                    <h4>Grammar</h4>
+                    <p>প্রাথমিক ব্যাকরণ পাঠ</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- সেকশন ৩: N4 লেভেল -->
+        <div class="section-header">
+            <h3 class="section-title">N4 লেভেল</h3>
+            <span class="section-subtag">লেসন ২৬-৫০</span>
+        </div>
+        <div class="card-grid" style="margin-bottom: 24px;">
+            <a href="n4-vocab.html" class="app-card card-blue">
+                <div class="card-badge badge-blue">語</div>
                 <div>
                     <h4>শব্দভাণ্ডার</h4>
-                    <p>২৬-৫০ লেসন শব্দার্থ</p>
+                    <p>লেসন ২৬-৫০ শব্দার্থ</p>
                 </div>
             </a>
-
-            <a href="n4-grammar.html" class="practice-card">
-                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-shapes"></i></div>
+            <a href="n4-grammar.html" class="app-card card-mint">
+                <div class="card-badge badge-mint">文法</div>
                 <div>
                     <h4>ব্যাকরণ</h4>
-                    <p>সম্পূর্ণ N4 রুলস</p>
+                    <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
                 </div>
             </a>
-
-            <a href="n4kanji.html" class="practice-card">
-                <div class="card-tag-icon tag-pink">漢字</div>
+            <a href="n4kanji.html" class="app-card card-pink">
+                <div class="card-badge badge-pink">字</div>
                 <div>
                     <h4>কাঞ্জি</h4>
-                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
+                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
                 </div>
             </a>
-
-            <a href="#" class="practice-card">
-                <div class="card-tag-icon tag-blue"><i class="fa-solid fa-book-open"></i></div>
+            <a href="#" class="app-card card-purple">
+                <div class="card-badge badge-purple"><i class="fa-solid fa-book-open"></i></div>
                 <div>
                     <h4>Reading</h4>
                     <p>N4 রিডিং প্র্যাকটিস</p>
@@ -626,22 +691,22 @@
 
     </main>
 
-    <!-- Bottom Navigation Bar Kas iti Ladawan -->
+    <!-- বটম বার (স্ক্রিনশটের মতো ৫টি আইটেম) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
         <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
+            <i class="fa-regular fa-calendar-check"></i>
             <span>Path</span>
         </a>
         <a href="#" class="nav-item">
-            <i class="fa-solid fa-chart-simple"></i>
+            <i class="fa-solid fa-bars-staggered"></i>
             <span>Speak</span>
         </a>
         <a href="alphabet.html" class="nav-item">
-            <span class="nav-kanji" style="font-weight:700;">あ</span>
+            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
             <span>Kana</span>
         </a>
         <a href="profile.html" class="nav-item">
@@ -650,15 +715,15 @@
         </a>
     </nav>
 
-    <!-- Notification Modal -->
+    <!-- নোটিফিকেশন মডাল -->
     <div class="modal-overlay" id="notifModal">
-        <div class="modal-box">
+        <div class="modal-card">
             <div class="modal-top">
-                <h4 style="font-weight: 800; font-size: 16px;">নোটিফিকেশন</h4>
-                <button class="close-btn" id="closeNotifBtn">&times;</button>
+                <h4 style="font-weight:800; font-size:15px;">নোটিফিকেশন</h4>
+                <button class="modal-close" id="closeNotifBtn">&times;</button>
             </div>
             <div id="notifList" style="overflow-y:auto; flex:1;">
-                <p style="text-align: center; color: var(--text-muted); font-size: 13px; padding: 20px 0;">কোনো নতুন নোটিফিকেশন নেই</p>
+                <p style="text-align: center; color: var(--text-sub); font-size: 13px; padding: 25px 0;">কোনো নতুন নোটিফিকেশন নেই</p>
             </div>
         </div>
     </div>
@@ -688,10 +753,23 @@
         const closeNotifBtn = document.getElementById("closeNotifBtn");
         const notifBadge = document.getElementById("notifBadge");
         const notifList = document.getElementById("notifList");
+        const mainAppLogo = document.getElementById("mainAppLogo");
 
         openNotifBtn.onclick = () => notifModal.style.display = "flex";
         closeNotifBtn.onclick = () => notifModal.style.display = "none";
         window.onclick = (e) => { if (e.target === notifModal) notifModal.style.display = "none"; };
+
+        async function loadSiteDynamicConfigs() {
+            try {
+                const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
+                if (brandSnap.exists() && brandSnap.data().appIconBase64) {
+                    mainAppLogo.src = brandSnap.data().appIconBase64;
+                }
+            } catch (err) {
+                console.warn(err);
+            }
+        }
+        loadSiteDynamicConfigs();
 
         onAuthStateChanged(auth, async (user) => {
             if (user && user.email) {
@@ -707,7 +785,7 @@
                             const div = document.createElement("div");
                             div.style.padding = "10px 0";
                             div.style.borderBottom = "1px solid #f1f5f9";
-                            div.innerHTML = `<h5 style="font-weight:700; font-size:13px;">${data.title}</h5><p style="font-size:12px; color:#64748b;">${data.message}</p>`;
+                            div.innerHTML = `<h5 style="font-weight:700; font-size:13px; color:#1E252D;">${data.title}</h5><p style="font-size:12px; color:#8B95A5; margin-top:2px;">${data.message}</p>`;
                             notifList.appendChild(div);
                         });
                     }

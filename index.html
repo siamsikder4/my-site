@@ -24,38 +24,31 @@
       window.OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
-          notifyButton: { enable: true },
+          notifyButton: { enable: false },
         });
       });
     </script>
 
     <style>
         :root {
-            /* স্ক্রিনশট অনুযায়ী লাইট প্যাস্টেল ব্যাকগ্রাউন্ড ও কালার প্যালেট */
             --bg-canvas: #F4F6F9;
             --text-title: #1E252D;
             --text-sub: #8B95A5;
             
-            /* টপ সায়ান/গ্রিন ব্যানার */
             --teal-banner: #00A896;
             
-            /* কার্ড ১: হিরাগানা (ল্যাভেন্ডার/পার্পল টিন্ট) */
             --card-purple-bg: #F5EDFA;
             --badge-purple: #9B51E0;
             
-            /* কার্ড ২: কাতাকানা (স্কাই ব্লু টিন্ট) */
             --card-blue-bg: #E8F5FD;
             --badge-blue: #2D9CDB;
             
-            /* কার্ড ৩: কাঞ্জি (সফট পিঙ্ক টিন্ট) */
             --card-pink-bg: #FEECEF;
             --badge-pink: #EB5757;
             
-            /* কার্ড ৪: ব্যাকরণ (মিন্ট গ্রিন টিন্ট) */
             --card-mint-bg: #E3F8F2;
             --badge-mint: #27AE60;
 
-            /* কার্ড ৫: অরেঞ্জ টিন্ট */
             --card-orange-bg: #FFF4E8;
             --badge-orange: #F2994A;
         }
@@ -117,9 +110,10 @@
         }
 
         .greeting-text {
-            font-size: 13.5px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
             color: var(--text-title);
+            letter-spacing: -0.2px;
         }
 
         .header-stats {
@@ -131,7 +125,7 @@
         .streak-pill {
             background: #FFFFFF;
             border-radius: 20px;
-            padding: 5px 11px;
+            padding: 6px 12px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -141,17 +135,15 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
-        .streak-pill .fire-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: #EB5757;
+        .streak-pill .fire-icon {
+            color: #EB5757;
+            font-size: 13px;
         }
 
-        .coin-pill {
+        .xp-pill {
             background: #FFFFFF;
             border-radius: 20px;
-            padding: 5px 11px;
+            padding: 6px 12px;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -161,41 +153,9 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
-        .coin-pill i {
+        .xp-pill i {
             color: #F2C94C;
             font-size: 13px;
-        }
-
-        .notif-bell-btn {
-            background: #FFFFFF;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-sub);
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        }
-
-        .notif-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #EB5757;
-            color: #ffffff;
-            font-size: 9px;
-            font-weight: 800;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #ffffff;
         }
 
         /* ব্যানার অ্যালার্ট */
@@ -231,7 +191,7 @@
 
         .hero-banner p {
             font-size: 12px;
-            opacity: 0.88;
+            opacity: 0.9;
             line-height: 1.45;
         }
 
@@ -278,7 +238,6 @@
             transform: scale(0.97);
         }
 
-        /* কার্ড কালার ভ্যারিয়েশন */
         .card-purple { background-color: var(--card-purple-bg); }
         .card-blue   { background-color: var(--card-blue-bg); }
         .card-pink   { background-color: var(--card-pink-bg); }
@@ -331,7 +290,7 @@
             border-radius: 6px;
         }
 
-        /* All Session - সাদা লিস্ট কার্ড */
+        /* All Session */
         .session-list {
             display: flex;
             flex-direction: column;
@@ -378,7 +337,7 @@
             font-weight: 500;
         }
 
-        /* আধুনিক বটম বার */
+        /* বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -416,49 +375,6 @@
             color: var(--teal-banner);
             font-weight: 800;
         }
-
-        /* নোটিফিকেশন মডাল */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(4px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .modal-card {
-            background: #ffffff;
-            width: 100%;
-            max-width: 380px;
-            border-radius: 20px;
-            padding: 18px;
-            max-height: 80vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #F1F5F9;
-        }
-
-        .modal-close {
-            background: #F1F5F9;
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
@@ -473,17 +389,13 @@
         </div>
         <div class="header-stats">
             <div class="streak-pill" title="Daily Streak">
-                <span class="fire-dot"></span>
-                <span>12</span>
+                <i class="fa-solid fa-fire fire-icon"></i>
+                <span id="streakCountText">12</span>
             </div>
-            <div class="coin-pill">
+            <div class="xp-pill" title="XP Points">
                 <i class="fa-solid fa-bolt"></i>
-                <span>25</span>
+                <span id="userXpText">0</span>
             </div>
-            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন">
-                <i class="fa-regular fa-bell"></i>
-                <span class="notif-badge" id="notifBadge">0</span>
-            </button>
         </div>
     </header>
 
@@ -492,7 +404,7 @@
         <!-- গ্লোবাল ব্যানার অ্যালার্ট -->
         <div id="homeGlobalAlert" class="global-alert-banner"></div>
 
-        <!-- টিল গ্রিন হিরো কার্ড -->
+        <!-- হিরো ব্যানার -->
         <div class="hero-banner">
             <h2>Consistency is key. You've crushed 12 days in a row! 🔥</h2>
             <p>So close! You're just 13 lessons away from finishing N5 Level.</p>
@@ -508,7 +420,6 @@
         </div>
         <div class="card-grid">
             
-            <!-- Hiragana (Purple Tint) -->
             <a href="alphabet.html" class="app-card card-purple">
                 <div class="card-badge badge-purple">あ</div>
                 <div>
@@ -517,7 +428,6 @@
                 </div>
             </a>
 
-            <!-- Katakana (Blue Tint) -->
             <a href="alphabet.html" class="app-card card-blue">
                 <div class="card-badge badge-blue">カ</div>
                 <div>
@@ -526,7 +436,6 @@
                 </div>
             </a>
 
-            <!-- Kanji (Pink Tint) -->
             <a href="kanji.html" class="app-card card-pink">
                 <div class="card-badge badge-pink">字</div>
                 <div>
@@ -535,7 +444,6 @@
                 </div>
             </a>
 
-            <!-- Bunpou / Grammar (Mint Tint) -->
             <a href="n5-grammar.html" class="app-card card-mint">
                 <div class="card-badge badge-mint">文法</div>
                 <div>
@@ -544,7 +452,6 @@
                 </div>
             </a>
 
-            <!-- Vocab (Blue Tint) -->
             <a href="n5-vocab.html" class="app-card card-blue">
                 <div class="card-badge badge-blue">語</div>
                 <div>
@@ -553,7 +460,6 @@
                 </div>
             </a>
 
-            <!-- Verbs (Orange Tint) -->
             <a href="#" class="app-card card-orange">
                 <div class="card-badge badge-orange"><i class="fa-solid fa-layer-group"></i></div>
                 <div>
@@ -562,7 +468,6 @@
                 </div>
             </a>
 
-            <!-- Lesson Practice (Purple Tint) -->
             <a href="#" class="app-card card-purple">
                 <div class="card-badge badge-purple"><i class="fa-solid fa-list-check"></i></div>
                 <div>
@@ -571,7 +476,6 @@
                 </div>
             </a>
 
-            <!-- Appendices (Mint Tint) -->
             <a href="appendices.html" class="app-card card-mint">
                 <div class="card-badge badge-mint"><i class="fa-solid fa-folder-open"></i></div>
                 <div>
@@ -581,7 +485,7 @@
             </a>
         </div>
 
-        <!-- All Session (লিস্ট ভিউ - সাদা কার্ড) -->
+        <!-- All Session -->
         <div class="section-header">
             <h3 class="section-title">All Session</h3>
             <span class="section-subtag">প্র্যাকটিস ও বিগত প্রশ্ন</span>
@@ -702,7 +606,7 @@
 
     </main>
 
-    <!-- বটম ন্যাভিগেশন বার (সরাসরি speak.html কানেক্টেড) -->
+    <!-- বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -726,24 +630,37 @@
         </a>
     </nav>
 
-    <!-- নোটিফিকেশন মডাল -->
-    <div class="modal-overlay" id="notifModal">
-        <div class="modal-card">
-            <div class="modal-top">
-                <h4 style="font-weight:800; font-size:15px;">নোটিফিকেশন</h4>
-                <button class="modal-close" id="closeNotifBtn">&times;</button>
-            </div>
-            <div id="notifList" style="overflow-y:auto; flex:1;">
-                <p style="text-align: center; color: var(--text-sub); font-size: 13px; padding: 25px 0;">কোনো নতুন নোটিফিকেশন নেই</p>
-            </div>
-        </div>
-    </div>
+    <!-- 0-Latency Local Cache Engine -->
+    <script>
+        // DOM লোডের সাথে সাথে ব্রাউজারের লোকাল মেমরি থেকে 0ms-এ পয়েন্ট ও ডেটা লোড
+        (function initLocalCacheImmediate() {
+            const cachedXp = localStorage.getItem("kotoba_cached_user_xp");
+            const cachedStreak = localStorage.getItem("kotoba_cached_user_streak");
+            const cachedLogo = localStorage.getItem("kotoba_cached_logo");
+            const cachedAlert = localStorage.getItem("kotoba_cached_alert_text");
 
-    <!-- Firebase Script Logic -->
+            if (cachedXp !== null) {
+                document.getElementById("userXpText").innerText = cachedXp;
+            }
+            if (cachedStreak !== null) {
+                document.getElementById("streakCountText").innerText = cachedStreak;
+            }
+            if (cachedLogo) {
+                document.getElementById("mainAppLogo").src = cachedLogo;
+            }
+            if (cachedAlert) {
+                const alertEl = document.getElementById("homeGlobalAlert");
+                alertEl.style.display = "block";
+                alertEl.innerText = cachedAlert;
+            }
+        })();
+    </script>
+
+    <!-- Firebase Background Sync -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -759,24 +676,20 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const notifModal = document.getElementById("notifModal");
-        const openNotifBtn = document.getElementById("openNotifBtn");
-        const closeNotifBtn = document.getElementById("closeNotifBtn");
-        const notifBadge = document.getElementById("notifBadge");
-        const notifList = document.getElementById("notifList");
+        const userXpText = document.getElementById("userXpText");
+        const streakCountText = document.getElementById("streakCountText");
         const mainAppLogo = document.getElementById("mainAppLogo");
         const homeGlobalAlert = document.getElementById("homeGlobalAlert");
         const homeAdContainer = document.getElementById("homeAdContainer");
 
-        openNotifBtn.onclick = () => notifModal.style.display = "flex";
-        closeNotifBtn.onclick = () => notifModal.style.display = "none";
-        window.onclick = (e) => { if (e.target === notifModal) notifModal.style.display = "none"; };
-
-        async function loadSiteDynamicConfigs() {
+        // ব্যাকগ্রাউন্ডে সাইট সেটিংস লোড ও ক্যাশে সেভ
+        async function syncSiteSettings() {
             try {
                 const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
                 if (brandSnap.exists() && brandSnap.data().appIconBase64) {
-                    mainAppLogo.src = brandSnap.data().appIconBase64;
+                    const icon = brandSnap.data().appIconBase64;
+                    mainAppLogo.src = icon;
+                    localStorage.setItem("kotoba_cached_logo", icon);
                 }
 
                 const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
@@ -785,9 +698,14 @@
                     if (ad.bannerStatus === "enabled" && ad.bannerText) {
                         homeGlobalAlert.style.display = "block";
                         homeGlobalAlert.innerText = ad.bannerText;
+                        localStorage.setItem("kotoba_cached_alert_text", ad.bannerText);
+                    } else {
+                        homeGlobalAlert.style.display = "none";
+                        localStorage.removeItem("kotoba_cached_alert_text");
                     }
                 }
 
+                // বিজ্ঞাপন কনফিগারেশন
                 const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
                 let isGlobalOn = true;
                 let isIndexOn = true;
@@ -833,32 +751,39 @@
                     iframeDoc.close();
                 }
             } catch (err) {
-                console.warn(err);
+                console.warn("Config sync error:", err);
             }
         }
-        loadSiteDynamicConfigs();
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user && user.email) {
-                try {
-                    const qUser = query(collection(db, "notifications"), where("target", "in", ["all", user.email.toLowerCase().trim()]));
-                    const snap = await getDocs(qUser);
-                    if (!snap.empty) {
-                        notifBadge.style.display = "flex";
-                        notifBadge.innerText = snap.size;
-                        notifList.innerHTML = "";
-                        snap.forEach(docSnap => {
-                            const data = docSnap.data();
-                            const div = document.createElement("div");
-                            div.style.padding = "10px 0";
-                            div.style.borderBottom = "1px solid #f1f5f9";
-                            div.innerHTML = `<h5 style="font-weight:700; font-size:13px; color:#1E252D;">${data.title}</h5><p style="font-size:12px; color:#8B95A5; margin-top:2px;">${data.message}</p>`;
-                            notifList.appendChild(div);
-                        });
+        syncSiteSettings();
+
+        // ইউজার লগইন স্টেট ও রিয়েলটাইম XP ট্র্যাকিং
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const docId = user.email ? user.email.toLowerCase().trim() : user.uid;
+                
+                // রিয়েলটাইমে ইউজারের XP ও স্ট্রিক শোনা এবং লোকাল ক্যাশে সেভ করা
+                onSnapshot(doc(db, "users", docId), (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        const realXp = Number(data.xp !== undefined ? data.xp : (data.points !== undefined ? data.points : 0));
+                        const streakDays = Number(data.streak || 12);
+
+                        // স্ক্রিনে রিয়েলটাইম আপডেট
+                        userXpText.innerText = realXp;
+                        streakCountText.innerText = streakDays;
+
+                        // ব্রাউজারে ক্যাশ সেভ যাতে পরের বার নিমেষেই লোড হয়
+                        localStorage.setItem("kotoba_cached_user_xp", realXp);
+                        localStorage.setItem("kotoba_cached_user_streak", streakDays);
                     }
-                } catch(e) {
-                    console.error(e);
-                }
+                }, (error) => {
+                    console.warn("Live XP sync error:", error);
+                });
+            } else {
+                // গেস্ট মোড
+                const fallbackXp = localStorage.getItem("kotoba_cached_user_xp") || "0";
+                userXpText.innerText = fallbackXp;
             }
         });
     </script>

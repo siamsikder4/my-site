@@ -456,13 +456,59 @@
         </a>
     </nav>
 
+    <!-- 0-Latency Local Cache Engine -->
+    <script>
+        (function initProfileLocalCache() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryUser = urlParams.get("email") || urlParams.get("uid");
+
+            // No query parameter = personal profile, load cached data immediately
+            if (!queryUser) {
+                const cachedName = localStorage.getItem("kotoba_cached_user_name");
+                const cachedEmail = localStorage.getItem("kotoba_cached_user_email");
+                const cachedBio = localStorage.getItem("kotoba_cached_user_bio");
+                const cachedLevel = localStorage.getItem("kotoba_cached_user_level");
+                const cachedXp = localStorage.getItem("kotoba_cached_user_xp");
+                const cachedStreak = localStorage.getItem("kotoba_cached_user_streak");
+                const cachedAvatar = localStorage.getItem("kotoba_cached_user_avatar");
+
+                if (cachedName) {
+                    document.getElementById("displayUserName").innerText = cachedName;
+                    document.getElementById("editName").value = cachedName;
+                }
+                if (cachedEmail) {
+                    document.getElementById("displayUserEmail").innerText = cachedEmail;
+                }
+                if (cachedBio !== null) {
+                    document.getElementById("displayUserBio").innerText = cachedBio || "কোনো বায়ো যোগ করা হয়নি।";
+                    document.getElementById("editBio").value = cachedBio;
+                }
+                if (cachedLevel) {
+                    document.getElementById("displayUserLevel").innerText = cachedLevel;
+                    document.getElementById("editLevel").value = cachedLevel;
+                }
+                if (cachedXp !== null) {
+                    document.getElementById("userXpCount").innerText = cachedXp;
+                }
+                if (cachedStreak !== null) {
+                    document.getElementById("userStreakCount").innerText = `${cachedStreak} 🔥`;
+                }
+                if (cachedAvatar) {
+                    document.getElementById("avatarContainer").innerHTML = `<img src="${cachedAvatar}" alt="Avatar">`;
+                } else if (cachedName) {
+                    document.getElementById("avatarContainer").innerHTML = cachedName.trim().charAt(0).toUpperCase();
+                }
+            }
+        })();
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
-    <!-- Firebase Scripts (সম্পূর্ণ লজিক অক্ষত) -->
+    <!-- Firebase Scripts (Realtime Background Sync + Cache Store) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -486,6 +532,7 @@
         let isOwnProfile = true;
         let cropper = null;
         let targetDocId = null;
+        let unsubscribeLiveListener = null;
 
         const avatarTrigger = document.getElementById("avatarTrigger");
         const avatarContainer = document.getElementById("avatarContainer");
@@ -542,40 +589,65 @@
                 }
             }
 
-            loadProfileData(targetDocId);
+            attachLiveProfileSync(targetDocId);
         });
 
-        async function loadProfileData(docId) {
-            try {
-                let userDoc = await getDoc(doc(db, "users", docId));
-                if (!userDoc.exists() && docId.includes("@")) {
-                    userDoc = await getDoc(doc(db, "users", docId.toLowerCase()));
+        function attachLiveProfileSync(docId) {
+            if (unsubscribeLiveListener) unsubscribeLiveListener();
+
+            const userRef = doc(db, "users", docId);
+            unsubscribeLiveListener = onSnapshot(userRef, (snap) => {
+                if (snap.exists()) {
+                    updateProfileUI(snap.data(), docId);
+                } else if (docId.includes("@")) {
+                    getDoc(doc(db, "users", docId.toLowerCase())).then((secondarySnap) => {
+                        if (secondarySnap.exists()) updateProfileUI(secondarySnap.data(), docId);
+                    });
                 }
+            }, (error) => {
+                console.warn("Live Profile Sync Error:", error);
+            });
+        }
 
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    const name = data.userName || data.name || (data.email ? data.email.split("@")[0] : "শিক্ষার্থী");
-                    const email = data.email || docId;
+        function updateProfileUI(data, docId) {
+            const name = data.userName || data.name || (data.email ? data.email.split("@")[0] : "শিক্ষার্থী");
+            const email = data.email || docId;
+            const bio = data.bio || "কোনো বায়ো যোগ করা হয়নি।";
+            const level = data.targetLevel || "N5";
+            const realXp = Number(data.xp !== undefined ? data.xp : (data.points !== undefined ? data.points : 0));
+            const streak = Number(data.streak || 12);
+            const avatarUrl = data.photoBase64 || data.photoURL || null;
 
-                    document.getElementById("displayUserName").innerText = name;
-                    document.getElementById("displayUserEmail").innerText = email;
-                    document.getElementById("displayUserBio").innerText = data.bio || "কোনো বায়ো যোগ করা হয়নি।";
-                    document.getElementById("displayUserLevel").innerText = data.targetLevel || "N5";
-                    document.getElementById("userXpCount").innerText = (typeof data.xp === "number") ? data.xp : 0;
-                    document.getElementById("userStreakCount").innerText = `${data.streak || 12} 🔥`;
+            document.getElementById("displayUserName").innerText = name;
+            document.getElementById("displayUserEmail").innerText = email;
+            document.getElementById("displayUserBio").innerText = bio;
+            document.getElementById("displayUserLevel").innerText = level;
+            document.getElementById("userXpCount").innerText = isNaN(realXp) ? 0 : realXp;
+            document.getElementById("userStreakCount").innerText = `${streak} 🔥`;
 
-                    document.getElementById("editName").value = name;
-                    document.getElementById("editBio").value = data.bio || "";
-                    document.getElementById("editLevel").value = data.targetLevel || "N5";
+            document.getElementById("editName").value = name;
+            document.getElementById("editBio").value = data.bio || "";
+            document.getElementById("editLevel").value = level;
 
-                    if (data.photoBase64 || data.photoURL) {
-                        avatarContainer.innerHTML = `<img src="${data.photoBase64 || data.photoURL}" alt="Avatar">`;
-                    } else {
-                        avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
-                    }
+            if (avatarUrl) {
+                avatarContainer.innerHTML = `<img src="${avatarUrl}" alt="Avatar">`;
+            } else {
+                avatarContainer.innerHTML = name.trim().charAt(0).toUpperCase();
+            }
+
+            // Sync to local cache if user is viewing their own profile
+            if (isOwnProfile) {
+                localStorage.setItem("kotoba_cached_user_name", name);
+                localStorage.setItem("kotoba_cached_user_email", email);
+                localStorage.setItem("kotoba_cached_user_bio", data.bio || "");
+                localStorage.setItem("kotoba_cached_user_level", level);
+                localStorage.setItem("kotoba_cached_user_xp", isNaN(realXp) ? 0 : realXp);
+                localStorage.setItem("kotoba_cached_user_streak", streak);
+                if (avatarUrl) {
+                    localStorage.setItem("kotoba_cached_user_avatar", avatarUrl);
+                } else {
+                    localStorage.removeItem("kotoba_cached_user_avatar");
                 }
-            } catch(e) {
-                console.error(e);
             }
         }
 
@@ -597,10 +669,17 @@
                 updatedAt: Date.now()
             };
 
+            // Immediate optimistic local update
+            document.getElementById("displayUserName").innerText = updatedData.userName;
+            document.getElementById("displayUserBio").innerText = updatedData.bio || "কোনো বায়ো যোগ করা হয়নি।";
+            document.getElementById("displayUserLevel").innerText = updatedData.targetLevel;
+            localStorage.setItem("kotoba_cached_user_name", updatedData.userName);
+            localStorage.setItem("kotoba_cached_user_bio", updatedData.bio);
+            localStorage.setItem("kotoba_cached_user_level", updatedData.targetLevel);
+
             try {
                 await setDoc(doc(db, "users", currentUser.email.toLowerCase()), updatedData, { merge: true });
                 editProfileModal.style.display = "none";
-                loadProfileData(currentUser.email.toLowerCase());
             } catch (err) {
                 alert("তথ্য আপডেট করতে সমস্যা হয়েছে!");
             } finally {
@@ -655,13 +734,16 @@
             const canvas = cropper.getCroppedCanvas({ width: 180, height: 180 });
             const base64 = canvas.toDataURL("image/jpeg", 0.75);
 
+            // Immediate optimistic UI & cache update
+            avatarContainer.innerHTML = `<img src="${base64}" alt="Avatar">`;
+            localStorage.setItem("kotoba_cached_user_avatar", base64);
+            document.getElementById("cropperModal").style.display = "none";
+
             try {
                 await setDoc(doc(db, "users", currentUser.email.toLowerCase()), {
                     photoBase64: base64
                 }, { merge: true });
 
-                avatarContainer.innerHTML = `<img src="${base64}" alt="Avatar">`;
-                document.getElementById("cropperModal").style.display = "none";
                 if (cropper) cropper.destroy();
             } catch(e) {
                 alert("ছবি সেভ করা যায়নি!");
@@ -673,6 +755,14 @@
 
         logoutBtn.onclick = async () => {
             if (confirm("লগআউট করতে চান?")) {
+                localStorage.removeItem("kotoba_cached_user_name");
+                localStorage.removeItem("kotoba_cached_user_email");
+                localStorage.removeItem("kotoba_cached_user_bio");
+                localStorage.removeItem("kotoba_cached_user_level");
+                localStorage.removeItem("kotoba_cached_user_xp");
+                localStorage.removeItem("kotoba_cached_user_streak");
+                localStorage.removeItem("kotoba_cached_user_avatar");
+
                 await signOut(auth);
                 window.location.href = "login.html";
             }

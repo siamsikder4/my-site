@@ -29,32 +29,39 @@
 
     <style>
         :root {
-            /* Index পেজের জাপানিজ কালার প্যালেট */
-            --paper: #fbf7ef;
-            --ink: #182620;
-            --pine: #0B4A38;
-            --jade: #147A57;
-            --clay: #B6472E;
-            --gold: #A9781F;
-            --mist: #7C8A82;
-            --line: #E9E2D3;
-            --card-bg: #ffffff;
-            --shadow-float: 0 10px 28px rgba(11, 74, 56, 0.12);
+            --bg-canvas: #F4F6F9;
+            --surface-card: #FFFFFF;
+            --text-dark: #1E252D;
+            --text-muted: #8E9AAB;
+
+            --teal-primary: #00A896;
+            --teal-soft: #E3F8F2;
+            --blue-primary: #2D9CDB;
+            --blue-soft: #E8F5FD;
+            --pink-accent: #EB5757;
+            --pink-soft: #FEECEF;
+
+            --border-soft: #EEF1F6;
+            --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --radius-md: 14px;
+            --radius-lg: 20px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--paper);
-            color: var(--ink);
-            padding-bottom: 96px;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            padding-bottom: 100px;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* লোডার ওভারলে */
@@ -62,14 +69,14 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(251, 247, 239, 0.95);
+            background: rgba(244, 246, 249, 0.95);
             backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .loader-overlay.hidden {
@@ -80,17 +87,17 @@
 
         .book-loader {
             position: relative;
-            width: 64px;
-            height: 46px;
+            width: 58px;
+            height: 42px;
             perspective: 200px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .book-loader .cover-left {
             position: absolute;
             left: 2px; top: 2px;
-            width: 30px; height: 42px;
-            border: 2.2px solid var(--pine);
+            width: 27px; height: 38px;
+            border: 2px solid var(--teal-primary);
             border-right: none;
             border-radius: 4px 0 0 4px;
             background: #ffffff;
@@ -99,8 +106,8 @@
         .book-loader .cover-right {
             position: absolute;
             right: 2px; top: 2px;
-            width: 30px; height: 42px;
-            border: 2.2px solid var(--pine);
+            width: 27px; height: 38px;
+            border: 2px solid var(--teal-primary);
             border-left: none;
             border-radius: 0 4px 4px 0;
             background: #ffffff;
@@ -108,16 +115,16 @@
 
         .book-loader .spine {
             position: absolute;
-            left: 31px; top: 0;
-            width: 2px; height: 46px;
-            background: var(--pine);
+            left: 28px; top: 0;
+            width: 2px; height: 42px;
+            background: var(--teal-primary);
         }
 
         .book-loader .page {
             position: absolute;
-            width: 29px; height: 42px;
+            width: 26px; height: 38px;
             top: 2px; right: 3px;
-            border: 2px solid var(--jade);
+            border: 2px solid var(--blue-primary);
             border-left: none;
             border-radius: 0 4px 4px 0;
             background: #ffffff;
@@ -136,21 +143,19 @@
 
         .loading-text {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
-            color: var(--pine);
+            color: var(--teal-primary);
             letter-spacing: 0.8px;
         }
 
-        /* টপ নেভিগেশন */
+        /* স্টিকি টপ বার */
         .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 18px;
-            background: rgba(251, 247, 239, 0.94);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
+            padding: 14px 18px;
+            background: var(--bg-canvas);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -159,45 +164,42 @@
         .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
         }
 
-        .menu-btn-icon {
-            background: #F0EAD9;
-            color: var(--pine);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+        .back-btn {
+            background: var(--surface-card);
+            color: var(--text-dark);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--line);
-            font-size: 15px;
-            transition: transform 0.15s;
+            border: 1px solid var(--border-soft);
+            font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: transform 0.15s ease;
         }
-
-        .menu-btn-icon:active { transform: scale(0.92); }
+        .back-btn:active { transform: scale(0.92); }
 
         .nav-title {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 17px;
-            color: var(--pine);
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            font-size: 15.5px;
+            color: var(--text-dark);
         }
 
         .nav-right {
             font-size: 11px;
             font-weight: 700;
-            color: var(--jade);
-            background: #E6F3EC;
-            padding: 4px 10px;
+            color: var(--teal-primary);
+            background: var(--teal-soft);
+            padding: 5px 12px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 5px;
-            border: 1px solid #CCE7DC;
             max-width: 170px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -205,49 +207,49 @@
         }
 
         .main-container {
-            padding: 16px;
-            max-width: 480px;
+            padding: 6px 18px 24px;
+            max-width: 440px;
             margin: 0 auto;
         }
 
         /* লেসন সিলেকশন গ্রিড */
         .grid-header-wrap {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .main-category-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
             margin-bottom: 3px;
         }
 
         .sub-category-desc {
             font-size: 12px;
-            color: var(--mist);
+            color: var(--text-muted);
             font-weight: 600;
         }
 
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 11px;
+            gap: 12px;
         }
 
         .lesson-card {
-            background: var(--card-bg);
-            border: 1px solid var(--line);
-            border-left: 4px solid var(--jade);
-            border-radius: 14px;
-            padding: 15px 12px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 16px 14px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            box-shadow: var(--shadow-subtle);
             transition: transform 0.15s ease, border-color 0.15s ease;
+            position: relative;
         }
 
         .lesson-card:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
         .card-top {
@@ -258,40 +260,40 @@
         }
 
         .l-badge {
-            background: #E6F3EC;
-            color: var(--jade);
+            background: var(--blue-soft);
+            color: var(--blue-primary);
             font-size: 10px;
             font-weight: 800;
-            padding: 2.5px 7px;
-            border-radius: 6px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 3px 8px;
+            border-radius: 8px;
         }
 
         .kanji-lesson-tag {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 12px;
-            color: var(--mist);
+            color: var(--text-muted);
             font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 2px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 3px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: var(--mist);
+            color: var(--text-muted);
+            font-weight: 600;
             line-height: 1.35;
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 8px;
-            color: #cbd5e1;
+            margin-top: 10px;
+            color: #CBD5E1;
             font-size: 11px;
         }
 
@@ -304,15 +306,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
             margin-bottom: 14px;
-            position: relative;
         }
 
         .fc-title {
-            font-size: 19px;
+            font-size: 17px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
         }
 
         .fc-tools {
@@ -324,24 +324,23 @@
         }
 
         .fc-tool-btn {
-            background: #ffffff;
-            border: 1px solid var(--line);
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
             width: 38px;
             height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--ink);
+            color: var(--text-dark);
             font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
             transition: all 0.15s;
         }
 
         .fc-tool-btn:active {
             transform: scale(0.92);
-            background: #FAF7F0;
         }
 
         .flashcard-container {
@@ -359,7 +358,7 @@
             text-align: center;
             transition: transform 0.6s cubic-bezier(0.34, 1.35, 0.64, 1);
             transform-style: preserve-3d;
-            border-radius: 20px;
+            border-radius: 24px;
         }
 
         .flashcard-container.flipped .flashcard-inner {
@@ -372,41 +371,41 @@
             height: 100%;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            border-radius: 20px;
-            background: #ffffff;
-            border: 1.5px solid var(--line);
+            border-radius: 24px;
+            background: var(--surface-card);
+            border: 1.5px solid var(--border-soft);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 24px 16px;
-            box-shadow: 0 8px 24px rgba(11, 74, 56, 0.04);
+            box-shadow: var(--shadow-subtle);
             box-sizing: border-box;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: all 0.25s ease;
         }
 
         .flashcard-front {
-            border-top: 4px solid var(--pine);
+            border-top: 5px solid var(--teal-primary);
         }
 
         .flashcard-back {
             transform: rotateY(180deg);
-            background: #FAF7F0;
-            border-top: 4px solid var(--clay);
+            background: #FAFCFE;
+            border-top: 5px solid var(--blue-primary);
         }
 
         .flashcard-container.is-highlighted .flashcard-face {
-            border-color: var(--clay) !important;
-            border-top-color: var(--clay) !important;
-            box-shadow: 0 10px 25px rgba(182, 71, 46, 0.14) !important;
-            background: #FBEAE6 !important;
+            border-color: #FED7AA !important;
+            border-top-color: #F97316 !important;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.1) !important;
+            background: #FFFBF7 !important;
         }
 
         .fc-jp-text {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 32px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
             line-height: 1.25;
             margin-bottom: 6px;
             padding: 0 10px;
@@ -416,99 +415,96 @@
         .fc-meaning-text {
             font-size: 20px;
             font-weight: 800;
-            color: var(--clay);
+            color: var(--teal-primary);
             margin-bottom: 4px;
             line-height: 1.3;
             padding: 0 10px;
         }
 
         .fc-ro-text {
-            font-size: 13.5px;
-            color: var(--mist);
-            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 700;
         }
 
         .fc-tap-hint {
             position: absolute;
             bottom: 16px;
-            font-size: 11.5px;
-            color: var(--mist);
+            font-size: 11px;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .fc-highlight-btn {
             position: absolute;
             top: 16px;
             left: 18px;
-            color: var(--mist);
-            background: #FAF7F0;
+            color: var(--text-muted);
+            background: #F1F5F9;
             width: 34px;
             height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            border: 1px solid var(--line);
+            font-size: 13px;
+            border: none;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .fc-highlight-btn.active {
             color: #ffffff;
-            background: var(--clay);
-            border-color: var(--clay);
-            box-shadow: 0 2px 8px rgba(182, 71, 46, 0.35);
+            background: #F97316;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35);
         }
 
         .fc-speaker-icon {
             position: absolute;
             top: 16px;
             right: 18px;
-            color: var(--jade);
-            background: #E6F3EC;
+            color: var(--teal-primary);
+            background: var(--teal-soft);
             width: 34px;
             height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            border: 1px solid #CCE7DC;
+            font-size: 13px;
+            border: none;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .fc-speaker-icon:active {
             transform: scale(0.9);
-            background: var(--jade);
-            color: #ffffff;
         }
 
         .fc-nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 18px 0 24px;
+            margin: 18px 0 22px;
             gap: 12px;
         }
 
         .fc-arrow-btn {
-            background: #ffffff;
-            border: 1px solid var(--line);
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
             width: 42px;
             height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--ink);
+            color: var(--text-dark);
             font-size: 14px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
             transition: all 0.15s;
         }
 
@@ -525,40 +521,40 @@
         }
 
         .fc-counter-text {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 800;
-            color: var(--mist);
+            color: var(--text-muted);
             letter-spacing: 0.5px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .fc-progress-bar {
             width: 100%;
-            height: 5px;
-            background: #E9E2D3;
-            border-radius: 6px;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 99px;
             overflow: hidden;
         }
 
         .fc-progress-fill {
             height: 100%;
-            background: var(--jade);
+            background: linear-gradient(90deg, #2DD4BF, var(--teal-primary));
             width: 5%;
             transition: width 0.25s ease;
         }
 
         .vocab-accordion-header {
-            background: var(--pine);
-            color: #ffffff;
-            border-radius: 14px;
-            padding: 13px 16px;
+            background: var(--surface-card);
+            color: var(--text-dark);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 15px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 13.5px;
-            box-shadow: 0 3px 8px rgba(11, 74, 56, 0.12);
+            box-shadow: var(--shadow-subtle);
         }
 
         .vocab-accordion-header .acc-title {
@@ -568,18 +564,19 @@
         }
 
         .vocab-accordion-header .acc-icon {
-            font-size: 13px;
+            font-size: 12px;
+            color: var(--text-muted);
             transition: transform 0.25s ease;
         }
 
         .vocab-table-card {
             display: none;
-            background: #ffffff;
-            border: 1px solid var(--line);
-            border-radius: 14px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
             margin-top: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(11, 74, 56, 0.03);
+            box-shadow: var(--shadow-subtle);
         }
 
         .vocab-table {
@@ -589,62 +586,62 @@
         }
 
         .vocab-table th {
-            background: #FAF7F0;
-            color: var(--pine);
+            background: #F8FAFC;
+            color: var(--text-dark);
             font-weight: 800;
-            font-size: 12px;
+            font-size: 11.5px;
             padding: 12px 6px;
-            border-bottom: 1px solid var(--line);
+            border-bottom: 1px solid var(--border-soft);
             line-height: 1.3;
         }
 
         .vocab-table td {
             padding: 12px 6px;
-            font-size: 12.5px;
-            border-bottom: 1px solid var(--line);
-            color: var(--ink);
+            font-size: 12px;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text-dark);
             vertical-align: middle;
         }
 
         .vocab-table tr:nth-child(even) {
-            background: #FAF9F5;
+            background: #FAFCFE;
         }
 
         .vocab-table tr.highlighted-row {
-            background-color: #FBEAE6 !important;
-            border-left: 4px solid var(--clay);
+            background-color: #FFF7ED !important;
+            border-left: 4px solid #F97316;
         }
 
         .col-kana {
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 13.5px;
             font-weight: 700;
-            color: var(--pine);
+            color: var(--text-dark);
         }
 
         .col-ro {
-            font-size: 11.5px;
-            color: var(--mist);
-            font-weight: 500;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
         .col-bn {
             font-size: 12px;
             font-weight: 700;
-            color: var(--ink);
+            color: var(--teal-primary);
         }
 
         .table-hl-btn {
             background: none;
             border: none;
-            font-size: 15px;
-            color: #cbd5e1;
+            font-size: 14px;
+            color: #CBD5E1;
             cursor: pointer;
             transition: transform 0.15s, color 0.15s;
         }
 
         .table-hl-btn.active {
-            color: var(--clay);
+            color: #F97316;
         }
 
         /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন */
@@ -652,7 +649,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 26px;
+            margin-top: 24px;
             margin-bottom: 20px;
             padding: 16px 8px;
             position: relative;
@@ -665,7 +662,7 @@
             top: 20%;
             height: 60%;
             width: 1px;
-            background-color: var(--line);
+            background-color: var(--border-soft);
             transform: translateX(-50%);
         }
 
@@ -690,29 +687,28 @@
         }
 
         .jump-label {
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 800;
-            color: var(--jade);
+            color: var(--teal-primary);
             letter-spacing: 0.8px;
             margin-bottom: 4px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .jump-title {
-            font-size: 14.5px;
+            font-size: 14px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
             line-height: 1.3;
         }
 
         .jump-btn:disabled,
         .jump-btn.disabled {
-            opacity: 0.25;
+            opacity: 0.3;
             cursor: not-allowed;
             pointer-events: none;
         }
 
-        /* ব্যানার অ্যাড বক্স স্টাইল */
+        /* ব্যানার অ্যাড বক্স */
         .ad-banner-slot {
             width: 100%;
             display: none;
@@ -723,60 +719,43 @@
             overflow: hidden;
         }
 
-        /* ফ্লোটিং আইল্যান্ড বটম বার */
+        /* বটম ন্যাভিগেশন বার */
         .bottom-nav {
             position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 440px;
-            height: 62px;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(233, 226, 211, 0.9);
-            border-radius: 999px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid #ECEFF4;
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-float);
-            padding: 0 8px;
+            padding: 10px 10px 18px;
+            z-index: 200;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: var(--mist);
-            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            text-decoration: none;
+            color: #9AA5B5;
+            font-size: 10px;
             font-weight: 600;
-            flex: 1;
-            padding: 8px 0;
-            border-radius: 999px;
-            transition: all 0.2s ease;
+            min-width: 50px;
         }
 
-        .nav-item i {
+        .nav-item i, .nav-item .nav-kana {
             font-size: 18px;
-            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-item.active {
-            color: var(--pine);
-            font-weight: 700;
-        }
-
-        .nav-item.active i {
-            transform: translateY(-1px) scale(1.1);
-            color: var(--jade);
-        }
-
-        .nav-item:active i {
-            transform: scale(0.9);
+            color: var(--teal-primary);
+            font-weight: 800;
         }
     </style>
 </head>
@@ -798,10 +777,10 @@
     <!-- টপ বার -->
     <header class="top-nav">
         <div class="nav-left" id="btnBackToGrid">
-            <div class="menu-btn-icon">
-                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            <div class="back-btn">
+                <i class="fa-solid fa-arrow-left" id="menuIcon"></i>
             </div>
-            <span class="nav-title">KOTOBA</span>
+            <span class="nav-title">N5 শব্দভাণ্ডার</span>
         </div>
         <div class="nav-right" id="userEmailDisplay">
             <i class="fa-solid fa-cloud"></i> <span id="syncText">লোড হচ্ছে...</span>
@@ -813,13 +792,12 @@
         <!-- ভিউ ১: লেসন তালিকা -->
         <div id="lessonGridView">
             <div class="grid-header-wrap">
-                <h2 class="main-category-title">N5 Vocabulary</h2>
-                <p class="sub-category-desc">লেসন ১ থেকে ২৫ • সম্পূর্ণ শব্দভাণ্ডার</p>
+                <h2 class="main-category-title">লেসন নির্বাচন করুন</h2>
+                <p class="sub-category-desc">লেসন ১ থেকে ২৫ • সম্পূর্ণ ভোকাবুলারি</p>
             </div>
 
             <div class="lesson-grid" id="gridContainer"></div>
 
-            <!-- অ্যাড স্লট ১: গ্রিড ভিউ-এর নিচে -->
             <div class="ad-banner-slot" id="gridBottomAd"></div>
         </div>
 
@@ -827,7 +805,7 @@
         <div id="lessonDetailView" class="detail-view">
             
             <div class="fc-top-header">
-                <h3 class="fc-title">শব্দার্থ ফ্ল্যাশকার্ড</h3>
+                <h3 class="fc-title" id="fcHeaderTitle">শব্দার্থ ফ্ল্যাশকার্ড</h3>
             </div>
 
             <div class="fc-tools">
@@ -846,7 +824,7 @@
                         <div class="fc-jp-text" id="fcKana">わたし</div>
                         <div class="fc-tap-hint">
                             <i class="fa-solid fa-hand-pointer"></i>
-                            <span>ফ্লিপ করুন</span>
+                            <span>ফ্লিপ করতে ট্যাপ করুন</span>
                         </div>
                     </div>
                     <div class="flashcard-face flashcard-back">
@@ -875,13 +853,12 @@
                 <button class="fc-arrow-btn" id="btnNextCard"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
-            <!-- অ্যাড স্লট ২: ফ্ল্যাশকার্ড ও টেবিল ড্রপডাউনের মাঝে -->
             <div class="ad-banner-slot" id="cardMiddleAd"></div>
 
             <div class="vocab-accordion-header" id="btnToggleTable">
                 <div class="acc-title">
-                    <i class="fa-regular fa-hand-point-right"></i>
-                    <span id="accButtonText">লেসন ১ এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন</span>
+                    <i class="fa-solid fa-list-ul" style="color:var(--teal-primary);"></i>
+                    <span id="accButtonText">লেসন ১ এর শব্দার্থ তালিকা দেখুন</span>
                 </div>
                 <i class="fa-solid fa-chevron-right acc-icon" id="accChevron"></i>
             </div>
@@ -890,8 +867,8 @@
                 <table class="vocab-table">
                     <thead>
                         <tr>
-                            <th style="width: 34%;">জাপানিজ<br>(কানা)</th>
-                            <th style="width: 28%;">রোমাজি /<br>উচ্চারণ</th>
+                            <th style="width: 34%;">জাপানিজ (কানা)</th>
+                            <th style="width: 28%;">রোমাজি</th>
                             <th style="width: 28%;">বাংলা অর্থ</th>
                             <th style="width: 10%;">মার্ক</th>
                         </tr>
@@ -904,34 +881,41 @@
             <div class="lesson-jump-nav">
                 <button class="jump-btn prev-btn" id="btnPrevLesson">
                     <span class="jump-label">PREVIOUS</span>
-                    <span class="jump-title" id="prevLessonTitle">(শব্দার্থ) লেসন ০১</span>
+                    <span class="jump-title" id="prevLessonTitle">লেসন ০১</span>
                 </button>
                 <button class="jump-btn next-btn" id="btnNextLesson">
                     <span class="jump-label">NEXT</span>
-                    <span class="jump-title" id="nextLessonTitle">(শব্দার্থ) লেসন ০৩</span>
+                    <span class="jump-title" id="nextLessonTitle">লেসন ০৩</span>
                 </button>
             </div>
 
-            <!-- অ্যাড স্লট ৩: পেজের একদম নিচে -->
             <div class="ad-banner-slot" id="detailBottomAd"></div>
 
         </div>
 
     </main>
 
-    <!-- ফিক্সড বটম বার -->
+    <!-- বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
+            <span>Home</span>
         </a>
         <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span>লিডারবোর্ড</span>
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Path</span>
+        </a>
+        <a href="speak.html" class="nav-item">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <span>Speak</span>
+        </a>
+        <a href="alphabet.html" class="nav-item">
+            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
+            <span>Kana</span>
         </a>
         <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
         </a>
     </nav>
 
@@ -958,7 +942,6 @@
         let currentUserEmail = null;
         let highlightedWords = [];
 
-        // ডাইনামিক অ্যাড লোডার (Adsterra 320x50 Banner)
         function injectAdsterraSlot(containerId, adKey) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1021,7 +1004,7 @@
 
         initPageAds();
 
-        // মিন্না নো নিহোঙ্গো N5 এর সম্পূর্ণ ১ থেকে ২৫ লেসনের শব্দভাণ্ডার
+        // সম্পূর্ণ ১ থেকে ২৫ লেসনের শব্দভাণ্ডার
         const lessons = {
             1: {
                 title: "প্রারম্ভিক শব্দার্থ ও পরিচয়",
@@ -1033,8 +1016,8 @@
                     { kana: "あのひと", ro: "ano hito", bn: "ঐ ব্যক্তি" },
                     { kana: "あのかた", ro: "ano kata", bn: "ঐ ব্যক্তি (ভদ্রভাবে)" },
                     { kana: "みなさん", ro: "minasan", bn: "সবাই" },
-                    { kana: "～さん", ro: "-san", bn: "-জনাব/সাহেব (সম্মানসূচক)" },
-                    { kana: "～ちゃん", ro: "-chan", bn: "-বাচ্চাদের নামের শেষে (স্নেহসূচক)" },
+                    { kana: "～さん", ro: "-san", bn: "-জনাব/সাহেব" },
+                    { kana: "～ちゃん", ro: "-chan", bn: "-বাচ্চাদের নামের শেষে" },
                     { kana: "せんせい", ro: "sensei", bn: "শিক্ষক" },
                     { kana: "きょうし", ro: "kyoushi", bn: "শিক্ষক (পেশা)" },
                     { kana: "がくせい", ro: "gakusei", bn: "ছাত্র / ছাত্রী" },
@@ -1271,7 +1254,7 @@
                     { kana: "かいます", ro: "kaimasu", bn: "কেনা" },
                     { kana: "とります", ro: "torimasu", bn: "ছবি তোলা" },
                     { kana: "します", ro: "shimasu", bn: "করা" },
-                    { kana: "あいます", ro: "aimasu", bn: "দেখা করা (বন্ধুর সাথে)" },
+                    { kana: "あいます", ro: "aimasu", bn: "দেখা করা" },
                     { kana: "ごはん", ro: "gohan", bn: "ভাত / খাবার" },
                     { kana: "あさごはん", ro: "asagohan", bn: "সকালের নাস্তা" },
                     { kana: "ひるごはん", ro: "hirugohan", bn: "দুপুরের খাবার" },
@@ -1311,7 +1294,7 @@
                     { kana: "かります", ro: "karimasu", bn: "ধার নেওয়া" },
                     { kana: "おしえます", ro: "oshiemasu", bn: "শেখানো" },
                     { kana: "ならいます", ro: "naraimasu", bn: "শেখা" },
-                    { kana: "かけます [でんわを~]", ro: "kakemasu", bn: "টেলিফোন করা" },
+                    { kana: "かけます", ro: "kakemasu", bn: "টেলিফোন করা" },
                     { kana: "て", ro: "te", bn: "হাত" },
                     { kana: "はし", ro: "hashi", bn: "চপস্টিক" },
                     { kana: "スプーン", ro: "supuun", bn: "চামচ" },
@@ -1338,7 +1321,7 @@
                     { kana: "ハンサム [な]", ro: "hansamu [na]", bn: "সুদর্শন" },
                     { kana: "きれい [な]", ro: "kirei [na]", bn: "সুন্দর / পরিষ্কার" },
                     { kana: "しずか [な]", ro: "shizuka [na]", bn: "শান্ত" },
-                    { kana: "にぎやか [な]", ro: "nigiyaka [na]", bn: "কোলাহলপূর্ণ / চঞ্চল" },
+                    { kana: "にぎやか [な]", ro: "nigiyaka [na]", bn: "কোলাহলপূর্ণ" },
                     { kana: "ゆうめい [な]", ro: "yuumei [na]", bn: "বিখ্যাত" },
                     { kana: "しんせつ [な]", ro: "shinsetsu [na]", bn: "দয়ালু" },
                     { kana: "げんき [な]", ro: "genki [na]", bn: "সুস্থ / উদ্যমী" },
@@ -1390,7 +1373,7 @@
                     { kana: "こまかいおかね", ro: "komakai okane", bn: "ভাংতি টাকা" },
                     { kana: "じかん", ro: "jikan", bn: "সময়" },
                     { kana: "ようじ", ro: "youji", bn: "জরুরি কাজ" },
-                    { kana: "やくそく", ro: "yakusoku", bn: "প্রতিশ্রুতি / ওয়াদা" },
+                    { kana: "やくそく", ro: "yakusoku", bn: "প্রতিশ্রুতি" },
                     { kana: "よく", ro: "yoku", bn: "ভালোভাবে" },
                     { kana: "だいたい", ro: "daitai", bn: "মোটামুটি" },
                     { kana: "たくさん", ro: "takusan", bn: "অনেক" },
@@ -1491,7 +1474,7 @@
                     { kana: "てんき", ro: "tenki", bn: "আবহাওয়া" },
                     { kana: "あめ", ro: "ame", bn: "বৃষ্টি" },
                     { kana: "ゆき", ro: "yuki", bn: "তুষার" },
-                    { kana: "どちら", ro: "dochira", bn: "কোনটি (দুটির মধ্যে)" },
+                    { kana: "どちら", ro: "dochira", bn: "কোনটি" },
                     { kana: "ずっと", ro: "zutto", bn: "অনেক বেশি" }
                 ]
             },
@@ -1537,7 +1520,7 @@
                     { kana: "はなします", ro: "hanashimasu", bn: "কথা বলা" },
                     { kana: "みせます", ro: "misemasu", bn: "দেখানো" },
                     { kana: "おしえます", ro: "oshiemasu", bn: "শেখানো" },
-                    { kana: "ふります [あめが~]", ro: "furimasu", bn: "বৃষ্টি পড়া" },
+                    { kana: "ふります", ro: "furimasu", bn: "বৃষ্টি পড়া" },
                     { kana: "エアコン", ro: "eakon", bn: "এসি" },
                     { kana: "パスポート", ro: "pasupooto", bn: "পাসপোর্ট" },
                     { kana: "なまえ", ro: "namae", bn: "নাম" },
@@ -1562,7 +1545,7 @@
                     { kana: "けんきゅうします", ro: "kenkyuushimasu", bn: "গবেষণা করা" },
                     { kana: "しっています", ro: "shitte imasu", bn: "জানি" },
                     { kana: "すんでいます", ro: "sunde imasu", bn: "বসবাস করছি" },
-                    { kana: "しりょう", ro: "shiryou", bn: "নথিপত্র / ডকুমেন্ট" },
+                    { kana: "しりょう", ro: "shiryou", bn: "নথিপত্র" },
                     { kana: "カタログ", ro: "katarogu", bn: "ক্যাটালগ" },
                     { kana: "ふく", ro: "fuku", bn: "জামাকাপড়" },
                     { kana: "はいしゃ", ro: "haisha", bn: "দাঁতের ডাক্তার" },
@@ -1573,15 +1556,15 @@
                 title: "ধারাবাহিক কাজ ও শারীরিক অঙ্গ",
                 kanji: "第16課",
                 words: [
-                    { kana: "のります [でんしゃに~]", ro: "norimasu", bn: "চড়া / ওঠা (ট্রেনে)" },
-                    { kana: "おります [でんしゃを~]", ro: "orimasu", bn: "নামা (ট্রেন থেকে)" },
+                    { kana: "のります", ro: "norimasu", bn: "চড়া / ওঠা (ট্রেনে)" },
+                    { kana: "おります", ro: "orimasu", bn: "নামা (ট্রেন থেকে)" },
                     { kana: "のりかえます", ro: "norikaemasu", bn: "ট্রেন পরিবর্তন করা" },
-                    { kana: "あびます [シャワーを~]", ro: "abimasu", bn: "গোসল করা (শাওয়ার)" },
+                    { kana: "あびます", ro: "abimasu", bn: "গোসল করা (শাওয়ার)" },
                     { kana: "いれます", ro: "iremasu", bn: "ভেতরে রাখা / ঢোকানো" },
                     { kana: "だします", ro: "dashimasu", bn: "বের করা / জমা দেওয়া" },
-                    { kana: "おろします [おかねを~]", ro: "oroshimasu", bn: "তোলা (টাকা)" },
-                    { kana: "はいります [だいがくに~]", ro: "hairimasu", bn: "ভর্তি হওয়া / ঢোকা" },
-                    { kana: "でます [だいがくを~]", ro: "demasu", bn: "পাস করা / বের হওয়া" },
+                    { kana: "おろします", ro: "oroshimasu", bn: "তোলা (টাকা)" },
+                    { kana: "はいります", ro: "hairimasu", bn: "ভর্তি হওয়া / ঢোকা" },
+                    { kana: "でます", ro: "demasu", bn: "পাস করা / বের হওয়া" },
                     { kana: "おします", ro: "oshimasu", bn: "চাপা / ধাক্কা দেওয়া" },
                     { kana: "わかい", ro: "wakai", bn: "তরুণ / কমবয়সী" },
                     { kana: "ながい", ro: "nagai", bn: "লম্বা" },
@@ -1634,7 +1617,7 @@
                 words: [
                     { kana: "できます", ro: "dekimasu", bn: "পারতে পারা / সক্ষম হওয়া" },
                     { kana: "あらいます", ro: "araimasu", bn: "ধোয়া / পরিষ্কার করা" },
-                    { kana: "ひきます [ピアノを~]", ro: "hikimasu", bn: "বাজানো (পিয়ানো)" },
+                    { kana: "ひきます", ro: "hikimasu", bn: "বাজানো (পিয়ানো)" },
                     { kana: "うたいます", ro: "utaimasu", bn: "গান গাওয়া" },
                     { kana: "あつめます", ro: "atsumemasu", bn: "সংগ্রহ করা" },
                     { kana: "すてます", ro: "sutemasu", bn: "ফেলে দেওয়া" },
@@ -1657,8 +1640,8 @@
                 title: "অভিজ্ঞতা ও ক্রমান্বয়ে পরিবর্তন",
                 kanji: "第19課",
                 words: [
-                    { kana: "のぼります [やまに~]", ro: "noborimasu", bn: "ওঠা (পাহাড়ে)" },
-                    { kana: "とまります [ホテルに~]", ro: "tomarimasu", bn: "থাকা (হোটেলে রাত্রিযাপন)" },
+                    { kana: "のぼります", ro: "noborimasu", bn: "ওঠা (পাহাড়ে)" },
+                    { kana: "とまります", ro: "tomarimasu", bn: "থাকা (হোটেলে রাত্রিযাপন)" },
                     { kana: "そうじします", ro: "soujishimasu", bn: "ঘর পরিষ্কার করা" },
                     { kana: "せんたくします", ro: "sentakushimasu", bn: "কাপড় ধোয়া" },
                     { kana: "なります", ro: "narimasu", bn: "হওয়া / পরিণত হওয়া" },
@@ -1668,9 +1651,9 @@
                     { kana: "ちょうし", ro: "choushi", bn: "শারীরিক অবস্থা" },
                     { kana: "いちど", ro: "ichido", bn: "একবার" },
                     { kana: "いちども", ro: "ichidomo", bn: "একবারও না" },
-                    { kana: "だんだん", ro: "dandan", bn: "ধীরে ধীরে / ক্রমশ" },
+                    { kana: "だんだん", ro: "dandan", bn: "ধীরে ধীরে" },
                     { kana: "もうすぐ", ro: "mousugu", bn: "খুব শীঘ্রই" },
-                    { kana: "かんぱい", ro: "kanpai", bn: "চিয়ার্স (পানীয় পানের পূর্বে)" },
+                    { kana: "かんぱい", ro: "kanpai", bn: "চিয়ার্স" },
                     { kana: "ダイエット", ro: "daietto", bn: "ডায়েট" }
                 ]
             },
@@ -1678,7 +1661,7 @@
                 title: "অনানুষ্ঠানিক ভাষা (Casual Speech)",
                 kanji: "第20課",
                 words: [
-                    { kana: "いります [ビザが~]", ro: "irimasu", bn: "প্রয়োজন হওয়া (ভিসা)" },
+                    { kana: "いります", ro: "irimasu", bn: "প্রয়োজন হওয়া (ভিসা)" },
                     { kana: "しらべます", ro: "shirabemasu", bn: "তদন্ত করা / খোঁজা" },
                     { kana: "なおします", ro: "naoshimasu", bn: "মেরামত করা" },
                     { kana: "ぼく", ro: "boku", bn: "আমি (পুরুষদের ক্যাজুয়াল)" },
@@ -1724,10 +1707,10 @@
                 title: "পোশাক পরিধান ও বাক্য বিশেষণ",
                 kanji: "第22課",
                 words: [
-                    { kana: "きます [シャツを~]", ro: "kimasu", bn: "পরা (উপরের পোশাক)" },
-                    { kana: "はきます [くつを~]", ro: "hakimasu", bn: "পরা (প্যান্ট/জুতো)" },
-                    { kana: "かぶります [ぼうしを~]", ro: "kaburimasu", bn: "পরা (টুপি)" },
-                    { kana: "かけます [めがねを~]", ro: "kakemasu", bn: "পরা (চশমা)" },
+                    { kana: "きます", ro: "kimasu", bn: "পরা (উপরের পোশাক)" },
+                    { kana: "はきます", ro: "hakimasu", bn: "পরা (প্যান্ট/জুতো)" },
+                    { kana: "かぶります", ro: "kaburimasu", bn: "পরা (টুপি)" },
+                    { kana: "かけます", ro: "kakemasu", bn: "পরা (চশমা)" },
                     { kana: "うまれます", ro: "umaremasu", bn: "জন্মগ্রহণ করা" },
                     { kana: "コート", ro: "kooto", bn: "কোট" },
                     { kana: "スーツ", ro: "suutsu", bn: "স্যুট" },
@@ -1744,14 +1727,14 @@
                 title: "সময়, রাস্তা ও দিকনির্দেশনা",
                 kanji: "第23課",
                 words: [
-                    { kana: "ききます [せんせいに~]", ro: "kikimasu", bn: "জিজ্ঞাসা করা (শিক্ষককে)" },
+                    { kana: "ききます", ro: "kikimasu", bn: "জিজ্ঞাসা করা (শিক্ষককে)" },
                     { kana: "まわします", ro: "mawashimasu", bn: "ঘোরানো" },
                     { kana: "ひきます", ro: "hikimasu", bn: "টানা" },
                     { kana: "かえます", ro: "kaemasu", bn: "পরিবর্তন করা" },
                     { kana: "さわります", ro: "sawarimasu", bn: "স্পর্শ করা" },
                     { kana: "あるきます", ro: "arukimasu", bn: "হাঁটা" },
-                    { kana: "わたります [はしを~]", ro: "watarimasu", bn: "পার হওয়া (সেতু)" },
-                    { kana: "まがります [みぎへ~]", ro: "magarimasu", bn: "মোড় নেওয়া (ডানে)" },
+                    { kana: "わたります", ro: "watarimasu", bn: "পার হওয়া (সেতু)" },
+                    { kana: "まがります", ro: "magarimasu", bn: "মোড় নেওয়া (ডানে)" },
                     { kana: "さびしい", ro: "sabishii", bn: "একাকী / মন খারাপ" },
                     { kana: "おゆ", ro: "oyu", bn: "গরম পানি" },
                     { kana: "おと", ro: "oto", bn: "শব্দ" },
@@ -1771,9 +1754,9 @@
                     { kana: "くれます", ro: "kuremasu", bn: "আমাকে দেওয়া" },
                     { kana: "つれていきます", ro: "tsurete ikimasu", bn: "সাথে নিয়ে যাওয়া" },
                     { kana: "つれてきます", ro: "tsurete kimasu", bn: "সাথে নিয়ে আসা" },
-                    { kana: "おくります [ひとを~]", ro: "okurimasu", bn: "এগিয়ে দেওয়া (মানুষকে)" },
+                    { kana: "おくります", ro: "okurimasu", bn: "এগিয়ে দেওয়া (মানুষকে)" },
                     { kana: "しょうかいします", ro: "shoukaishimasu", bn: "পরিচয় করিয়ে দেওয়া" },
-                    { kana: "あんないします", ro: "annaishimasu", bn: "ঘুরিয়ে দেখানো / পথ প্রদর্শন" },
+                    { kana: "あんないします", ro: "annaishimasu", bn: "ঘুরিয়ে দেখানো" },
                     { kana: "せつめいします", ro: "setsumeishimasu", bn: "ব্যাখ্যা করা" },
                     { kana: "おじいさん", ro: "ojiisan", bn: "দাদা / বৃদ্ধ লোক" },
                     { kana: "おばあさん", ro: "obaasan", bn: "দাদি / বৃদ্ধ মহিলা" },
@@ -1790,17 +1773,17 @@
                 kanji: "第25課",
                 words: [
                     { kana: "かんがえます", ro: "kangaemasu", bn: "চিন্তা করা / বিবেচনা করা" },
-                    { kana: "つきます [えきに~]", ro: "tsukimasu", bn: "পৌঁছানো (স্টেশনে)" },
+                    { kana: "つきます", ro: "tsukimasu", bn: "পৌঁছানো (স্টেশনে)" },
                     { kana: "りゅうがくします", ro: "ryuugakushimasu", bn: "উচ্চশিক্ষার্থে বিদেশে যাওয়া" },
-                    { kana: "とります [としを~]", ro: "torimasu", bn: "বয়স বাড়া" },
+                    { kana: "とります", ro: "torimasu", bn: "বয়স বাড়া" },
                     { kana: "いなか", ro: "inaka", bn: "গ্রামাঞ্চল" },
                     { kana: "チャンス", ro: "chansu", bn: "সুযোগ" },
                     { kana: "おく", ro: "oku", bn: "দশ কোটি (১০০ মিলিয়ন)" },
-                    { kana: "もし [～たら]", ro: "moshi", bn: "যদি..." },
-                    { kana: "いくら [～ても]", ro: "ikura", bn: "যতই হোক না কেন..." },
+                    { kana: "もし", ro: "moshi", bn: "যদি..." },
+                    { kana: "いくら", ro: "ikura", bn: "যতই হোক না কেন..." },
                     { kana: "てんきん", ro: "tenkin", bn: "চাকরি বদলি" },
                     { kana: "がんばります", ro: "ganbarimasu", bn: "সর্বোচ্চ চেষ্টা করা" },
-                    { kana: "どうぞおげんきで", ro: "douzo ogenki de", bn: "ভালো থাকবেন (দীর্ঘ বিদায় সম্ভাষণ)" }
+                    { kana: "どうぞおげんきで", ro: "douzo ogenki de", bn: "ভালো থাকবেন" }
                 ]
             }
         };
@@ -1942,7 +1925,7 @@
             } else {
                 prevBtn.classList.remove("disabled");
                 const formattedNum = prevLessonNum < 10 ? `০${convertBengaliNumber(prevLessonNum)}` : convertBengaliNumber(prevLessonNum);
-                prevTitle.innerText = `(শব্দার্থ) লেসন ${formattedNum}`;
+                prevTitle.innerText = `লেসন ${formattedNum}`;
             }
 
             if (nextLessonNum > 25) {
@@ -1951,7 +1934,7 @@
             } else {
                 nextBtn.classList.remove("disabled");
                 const formattedNum = nextLessonNum < 10 ? `০${convertBengaliNumber(nextLessonNum)}` : convertBengaliNumber(nextLessonNum);
-                nextTitle.innerText = `(শব্দার্থ) লেসন ${formattedNum}`;
+                nextTitle.innerText = `লেসন ${formattedNum}`;
             }
         }
 
@@ -1967,7 +1950,8 @@
 
             document.getElementById("lessonGridView").style.display = "none";
             document.getElementById("lessonDetailView").style.display = "block";
-            document.getElementById("accButtonText").innerText = `লেসন ${convertBengaliNumber(num)} এর গুরুত্বপূর্ণ শব্দার্থ সমূহ দেখুন`;
+            document.getElementById("fcHeaderTitle").innerText = `লেসন ${convertBengaliNumber(num)} ফ্ল্যাশকার্ড`;
+            document.getElementById("accButtonText").innerText = `লেসন ${convertBengaliNumber(num)} এর শব্দার্থ তালিকা দেখুন`;
             
             document.getElementById("tableCard").style.display = "none";
             document.getElementById("accChevron").style.transform = "rotate(0deg)";

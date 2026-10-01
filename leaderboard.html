@@ -6,29 +6,31 @@
     <title>লিডারবোর্ড - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- ফন্ট ও আইকন -->
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-canvas: #F4F6F9;
-            --surface-card: #FFFFFF;
+            --bg-canvas: #F8FAFC;
+            --surface-white: #FFFFFF;
             --text-dark: #1E252D;
             --text-muted: #8E9AAB;
+            
+            --podium-purple: #8B5CF6;
+            --podium-orange: #FB923C;
+            --league-dark: #27272A;
 
-            --teal-primary: #00A896;
-            --teal-soft: #E3F8F2;
+            --progress-orange: #F97316;
+            --progress-purple: #6366F1;
+            --progress-green: #10B981;
 
-            --gold-accent: #F59E0B;
-            --gold-soft: #FEF3C7;
-
-            --border-soft: #EEF1F6;
+            --border-soft: #F1F5F9;
             --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
-            --radius-md: 14px;
-            --radius-lg: 20px;
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --radius-pill: 999px;
         }
 
         * {
@@ -42,358 +44,352 @@
         body {
             background-color: var(--bg-canvas);
             color: var(--text-dark);
-            padding-bottom: 100px;
+            padding-bottom: 150px;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* স্টিকি টপ বার */
-        .top-nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--bg-canvas);
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .container {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 12px 18px;
         }
 
-        .nav-left {
+        /* Top League Shields Carousel */
+        .league-badges-track {
             display: flex;
             align-items: center;
             gap: 12px;
+            overflow-x: auto;
+            padding: 8px 4px 14px;
+            scrollbar-width: none;
         }
+        .league-badges-track::-webkit-scrollbar { display: none; }
 
-        .back-btn {
-            color: var(--text-dark);
-            text-decoration: none;
-            background: var(--surface-card);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+        .shield-badge {
+            width: 44px;
+            height: 48px;
+            background: #FFFFFF;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border-soft);
-            font-size: 13px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-            transition: transform 0.15s ease;
+            font-size: 20px;
+            flex-shrink: 0;
+            color: #CBD5E1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
         }
-        .back-btn:active { transform: scale(0.92); }
 
-        .nav-title {
+        .shield-badge.active {
+            border-color: #FDBA74;
+            background: #FFF7ED;
+            color: #EA580C;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+            transform: scale(1.08);
+        }
+
+        .league-title {
+            font-size: 22px;
             font-weight: 800;
-            font-size: 15.5px;
             color: var(--text-dark);
+            margin: 4px 0 14px;
         }
 
-        .live-tag {
+        /* Switcher: My League / Friends League */
+        .tab-switcher {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--teal-soft);
-            color: var(--teal-primary);
+            background: #E2E8F0;
+            border-radius: var(--radius-pill);
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 9px;
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--league-dark);
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        /* MY PROGRESS Section */
+        .section-label {
             font-size: 11px;
             font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 20px;
-        }
-
-        .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--teal-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(0, 168, 150, 0.7);
-            animation: pulse 1.6s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 168, 150, 0.6); }
-            70% { box-shadow: 0 0 0 7px rgba(0, 168, 150, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 168, 150, 0); }
-        }
-
-        .page-content {
-            padding: 6px 18px 24px;
-            max-width: 440px;
-            margin: 0 auto;
-        }
-
-        .loading-state {
-            text-align: center;
-            padding: 60px 16px;
             color: var(--text-muted);
-            font-size: 13.5px;
-            font-weight: 600;
-        }
-        .loading-state i {
-            font-size: 30px;
-            color: var(--teal-primary);
-            margin-bottom: 12px;
-            display: block;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
         }
 
-        /* পোডিয়াম সেকশন */
-        .podium-section {
-            background: linear-gradient(135deg, var(--teal-primary) 0%, #087F71 100%);
-            border-radius: 24px;
-            padding: 24px 12px 16px;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+        .progress-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 22px;
-            box-shadow: 0 12px 28px -6px rgba(0, 168, 150, 0.35);
-            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .prog-card {
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 12px 10px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .prog-track {
+            width: 100%;
+            height: 8px;
+            background: #F1F5F9;
+            border-radius: 99px;
             overflow: hidden;
         }
 
-        .podium-col {
+        .prog-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 0.4s ease;
+        }
+
+        .fill-orange { background: var(--progress-orange); }
+        .fill-purple { background: var(--progress-purple); }
+        .fill-green  { background: var(--progress-green); }
+
+        .prog-meta {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10.5px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .prog-meta i { font-size: 11px; }
+
+        /* Podium Layout */
+        .podium-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-top: 10px;
+        }
+
+        .podium-column {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 32%;
-            position: relative;
-            z-index: 2;
+            width: 30%;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.15s ease;
         }
-        .podium-col:active {
-            transform: scale(0.96);
+        .podium-column:active { transform: scale(0.96); }
+
+        .user-avatar-wrap {
+            position: relative;
+            margin-bottom: 6px;
         }
 
         .podium-avatar {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 800;
-            color: #ffffff;
-            border: 2.5px solid transparent;
-            margin-bottom: 8px;
-            position: relative;
-            background: #096B5F;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-        }
-
-        .podium-avatar img {
-            width: 100%;
-            height: 100%;
+            background: #E2E8F0;
+            border: 2.5px solid #FFFFFF;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .podium-avatar.first {
-            width: 66px;
-            height: 66px;
-            font-size: 22px;
-            border-color: #FDE047;
-            background: #0D8274;
-            box-shadow: 0 0 20px rgba(253, 224, 71, 0.4);
-        }
-
-        .podium-avatar.second {
-            border-color: #E2E8F0;
-        }
-
-        .podium-avatar.third {
-            border-color: #FDBA74;
-        }
-
-        .crown-icon {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #FDE047;
-            font-size: 20px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
-            animation: crownBounce 2s infinite ease-in-out;
-        }
-
-        @keyframes crownBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-3px); }
-        }
-
-        .podium-name-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            max-width: 95px;
-            margin-bottom: 3px;
+            font-weight: 800;
+            color: var(--text-dark);
+            overflow: hidden;
         }
 
-        .podium-name {
-            font-size: 12.5px;
+        .podium-column.first .podium-avatar {
+            width: 60px;
+            height: 60px;
+            border-color: #EDE9FE;
+        }
+
+        .podium-user-name {
+            font-size: 11.5px;
             font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            color: #ffffff;
-        }
-
-        .podium-xp {
-            font-size: 10.5px;
-            color: #E6FFFA;
-            font-weight: 800;
+            max-width: 90px;
             margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.16);
-            padding: 2px 8px;
-            border-radius: 12px;
         }
 
-        .podium-step {
+        .podium-box {
             width: 100%;
-            border-radius: 14px 14px 6px 6px;
+            border-radius: 18px 18px 8px 8px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 15px;
+            justify-content: flex-start;
+            padding-top: 8px;
+            color: #FFFFFF;
+            position: relative;
         }
 
-        .step-1 { height: 76px; background: rgba(253, 224, 71, 0.22); color: #FEF08A; border-top: 3px solid #FDE047; }
-        .step-2 { height: 56px; background: rgba(255, 255, 255, 0.18); color: #F8FAFC; border-top: 3px solid #E2E8F0; }
-        .step-3 { height: 44px; background: rgba(253, 186, 116, 0.22); color: #FED7AA; border-top: 3px solid #FDBA74; }
-
-        /* ভেরিফাইড ও রোল ব্যাজ */
-        .verified-badge {
-            color: #38BDF8;
-            font-size: 12px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .admin-badge {
-            background: var(--gold-soft);
-            color: #D97706;
-            font-size: 9px;
+        .score-pill-inside {
+            background: #FFFFFF;
+            border-radius: var(--radius-pill);
+            padding: 2px 7px;
+            font-size: 9.5px;
             font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 6px;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 3px;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* লিস্ট সেকশন */
-        .list-section-title {
-            font-size: 14.5px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+        .first-score { color: var(--podium-purple); }
+        .side-score { color: var(--podium-orange); }
+
+        .podium-rank-num {
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .box-first  { height: 110px; background: var(--podium-purple); }
+        .box-second { height: 80px;  background: var(--podium-orange); }
+        .box-third  { height: 70px;  background: var(--podium-orange); }
+
+        /* Rankings List */
+        .ranking-list {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 4px;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .leader-card {
-            background: var(--surface-card);
+        .rank-card {
+            background: #FFFFFF;
             border: 1px solid var(--border-soft);
             border-radius: 18px;
             padding: 12px 14px;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            justify-content: space-between;
             box-shadow: var(--shadow-subtle);
-            transition: transform 0.15s ease;
             cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            transition: transform 0.15s;
+        }
+        .rank-card:active { transform: scale(0.98); }
+
+        .rank-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .leader-card:active {
-            transform: scale(0.98);
-        }
-
-        .leader-card.current-user-card {
-            border: 1.5px solid var(--teal-primary);
-            background: #FAFEFD;
-        }
-
-        .leader-card.admin-card {
-            border: 1.5px solid #FDE68A;
-        }
-
-        .rank-number {
-            font-size: 14px;
+        .rank-index {
+            font-size: 13px;
             font-weight: 800;
-            width: 26px;
             color: var(--text-muted);
-            flex-shrink: 0;
+            width: 20px;
         }
 
-        .user-icon-circle {
-            width: 42px;
-            height: 42px;
+        .card-avatar {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--teal-soft);
-            color: var(--teal-primary);
+            background: #F1F5F9;
+            object-fit: cover;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
             font-weight: 800;
-            margin-right: 12px;
-            flex-shrink: 0;
-            overflow: hidden;
-            border: 2px solid #CCF2E6;
-        }
-
-        .user-icon-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-meta {
-            flex: 1;
+            font-size: 13px;
+            color: var(--text-dark);
             overflow: hidden;
         }
 
-        .user-title-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .card-info h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
             margin-bottom: 2px;
         }
 
-        .user-title-row h4 {
-            font-size: 13.5px;
+        .card-league-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .score-pill-right {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
             font-weight: 800;
             color: var(--text-dark);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+        .score-pill-right i { color: #F59E0B; }
+
+        /* Floating Bottom "YOU" Card */
+        .floating-current-user {
+            position: fixed;
+            bottom: 74px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 36px);
+            max-width: 404px;
+            background: #FFFFFF;
+            border: 1.5px solid #FDBA74;
+            box-shadow: var(--shadow-float);
+            border-radius: 20px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 500;
+            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .user-meta p {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
+        @keyframes slideUp {
+            from { transform: translate(-50%, 20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
         }
 
-        .xp-score {
-            font-size: 12.5px;
+        .badge-you-pill {
+            background: #EA580C;
+            color: #FFFFFF;
+            font-size: 9.5px;
             font-weight: 800;
-            color: var(--teal-primary);
-            background: var(--teal-soft);
-            padding: 5px 11px;
-            border-radius: 12px;
-            white-space: nowrap;
-            margin-left: 8px;
+            padding: 2px 7px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
         }
 
-        /* বটম ন্যাভিগেশন বার */
+        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -428,89 +424,145 @@
         }
 
         .nav-item.active {
-            color: var(--teal-primary);
+            color: #8B5CF6;
             font-weight: 800;
         }
     </style>
 </head>
 <body>
 
-    <!-- টপ বার -->
-    <header class="top-nav">
-        <div class="nav-left">
-            <a href="index.html" class="back-btn" aria-label="হোমে যান">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <span class="nav-title">লিডারবোর্ড</span>
-        </div>
-        <div class="live-tag">
-            <span class="pulse-dot"></span>
-            <span>লাইভ</span>
-        </div>
-    </header>
+    <main class="container">
 
-    <main class="page-content">
-
-        <div id="loadingBox" class="loading-state">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <span>র‍্যাঙ্কিং লোড হচ্ছে...</span>
+        <!-- Top League Carousel -->
+        <div class="league-badges-track">
+            <div class="shield-badge active" title="Bronze League"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
         </div>
 
-        <div id="leaderboardContent" style="display: none;">
-            <!-- পোডিয়াম -->
-            <div class="podium-section">
-                <!-- ২য় স্থান -->
-                <div class="podium-col" id="podiumCol2">
-                    <div class="podium-avatar second" id="rank2AvatarContainer">
-                        <span id="rank2Avatar">২</span>
-                    </div>
-                    <div class="podium-name-box">
-                        <span class="podium-name" id="rank2Name">---</span>
-                        <span id="rank2Badges"></span>
-                    </div>
-                    <span class="podium-xp" id="rank2XP">0 XP</span>
-                    <div class="podium-step step-2">২</div>
+        <h1 class="league-title" id="currentLeagueTitle">Bronze League</h1>
+
+        <!-- My League / Friends League Switcher -->
+        <div class="tab-switcher">
+            <button class="tab-btn active" id="btnMyLeague">My League</button>
+            <button class="tab-btn" id="btnFriendsLeague">Friends League</button>
+        </div>
+
+        <!-- MY PROGRESS Section -->
+        <div class="section-label">MY PROGRESS</div>
+        <div class="progress-cards-grid">
+            
+            <!-- XP Progress Card -->
+            <div class="prog-card">
+                <div class="prog-track">
+                    <div class="prog-fill fill-orange" id="progXpFill" style="width: 45%;"></div>
                 </div>
-
-                <!-- ১ম স্থান -->
-                <div class="podium-col" id="podiumCol1">
-                    <div class="podium-avatar first" id="rank1AvatarContainer">
-                        <i class="fa-solid fa-crown crown-icon"></i>
-                        <span id="rank1Avatar">১</span>
-                    </div>
-                    <div class="podium-name-box">
-                        <span class="podium-name" id="rank1Name">---</span>
-                        <span id="rank1Badges"></span>
-                    </div>
-                    <span class="podium-xp" id="rank1XP">0 XP</span>
-                    <div class="podium-step step-1">১</div>
-                </div>
-
-                <!-- ৩য় স্থান -->
-                <div class="podium-col" id="podiumCol3">
-                    <div class="podium-avatar third" id="rank3AvatarContainer">
-                        <span id="rank3Avatar">৩</span>
-                    </div>
-                    <div class="podium-name-box">
-                        <span class="podium-name" id="rank3Name">---</span>
-                        <span id="rank3Badges"></span>
-                    </div>
-                    <span class="podium-xp" id="rank3XP">0 XP</span>
-                    <div class="podium-step step-3">৩</div>
+                <div class="prog-meta">
+                    <i class="fa-solid fa-bolt" style="color:var(--progress-orange);"></i>
+                    <span id="progXpText">0/500</span>
                 </div>
             </div>
 
-            <div class="list-section-title">
-                <span>র‍্যাঙ্কিং তালিকা</span>
-                <span style="font-size: 11.5px; color: var(--teal-primary); font-weight: 800;"><i class="fa-solid fa-bolt"></i> অর্জিত পয়েন্ট</span>
+            <!-- Lessons Progress Card -->
+            <div class="prog-card">
+                <div class="prog-track">
+                    <div class="prog-fill fill-purple" id="progLessonFill" style="width: 50%;"></div>
+                </div>
+                <div class="prog-meta">
+                    <i class="fa-solid fa-book-bookmark" style="color:var(--progress-purple);"></i>
+                    <span id="progLessonText">12/25</span>
+                </div>
             </div>
 
-            <div id="leaderboardList"></div>
+            <!-- Streak Progress Card -->
+            <div class="prog-card">
+                <div class="prog-track">
+                    <div class="prog-fill fill-green" id="progStreakFill" style="width: 52%;"></div>
+                </div>
+                <div class="prog-meta">
+                    <i class="fa-solid fa-fire" style="color:var(--progress-green);"></i>
+                    <span id="progStreakText">12/30</span>
+                </div>
+            </div>
         </div>
+
+        <!-- Podium Section (Top 3 Users) -->
+        <div class="podium-container" id="podiumContainer">
+            
+            <!-- 2nd Place -->
+            <div class="podium-column second" id="podiumCol2">
+                <div class="user-avatar-wrap">
+                    <div class="podium-avatar" id="avatar2">?</div>
+                </div>
+                <div class="podium-user-name" id="name2">লোড হচ্ছে...</div>
+                <div class="podium-box box-second">
+                    <div class="score-pill-inside side-score">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span id="score2">0</span>
+                    </div>
+                    <div class="podium-rank-num">2</div>
+                </div>
+            </div>
+
+            <!-- 1st Place -->
+            <div class="podium-column first" id="podiumCol1">
+                <div class="user-avatar-wrap">
+                    <div class="podium-avatar" id="avatar1">?</div>
+                </div>
+                <div class="podium-user-name" id="name1">লোড হচ্ছে...</div>
+                <div class="podium-box box-first">
+                    <div class="score-pill-inside first-score">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span id="score1">0</span>
+                    </div>
+                    <div class="podium-rank-num">1</div>
+                </div>
+            </div>
+
+            <!-- 3rd Place -->
+            <div class="podium-column third" id="podiumCol3">
+                <div class="user-avatar-wrap">
+                    <div class="podium-avatar" id="avatar3">?</div>
+                </div>
+                <div class="podium-user-name" id="name3">লোড হচ্ছে...</div>
+                <div class="podium-box box-third">
+                    <div class="score-pill-inside side-score">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span id="score3">0</span>
+                    </div>
+                    <div class="podium-rank-num">3</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Ranking List Below Podium (4th and beyond) -->
+        <div class="ranking-list" id="rankingList"></div>
 
     </main>
 
-    <!-- বটম ন্যাভিগেশন বার (Path ট্যাব সক্রিয়) -->
+    <!-- Floating Current User Status (YOU) -->
+    <div class="floating-current-user" id="floatingUserCard" style="display: none;">
+        <div class="rank-left">
+            <span class="rank-index" id="myRankIndex">#--</span>
+            <div class="card-avatar" id="myAvatar">U</div>
+            <div class="card-info">
+                <h4>
+                    <span id="myName">শিক্ষার্থী</span>
+                    <span class="badge-you-pill">You <span id="myRankSub">#--</span></span>
+                </h4>
+                <div class="card-league-tag"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
+            </div>
+        </div>
+        <div class="score-pill-right">
+            <span id="myXpScore">0</span>
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -528,16 +580,17 @@
             <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
             <span>Kana</span>
         </a>
-        <a href="profile.html" class="nav-item" id="bottomAuthBtn">
-            <i class="fa-regular fa-user" id="bottomAuthIcon"></i>
-            <span id="bottomAuthText">Profile</span>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
         </a>
     </nav>
 
+    <!-- Firebase Realtime Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
@@ -553,122 +606,68 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const ADMIN_EMAIL = "qr.siamsikder@gmail.com";
-
         let currentUserId = null;
         let currentUserEmail = null;
 
-        const bottomAuthBtn = document.getElementById("bottomAuthBtn");
-        const bottomAuthIcon = document.getElementById("bottomAuthIcon");
-        const bottomAuthText = document.getElementById("bottomAuthText");
+        const floatingUserCard = document.getElementById("floatingUserCard");
+        const progXpFill = document.getElementById("progXpFill");
+        const progXpText = document.getElementById("progXpText");
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUserId = user.uid;
-                currentUserEmail = user.email ? user.email.toLowerCase() : null;
-                bottomAuthBtn.href = "profile.html";
-                bottomAuthIcon.className = "fa-regular fa-user";
-                bottomAuthText.innerText = "Profile";
-
+                currentUserEmail = user.email ? user.email.toLowerCase().trim() : null;
+                floatingUserCard.style.display = "flex";
+                
+                // নিজের ডাটা নিয়ে প্রগ্রেস বার আপডেট
+                const docId = currentUserEmail || currentUserId;
                 try {
-                    const docId = user.email ? user.email.toLowerCase() : user.uid;
-                    const userRef = doc(db, "users", docId);
-                    await setDoc(userRef, {
-                        name: user.displayName || user.email.split('@')[0],
-                        email: user.email,
-                        xp: 0
-                    }, { merge: true });
-                } catch (e) {
-                    console.warn("User auto-init info:", e);
-                }
+                    const snap = await getDoc(doc(db, "users", docId));
+                    if (snap.exists()) {
+                        const d = snap.data();
+                        const myXp = typeof d.xp === 'number' ? d.xp : 0;
+                        const targetXp = 500;
+                        const pct = Math.min(100, Math.round((myXp / targetXp) * 100));
+                        progXpFill.style.width = `${pct}%`;
+                        progXpText.innerText = `${myXp}/${targetXp}`;
+                    }
+                } catch(e) { console.warn(e); }
             } else {
                 currentUserId = null;
                 currentUserEmail = null;
-                bottomAuthBtn.href = "login.html";
-                bottomAuthIcon.className = "fa-solid fa-arrow-right-to-bracket";
-                bottomAuthText.innerText = "লগইন";
+                floatingUserCard.style.display = "none";
             }
         });
 
-        const loadingBox = document.getElementById("loadingBox");
-        const leaderboardContent = document.getElementById("leaderboardContent");
-        const leaderboardList = document.getElementById("leaderboardList");
-
-        const usersCol = collection(db, "users");
-
-        window.openUserProfile = function(user) {
-            if (!user) return;
-            const isCurrent = (user.id === currentUserId || (currentUserEmail && user.email === currentUserEmail));
-            if (isCurrent) {
-                window.location.href = "profile.html";
-                return;
-            }
-            const param = user.email ? `email=${encodeURIComponent(user.email)}` : `uid=${encodeURIComponent(user.id)}`;
-            window.location.href = `profile.html?${param}`;
-        };
-
-        onSnapshot(usersCol, (snapshot) => {
-            let users = [];
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                const userEmail = (data.email || (doc.id.includes("@") ? doc.id : "")).toLowerCase();
-                const isAdmin = (userEmail === ADMIN_EMAIL.toLowerCase());
-
-                users.push({
-                    id: doc.id,
-                    email: userEmail,
-                    name: data.userName || data.name || (userEmail ? userEmail.split('@')[0] : "শিক্ষার্থী"),
-                    xp: typeof data.xp === "number" ? data.xp : 0,
-                    photo: data.photoBase64 || data.photoURL || null,
-                    isAdmin: isAdmin
-                });
-            });
-
-            users.sort((a, b) => b.xp - a.xp);
-
-            loadingBox.style.display = "none";
-            leaderboardContent.style.display = "block";
-
-            renderPodium(users);
-            renderList(users);
-        }, (error) => {
-            console.error("Firestore Snapshot Error:", error);
-            loadingBox.innerHTML = `
-                <span style="color: #ef4444; font-weight: 700;">ডাটাবেস এক্সেস করা যায়নি!</span>
-                <p style="font-size: 11px; color: #64748b; margin-top: 5px;">Firestore Rules পরীক্ষা করুন।</p>
-            `;
-        });
-
-        function getFirstLetter(name) {
+        // ইউজারের নামের ১ম অক্ষর নেওয়া
+        function getAvatarHtml(photo, name) {
+            if (photo) return `<img src="${photo}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
             return name ? name.trim().charAt(0).toUpperCase() : "U";
         }
 
-        function getUserLevel(xp, isAdmin) {
-            if (isAdmin) return "অ্যাডমিনিস্ট্রেটর";
-            if (xp >= 1000) return "মাস্টার লার্নার (N4)";
-            if (xp >= 500) return "অ্যাডভান্সড শিক্ষার্থী";
-            if (xp >= 200) return "এক্টিভ লার্নার";
-            return "বিগিনার শিক্ষার্থী";
-        }
+        // রিয়েল-টাইম লিডারবোর্ড আপডেট
+        const usersCol = collection(db, "users");
+        onSnapshot(usersCol, (snapshot) => {
+            let users = [];
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const email = (data.email || (docSnap.id.includes("@") ? docSnap.id : "")).toLowerCase();
+                users.push({
+                    id: docSnap.id,
+                    email: email,
+                    name: data.userName || data.name || (email ? email.split('@')[0] : "শিক্ষার্থী"),
+                    xp: typeof data.xp === "number" ? data.xp : 0,
+                    photo: data.photoBase64 || data.photoURL || null
+                });
+            });
 
-        function getBadgeHtml(isAdmin, isSmall = false) {
-            if (!isAdmin) return '';
-            const adminText = isSmall ? '' : '<span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> ADMIN</span>';
-            return `
-                <i class="fa-solid fa-circle-check verified-badge" title="অফিশিয়াল ভেরিফাইড"></i>
-                ${adminText}
-            `;
-        }
+            // XP অনুযায়ী সর্ট
+            users.sort((a, b) => b.xp - a.xp);
 
-        function setAvatarElement(container, user, isFirst = false) {
-            const crownHtml = isFirst ? '<i class="fa-solid fa-crown crown-icon"></i>' : '';
-            if (user && user.photo) {
-                container.innerHTML = `${crownHtml}<img src="${user.photo}" alt="${user.name}">`;
-            } else {
-                const initial = user ? getFirstLetter(user.name) : "-";
-                container.innerHTML = `${crownHtml}<span>${initial}</span>`;
-            }
-        }
+            renderPodium(users);
+            renderList(users);
+            updateMyFloatingStatus(users);
+        });
 
         function renderPodium(users) {
             const u1 = users[0];
@@ -676,67 +675,81 @@
             const u3 = users[2];
 
             // ১ম স্থান
-            document.getElementById("rank1Name").innerText = u1 ? u1.name : "খালি";
-            document.getElementById("rank1XP").innerText = u1 ? `${u1.xp} XP` : "০ XP";
-            document.getElementById("rank1Badges").innerHTML = u1 ? getBadgeHtml(u1.isAdmin, true) : "";
-            setAvatarElement(document.getElementById("rank1AvatarContainer"), u1, true);
-            document.getElementById("podiumCol1").onclick = () => openUserProfile(u1);
+            document.getElementById("name1").innerText = u1 ? u1.name : "খালি";
+            document.getElementById("score1").innerText = u1 ? u1.xp : "0";
+            document.getElementById("avatar1").innerHTML = u1 ? getAvatarHtml(u1.photo, u1.name) : "?";
+            document.getElementById("podiumCol1").onclick = () => openProfile(u1);
 
             // ২য় স্থান
-            document.getElementById("rank2Name").innerText = u2 ? u2.name : "খালি";
-            document.getElementById("rank2XP").innerText = u2 ? `${u2.xp} XP` : "০ XP";
-            document.getElementById("rank2Badges").innerHTML = u2 ? getBadgeHtml(u2.isAdmin, true) : "";
-            setAvatarElement(document.getElementById("rank2AvatarContainer"), u2, false);
-            document.getElementById("podiumCol2").onclick = () => openUserProfile(u2);
+            document.getElementById("name2").innerText = u2 ? u2.name : "খালি";
+            document.getElementById("score2").innerText = u2 ? u2.xp : "0";
+            document.getElementById("avatar2").innerHTML = u2 ? getAvatarHtml(u2.photo, u2.name) : "?";
+            document.getElementById("podiumCol2").onclick = () => openProfile(u2);
 
             // ৩য় স্থান
-            document.getElementById("rank3Name").innerText = u3 ? u3.name : "খালি";
-            document.getElementById("rank3XP").innerText = u3 ? `${u3.xp} XP` : "০ XP";
-            document.getElementById("rank3Badges").innerHTML = u3 ? getBadgeHtml(u3.isAdmin, true) : "";
-            setAvatarElement(document.getElementById("rank3AvatarContainer"), u3, false);
-            document.getElementById("podiumCol3").onclick = () => openUserProfile(u3);
+            document.getElementById("name3").innerText = u3 ? u3.name : "খালি";
+            document.getElementById("score3").innerText = u3 ? u3.xp : "0";
+            document.getElementById("avatar3").innerHTML = u3 ? getAvatarHtml(u3.photo, u3.name) : "?";
+            document.getElementById("podiumCol3").onclick = () => openProfile(u3);
         }
 
         function renderList(users) {
-            leaderboardList.innerHTML = "";
-
-            if (users.length === 0) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 25px; color:#8E9AAB; font-size:13px;">এখনও কোনো শিক্ষার্থী যুক্ত হয়নি।</div>`;
-                return;
-            }
+            const listEl = document.getElementById("rankingList");
+            listEl.innerHTML = "";
 
             if (users.length <= 3) {
-                leaderboardList.innerHTML = `<div style="text-align:center; padding: 20px; color:#8E9AAB; font-size:13px;">শীর্ষ ৩ জন পোডিয়ামে প্রদর্শিত হচ্ছে।</div>`;
+                listEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);font-size:12px;padding:20px 0;">শীর্ষ ৩ জন পোডিয়ামে প্রদর্শিত হচ্ছে।</p>`;
                 return;
             }
 
             for (let i = 3; i < users.length; i++) {
                 const user = users[i];
-                const isCurrent = (user.id === currentUserId || (currentUserEmail && user.email === currentUserEmail));
-
-                const avatarHtml = user.photo 
-                    ? `<img src="${user.photo}" alt="${user.name}">` 
-                    : getFirstLetter(user.name);
-
                 const card = document.createElement("div");
-                card.className = `leader-card ${isCurrent ? 'current-user-card' : ''} ${user.isAdmin ? 'admin-card' : ''}`;
-                card.onclick = () => openUserProfile(user);
+                card.className = "rank-card";
+                card.onclick = () => openProfile(user);
 
                 card.innerHTML = `
-                    <span class="rank-number">${i + 1}</span>
-                    <div class="user-icon-circle">${avatarHtml}</div>
-                    <div class="user-meta">
-                        <div class="user-title-row">
+                    <div class="rank-left">
+                        <span class="rank-index">${i + 1 < 10 ? '0' + (i + 1) : i + 1}</span>
+                        <div class="card-avatar">${getAvatarHtml(user.photo, user.name)}</div>
+                        <div class="card-info">
                             <h4>${user.name}</h4>
-                            ${getBadgeHtml(user.isAdmin, false)}
-                            ${isCurrent ? '<span style="font-size:10px; color:var(--teal-primary); font-weight:800;">(আপনি)</span>' : ''}
+                            <div class="card-league-tag"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
                         </div>
-                        <p>${getUserLevel(user.xp, user.isAdmin)}</p>
                     </div>
-                    <span class="xp-score">${user.xp} XP</span>
+                    <div class="score-pill-right">
+                        <span>${user.xp}</span>
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
                 `;
-                leaderboardList.appendChild(card);
+                listEl.appendChild(card);
             }
+        }
+
+        function updateMyFloatingStatus(users) {
+            if (!currentUserEmail && !currentUserId) return;
+            const myIndex = users.findIndex(u => u.id === currentUserId || u.email === currentUserEmail);
+            
+            if (myIndex !== -1) {
+                const me = users[myIndex];
+                const rankNum = myIndex + 1;
+                document.getElementById("myRankIndex").innerText = rankNum < 10 ? `0${rankNum}` : rankNum;
+                document.getElementById("myRankSub").innerText = `#${rankNum}`;
+                document.getElementById("myName").innerText = me.name;
+                document.getElementById("myXpScore").innerText = me.xp;
+                document.getElementById("myAvatar").innerHTML = getAvatarHtml(me.photo, me.name);
+            }
+        }
+
+        function openProfile(user) {
+            if (!user) return;
+            const isMe = (user.id === currentUserId || (currentUserEmail && user.email === currentUserEmail));
+            if (isMe) {
+                window.location.href = "profile.html";
+                return;
+            }
+            const query = user.email ? `email=${encodeURIComponent(user.email)}` : `uid=${encodeURIComponent(user.id)}`;
+            window.location.href = `profile.html?${query}`;
         }
     </script>
 </body>

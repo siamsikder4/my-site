@@ -8,48 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Klee+One:wght@600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Index পেজের কালার প্যালেট */
-            --paper: #fbf7ef;
-            --ink: #182620;
-            --pine: #0B4A38;
-            --jade: #147A57;
-            --clay: #B6472E;
-            --gold: #A9781F;
-            --mist: #7C8A82;
-            --line: #E9E2D3;
-            --card-bg: #ffffff;
+            --bg-canvas: #F4F6F9;
+            --surface-card: #FFFFFF;
+            --text-dark: #1E252D;
+            --text-muted: #8E9AAB;
+
+            --teal-primary: #00A896;
+            --teal-soft: #E3F8F2;
+
+            --pink-main: #EB5757;
+            --pink-soft: #FEECEF;
+
+            --purple-main: #9B51E0;
+            --purple-soft: #F5EDFA;
+
+            --orange-main: #F2994A;
+            --orange-soft: #FFF4E8;
+
+            --blue-main: #2D9CDB;
+            --blue-soft: #E8F5FD;
+
+            --border-soft: #EEF1F6;
+            --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+            --radius-md: 14px;
+            --radius-lg: 20px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--paper);
-            color: var(--ink);
-            padding-bottom: 90px;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            padding-bottom: 100px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* স্টিকি টপ বার */
         .top-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 18px;
-            background: rgba(251, 247, 239, 0.94);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 100;
+            background: var(--bg-canvas);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .nav-left {
@@ -59,121 +73,122 @@
         }
 
         .back-btn {
+            color: var(--text-dark);
             text-decoration: none;
-            color: var(--pine);
-            background: #F0EAD9;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            background: var(--surface-card);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--line);
+            border: 1px solid var(--border-soft);
             cursor: pointer;
-            font-size: 15px;
-            transition: transform 0.15s;
+            font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: transform 0.15s ease;
         }
-
         .back-btn:active { transform: scale(0.92); }
 
         .logo-text {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 17px;
-            color: var(--pine);
+            font-weight: 800;
+            font-size: 15.5px;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 6px;
-            letter-spacing: 0.5px;
         }
 
         .level-pill {
-            background: var(--pine);
-            color: #ffffff;
+            background: var(--pink-soft);
+            color: var(--pink-main);
             font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 8px;
         }
 
         .container {
-            padding: 14px 16px;
-            max-width: 480px;
+            padding: 6px 18px 24px;
+            max-width: 440px;
             margin: 0 auto;
         }
 
         .subtitle-bar {
             text-align: center;
-            font-size: 12.5px;
-            color: var(--mist);
-            font-weight: 600;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            font-weight: 700;
             margin-bottom: 16px;
-            background: #F0EAD9;
-            padding: 6px 14px;
+            background: var(--surface-card);
+            padding: 8px 14px;
             border-radius: 20px;
-            border: 1px solid var(--line);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-subtle);
         }
 
         /* লেসন গ্রিড */
         .lesson-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 11px;
+            gap: 12px;
         }
 
         .lesson-card {
-            background: var(--card-bg);
-            border: 1px solid var(--line);
-            border-left: 4px solid var(--jade);
-            border-radius: 14px;
-            padding: 15px 12px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 16px 14px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(11, 74, 56, 0.04);
+            box-shadow: var(--shadow-subtle);
             transition: transform 0.15s ease, border-color 0.15s ease;
+            position: relative;
         }
 
-        .lesson-card:active { transform: scale(0.97); }
+        .lesson-card:active { transform: scale(0.96); }
 
         .card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .kl-badge {
-            background: #E6F3EC;
-            color: var(--jade);
+            background: var(--pink-soft);
+            color: var(--pink-main);
             font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 8px;
         }
 
         .kanji-watermark {
             font-family: 'Klee One', sans-serif;
             font-size: 14px;
-            color: var(--mist);
+            color: var(--text-muted);
             font-weight: 700;
         }
 
         .card-lesson-title {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 2px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 3px;
         }
 
         .card-lesson-desc {
             font-size: 11px;
-            color: var(--mist);
+            color: var(--text-muted);
+            font-weight: 600;
+            line-height: 1.35;
         }
 
         .card-arrow {
             display: flex;
             justify-content: flex-end;
-            margin-top: 6px;
-            color: #cbd5e1;
+            margin-top: 10px;
+            color: #CBD5E1;
             font-size: 11px;
         }
 
@@ -182,34 +197,40 @@
 
         .view-header {
             text-align: center;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .view-header h3 {
-            font-size: 17.5px;
+            font-size: 16.5px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
         }
 
         .kanji-item {
-            margin-bottom: 11px;
-            border-radius: 14px;
+            margin-bottom: 12px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
-            border: 1px solid var(--line);
-            background: var(--card-bg);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-soft);
+            background: var(--surface-card);
         }
 
         .kanji-header {
-            background: var(--pine);
-            color: #ffffff;
-            padding: 13px 16px;
+            background: var(--surface-card);
+            color: var(--text-dark);
+            padding: 15px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14.5px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background 0.15s;
+        }
+
+        .kanji-item.open .kanji-header {
+            background: #FAFCFE;
+            border-bottom: 1px solid var(--border-soft);
         }
 
         .kanji-header .left-info {
@@ -219,19 +240,23 @@
         }
 
         .kanji-header .left-info .icon-box {
-            background: rgba(255, 255, 255, 0.18);
-            padding: 2px 7px;
-            border-radius: 6px;
+            background: var(--pink-soft);
+            color: var(--pink-main);
+            padding: 4px 8px;
+            border-radius: 8px;
             font-size: 12px;
+            font-weight: 800;
         }
 
         .kanji-header .arrow-icon {
-            font-size: 13px;
+            font-size: 12px;
+            color: var(--text-muted);
             transition: transform 0.25s ease;
         }
 
         .kanji-item.open .arrow-icon {
             transform: rotate(90deg);
+            color: var(--teal-primary);
         }
 
         .kanji-body {
@@ -245,13 +270,13 @@
         }
 
         .kanji-anim-stage {
-            width: 170px;
-            height: 170px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto 16px;
             position: relative;
-            background: #FAF7F0;
-            border: 1.5px dashed #D2DDD6;
-            border-radius: 18px;
+            background: var(--bg-canvas);
+            border: 1.5px dashed #CBD5E1;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -263,7 +288,7 @@
             position: absolute;
             left: 50%; top: 0; bottom: 0;
             width: 1px;
-            border-left: 1px dashed var(--line);
+            border-left: 1px dashed #CBD5E1;
             pointer-events: none;
             z-index: 1;
         }
@@ -273,14 +298,14 @@
             position: absolute;
             top: 50%; left: 0; right: 0;
             height: 1px;
-            border-top: 1px dashed var(--line);
+            border-top: 1px dashed #CBD5E1;
             pointer-events: none;
             z-index: 1;
         }
 
         .kanji-svg-wrap {
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             position: relative;
             z-index: 2;
             display: flex;
@@ -297,51 +322,50 @@
         .action-btns {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 16px;
         }
 
         .action-btn {
-            border: 1px solid var(--line);
-            background: #ffffff;
-            padding: 7px 16px;
+            border: 1px solid transparent;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12.5px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.15s;
+            transition: transform 0.15s;
         }
 
         .action-btn:active { transform: scale(0.95); }
-        .action-btn.play { color: var(--jade); border-color: #CCE7DC; background: #E6F3EC; }
-        .action-btn.practice { color: var(--ink); border-color: var(--line); background: #FAF7F0; }
-        .action-btn.test { color: var(--clay); border-color: #F5C9BF; background: #FBEAE6; }
+        .action-btn.play { color: var(--teal-primary); background: var(--teal-soft); }
+        .action-btn.practice { color: var(--blue-main); background: var(--blue-soft); }
+        .action-btn.test { color: var(--pink-main); background: var(--pink-soft); }
 
         .readings-box {
             text-align: center;
-            font-size: 13.5px;
+            font-size: 13px;
             line-height: 1.85;
             margin-bottom: 14px;
-            color: var(--ink);
-            background: #FAF7F0;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
+            color: var(--text-dark);
+            background: var(--bg-canvas);
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
         }
 
         .readings-box span.jp-font {
             font-family: 'Klee One', sans-serif;
             font-weight: 700;
-            color: var(--pine);
+            color: var(--teal-primary);
         }
 
         .detail-sub-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--pine);
+            font-size: 13.5px;
+            font-weight: 800;
+            color: var(--text-dark);
             margin: 12px 0 8px;
             display: flex;
             align-items: center;
@@ -350,9 +374,9 @@
 
         .vocab-list {
             list-style: none;
-            font-size: 13px;
+            font-size: 12.5px;
             line-height: 1.75;
-            color: #4B5A52;
+            color: #475569;
         }
 
         .vocab-list li {
@@ -365,14 +389,14 @@
             content: "•";
             position: absolute;
             left: 2px;
-            color: var(--jade);
+            color: var(--teal-primary);
             font-weight: bold;
         }
 
         .vocab-list span.jp-word {
             font-family: 'Klee One', sans-serif;
             font-weight: 700;
-            color: var(--ink);
+            color: var(--text-dark);
         }
 
         /* ব্লাইন্ড টেস্ট পপ-আপ */
@@ -381,7 +405,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(11, 30, 22, 0.6);
+            background: rgba(15, 23, 42, 0.45);
             backdrop-filter: blur(4px);
             z-index: 9999;
             justify-content: center;
@@ -397,43 +421,49 @@
             padding: 24px 20px 22px;
             text-align: center;
             position: relative;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-            animation: popUp 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+            animation: popUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes popUp {
-            from { transform: scale(0.92); opacity: 0; }
+            from { transform: scale(0.94); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .modal-close-icon {
             position: absolute;
             top: 14px;
-            right: 18px;
-            background: none;
+            right: 16px;
+            background: #F1F5F9;
             border: none;
-            font-size: 22px;
-            color: var(--mist);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--text-muted);
             cursor: pointer;
-            line-height: 1;
         }
 
         .blind-title {
-            font-size: 19px;
+            font-size: 16px;
             font-weight: 800;
-            color: var(--pine);
+            color: var(--text-dark);
             line-height: 1.35;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
+            padding-right: 24px;
         }
 
         .blind-canvas-box {
             position: relative;
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 14px;
-            border: 2px dashed #cbd5e1;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 12px;
+            border: 2px dashed #CBD5E1;
             border-radius: 20px;
-            background: #ffffff;
+            background: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -443,8 +473,8 @@
         .blind-svg-layer {
             position: absolute;
             top: 0; left: 0;
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             pointer-events: none;
             z-index: 1;
         }
@@ -458,44 +488,43 @@
         #drawCanvas {
             position: absolute;
             top: 0; left: 0;
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             cursor: crosshair;
             touch-action: none;
             z-index: 2;
         }
 
         .blind-status-text {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
             min-height: 24px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.4;
         }
 
         .status-correct {
-            color: var(--jade) !important;
+            color: var(--teal-primary) !important;
         }
 
         .status-completed {
-            color: #0284c7 !important;
+            color: var(--blue-main) !important;
         }
 
         .blind-btn-group {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .blind-btn {
             border: none;
-            padding: 9px 24px;
+            padding: 9px 20px;
             border-radius: 24px;
-            font-size: 13.5px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -504,36 +533,47 @@
         }
 
         .blind-btn:active { transform: scale(0.95); }
-        .btn-hint { background: #fef08a; color: #854d0e; }
-        .btn-retry { background: #FAF0DC; color: var(--gold); border: 1px solid #F0DFB6; }
+        .btn-hint { background: var(--orange-soft); color: var(--orange-main); }
+        .btn-retry { background: #F1F5F9; color: var(--text-dark); }
 
         /* বটম বার */
         .bottom-nav {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 64px;
-            background: rgba(251, 247, 239, 0.96);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--line);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid #ECEFF4;
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
+            padding: 10px 10px 18px;
+            z-index: 200;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: var(--mist);
-            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            text-decoration: none;
+            color: #9AA5B5;
+            font-size: 10px;
             font-weight: 600;
+            min-width: 50px;
         }
 
-        .nav-item.active { color: var(--jade); }
-        .nav-item i { font-size: 18px; }
+        .nav-item i, .nav-item .nav-kana {
+            font-size: 18px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-item.active {
+            color: var(--teal-primary);
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -545,7 +585,7 @@
                 KOTOBA <span class="level-pill">N5 KANJI</span>
             </div>
         </div>
-        <div style="font-size: 12px; font-weight: 700; color: var(--jade);">১–১২০ কাঞ্জি</div>
+        <div style="font-size: 12px; font-weight: 800; color: var(--teal-primary);">১–১২০ কাঞ্জি</div>
     </header>
 
     <main class="container">
@@ -645,7 +685,7 @@
 
             <div class="blind-canvas-box">
                 <div class="blind-svg-layer" id="testSvgLayer"></div>
-                <canvas id="drawCanvas" width="250" height="250"></canvas>
+                <canvas id="drawCanvas" width="240" height="240"></canvas>
             </div>
 
             <div class="blind-status-text" id="blindStatus"></div>
@@ -657,11 +697,28 @@
         </div>
     </div>
 
-    <!-- বটম বার -->
+    <!-- বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>হোম</span></a>
-        <a href="leaderboard.html" class="nav-item"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
-        <a href="profile.html" class="nav-item"><i class="fa-solid fa-circle-user"></i><span>প্রোফাইল</span></a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Path</span>
+        </a>
+        <a href="speak.html" class="nav-item">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <span>Speak</span>
+        </a>
+        <a href="alphabet.html" class="nav-item">
+            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
+            <span>Kana</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
+        </a>
     </nav>
 
     <script>
@@ -727,7 +784,7 @@
                 { id: "50", char: "時", code: "06642", kun: "とき (toki)", on: "ジ (ji)", meaning: "সময় / ঘন্টা", vocab: [{ w: "時 (とき)", m: "সময়" }, { w: "一時 (いちじ)", m: "১ টা বাজে" }, { w: "時間 (じかん)", m: "সময় (Time)" }] }
             ],
             6: [
-                { id: "51", char: "間", code: "09593", kun: "あいだ・ま (aida / ma)", on: "カン・ケン (kan / ken)", meaning: "ব্যবধান / মাঝে", vocab: [{ w: "間 (あいだ)", m: "মাঝখানে" }, { w: "時間 (じかん)", m: "সময়" }, { w: "二時間 (にじかん)", m: "দুই ঘণ্টা" }] },
+                { id: "51", char: "间", code: "09593", kun: "あいだ・ま (aida / ma)", on: "カン・ケン (kan / ken)", meaning: "ব্যবধান / মাঝে", vocab: [{ w: "間 (あいだ)", m: "মাঝখানে" }, { w: "時間 (じかん)", m: "সময়" }, { w: "二時間 (にじかん)", m: "দুই ঘণ্টা" }] },
                 { id: "52", char: "分", code: "05206", kun: "わ(ける) (wa-keru)", on: "フン・ブン (fun / bun)", meaning: "মিনিট / ভাগ করা", vocab: [{ w: "五分 (ごふん)", m: "৫ মিনিট" }, { w: "十分 (じゅっぷん)", m: "১০ মিনিট" }, { w: "分けます (わけます)", m: "ভাগ করা" }] },
                 { id: "53", char: "半", code: "0534a", kun: "なか(ば) (naka-ba)", on: "ハン (han)", meaning: "অর্ধেক / Half", vocab: [{ w: "半 (はん)", m: "অর্ধেক" }, { w: "八時半 (はちじはん)", m: "সাড়ে আটটা" }, { w: "半分 (はんぶん)", m: "অর্ধেক অংশ" }] },
                 { id: "54", char: "毎", code: "06bce", kun: "ごと (goto)", on: "マイ (mai)", meaning: "প্রতি / Every", vocab: [{ w: "毎日 (まいにち)", m: "প্রতিদিন" }, { w: "毎月 (まいつき)", m: "প্রতি মাসে" }, { w: "毎週 (まいしゅう)", m: "প্রতি সপ্তাহে" }] },
@@ -804,7 +861,7 @@
                 { id: "113", char: "住", code: "04f4f", kun: "す(む) (su-mu)", on: "ジュウ (juu)", meaning: "বসবাস করা", vocab: [{ w: "住みます (すみます)", m: "বাস করা" }, { w: "住所 (じゅうしょ)", m: "ঠিকানা" }] },
                 { id: "114", char: "空", code: "07a7a", kun: "そら・あ(く) (sora / a-ku)", on: "クウ (kuu)", meaning: "আকাশ / খালি", vocab: [{ w: "空 (そら)", m: "আকাশ" }, { w: "空港 (くうこう)", m: "বিমানবন্দর" }, { w: "空気 (くうき)", m: "বাতাস" }] },
                 { id: "115", char: "週", code: "09031", kun: "-", on: "シュウ (shuu)", meaning: "সপ্তাহ", vocab: [{ w: "今週 (こんしゅう)", m: "এই সপ্তাহ" }, { w: "来週 (らいしゅう)", m: "আগামী সপ্তাহ" }, { w: "毎週 (まいしゅう)", m: "প্রতি সপ্তাহ" }] },
-                { id: "116", char: "魚", code: "09b5a", kun: "さかな・うお (sakana)", on: "ギョ (gyo)", meaning: "মাছ", vocab: [{ w: "鱼 (さかな)", m: "মাছ" }, { w: "魚屋 (さかなや)", m: "মাছের দোকান" }, { w: "金魚 (きんぎょ)", m: "গোল্ডফিশ" }] },
+                { id: "116", char: "魚", code: "09b5a", kun: "さかな・うお (sakana)", on: "ギョ (gyo)", meaning: "মাছ", vocab: [{ w: "魚 (さかな)", m: "মাছ" }, { w: "魚屋 (さかなや)", m: "মাছের দোকান" }, { w: "金魚 (きんぎょ)", m: "গোল্ডফিশ" }] },
                 { id: "117", char: "耳", code: "08033", kun: "みみ (mimi)", on: "ジ (ji)", meaning: "কান", vocab: [{ w: "耳 (みみ)", m: "কান" }] },
                 { id: "118", char: "銀", code: "09280", kun: "しろがね (shirogane)", on: "ギン (gin)", meaning: "রুপা", vocab: [{ w: "銀 (ぎん)", m: "রুপা" }, { w: "銀行 (ぎんこう)", m: "ব্যাংক" }] },
                 { id: "119", char: "道", code: "09053", kun: "みち (michi)", on: "ドウ (dou)", meaning: "রাস্তা / পথ", vocab: [{ w: "道 (みち)", m: "রাস্তা" }, { w: "水道 (すいどう)", m: "পানির লাইন" }] },
@@ -814,7 +871,6 @@
 
         const svgCache = {};
 
-        // ফিক্স: DTD ও অপ্রয়োজনীয় ট্যাগ ক্লিন করা যাতে স্ক্রিনে ']' বা '>' না আসে
         function cleanSvg(svgStr) {
             if (!svgStr) return "";
             const start = svgStr.indexOf("<svg");
@@ -857,7 +913,7 @@
 
                 const paths = svg.querySelectorAll("path");
                 paths.forEach(p => {
-                    p.style.stroke = "#0B4A38";
+                    p.style.stroke = "#1E252D";
                     p.style.strokeWidth = "4.2";
                     p.style.strokeLinecap = "round";
                     p.style.strokeLinejoin = "round";
@@ -866,7 +922,6 @@
             }
         }
 
-        // লেসন ওপেন (ফিক্স: কোনো কাঞ্জি প্রথমে নিজে থেকে খোলা থাকবে না)
         function openLesson(lessonNo) {
             const items = kanjiData[lessonNo] || kanjiData[1];
             document.getElementById("lessonGridView").style.display = "none";
@@ -886,8 +941,8 @@
                 itemDiv.innerHTML = `
                     <div class="kanji-header" onclick="toggleKanji(${index})">
                         <div class="left-info">
-                            <span class="icon-box"><i class="fa-solid fa-language"></i></span>
-                            <span>Kanji ${k.id}: ${k.char}</span>
+                            <span class="icon-box">${k.id}</span>
+                            <span>Kanji: ${k.char}</span>
                         </div>
                         <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </div>
@@ -912,7 +967,7 @@
                             <div><strong>Onyomi:</strong> <span class="jp-font">${k.on}</span></div>
                             <div><strong>Meaning:</strong> ${k.meaning}</div>
                         </div>
-                        <div class="detail-sub-title"><i class="fa-solid fa-puzzle-piece" style="color:var(--jade);"></i> Vocabulary</div>
+                        <div class="detail-sub-title"><i class="fa-solid fa-book-bookmark" style="color:var(--teal-primary);"></i> Vocabulary</div>
                         <ul class="vocab-list">${vocabHtml}</ul>
                     </div>
                 `;
@@ -923,7 +978,6 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // একটি কাঞ্জি খুললে অন্যগুলো বন্ধ হয়ে যাবে (Accordion Mode)
         function toggleKanji(index) {
             const currentItem = document.getElementById(`kanjiItem_${index}`);
             const isAlreadyOpen = currentItem.classList.contains("open");
@@ -976,7 +1030,7 @@
 
             paths.forEach((path, i) => {
                 const len = path.getTotalLength();
-                path.style.stroke = "#147A57";
+                path.style.stroke = "#00A896";
                 path.style.strokeWidth = "4.5";
                 path.style.strokeLinecap = "round";
                 path.style.strokeLinejoin = "round";
@@ -994,16 +1048,14 @@
             });
         }
 
-        /* -------------------------------------------------------------
-           ভিডিওর মতো হুবহু অটো-স্ন্যাপ ব্লাইন্ড টেস্ট ইঞ্জিন
-        ------------------------------------------------------------- */
+        /* অটো-স্ন্যাপ ব্লাইন্ড টেস্ট ইঞ্জিন */
         const canvas = document.getElementById("drawCanvas");
         const ctx = canvas.getContext("2d");
         const testSvgLayer = document.getElementById("testSvgLayer");
         const statusText = document.getElementById("blindStatus");
         const modalTitle = document.getElementById("blindModalTitle");
 
-        const BOX_SIZE = 250;
+        const BOX_SIZE = 240;
         const SVG_SCALE = BOX_SIZE / 109;
 
         let strokePathsData = [];
@@ -1101,17 +1153,17 @@
 
                 if (index < currentStrokeIdx) {
                     p.style.display = "block";
-                    p.style.stroke = "#182620";
+                    p.style.stroke = "#1E252D";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = "1";
                 } else if (index === currentStrokeIdx) {
                     p.style.display = "block";
-                    p.style.stroke = "#cbd5e1";
+                    p.style.stroke = "#CBD5E1";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = showHint ? "1" : "0";
                 } else {
                     p.style.display = "block";
-                    p.style.stroke = "#cbd5e1";
+                    p.style.stroke = "#CBD5E1";
                     p.style.strokeWidth = "6.5";
                     p.style.opacity = showHint ? "0.6" : "0";
                 }
@@ -1121,7 +1173,7 @@
         function setupActiveStroke() {
             if (currentStrokeIdx >= strokePathsData.length) {
                 statusText.className = "blind-status-text status-completed";
-                statusText.innerText = "অভিনন্দন! আপনি সঠিকভাবে লিখতে পেরেছেন।";
+                statusText.innerText = "অভিনন্দন! আপনি সঠিকভাবে লিখতে পেরেছেন। 🎉";
                 playSuccessFanfare();
                 return;
             }
@@ -1147,7 +1199,7 @@
         ctx.lineWidth = 14;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        ctx.strokeStyle = "#182620";
+        ctx.strokeStyle = "#1E252D";
 
         function getCanvasCoords(e) {
             const rect = canvas.getBoundingClientRect();
@@ -1206,7 +1258,7 @@
             updateSvgDisplayState();
 
             statusText.className = "blind-status-text status-correct";
-            statusText.innerText = "সঠিক!";
+            statusText.innerText = "সঠিক! ✨";
 
             setupActiveStroke();
         }

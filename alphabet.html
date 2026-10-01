@@ -28,14 +28,6 @@
             --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
             --radius-md: 14px;
             --radius-lg: 20px;
-
-            /* Duolingo Dark Theme Colors */
-            --duo-bg: #131F24;
-            --duo-surface: #1E2E35;
-            --duo-green: #58CC02;
-            --duo-green-border: #46A302;
-            --duo-blue: #1CB0F6;
-            --duo-text: #FFFFFF;
         }
 
         * {
@@ -284,278 +276,165 @@
         }
 
         /* -------------------------------------------------------------
-           Duolingo স্টাইল ফুল-স্ক্রিন মোডাল
+           কাঞ্জির মতো পরিষ্কার লাইট প্র্যাকটিস মডাল (Kanji-Style Modal)
         ------------------------------------------------------------- */
-        .duo-modal {
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--duo-bg);
+            width: 100vw; height: 100vh;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
             z-index: 9999;
-            flex-direction: column;
-            justify-content: space-between;
-            color: var(--duo-text);
-        }
-
-        .duo-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            gap: 12px;
-        }
-
-        .duo-close-btn {
-            background: none;
-            border: none;
-            color: #94A3B8;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .duo-progress-bar {
-            flex: 1;
-            height: 12px;
-            background: #2B3A42;
-            border-radius: 99px;
-            overflow: hidden;
-        }
-
-        .duo-progress-fill {
-            width: 40%;
-            height: 100%;
-            background: var(--duo-green);
-            border-radius: 99px;
-            transition: width 0.3s;
-        }
-
-        .duo-energy-pill {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 13px;
-            font-weight: 800;
-            color: #F472B6;
-        }
-
-        .duo-body {
-            flex: 1;
-            padding: 10px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            max-width: 440px;
-            margin: 0 auto;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .kana-practice-card {
+            background: #ffffff;
             width: 100%;
-        }
-
-        .duo-task-title {
-            align-self: flex-start;
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .duo-prompt-row {
-            align-self: flex-start;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .duo-speaker-btn {
-            background: var(--duo-blue);
-            color: #FFFFFF;
-            border: none;
-            width: 46px;
-            height: 46px;
-            border-radius: 14px;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #0C85BE;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .duo-speaker-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #0C85BE;
-        }
-
-        .duo-kana-display {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .duo-kana-ro {
-            font-size: 11px;
-            color: #8E9AAB;
-            font-weight: 700;
-        }
-
-        .duo-kana-char {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-        }
-
-        /* ড্রয়িং ক্যানভাস */
-        .duo-canvas-container {
-            width: 270px;
-            height: 270px;
-            position: relative;
-            background: #18262C;
+            max-width: 340px;
             border-radius: 24px;
+            padding: 22px 18px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+            animation: popUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes popUp {
+            from { transform: scale(0.94); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close-icon {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: #F1F5F9;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #2B3A42;
+            font-size: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .modal-char-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .modal-sub-details {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .audio-play-badge {
+            background: var(--teal-soft);
+            color: var(--teal-primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .canvas-box-stage {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 12px;
+            border: 2px dashed #CBD5E1;
+            border-radius: 20px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
-        .duo-crosshair-h {
+        .canvas-crosshair-h {
             position: absolute;
             top: 50%; left: 0; right: 0;
-            border-top: 1px dashed #2B3A42;
+            border-top: 1px dashed #E2E8F0;
             pointer-events: none;
         }
 
-        .duo-crosshair-v {
+        .canvas-crosshair-v {
             position: absolute;
             left: 50%; top: 0; bottom: 0;
-            border-left: 1px dashed #2B3A42;
+            border-left: 1px dashed #E2E8F0;
             pointer-events: none;
         }
 
-        #traceCanvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 270px;
-            height: 270px;
-            touch-action: none;
-            cursor: crosshair;
-            z-index: 2;
-        }
-
-        .trace-guide-char {
+        .trace-bg-letter {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 175px;
-            color: #24353E;
+            font-size: 155px;
+            color: #EEF2F6;
             font-weight: 700;
             user-select: none;
             pointer-events: none;
-            z-index: 1;
             line-height: 1;
+            position: absolute;
         }
 
-        /* অডিও অপশন গ্রিড */
-        .duo-audio-card {
-            width: 170px;
-            height: 170px;
-            background: #50B2FF;
-            border-radius: 28px;
+        #drawCanvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 240px;
+            height: 240px;
+            cursor: crosshair;
+            touch-action: none;
+            z-index: 2;
+        }
+
+        .practice-status-text {
+            font-size: 13.5px;
+            font-weight: 800;
+            min-height: 22px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: 0 6px 0 #1880C7;
-            margin-bottom: 30px;
+            color: var(--text-muted);
         }
 
-        .duo-audio-card span {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 72px;
-            font-weight: 700;
-            color: #122129;
-        }
+        .status-success { color: var(--teal-primary) !important; }
 
-        .duo-audio-card i {
-            position: absolute;
-            bottom: 12px;
-            right: 14px;
-            font-size: 18px;
-            color: #122129;
-        }
-
-        .duo-options-row {
+        .modal-btn-row {
             display: flex;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .duo-choice-btn {
-            flex: 1;
-            background: #18262C;
-            border: 2px solid #2B3A42;
-            box-shadow: 0 4px 0 #2B3A42;
-            border-radius: 16px;
-            padding: 14px 10px;
-            color: #FFFFFF;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.1s, border-color 0.1s;
-        }
-
-        .duo-choice-btn.selected {
-            background: #203B46;
-            border-color: var(--duo-blue);
-            box-shadow: 0 4px 0 var(--duo-blue);
-        }
-
-        /* বটম সাবমিট বার */
-        .duo-bottom-bar {
-            padding: 16px 20px 24px;
-            background: var(--duo-bg);
-            border-top: 1px solid #1E2E35;
-        }
-
-        .duo-feedback-box {
-            display: none;
-            margin-bottom: 14px;
-            align-items: center;
+            justify-content: center;
             gap: 10px;
-            font-size: 18px;
-            font-weight: 800;
         }
 
-        .duo-feedback-box.correct {
-            display: flex;
-            color: var(--duo-green);
-        }
-
-        .duo-feedback-box.wrong {
-            display: flex;
-            color: #EA2B2B;
-        }
-
-        .duo-btn-check {
-            width: 100%;
-            background: #2E3E46;
-            color: #8E9AAB;
+        .modal-btn {
             border: none;
-            padding: 14px;
-            border-radius: 16px;
-            font-size: 15px;
+            padding: 9px 20px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             cursor: pointer;
-            transition: all 0.15s;
+            transition: transform 0.15s;
         }
-
-        .duo-btn-check.ready {
-            background: var(--duo-green);
-            color: #FFFFFF;
-            box-shadow: 0 4px 0 var(--duo-green-border);
-        }
-
-        .duo-btn-check.ready:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 var(--duo-green-border);
-        }
+        .modal-btn:active { transform: scale(0.95); }
+        .btn-clear { background: #F1F5F9; color: var(--text-dark); }
+        .btn-check { background: var(--teal-primary); color: #ffffff; }
     </style>
 </head>
 <body>
@@ -586,8 +465,8 @@
         </div>
 
         <div class="info-bar">
-            <span>অক্ষরে ট্যাপ করে শুনুন বা ট্রেস করুন (+৫ XP)</span>
-            <i class="fa-solid fa-volume-high"></i>
+            <span>অক্ষরে ট্যাপ করে প্র্যাকটিস করুন (+৫ XP)</span>
+            <i class="fa-solid fa-pen-nib"></i>
         </div>
 
         <!-- বর্ণমালা কার্ড গ্রিড -->
@@ -620,64 +499,47 @@
     </nav>
 
     <!-- -------------------------------------------------------------
-         Duolingo ফুল-স্ক্রিন মোডাল (ট্রেসিং ও কুইজ)[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span)
+         কাঞ্জির মতো লাইট প্র্যাকটিস মডাল (Kanji-Style Clean Modal)
     ------------------------------------------------------------- -->
-    <div class="duo-modal" id="duoPracticeModal">
-        <header class="duo-header">
-            <button class="duo-close-btn" onclick="closePracticeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="duo-progress-bar">
-                <div class="duo-progress-fill" id="modalProgress"></div>
-            </div>
-            <div class="duo-energy-pill">
-                <i class="fa-solid fa-bolt"></i>
-                <span id="modalXpBadge">+৫ XP</span>
-            </div>
-        </header>
-
-        <section class="duo-body">
-            <!-- মোড ১: ড্রয়িং / ট্রেসিং স্ক্রিন[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span) -->
-            <div id="traceModeSection" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-                <h2 class="duo-task-title">বর্ণটি লিখুন</h2>
-
-                <div class="duo-prompt-row">
-                    <button class="duo-speaker-btn" onclick="playCurrentModalSound()"><i class="fa-solid fa-volume-high"></i></button>
-                    <div class="duo-kana-display">
-                        <span class="duo-kana-ro" id="modalPromptRo">su</span>
-                        <span class="duo-kana-char" id="modalPromptChar">す</span>
-                    </div>
-                </div>
-
-                <div class="duo-canvas-container">
-                    <div class="duo-crosshair-h"></div>
-                    <div class="duo-crosshair-v"></div>
-                    <div class="trace-guide-char" id="traceGuideChar">す</div>
-                    <canvas id="traceCanvas" width="270" height="270"></canvas>
-                </div>
+    <div class="modal-overlay" id="practiceModal">
+        <div class="kana-practice-card">
+            <button class="modal-close-icon" onclick="closePracticeModal()">&times;</button>
+            <h4 class="modal-char-title" id="modalCharTitle">Practice (অনুশীলন)</h4>
+            
+            <div class="modal-sub-details">
+                <span id="modalRomajiText">a</span>
+                <span>•</span>
+                <span id="modalBanglaText">আ</span>
+                <span class="audio-play-badge" onclick="playCurrentModalSound()"><i class="fa-solid fa-volume-high"></i> শুনুন</span>
             </div>
 
-            <!-- মোড ২: অডিও নির্বাচন কুইজ[span_6](start_span)[span_6](end_span) -->
-            <div id="quizModeSection" style="width: 100%; display: none; flex-direction: column; align-items: center;">
-                <h2 class="duo-task-title">এখানে কোন আওয়াজটি শোনা যাচ্ছে?</h2>
-
-                <div class="duo-audio-card" onclick="playCurrentModalSound()">
-                    <span id="quizCharDisplay">す</span>
-                    <i class="fa-solid fa-volume-high"></i>
-                </div>
-
-                <div class="duo-options-row" id="quizOptionsRow"></div>
+            <div class="canvas-box-stage">
+                <div class="canvas-crosshair-h"></div>
+                <div class="canvas-crosshair-v"></div>
+                <div class="trace-bg-letter" id="traceBgLetter">あ</div>
+                <canvas id="drawCanvas" width="240" height="240"></canvas>
             </div>
-        </section>
 
-        <footer class="duo-bottom-bar">
-            <div class="duo-feedback-box" id="duoFeedback">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>অসাধারণ!</span>
+            <div class="practice-status-text" id="practiceStatus">অক্ষরটির ওপর হাত ঘুরিয়ে লিখুন</div>
+
+            <div class="modal-btn-row">
+                <button class="modal-btn btn-clear" onclick="clearDrawCanvas()"><i class="fa-solid fa-rotate-left"></i> মুছুন</button>
+                <button class="modal-btn btn-check" id="btnVerifyKana" onclick="verifyKanaDrawing()"><i class="fa-solid fa-check"></i> যাচাই করুন</button>
             </div>
-            <button class="duo-btn-check" id="duoCheckBtn" onclick="handleDuoCheckClick()">যাচাই করুন</button>
-        </footer>
+        </div>
     </div>
 
-    <!-- Firebase Script (XP পয়েন্ট যোগ করার জন্য) -->
+    <!-- 0-Latency Local Cache Engine -->
+    <script>
+        (function initLocalCacheImmediate() {
+            const cachedXp = localStorage.getItem("kotoba_cached_user_xp");
+            if (cachedXp !== null) {
+                document.getElementById("topUserXp").innerText = `${cachedXp} XP`;
+            }
+        })();
+    </script>
+
+    <!-- Firebase Script (Anti-Cheat XP Cap + Background Sync) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -706,28 +568,48 @@
                 const docId = user.email ? user.email.toLowerCase().trim() : user.uid;
                 try {
                     const snap = await getDoc(doc(db, "users", docId));
-                    if (snap.exists() && typeof snap.data().xp === "number") {
-                        topUserXp.innerText = `${snap.data().xp} XP`;
+                    if (snap.exists()) {
+                        const realXp = Number(snap.data().xp || snap.data().points || 0);
+                        topUserXp.innerText = `${realXp} XP`;
+                        localStorage.setItem("kotoba_cached_user_xp", realXp);
                     }
                 } catch(e) { console.warn(e); }
             }
         });
 
-        window.rewardKanaXP = async function(points) {
-            if (!currentUser) return;
-            const docId = currentUser.email ? currentUser.email.toLowerCase().trim() : currentUser.uid;
-            try {
-                await updateDoc(doc(db, "users", docId), {
-                    xp: increment(points),
-                    lastActive: Date.now()
-                });
-                const cur = parseInt(topUserXp.innerText) || 0;
-                topUserXp.innerText = `${cur + points} XP`;
-            } catch(e) { console.warn("XP Error:", e); }
+        // Anti-Spam Protected XP Reward: দিনে একই ক্যারেক্টার থেকে একবারই XP পাওয়া যাবে
+        window.rewardProtectedKanaXP = async function(charKey, points) {
+            const todayStr = new Date().toISOString().slice(0, 10);
+            const storageKey = `xp_rewarded_${charKey}_${todayStr}`;
+
+            if (localStorage.getItem(storageKey)) {
+                return { awarded: false, reason: "already_claimed" };
+            }
+
+            localStorage.setItem(storageKey, "true");
+
+            // Optimistic Local Update
+            const cur = parseInt(topUserXp.innerText) || 0;
+            const updated = cur + points;
+            topUserXp.innerText = `${updated} XP`;
+            localStorage.setItem("kotoba_cached_user_xp", updated);
+
+            if (currentUser) {
+                const docId = currentUser.email ? currentUser.email.toLowerCase().trim() : currentUser.uid;
+                try {
+                    await updateDoc(doc(db, "users", docId), {
+                        xp: increment(points),
+                        lastActive: Date.now()
+                    });
+                } catch(e) {
+                    console.warn("XP save error:", e);
+                }
+            }
+            return { awarded: true, points: points };
         };
     </script>
 
-    <!-- ক্যারেক্টার ডেটা ও অ্যাপ্লিকেশন লজিক -->
+    <!-- Character Logic & Kanji-Style Drawing Engine -->
     <script>
         let currentScript = 'hira';
         let currentType = 'basic';
@@ -810,7 +692,7 @@
                 { h: 'だ', k: 'ダ', r: 'da', b: 'দা' },
                 { h: 'ぢ', k: 'ヂ', r: 'ji', b: 'জি' },
                 { h: 'づ', k: 'ヅ', r: 'zu', b: 'জু' },
-                { h: 'де', k: 'デ', r: 'de', b: 'দে' },
+                { h: 'で', k: 'デ', r: 'de', b: 'দে' },
                 { h: 'ど', k: 'ド', r: 'do', b: 'দো' },
 
                 { h: 'ば', k: 'バ', r: 'ba', b: 'বা' },
@@ -862,7 +744,7 @@
                     const char = currentScript === 'hira' ? item.h : item.k;
                     const card = document.createElement('div');
                     card.className = 'char-card';
-                    card.onclick = () => openDuolingoPractice(item, char);
+                    card.onclick = () => openKanaPractice(item, char);
                     card.innerHTML = `
                         <span class="card-practice-dot"></span>
                         <i class="fa-solid fa-volume-low audio-icon"></i>
@@ -902,72 +784,57 @@
         renderGrid();
 
         /* -------------------------------------------------------------
-           Duolingo কুইজ ও ট্রেসিং ইঞ্জিন[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)
+           কাঞ্জির মতো পরিষ্কার ক্যানভাস ও ভেরিফিকেশন ইঞ্জিন
         ------------------------------------------------------------- */
-        const duoModal = document.getElementById("duoPracticeModal");
-        const traceModeSection = document.getElementById("traceModeSection");
-        const quizModeSection = document.getElementById("quizModeSection");
-        const duoFeedback = document.getElementById("duoFeedback");
-        const duoCheckBtn = document.getElementById("duoCheckBtn");
-        const traceGuideChar = document.getElementById("traceGuideChar");
-        const modalPromptRo = document.getElementById("modalPromptRo");
-        const modalPromptChar = document.getElementById("modalPromptChar");
-        const quizCharDisplay = document.getElementById("quizCharDisplay");
-        const quizOptionsRow = document.getElementById("quizOptionsRow");
-        const modalProgress = document.getElementById("modalProgress");
+        const practiceModal = document.getElementById("practiceModal");
+        const modalCharTitle = document.getElementById("modalCharTitle");
+        const modalRomajiText = document.getElementById("modalRomajiText");
+        const modalBanglaText = document.getElementById("modalBanglaText");
+        const traceBgLetter = document.getElementById("traceBgLetter");
+        const practiceStatus = document.getElementById("practiceStatus");
+        const canvas = document.getElementById("drawCanvas");
+        const ctx = canvas.getContext("2d");
 
-        let activeItem = null;
-        let activeChar = "";
-        let currentMode = "trace"; // 'trace' or 'quiz'
-        let hasDrawn = false;
-        let selectedChoice = null;
-        let isCorrectState = false;
+        let currentActiveItem = null;
+        let currentActiveChar = "";
+        let isDrawing = false;
+        let drawnPointCount = 0;
 
-        function openDuolingoPractice(item, char) {
-            activeItem = item;
-            activeChar = char;
-            currentMode = "trace";
-            isCorrectState = false;
-            hasDrawn = false;
+        ctx.lineWidth = 12;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = "#1E252D";
 
-            duoModal.style.display = "flex";
-            traceModeSection.style.display = "flex";
-            quizModeSection.style.display = "none";
-            duoFeedback.className = "duo-feedback-box";
-            modalProgress.style.width = "40%";
+        function openKanaPractice(item, char) {
+            currentActiveItem = item;
+            currentActiveChar = char;
 
-            modalPromptRo.innerText = item.r;
-            modalPromptChar.innerText = char;
-            traceGuideChar.innerText = char;
+            modalCharTitle.innerText = `Practice: ${char}`;
+            modalRomajiText.innerText = item.r;
+            modalBanglaText.innerText = item.b;
+            traceBgLetter.innerText = char;
+            practiceStatus.className = "practice-status-text";
+            practiceStatus.innerText = "অক্ষরটির ওপর হাত ঘুরিয়ে লিখুন";
 
-            duoCheckBtn.innerText = "যাচাই করুন";
-            duoCheckBtn.className = "duo-btn-check";
-
-            clearCanvas();
+            clearDrawCanvas();
+            practiceModal.style.display = "flex";
             playSound(char);
         }
 
         function closePracticeModal() {
-            duoModal.style.display = "none";
+            practiceModal.style.display = "none";
+            clearDrawCanvas();
         }
 
         function playCurrentModalSound() {
-            if (activeChar) playSound(activeChar);
+            if (currentActiveChar) playSound(currentActiveChar);
         }
 
-        /* ক্যানভাস হ্যান্ডলিং */
-        const canvas = document.getElementById("traceCanvas");
-        const ctx = canvas.getContext("2d");
-        let isDrawing = false;
-
-        ctx.lineWidth = 14;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.strokeStyle = "#FFFFFF";
-
-        function clearCanvas() {
+        function clearDrawCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            hasDrawn = false;
+            drawnPointCount = 0;
+            practiceStatus.className = "practice-status-text";
+            practiceStatus.innerText = "অক্ষরটির ওপর হাত ঘুরিয়ে লিখুন";
         }
 
         function getPos(e) {
@@ -978,125 +845,64 @@
         }
 
         canvas.addEventListener("mousedown", (e) => {
-            if (isCorrectState) return;
             isDrawing = true;
             const p = getPos(e);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
+            drawnPointCount++;
         });
 
         canvas.addEventListener("mousemove", (e) => {
-            if (!isDrawing || isCorrectState) return;
+            if (!isDrawing) return;
             const p = getPos(e);
             ctx.lineTo(p.x, p.y);
             ctx.stroke();
-            if (!hasDrawn) {
-                hasDrawn = true;
-                duoCheckBtn.className = "duo-btn-check ready";
-            }
+            drawnPointCount++;
         });
 
         window.addEventListener("mouseup", () => { isDrawing = false; });
 
         canvas.addEventListener("touchstart", (e) => {
-            if (isCorrectState) return;
             e.preventDefault();
             isDrawing = true;
             const p = getPos(e);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
+            drawnPointCount++;
         }, { passive: false });
 
         canvas.addEventListener("touchmove", (e) => {
-            if (!isDrawing || isCorrectState) return;
+            if (!isDrawing) return;
             e.preventDefault();
             const p = getPos(e);
             ctx.lineTo(p.x, p.y);
             ctx.stroke();
-            if (!hasDrawn) {
-                hasDrawn = true;
-                duoCheckBtn.className = "duo-btn-check ready";
-            }
+            drawnPointCount++;
         }, { passive: false });
 
         window.addEventListener("touchend", () => { isDrawing = false; });
 
-        /* ভেরিফাই এবং নেক্সট হ্যান্ডলার */
-        function handleDuoCheckClick() {
-            if (isCorrectState) {
-                // ২য় ধাপে (কুইজে) যান অথবা সম্পন্ন করুন[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)
-                if (currentMode === "trace") {
-                    startQuizMode();
-                } else {
-                    closePracticeModal();
-                }
+        async function verifyKanaDrawing() {
+            if (drawnPointCount < 18) {
+                practiceStatus.className = "practice-status-text";
+                practiceStatus.innerText = "পুরো অক্ষরটি সম্পূর্ণ করে লিখুন!";
                 return;
             }
 
-            if (currentMode === "trace") {
-                if (!hasDrawn) return;
-                // সফল ট্রেসিং
-                setSuccessUI();
-            } else {
-                if (!selectedChoice) return;
-                if (selectedChoice === activeItem.r) {
-                    setSuccessUI(true);
+            practiceStatus.className = "practice-status-text status-success";
+            
+            // Anti-Cheat Protected XP Reward
+            if (window.rewardProtectedKanaXP) {
+                const res = await window.rewardProtectedKanaXP(currentActiveChar, 5);
+                if (res.awarded) {
+                    practiceStatus.innerText = `সঠিক হয়েছে! (+৫ XP যোগ হয়েছে 🎉)`;
+                    confetti({ particleCount: 40, spread: 55, origin: { y: 0.8 } });
                 } else {
-                    duoFeedback.className = "duo-feedback-box wrong";
-                    duoFeedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>ভুল হয়েছে, আবার চেষ্টা করুন!</span>`;
+                    practiceStatus.innerText = "সঠিক হয়েছে! (আজকের XP ইতিমধ্যে জমা হয়েছে ✨)";
                 }
+            } else {
+                practiceStatus.innerText = "সঠিক হয়েছে! 🎉";
             }
-        }
-
-        function setSuccessUI(isFinal = false) {
-            isCorrectState = true;
-            duoFeedback.className = "duo-feedback-box correct";
-            duoFeedback.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>অসাধারণ!</span>`;
-            duoCheckBtn.innerText = "চালিয়ে যান";
-            duoCheckBtn.className = "duo-btn-check ready";
-
-            confetti({ particleCount: 35, spread: 50, origin: { y: 0.85 } });
-
-            if (isFinal) {
-                modalProgress.style.width = "100%";
-                if (window.rewardKanaXP) window.rewardKanaXP(5);
-            }
-        }
-
-        /* অডিও কুইজ মোড চালু[span_11](start_span)[span_11](end_span) */
-        function startQuizMode() {
-            currentMode = "quiz";
-            isCorrectState = false;
-            selectedChoice = null;
-
-            traceModeSection.style.display = "none";
-            quizModeSection.style.display = "flex";
-            duoFeedback.className = "duo-feedback-box";
-            modalProgress.style.width = "75%";
-            duoCheckBtn.innerText = "যাচাই করুন";
-            duoCheckBtn.className = "duo-btn-check";
-
-            quizCharDisplay.innerText = activeChar;
-            playSound(activeChar);
-
-            // ৩টি অপশন তৈরি
-            const allR = characters.basic.filter(x => !x.empty).map(x => x.r);
-            const distractors = allR.filter(r => r !== activeItem.r).sort(() => 0.5 - Math.random()).slice(0, 2);
-            const choices = [activeItem.r, ...distractors].sort(() => 0.5 - Math.random());
-
-            quizOptionsRow.innerHTML = "";
-            choices.forEach(ch => {
-                const btn = document.createElement("button");
-                btn.className = "duo-choice-btn";
-                btn.innerText = ch;
-                btn.onclick = () => {
-                    document.querySelectorAll(".duo-choice-btn").forEach(b => b.classList.remove("selected"));
-                    btn.classList.add("selected");
-                    selectedChoice = ch;
-                    duoCheckBtn.className = "duo-btn-check ready";
-                };
-                quizOptionsRow.appendChild(btn);
-            });
         }
     </script>
 </body>

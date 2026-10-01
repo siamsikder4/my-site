@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KOTOBA - Speak Practice</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-canvas: #F8FAFC;
+            --teal-primary: #00A896;
+            --teal-light: #E0F7F4;
+            --bubble-cyan: #A5F3FC;
+            --text-dark: #1E252D;
+            --text-muted: #8E9AAB;
+            --border-soft: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .screen-container {
+            max-width: 440px;
+            width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 20px 24px;
+            background: #ffffff;
+            position: relative;
+        }
+
+        /* Top Progress Bar & Header */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 6px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #64748B;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .progress-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .streak-info {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--teal-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background-color: #E2E8F0;
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(90deg, #2DD4BF, var(--teal-primary));
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }
+
+        .xp-pill {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+            background: #F8FAFC;
+            padding: 4px 10px;
+            border-radius: 14px;
+        }
+
+        .xp-pill i {
+            color: #F59E0B;
+        }
+
+        /* Scenario Section */
+        .scenario-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .scenario-image-card {
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+            margin-bottom: 16px;
+        }
+
+        .scenario-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Speech Bubble (Speaker) */
+        .speech-bubble {
+            width: 100%;
+            background-color: #BAF0F2;
+            border-radius: 18px;
+            padding: 14px 16px;
+            position: relative;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 36px;
+            border-width: 0 9px 9px 9px;
+            border-style: solid;
+            border-color: transparent transparent #BAF0F2 transparent;
+        }
+
+        .bubble-speaker-btn {
+            background: none;
+            border: none;
+            color: #0E7490;
+            font-size: 14px;
+            cursor: pointer;
+            padding-top: 2px;
+        }
+
+        .bubble-content h3 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #083344;
+            line-height: 1.45;
+            margin-bottom: 4px;
+        }
+
+        .bubble-content p {
+            font-size: 11px;
+            color: #155E75;
+            line-height: 1.35;
+        }
+
+        /* Bottom Response Area */
+        .bottom-action-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .target-response-box {
+            width: 100%;
+            background: #FFFFFF;
+            border: 1.8px solid var(--teal-primary);
+            border-radius: 16px;
+            padding: 14px 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 168, 150, 0.08);
+        }
+
+        .target-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .target-translation {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .hint-instruction {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Controls: Speaker, Voice Mic, Shuffle */
+        .controls-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6px;
+        }
+
+        .round-action-btn {
+            background: #F1F5F9;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .round-action-btn:active {
+            background: #E2E8F0;
+        }
+
+        .voice-submit-btn {
+            background-color: var(--teal-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 99px;
+            padding: 12px 36px;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(0, 168, 150, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .voice-submit-btn:active {
+            transform: scale(0.96);
+        }
+
+        .voice-submit-btn.listening {
+            background-color: #EF4444;
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+            animation: pulseRecord 1.2s infinite;
+        }
+
+        @keyframes pulseRecord {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Result Feedback Alert */
+        .feedback-banner {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .feedback-banner.success {
+            display: block;
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        .feedback-banner.try-again {
+            display: block;
+            background: #FEE2E2;
+            color: #B91C1C;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen-container">
+
+        <!-- Top Progress Header -->
+        <header class="top-header">
+            <a href="index.html" class="close-btn" title="Exit">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+
+            <div class="progress-box">
+                <div class="streak-info">
+                    <span>5 Combo Streak!</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="xp-pill">
+                <i class="fa-solid fa-bolt"></i>
+                <span id="streakPoints">12</span>
+            </div>
+        </header>
+
+        <!-- Context & Speaking Scenario -->
+        <section class="scenario-area">
+            <div class="scenario-image-card">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop" alt="Bakery shop scenario">
+            </div>
+
+            <!-- Dialogue Speech Bubble -->
+            <div class="speech-bubble">
+                <button class="bubble-speaker-btn" id="playPromptAudio" title="শুনুন">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <div class="bubble-content">
+                    <h3 id="promptJapanese">はい、こちらのパンですね。どうぞ！ありがとうございました！</h3>
+                    <p id="promptTranslation">Here is your bread! Thank you so much, have a great day!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Answer Target & Speaking Controls -->
+        <footer class="bottom-action-area">
+            
+            <div class="target-response-box">
+                <div class="target-japanese" id="targetJapanese">はい、どうも。</div>
+                <div class="target-translation" id="targetTranslation">Thanks, you too!</div>
+            </div>
+
+            <div class="hint-instruction" id="instructionText">
+                Please tap the Voice button and speak
+            </div>
+
+            <div id="feedbackBanner" class="feedback-banner"></div>
+
+            <div class="controls-row">
+                <button class="round-action-btn" id="playTargetAudio" title="উচ্চারণ শুনুন">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+
+                <button class="voice-submit-btn" id="voiceBtn">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span id="voiceBtnText">Voice</span>
+                </button>
+
+                <button class="round-action-btn" id="shuffleBtn" title="পরবর্তী বাক্য">
+                    <i class="fa-solid fa-shuffle"></i>
+                </button>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script: Text to Speech & Speech Recognition -->
+    <script>
+        const scenarios = [
+            {
+                promptJp: "はい、こちらのパンですね。どうぞ！ありがとうございました！",
+                promptEn: "Here is your bread! Thank you so much, have a great day!",
+                targetJp: "はい、どうも。",
+                targetEn: "Thanks, you too!"
+            },
+            {
+                promptJp: "いらっしゃいませ！何名様ですか？",
+                promptEn: "Welcome! How many people in your party?",
+                targetJp: "一人です。",
+                targetEn: "Just one person."
+            },
+            {
+                promptJp: "お会計は千円になります。",
+                promptEn: "Your total will be 1,000 yen.",
+                targetJp: "カードで払えますか？",
+                targetEn: "Can I pay by card?"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        const promptJpEl = document.getElementById("promptJapanese");
+        const promptEnEl = document.getElementById("promptTranslation");
+        const targetJpEl = document.getElementById("targetJapanese");
+        const targetEnEl = document.getElementById("targetTranslation");
+        const feedbackEl = document.getElementById("feedbackBanner");
+        const voiceBtn = document.getElementById("voiceBtn");
+        const voiceBtnText = document.getElementById("voiceBtnText");
+
+        // Text to Speech
+        function speakJapanese(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("আপনার ব্রাউজারে স্পিচ সাপোর্ট নেই।");
+            }
+        }
+
+        document.getElementById("playPromptAudio").onclick = () => {
+            speakJapanese(scenarios[currentIndex].promptJp);
+        };
+
+        document.getElementById("playTargetAudio").onclick = () => {
+            speakJapanese(scenarios[currentIndex].targetJp);
+        };
+
+        // Shuffle / Next Scenario
+        document.getElementById("shuffleBtn").onclick = () => {
+            currentIndex = (currentIndex + 1) % scenarios.length;
+            loadScenario(currentIndex);
+        };
+
+        function loadScenario(index) {
+            promptJpEl.innerText = scenarios[index].promptJp;
+            promptEnEl.innerText = scenarios[index].promptEn;
+            targetJpEl.innerText = scenarios[index].targetJp;
+            targetEnEl.innerText = scenarios[index].targetEn;
+            feedbackEl.className = "feedback-banner";
+            feedbackEl.style.display = "none";
+        }
+
+        // Voice Recognition (Speech to Text)
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+        let isListening = false;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.lang = 'ja-JP';
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isListening = true;
+                voiceBtn.classList.add("listening");
+                voiceBtnText.innerText = "Listening...";
+                feedbackEl.style.display = "none";
+            };
+
+            recognition.onresult = (event) => {
+                const spokenText = event.results[0][0].transcript;
+                checkAnswer(spokenText);
+            };
+
+            recognition.onerror = () => {
+                resetVoiceBtn();
+                feedbackEl.className = "feedback-banner try-again";
+                feedbackEl.innerText = "কথা পরিষ্কার বোঝা যায়নি, আবার বলুন।";
+                feedbackEl.style.display = "block";
+            };
+
+            recognition.onend = () => {
+                resetVoiceBtn();
+            };
+        }
+
+        voiceBtn.onclick = () => {
+            if (!recognition) {
+                alert("আপনার ব্রাউজার জাপানিজ ভয়েস রিকগনিশন সাপোর্ট করে না (Chrome ব্যবহার করুন)।");
+                return;
+            }
+
+            if (!isListening) {
+                recognition.start();
+            } else {
+                recognition.stop();
+            }
+        };
+
+        function resetVoiceBtn() {
+            isListening = false;
+            voiceBtn.classList.remove("listening");
+            voiceBtnText.innerText = "Voice";
+        }
+
+        function checkAnswer(spoken) {
+            const targetClean = scenarios[currentIndex].targetJp.replace(/[。、！？\s]/g, "");
+            const spokenClean = spoken.replace(/[。、！？\s]/g, "");
+
+            if (spokenClean.includes(targetClean) || targetClean.includes(spokenClean)) {
+                feedbackEl.className = "feedback-banner success";
+                feedbackEl.innerText = "Great job! একদম সঠিক হয়েছে! 🎉";
+            } else {
+                feedbackEl.className = "feedback-banner try-again";
+                feedbackEl.innerText = `আপনি বলেছেন: "${spoken}"। আবার চেষ্টা করুন!`;
+            }
+            feedbackEl.style.display = "block";
+        }
+    </script>
+</body>
+</html>

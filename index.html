@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KOTOBA - জাপানিজ ভাষা শিখুন</title>
 
-    <!-- ফেভিকন ও মোবাইল অ্যাপ আইকন -->
+    <!-- ফেভিকন -->
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="shortcut icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
 
-    <!-- Google AdSense Verification Script -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
 
-    <!-- ফন্ট ও আইকন -->
+    <!-- Font ken Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Noto+Serif+Bengali:wght@600;700&family=Noto+Sans+JP:wght@700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
 
-    <!-- OneSignal Push Notification SDK -->
+    <!-- OneSignal SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -30,771 +30,640 @@
     </script>
 
     <style>
+        :root {
+            --bg-canvas: #F8FAFC;
+            --card-white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --teal-card: #0D9488;
+            --teal-dark: #0F766E;
+            --border-soft: #F1F5F9;
+            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+
+            /* Pastel tones kas iti ladawan */
+            --pastel-purple-bg: #F3E8FF;
+            --pastel-purple-text: #9333EA;
+            --pastel-blue-bg: #E0F2FE;
+            --pastel-blue-text: #0284C7;
+            --pastel-pink-bg: #FFE4E6;
+            --pastel-pink-text: #E11D48;
+            --pastel-mint-bg: #DCFCE7;
+            --pastel-mint-text: #16A34A;
+            --pastel-orange-bg: #FFEDD5;
+            --pastel-orange-text: #EA580C;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
-        :root {
-            --paper: #FAF7F0;
-            --ink: #182620;
-            --pine: #0B4A38;
-            --jade: #147A57;
-            --clay: #B6472E;
-            --gold: #A9781F;
-            --mist: #7C8A82;
-            --line: #E9E2D3;
-            --shadow-float: 0 10px 28px rgba(11, 74, 56, 0.12);
-        }
-
         body {
-            background-color: var(--paper);
-            color: var(--ink);
-            padding-bottom: 96px;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            padding-bottom: 110px;
             min-height: 100vh;
         }
 
-        /* হেডার ও লোগো বার */
-        .top-nav {
-            display: grid;
-            grid-template-columns: 40px 1fr 40px;
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
             align-items: center;
-            padding: 11px 18px;
-            background: rgba(250, 247, 240, 0.94);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--line);
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: #ffffff;
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid var(--border-soft);
         }
 
-        .top-nav-spacer { width: 38px; }
-
-        .logo-container {
+        .user-greeting {
             display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FDE047;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
+            overflow: hidden;
+            border: 2px solid #FEF08A;
         }
 
-        .brand-link {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            text-decoration: none;
-        }
-
-        /* সিম্পল লোগো (কোনো শ্যাডো ছাড়া) */
-        .app-logo-img {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            box-shadow: none !important; /* সম্পূর্ণ শ্যাডো মুক্ত */
         }
 
-        .logo {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 19px;
-            letter-spacing: 1.5px;
-            color: var(--pine);
+        .greeting-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
         }
 
-        .top-nav-right {
+        .header-stats {
             display: flex;
-            justify-content: flex-end;
             align-items: center;
+            gap: 12px;
         }
 
-        /* আধুনিক নোটিফিকেশন বেল বাটন */
-        .notif-bell-btn {
+        .streak-pill {
+            background: #FFFBEB;
+            border: 1px solid #FEF3C7;
+            border-radius: 20px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #D97706;
+        }
+
+        .notif-btn {
             position: relative;
-            background: #ffffff;
-            color: var(--pine);
-            border: 1px solid var(--line);
+            background: #F8FAFC;
+            border: 1px solid var(--border-soft);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #EF4444;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        /* Banner Hero Card Kas iti UI Concept */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--teal-card), var(--teal-dark));
+            border-radius: 24px;
+            padding: 24px 22px;
+            color: #ffffff;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -6px rgba(13, 148, 136, 0.35);
+        }
+
+        .hero-banner h2 {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-banner p {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        /* Section Headlines */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 24px 0 14px;
+        }
+
+        .section-header h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.2px;
+        }
+
+        .badge-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .badge-purple { background: var(--pastel-purple-bg); color: var(--pastel-purple-text); }
+        .badge-blue { background: var(--pastel-blue-bg); color: var(--pastel-blue-text); }
+        .badge-orange { background: var(--pastel-orange-bg); color: var(--pastel-orange-text); }
+
+        /* Card Grid Layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .practice-card {
+            background: var(--card-white);
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-subtle);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .practice-card:active {
+            transform: scale(0.97);
+        }
+
+        .card-tag-icon {
             width: 38px;
             height: 38px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .notif-bell-btn:active {
-            transform: scale(0.92);
-            background: #F0EAD9;
-        }
-
-        .notif-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--clay);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 10px;
-            font-weight: 800;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 10px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--paper);
-            padding: 0 4px;
-            animation: pulseBadge 2s infinite;
-        }
-
-        @keyframes pulseBadge {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-        }
-
-        .global-alert-banner {
-            display: none;
-            background: #FBEAE6;
-            border-bottom: 1px solid #EFC9C0;
-            color: var(--clay);
-            padding: 8px 14px;
-            font-size: 12px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .page-content {
-            padding: 18px 16px;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        /* হিরো টেক্সট বক্স */
-        .hero-text {
-            position: relative;
-            text-align: left;
-            margin: 4px 0 22px;
-            padding: 4px 90px 4px 2px;
-            overflow: hidden;
-        }
-
-        .hero-kanji {
-            position: absolute;
-            top: -22px;
-            right: -14px;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 900;
-            font-size: 108px;
-            color: var(--pine);
-            opacity: 0.08;
-            line-height: 1;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .hero-text h2 {
-            font-family: 'Noto Serif Bengali', serif;
-            font-size: 21px;
-            font-weight: 700;
-            color: var(--pine);
-            margin-bottom: 7px;
-            line-height: 1.4;
-        }
-
-        .hero-text p {
-            font-size: 12px;
-            line-height: 1.6;
-            color: var(--mist);
-            max-width: 300px;
-        }
-
-        .ad-banner-box {
-            width: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            margin: 10px auto 22px;
-            min-height: 50px;
-            overflow: hidden;
-        }
-
-        /* সেকশন ও ব্যাজ */
-        .level-section {
-            margin-bottom: 28px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 13px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: 0.3px;
-        }
-
-        .red-badge { background: var(--clay); }
-        .green-badge { background: var(--jade); }
-        .dark-badge { background: var(--gold); }
-
-        .section-heading {
-            font-family: 'Noto Serif Bengali', serif;
-            font-size: 16.5px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 13px;
-        }
-
-        /* কার্ড গ্রিড ও আইটেম */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 11px;
-        }
-
-        .item-card {
-            background: #ffffff;
-            border: 1px solid var(--line);
-            border-left-width: 3px;
-            border-radius: 14px;
-            padding: 16px 12px 14px;
-            text-align: left;
-            text-decoration: none;
-            position: relative;
-            display: block;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-        }
-
-        .item-card:active {
-            transform: scale(0.97);
-        }
-
-        .red-top { border-left-color: var(--clay); }
-        .green-top { border-left-color: var(--jade); }
-
-        .icon-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            margin-bottom: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 15px;
+            font-weight: 800;
         }
 
-        .green-bg { background: #E6F3EC; color: var(--jade); }
-        .red-bg { background: #FBEAE6; color: var(--clay); }
-        .yellow-bg { background: #FAF0DC; color: var(--gold); }
+        .tag-purple { background: var(--pastel-purple-bg); color: var(--pastel-purple-text); }
+        .tag-blue { background: var(--pastel-blue-bg); color: var(--pastel-blue-text); }
+        .tag-pink { background: var(--pastel-pink-bg); color: var(--pastel-pink-text); }
+        .tag-mint { background: var(--pastel-mint-bg); color: var(--pastel-mint-text); }
+        .tag-orange { background: var(--pastel-orange-bg); color: var(--pastel-orange-text); }
 
-        .item-card h4 {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 3px;
+        .practice-card h4 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2px;
         }
 
-        .item-card p {
-            font-size: 10.5px;
-            color: var(--mist);
+        .practice-card p {
+            font-size: 11px;
+            color: var(--text-muted);
             line-height: 1.4;
         }
 
-        .mini-tag {
+        .tag-badge-mini {
             position: absolute;
-            top: 9px;
-            right: 9px;
-            background: #FAF0DC;
-            color: var(--gold);
-            font-size: 8px;
-            font-weight: 700;
-            padding: 2px 7px;
+            top: 12px;
+            right: 12px;
+            background: #FEE2E2;
+            color: #DC2626;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 6px;
             border-radius: 6px;
-            border: 1px solid #F0DFB6;
         }
 
-        /* দৃষ্টিনন্দন ও আধুনিক নোটিফিকেশন মডাল */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(15, 34, 27, 0.45);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .notif-modal-card {
-            background: #ffffff;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 22px;
-            overflow: hidden;
-            box-shadow: 0 16px 40px rgba(11, 74, 56, 0.2);
-            border: 1px solid var(--line);
+        /* List Items Kas iti "All Session" */
+        .session-list {
             display: flex;
             flex-direction: column;
-            max-height: 82vh;
-            animation: modalPopUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes modalPopUp {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-header {
-            background: #ffffff;
-            color: var(--ink);
-            padding: 16px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .modal-header-left {
-            display: flex;
-            align-items: center;
             gap: 10px;
         }
 
-        .modal-header-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
-            background: #E6F3EC;
-            color: var(--jade);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .modal-header h3 {
-            font-size: 15.5px;
-            font-weight: 800;
-            color: var(--pine);
-            margin: 0;
-        }
-
-        .close-btn {
-            background: #F0EAD9;
-            border: none;
-            color: var(--mist);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 17px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .close-btn:active {
-            background: #E7DFC9;
-            color: var(--ink);
-        }
-
-        .notif-list {
-            padding: 14px;
-            overflow-y: auto;
-            flex: 1;
-            background: #FAF7F0;
-        }
-
-        /* প্রতিটি নোটিফিকেশন আইটেম কার্ড */
-        .notif-item {
-            background: #ffffff;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            padding: 13px 14px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 6px rgba(11, 74, 56, 0.03);
-            transition: transform 0.15s ease;
-        }
-
-        .notif-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .notif-item.targeted {
-            border-color: #EEDBB7;
-            background: #FFFCF7;
-        }
-
-        .notif-item-top {
+        .session-card {
+            background: var(--card-white);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 6px;
-            gap: 8px;
+            text-decoration: none;
+            box-shadow: var(--shadow-subtle);
         }
 
-        .notif-item-title-wrap {
+        .session-card-left {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex: 1;
+            gap: 14px;
         }
 
-        .notif-item-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 7px;
-            background: #E6F3EC;
-            color: var(--jade);
+        .session-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
-            flex-shrink: 0;
+            font-size: 16px;
         }
 
-        .notif-item-icon.targeted {
-            background: #FAF0DC;
-            color: var(--gold);
-        }
-
-        .notif-item h4 {
+        .session-info h4 {
             font-size: 13.5px;
-            color: var(--pine);
             font-weight: 700;
-            line-height: 1.35;
+            color: var(--text-dark);
         }
 
-        .notif-pill {
-            font-size: 9.5px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 12px;
-            flex-shrink: 0;
+        .session-info p {
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
-        .notif-pill.global {
-            background: #E6F3EC;
-            color: var(--jade);
-        }
-
-        .notif-pill.personal {
-            background: #FAF0DC;
-            color: var(--gold);
-            border: 1px solid #F0DFB6;
-        }
-
-        .notif-message {
-            font-size: 12px;
-            color: #4B5A52;
-            line-height: 1.5;
-            margin-bottom: 8px;
-            padding-left: 2px;
-        }
-
-        .notif-time {
-            font-size: 10px;
-            color: var(--mist);
-            font-weight: 600;
-            text-align: right;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 4px;
-        }
-
-        /* এম্পটি স্টেট */
-        .no-notif {
-            text-align: center;
-            color: var(--mist);
-            padding: 38px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .no-notif .empty-icon {
-            font-size: 32px;
-            color: #C8D1CC;
-            margin-bottom: 4px;
-        }
-
-        .no-notif p {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* ফ্লোটিং আইল্যান্ড বটম ন্যাভিগেশন বার */
+        /* Bottom Floating Bar Kas iti UI Mockup */
         .bottom-nav {
             position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 440px;
-            height: 62px;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(233, 226, 211, 0.9);
-            border-radius: 999px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            border-top: 1px solid var(--border-soft);
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-float);
-            padding: 0 8px;
+            padding: 12px 16px 20px;
+            z-index: 200;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: var(--mist);
-            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 11px;
             font-weight: 600;
-            flex: 1;
-            padding: 8px 0;
-            border-radius: 999px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
-        .nav-item i {
-            font-size: 18px;
-            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        .nav-item i, .nav-item .nav-kanji {
+            font-size: 19px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-item.active {
-            color: var(--pine);
-            font-weight: 700;
+            color: var(--teal-card);
+            font-weight: 800;
         }
 
-        .nav-item.active i {
-            transform: translateY(-1px) scale(1.1);
-            color: var(--jade);
+        /* Modal Alerts & Notifications */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        .nav-item:active i {
-            transform: scale(0.9);
+        .modal-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow-float);
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .close-btn {
+            background: #F1F5F9;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-    <!-- গ্লোবাল ব্যানার অ্যালার্ট -->
-    <div id="homeGlobalAlert" class="global-alert-banner"></div>
-
-    <!-- টপ বার -->
-    <header class="top-nav">
-        <div class="top-nav-spacer"></div>
-        <div class="logo-container">
-            <a href="index.html" class="brand-link">
-                <img id="mainAppLogo" src="logo.png" alt="KOTOBA Logo" class="app-logo-img" onerror="this.src='https://placehold.co/100x100/0B4A38/ffffff?text=K'">
-                <span class="logo">KOTOBA</span>
-            </a>
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="user-greeting">
+            <div class="user-avatar">
+                <img id="mainAppLogo" src="logo.png" alt="Logo" onerror="this.src='https://placehold.co/100x100/0D9488/ffffff?text=K'">
+            </div>
+            <div>
+                <div class="greeting-text">KOTOBA</div>
+            </div>
         </div>
-        <div class="top-nav-right">
-            <button id="openNotifBtn" class="notif-bell-btn" title="নোটিফিকেশন" aria-label="নোটিফিকেশন">
+        <div class="header-stats">
+            <div class="streak-pill">
+                <i class="fa-solid fa-fire text-amber-500"></i>
+                <span id="streakDays">12</span>
+            </div>
+            <button id="openNotifBtn" class="notif-btn" title="নোটিফিকেশন">
                 <i class="fa-regular fa-bell"></i>
                 <span class="notif-badge" id="notifBadge">0</span>
             </button>
         </div>
     </header>
 
-    <!-- সুন্দর ও আধুনিক নোটিফিকেশন মডাল -->
+    <main class="container">
+
+        <!-- Teal Motivation Card kas iti UI reference -->
+        <div class="hero-banner">
+            <h2>নিয়মিত চর্চাই সফলতার চাবিকাঠি! 🔥</h2>
+            <p>প্রতিদিন সামান্য সময় দিন, জাপানিজ ভাষা শেখা হবে আরও সহজ ও মজাদার।</p>
+        </div>
+
+        <div id="homeAdContainer" style="display:none; justify-content:center; margin-bottom:16px;"></div>
+
+        <!-- Section 1: A1-A2 -->
+        <div class="section-header">
+            <h3>বিগিনার - এলিমেন্টারি</h3>
+            <span class="badge-pill badge-purple">A1-A2 · JFT</span>
+        </div>
+        <div class="card-grid">
+            <a href="#" class="practice-card">
+                <div class="card-tag-icon tag-purple"><i class="fa-regular fa-comments"></i></div>
+                <div>
+                    <h4>Conversation</h4>
+                    <p>কথোপকথন গাইড</p>
+                </div>
+            </a>
+            <a href="#" class="practice-card">
+                <span class="tag-badge-mini">শীঘ্রই</span>
+                <div class="card-tag-icon tag-orange"><i class="fa-solid fa-book-open-reader"></i></div>
+                <div>
+                    <h4>Grammar</h4>
+                    <p>ব্যাকরণ পাঠ</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Section 2: N5 Section -->
+        <div class="section-header">
+            <h3>N5 ফাউন্ডেশন</h3>
+            <span class="badge-pill badge-blue">JLPT / NAT / JLCT</span>
+        </div>
+        <div class="card-grid">
+            <a href="alphabet.html" class="practice-card">
+                <div class="card-tag-icon tag-purple">あ</div>
+                <div>
+                    <h4>বর্ণমালা</h4>
+                    <p>হিরাগানা ও কাতাকানা</p>
+                </div>
+            </a>
+
+            <a href="n5-vocab.html" class="practice-card">
+                <div class="card-tag-icon tag-blue">語</div>
+                <div>
+                    <h4>শব্দভাণ্ডার</h4>
+                    <p>ভোকাবুলারি ও মূলশব্দ</p>
+                </div>
+            </a>
+
+            <a href="kanji.html" class="practice-card">
+                <div class="card-tag-icon tag-pink">字</div>
+                <div>
+                    <h4>কাঞ্জি</h4>
+                    <p>মৌলিক ও প্রয়োজনীয় কাঞ্জি</p>
+                </div>
+            </a>
+
+            <a href="n5-grammar.html" class="practice-card">
+                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-shapes"></i></div>
+                <div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>সহজ ভাষায় গ্রামার</p>
+                </div>
+            </a>
+
+            <a href="#" class="practice-card">
+                <div class="card-tag-icon tag-orange"><i class="fa-solid fa-layer-group"></i></div>
+                <div>
+                    <h4>ক্রিয়াপদ</h4>
+                    <p>Conjugation of Verbs</p>
+                </div>
+            </a>
+
+            <a href="#" class="practice-card">
+                <div class="card-tag-icon tag-purple"><i class="fa-solid fa-list-check"></i></div>
+                <div>
+                    <h4>লেসন প্র্যাকটিস</h4>
+                    <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
+                </div>
+            </a>
+
+            <a href="appendices.html" class="practice-card">
+                <div class="card-tag-icon tag-blue"><i class="fa-solid fa-folder-open"></i></div>
+                <div>
+                    <h4>Appendices</h4>
+                    <p>প্রয়োজনীয় তালিকা</p>
+                </div>
+            </a>
+
+            <a href="mock-test.html" class="practice-card">
+                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-file-signature"></i></div>
+                <div>
+                    <h4>বিগত প্রশ্ন</h4>
+                    <p>NAT / JLPT প্রশ্নব্যাংক</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Practice / Tests List Kas iti All Sessions -->
+        <div class="section-header">
+            <h3>স্কিল ও টেস্ট সেশন</h3>
+        </div>
+        <div class="session-list">
+            <a href="#" class="session-card">
+                <div class="session-card-left">
+                    <div class="session-icon tag-blue"><i class="fa-solid fa-headphones"></i></div>
+                    <div class="session-info">
+                        <h4>Listening & Audio (聴解)</h4>
+                        <p>N5 লিসেনিং প্র্যাকটিস ও টেস্ট</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+            </a>
+
+            <a href="#" class="session-card">
+                <div class="session-card-left">
+                    <div class="session-icon tag-mint"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="session-info">
+                        <h4>Reading Practice (読解)</h4>
+                        <p>N5 রিডিং ও প্যাসেজ রিডিং</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+            </a>
+
+            <a href="#" class="session-card">
+                <div class="session-card-left">
+                    <div class="session-icon tag-orange"><i class="fa-solid fa-video"></i></div>
+                    <div class="session-info">
+                        <h4>Skype / Zoom</h4>
+                        <p>সরাসরি লাইভ ক্লাস ও সাপোর্ট</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+            </a>
+        </div>
+
+        <!-- Section 3: N4 Section -->
+        <div class="section-header">
+            <h3>N4 এলিমেন্টারি লেভেল</h3>
+            <span class="badge-pill badge-orange">লেসন ২৬-৫০</span>
+        </div>
+        <div class="card-grid">
+            <a href="n4-vocab.html" class="practice-card">
+                <div class="card-tag-icon tag-purple"><i class="fa-solid fa-book-bookmark"></i></div>
+                <div>
+                    <h4>শব্দভাণ্ডার</h4>
+                    <p>২৬-৫০ লেসন শব্দার্থ</p>
+                </div>
+            </a>
+
+            <a href="n4-grammar.html" class="practice-card">
+                <div class="card-tag-icon tag-mint"><i class="fa-solid fa-shapes"></i></div>
+                <div>
+                    <h4>ব্যাকরণ</h4>
+                    <p>সম্পূর্ণ N4 রুলস</p>
+                </div>
+            </a>
+
+            <a href="n4kanji.html" class="practice-card">
+                <div class="card-tag-icon tag-pink">漢字</div>
+                <div>
+                    <h4>কাঞ্জি</h4>
+                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
+                </div>
+            </a>
+
+            <a href="#" class="practice-card">
+                <div class="card-tag-icon tag-blue"><i class="fa-solid fa-book-open"></i></div>
+                <div>
+                    <h4>Reading</h4>
+                    <p>N4 রিডিং প্র্যাকটিস</p>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar Kas iti Ladawan -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-solid fa-trophy"></i>
+            <span>Path</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Speak</span>
+        </a>
+        <a href="alphabet.html" class="nav-item">
+            <span class="nav-kanji" style="font-weight:700;">あ</span>
+            <span>Kana</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Notification Modal -->
     <div class="modal-overlay" id="notifModal">
-        <div class="notif-modal-card">
-            <div class="modal-header">
-                <div class="modal-header-left">
-                    <div class="modal-header-icon"><i class="fa-solid fa-bell"></i></div>
-                    <h3>নোটিফিকেশন</h3>
-                </div>
-                <button class="close-btn" id="closeNotifBtn" aria-label="বন্ধ করুন">&times;</button>
+        <div class="modal-box">
+            <div class="modal-top">
+                <h4 style="font-weight: 800; font-size: 16px;">নোটিফিকেশন</h4>
+                <button class="close-btn" id="closeNotifBtn">&times;</button>
             </div>
-            <div class="notif-list" id="notifList">
-                <div class="no-notif">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 20px; color: var(--jade);"></i>
-                    <p style="margin-top: 6px;">লোড হচ্ছে...</p>
-                </div>
+            <div id="notifList" style="overflow-y:auto; flex:1;">
+                <p style="text-align: center; color: var(--text-muted); font-size: 13px; padding: 20px 0;">কোনো নতুন নোটিফিকেশন নেই</p>
             </div>
         </div>
     </div>
 
-    <main class="page-content">
-
-        <!-- হিরো টেক্সট -->
-        <section class="hero-text">
-            <span class="hero-kanji">語</span>
-            <h2>জাপানিজ ভাষা শেখা আর কঠিন নয়</h2>
-            <p>শুরু থেকে দক্ষতা পর্যন্ত — প্রতিটি ধাপে আমরা আছি আপনার সাথে।</p>
-        </section>
-
-        <!-- ডাইনামিক ব্যানার বিজ্ঞাপন -->
-        <div class="ad-banner-box" id="homeAdContainer"></div>
-
-        <!-- সেকশন ১: A1-A2 -->
-        <section class="level-section">
-            <span class="badge red-badge">A1-A2 · JFT</span>
-            <h3 class="section-heading">বিগিনার - এলিমেন্টারি লেভেল</h3>
-            <div class="card-grid">
-                <a href="#" class="item-card red-top">
-                    <div class="icon-circle red-bg"><i class="fa-solid fa-comments"></i></div>
-                    <h4>Conversation</h4>
-                    <p>কথোপকথন গাইড</p>
-                </a>
-                <a href="#" class="item-card red-top">
-                    <span class="mini-tag">শীঘ্রই</span>
-                    <div class="icon-circle yellow-bg"><i class="fa-solid fa-book-open-reader"></i></div>
-                    <h4>Grammar</h4>
-                    <p>ব্যাকরণ পাঠ</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- সেকশন ২: N5 লেভেল -->
-        <section class="level-section">
-            <span class="badge green-badge">N5 · JLPT / NAT / JLCT</span>
-            <h3 class="section-heading">বিগিনার লেভেল</h3>
-            <div class="card-grid">
-                
-                <a href="alphabet.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-rocket"></i></div>
-                    <h4>বর্ণমালা</h4>
-                    <p>হিরাগানা ও কাতাকানা সাউন্ডসহ</p>
-                </a>
-
-                <a href="n5-vocab.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
-                    <h4>শব্দভাণ্ডার</h4>
-                    <p>N5 ভোকাবুলারি এবং মূলশব্দ</p>
-                </a>
-
-                <a href="n5-grammar.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
-                    <h4>ব্যাকরণ</h4>
-                    <p>সহজ ভাষায় N5 গ্রামার</p>
-                </a>
-
-                <a href="kanji.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
-                    <h4>কাঞ্জি</h4>
-                    <p>মৌলিক ও বহুল ব্যবহৃত কাঞ্জি</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-layer-group"></i></div>
-                    <h4>ক্রিয়াপদ</h4>
-                    <p>Conjugation of Verbs</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-list-check"></i></div>
-                    <h4>লেসন প্র্যাকটিস</h4>
-                    <p>অধ্যায়ভিত্তিক পরীক্ষা</p>
-                </a>
-
-                <a href="appendices.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-folder-open"></i></div>
-                    <h4>Appendices</h4>
-                    <p>প্রয়োজনীয় চার্ট এবং তালিকা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
-                    <h4>Reading</h4>
-                    <p>N5 রিডিং প্র্যাকটিস</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-bullhorn"></i></div>
-                    <h4>Listening</h4>
-                    <p>N5 লিসেনিং প্র্যাকটিস</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-headphones"></i></div>
-                    <h4>Listening Test</h4>
-                    <p>N5 লিসেনিং পরীক্ষা</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-video"></i></div>
-                    <h4>Skype/Zoom</h4>
-                    <p>ক্লাস সাপোর্ট ও লিঙ্ক</p>
-                </a>
-
-                <a href="mock-test.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>পূর্বের প্রশ্নাবলী</h4>
-                    <p>NAT / JLPT বিগত প্রশ্ন</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- সেকশন ৩: N4 লেভেল -->
-        <section class="level-section">
-            <span class="badge dark-badge">N4 · JLPT / NAT / JLCT</span>
-            <h3 class="section-heading">এলিমেন্টারি লেভেল</h3>
-            <div class="card-grid">
-                
-                <a href="n4-vocab.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-bookmark"></i></div>
-                    <h4>শব্দভাণ্ডার</h4>
-                    <p>লেসন ২৬-৫০ সম্পূর্ণ ভোকাবুলারি</p>
-                </a>
-
-                <a href="n4-grammar.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-shapes"></i></div>
-                    <h4>ব্যাকরণ</h4>
-                    <p>লেসন ২৬-৪৬ সম্পূর্ণ রুলস</p>
-                </a>
-
-                <a href="n4kanji.html" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-pen-nib"></i></div>
-                    <h4>কাঞ্জি</h4>
-                    <p>N4 প্রয়োজনীয় কাঞ্জি</p>
-                </a>
-
-                <a href="#" class="item-card green-top">
-                    <div class="icon-circle green-bg"><i class="fa-solid fa-book-open"></i></div>
-                    <h4>Reading</h4>
-                    <p>N4 রিডিং প্র্যাকটিস</p>
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ফ্লোটিং বটম বার -->
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span>লিডারবোর্ড</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
-        </a>
-    </nav>
-
-    <!-- Firebase Scripts -->
+    <!-- Firebase Script Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -819,155 +688,34 @@
         const closeNotifBtn = document.getElementById("closeNotifBtn");
         const notifBadge = document.getElementById("notifBadge");
         const notifList = document.getElementById("notifList");
-        const mainAppLogo = document.getElementById("mainAppLogo");
-        const homeGlobalAlert = document.getElementById("homeGlobalAlert");
-        const homeAdContainer = document.getElementById("homeAdContainer");
-
-        let currentUserEmail = null;
-
-        onAuthStateChanged(auth, (user) => {
-            currentUserEmail = user && user.email ? user.email.toLowerCase().trim() : null;
-            loadNotifications();
-        });
-
-        async function loadSiteDynamicConfigs() {
-            try {
-                const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
-                if (brandSnap.exists() && brandSnap.data().appIconBase64) {
-                    mainAppLogo.src = brandSnap.data().appIconBase64;
-                }
-
-                const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
-                if (alertSnap.exists()) {
-                    const ad = alertSnap.data();
-                    if (ad.bannerStatus === "enabled" && ad.bannerText) {
-                        homeGlobalAlert.style.display = "block";
-                        homeGlobalAlert.innerText = ad.bannerText;
-                    }
-                }
-
-                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
-                let isGlobalOn = true;
-                let isIndexOn = true;
-                let adKey = "8daacdc376c790c03bd8fe48f80c0b1c";
-
-                if (adSnap.exists()) {
-                    const adData = adSnap.data();
-                    isGlobalOn = adData.globalAdsEnabled !== false;
-                    isIndexOn = adData.indexAdsEnabled !== false;
-                    if (adData.adKey) adKey = adData.adKey;
-                }
-
-                if (isGlobalOn && isIndexOn) {
-                    homeAdContainer.style.display = "flex";
-                    
-                    const adIframe = document.createElement("iframe");
-                    adIframe.style.width = "320px";
-                    adIframe.style.height = "50px";
-                    adIframe.style.border = "none";
-                    adIframe.style.overflow = "hidden";
-                    adIframe.scrolling = "no";
-                    
-                    homeAdContainer.appendChild(adIframe);
-                    
-                    const iframeDoc = adIframe.contentWindow.document;
-                    iframeDoc.open();
-                    iframeDoc.write(`
-                        <!DOCTYPE html>
-                        <html>
-                        <head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent;}</style></head>
-                        <body>
-                            <script type="text/javascript">
-                                atOptions = {
-                                    'key' : '${adKey}',
-                                    'format' : 'iframe',
-                                    'height' : 50,
-                                    'width' : 320,
-                                    'params' : {}
-                                };
-                            <\/script>
-                            <script type="text/javascript" src="https://www.highrevenueformat.com/${adKey}/invoke.js"><\/script>
-                        </body>
-                        </html>
-                    `);
-                    iframeDoc.close();
-                } else {
-                    homeAdContainer.style.display = "none";
-                    homeAdContainer.innerHTML = "";
-                }
-            } catch (err) {
-                console.warn("Dynamic config load error:", err);
-            }
-        }
-
-        loadSiteDynamicConfigs();
 
         openNotifBtn.onclick = () => notifModal.style.display = "flex";
         closeNotifBtn.onclick = () => notifModal.style.display = "none";
-        window.onclick = (e) => {
-            if (e.target === notifModal) notifModal.style.display = "none";
-        };
+        window.onclick = (e) => { if (e.target === notifModal) notifModal.style.display = "none"; };
 
-        async function loadNotifications() {
-            try {
-                let notifs = [];
-                const qAll = query(collection(db, "notifications"), where("target", "==", "all"));
-                const snapAll = await getDocs(qAll);
-                snapAll.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data() }));
-
-                if (currentUserEmail) {
-                    const qUser = query(collection(db, "notifications"), where("target", "==", currentUserEmail));
-                    const snapUser = await getDocs(qUser);
-                    snapUser.forEach(docSnap => notifs.push({ id: docSnap.id, ...docSnap.data(), isTargeted: true }));
+        onAuthStateChanged(auth, async (user) => {
+            if (user && user.email) {
+                try {
+                    const qUser = query(collection(db, "notifications"), where("target", "in", ["all", user.email.toLowerCase().trim()]));
+                    const snap = await getDocs(qUser);
+                    if (!snap.empty) {
+                        notifBadge.style.display = "flex";
+                        notifBadge.innerText = snap.size;
+                        notifList.innerHTML = "";
+                        snap.forEach(docSnap => {
+                            const data = docSnap.data();
+                            const div = document.createElement("div");
+                            div.style.padding = "10px 0";
+                            div.style.borderBottom = "1px solid #f1f5f9";
+                            div.innerHTML = `<h5 style="font-weight:700; font-size:13px;">${data.title}</h5><p style="font-size:12px; color:#64748b;">${data.message}</p>`;
+                            notifList.appendChild(div);
+                        });
+                    }
+                } catch(e) {
+                    console.error(e);
                 }
-
-                notifs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-                if (notifs.length > 0) {
-                    notifBadge.style.display = "flex";
-                    notifBadge.innerText = notifs.length;
-                    notifList.innerHTML = "";
-
-                    notifs.forEach(n => {
-                        const dateStr = n.timestamp ? new Date(n.timestamp).toLocaleString('bn-BD', {
-                            day: 'numeric', month: 'short', hour: 'numeric', minute: 'numeric'
-                        }) : "";
-
-                        const itemDiv = document.createElement("div");
-                        itemDiv.className = `notif-item ${n.isTargeted ? 'targeted' : ''}`;
-                        itemDiv.innerHTML = `
-                            <div class="notif-item-top">
-                                <div class="notif-item-title-wrap">
-                                    <span class="notif-item-icon ${n.isTargeted ? 'targeted' : ''}">
-                                        <i class="fa-solid ${n.isTargeted ? 'fa-user-tag' : 'fa-bullhorn'}"></i>
-                                    </span>
-                                    <h4>${n.title}</h4>
-                                </div>
-                                ${n.isTargeted ? '<span class="notif-pill personal">ব্যক্তিগত</span>' : '<span class="notif-pill global">ঘোষণা</span>'}
-                            </div>
-                            <p class="notif-message">${n.message}</p>
-                            <div class="notif-time"><i class="fa-regular fa-clock"></i> ${dateStr}</div>
-                        `;
-                        notifList.appendChild(itemDiv);
-                    });
-                } else {
-                    notifBadge.style.display = "none";
-                    notifList.innerHTML = `
-                        <div class="no-notif">
-                            <div class="empty-icon"><i class="fa-regular fa-bell-slash"></i></div>
-                            <p>নতুন কোনো নোটিফিকেশন নেই</p>
-                        </div>
-                    `;
-                }
-            } catch (err) {
-                notifList.innerHTML = `
-                    <div class="no-notif" style="color:var(--clay);">
-                        <div class="empty-icon" style="color:var(--clay);"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <p>নোটিফিকেশন লোড করতে সমস্যা হয়েছে।</p>
-                    </div>
-                `;
             }
-        }
+        });
     </script>
 </body>
 </html>

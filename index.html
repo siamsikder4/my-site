@@ -31,15 +31,15 @@
 
     <style>
         :root {
-            /* স্ক্রিনশটের হুবহু কালার প্যালেট */
+            /* স্ক্রিনশট অনুযায়ী লাইট প্যাস্টেল ব্যাকগ্রাউন্ড ও কালার প্যালেট */
             --bg-canvas: #F4F6F9;
             --text-title: #1E252D;
             --text-sub: #8B95A5;
             
-            /* টপ ব্যানার সায়ান/গ্রিন */
+            /* টপ সায়ান/গ্রিন ব্যানার */
             --teal-banner: #00A896;
             
-            /* কার্ড ১: হিরাগানা (পার্পল টিন্ট) */
+            /* কার্ড ১: হিরাগানা (ল্যাভেন্ডার/পার্পল টিন্ট) */
             --card-purple-bg: #F5EDFA;
             --badge-purple: #9B51E0;
             
@@ -198,13 +198,27 @@
             border: 2px solid #ffffff;
         }
 
-        /* মেইন টিল কালার ব্যানার */
+        /* ব্যানার অ্যালার্ট */
+        .global-alert-banner {
+            display: none;
+            background: #FEECEF;
+            border: 1px solid #FCD3D9;
+            color: #EB5757;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* টিল গ্রিন হিরো কার্ড */
         .hero-banner {
             background-color: var(--teal-banner);
             border-radius: 20px;
             padding: 20px 20px;
             color: #ffffff;
-            margin: 12px 0 20px;
+            margin: 10px 0 20px;
             position: relative;
         }
 
@@ -213,11 +227,6 @@
             font-weight: 800;
             line-height: 1.4;
             margin-bottom: 6px;
-        }
-
-        .hero-banner h2 span {
-            display: inline-block;
-            margin-left: 4px;
         }
 
         .hero-banner p {
@@ -246,7 +255,7 @@
             color: var(--text-sub);
         }
 
-        /* কালারড কার্ড গ্রিড */
+        /* কার্ড গ্রিড */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -269,14 +278,13 @@
             transform: scale(0.97);
         }
 
-        /* কার্ডের ব্যাকগ্রাউন্ড ভ্যারিয়েশন */
+        /* কার্ড কালার ভ্যারিয়েশন */
         .card-purple { background-color: var(--card-purple-bg); }
         .card-blue   { background-color: var(--card-blue-bg); }
         .card-pink   { background-color: var(--card-pink-bg); }
         .card-mint   { background-color: var(--card-mint-bg); }
         .card-orange { background-color: var(--card-orange-bg); }
 
-        /* কার্ডের উপরের ছোট আইকন ব্যাজ */
         .card-badge {
             width: 28px;
             height: 28px;
@@ -370,7 +378,7 @@
             font-weight: 500;
         }
 
-        /* বটম ন্যাভিগেশন বার */
+        /* আধুনিক বটম বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -481,9 +489,12 @@
 
     <main class="container">
 
+        <!-- গ্লোবাল ব্যানার অ্যালার্ট -->
+        <div id="homeGlobalAlert" class="global-alert-banner"></div>
+
         <!-- টিল গ্রিন হিরো কার্ড -->
         <div class="hero-banner">
-            <h2>Consistency is key. You've crushed 12 days in a row! <span>🔥</span></h2>
+            <h2>Consistency is key. You've crushed 12 days in a row! 🔥</h2>
             <p>So close! You're just 13 lessons away from finishing N5 Level.</p>
         </div>
 
@@ -538,7 +549,7 @@
                 <div class="card-badge badge-blue">語</div>
                 <div>
                     <h4>Vocab</h4>
-                    <p>N5 শব্দভাণ্ডার ও অর্থ</p>
+                    <p>N5 শব্দভাণ্ডার ও মূলশব্দ</p>
                 </div>
             </a>
 
@@ -691,7 +702,7 @@
 
     </main>
 
-    <!-- বটম বার (স্ক্রিনশটের মতো ৫টি আইটেম) -->
+    <!-- বটম ন্যাভিগেশন বার (সরাসরি speak.html কানেক্টেড) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-house"></i>
@@ -701,7 +712,7 @@
             <i class="fa-regular fa-calendar-check"></i>
             <span>Path</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="speak.html" class="nav-item">
             <i class="fa-solid fa-bars-staggered"></i>
             <span>Speak</span>
         </a>
@@ -754,6 +765,8 @@
         const notifBadge = document.getElementById("notifBadge");
         const notifList = document.getElementById("notifList");
         const mainAppLogo = document.getElementById("mainAppLogo");
+        const homeGlobalAlert = document.getElementById("homeGlobalAlert");
+        const homeAdContainer = document.getElementById("homeAdContainer");
 
         openNotifBtn.onclick = () => notifModal.style.display = "flex";
         closeNotifBtn.onclick = () => notifModal.style.display = "none";
@@ -764,6 +777,60 @@
                 const brandSnap = await getDoc(doc(db, "site_settings", "branding"));
                 if (brandSnap.exists() && brandSnap.data().appIconBase64) {
                     mainAppLogo.src = brandSnap.data().appIconBase64;
+                }
+
+                const alertSnap = await getDoc(doc(db, "site_settings", "system_alerts"));
+                if (alertSnap.exists()) {
+                    const ad = alertSnap.data();
+                    if (ad.bannerStatus === "enabled" && ad.bannerText) {
+                        homeGlobalAlert.style.display = "block";
+                        homeGlobalAlert.innerText = ad.bannerText;
+                    }
+                }
+
+                const adSnap = await getDoc(doc(db, "site_settings", "ads_control"));
+                let isGlobalOn = true;
+                let isIndexOn = true;
+                let adKey = "8daacdc376c790c03bd8fe48f80c0b1c";
+
+                if (adSnap.exists()) {
+                    const adData = adSnap.data();
+                    isGlobalOn = adData.globalAdsEnabled !== false;
+                    isIndexOn = adData.indexAdsEnabled !== false;
+                    if (adData.adKey) adKey = adData.adKey;
+                }
+
+                if (isGlobalOn && isIndexOn) {
+                    homeAdContainer.style.display = "flex";
+                    const adIframe = document.createElement("iframe");
+                    adIframe.style.width = "320px";
+                    adIframe.style.height = "50px";
+                    adIframe.style.border = "none";
+                    adIframe.style.overflow = "hidden";
+                    adIframe.scrolling = "no";
+                    homeAdContainer.appendChild(adIframe);
+                    
+                    const iframeDoc = adIframe.contentWindow.document;
+                    iframeDoc.open();
+                    iframeDoc.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head><style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;overflow:hidden;background:transparent;}</style></head>
+                        <body>
+                            <script type="text/javascript">
+                                atOptions = {
+                                    'key' : '${adKey}',
+                                    'format' : 'iframe',
+                                    'height' : 50,
+                                    'width' : 320,
+                                    'params' : {}
+                                };
+                            <\/script>
+                            <script type="text/javascript" src="https://www.highrevenueformat.com/${adKey}/invoke.js"><\/script>
+                        </body>
+                        </html>
+                    `);
+                    iframeDoc.close();
                 }
             } catch (err) {
                 console.warn(err);

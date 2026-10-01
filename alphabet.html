@@ -2,83 +2,119 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জাপানিজ বর্ণমালা - BD Japanese</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>জাপানিজ বর্ণমালা - KOTOBA</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
     <!-- আইকন ও ফন্ট -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-canvas: #F4F6F9;
+            --surface-card: #FFFFFF;
+            --text-dark: #1E252D;
+            --text-muted: #8E9AAB;
+            
+            --teal-primary: #00A896;
+            --teal-soft: #E3F8F2;
+
+            --purple-main: #9B51E0;
+            --purple-soft: #F5EDFA;
+
+            --border-soft: #EEF1F6;
+            --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Hind Siliguri", "Segoe UI", sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
-            padding-bottom: 80px;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            padding-bottom: 100px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* টপ হেডার */
+        /* স্টিকি টপ বার */
         .top-nav {
-            display: flex;
-            align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
             position: sticky;
             top: 0;
             z-index: 100;
+            background: var(--bg-canvas);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .back-btn {
+            color: var(--text-dark);
             text-decoration: none;
-            color: #0f3e2e;
-            font-size: 16px;
-            margin-right: 14px;
+            background: var(--surface-card);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-soft);
+            font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: transform 0.15s ease;
         }
+        .back-btn:active { transform: scale(0.92); }
 
-        .logo {
+        .nav-title {
             font-weight: 800;
-            font-size: 17px;
-            color: #0f3e2e;
+            font-size: 15.5px;
+            color: var(--text-dark);
         }
 
         .content {
-            padding: 16px;
-            max-width: 480px;
+            padding: 6px 18px 24px;
+            max-width: 440px;
             margin: 0 auto;
         }
 
-        /* মূল সুইচ বাটন (হিরাগানা / কাতাকানা) */
+        /* হিরাগানা / কাতাকানা মূল সুইচ বাটন */
         .main-switcher {
             display: flex;
-            background: #e2e8f0;
-            border-radius: 14px;
+            background: #E8EEF5;
+            border-radius: 16px;
             padding: 4px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .switch-btn {
             flex: 1;
-            padding: 10px;
+            padding: 10px 8px;
             border: none;
             background: transparent;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            color: #4a5568;
-            border-radius: 10px;
+            color: var(--text-muted);
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .switch-btn.active {
-            background: #0f3e2e;
-            color: #ffffff;
-            box-shadow: 0 2px 6px rgba(15, 62, 46, 0.2);
+            background: var(--surface-card);
+            color: var(--text-dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            font-weight: 800;
         }
 
         /* সাব ক্যাটাগরি পিলস */
@@ -86,7 +122,7 @@
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding-bottom: 8px;
+            padding-bottom: 4px;
             margin-bottom: 14px;
             scrollbar-width: none;
         }
@@ -96,21 +132,22 @@
         }
 
         .sub-pill {
-            padding: 6px 14px;
+            padding: 7px 14px;
             border-radius: 20px;
-            border: 1px solid #cbd5e1;
-            background: #ffffff;
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
+            border: 1px solid var(--border-soft);
+            background: var(--surface-card);
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--text-muted);
             white-space: nowrap;
             cursor: pointer;
+            transition: all 0.15s ease;
         }
 
         .sub-pill.active {
-            background: #e6f4ea;
-            border-color: #059669;
-            color: #059669;
+            background: var(--teal-soft);
+            border-color: #BBEFE3;
+            color: var(--teal-primary);
         }
 
         .info-bar {
@@ -118,122 +155,128 @@
             justify-content: space-between;
             align-items: center;
             font-size: 11px;
-            color: #64748b;
+            color: var(--text-muted);
+            font-weight: 600;
             margin-bottom: 12px;
             padding: 0 4px;
         }
 
-        /* বর্ণমালা কার্ড গ্রিড */
+        /* বর্ণমালা গ্রিড */
         .char-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
+            gap: 9px;
         }
 
         .char-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
             padding: 10px 4px 8px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-subtle);
             cursor: pointer;
             position: relative;
-            transition: transform 0.1s, border-color 0.1s;
+            transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
         }
 
         .char-card:active {
-            transform: scale(0.94);
-            border-color: #059669;
-            background: #f0fdf4;
+            transform: scale(0.93);
+            border-color: var(--teal-primary);
+            background: var(--teal-soft);
         }
 
         .char-jp {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 700;
-            color: #0f3e2e;
-            line-height: 1.1;
+            color: var(--text-dark);
+            line-height: 1.15;
             margin-bottom: 2px;
         }
 
         .char-ro {
             font-size: 11px;
-            color: #64748b;
-            font-weight: 600;
+            color: var(--text-muted);
+            font-weight: 700;
         }
 
         .char-bn {
-            font-size: 11px;
-            color: #059669;
+            font-size: 10.5px;
+            color: var(--teal-primary);
             font-weight: 700;
         }
 
         .audio-icon {
             position: absolute;
-            top: 4px;
-            right: 5px;
+            top: 5px;
+            right: 6px;
             font-size: 8px;
-            color: #cbd5e1;
+            color: #CBD5E1;
         }
 
         .empty-slot {
             visibility: hidden;
         }
 
-        /* বটম বার */
+        /* বটম বার (Active Tab: Kana) */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid #ECEFF4;
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
+            padding: 10px 10px 18px;
+            z-index: 200;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: #8392a5;
-            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            text-decoration: none;
+            color: #9AA5B5;
+            font-size: 10px;
             font-weight: 600;
-            background: none;
-            border: none;
+            min-width: 50px;
+        }
+
+        .nav-item i, .nav-item .nav-kana {
+            font-size: 18px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-item.active {
-            color: #0f3e2e;
-        }
-
-        .nav-item i {
-            font-size: 19px;
+            color: var(--teal-primary);
+            font-weight: 800;
         }
     </style>
 </head>
 <body>
 
+    <!-- টপ বার -->
     <header class="top-nav">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="logo">জাপানিজ বর্ণমালা</div>
+        <a href="index.html" class="back-btn" aria-label="হোমে যান"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title">জাপানিজ বর্ণমালা</span>
+        <div style="width: 38px;"></div>
     </header>
 
     <main class="content">
 
-        <!-- হিরাগানা / কাতাকানা সুইচ -->
+        <!-- হিরাগানা / কাতাকানা মডার্ন সুইচ -->
         <div class="main-switcher">
             <button class="switch-btn active" onclick="switchScript('hira', this)">হিরাগানা (Hiragana)</button>
             <button class="switch-btn" onclick="switchScript('kata', this)">কাতাকানা (Katakana)</button>
         </div>
 
-        <!-- সাব ক্যাটাগরি -->
+        <!-- সাব ক্যাটাগরি পিলস -->
         <div class="sub-categories">
             <button class="sub-pill active" onclick="switchType('basic', this)">মৌলিক (৪৬টি)</button>
             <button class="sub-pill" onclick="switchType('dakuon', this)">দাকুঅন (২৫টি)</button>
@@ -245,24 +288,32 @@
             <i class="fa-solid fa-volume-high"></i>
         </div>
 
-        <!-- ক্যারেক্টার গ্রিড কনটেইনার -->
+        <!-- বর্ণমালা কার্ড গ্রিড -->
         <div class="char-grid" id="charGrid"></div>
 
     </main>
 
-    <!-- বটম নেভিগেশন -->
+    <!-- বটম ন্যাভিগেশন বার (Kana অ্যাক্টিভ) -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
+            <span>Home</span>
         </a>
-        <a href="index.html" class="nav-item active">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Path</span>
         </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>লগইন</span>
+        <a href="speak.html" class="nav-item">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <span>Speak</span>
+        </a>
+        <a href="alphabet.html" class="nav-item active">
+            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
+            <span>Kana</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
         </a>
     </nav>
 
@@ -428,9 +479,10 @@
 
         function playSound(text) {
             if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'ja-JP';
-                utterance.rate = 0.8;
+                utterance.rate = 0.85;
                 window.speechSynthesis.speak(utterance);
             }
         }

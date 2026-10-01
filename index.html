@@ -15,7 +15,7 @@
 
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
 
     <!-- OneSignal SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -122,6 +122,7 @@
             gap: 8px;
         }
 
+        /* অ্যানিমেটেড স্ট্রিক ও এক্সপি পিল */
         .streak-pill {
             background: #FFFFFF;
             border-radius: 20px;
@@ -132,12 +133,38 @@
             font-size: 12px;
             font-weight: 800;
             color: var(--text-title);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(235, 87, 87, 0.08);
+            border: 1px solid rgba(235, 87, 87, 0.15);
+            transition: transform 0.2s ease;
         }
 
-        .streak-pill .fire-icon {
+        .streak-pill:active {
+            transform: scale(0.95);
+        }
+
+        /* আগুনের লাইভ ফ্লেম অ্যানিমেশন */
+        .fire-icon {
             color: #EB5757;
-            font-size: 13px;
+            font-size: 14px;
+            display: inline-block;
+            transform-origin: center bottom;
+            animation: fireFlamePulse 1.4s infinite alternate ease-in-out;
+            filter: drop-shadow(0 2px 4px rgba(235, 87, 87, 0.4));
+        }
+
+        @keyframes fireFlamePulse {
+            0% {
+                transform: scale(0.95) rotate(-3deg);
+                filter: drop-shadow(0 2px 4px rgba(235, 87, 87, 0.35));
+            }
+            50% {
+                transform: scale(1.12) rotate(3deg);
+                filter: drop-shadow(0 3px 8px rgba(249, 115, 22, 0.6));
+            }
+            100% {
+                transform: scale(1.22) rotate(-2deg);
+                filter: drop-shadow(0 4px 10px rgba(235, 87, 87, 0.7));
+            }
         }
 
         .xp-pill {
@@ -146,16 +173,47 @@
             padding: 6px 12px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             font-size: 12px;
             font-weight: 800;
             color: var(--text-title);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(242, 201, 76, 0.12);
+            border: 1px solid rgba(242, 201, 76, 0.25);
+            transition: transform 0.2s ease;
         }
 
-        .xp-pill i {
+        .xp-pill:active {
+            transform: scale(0.95);
+        }
+
+        .xp-bolt-icon {
             color: #F2C94C;
             font-size: 13px;
+            display: inline-block;
+            animation: boltGlowPulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes boltGlowPulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 1px rgba(242, 201, 76, 0.3));
+            }
+            50% {
+                transform: scale(1.18);
+                filter: drop-shadow(0 0 6px rgba(242, 201, 76, 0.8));
+            }
+        }
+
+        /* রোলিং নাম্বার কাউন্টার পপ এফেক্ট */
+        .count-pop {
+            display: inline-block;
+            animation: numPopEffect 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes numPopEffect {
+            0% { transform: scale(0.7); opacity: 0.6; }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* ব্যানার অ্যালার্ট */
@@ -390,10 +448,10 @@
         <div class="header-stats">
             <div class="streak-pill" title="Daily Streak">
                 <i class="fa-solid fa-fire fire-icon"></i>
-                <span id="streakCountText">12</span>
+                <span id="streakCountText">0</span>
             </div>
             <div class="xp-pill" title="XP Points">
-                <i class="fa-solid fa-bolt"></i>
+                <i class="fa-solid fa-bolt xp-bolt-icon"></i>
                 <span id="userXpText">0</span>
             </div>
         </div>
@@ -420,7 +478,7 @@
         </div>
         <div class="card-grid">
             
-            <!-- বর্ণমালা (হিরাগানা ও কাতাকানা) -->
+            <!-- বর্ণমালা -->
             <a href="alphabet.html" class="app-card card-purple">
                 <div class="card-badge badge-purple">あ</div>
                 <div>
@@ -438,7 +496,7 @@
                 </div>
             </a>
 
-            <!-- ব্যাকরণ (Bunpou) -->
+            <!-- Bunpou -->
             <a href="n5-grammar.html" class="app-card card-mint">
                 <div class="card-badge badge-mint">文法</div>
                 <div>
@@ -447,7 +505,7 @@
                 </div>
             </a>
 
-            <!-- শব্দভাণ্ডার (Vocab) -->
+            <!-- Vocab -->
             <a href="n5-vocab.html" class="app-card card-blue">
                 <div class="card-badge badge-blue">語</div>
                 <div>
@@ -456,7 +514,7 @@
                 </div>
             </a>
 
-            <!-- লেসন প্র্যাকটিস -->
+            <!-- Lesson Practice -->
             <a href="#" class="app-card card-orange">
                 <div class="card-badge badge-orange"><i class="fa-solid fa-list-check"></i></div>
                 <div>
@@ -620,20 +678,59 @@
         </a>
     </nav>
 
-    <!-- 0-Latency Local Cache Engine -->
+    <!-- 0-Latency Local Cache Engine & Rolling Animation Script -->
     <script>
+        // স্মুথ রোলিং অ্যানিমেশন ফাংশন
+        function animateRollingNumber(element, targetNumber, duration = 800) {
+            if (!element) return;
+            const target = parseInt(targetNumber) || 0;
+            const start = 0;
+            const startTime = performance.now();
+
+            element.classList.remove("count-pop");
+            void element.offsetWidth; // রিফ্লো ট্রিগার
+            element.classList.add("count-pop");
+
+            function updateCount(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease-out cubic
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentVal = Math.floor(start + (target - start) * easeOut);
+                
+                element.innerText = currentVal;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    element.innerText = target;
+                }
+            }
+            requestAnimationFrame(updateCount);
+        }
+
+        // পেজ লোডের সাথে সাথেই 0ms-এ ক্যাশ থেকে এনিমেট হয়ে আসবে
         (function initLocalCacheImmediate() {
             const cachedXp = localStorage.getItem("kotoba_cached_user_xp");
             const cachedStreak = localStorage.getItem("kotoba_cached_user_streak");
             const cachedLogo = localStorage.getItem("kotoba_cached_logo");
             const cachedAlert = localStorage.getItem("kotoba_cached_alert_text");
 
+            const xpEl = document.getElementById("userXpText");
+            const streakEl = document.getElementById("streakCountText");
+
             if (cachedXp !== null) {
-                document.getElementById("userXpText").innerText = cachedXp;
+                animateRollingNumber(xpEl, cachedXp, 900);
+            } else {
+                animateRollingNumber(xpEl, 0, 400);
             }
+
             if (cachedStreak !== null) {
-                document.getElementById("streakCountText").innerText = cachedStreak;
+                animateRollingNumber(streakEl, cachedStreak, 700);
+            } else {
+                animateRollingNumber(streakEl, 12, 700);
             }
+
             if (cachedLogo) {
                 document.getElementById("mainAppLogo").src = cachedLogo;
             }
@@ -754,8 +851,16 @@
                         const realXp = Number(data.xp !== undefined ? data.xp : (data.points !== undefined ? data.points : 0));
                         const streakDays = Number(data.streak || 12);
 
-                        userXpText.innerText = realXp;
-                        streakCountText.innerText = streakDays;
+                        // ক্যাশ মানের সাথে পার্থক্য থাকলে অ্যানিমেট করে নতুন মানে যাবে
+                        const prevXp = parseInt(userXpText.innerText) || 0;
+                        if (prevXp !== realXp) {
+                            animateRollingNumber(userXpText, realXp, 800);
+                        }
+
+                        const prevStreak = parseInt(streakCountText.innerText) || 0;
+                        if (prevStreak !== streakDays) {
+                            animateRollingNumber(streakCountText, streakDays, 600);
+                        }
 
                         localStorage.setItem("kotoba_cached_user_xp", realXp);
                         localStorage.setItem("kotoba_cached_user_streak", streakDays);
@@ -765,7 +870,7 @@
                 });
             } else {
                 const fallbackXp = localStorage.getItem("kotoba_cached_user_xp") || "0";
-                userXpText.innerText = fallbackXp;
+                animateRollingNumber(userXpText, fallbackXp, 600);
             }
         });
     </script>

@@ -10,27 +10,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Hind+Siliguri:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-canvas: #F8FAFC;
+            /* স্ক্রিনশটের হুবহু সফট কালার প্যালেট */
+            --bg-canvas: #F8F9FB;
             --surface-white: #FFFFFF;
-            --text-dark: #1E252D;
-            --text-muted: #8E9AAB;
+            --text-title: #1E232A;
+            --text-sub: #8B94A0;
             
-            --podium-purple: #8B5CF6;
-            --podium-orange: #FB923C;
-            --league-dark: #27272A;
+            /* পোডিয়াম কালার */
+            --podium-purple: #8B74DB;
+            --podium-coral: #F6A888;
 
-            --progress-orange: #F97316;
-            --progress-purple: #6366F1;
-            --progress-green: #10B981;
+            /* প্রগ্রেস বার কালার */
+            --prog-orange: #F59E0B;
+            --prog-purple: #7C3AED;
+            --prog-green: #10B981;
 
-            --border-soft: #F1F5F9;
-            --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
-            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-            --radius-pill: 999px;
+            --pill-gray: #EEF2F6;
+            --border-soft: #F0F2F5;
         }
 
         * {
@@ -43,353 +43,380 @@
 
         body {
             background-color: var(--bg-canvas);
-            color: var(--text-dark);
-            padding-bottom: 150px;
+            color: var(--text-title);
+            padding-bottom: 140px;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 440px;
+        .screen-container {
+            max-width: 420px;
             margin: 0 auto;
-            padding: 12px 18px;
+            padding: 14px 18px;
         }
 
-        /* Top League Shields Carousel */
+        /* ১. টপ লিগ ব্যাজ হরাইজন্টাল ট্র্যাক */
         .league-badges-track {
             display: flex;
             align-items: center;
             gap: 12px;
             overflow-x: auto;
-            padding: 8px 4px 14px;
+            padding: 4px 2px 14px;
             scrollbar-width: none;
         }
         .league-badges-track::-webkit-scrollbar { display: none; }
 
-        .shield-badge {
+        .league-pentagon-badge {
             width: 44px;
             height: 48px;
             background: #FFFFFF;
-            border: 2px solid #E2E8F0;
+            border: 2px solid #E5E9EF;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 19px;
             flex-shrink: 0;
-            color: #CBD5E1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            position: relative;
+            color: #C5CEE0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
         }
 
-        .shield-badge.active {
-            border-color: #FDBA74;
-            background: #FFF7ED;
-            color: #EA580C;
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        .league-pentagon-badge.active {
+            border-color: #F8B493;
+            background: #FFF7F2;
+            color: #E26838;
             transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(226, 104, 56, 0.18);
         }
 
-        .league-title {
+        /* লিগ হেডার টেক্সট */
+        .league-title-text {
             font-size: 22px;
             font-weight: 800;
-            color: var(--text-dark);
-            margin: 4px 0 14px;
+            color: var(--text-title);
+            margin: 2px 0 14px;
+            letter-spacing: -0.3px;
         }
 
-        /* Switcher: My League / Friends League */
-        .tab-switcher {
+        /* ২. My League ও Friends League সুইচ বার */
+        .league-switcher {
             display: flex;
-            background: #E2E8F0;
-            border-radius: var(--radius-pill);
+            background: #1C232B;
+            border-radius: 99px;
             padding: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
-        .tab-btn {
+        .switcher-btn {
             flex: 1;
-            padding: 9px;
+            padding: 8px 12px;
             border: none;
             background: transparent;
             font-size: 13px;
             font-weight: 700;
-            color: var(--text-muted);
-            border-radius: var(--radius-pill);
+            color: #8C96A5;
+            border-radius: 99px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
-        .tab-btn.active {
-            background: var(--league-dark);
+        .switcher-btn.active {
+            background: #323C47;
             color: #FFFFFF;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        /* MY PROGRESS Section */
-        .section-label {
-            font-size: 11px;
+        /* ৩. MY PROGRESS সেকশন */
+        .progress-label {
+            font-size: 11.5px;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--text-sub);
             letter-spacing: 0.8px;
             margin-bottom: 10px;
         }
 
-        .progress-cards-grid {
+        .progress-cards-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 24px;
+            margin-bottom: 26px;
         }
 
-        .prog-card {
+        .prog-item-box {
             background: #FFFFFF;
-            border-radius: 18px;
-            padding: 12px 10px;
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-subtle);
+            border-radius: 16px;
+            padding: 10px 10px 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .prog-track {
+        .prog-bar-track {
             width: 100%;
-            height: 8px;
-            background: #F1F5F9;
+            height: 7px;
+            background: #F1F4F8;
             border-radius: 99px;
             overflow: hidden;
         }
 
-        .prog-fill {
+        .prog-bar-fill {
             height: 100%;
             border-radius: 99px;
             transition: width 0.4s ease;
         }
 
-        .fill-orange { background: var(--progress-orange); }
-        .fill-purple { background: var(--progress-purple); }
-        .fill-green  { background: var(--progress-green); }
+        .fill-orange { background: #FB923C; }
+        .fill-purple { background: #818CF8; }
+        .fill-green  { background: #34D399; }
 
-        .prog-meta {
+        .prog-info-footer {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 10.5px;
+            gap: 5px;
+            font-size: 11px;
             font-weight: 800;
-            color: var(--text-dark);
+            color: var(--text-title);
         }
-        .prog-meta i { font-size: 11px; }
 
-        /* Podium Layout */
-        .podium-container {
+        .prog-info-footer i {
+            font-size: 11px;
+        }
+
+        /* ৪. পোডিয়াম ফিল্টার ও হেডার */
+        .podium-filter-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 8px;
+        }
+
+        .filter-pill {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-title);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        /* পোডিয়াম গ্রিড */
+        .podium-stage {
             display: flex;
             align-items: flex-end;
             justify-content: center;
             gap: 12px;
             margin-bottom: 24px;
-            padding-top: 10px;
         }
 
-        .podium-column {
+        .podium-user-col {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 30%;
             cursor: pointer;
-            transition: transform 0.15s ease;
+            transition: transform 0.15s;
         }
-        .podium-column:active { transform: scale(0.96); }
+        .podium-user-col:active { transform: scale(0.96); }
 
-        .user-avatar-wrap {
-            position: relative;
-            margin-bottom: 6px;
-        }
-
-        .podium-avatar {
+        .podium-user-avatar {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: #E2E8F0;
-            border: 2.5px solid #FFFFFF;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: #EAEFF5;
             object-fit: cover;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            color: var(--text-dark);
+            font-size: 14px;
+            color: var(--text-title);
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            margin-bottom: 6px;
             overflow: hidden;
         }
 
-        .podium-column.first .podium-avatar {
-            width: 60px;
-            height: 60px;
-            border-color: #EDE9FE;
+        .podium-user-col.rank-1 .podium-user-avatar {
+            width: 58px;
+            height: 58px;
+            border-color: #E0E7FF;
         }
 
-        .podium-user-name {
-            font-size: 11.5px;
+        .podium-name-tag {
+            font-size: 12px;
             font-weight: 700;
-            color: var(--text-dark);
-            text-align: center;
+            color: var(--text-title);
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 90px;
-            margin-bottom: 8px;
+            text-align: center;
         }
 
-        .podium-box {
+        .podium-block {
             width: 100%;
             border-radius: 18px 18px 8px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             padding-top: 8px;
             color: #FFFFFF;
-            position: relative;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
         }
 
-        .score-pill-inside {
+        .podium-block.first-place {
+            height: 125px;
+            background: var(--podium-purple);
+        }
+
+        .podium-block.second-place {
+            height: 90px;
+            background: var(--podium-coral);
+        }
+
+        .podium-block.third-place {
+            height: 80px;
+            background: var(--podium-coral);
+        }
+
+        .podium-points-badge {
             background: #FFFFFF;
-            border-radius: var(--radius-pill);
+            border-radius: 99px;
             padding: 2px 7px;
-            font-size: 9.5px;
+            font-size: 10px;
             font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
             margin-bottom: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .first-score { color: var(--podium-purple); }
-        .side-score { color: var(--podium-orange); }
+        .first-badge-color { color: var(--podium-purple); }
+        .side-badge-color { color: #E07347; }
 
-        .podium-rank-num {
-            font-size: 26px;
+        .podium-number-display {
+            font-size: 30px;
             font-weight: 900;
-            line-height: 1;
+            line-height: 1.1;
         }
 
-        .box-first  { height: 110px; background: var(--podium-purple); }
-        .box-second { height: 80px;  background: var(--podium-orange); }
-        .box-third  { height: 70px;  background: var(--podium-orange); }
-
-        /* Rankings List */
-        .ranking-list {
+        /* ৫. র‍্যাঙ্কিং তালিকা (৪ নম্বর থেকে) */
+        .ranking-feed {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .rank-card {
+        .rank-feed-card {
             background: #FFFFFF;
-            border: 1px solid var(--border-soft);
-            border-radius: 18px;
-            padding: 12px 14px;
+            border-radius: 16px;
+            padding: 11px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: var(--shadow-subtle);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-soft);
             cursor: pointer;
             transition: transform 0.15s;
         }
-        .rank-card:active { transform: scale(0.98); }
+        .rank-feed-card:active { transform: scale(0.98); }
 
-        .rank-left {
+        .feed-left-wrap {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .rank-index {
-            font-size: 13px;
+        .feed-rank-idx {
+            font-size: 12.5px;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--text-sub);
             width: 20px;
         }
 
-        .card-avatar {
+        .feed-user-avatar {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: #F1F5F9;
-            object-fit: cover;
+            background: #F1F4F8;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             font-size: 13px;
-            color: var(--text-dark);
+            color: var(--text-title);
             overflow: hidden;
+            flex-shrink: 0;
         }
 
-        .card-info h4 {
+        .feed-user-meta h4 {
             font-size: 13px;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-title);
             margin-bottom: 2px;
         }
 
-        .card-league-tag {
-            font-size: 10px;
+        .feed-league-badge {
+            font-size: 10.5px;
             font-weight: 700;
-            color: var(--text-muted);
+            color: var(--text-sub);
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        .score-pill-right {
+        .feed-right-score {
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 800;
-            color: var(--text-dark);
+            color: var(--text-title);
         }
-        .score-pill-right i { color: #F59E0B; }
+        .feed-right-score i {
+            color: #F59E0B;
+            font-size: 12px;
+        }
 
-        /* Floating Bottom "YOU" Card */
-        .floating-current-user {
+        /* ৬. স্ক্রিনের নিচের ফ্লোটিং "YOU" কার্ড */
+        .you-floating-card {
             position: fixed;
-            bottom: 74px;
+            bottom: 72px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 36px);
-            max-width: 404px;
+            width: calc(100% - 32px);
+            max-width: 400px;
             background: #FFFFFF;
-            border: 1.5px solid #FDBA74;
-            box-shadow: var(--shadow-float);
-            border-radius: 20px;
-            padding: 10px 14px;
+            border: 1.5px solid #FCD34D;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            padding: 9px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 500;
-            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideUp {
-            from { transform: translate(-50%, 20px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-
-        .badge-you-pill {
-            background: #EA580C;
+        .you-tag-pill {
+            background: #F59E0B;
             color: #FFFFFF;
             font-size: 9.5px;
             font-weight: 800;
             padding: 2px 7px;
-            border-radius: 8px;
+            border-radius: 6px;
             display: inline-flex;
             align-items: center;
             gap: 3px;
+            margin-left: 5px;
         }
 
-        /* Bottom Navigation Bar */
+        /* ৭. বটম ন্যাভবার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -403,7 +430,7 @@
             z-index: 200;
         }
 
-        .nav-item {
+        .nav-tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -415,7 +442,7 @@
             min-width: 50px;
         }
 
-        .nav-item i, .nav-item .nav-kana {
+        .nav-tab-item i, .nav-tab-item .kana-icon {
             font-size: 18px;
             height: 20px;
             display: flex;
@@ -423,170 +450,172 @@
             justify-content: center;
         }
 
-        .nav-item.active {
-            color: #8B5CF6;
+        .nav-tab-item.active {
+            color: var(--podium-purple);
             font-weight: 800;
         }
     </style>
 </head>
 <body>
 
-    <main class="container">
+    <main class="screen-container">
 
-        <!-- Top League Carousel -->
+        <!-- টপ শিল্ড ক্যারোজেল -->
         <div class="league-badges-track">
-            <div class="shield-badge active" title="Bronze League"><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
-            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
-            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
-            <div class="shield-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="league-pentagon-badge active" title="Bronze League"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="league-pentagon-badge"><i class="fa-solid fa-shield-cat"></i></div>
+            <div class="league-pentagon-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="league-pentagon-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="league-pentagon-badge"><i class="fa-solid fa-lock"></i></div>
+            <div class="league-pentagon-badge"><i class="fa-solid fa-lock"></i></div>
         </div>
 
-        <h1 class="league-title" id="currentLeagueTitle">Bronze League</h1>
+        <h1 class="league-title-text" id="leagueTitle">Bronze League</h1>
 
-        <!-- My League / Friends League Switcher -->
-        <div class="tab-switcher">
-            <button class="tab-btn active" id="btnMyLeague">My League</button>
-            <button class="tab-btn" id="btnFriendsLeague">Friends League</button>
+        <!-- My League / Friends League সুইচ -->
+        <div class="league-switcher">
+            <button class="switcher-btn active" id="btnMyLeague">My League</button>
+            <button class="switcher-btn" id="btnFriendsLeague">Friends League</button>
         </div>
 
-        <!-- MY PROGRESS Section -->
-        <div class="section-label">MY PROGRESS</div>
-        <div class="progress-cards-grid">
+        <!-- MY PROGRESS সেকশন -->
+        <div class="progress-label">MY PROGRESS</div>
+        <div class="progress-cards-row">
+            <!-- XP কার্ড -->
+            <div class="prog-item-box">
+                <div class="prog-bar-track">
+                    <div class="prog-bar-fill fill-orange" id="fillXp" style="width: 20%;"></div>
+                </div>
+                <div class="prog-info-footer">
+                    <i class="fa-solid fa-bolt" style="color:#F59E0B;"></i>
+                    <span id="labelXp">0/500</span>
+                </div>
+            </div>
+
+            <!-- লেসন কার্ড -->
+            <div class="prog-item-box">
+                <div class="prog-bar-track">
+                    <div class="prog-bar-fill fill-purple" id="fillLesson" style="width: 50%;"></div>
+                </div>
+                <div class="prog-info-footer">
+                    <i class="fa-solid fa-book-bookmark" style="color:#818CF8;"></i>
+                    <span id="labelLesson">09/18</span>
+                </div>
+            </div>
+
+            <!-- স্ট্রিক কার্ড -->
+            <div class="prog-item-box">
+                <div class="prog-bar-track">
+                    <div class="prog-bar-fill fill-green" id="fillStreak" style="width: 65%;"></div>
+                </div>
+                <div class="prog-info-footer">
+                    <i class="fa-solid fa-fire" style="color:#10B981;"></i>
+                    <span id="labelStreak">12/30</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- পোডিয়াম ফিল্টার (Day ∨) -->
+        <div class="podium-filter-bar">
+            <div class="filter-pill">
+                <span>Day</span>
+                <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i>
+            </div>
+        </div>
+
+        <!-- পোডিয়াম স্টেজ (১ম, ২য় ও ৩য় স্থান) -->
+        <div class="podium-stage" id="podiumStage">
             
-            <!-- XP Progress Card -->
-            <div class="prog-card">
-                <div class="prog-track">
-                    <div class="prog-fill fill-orange" id="progXpFill" style="width: 45%;"></div>
-                </div>
-                <div class="prog-meta">
-                    <i class="fa-solid fa-bolt" style="color:var(--progress-orange);"></i>
-                    <span id="progXpText">0/500</span>
-                </div>
-            </div>
-
-            <!-- Lessons Progress Card -->
-            <div class="prog-card">
-                <div class="prog-track">
-                    <div class="prog-fill fill-purple" id="progLessonFill" style="width: 50%;"></div>
-                </div>
-                <div class="prog-meta">
-                    <i class="fa-solid fa-book-bookmark" style="color:var(--progress-purple);"></i>
-                    <span id="progLessonText">12/25</span>
-                </div>
-            </div>
-
-            <!-- Streak Progress Card -->
-            <div class="prog-card">
-                <div class="prog-track">
-                    <div class="prog-fill fill-green" id="progStreakFill" style="width: 52%;"></div>
-                </div>
-                <div class="prog-meta">
-                    <i class="fa-solid fa-fire" style="color:var(--progress-green);"></i>
-                    <span id="progStreakText">12/30</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Podium Section (Top 3 Users) -->
-        <div class="podium-container" id="podiumContainer">
-            
-            <!-- 2nd Place -->
-            <div class="podium-column second" id="podiumCol2">
-                <div class="user-avatar-wrap">
-                    <div class="podium-avatar" id="avatar2">?</div>
-                </div>
-                <div class="podium-user-name" id="name2">লোড হচ্ছে...</div>
-                <div class="podium-box box-second">
-                    <div class="score-pill-inside side-score">
+            <!-- ২য় স্থান -->
+            <div class="podium-user-col rank-2" id="colRank2">
+                <div class="podium-user-avatar" id="avatar2">?</div>
+                <div class="podium-name-tag" id="name2">লোড হচ্ছে...</div>
+                <div class="podium-block second-place">
+                    <div class="podium-points-badge side-badge-color">
                         <i class="fa-solid fa-bolt"></i>
-                        <span id="score2">0</span>
+                        <span id="points2">0</span>
                     </div>
-                    <div class="podium-rank-num">2</div>
+                    <div class="podium-number-display">2</div>
                 </div>
             </div>
 
-            <!-- 1st Place -->
-            <div class="podium-column first" id="podiumCol1">
-                <div class="user-avatar-wrap">
-                    <div class="podium-avatar" id="avatar1">?</div>
-                </div>
-                <div class="podium-user-name" id="name1">লোড হচ্ছে...</div>
-                <div class="podium-box box-first">
-                    <div class="score-pill-inside first-score">
+            <!-- ১ম স্থান -->
+            <div class="podium-user-col rank-1" id="colRank1">
+                <div class="podium-user-avatar" id="avatar1">?</div>
+                <div class="podium-name-tag" id="name1">লোড হচ্ছে...</div>
+                <div class="podium-block first-place">
+                    <div class="podium-points-badge first-badge-color">
                         <i class="fa-solid fa-bolt"></i>
-                        <span id="score1">0</span>
+                        <span id="points1">0</span>
                     </div>
-                    <div class="podium-rank-num">1</div>
+                    <div class="podium-number-display">1</div>
                 </div>
             </div>
 
-            <!-- 3rd Place -->
-            <div class="podium-column third" id="podiumCol3">
-                <div class="user-avatar-wrap">
-                    <div class="podium-avatar" id="avatar3">?</div>
-                </div>
-                <div class="podium-user-name" id="name3">লোড হচ্ছে...</div>
-                <div class="podium-box box-third">
-                    <div class="score-pill-inside side-score">
+            <!-- ৩য় স্থান -->
+            <div class="podium-user-col rank-3" id="colRank3">
+                <div class="podium-user-avatar" id="avatar3">?</div>
+                <div class="podium-name-tag" id="name3">লোড হচ্ছে...</div>
+                <div class="podium-block third-place">
+                    <div class="podium-points-badge side-badge-color">
                         <i class="fa-solid fa-bolt"></i>
-                        <span id="score3">0</span>
+                        <span id="points3">0</span>
                     </div>
-                    <div class="podium-rank-num">3</div>
+                    <div class="podium-number-display">3</div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Ranking List Below Podium (4th and beyond) -->
-        <div class="ranking-list" id="rankingList"></div>
+        <!-- ৪ নম্বর থেকে র‍্যাঙ্কিং তালিকা -->
+        <div class="ranking-feed" id="rankingFeed"></div>
 
     </main>
 
-    <!-- Floating Current User Status (YOU) -->
-    <div class="floating-current-user" id="floatingUserCard" style="display: none;">
-        <div class="rank-left">
-            <span class="rank-index" id="myRankIndex">#--</span>
-            <div class="card-avatar" id="myAvatar">U</div>
-            <div class="card-info">
+    <!-- ফ্লোটিং ইউজার কার্ড (YOU) -->
+    <div class="you-floating-card" id="youCard" style="display: none;">
+        <div class="feed-left-wrap">
+            <span class="feed-rank-idx" id="myRankIdx">#--</span>
+            <div class="feed-user-avatar" id="myAvatar">U</div>
+            <div class="feed-user-meta">
                 <h4>
                     <span id="myName">শিক্ষার্থী</span>
-                    <span class="badge-you-pill">You <span id="myRankSub">#--</span></span>
+                    <span class="you-tag-pill">You <span id="myRankSub">#--</span></span>
                 </h4>
-                <div class="card-league-tag"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
+                <div class="feed-league-badge"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
             </div>
         </div>
-        <div class="score-pill-right">
-            <span id="myXpScore">0</span>
+        <div class="feed-right-score">
+            <span id="myXp">0</span>
             <i class="fa-solid fa-bolt"></i>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
+        <a href="index.html" class="nav-tab-item">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
-        <a href="leaderboard.html" class="nav-item active">
+        <a href="leaderboard.html" class="nav-tab-item active">
             <i class="fa-solid fa-trophy"></i>
             <span>Path</span>
         </a>
-        <a href="speak.html" class="nav-item">
+        <a href="speak.html" class="nav-tab-item">
             <i class="fa-solid fa-bars-staggered"></i>
             <span>Speak</span>
         </a>
-        <a href="alphabet.html" class="nav-item">
-            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
+        <a href="alphabet.html" class="nav-tab-item">
+            <span class="kana-icon" style="font-weight:700;">あ</span>
             <span>Kana</span>
         </a>
-        <a href="profile.html" class="nav-item">
+        <a href="profile.html" class="nav-tab-item">
             <i class="fa-regular fa-user"></i>
             <span>Profile</span>
         </a>
     </nav>
 
-    <!-- Firebase Realtime Logic -->
+    <!-- Firebase রিয়েলটাইম লজিক -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -609,64 +638,75 @@
         let currentUserId = null;
         let currentUserEmail = null;
 
-        const floatingUserCard = document.getElementById("floatingUserCard");
-        const progXpFill = document.getElementById("progXpFill");
-        const progXpText = document.getElementById("progXpText");
+        const youCard = document.getElementById("youCard");
+        const fillXp = document.getElementById("fillXp");
+        const labelXp = document.getElementById("labelXp");
+        const fillStreak = document.getElementById("fillStreak");
+        const labelStreak = document.getElementById("labelStreak");
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUserId = user.uid;
                 currentUserEmail = user.email ? user.email.toLowerCase().trim() : null;
-                floatingUserCard.style.display = "flex";
-                
-                // নিজের ডাটা নিয়ে প্রগ্রেস বার আপডেট
+                youCard.style.display = "flex";
+
+                // ইউজারের নিজস্ব ডেটা নিয়ে প্রগ্রেস ক্যালকুলেশন
                 const docId = currentUserEmail || currentUserId;
                 try {
                     const snap = await getDoc(doc(db, "users", docId));
                     if (snap.exists()) {
                         const d = snap.data();
-                        const myXp = typeof d.xp === 'number' ? d.xp : 0;
+                        const realXp = Number(d.xp || d.points || 0);
+                        const streakDays = Number(d.streak || 12);
+                        
                         const targetXp = 500;
-                        const pct = Math.min(100, Math.round((myXp / targetXp) * 100));
-                        progXpFill.style.width = `${pct}%`;
-                        progXpText.innerText = `${myXp}/${targetXp}`;
+                        const pctXp = Math.min(100, Math.round((realXp / targetXp) * 100));
+                        fillXp.style.width = `${pctXp}%`;
+                        labelXp.innerText = `${realXp}/${targetXp}`;
+
+                        const pctStreak = Math.min(100, Math.round((streakDays / 30) * 100));
+                        fillStreak.style.width = `${pctStreak}%`;
+                        labelStreak.innerText = `${streakDays}/30`;
                     }
                 } catch(e) { console.warn(e); }
             } else {
                 currentUserId = null;
                 currentUserEmail = null;
-                floatingUserCard.style.display = "none";
+                youCard.style.display = "none";
             }
         });
 
-        // ইউজারের নামের ১ম অক্ষর নেওয়া
-        function getAvatarHtml(photo, name) {
+        function getAvatar(photo, name) {
             if (photo) return `<img src="${photo}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
             return name ? name.trim().charAt(0).toUpperCase() : "U";
         }
 
-        // রিয়েল-টাইম লিডারবোর্ড আপডেট
+        // রিয়েলটাইম ডেটা রিড
         const usersCol = collection(db, "users");
         onSnapshot(usersCol, (snapshot) => {
             let users = [];
             snapshot.forEach((docSnap) => {
                 const data = docSnap.data();
                 const email = (data.email || (docSnap.id.includes("@") ? docSnap.id : "")).toLowerCase();
+                
+                // পয়েন্ট সঠিক নম্বরে কনভার্ট
+                const xpValue = Number(data.xp !== undefined ? data.xp : (data.points !== undefined ? data.points : 0));
+
                 users.push({
                     id: docSnap.id,
                     email: email,
                     name: data.userName || data.name || (email ? email.split('@')[0] : "শিক্ষার্থী"),
-                    xp: typeof data.xp === "number" ? data.xp : 0,
+                    xp: isNaN(xpValue) ? 0 : xpValue,
                     photo: data.photoBase64 || data.photoURL || null
                 });
             });
 
-            // XP অনুযায়ী সর্ট
+            // বড় থেকে ছোট পয়েন্ট অনুযায়ী সাজানো
             users.sort((a, b) => b.xp - a.xp);
 
             renderPodium(users);
-            renderList(users);
-            updateMyFloatingStatus(users);
+            renderFeed(users);
+            updateYouStatus(users);
         });
 
         function renderPodium(users) {
@@ -676,68 +716,70 @@
 
             // ১ম স্থান
             document.getElementById("name1").innerText = u1 ? u1.name : "খালি";
-            document.getElementById("score1").innerText = u1 ? u1.xp : "0";
-            document.getElementById("avatar1").innerHTML = u1 ? getAvatarHtml(u1.photo, u1.name) : "?";
-            document.getElementById("podiumCol1").onclick = () => openProfile(u1);
+            document.getElementById("points1").innerText = u1 ? u1.xp : "0";
+            document.getElementById("avatar1").innerHTML = u1 ? getAvatar(u1.photo, u1.name) : "?";
+            document.getElementById("colRank1").onclick = () => openProfile(u1);
 
             // ২য় স্থান
             document.getElementById("name2").innerText = u2 ? u2.name : "খালি";
-            document.getElementById("score2").innerText = u2 ? u2.xp : "0";
-            document.getElementById("avatar2").innerHTML = u2 ? getAvatarHtml(u2.photo, u2.name) : "?";
-            document.getElementById("podiumCol2").onclick = () => openProfile(u2);
+            document.getElementById("points2").innerText = u2 ? u2.xp : "0";
+            document.getElementById("avatar2").innerHTML = u2 ? getAvatar(u2.photo, u2.name) : "?";
+            document.getElementById("colRank2").onclick = () => openProfile(u2);
 
             // ৩য় স্থান
             document.getElementById("name3").innerText = u3 ? u3.name : "খালি";
-            document.getElementById("score3").innerText = u3 ? u3.xp : "0";
-            document.getElementById("avatar3").innerHTML = u3 ? getAvatarHtml(u3.photo, u3.name) : "?";
-            document.getElementById("podiumCol3").onclick = () => openProfile(u3);
+            document.getElementById("points3").innerText = u3 ? u3.xp : "0";
+            document.getElementById("avatar3").innerHTML = u3 ? getAvatar(u3.photo, u3.name) : "?";
+            document.getElementById("colRank3").onclick = () => openProfile(u3);
         }
 
-        function renderList(users) {
-            const listEl = document.getElementById("rankingList");
-            listEl.innerHTML = "";
+        function renderFeed(users) {
+            const feedEl = document.getElementById("rankingFeed");
+            feedEl.innerHTML = "";
 
             if (users.length <= 3) {
-                listEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);font-size:12px;padding:20px 0;">শীর্ষ ৩ জন পোডিয়ামে প্রদর্শিত হচ্ছে।</p>`;
+                feedEl.innerHTML = `<p style="text-align:center;color:var(--text-sub);font-size:12px;padding:20px 0;">শীর্ষ ৩ জন পোডিয়ামে প্রদর্শিত হচ্ছে।</p>`;
                 return;
             }
 
             for (let i = 3; i < users.length; i++) {
                 const user = users[i];
                 const card = document.createElement("div");
-                card.className = "rank-card";
+                card.className = "rank-feed-card";
                 card.onclick = () => openProfile(user);
 
+                const rankStr = i + 1 < 10 ? `0${i + 1}` : `${i + 1}`;
+
                 card.innerHTML = `
-                    <div class="rank-left">
-                        <span class="rank-index">${i + 1 < 10 ? '0' + (i + 1) : i + 1}</span>
-                        <div class="card-avatar">${getAvatarHtml(user.photo, user.name)}</div>
-                        <div class="card-info">
+                    <div class="feed-left-wrap">
+                        <span class="feed-rank-idx">${rankStr}</span>
+                        <div class="feed-user-avatar">${getAvatar(user.photo, user.name)}</div>
+                        <div class="feed-user-meta">
                             <h4>${user.name}</h4>
-                            <div class="card-league-tag"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
+                            <div class="feed-league-badge"><i class="fa-solid fa-shield-halved"></i> Bronze</div>
                         </div>
                     </div>
-                    <div class="score-pill-right">
+                    <div class="feed-right-score">
                         <span>${user.xp}</span>
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                 `;
-                listEl.appendChild(card);
+                feedEl.appendChild(card);
             }
         }
 
-        function updateMyFloatingStatus(users) {
+        function updateYouStatus(users) {
             if (!currentUserEmail && !currentUserId) return;
             const myIndex = users.findIndex(u => u.id === currentUserId || u.email === currentUserEmail);
             
             if (myIndex !== -1) {
                 const me = users[myIndex];
                 const rankNum = myIndex + 1;
-                document.getElementById("myRankIndex").innerText = rankNum < 10 ? `0${rankNum}` : rankNum;
+                document.getElementById("myRankIdx").innerText = rankNum < 10 ? `0${rankNum}` : rankNum;
                 document.getElementById("myRankSub").innerText = `#${rankNum}`;
                 document.getElementById("myName").innerText = me.name;
-                document.getElementById("myXpScore").innerText = me.xp;
-                document.getElementById("myAvatar").innerHTML = getAvatarHtml(me.photo, me.name);
+                document.getElementById("myXp").innerText = me.xp;
+                document.getElementById("myAvatar").innerHTML = getAvatar(me.photo, me.name);
             }
         }
 

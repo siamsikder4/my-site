@@ -2,821 +2,1144 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appendices - KOTOBA</title>
-    <!-- ফন্ট ও আইকন -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Hind+Siliguri:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>জাপানিজ বর্ণমালা - KOTOBA</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
+        :root {
+            /* KOTOBA Modern Light Palette */
+            --bg-canvas: #F4F6F9;
+            --surface-card: #FFFFFF;
+            --text-dark: #1E252D;
+            --text-muted: #8E9AAB;
+            
+            --teal-primary: #00A896;
+            --teal-soft: #E3F8F2;
+            --brand-green: #58CC02;
+            --brand-green-dark: #46A302;
+            --sky-blue: #1CB0F6;
+
+            --border-soft: #EEF1F6;
+            --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hind Siliguri", sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f7faf9;
-            color: #1a202c;
-            padding-bottom: 85px;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            padding-bottom: 100px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* টপ নেভিগেশন */
+        /* Top Bar */
         .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            background: #ffffff;
-            border-bottom: 1px solid #eef2f5;
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .nav-left {
+            background: var(--bg-canvas);
+            padding: 14px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #0f3e2e;
-            cursor: pointer;
+            justify-content: space-between;
         }
+
+        .back-btn {
+            color: var(--text-dark);
+            text-decoration: none;
+            background: var(--surface-card);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-soft);
+            font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: transform 0.15s ease;
+        }
+        .back-btn:active { transform: scale(0.92); }
 
         .nav-title {
             font-weight: 800;
-            font-size: 17px;
-            color: #0f3e2e;
-            letter-spacing: 0.5px;
+            font-size: 15.5px;
+            color: var(--text-dark);
         }
 
-        .nav-right {
-            font-size: 12px;
-            font-weight: 700;
-            color: #047857;
-            background: #e6f4ea;
-            padding: 4px 10px;
-            border-radius: 20px;
+        .xp-pill-header {
             display: flex;
             align-items: center;
             gap: 5px;
-            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text-dark);
+            background: #FFFBEB;
+            border: 1px solid #FEF3C7;
+            padding: 4px 10px;
+            border-radius: 14px;
         }
 
-        .main-container {
-            padding: 16px;
-            max-width: 520px;
+        .content {
+            padding: 6px 18px 24px;
+            max-width: 440px;
             margin: 0 auto;
         }
 
-        /* হেডার */
-        .grid-header-wrap {
-            text-align: center;
-            margin: 10px 0 20px;
-        }
-
-        .main-category-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0e3b2c;
-            margin-bottom: 4px;
-        }
-
-        .sub-category-desc {
-            font-size: 12.5px;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        /* গ্রিড কার্ডস */
-        .appendix-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .appendix-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #144336;
-            border-radius: 14px;
-            padding: 16px 12px;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        /* Switcher */
+        .main-switcher {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 145px;
+            background: #E8EEF5;
+            border-radius: 16px;
+            padding: 4px;
+            margin-bottom: 14px;
         }
 
-        .appendix-card:active {
-            transform: scale(0.98);
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .a-badge {
-            background: #f1f5f9;
-            color: #475569;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 6px;
-        }
-
-        .kanji-tag {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 12px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-
-        .card-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #144336;
-            margin-bottom: 4px;
-            line-height: 1.35;
-        }
-
-        .card-desc {
-            font-size: 11px;
-            color: #64748b;
-            line-height: 1.3;
-        }
-
-        .card-arrow {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 8px;
-            color: #cbd5e1;
-            font-size: 12px;
-        }
-
-        /* ডিটেইল ভিউ */
-        .detail-view {
-            display: none;
-        }
-
-        .detail-header-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .detail-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #0f3e2e;
-        }
-
-        .btn-back-pill {
-            background: #f1f5f9;
-            color: #334155;
+        .switch-btn {
+            flex: 1;
+            padding: 10px 8px;
             border: none;
-            padding: 6px 12px;
+            background: transparent;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .switch-btn.active {
+            background: var(--surface-card);
+            color: var(--text-dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            font-weight: 800;
+        }
+
+        /* Sub Categories */
+        .sub-categories {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
+        }
+
+        .sub-categories::-webkit-scrollbar { display: none; }
+
+        .sub-pill {
+            padding: 7px 14px;
             border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            background: var(--surface-card);
             font-size: 11.5px;
             font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
             cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .sub-pill.active {
+            background: var(--teal-soft);
+            border-color: #BBEFE3;
+            color: var(--teal-primary);
+        }
+
+        .info-bar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 5px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding: 0 4px;
         }
 
-        /* টেবিল ব্লক */
-        .table-section-box {
-            margin-bottom: 22px;
+        /* Character Grid */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 9px;
         }
 
-        .table-section-title {
-            font-size: 14.5px;
-            font-weight: 800;
-            color: #0f3e2e;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .char-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 10px 4px 8px;
+            text-align: center;
+            box-shadow: var(--shadow-subtle);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.12s ease, border-color 0.12s ease;
         }
 
-        .appendix-table-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        .char-card:active {
+            transform: scale(0.93);
+            border-color: var(--teal-primary);
         }
 
-        .appendix-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        .appendix-table th {
-            background: #0f3e2e;
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 12px;
-            padding: 10px 12px;
-        }
-
-        .appendix-table td {
-            padding: 9px 12px;
-            font-size: 12.5px;
-            border-bottom: 1px solid #f1f5f9;
-            color: #334155;
-            vertical-align: middle;
-        }
-
-        .appendix-table tr:nth-child(even) {
-            background: #fafcfb;
-        }
-
-        .appendix-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .col-item-name {
-            font-weight: 700;
-            color: #0f3e2e;
-        }
-
-        .col-jp {
+        .char-jp {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13.5px;
+            font-size: 24px;
             font-weight: 700;
-            color: #144336;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 2px;
         }
 
-        .col-ro {
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 500;
+        .char-ro {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 700;
         }
 
-        /* ব্যতিক্রমী উচ্চারণ লাল রং */
-        .highlight-red {
-            color: #dc2626 !important;
-            font-weight: 800 !important;
+        .char-bn {
+            font-size: 10.5px;
+            color: var(--teal-primary);
+            font-weight: 700;
         }
 
-        /* বটম বার */
+        .audio-icon {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            font-size: 8px;
+            color: #CBD5E1;
+        }
+
+        .card-practice-dot {
+            position: absolute;
+            top: 5px;
+            left: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal-primary);
+        }
+
+        .empty-slot { visibility: hidden; }
+
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 62px;
-            background: #ffffff;
-            border-top: 1px solid #eef2f5;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid #ECEFF4;
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
+            padding: 10px 10px 18px;
+            z-index: 200;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: #8392a5;
-            font-size: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            text-decoration: none;
+            color: #9AA5B5;
+            font-size: 10px;
             font-weight: 600;
-            cursor: pointer;
-            background: none;
-            border: none;
+            min-width: 50px;
+        }
+
+        .nav-item i, .nav-item .nav-kana {
+            font-size: 18px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-item.active {
-            color: #0f3e2e;
+            color: var(--teal-primary);
+            font-weight: 800;
         }
 
-        .nav-item i {
+        /* -------------------------------------------------------------
+           Clean & Modern Practice Modal (Light UI Theme)[span_5](start_span)[span_5](end_span)
+        ------------------------------------------------------------- */
+        .practice-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--bg-canvas);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--text-dark);
+        }
+
+        .practice-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            gap: 14px;
+            background: var(--bg-canvas);
+        }
+
+        .modal-close-btn {
+            background: var(--surface-card);
+            border: 1px solid var(--border-soft);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--text-muted);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* Fixed Duolingo-Style Progress Bar[span_6](start_span)[span_6](end_span) */
+        .progress-container {
+            flex: 1;
+            height: 14px;
+            background: #E2E8F0;
+            border-radius: 99px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, #84CC16, var(--brand-green));
+            border-radius: 99px;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-energy-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #D97706;
+            background: #FFFBEB;
+            border: 1px solid #FEF3C7;
+            padding: 4px 10px;
+            border-radius: 14px;
+        }
+
+        .practice-body {
+            flex: 1;
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .task-headline {
+            align-self: flex-start;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .prompt-header-box {
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .audio-speaker-pill {
+            background: var(--sky-blue);
+            color: #FFFFFF;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
             font-size: 19px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #0284C7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s;
+        }
+
+        .audio-speaker-pill:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #0284C7;
+        }
+
+        .kana-info-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kana-ro-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .kana-char-text {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        /* Fixed Tracing Box (White Canvas & Dashed Guide Line)[span_7](start_span)[span_7](end_span) */
+        .canvas-drawing-card {
+            width: 270px;
+            height: 270px;
+            position: relative;
+            background: #FFFFFF;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-soft);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+        }
+
+        .grid-line-h {
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            border-top: 1.5px dashed #CBD5E1;
+            pointer-events: none;
+        }
+
+        .grid-line-v {
+            position: absolute;
+            left: 50%; top: 0; bottom: 0;
+            border-left: 1.5px dashed #CBD5E1;
+            pointer-events: none;
+        }
+
+        #traceCanvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 270px;
+            height: 270px;
+            touch-action: none;
+            cursor: crosshair;
+            z-index: 4;
+        }
+
+        /* Outline Character Guide */
+        .trace-outline-char {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 175px;
+            color: #E2E8F0;
+            font-weight: 700;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            line-height: 1;
+        }
+
+        /* Directional Arrow Guide[span_8](start_span)[span_8](end_span) */
+        .arrow-guide-indicator {
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+            background: var(--sky-blue);
+            color: #FFFFFF;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            box-shadow: 0 3px 8px rgba(28, 176, 246, 0.4);
+            animation: pulseArrow 1.5s infinite;
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Audio Quiz Section[span_9](start_span)[span_9](end_span) */
+        .audio-quiz-bubble {
+            width: 170px;
+            height: 170px;
+            background: #50B2FF;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 6px 0 #1880C7;
+            margin-bottom: 26px;
+            cursor: pointer;
+        }
+
+        .audio-quiz-bubble span {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: #0E364E;
+        }
+
+        .audio-quiz-bubble i {
+            position: absolute;
+            bottom: 12px;
+            right: 14px;
+            font-size: 18px;
+            color: #0E364E;
+        }
+
+        .quiz-choices-wrap {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .choice-item-btn {
+            flex: 1;
+            background: #FFFFFF;
+            border: 2px solid var(--border-soft);
+            box-shadow: 0 4px 0 #CBD5E1;
+            border-radius: 18px;
+            padding: 16px 10px;
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .choice-item-btn.selected {
+            background: var(--teal-soft);
+            border-color: var(--teal-primary);
+            box-shadow: 0 4px 0 var(--teal-primary);
+            color: var(--teal-primary);
+        }
+
+        /* Bottom Footer Action */
+        .practice-bottom-bar {
+            padding: 16px 20px 24px;
+            background: #FFFFFF;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .feedback-state-box {
+            display: none;
+            margin-bottom: 14px;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .feedback-state-box.correct {
+            display: flex;
+            color: var(--brand-green);
+        }
+
+        .feedback-state-box.wrong {
+            display: flex;
+            color: #EF4444;
+        }
+
+        .verify-submit-btn {
+            width: 100%;
+            background: #E2E8F0;
+            color: #94A3B8;
+            border: none;
+            padding: 15px;
+            border-radius: 18px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .verify-submit-btn.ready {
+            background: var(--brand-green);
+            color: #FFFFFF;
+            box-shadow: 0 4px 0 var(--brand-green-dark);
+        }
+
+        .verify-submit-btn.ready:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--brand-green-dark);
         }
     </style>
 </head>
 <body>
 
-    <!-- টপ বার -->
+    <!-- Top Bar -->
     <header class="top-nav">
-        <div class="nav-left" id="btnHeaderBack">
-            <i class="fa-solid fa-arrow-left" id="headerBackIcon"></i>
-            <span class="nav-title">Appendices</span>
+        <a href="index.html" class="back-btn" aria-label="হোমে যান"><i class="fa-solid fa-arrow-left"></i></a>
+        <span class="nav-title">জাপানিজ বর্ণমালা</span>
+        <div class="xp-pill-header">
+            <i class="fa-solid fa-bolt" style="color:#F59E0B;"></i>
+            <span id="topUserXp">০ XP</span>
         </div>
-        <a href="index.html" class="nav-right">
-            <i class="fa-solid fa-house"></i> <span>হোম</span>
-        </a>
     </header>
 
-    <main class="main-container">
+    <main class="content">
 
-        <!-- ভিউ ১: অ্যাপেনডিক্স গ্রিড তালিকা -->
-        <div id="appendixGridView">
-            <div class="grid-header-wrap">
-                <h2 class="main-category-title">Appendices</h2>
-                <p class="sub-category-desc">সহায়ক স্টাডি মেটেরিয়ালস • প্রয়োজনীয় চার্ট</p>
-            </div>
-
-            <div class="appendix-grid">
-                
-                <!-- কার্ড ১: জাপানিজ সংখ্যা -->
-                <div class="appendix-card" onclick="openAppendix(1)">
-                    <div>
-                        <div class="card-top">
-                            <span class="a-badge">Appendices</span>
-                            <span class="kanji-tag">付録</span>
-                        </div>
-                        <div class="card-title">জাপানিজ সংখ্যা</div>
-                        <div class="card-desc">(Japanese Numbers)</div>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <!-- কার্ড ২: সময়, দিন, তারিখ, মাস -->
-                <div class="appendix-card" onclick="openAppendix(2)">
-                    <div>
-                        <div class="card-top">
-                            <span class="a-badge">Appendices</span>
-                            <span class="kanji-tag">付録</span>
-                        </div>
-                        <div class="card-title">জাপানিজ সময়, দিন, তারিখ, মাস</div>
-                        <div class="card-desc">(Japanese Time, Day, Months, Date)</div>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <!-- কার্ড ৩: জাপানিজ ঘণ্টা -->
-                <div class="appendix-card" onclick="openAppendix(3)">
-                    <div>
-                        <div class="card-top">
-                            <span class="a-badge">Appendices</span>
-                            <span class="kanji-tag">付録</span>
-                        </div>
-                        <div class="card-title">জাপানিজ ঘণ্টা ও সময়কাল</div>
-                        <div class="card-desc">(Japanese Period & Duration)</div>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <!-- কার্ড ৪: জাপানিজ গণনা নিয়ম -->
-                <div class="appendix-card" onclick="openAppendix(4)">
-                    <div>
-                        <div class="card-top">
-                            <span class="a-badge">Appendices</span>
-                            <span class="kanji-tag">付録</span>
-                        </div>
-                        <div class="card-title">জাপানিজ গণনা নিয়ম</div>
-                        <div class="card-desc">(Japanese Counting System)</div>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-            </div>
+        <!-- Script Switcher -->
+        <div class="main-switcher">
+            <button class="switch-btn active" onclick="switchScript('hira', this)">হিরাগানা (Hiragana)</button>
+            <button class="switch-btn" onclick="switchScript('kata', this)">কাতাকানা (Katakana)</button>
         </div>
 
-        <!-- ভিউ ২: বিস্তারিত টেবিল সেকশন -->
-        <div id="appendixDetailView" class="detail-view">
-            
-            <div class="detail-header-card">
-                <div class="detail-title" id="detailHeaderTitle">লোড হচ্ছে...</div>
-                <button class="btn-back-pill" onclick="backToGrid()"><i class="fa-solid fa-chevron-left"></i> তালিকা</button>
-            </div>
-
-            <div id="detailContentContainer"></div>
-
+        <!-- Sub Categories -->
+        <div class="sub-categories">
+            <button class="sub-pill active" onclick="switchType('basic', this)">মৌলিক (৪৬টি)</button>
+            <button class="sub-pill" onclick="switchType('dakuon', this)">দাকুঅন (২৫টি)</button>
+            <button class="sub-pill" onclick="switchType('yoon', this)">যুক্তাক্ষর (৩৬টি)</button>
         </div>
+
+        <div class="info-bar">
+            <span>অক্ষরে ট্যাপ করে প্র্যাকটিস ও ট্রেস করুন (+৫ XP)</span>
+            <i class="fa-solid fa-pen-nib"></i>
+        </div>
+
+        <!-- Character Grid Container -->
+        <div class="char-grid" id="charGrid"></div>
 
     </main>
 
-    <!-- ফিক্সড বটম বার -->
+    <!-- Bottom Nav -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
-            <span>হোম</span>
+            <span>Home</span>
         </a>
         <a href="leaderboard.html" class="nav-item">
-            <i class="fa-solid fa-trophy"></i>
-            <span>লিডারবোর্ড</span>
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Path</span>
         </a>
-        <a href="ai-sensei.html" class="nav-item">
-            <i class="fa-solid fa-robot"></i>
-            <span>AI সেনসেই</span>
+        <a href="speak.html" class="nav-item">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <span>Speak</span>
+        </a>
+        <a href="alphabet.html" class="nav-item active">
+            <span class="nav-kana" style="font-weight:700; font-family:'Noto Sans JP', sans-serif;">あ</span>
+            <span>Kana</span>
         </a>
         <a href="profile.html" class="nav-item">
-            <i class="fa-solid fa-circle-user"></i>
-            <span>প্রোফাইল</span>
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
         </a>
     </nav>
 
-    <script>
-        const gridView = document.getElementById("appendixGridView");
-        const detailView = document.getElementById("appendixDetailView");
-        const headerTitle = document.getElementById("detailHeaderTitle");
-        const contentContainer = document.getElementById("detailContentContainer");
+    <!-- -------------------------------------------------------------
+         Clean & Modern Practice Modal (Light UI Theme)[span_10](start_span)[span_10](end_span)
+    ------------------------------------------------------------- -->
+    <div class="practice-modal" id="practiceModal">
+        <header class="practice-header">
+            <button class="modal-close-btn" onclick="closePracticeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="progress-container">
+                <div class="progress-bar-fill" id="modalProgressFill"></div>
+            </div>
+            <div class="modal-energy-badge">
+                <i class="fa-solid fa-bolt"></i>
+                <span>+৫ XP</span>
+            </div>
+        </header>
 
-        // ৪টি প্রধান সেকশনের এইচটিএমএল ডেটা
-        const appendixData = {
-            1: {
-                title: "জাপানিজ সংখ্যা (Japanese Numbers)",
-                html: `
-                    <!-- ১. মৌলিক সংখ্যা (Basic Numbers 0-10) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">১. মৌলিক সংখ্যা (Basic Numbers 0-10)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">0</td><td class="col-jp">ゼロ, れい</td><td class="col-ro">zero, rei</td></tr>
-                                    <tr><td class="col-item-name">1</td><td class="col-jp">いち</td><td class="col-ro">ichi</td></tr>
-                                    <tr><td class="col-item-name">2</td><td class="col-jp">に</td><td class="col-ro">ni</td></tr>
-                                    <tr><td class="col-item-name">3</td><td class="col-jp">さん</td><td class="col-ro">san</td></tr>
-                                    <tr><td class="col-item-name">4</td><td class="col-jp">よん, し</td><td class="col-ro">yon, shi</td></tr>
-                                    <tr><td class="col-item-name">5</td><td class="col-jp">ご</td><td class="col-ro">go</td></tr>
-                                    <tr><td class="col-item-name">6</td><td class="col-jp">ろく</td><td class="col-ro">roku</td></tr>
-                                    <tr><td class="col-item-name">7</td><td class="col-jp">なな, しち</td><td class="col-ro">nana, shichi</td></tr>
-                                    <tr><td class="col-item-name">8</td><td class="col-jp">はち</td><td class="col-ro">hachi</td></tr>
-                                    <tr><td class="col-item-name">9</td><td class="col-jp">きゅう, く</td><td class="col-ro">kyuu, ku</td></tr>
-                                    <tr><td class="col-item-name">10</td><td class="col-jp">じゅう</td><td class="col-ro">juu</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        <section class="practice-body">
+            <!-- Stage 1: Tracing Mode[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span) -->
+            <div id="tracingStage" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <h2 class="task-headline">বর্ণটি খুঁজে বের করুন</h2>
 
-                    <!-- ২. শতক (Hundreds) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">২. শতক (Hundreds)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">100</td><td class="col-jp">ひゃく</td><td class="col-ro">hyaku</td></tr>
-                                    <tr><td class="col-item-name">200</td><td class="col-jp">にひゃく</td><td class="col-ro">nihyaku</td></tr>
-                                    <tr><td class="col-item-name">300</td><td class="col-jp highlight-red">さんびゃく</td><td class="col-ro highlight-red">sanbyaku</td></tr>
-                                    <tr><td class="col-item-name">400</td><td class="col-jp">よんひゃく</td><td class="col-ro">yonhyaku</td></tr>
-                                    <tr><td class="col-item-name">500</td><td class="col-jp">ごひゃく</td><td class="col-ro">gohyaku</td></tr>
-                                    <tr><td class="col-item-name">600</td><td class="col-jp highlight-red">ろっぴゃく</td><td class="col-ro highlight-red">roppyaku</td></tr>
-                                    <tr><td class="col-item-name">700</td><td class="col-jp">ななひゃく</td><td class="col-ro">nanahyaku</td></tr>
-                                    <tr><td class="col-item-name">800</td><td class="col-jp highlight-red">はっぴゃく</td><td class="col-ro highlight-red">happyaku</td></tr>
-                                    <tr><td class="col-item-name">900</td><td class="col-jp">きゅうひゃく</td><td class="col-ro">kyuuhyaku</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="prompt-header-box">
+                    <button class="audio-speaker-pill" onclick="playCurrentCharSound()"><i class="fa-solid fa-volume-high"></i></button>
+                    <div class="kana-info-box">
+                        <span class="kana-ro-text" id="modalPromptRo">su</span>
+                        <span class="kana-char-text" id="modalPromptChar">す</span>
                     </div>
+                </div>
 
-                    <!-- ৩. হাজার (Thousands) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৩. হাজার (Thousands)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">সংখ্যা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">1,000</td><td class="col-jp">せん</td><td class="col-ro">sen</td></tr>
-                                    <tr><td class="col-item-name">2,000</td><td class="col-jp">にせん</td><td class="col-ro">nisen</td></tr>
-                                    <tr><td class="col-item-name">3,000</td><td class="col-jp highlight-red">さんぜん</td><td class="col-ro highlight-red">sanzen</td></tr>
-                                    <tr><td class="col-item-name">4,000</td><td class="col-jp">よんせん</td><td class="col-ro">yonsen</td></tr>
-                                    <tr><td class="col-item-name">5,000</td><td class="col-jp">ごせん</td><td class="col-ro">gosen</td></tr>
-                                    <tr><td class="col-item-name">6,000</td><td class="col-jp">ろくせん</td><td class="col-ro">rokusen</td></tr>
-                                    <tr><td class="col-item-name">7,000</td><td class="col-jp">ななせん</td><td class="col-ro">nanasen</td></tr>
-                                    <tr><td class="col-item-name">8,000</td><td class="col-jp highlight-red">はっせん</td><td class="col-ro highlight-red">hassen</td></tr>
-                                    <tr><td class="col-item-name">9,000</td><td class="col-jp">きゅうせん</td><td class="col-ro">kyuusen</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="canvas-drawing-card">
+                    <div class="grid-line-h"></div>
+                    <div class="grid-line-v"></div>
+                    <div class="arrow-guide-indicator" id="arrowGuide" style="top:75px; left:65px;"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="trace-outline-char" id="traceOutlineChar">す</div>
+                    <canvas id="traceCanvas" width="270" height="270"></canvas>
+                </div>
+            </div>
 
-                    <!-- ৪. বড় সংখ্যা (Large Numbers) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৪. বড় সংখ্যা (Large Numbers)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 30%;">সংখ্যা</th><th style="width: 40%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">10,000</td><td class="col-jp">いちまん</td><td class="col-ro">ichiman</td></tr>
-                                    <tr><td class="col-item-name">100,000</td><td class="col-jp">じゅうまん</td><td class="col-ro">juuman</td></tr>
-                                    <tr><td class="col-item-name">1,000,000</td><td class="col-jp">ひゃくまん</td><td class="col-ro">hyakuman</td></tr>
-                                    <tr><td class="col-item-name">10,000,000</td><td class="col-jp">せんまん</td><td class="col-ro">senman</td></tr>
-                                    <tr><td class="col-item-name">100,000,000</td><td class="col-jp">いちおく</td><td class="col-ro">ichioku</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <!-- Stage 2: Audio Quiz Selection Mode[span_13](start_span)[span_13](end_span) -->
+            <div id="quizStage" style="width: 100%; display: none; flex-direction: column; align-items: center;">
+                <h2 class="task-headline">এখানে কোন আওয়াজটি শোনা যাচ্ছে?</h2>
 
-                    <!-- ৫. দশমিক ও ভগ্নাংশ -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৫. দশমিক ও ভগ্নাংশ (Decimals & Fractions)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 20%;">সংখ্যা</th><th style="width: 38%;">জাপানিজ কানা</th><th style="width: 27%;">রোমাজি</th><th style="width: 15%;">বাংলা</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">17.5</td><td class="col-jp">じゅうななてんご</td><td class="col-ro">juunanatengo</td><td>১৭.৫</td></tr>
-                                    <tr><td class="col-item-name">0.83</td><td class="col-jp">れいてんはちさん</td><td class="col-ro">reitenhachisan</td><td>০.৮৩</td></tr>
-                                    <tr><td class="col-item-name">1/2</td><td class="col-jp">にぶんのいち</td><td class="col-ro">nibunnoichi</td><td>অর্ধেক</td></tr>
-                                    <tr><td class="col-item-name">3/4</td><td class="col-jp">よんぶんのさん</td><td class="col-ro">yonbunnosan</td><td>চার ভাগের তিন</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `
-            },
-            2: {
-                title: "জাপানিজ সময়, দিন, তারিখ, মাস",
-                html: `
-                    <!-- ১. সপ্তাহের ৭ দিন -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">১. সপ্তাহের দিনসমূহ (Days of the Week)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 30%;">বার</th><th style="width: 40%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">রবিবার</td><td class="col-jp">にちようび</td><td class="col-ro">nichiyoubi</td></tr>
-                                    <tr><td class="col-item-name">সোমবার</td><td class="col-jp">げつようび</td><td class="col-ro">getsuyoubi</td></tr>
-                                    <tr><td class="col-item-name">মঙ্গলবার</td><td class="col-jp">かようび</td><td class="col-ro">kayoubi</td></tr>
-                                    <tr><td class="col-item-name">বুধবার</td><td class="col-jp">すいようび</td><td class="col-ro">suiyoubi</td></tr>
-                                    <tr><td class="col-item-name">বৃহস্পতিবার</td><td class="col-jp">もくようび</td><td class="col-ro">mokuyoubi</td></tr>
-                                    <tr><td class="col-item-name">শুক্রবার</td><td class="col-jp">きんようび</td><td class="col-ro">kinyoubi</td></tr>
-                                    <tr><td class="col-item-name">শনিবার</td><td class="col-jp">どようび</td><td class="col-ro">doyoubi</td></tr>
-                                    <tr><td class="col-item-name">কী বার?</td><td class="col-jp highlight-red">なんようび</td><td class="col-ro highlight-red">nanyoubi</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="audio-quiz-bubble" onclick="playCurrentCharSound()">
+                    <span id="quizCharDisplay">す</span>
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
 
-                    <!-- ২. মাসের দিন / তারিখ (১ - ৩১ তারিখ) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">২. মাসের তারিখ (Days of the Month)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">তারিখ</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১ তারিখ</td><td class="col-jp highlight-red">ついたち</td><td class="col-ro highlight-red">tsuitachi</td></tr>
-                                    <tr><td class="col-item-name">২ তারিখ</td><td class="col-jp highlight-red">ふつか</td><td class="col-ro highlight-red">futsuka</td></tr>
-                                    <tr><td class="col-item-name">৩ তারিখ</td><td class="col-jp highlight-red">みっか</td><td class="col-ro highlight-red">mikka</td></tr>
-                                    <tr><td class="col-item-name">৪ তারিখ</td><td class="col-jp highlight-red">よっか</td><td class="col-ro highlight-red">yokka</td></tr>
-                                    <tr><td class="col-item-name">৫ তারিখ</td><td class="col-jp highlight-red">いつか</td><td class="col-ro highlight-red">itsuka</td></tr>
-                                    <tr><td class="col-item-name">৬ তারিখ</td><td class="col-jp highlight-red">むいか</td><td class="col-ro highlight-red">muika</td></tr>
-                                    <tr><td class="col-item-name">৭ তারিখ</td><td class="col-jp highlight-red">なのか</td><td class="col-ro highlight-red">nanoka</td></tr>
-                                    <tr><td class="col-item-name">৮ তারিখ</td><td class="col-jp highlight-red">ようか</td><td class="col-ro highlight-red">youka</td></tr>
-                                    <tr><td class="col-item-name">৯ তারিখ</td><td class="col-jp highlight-red">ここのか</td><td class="col-ro highlight-red">kokonoka</td></tr>
-                                    <tr><td class="col-item-name">১০ তারিখ</td><td class="col-jp highlight-red">とおか</td><td class="col-ro highlight-red">tooka</td></tr>
-                                    <tr><td class="col-item-name">১৪ তারিখ</td><td class="col-jp highlight-red">じゅうよっか</td><td class="col-ro highlight-red">juuyokka</td></tr>
-                                    <tr><td class="col-item-name">২০ তারিখ</td><td class="col-jp highlight-red">はつか</td><td class="col-ro highlight-red">hatsuka</td></tr>
-                                    <tr><td class="col-item-name">২৪ তারিখ</td><td class="col-jp highlight-red">にじゅうよっか</td><td class="col-ro highlight-red">nijuuyokka</td></tr>
-                                    <tr><td class="col-item-name">সাধারণ দিন</td><td class="col-jp">সংখ্যা + にち</td><td class="col-ro">~nichi</td></tr>
-                                    <tr><td class="col-item-name">কত তারিখ?</td><td class="col-jp highlight-red">なんにち</td><td class="col-ro highlight-red">nannichi</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="quiz-choices-wrap" id="quizChoicesWrap"></div>
+            </div>
+        </section>
 
-                    <!-- ৩. ১২ মাসের নাম (Months of the Year) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৩. ১২ মাসের নাম (Months - がつ)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">মাস</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">জানুয়ারি</td><td class="col-jp">いちがつ</td><td class="col-ro">ichigatsu</td></tr>
-                                    <tr><td class="col-item-name">ফেব্রুয়ারি</td><td class="col-jp">にがつ</td><td class="col-ro">nigatsu</td></tr>
-                                    <tr><td class="col-item-name">মার্চ</td><td class="col-jp">さんがつ</td><td class="col-ro">sangatsu</td></tr>
-                                    <tr><td class="col-item-name">এপ্রিল</td><td class="col-jp highlight-red">しがつ</td><td class="col-ro highlight-red">shigatsu</td></tr>
-                                    <tr><td class="col-item-name">মে</td><td class="col-jp">ごがつ</td><td class="col-ro">gogatsu</td></tr>
-                                    <tr><td class="col-item-name">জুন</td><td class="col-jp">ろくがつ</td><td class="col-ro">rokugatsu</td></tr>
-                                    <tr><td class="col-item-name">জুলাই</td><td class="col-jp highlight-red">しちがつ</td><td class="col-ro highlight-red">shichigatsu</td></tr>
-                                    <tr><td class="col-item-name">আগস্ট</td><td class="col-jp">はちがつ</td><td class="col-ro">hachigatsu</td></tr>
-                                    <tr><td class="col-item-name">সেপ্টেম্বর</td><td class="col-jp highlight-red">くがつ</td><td class="col-ro highlight-red">kugatsu</td></tr>
-                                    <tr><td class="col-item-name">অক্টোবর</td><td class="col-jp">じゅうがつ</td><td class="col-ro">juugatsu</td></tr>
-                                    <tr><td class="col-item-name">নভেম্বর</td><td class="col-jp">じゅういちがつ</td><td class="col-ro">juuichigatsu</td></tr>
-                                    <tr><td class="col-item-name">ডিসেম্বর</td><td class="col-jp">じゅうにがつ</td><td class="col-ro">juunigatsu</td></tr>
-                                    <tr><td class="col-item-name">কোন মাস?</td><td class="col-jp highlight-red">なんがつ</td><td class="col-ro highlight-red">nangatsu</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `
-            },
-            3: {
-                title: "জাপানিজ ঘণ্টা ও সময়কাল (Period & Hours)",
-                html: `
-                    <!-- ১. ঘড়ির সময় (Hours - じ) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">১. ঘড়ির ঘণ্টা (O'clock - じ)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">সময়</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১:০০</td><td class="col-jp">いちじ</td><td class="col-ro">ichiji</td></tr>
-                                    <tr><td class="col-item-name">২:০০</td><td class="col-jp">にじ</td><td class="col-ro">niji</td></tr>
-                                    <tr><td class="col-item-name">৩:০০</td><td class="col-jp">さんじ</td><td class="col-ro">sanji</td></tr>
-                                    <tr><td class="col-item-name">৪:০০</td><td class="col-jp highlight-red">よじ</td><td class="col-ro highlight-red">yoji</td></tr>
-                                    <tr><td class="col-item-name">৫:০০</td><td class="col-jp">ごじ</td><td class="col-ro">goji</td></tr>
-                                    <tr><td class="col-item-name">৬:০০</td><td class="col-jp">ろくじ</td><td class="col-ro">rokuji</td></tr>
-                                    <tr><td class="col-item-name">৭:০০</td><td class="col-jp highlight-red">しちじ</td><td class="col-ro highlight-red">shichiji</td></tr>
-                                    <tr><td class="col-item-name">৮:০০</td><td class="col-jp">はちじ</td><td class="col-ro">hachiji</td></tr>
-                                    <tr><td class="col-item-name">৯:০০</td><td class="col-jp highlight-red">くじ</td><td class="col-ro highlight-red">kuji</td></tr>
-                                    <tr><td class="col-item-name">১০:০০</td><td class="col-jp">じゅうじ</td><td class="col-ro">juuji</td></tr>
-                                    <tr><td class="col-item-name">১১:০০</td><td class="col-jp">じゅういちじ</td><td class="col-ro">juuichiji</td></tr>
-                                    <tr><td class="col-item-name">১২:০০</td><td class="col-jp">じゅうにじ</td><td class="col-ro">juuniji</td></tr>
-                                    <tr><td class="col-item-name">কয়টা বাজে?</td><td class="col-jp highlight-red">なんじ</td><td class="col-ro highlight-red">nanji</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        <footer class="practice-bottom-bar">
+            <div class="feedback-state-box" id="feedbackBox">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>অসাধারণ!</span>
+            </div>
+            <button class="verify-submit-btn" id="verifyBtn" onclick="handleVerifyClick()">যাচাই করুন</button>
+        </footer>
+    </div>
 
-                    <!-- ২. মিনিট (Minutes - ふん / ぷん) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">২. মিনিট গণনা (Minutes)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">মিনিট</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১ মিনিট</td><td class="col-jp highlight-red">いっぷん</td><td class="col-ro highlight-red">ippun</td></tr>
-                                    <tr><td class="col-item-name">২ মিনিট</td><td class="col-jp">にふん</td><td class="col-ro">nifun</td></tr>
-                                    <tr><td class="col-item-name">৩ মিনিট</td><td class="col-jp highlight-red">さんぷん</td><td class="col-ro highlight-red">sanpun</td></tr>
-                                    <tr><td class="col-item-name">৪ মিনিট</td><td class="col-jp highlight-red">よんぷん</td><td class="col-ro highlight-red">yonpun</td></tr>
-                                    <tr><td class="col-item-name">৫ মিনিট</td><td class="col-jp">ごふん</td><td class="col-ro">gofun</td></tr>
-                                    <tr><td class="col-item-name">৬ মিনিট</td><td class="col-jp highlight-red">ろっぷん</td><td class="col-ro highlight-red">roppun</td></tr>
-                                    <tr><td class="col-item-name">৭ মিনিট</td><td class="col-jp">ななふん</td><td class="col-ro">nanafun</td></tr>
-                                    <tr><td class="col-item-name">৮ মিনিট</td><td class="col-jp highlight-red">はっぷん</td><td class="col-ro highlight-red">happun</td></tr>
-                                    <tr><td class="col-item-name">৯ মিনিট</td><td class="col-jp">きゅうふん</td><td class="col-ro">kyuufun</td></tr>
-                                    <tr><td class="col-item-name">১০ মিনিট</td><td class="col-jp highlight-red">じゅっぷん</td><td class="col-ro highlight-red">juppun</td></tr>
-                                    <tr><td class="col-item-name">৩০ মিনিট/অর্ধেক</td><td class="col-jp">はん / さんじゅっぷん</td><td class="col-ro">han / sanjuppun</td></tr>
-                                    <tr><td class="col-item-name">কত মিনিট?</td><td class="col-jp highlight-red">なんぷん</td><td class="col-ro highlight-red">nanpun</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-                    <!-- ৩. সময়কাল / ঘণ্টা ব্যপ্তি (Duration - じかん) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৩. সময়কাল / ঘণ্টার স্থায়িত্ব (Duration - じかん)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">স্থায়িত্ব</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১ ঘণ্টা</td><td class="col-jp">いちじかん</td><td class="col-ro">ichijikan</td></tr>
-                                    <tr><td class="col-item-name">৪ ঘণ্টা</td><td class="col-jp highlight-red">よじかん</td><td class="col-ro highlight-red">yojikan</td></tr>
-                                    <tr><td class="col-item-name">৭ ঘণ্টা</td><td class="col-jp highlight-red">しちじかん / ななじかん</td><td class="col-ro highlight-red">shichijikan</td></tr>
-                                    <tr><td class="col-item-name">৯ ঘণ্টা</td><td class="col-jp highlight-red">くじかん</td><td class="col-ro highlight-red">kujikan</td></tr>
-                                    <tr><td class="col-item-name">কত ঘণ্টা?</td><td class="col-jp highlight-red">なんじかん</td><td class="col-ro highlight-red">nanjikan</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `
-            },
-            4: {
-                title: "জাপানিজ গণনা নিয়ম (Counting System)",
-                html: `
-                    <!-- ১. সাধারণ বস্তু গণনা (つ - Counter) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">১. সাধারণ বস্তু গণনা (~つ)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">গণনা</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১টি</td><td class="col-jp">ひとつ</td><td class="col-ro">hitotsu</td></tr>
-                                    <tr><td class="col-item-name">২টি</td><td class="col-jp">ふたつ</td><td class="col-ro">futatsu</td></tr>
-                                    <tr><td class="col-item-name">৩টি</td><td class="col-jp">みっつ</td><td class="col-ro">mittsu</td></tr>
-                                    <tr><td class="col-item-name">৪টি</td><td class="col-jp">よっつ</td><td class="col-ro">yottsu</td></tr>
-                                    <tr><td class="col-item-name">৫টি</td><td class="col-jp">いつつ</td><td class="col-ro">itsutsu</td></tr>
-                                    <tr><td class="col-item-name">৬টি</td><td class="col-jp">むっつ</td><td class="col-ro">muttsu</td></tr>
-                                    <tr><td class="col-item-name">৭টি</td><td class="col-jp">ななつ</td><td class="col-ro">nanatsu</td></tr>
-                                    <tr><td class="col-item-name">৮টি</td><td class="col-jp">やっつ</td><td class="col-ro">yattsu</td></tr>
-                                    <tr><td class="col-item-name">৯টি</td><td class="col-jp">ここのつ</td><td class="col-ro">kokonotsu</td></tr>
-                                    <tr><td class="col-item-name">১০টি</td><td class="col-jp">とお</td><td class="col-ro">too</td></tr>
-                                    <tr><td class="col-item-name">কয়টি?</td><td class="col-jp highlight-red">いくつ</td><td class="col-ro highlight-red">ikutsu</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- ২. ব্যক্তি গণনা (~にん / 人) -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">২. মানুষ গণনা (~にん)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">জন</th><th style="width: 45%;">জাপানিজ কানা</th><th style="width: 30%;">রোমাজি</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">১ জন</td><td class="col-jp highlight-red">ひとり</td><td class="col-ro highlight-red">hitori</td></tr>
-                                    <tr><td class="col-item-name">২ জন</td><td class="col-jp highlight-red">ふたり</td><td class="col-ro highlight-red">futari</td></tr>
-                                    <tr><td class="col-item-name">৩ জন</td><td class="col-jp">さんにん</td><td class="col-ro">sannin</td></tr>
-                                    <tr><td class="col-item-name">৪ জন</td><td class="col-jp highlight-red">よにん</td><td class="col-ro highlight-red">yonin</td></tr>
-                                    <tr><td class="col-item-name">কত জন?</td><td class="col-jp highlight-red">なんにん</td><td class="col-ro highlight-red">nannin</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- ৩. বিভিন্ন বস্তু ভিত্তিক কাউন্টার সাফিক্স চার্ট -->
-                    <div class="table-section-box">
-                        <h3 class="table-section-title">৩. প্রধান কাউন্টার প্রত্যয় (Counter Suffixes)</h3>
-                        <div class="appendix-table-card">
-                            <table class="appendix-table">
-                                <thead>
-                                    <tr><th style="width: 25%;">কাউন্টার</th><th style="width: 40%;">ব্যবহারের ক্ষেত্র</th><th style="width: 35%;">প্রশ্নবোধক শব্দ</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="col-item-name">〜まい (枚)</td><td>কাগজ, ছবি, টিকিট, শার্ট (পাতলা বস্তু)</td><td class="col-jp">なんまい (nanmai)</td></tr>
-                                    <tr><td class="col-item-name">〜だい (台)</td><td>গাড়ি, কম্পিউটার, সাইকেল (যন্ত্রপাতি)</td><td class="col-jp">なんだい (nandai)</td></tr>
-                                    <tr><td class="col-item-name">〜かい (回)</td><td>বার / সংখ্যা (ফ্রিকোয়েন্সি)</td><td class="col-jp">なんかい (nankai)</td></tr>
-                                    <tr><td class="col-item-name">〜ほん (本)</td><td>বোতল, পেন্সিল, ছাতা, গাছ (লম্বা জিনিস)</td><td class="col-jp highlight-red">なんぼん (nanbon)</td></tr>
-                                    <tr><td class="col-item-name">〜さつ (冊)</td><td>বই, খাতা, ম্যাগাজিন (বাঁধাইকৃত)</td><td class="col-jp">なんさつ (nansatsu)</td></tr>
-                                    <tr><td class="col-item-name">〜ひき (匹)</td><td>কুকুর, বিড়াল, মাছ (ছোট প্রাণী)</td><td class="col-jp highlight-red">なんびき (nanbiki)</td></tr>
-                                    <tr><td class="col-item-name">〜かい (階)</td><td>ভবনের তলা (Floor)</td><td class="col-jp highlight-red">なんがい (nangai)</td></tr>
-                                    <tr><td class="col-item-name">〜はい (杯)</td><td>কাপ, গ্লাস (পানীয় পরিমাপে)</td><td class="col-jp highlight-red">なんばい (nanbai)</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `
-            }
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
         };
 
-        function openAppendix(id, pushToHistory = true) {
-            const data = appendixData[id];
-            if (data) {
-                headerTitle.innerText = data.title;
-                contentContainer.innerHTML = data.html;
-                gridView.style.display = "none";
-                detailView.style.display = "block";
-                window.scrollTo({ top: 0, behavior: "smooth" });
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-                if (pushToHistory) {
-                    history.pushState({ view: "detail", id: id }, "");
-                }
-            }
-        }
+        let currentUser = null;
+        const topUserXp = document.getElementById("topUserXp");
 
-        function backToGrid(fromHistory = false) {
-            if (detailView.style.display === "block") {
-                detailView.style.display = "none";
-                gridView.style.display = "block";
-                window.scrollTo({ top: 0, behavior: "smooth" });
-
-                if (!fromHistory && history.state && history.state.view === "detail") {
-                    history.back();
-                }
-            } else {
-                window.location.href = "index.html";
-            }
-        }
-
-        // ব্রাউজার বা মোবাইলের ব্যাক বাটন সাপোর্ট
-        window.addEventListener("popstate", (event) => {
-            if (event.state && event.state.view === "detail") {
-                openAppendix(event.state.id, false);
-            } else {
-                backToGrid(true);
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                const docId = user.email ? user.email.toLowerCase().trim() : user.uid;
+                try {
+                    const snap = await getDoc(doc(db, "users", docId));
+                    if (snap.exists() && typeof snap.data().xp === "number") {
+                        topUserXp.innerText = `${snap.data().xp} XP`;
+                    }
+                } catch(e) { console.warn(e); }
             }
         });
 
-        // টপবার ব্যাক বাটন ইভেন্ট
-        document.getElementById("btnHeaderBack").addEventListener("click", () => backToGrid(false));
+        window.rewardKanaXP = async function(points) {
+            if (!currentUser) return;
+            const docId = currentUser.email ? currentUser.email.toLowerCase().trim() : currentUser.uid;
+            try {
+                await updateDoc(doc(db, "users", docId), {
+                    xp: increment(points),
+                    lastActive: Date.now()
+                });
+                const cur = parseInt(topUserXp.innerText) || 0;
+                topUserXp.innerText = `${cur + points} XP`;
+            } catch(e) { console.warn("XP Error:", e); }
+        };
+    </script>
 
-        // ইনিশিয়াল হিস্ট্রি স্টেট সেট
-        history.replaceState({ view: "grid" }, "");
+    <!-- Character Logic & Interaction -->
+    <script>
+        let currentScript = 'hira';
+        let currentType = 'basic';
+
+        const characters = {
+            basic: [
+                { h: 'あ', k: 'ア', r: 'a', b: 'আ' },
+                { h: 'い', k: 'イ', r: 'i', b: 'ই' },
+                { h: 'う', k: 'ウ', r: 'u', b: 'উ' },
+                { h: 'え', k: 'エ', r: 'e', b: 'এ' },
+                { h: 'お', k: 'オ', r: 'o', b: 'ও' },
+
+                { h: 'か', k: 'カ', r: 'ka', b: 'কা' },
+                { h: 'き', k: 'キ', r: 'ki', b: 'কি' },
+                { h: 'く', k: 'ク', r: 'ku', b: 'কু' },
+                { h: 'け', k: 'ケ', r: 'ke', b: 'কে' },
+                { h: 'こ', k: 'コ', r: 'ko', b: 'কো' },
+
+                { h: 'さ', k: 'サ', r: 'sa', b: 'সা' },
+                { h: 'し', k: 'シ', r: 'shi', b: 'শি' },
+                { h: 'す', k: 'ス', r: 'su', b: 'সু' },
+                { h: 'せ', k: 'セ', r: 'se', b: 'সে' },
+                { h: 'そ', k: 'ソ', r: 'so', b: 'সো' },
+
+                { h: 'た', k: 'タ', r: 'ta', b: 'তা' },
+                { h: 'ち', k: 'チ', r: 'chi', b: 'চি' },
+                { h: 'つ', k: 'ツ', r: 'tsu', b: 'ৎসু' },
+                { h: 'て', k: 'テ', r: 'te', b: 'তে' },
+                { h: 'と', k: 'ト', r: 'to', b: 'তো' },
+
+                { h: 'な', k: 'ナ', r: 'na', b: 'না' },
+                { h: 'に', k: 'ニ', r: 'ni', b: 'নি' },
+                { h: 'ぬ', k: 'ヌ', r: 'nu', b: 'নু' },
+                { h: 'ね', k: 'ネ', r: 'ne', b: 'নে' },
+                { h: 'の', k: 'ノ', r: 'no', b: 'নো' },
+
+                { h: 'は', k: 'ハ', r: 'ha', b: 'হা' },
+                { h: 'ひ', k: 'ヒ', r: 'hi', b: 'হি' },
+                { h: 'ふ', k: 'フ', r: 'fu', b: 'ফু' },
+                { h: 'へ', k: 'ヘ', r: 'he', b: 'হে' },
+                { h: 'ほ', k: 'ホ', r: 'ho', b: 'হো' },
+
+                { h: 'ま', k: 'マ', r: 'ma', b: 'মা' },
+                { h: 'み', k: 'ミ', r: 'mi', b: 'মি' },
+                { h: 'む', k: 'ム', r: 'mu', b: 'মু' },
+                { h: 'め', k: 'メ', r: 'me', b: 'মে' },
+                { h: 'も', k: 'モ', r: 'mo', b: 'মো' },
+
+                { h: 'や', k: 'ヤ', r: 'ya', b: 'ইয়া' },
+                { empty: true },
+                { h: 'ゆ', k: 'ユ', r: 'yu', b: 'ইউ' },
+                { empty: true },
+                { h: 'よ', k: 'ヨ', r: 'yo', b: 'ইয়ো' },
+
+                { h: 'ら', k: 'ラ', r: 'ra', b: 'রা' },
+                { h: 'り', k: 'リ', r: 'ri', b: 'রি' },
+                { h: 'る', k: 'ル', r: 'ru', b: 'রু' },
+                { h: 'れ', k: 'レ', r: 're', b: 'রে' },
+                { h: 'ろ', k: 'ロ', r: 'ro', b: 'রো' },
+
+                { h: 'わ', k: 'ワ', r: 'wa', b: 'ওয়া' },
+                { empty: true },
+                { h: 'ん', k: 'ン', r: 'n', b: 'ং/ন' },
+                { empty: true },
+                { h: 'を', k: 'ヲ', r: 'wo', b: 'ও' }
+            ],
+            dakuon: [
+                { h: 'が', k: 'ガ', r: 'ga', b: 'গা' },
+                { h: 'ぎ', k: 'ギ', r: 'gi', b: 'গি' },
+                { h: 'ぐ', k: 'グ', r: 'gu', b: 'গু' },
+                { h: 'げ', k: 'ゲ', r: 'ge', b: 'গে' },
+                { h: 'ご', k: 'ゴ', r: 'go', b: 'গো' },
+
+                { h: 'ざ', k: 'ザ', r: 'za', b: 'জা' },
+                { h: 'じ', k: 'ジ', r: 'ji', b: 'জি' },
+                { h: 'ず', k: 'ズ', r: 'zu', b: 'জু' },
+                { h: 'ぜ', k: 'ゼ', r: 'ze', b: 'জে' },
+                { h: 'ぞ', k: 'ゾ', r: 'zo', b: 'জো' },
+
+                { h: 'だ', k: 'ダ', r: 'da', b: 'দা' },
+                { h: 'ぢ', k: 'ヂ', r: 'ji', b: 'জি' },
+                { h: 'づ', k: 'ヅ', r: 'zu', b: 'জু' },
+                { h: 'で', k: 'デ', r: 'de', b: 'দে' },
+                { h: 'ど', k: 'ド', r: 'do', b: 'দো' },
+
+                { h: 'ば', k: 'バ', r: 'ba', b: 'বা' },
+                { h: 'び', k: 'ビ', r: 'bi', b: 'বি' },
+                { h: 'ぶ', k: 'ブ', r: 'bu', b: 'বু' },
+                { h: 'べ', k: 'ベ', r: 'be', b: 'বে' },
+                { h: 'ぼ', k: 'ボ', r: 'bo', b: 'বো' },
+
+                { h: 'ぱ', k: 'パ', r: 'pa', b: 'পা' },
+                { h: 'ぴ', k: 'ピ', r: 'pi', b: 'পি' },
+                { h: 'ぷ', k: 'プ', r: 'pu', b: 'পু' },
+                { h: 'ぺ', k: 'ペ', r: 'pe', b: 'পে' },
+                { h: 'ぽ', k: 'ポ', r: 'po', b: 'পো' }
+            ],
+            yoon: [
+                { h: 'きゃ', k: 'キャ', r: 'kya', b: 'ক্যা' },
+                { h: 'きゅ', k: 'キュ', r: 'kyu', b: 'কিউ' },
+                { h: 'きょ', k: 'キョ', r: 'kyo', b: 'কিয়ো' },
+                { empty: true }, { empty: true },
+
+                { h: 'しゃ', k: 'シャ', r: 'sha', b: 'শা' },
+                { h: 'しゅ', k: 'シュ', r: 'shu', b: 'শু' },
+                { h: 'しょ', k: 'ショ', r: 'sho', b: 'শো' },
+                { empty: true }, { empty: true },
+
+                { h: 'ちゃ', k: 'チャ', r: 'cha', b: 'চা' },
+                { h: 'ちゅ', k: 'チュ', r: 'chu', b: 'চু' },
+                { h: 'ちょ', k: 'チョ', r: 'cho', b: 'চো' },
+                { empty: true }, { empty: true },
+
+                { h: 'にゃ', k: 'ニャ', r: 'nya', b: 'ন্যা' },
+                { h: 'にゅ', k: 'ニュ', r: 'nyu', b: 'নিউ' },
+                { h: 'にょ', k: 'ニョ', r: 'nyo', b: 'নিয়ো' },
+                { empty: true }, { empty: true }
+            ]
+        };
+
+        function renderGrid() {
+            const grid = document.getElementById('charGrid');
+            grid.innerHTML = '';
+
+            const list = characters[currentType];
+            list.forEach(item => {
+                if (item.empty) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'empty-slot';
+                    grid.appendChild(emptyDiv);
+                } else {
+                    const char = currentScript === 'hira' ? item.h : item.k;
+                    const card = document.createElement('div');
+                    card.className = 'char-card';
+                    card.onclick = () => openPracticeFlow(item, char);
+                    card.innerHTML = `
+                        <span class="card-practice-dot"></span>
+                        <i class="fa-solid fa-volume-low audio-icon"></i>
+                        <div class="char-jp">${char}</div>
+                        <div class="char-ro">${item.r}</div>
+                        <div class="char-bn">${item.b}</div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+        }
+
+        function switchScript(script, el) {
+            currentScript = script;
+            document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderGrid();
+        }
+
+        function switchType(type, el) {
+            currentType = type;
+            document.querySelectorAll('.sub-pill').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            renderGrid();
+        }
+
+        function playSound(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'ja-JP';
+                u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        renderGrid();
+
+        /* -------------------------------------------------------------
+           Drawing, Tracing & Clean Progression Engine[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span)
+        ------------------------------------------------------------- */
+        const practiceModal = document.getElementById("practiceModal");
+        const tracingStage = document.getElementById("tracingStage");
+        const quizStage = document.getElementById("quizStage");
+        const feedbackBox = document.getElementById("feedbackBox");
+        const verifyBtn = document.getElementById("verifyBtn");
+        const traceOutlineChar = document.getElementById("traceOutlineChar");
+        const modalPromptRo = document.getElementById("modalPromptRo");
+        const modalPromptChar = document.getElementById("modalPromptChar");
+        const quizCharDisplay = document.getElementById("quizCharDisplay");
+        const quizChoicesWrap = document.getElementById("quizChoicesWrap");
+        const modalProgressFill = document.getElementById("modalProgressFill");
+        const arrowGuide = document.getElementById("arrowGuide");
+
+        let activeItem = null;
+        let activeChar = "";
+        let currentMode = "trace"; // 'trace' or 'quiz'
+        let hasDrawn = false;
+        let selectedChoice = null;
+        let isCorrectState = false;
+
+        function openPracticeFlow(item, char) {
+            activeItem = item;
+            activeChar = char;
+            currentMode = "trace";
+            isCorrectState = false;
+            hasDrawn = false;
+
+            practiceModal.style.display = "flex";
+            tracingStage.style.display = "flex";
+            quizStage.style.display = "none";
+            feedbackBox.className = "feedback-state-box";
+            modalProgressFill.style.width = "40%";
+
+            modalPromptRo.innerText = item.r;
+            modalPromptChar.innerText = char;
+            traceOutlineChar.innerText = char;
+
+            arrowGuide.style.display = "flex";
+            verifyBtn.innerText = "যাচাই করুন";
+            verifyBtn.className = "verify-submit-btn";
+
+            clearCanvas();
+            playSound(char);
+        }
+
+        function closePracticeModal() {
+            practiceModal.style.display = "none";
+        }
+
+        function playCurrentCharSound() {
+            if (activeChar) playSound(activeChar);
+        }
+
+        /* Canvas Tracing Drawing[span_16](start_span)[span_16](end_span) */
+        const canvas = document.getElementById("traceCanvas");
+        const ctx = canvas.getContext("2d");
+        let isDrawing = false;
+
+        ctx.lineWidth = 14;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = "#1E252D"; // Dark Clean Ink
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasDrawn = false;
+        }
+
+        function getPos(e) {
+            const r = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            return { x: clientX - r.left, y: clientY - r.top };
+        }
+
+        canvas.addEventListener("mousedown", (e) => {
+            if (isCorrectState) return;
+            isDrawing = true;
+            const p = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            arrowGuide.style.display = "none";
+        });
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (!isDrawing || isCorrectState) return;
+            const p = getPos(e);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+            if (!hasDrawn) {
+                hasDrawn = true;
+                verifyBtn.className = "verify-submit-btn ready";
+            }
+        });
+
+        window.addEventListener("mouseup", () => { isDrawing = false; });
+
+        canvas.addEventListener("touchstart", (e) => {
+            if (isCorrectState) return;
+            e.preventDefault();
+            isDrawing = true;
+            const p = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            arrowGuide.style.display = "none";
+        }, { passive: false });
+
+        canvas.addEventListener("touchmove", (e) => {
+            if (!isDrawing || isCorrectState) return;
+            e.preventDefault();
+            const p = getPos(e);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+            if (!hasDrawn) {
+                hasDrawn = true;
+                verifyBtn.className = "verify-submit-btn ready";
+            }
+        }, { passive: false });
+
+        window.addEventListener("touchend", () => { isDrawing = false; });
+
+        /* Action Handling */
+        function handleVerifyClick() {
+            if (isCorrectState) {
+                if (currentMode === "trace") {
+                    startQuizStage();
+                } else {
+                    closePracticeModal();
+                }
+                return;
+            }
+
+            if (currentMode === "trace") {
+                if (!hasDrawn) return;
+                triggerSuccessResult();
+            } else {
+                if (!selectedChoice) return;
+                if (selectedChoice === activeItem.r) {
+                    triggerSuccessResult(true);
+                } else {
+                    feedbackBox.className = "feedback-state-box wrong";
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i><span>ভুল হয়েছে, আবার চেষ্টা করুন!</span>`;
+                }
+            }
+        }
+
+        function triggerSuccessResult(isFinal = false) {
+            isCorrectState = true;
+            feedbackBox.className = "feedback-state-box correct";
+            feedbackBox.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>অসাধারণ!</span>`;
+            verifyBtn.innerText = "চালিয়ে যান";
+            verifyBtn.className = "verify-submit-btn ready";
+
+            confetti({ particleCount: 35, spread: 50, origin: { y: 0.85 } });
+
+            if (isFinal) {
+                modalProgressFill.style.width = "100%";
+                if (window.rewardKanaXP) window.rewardKanaXP(5);
+            }
+        }
+
+        /* Quiz Stage[span_17](start_span)[span_17](end_span) */
+        function startQuizStage() {
+            currentMode = "quiz";
+            isCorrectState = false;
+            selectedChoice = null;
+
+            tracingStage.style.display = "none";
+            quizStage.style.display = "flex";
+            feedbackBox.className = "feedback-state-box";
+            modalProgressFill.style.width = "75%";
+            verifyBtn.innerText = "যাচাই করুন";
+            verifyBtn.className = "verify-submit-btn";
+
+            quizCharDisplay.innerText = activeChar;
+            playSound(activeChar);
+
+            const allR = characters.basic.filter(x => !x.empty).map(x => x.r);
+            const distractors = allR.filter(r => r !== activeItem.r).sort(() => 0.5 - Math.random()).slice(0, 2);
+            const choices = [activeItem.r, ...distractors].sort(() => 0.5 - Math.random());
+
+            quizChoicesWrap.innerHTML = "";
+            choices.forEach(ch => {
+                const btn = document.createElement("button");
+                btn.className = "choice-item-btn";
+                btn.innerText = ch;
+                btn.onclick = () => {
+                    document.querySelectorAll(".choice-item-btn").forEach(b => b.classList.remove("selected"));
+                    btn.classList.add("selected");
+                    selectedChoice = ch;
+                    verifyBtn.className = "verify-submit-btn ready";
+                };
+                quizChoicesWrap.appendChild(btn);
+            });
+        }
     </script>
 </body>
 </html>

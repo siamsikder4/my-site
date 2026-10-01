@@ -7,24 +7,32 @@
 
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         :root {
-            --bg-canvas: #F8FAFC;
-            --teal-primary: #00A896;
-            --teal-light: #E0F7F4;
-            --bubble-cyan: #A5F3FC;
+            --bg-canvas: #F4F6F9;
+            --surface-card: #FFFFFF;
             --text-dark: #1E252D;
             --text-muted: #8E9AAB;
-            --border-soft: #E2E8F0;
+            --teal-primary: #00A896;
+            --teal-soft: #E3F8F2;
+            --bubble-cyan: #E0F7F4;
+            --border-soft: #EEF1F6;
+            --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+            --radius-lg: 24px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -34,13 +42,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
 
         .screen-container {
             max-width: 440px;
             width: 100%;
-            margin: 0 auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -48,34 +56,39 @@
             padding: 16px 20px 24px;
             background: #ffffff;
             position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.03);
         }
 
-        /* Top Progress Bar & Header */
+        /* Top Progress Header */
         .top-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            padding-top: 6px;
+            gap: 14px;
+            padding-top: 4px;
         }
 
         .close-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
+            background: #F8FAFC;
+            border: 1px solid var(--border-soft);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 16px;
             color: #64748B;
-            cursor: pointer;
-            padding: 4px;
             display: flex;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
+            transition: transform 0.15s ease;
         }
+        .close-btn:active { transform: scale(0.92); }
 
         .progress-box {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
         }
 
         .streak-info {
@@ -84,41 +97,39 @@
             color: var(--teal-primary);
             display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: space-between;
         }
 
         .progress-track {
             width: 100%;
             height: 10px;
-            background-color: #E2E8F0;
+            background-color: #EEF2F6;
             border-radius: 99px;
             overflow: hidden;
             position: relative;
         }
 
         .progress-fill {
-            width: 55%;
+            width: 33%;
             height: 100%;
             background: linear-gradient(90deg, #2DD4BF, var(--teal-primary));
             border-radius: 99px;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .xp-pill {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 13px;
+            gap: 6px;
+            font-size: 12.5px;
             font-weight: 800;
             color: var(--text-dark);
-            background: #F8FAFC;
-            padding: 4px 10px;
-            border-radius: 14px;
+            background: #FFFBEB;
+            border: 1px solid #FEF3C7;
+            padding: 5px 11px;
+            border-radius: 20px;
         }
-
-        .xp-pill i {
-            color: #F59E0B;
-        }
+        .xp-pill i { color: #F59E0B; }
 
         /* Scenario Section */
         .scenario-area {
@@ -126,16 +137,47 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 18px;
+            margin-top: 14px;
         }
+
+        .scenario-tag-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .scene-badge {
+            background: var(--teal-soft);
+            color: var(--teal-primary);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+
+        .furigana-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .furigana-toggle-btn.active { color: var(--teal-primary); }
 
         .scenario-image-card {
             width: 100%;
-            height: 200px;
-            border-radius: 20px;
+            height: 175px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-subtle);
             margin-bottom: 16px;
+            position: relative;
         }
 
         .scenario-image-card img {
@@ -144,40 +186,81 @@
             object-fit: cover;
         }
 
-        /* Speech Bubble (Speaker) */
+        /* Speech Bubble */
         .speech-bubble {
             width: 100%;
-            background-color: #BAF0F2;
-            border-radius: 18px;
+            background-color: var(--bubble-cyan);
+            border: 1.5px solid #CCF2EC;
+            border-radius: 20px;
             padding: 14px 16px;
             position: relative;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: flex-start;
         }
 
         .speech-bubble::before {
             content: '';
             position: absolute;
-            top: -8px;
+            top: -9px;
             left: 36px;
             border-width: 0 9px 9px 9px;
             border-style: solid;
-            border-color: transparent transparent #BAF0F2 transparent;
+            border-color: transparent transparent #CCF2EC transparent;
         }
 
-        .bubble-speaker-btn {
-            background: none;
-            border: none;
-            color: #0E7490;
-            font-size: 14px;
+        .bubble-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .audio-btn-circle {
+            background: #ffffff;
+            border: 1px solid #BCEAE1;
+            color: var(--teal-primary);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
             cursor: pointer;
-            padding-top: 2px;
+            transition: transform 0.15s;
+        }
+        .audio-btn-circle:active { transform: scale(0.92); }
+
+        .turtle-btn {
+            font-size: 11px;
+            background: #ffffff;
+            border: 1px solid #BCEAE1;
+            color: #0E7490;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .bubble-content {
+            flex: 1;
+        }
+
+        .bubble-furigana {
+            font-size: 10.5px;
+            color: #0E7490;
+            font-weight: 700;
+            margin-bottom: 2px;
+            display: none;
         }
 
         .bubble-content h3 {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 13.5px;
+            font-size: 14.5px;
             font-weight: 700;
             color: #083344;
             line-height: 1.45;
@@ -185,9 +268,10 @@
         }
 
         .bubble-content p {
-            font-size: 11px;
+            font-size: 11.5px;
             color: #155E75;
             line-height: 1.35;
+            font-weight: 500;
         }
 
         /* Bottom Response Area */
@@ -196,25 +280,35 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            margin-top: 20px;
+            margin-top: 14px;
         }
 
         .target-response-box {
             width: 100%;
             background: #FFFFFF;
-            border: 1.8px solid var(--teal-primary);
-            border-radius: 16px;
-            padding: 14px 16px;
+            border: 2px solid var(--teal-primary);
+            border-radius: 20px;
+            padding: 16px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 168, 150, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 168, 150, 0.08);
+            position: relative;
+        }
+
+        .target-romaji {
+            font-size: 11px;
+            color: var(--teal-primary);
+            font-weight: 700;
+            margin-bottom: 3px;
+            display: none;
         }
 
         .target-japanese {
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 800;
             color: var(--text-dark);
             margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
 
         .target-translation {
@@ -227,6 +321,9 @@
             font-size: 11px;
             color: var(--text-muted);
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* Controls: Speaker, Voice Mic, Shuffle */
@@ -235,52 +332,51 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 6px;
+            padding: 4px 8px 0;
         }
 
         .round-action-btn {
-            background: #F1F5F9;
-            border: none;
-            width: 42px;
-            height: 42px;
+            background: #F4F6F9;
+            border: 1px solid var(--border-soft);
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #475569;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: all 0.15s ease;
         }
-
         .round-action-btn:active {
             background: #E2E8F0;
+            transform: scale(0.92);
         }
 
         .voice-submit-btn {
-            background-color: var(--teal-primary);
+            background: linear-gradient(135deg, var(--teal-primary) 0%, #009383 100%);
             color: #ffffff;
             border: none;
             border-radius: 99px;
-            padding: 12px 36px;
-            font-size: 14px;
-            font-weight: 700;
+            padding: 14px 42px;
+            font-size: 15px;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            box-shadow: 0 6px 16px rgba(0, 168, 150, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 168, 150, 0.35);
             transition: all 0.2s ease;
         }
-
         .voice-submit-btn:active {
-            transform: scale(0.96);
+            transform: scale(0.95);
         }
 
         .voice-submit-btn.listening {
-            background-color: #EF4444;
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
-            animation: pulseRecord 1.2s infinite;
+            background: #EF4444;
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.45);
+            animation: pulseRecord 1.1s infinite;
         }
 
         @keyframes pulseRecord {
@@ -292,24 +388,31 @@
         .feedback-banner {
             display: none;
             width: 100%;
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 12.5px;
             font-weight: 700;
             text-align: center;
-            margin-top: 6px;
+            animation: popFeedback 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes popFeedback {
+            from { transform: translateY(6px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .feedback-banner.success {
             display: block;
             background: #DCFCE7;
             color: #15803D;
+            border: 1px solid #BBF7D0;
         }
 
         .feedback-banner.try-again {
             display: block;
             background: #FEE2E2;
             color: #B91C1C;
+            border: 1px solid #FECACA;
         }
     </style>
 </head>
@@ -319,13 +422,14 @@
 
         <!-- Top Progress Header -->
         <header class="top-header">
-            <a href="index.html" class="close-btn" title="Exit">
+            <a href="index.html" class="close-btn" title="হোমে ফিরে যান">
                 <i class="fa-solid fa-xmark"></i>
             </a>
 
             <div class="progress-box">
                 <div class="streak-info">
-                    <span>5 Combo Streak!</span>
+                    <span id="streakBadgeText">🔥 <span id="comboCount">1</span> Combo Streak!</span>
+                    <span style="color:var(--text-muted);" id="stepRatio">1 / 5</span>
                 </div>
                 <div class="progress-track">
                     <div class="progress-fill" id="progressFill"></div>
@@ -334,38 +438,51 @@
 
             <div class="xp-pill">
                 <i class="fa-solid fa-bolt"></i>
-                <span id="streakPoints">12</span>
+                <span id="displayXp">০</span>
             </div>
         </header>
 
-        <!-- Context & Speaking Scenario -->
+        <!-- Scenario Section -->
         <section class="scenario-area">
+            <div class="scenario-tag-bar">
+                <span class="scene-badge" id="sceneBadge">রেস্তোরাঁ ও ক্যাফে</span>
+                <button class="furigana-toggle-btn" id="toggleFuriganaBtn">
+                    <i class="fa-solid fa-eye"></i> রোমাজি সহ
+                </button>
+            </div>
+
             <div class="scenario-image-card">
-                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop" alt="Bakery shop scenario">
+                <img id="scenarioImg" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop" alt="Scenario context">
             </div>
 
             <!-- Dialogue Speech Bubble -->
             <div class="speech-bubble">
-                <button class="bubble-speaker-btn" id="playPromptAudio" title="শুনুন">
-                    <i class="fa-solid fa-volume-high"></i>
-                </button>
+                <div class="bubble-controls">
+                    <button class="audio-btn-circle" id="playPromptAudio" title="শুনুন">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <button class="turtle-btn" id="playPromptSlowAudio" title="ধীরে শুনুন">
+                        🐢
+                    </button>
+                </div>
                 <div class="bubble-content">
+                    <div class="bubble-furigana" id="promptFurigana">Hai, kochira no pan desu ne. Douzo!</div>
                     <h3 id="promptJapanese">はい、こちらのパンですね。どうぞ！ありがとうございました！</h3>
-                    <p id="promptTranslation">Here is your bread! Thank you so much, have a great day!</p>
+                    <p id="promptTranslation">এই যে আপনার ব্রেড। অনেক ধন্যবাদ, দিনটি শুভ হোক!</p>
                 </div>
             </div>
         </section>
 
         <!-- User Answer Target & Speaking Controls -->
         <footer class="bottom-action-area">
-            
             <div class="target-response-box">
+                <div class="target-romaji" id="targetRomaji">Hai, doumo.</div>
                 <div class="target-japanese" id="targetJapanese">はい、どうも。</div>
-                <div class="target-translation" id="targetTranslation">Thanks, you too!</div>
+                <div class="target-translation" id="targetTranslation">ধন্যবাদ, আপনার দিনটিও শুভ হোক!</div>
             </div>
 
             <div class="hint-instruction" id="instructionText">
-                Please tap the Voice button and speak
+                <i class="fa-regular fa-circle-question"></i> নিচে Voice চেপে কথা বলুন
             </div>
 
             <div id="feedbackBanner" class="feedback-banner"></div>
@@ -381,53 +498,184 @@
                 </button>
 
                 <button class="round-action-btn" id="shuffleBtn" title="পরবর্তী বাক্য">
-                    <i class="fa-solid fa-shuffle"></i>
+                    <i class="fa-solid fa-forward-step"></i>
                 </button>
             </div>
         </footer>
 
     </div>
 
-    <!-- Script: Text to Speech & Speech Recognition -->
+    <!-- Firebase Script (XP পয়েন্ট সরাসরি যোগ করার জন্য) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyANfr8MKJOG3VaDu2xO8rlz5wuQmHLjOYs",
+            authDomain: "kotoba-b20b3.firebaseapp.com",
+            projectId: "kotoba-b20b3",
+            storageBucket: "kotoba-b20b3.firebasestorage.app",
+            messagingSenderId: "556955805953",
+            appId: "1:556955805953:web:cef5927677815bf5e05300",
+            measurementId: "G-MXH61ERTC2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        const displayXp = document.getElementById("displayXp");
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                const docId = user.email ? user.email.toLowerCase().trim() : user.uid;
+                try {
+                    const snap = await getDoc(doc(db, "users", docId));
+                    if (snap.exists() && typeof snap.data().xp === "number") {
+                        displayXp.innerText = snap.data().xp;
+                    }
+                } catch(e) {
+                    console.warn(e);
+                }
+            }
+        });
+
+        // বৈশ্বিক addXP ফাংশন
+        window.rewardSpeakingXP = async function(points) {
+            if (!currentUser) return;
+            const docId = currentUser.email ? currentUser.email.toLowerCase().trim() : currentUser.uid;
+            try {
+                await updateDoc(doc(db, "users", docId), {
+                    xp: increment(points),
+                    lastActive: Date.now()
+                });
+                const current = parseInt(displayXp.innerText) || 0;
+                displayXp.innerText = current + points;
+            } catch(e) {
+                console.warn("XP Reward Error:", e);
+            }
+        };
+    </script>
+
+    <!-- App Logic Script -->
     <script>
         const scenarios = [
             {
+                tag: "বেকারি ও শপ",
+                image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop",
                 promptJp: "はい、こちらのパンですね。どうぞ！ありがとうございました！",
-                promptEn: "Here is your bread! Thank you so much, have a great day!",
+                promptFuri: "Hai, kochira no pan desu ne. Douzo! Arigatou gozaimashita!",
+                promptBn: "এই যে আপনার ব্রেড। অনেক ধন্যবাদ, দিনটি শুভ হোক!",
                 targetJp: "はい、どうも。",
-                targetEn: "Thanks, you too!"
+                targetRomaji: "Hai, doumo.",
+                targetBn: "ধন্যবাদ, আপনার দিনটিও শুভ হোক!"
             },
             {
+                tag: "রেস্তোরাঁয় প্রবেশ",
+                image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=600&auto=format&fit=crop",
                 promptJp: "いらっしゃいませ！何名様ですか？",
-                promptEn: "Welcome! How many people in your party?",
+                promptFuri: "Irasshaimase! Nan-mei-sama desu ka?",
+                promptBn: "স্বাগতম! আপনারা কয়জন ব্যক্তি?",
                 targetJp: "一人です。",
-                targetEn: "Just one person."
+                targetRomaji: "Hitori desu.",
+                targetBn: "আমি একা।"
             },
             {
+                tag: "কনভিনিয়েন্স স্টোর (বিল পরিশোধ)",
+                image: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop",
                 promptJp: "お会計は千円になります。",
-                promptEn: "Your total will be 1,000 yen.",
+                promptFuri: "O-kaikei wa sen-en ni narimasu.",
+                promptBn: "আপনার মোট বিল ১,০০০ ইয়েন হয়েছে।",
                 targetJp: "カードで払えますか？",
-                targetEn: "Can I pay by card?"
+                targetRomaji: "Kaado de haraemasu ka?",
+                targetBn: "কার্ড দিয়ে কি পেমেন্ট করা যাবে?"
+            },
+            {
+                tag: "ট্রেন স্টেশন / দিক নির্দেশনা",
+                image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=600&auto=format&fit=crop",
+                promptJp: "すみません、東京駅はどこですか？",
+                promptFuri: "Sumimasen, Toukyou-eki wa doko desu ka?",
+                promptBn: "মাফ করবেন, টোকিও স্টেশন কোন দিকে?",
+                targetJp: "あそこです。",
+                targetRomaji: "Asoko desu.",
+                targetBn: "ঐ যে ওখানে।"
+            },
+            {
+                tag: "বিদায় ও শুভেচ্ছা",
+                image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=600&auto=format&fit=crop",
+                promptJp: "今日は楽しかったです。また明日！",
+                promptFuri: "Kyou wa tanoshikatta desu. Mata ashita!",
+                promptBn: "আজকের দিনটি চমৎকার ছিল। কাল দেখা হবে!",
+                targetJp: "また明日、お疲れ様でした。",
+                targetRomaji: "Mata ashita, otsukaresama deshita.",
+                targetBn: "কাল দেখা হবে, শুভ বিদায়।"
             }
         ];
 
         let currentIndex = 0;
+        let comboStreak = 1;
+        let showRomaji = false;
 
+        const sceneBadge = document.getElementById("sceneBadge");
+        const scenarioImg = document.getElementById("scenarioImg");
         const promptJpEl = document.getElementById("promptJapanese");
-        const promptEnEl = document.getElementById("promptTranslation");
+        const promptFuriEl = document.getElementById("promptFurigana");
+        const promptBnEl = document.getElementById("promptTranslation");
         const targetJpEl = document.getElementById("targetJapanese");
-        const targetEnEl = document.getElementById("targetTranslation");
+        const targetRomajiEl = document.getElementById("targetRomaji");
+        const targetBnEl = document.getElementById("targetTranslation");
         const feedbackEl = document.getElementById("feedbackBanner");
         const voiceBtn = document.getElementById("voiceBtn");
         const voiceBtnText = document.getElementById("voiceBtnText");
+        const progressFill = document.getElementById("progressFill");
+        const stepRatio = document.getElementById("stepRatio");
+        const comboCount = document.getElementById("comboCount");
+        const toggleFuriganaBtn = document.getElementById("toggleFuriganaBtn");
 
-        // Text to Speech
-        function speakJapanese(text) {
+        // Web Audio API সাউন্ড ইফেক্টস
+        let audioCtx = null;
+        function playTone(freq, type, duration) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        function playSuccessChime() {
+            setTimeout(() => playTone(523.25, 'triangle', 0.15), 0);
+            setTimeout(() => playTone(659.25, 'triangle', 0.15), 100);
+            setTimeout(() => playTone(783.99, 'triangle', 0.25), 200);
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.8 }
+            });
+        }
+
+        function playErrorBuzz() {
+            playTone(220, 'sawtooth', 0.25);
+        }
+
+        // জাপানিজ স্পিচ
+        function speakJapanese(text, rate = 0.9) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'ja-JP';
-                utterance.rate = 0.9;
+                utterance.rate = rate;
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("আপনার ব্রাউজারে স্পিচ সাপোর্ট নেই।");
@@ -435,29 +683,53 @@
         }
 
         document.getElementById("playPromptAudio").onclick = () => {
-            speakJapanese(scenarios[currentIndex].promptJp);
+            speakJapanese(scenarios[currentIndex].promptJp, 0.95);
+        };
+
+        document.getElementById("playPromptSlowAudio").onclick = () => {
+            speakJapanese(scenarios[currentIndex].promptJp, 0.65);
         };
 
         document.getElementById("playTargetAudio").onclick = () => {
-            speakJapanese(scenarios[currentIndex].targetJp);
+            speakJapanese(scenarios[currentIndex].targetJp, 0.85);
         };
 
-        // Shuffle / Next Scenario
+        // রোমাজি টগল
+        toggleFuriganaBtn.onclick = () => {
+            showRomaji = !showRomaji;
+            promptFuriEl.style.display = showRomaji ? "block" : "none";
+            targetRomajiEl.style.display = showRomaji ? "block" : "none";
+            toggleFuriganaBtn.classList.toggle("active", showRomaji);
+        };
+
+        // পরবর্তী পরিস্থিতি
         document.getElementById("shuffleBtn").onclick = () => {
             currentIndex = (currentIndex + 1) % scenarios.length;
             loadScenario(currentIndex);
         };
 
         function loadScenario(index) {
-            promptJpEl.innerText = scenarios[index].promptJp;
-            promptEnEl.innerText = scenarios[index].promptEn;
-            targetJpEl.innerText = scenarios[index].targetJp;
-            targetEnEl.innerText = scenarios[index].targetEn;
+            const sc = scenarios[index];
+            sceneBadge.innerText = sc.tag;
+            scenarioImg.src = sc.image;
+            promptJpEl.innerText = sc.promptJp;
+            promptFuriEl.innerText = sc.promptFuri;
+            promptBnEl.innerText = sc.promptBn;
+            targetJpEl.innerText = sc.targetJp;
+            targetRomajiEl.innerText = sc.targetRomaji;
+            targetBnEl.innerText = sc.targetBn;
+
             feedbackEl.className = "feedback-banner";
             feedbackEl.style.display = "none";
+
+            // প্রগ্রেস বার ও কম্বো স্টেট
+            const progressPercent = ((index + 1) / scenarios.length) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+            stepRatio.innerText = `${index + 1} / ${scenarios.length}`;
+            comboCount.innerText = comboStreak;
         }
 
-        // Voice Recognition (Speech to Text)
+        // ভয়েস রিকগনিশন (Speech to Text)
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let recognition = null;
         let isListening = false;
@@ -472,6 +744,7 @@
                 voiceBtn.classList.add("listening");
                 voiceBtnText.innerText = "Listening...";
                 feedbackEl.style.display = "none";
+                playTone(440, 'sine', 0.1);
             };
 
             recognition.onresult = (event) => {
@@ -481,8 +754,9 @@
 
             recognition.onerror = () => {
                 resetVoiceBtn();
+                playErrorBuzz();
                 feedbackEl.className = "feedback-banner try-again";
-                feedbackEl.innerText = "কথা পরিষ্কার বোঝা যায়নি, আবার বলুন।";
+                feedbackEl.innerText = "কথা পরিষ্কার শোনা যায়নি, পুনরায় বলুন!";
                 feedbackEl.style.display = "block";
             };
 
@@ -493,7 +767,7 @@
 
         voiceBtn.onclick = () => {
             if (!recognition) {
-                alert("আপনার ব্রাউজার জাপানিজ ভয়েস রিকগনিশন সাপোর্ট করে না (Chrome ব্যবহার করুন)।");
+                alert("আপনার ব্রাউজার জাপানিজ ভয়েস রিকগনিশন সাপোর্ট করে না (Google Chrome ব্যবহার করুন)।");
                 return;
             }
 
@@ -515,14 +789,37 @@
             const spokenClean = spoken.replace(/[。、！？\s]/g, "");
 
             if (spokenClean.includes(targetClean) || targetClean.includes(spokenClean)) {
+                comboStreak++;
+                comboCount.innerText = comboStreak;
+                playSuccessChime();
+
                 feedbackEl.className = "feedback-banner success";
-                feedbackEl.innerText = "Great job! একদম সঠিক হয়েছে! 🎉";
+                feedbackEl.innerText = "অসাধারণ! সঠিক উচ্চারণ হয়েছে (+১৫ XP) 🎉";
+                feedbackEl.style.display = "block";
+
+                // Firebase-এ XP যোগ করা
+                if (window.rewardSpeakingXP) {
+                    window.rewardSpeakingXP(15);
+                }
+
+                // ১.৫ সেকেন্ড পর স্বয়ংক্রিয়ভাবে পরবর্তী সেশনে যাওয়া
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % scenarios.length;
+                    loadScenario(currentIndex);
+                }, 1600);
             } else {
+                comboStreak = 1;
+                comboCount.innerText = comboStreak;
+                playErrorBuzz();
+
                 feedbackEl.className = "feedback-banner try-again";
                 feedbackEl.innerText = `আপনি বলেছেন: "${spoken}"। আবার চেষ্টা করুন!`;
+                feedbackEl.style.display = "block";
             }
-            feedbackEl.style.display = "block";
         }
+
+        // ইনিশিয়াল লোড
+        loadScenario(currentIndex);
     </script>
 </body>
 </html>

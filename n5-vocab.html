@@ -6,23 +6,23 @@
     <title>N5 Vocabulary - KOTOBA</title>
     <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- Google AdSense Verification Script -->
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9023379305536988" crossorigin="anonymous"></script>
 
-    <!-- ফন্ট ও আইকন -->
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- OneSignal Push Notification SDK -->
+    <!-- OneSignal SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       window.OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "24a46f70-4d24-411a-b673-5139c2f541b7",
-          notifyButton: { enable: true },
+          notifyButton: { enable: false },
         });
       });
     </script>
@@ -64,7 +64,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* লোডার ওভারলে */
         .loader-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -149,7 +148,6 @@
             letter-spacing: 0.8px;
         }
 
-        /* স্টিকি টপ বার */
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -212,7 +210,6 @@
             margin: 0 auto;
         }
 
-        /* লেসন সিলেকশন গ্রিড */
         .grid-header-wrap {
             text-align: center;
             margin-bottom: 16px;
@@ -297,7 +294,6 @@
             font-size: 11px;
         }
 
-        /* ফ্ল্যাশকার্ড ভিউ */
         .detail-view {
             display: none;
         }
@@ -644,7 +640,6 @@
             color: #F97316;
         }
 
-        /* লেসন প্রিভিয়াস ও নেক্সট নেভিগেশন */
         .lesson-jump-nav {
             display: flex;
             justify-content: space-between;
@@ -708,7 +703,6 @@
             pointer-events: none;
         }
 
-        /* ব্যানার অ্যাড বক্স */
         .ad-banner-slot {
             width: 100%;
             display: none;
@@ -719,7 +713,6 @@
             overflow: hidden;
         }
 
-        /* বটম ন্যাভিগেশন বার */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -761,7 +754,6 @@
 </head>
 <body>
 
-    <!-- লোডার ওভারলে -->
     <div id="pageLoader" class="loader-overlay">
         <div class="book-loader">
             <div class="cover-left"></div>
@@ -774,7 +766,6 @@
         <div class="loading-text">読み込み中...</div>
     </div>
 
-    <!-- টপ বার -->
     <header class="top-nav">
         <div class="nav-left" id="btnBackToGrid">
             <div class="back-btn">
@@ -789,21 +780,19 @@
 
     <main class="main-container">
 
-        <!-- ভিউ ১: লেসন তালিকা -->
+        <!-- ভিউ ১: লেসন গ্রিড -->
         <div id="lessonGridView">
             <div class="grid-header-wrap">
                 <h2 class="main-category-title">লেসন নির্বাচন করুন</h2>
-                <p class="sub-category-desc">লেসন ১ থেকে ২৫ • সম্পূর্ণ ভোকাবুলারি</p>
+                <p class="sub-category-desc">লেসন ১ থেকে ২৫ • সম্পূর্ণ শব্দভাণ্ডার</p>
             </div>
 
             <div class="lesson-grid" id="gridContainer"></div>
-
             <div class="ad-banner-slot" id="gridBottomAd"></div>
         </div>
 
-        <!-- ভিউ ২: ৩ডি ফ্ল্যাশকার্ড ও টেবিল ভিউ -->
+        <!-- ভিউ ২: ফ্ল্যাশকার্ড ও টেবিল -->
         <div id="lessonDetailView" class="detail-view">
-            
             <div class="fc-top-header">
                 <h3 class="fc-title" id="fcHeaderTitle">শব্দার্থ ফ্ল্যাশকার্ড</h3>
             </div>
@@ -813,7 +802,6 @@
                 <button class="fc-tool-btn" id="btnSpeakMain" title="উচ্চারণ শুনুন"><i class="fa-solid fa-volume-high"></i></button>
             </div>
 
-            <!-- ৩ডি অ্যানিমেটেড ফ্ল্যাশকার্ড -->
             <div class="flashcard-container" id="flashcardContainer">
                 <div class="flashcard-inner">
                     <div class="flashcard-face flashcard-front">
@@ -877,7 +865,6 @@
                 </table>
             </div>
 
-            <!-- প্রিভিয়াস ও নেক্সট লেসন বাটন -->
             <div class="lesson-jump-nav">
                 <button class="jump-btn prev-btn" id="btnPrevLesson">
                     <span class="jump-label">PREVIOUS</span>
@@ -890,12 +877,10 @@
             </div>
 
             <div class="ad-banner-slot" id="detailBottomAd"></div>
-
         </div>
 
     </main>
 
-    <!-- বটম ন্যাভিগেশন বার -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
@@ -919,7 +904,17 @@
         </a>
     </nav>
 
-    <!-- Firebase ও স্ক্রিপ্ট -->
+    <!-- 0-Latency Local Cache Engine -->
+    <script>
+        (function initLocalCacheImmediate() {
+            const cachedHighlights = localStorage.getItem("kotoba_n5_vocab_highlights");
+            if (cachedHighlights) {
+                try { window.preloadedHighlights = JSON.parse(cachedHighlights); } catch(e){}
+            }
+        })();
+    </script>
+
+    <!-- Firebase ও সম্পূর্ণ ডাটা স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -940,7 +935,7 @@
         const db = getFirestore(app);
 
         let currentUserEmail = null;
-        let highlightedWords = [];
+        let highlightedWords = window.preloadedHighlights || [];
 
         function injectAdsterraSlot(containerId, adKey) {
             const container = document.getElementById(containerId);
@@ -1004,7 +999,7 @@
 
         initPageAds();
 
-        // সম্পূর্ণ ১ থেকে ২৫ লেসনের শব্দভাণ্ডার
+        // সম্পূর্ণ ১ থেকে ২৫ লেসনের পূর্ণাঙ্গ শব্দভাণ্ডার
         const lessons = {
             1: {
                 title: "প্রারম্ভিক শব্দার্থ ও পরিচয়",
@@ -1567,7 +1562,7 @@
                     { kana: "でます", ro: "demasu", bn: "পাস করা / বের হওয়া" },
                     { kana: "おします", ro: "oshimasu", bn: "চাপা / ধাক্কা দেওয়া" },
                     { kana: "わかい", ro: "wakai", bn: "তরুণ / কমবয়সী" },
-                    { kana: "ながい", ro: "nagai", bn: "লম্বা" },
+                    { kana: "ながই", ro: "nagai", bn: "লম্বা" },
                     { kana: "みじかい", ro: "mijikai", bn: "খাটো" },
                     { kana: "あかるい", ro: "akarui", bn: "উজ্জ্বল" },
                     { kana: "くらい", ro: "kurai", bn: "অন্ধকার" },
@@ -1732,7 +1727,7 @@
                     { kana: "ひきます", ro: "hikimasu", bn: "টানা" },
                     { kana: "かえます", ro: "kaemasu", bn: "পরিবর্তন করা" },
                     { kana: "さわります", ro: "sawarimasu", bn: "স্পর্শ করা" },
-                    { kana: "あるきます", ro: "arukimasu", bn: "হাঁটা" },
+                    { kana: "あるきます", ro: "aruite", bn: "হাঁটা" },
                     { kana: "わたります", ro: "watarimasu", bn: "পার হওয়া (সেতু)" },
                     { kana: "まがります", ro: "magarimasu", bn: "মোড় নেওয়া (ডানে)" },
                     { kana: "さびしい", ro: "sabishii", bn: "একাকী / মন খারাপ" },
